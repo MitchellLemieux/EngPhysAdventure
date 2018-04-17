@@ -151,7 +151,7 @@ Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"I a
 Enemy("Feral First Year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"I'm a failure at school and at home!"),
 Enemy("Drunk First Year","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"y u do dis"),
 Enemy("Vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"I was going to bring it back I swear!"),
-Enemy("Bus Driver","Is that even your bus pass?",(2,1,1),(5,10,4),100,None,None,"That was definitely not your bus pass!"),
+Enemy("Bus Driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"That was definitely not your bus pass!"),
 Enemy("Hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,""),
 Enemy("Frustrated TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,""),
 Enemy("Arts Student","Can you come see my exhibit?",(4,0,1),(5,15,5),20,None,None,""),

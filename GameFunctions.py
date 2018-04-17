@@ -36,8 +36,6 @@ def Equip(Item):
     else:
         print "That doesn't seem to be around here."
 
-
-
 def Drop(Item):
     global MAPS
     global PLAYER
@@ -125,11 +123,15 @@ def Combat(P,E):
         return 1
 
 def Attack(E):
-    global PLAYER
     global ENEMIES
-    
+    global MAPS
+    global PLAYER
+    x = PLAYER.location[0]
+    y = PLAYER.location[1]
+    z = PLAYER.location[2]
+    CurrentPlace = MAPS[x][y][z]
     if E in ENEMIES:
-        enemy = ENEMIES[objectName]
+        enemy = ENEMIES[E]
         if (enemy.location == tuple(PLAYER.location)) and (enemy.alive):
             Outcome = Combat(PLAYER,enemy)
             if Outcome:
