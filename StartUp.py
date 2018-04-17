@@ -30,7 +30,7 @@ Map("The Willy Dog stand",(4,1,1),"You are at the Willy Dog Stand. Statue of Sir
 Map("Mills Library",(4,0,1),"You are inside Mills Library. The Willy Dog Stand is in front of you.\nMUSC is to your right.","This is definitely not Thode. You wonder if anything gets done in this\nlibrary. All of the debauchery taking place on the 6th floor sends a\nchill down your spine as you gather your wits.",("l")),
 Map("Statue of Sir William McMaster",(4,2,1),"You are at Statue of Sir William McMaster. The Phoenix is in front of you.\nEntrance to University Hall is to your right. BSB field is to your left.","Do you think you'll ever do something worth a statue of yourself\nchilling on a bench? What if Sir Willy McMaster was actually in that statue\nHan Solo style? After a quick selfie with Willy you plan your next move.",()),
 Map("BSB Field",(3,2,1),"You are in BSB Field. The Statue of Willy McMaster is to your right.\nJHE field to your left. Entrance to BSB to your front.","You look up to see the flags flapping happily in the morning breeze.\nThat sun dial at their feet ticking to the tune of celestial magic.\nAfter swatting Neil Degrasse quotes from your thoughts and a quick smell of the flowerbed...\nYou consider what to do next.",()),
-Map("JHE Field",(2,2,1),"You are in JHE Field. BSB Field is to your right.\nMcMaster map to your left. The Bus Stop is at your rear. The Starting location is in front of you.","The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everyone knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.",()),
+Map("JHE Field",(2,2,1),"You are in JHE Field. BSB Field is to your right.\nMcMaster map to your left. The Bus Stop is at your rear.\nThe Starting location is in front of you.","The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everyone knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.",()),
 Map("McMaster Student Centre",(5,0,1),"You are in the Student Centre. Mills is to your left.\nThe Archway is in front of you. A custodial closet downstairs.","The Student Centre is alive. After counting the number of jean jackets\nin the Starbucks line like the Count from Sesame Street you snap back into reality.\n(Oops there goes gravity).\nThe bustling atmosphere disorients you and it becomes difficult to think straight...",()),
 Map("The McMaster Archway",(5,1,1),"You are under the Archway. The Willy Dog Stand is to your left.\nMUSC at your rear. Enterance to University Hall in front of you.","Probably the most beautiful structure at Mac.\nThose Western kids have that Big Ben lookalike but this takes the cake.\nYou snap a quick selfie in front of the Archway for the 'gram.",("u")),
 Map("Inside University Hall",(5,2,1),"You enter University Hall. The Archway is at your rear.\nThe Statue of Willy McMaster is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",("b")),
@@ -147,13 +147,13 @@ Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,None,None,"THANKS! TOKE UP MY DUDES!"),
 #General
-Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"I am slain!"),
+Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),20,None,None,"I am slain!"),
 Enemy("Feral First Year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"I'm a failure at school and at home!"),
 Enemy("Drunk First Year","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"y u do dis"),
 Enemy("Vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"I was going to bring it back I swear!"),
-Enemy("Bus Driver","Is that even your bus pass?",(2,1,1),(5,10,4),100,None,None,"That was definitely not your bus pass!"),
+Enemy("Bus Driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"That was definitely not your bus pass!"),
 Enemy("Hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,""),
-Enemy("Frustrated TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,""),
+Enemy("Frustrated TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),20,None,None,""),
 Enemy("Arts Student","Can you come see my exhibit?",(4,0,1),(5,15,5),20,None,None,""),
 Enemy("Aspiring High School Student","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,""),
 Enemy("McMaster Police Officer","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"We are able to arrest you anyway!")]
