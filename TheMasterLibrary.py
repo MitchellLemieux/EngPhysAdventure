@@ -135,61 +135,6 @@ GBB = Equipment("Green Band Bong",(None),"GBB.jpg","The sacred glass flute provi
 ThreeWText = Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10))
 FakeGun = Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5))
 
-#Placing Items
-#Definition of item locations...
-#AreaName.placeItem(item)
-#Example: Start.placeItem(MSP430)
-#Head Items
-ChapelUpstairs.placeItem(PopeHat)
-Police.placeItem(GasMask)
-CustodialCloset.placeItem(Bucket)
-JHEField.placeItem(EngHat)
-ETB.placeItem(WendysBag)
-ETBUpstairs.placeItem(HardHat)
-InArtMus.placeItem(FrostedTips)
-NRBBasement.placeItem(FastGlasses)
-
-#Body Items
-UniHall.placeItem(BigHitsShirt)
-ThodeBasement.placeItem(Chainmail)
-MACMap.placeItem(MAPShirt)
-KeyesSecret.placeItem(Chainmail)
-InsideReactor.placeItem(Hazmat)
-Archway.placeItem(PizzaBox)
-MUSC.placeItem(Apron)
-
-#Hand Items
-Start.placeItem(MSP430)
-InHatch.placeItem(Wrench)
-BSB.placeItem(BanWires)
-Archway.placeItem(OldHeadphones)
-Mills.placeItem(EmptyBottle)
-InJHE.placeItem(Pencil)
-InChapel.placeItem(Crucifix)
-MUSC.placeItem(Racket)
-WillyDog.placeItem(HotDog)
-Keyes.placeItem(Pita)
-HLTHSci.placeItem(Needle)
-CustodialCloset.placeItem(Plunger)
-PhoenixLoft.placeItem(WineBottle)
-QuantumTunnel.placeItem(PhysPen)
-MUSC.placeItem(ButterKnife)
-MUSC.placeItem(Tofu)
-
-#Off-Hand Items
-JHEUpstairs.placeItem(Griffiths)
-Phoenix.placeItem(Pint)
-JHEField.placeItem(Casio)
-ArtMus.placeItem(Coffee)
-InArtMus.placeItem(Brush)
-KeyesSecret.placeItem(Diary)
-PhoenixLoft.placeItem(Shield)
-NukeRS.placeItem(Lenovo)
-InArtMus.placeItem(Painting)
-QuantumTunnel.placeItem(LunchBox)
-ThodeUpstairs.placeItem(Peanut)
-PhoenixLoft.placeItem(Drumstick)
-
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
 #Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo)
