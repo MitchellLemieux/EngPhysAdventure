@@ -216,22 +216,46 @@ ArtStudent = Enemy("Arts Student","Can you come see my exhibit?",(4,0,1),(5,15,5
 HighSchool = Enemy("Aspiring High School Student","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"")
 MACCop = Enemy("McMaster Police Officer","Give me your student card!",(3,5,1),(50,25,10),75,FakeGun,None,"We are able to arrest you anyway!")
 
-#Place Enemy: Location.placeEnemy(name)
-InsideReactor.placeEnemy(Novog)
-ABBUpstairs.placeEnemy(Haugen)
-BSB.placeEnemy(Minnick)
-JHEBSB.placeEnemy(Kenrick)
-JHEAUpstairs.placeEnemy(Kitai)
-JHEUpstairs.placeEnemy(Knights)
-InChapel.placeEnemy(Priest)
-Archway.placeEnemy(FeralFirst)
-Keyes.placeEnemy(DrunkFirst)
-Bridges.placeEnemy(Vegan)
-BusStop.placeEnemy(BusDriver)
-JHEField.placeEnemy(Hipster)
-ETB.placeEnemy(TAmad)
-ArtMus.placeEnemy(ArtStudent)
-MUSC.placeEnemy(HighSchool)
-Police.placeEnemy(MACCop)
+def WorldMap():
+    global MAPS
+    global LOCATIONS
+    global ENEMIES
+    global ITEMS
+    for i in LOCATIONS:
+        position = i.coords
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z] = i
+    for i in ENEMIES:
+        position = i.location
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z].placeEnemy(i)
+    for i in ITEMS:
+        position = i.location
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z].placeItem[i]
+    return tuple(MAPS)
+
+def ItemDictionary():
+    global ITEMS
+    ItemDictionary = {}
+    for item in Items:
+        name = item.name.lower()
+        ItemDictionary.update({name:item})
+    return ItemDictionary
+
+def EnemyDictionary():
+    global ENEMIES
+    EnemyDictionary = {}
+    for enemy in Enemies:
+        name = enemy.name.lower()
+        EnemyDictionary.update({name:enemy})
+    return EnemyDictionary
+
 
 
