@@ -6,6 +6,14 @@
 
 from GameClasses import *
 
+XRANGE = 6
+YRANGE = 8
+ZRANGE = 3
+
+MAPS = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
+
+
+
 #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
 #Example: Start = Map("Start",(0,0,0),"You start here")
 LOCATIONS=[
