@@ -83,7 +83,7 @@ Equipment("Big Hits Shirt",(5,2,1),"BigHits.jpg","The Shirt of the Hero of Kyvac
 Equipment("Ocons Chainmail",(3,6,0),"OconMail.jpg","The sacred chainmail forged by the legend himself","body",(75,100,50)),
 Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,10)),
 Equipment("McMaster map",(1,2,1),"MACMap.jpg","A map of McMaster you can... wear? I guess?","body",(1,5,5)),
-Equipment("A Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3)),
+Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3)),
 Equipment("Pizza Box",(3,1,1),"PizzaBox.jpg","Fully equipped with crusted cheese.","body",(1,5,1)),
 Equipment("Starbucks Apron",(5,0,1),"Apron.jpg","If you put this on do you immediately know how to make a frappe?","body",(1,5,5)),
 #Hand Items
