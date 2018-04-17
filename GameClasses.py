@@ -134,7 +134,8 @@ class Map:  #Map Location Storage
                 description = description + " a " +self.items[0].name + ".\n"
         
         if self.ENEMY:
-            description = description + self.ENEMY.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape"])
+            if self.ENEMY.alive:
+                description = description + self.ENEMY.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape"])
                 
         if (description == ""):
             description = "There isn't a whole lot to see."
