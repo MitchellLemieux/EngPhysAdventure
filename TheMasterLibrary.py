@@ -4,7 +4,7 @@
 #Start Date: April 14th 2018
 #Library of Items and Locations
 
-from TheAdventureMain import *
+from GameClasses import *
 
 #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
 #Example: Start = Map("Start",(0,0,0),"You start here")
@@ -131,7 +131,7 @@ LED = Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of
 BadAss = Equipment("Horrible Assignment",(None),"BadAss.jpg","A barely legible report on Fourier analysis.","off-hand",(1,1,5))
 Beer = Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(20,0,-20))
 GBB = Equipment("Green Band Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420))
-3WText = Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10))
+ThreeWText = Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10))
 FakeGun = Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5))
 
 #Placing Items
@@ -187,33 +187,33 @@ NukeRS.placeItem(Lenovo)
 InArtMus.placeItem(Painting)
 QuantumTunnel.placeItem(LunchBox)
 ThodeUpstairs.placeItem(Peanut)
-Phoenixloft.placeItem(Drumstick)
+PhoenixLoft.placeItem(Drumstick)
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
 #Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo)
 #Bosses
-Minnick = Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(None),(500,500,500),500,MinnickGlasses,None,"")
-Novog = Enemy("Dr.Novog","Whats up folks.",(None),(420,420,420),400,IronRing,Joint,"Smoke up folks! You've earned your Iron Ring!")
-Haugen = Enemy("Dr.Haugen","Pedrotti Cubed!",(None),(250,0,100),400,Laser,None,"Oh my! You've earned the right to use my laser!")
-Kenrick = Enemy("Kenrick Chin","The oscilloscope is the window into the electronic world.",(None),(400,50,350),300,Oscilloscope,PID,"Here, take this. It is the windor into the electronics world!")
-Kitai = Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(None),(75,50,10),150,LED,Diary,"I've beeen looking all over for this! Where did you find it? Take this!")
-Knights = Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(None),(200,100,1),500,BadAss,Beer,"Here, you've earned this")
+Minnick = Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),500,MinnickGlasses,None,"")
+Novog = Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,IronRing,Joint,"Smoke up folks! You've earned your Iron Ring!")
+Haugen = Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,Laser,(None),"Oh my! You've earned the right to use my laser!")
+Kenrick = Enemy("Kenrick Chin","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,Oscilloscope,PID,"Here, take this. It is the windor into the electronics world!")
+Kitai = Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,LED,Diary,"I've beeen looking all over for this! Where did you find it? Take this!")
+Knights = Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,BadAss,Beer,"Here, you've earned this")
 
 #Special
-Fallon = Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,GBB,Lunchbox,"THANKS! TOKE UP MY DUDES!")
+Fallon = Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,GBB,LunchBox,"THANKS! TOKE UP MY DUDES!")
 
 #General
-Priest = Enemy("Father Frobenius","You need prayer.",(None),(10,10,10),25,PriestGown,None,"I am slain!")
-FeralFirst = Enemy("Feral First Year","Have you go the LONCAPA Python code?",(None),(5,1,10),15,Adderall,None,"I'm a failure at school and at home!")
-DrunkFirst = Enemy("Drunk First Year","MHhmgh, Soouh whatu we getta druuuunk",(None),(10,5,1),15,PeeBottle,None,"y u do dis")
-Vegan = Enemy("Vegan","Did I mention I'm vegan?",(None),(15,1,5),10,3WText,Tofu,"I was going to bring it back I swear!")
-BusDriver = Enemy("Bus Driver","Is that even your bus pass?",(None),(5,10,4),100,None,None,"That was definitely not your bus pass!")
-Hipster = Enemy("Hipster","Have you ever heard of Macklemore?",(None),(5,2,10),10,None,None,"")
-TAmad = Enemy("Frustrated TA","I'll have your marks back within the week, okay?",(None),(10,5,10),25,None,None,"")
-ArtStudent = Enemy("Arts Student","Can you come see my exhibit?",(None),(5,15,5),20,None,None,"")
-HighSchool = Enemy("Aspiring High School Student","What is the entrance average for Engineering???",(None),(1,5,75),10,None,None,"")
-MACCop = Enemy("McMaster Police Officer","Give me your student card!",(None),(50,25,10),75,FakeGun,None,"We are able to arrest you anyway!")
+Priest = Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,PriestGown,SNone,"I am slain!")
+FeralFirst = Enemy("Feral First Year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,Adderall,None,"I'm a failure at school and at home!")
+DrunkFirst = Enemy("Drunk First Year","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,PeeBottle,None,"y u do dis")
+Vegan = Enemy("Vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,ThreeWText,Tofu,"I was going to bring it back I swear!")
+BusDriver = Enemy("Bus Driver","Is that even your bus pass?",(2,1,1),(5,10,4),100,None,None,"That was definitely not your bus pass!")
+Hipster = Enemy("Hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,"")
+TAmad = Enemy("Frustrated TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,"")
+ArtStudent = Enemy("Arts Student","Can you come see my exhibit?",(4,0,1),(5,15,5),20,None,None,"")
+HighSchool = Enemy("Aspiring High School Student","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"")
+MACCop = Enemy("McMaster Police Officer","Give me your student card!",(3,5,1),(50,25,10),75,FakeGun,None,"We are able to arrest you anyway!")
 
 #Place Enemy: Location.placeEnemy(name)
 InsideReactor.placeEnemy(Novog)
