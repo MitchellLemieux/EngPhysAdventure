@@ -137,7 +137,7 @@ class Map:  #Map Location Storage
             if self.ENEMY.alive:
                 description = description + self.ENEMY.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n"])
             else:
-                description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of", "body of", "cadaver of", "hunk of meat that used to be ", "the remains of "]) + self.ENEMY.name
+                description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of", "body of", "cadaver of", "hunk of meat that used to be ", "remains of "]) + self.ENEMY.name + "\n."
                 
         if (description == ""):
             description = "There isn't a whole lot to see."
