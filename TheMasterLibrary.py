@@ -234,4 +234,44 @@ ArtMus.placeEnemy(ArtStudent)
 MUSC.placeEnemy(HighSchool)
 Police.placeEnemy(MACCop)
 
+def WorldMap():
+    global MAPS
+    global LOCATIONS
+    global ENEMIES
+    global ITEMS
+    for i in LOCATIONS:
+        position = i.coords
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z] = i
+    for i in ENEMIES:
+        position = i.location
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z].placeEnemy(i)
+    for i in ITEMS:
+        position = i.location
+        x = position[0]
+        y = position[1]
+        z = position[2]
+        MAPS[x][y][z].placeItem[i]
+    return tuple(MAPS)
+
+def ItemDictionary():
+    global ITEMS
+    ItemDictionary = {}
+    for item in Items:
+        name = item.name.lower()
+        ItemDictionary.update({name:item})
+    return ItemDictionary
+
+def EnemyDictionary():
+    global ENEMIES
+    EnemyDictionary = {}
+    for enemy in Enemies:
+        name = enemy.name.lower()
+        EnemyDictionary.update({name:enemy})
+    return EnemyDictionary
 
