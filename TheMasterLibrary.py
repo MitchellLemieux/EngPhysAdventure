@@ -66,12 +66,12 @@ Locations = [Start,InJHE,NukeRS,InHatch,FrntHatch,MACMap,HLTHSci,BusStop,InChape
 #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
 #Example: Gun = Equipment("Gun",(0,0,0),"Gun.jpg","It shoots people.","hand",(100,0,100))
 #Head Items
-EngHat = Equipment("Fireball Hat",(-2,-1,0),"EngHat.jpg","Kind of like the hat you bought in first year and thought you'd wear it forever...","head",(0,3,1))
-PopeHat = Equipment("Pope Hat",(0,-3,0),"PopeHat.jpg","Does the Pope where a silly hat? Now you do.","head",(0,3,2))
-Goggles = Equipment("Goggles",(0,-2,0),"Goggles.jpg","Got PPE?","head",(2,0,2))
-WendysBag = Equipment("Wendy's Bag",(1,1,0),"WendyBag.jpg","Fully equipped with grease stains.","head",(1,0,-5))
+EngHat = Equipment("Fireball Hat",(2,2,1),"EngHat.jpg","Kind of like the hat you bought in first year and thought you'd wear it forever...","head",(0,3,1))
+PopeHat = Equipment("Pope Hat",(2,0,2),"PopeHat.jpg","Does the Pope where a silly hat? Now you do.","head",(0,3,2))
+Goggles = Equipment("Goggles",(3,2,1),"Goggles.jpg","Got PPE?","head",(2,0,2))
+WendysBag = Equipment("Wendy's Bag",(1,1,1),"WendyBag.jpg","Fully equipped with grease stains.","head",(1,0,-5))
 Bucket = Equipment("An Empty Bucket",(5,0,0),"Bucket.jpg","The smell of cheap soap still lingers.","head",(-5,10,1))
-GasMask = Equipment("Gas Mask",(0,0,0),"GasMask.jpg","The best defence agains a Brian methane extrusion.","head",(5,10,10))
+GasMask = Equipment("Gas Mask",(3,5,1),"GasMask.jpg","The best defence agains a Brian methane extrusion.","head",(5,10,10))
 HardHat = Equipment("Hard Hat",(0,0,0),"HardHat.jpg","You don't really want to look like a Civil kid. But at least it protects your head.","head",(1,15,5))
 FrostedTips = Equipment("Erik's Frosted Tips",(0,0,0),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20))
 FastGlasses = Equipment("Fast Visor Glasses",(0,0,0),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30))
@@ -234,44 +234,4 @@ ArtMus.placeEnemy(ArtStudent)
 MUSC.placeEnemy(HighSchool)
 Police.placeEnemy(MACCop)
 
-def WorldMap():
-    global MAPS
-    global LOCATIONS
-    global ENEMIES
-    global ITEMS
-    for i in LOCATIONS:
-        position = i.coords
-        x = position[0]
-        y = position[1]
-        z = position[2]
-        MAPS[x][y][z] = i
-    for i in ENEMIES:
-        position = i.location
-        x = position[0]
-        y = position[1]
-        z = position[2]
-        MAPS[x][y][z].placeEnemy(i)
-    for i in ITEMS:
-        position = i.location
-        x = position[0]
-        y = position[1]
-        z = position[2]
-        MAPS[x][y][z].placeItem[i]
-    return tuple(MAPS)
-
-def ItemDictionary():
-    global ITEMS
-    ItemDictionary = {}
-    for item in Items:
-        name = item.name.lower()
-        ItemDictionary.update({name:item})
-    return ItemDictionary
-
-def EnemyDictionary():
-    global ENEMIES
-    EnemyDictionary = {}
-    for enemy in Enemies:
-        name = enemy.name.lower()
-        EnemyDictionary.update({name:enemy})
-    return EnemyDictionary
 
