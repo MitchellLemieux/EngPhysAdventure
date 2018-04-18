@@ -77,6 +77,7 @@ def Move(direction):
 #Combat System
 def Combat(P,E):
      if E:
+            
         #Speed
         PSpeed = P.stats[2]
         ESpeed = E.stats[2]
@@ -131,23 +132,27 @@ def Attack(E):
     y = PLAYER.location[1]
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
-    if E in ENEMIES:
+    if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
-        if (enemy.location == tuple(PLAYER.location)) and (enemy.alive):
-            Outcome = Combat(PLAYER,enemy)
-            if Outcome:
-                print "You defeated " + enemy.name + ".\n"
-                print enemy.Dinfo
-                if enemy.drop:
-                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
-                    CurrentPlace.placeItem(ITEMS[enemy.drop])
-            else:
-                print "Oh no! You died, without ever finding your iron ring"
+        if random() <= 0.01:
+            print "An oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death.\n"
+            print enemy.Dinfo + ".\n"
+            if enemy.drop:
+               print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+               CurrentPlace.placeItem(ITEMS[enemy.drop])
         else:
-            print "They don't appear to be here."
-                        
+           Outcome = Combat(PLAYER,enemy) 
+           if Outcome:
+               print "You defeated " + enemy.name + ".\n"
+               print enemy.Dinfo + ".\n"
+           if enemy.drop:
+               print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+               CurrentPlace.placeItem(ITEMS[enemy.drop])
+           else:
+               print "Oh no! You died, without ever finding your iron ring"
     else:
         print "They don't appear to be here."
+                        
 
 def Talk(E):
     global ENEMIES
@@ -157,21 +162,31 @@ def Talk(E):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    if E in ENEMIES:
+    if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
-        if (enemy.location == tuple(PLAYER.location)) and (enemy.alive):
-            if ITEMS[enemy.need] in PLAYER.inv:
-                print enemy.Sinfo
-                MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
-                enemy.drop = None
-                PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
-        
-            else:
-                print enemy.info
+        if enemy.need and ITEMS[enemy.need]in PLAYER.inv:
+            print enemy.Sinfo
+            MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+            enemy.drop = None
+            PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
         else:
-            print "They don't appear to be here."
+            print enemy.info
     else:
-        print "They don't appear to be here."
+        print "They don't appear to be here.\n"
+
+
+def Stats():
+    global PLAYER
+    print "HEALTH: " + str(PLAYER.health)+"\n"+str(PLAYER.stats)
+
+def Inspect(Item):
+    global ITEMS
+    global PLAYER
+    if Item in ITEMS and ITEMS[Item].location == tuple(PLAYER.location):
+            print ITEMS[Item].info + "\n"
+    else:
+        print "That doesn't seem to be around here.\n"
+            
         
     
     

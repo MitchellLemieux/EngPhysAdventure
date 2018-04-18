@@ -26,7 +26,7 @@ while(PLAYER.alive):
             print CurrentPlace.search()
             
         elif (verb == 'stats'):
-            print "HEALTH: " + str(PLAYER.health)+"\n"+str(PLAYER.stats)
+            Stats()
 
 
     elif (len(direction) == 2):
@@ -34,17 +34,19 @@ while(PLAYER.alive):
         objectName = direction [1]
         
         if verb == 'equip':
-                Equip(objectName)
+            Equip(objectName)
         
         if verb == 'drop':
-                Drop(objectName)
+            Drop(objectName)
 
         if verb == 'attack':
-                Attack(objectName)
+            Attack(objectName)
 
         if verb == 'talk':
-            Talk(ObjectName)
-        
+            Talk(objectName)
+            
+        if verb == 'inspect':
+            Inspect(objectName)
                         
 
     

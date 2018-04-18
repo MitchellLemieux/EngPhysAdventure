@@ -43,10 +43,12 @@ class Character: #When the equip function is called we need to make sure the ite
             print 'This item is already equipped'
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn
+            print Equip.info
+            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
+            print Equip.info
             print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.'
         else:
             print "That doesn't seem to be around here."
@@ -147,7 +149,7 @@ class Map:  #Map Location Storage
                 if enemy.alive:
                     description = description + "\n" + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n"])
                 else:
-                    description = description + "\nOh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of", "body of", "cadaver of", "hunk of meat that used to be ", "remains of "]) + enemy.name + "\n."
+                    description = description + "\nOh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of", "hunk of meat that used to be ", "remains of "]) + enemy.name + "\n."
                 
         if (description == ""):
             description = "\nThere isn't a whole lot to see.\n"
