@@ -78,7 +78,7 @@ Equipment("Hard Hat",(4,2,1),"HardHat.jpg","You don't really want to look like a
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(5,2,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
-Equipment("Ocons Chainmail",(3,6,0),"OconMail.jpg","The sacred chainmail forged by the legend himself","body",(75,100,50)),
+Equipment("Ocons Chainmail",(3,6,0),"OconMail.jpg","The sacred chainmail forged by the legend himself","body",(25,50,25)),
 Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,10)),
 Equipment("McMaster map",(1,2,1),"MACMap.jpg","A map of McMaster you can... wear? I guess?","body",(1,5,5)),
 Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3)),
@@ -103,10 +103,10 @@ Equipment("Used Condom",(2,1,1),"Condom.jpg","The audacity of some people to lea
 Equipment("Eng Phys Pen",(3,3,0),"PhysPen.jpg","It would be amazing if this thing actually worked. Plug it in and find all of 2P04","hand",(15,0,10)),
 Equipment("Butter Knife",(3,6,1),"ButterKnife.jpg","Meant for spreading, not stabbing...","hand",(4,0,5)),
 Equipment("Pee Bottle",(2,1,1),"PeeBottle.jpg","It is literally a bottle of urine.","hand",(10,0,0)),
-Equipment("Tofu",(4,3,0),"Carrot.jpg","Vegan's delight","hand",(1,1,5)),
+Equipment("Tofu",(4,3,0),"Carrot.jpg","Vegan's delight.","hand",(1,1,5)),
 Equipment("Space Pop",(4,0,1),"SpacePop.jgp","Get ready to go to space pop city.","hand",(10,5,20)),
 #Off-Hand Items
-Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,25)),
+Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,10)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,100,10)),
 Equipment("An Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5)),
 Equipment("Diary of the Fallen",(3,6,0),"Diary.jpg","The personal notes of an ancient Hero.","off-hand",(69,69,69)),
@@ -115,10 +115,10 @@ Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal
 Equipment("Paint Brush",(3,0,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,0,20)),
 Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,30,-5)),
 Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,20,5)),
-Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,25,15)),
+Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,10,15)),
 Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5)),
 Equipment("Adderall",(4,0,1),"Adderall.jpg","Speed up, my dude!","off-hand",(0,0,50)),
-Equipment("Drumstick",(4,3,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,15,25)),
+Equipment("Drumstick",(4,3,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,10,15)),
 Equipment("Bottle Opener",(3,7,1),"BottleOpener.jpg","I wish I had a bottle of wine right about now...","off-hand",(0,10,15)),
 #Special/Dropped Items
 Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000)),
@@ -129,9 +129,9 @@ Equipment("Joint of Destiny",(None),"Joint.jpg","A tighly rolled spliff filled w
 Equipment("PID control system",(None),"PID.jpg","A PID control system. Kp = 69, my dude.","head",(69,0,10)),
 Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of a neutron star, ok maybe not.","hand",(100,0,50)),
 Equipment("Horrible Assignment",(None),"BadAss.jpg","A barely legible report on Fourier analysis.","off-hand",(1,1,5)),
-Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(20,0,-20)),
+Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(15,0,20)),
 Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420)),
-Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10)),
+Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(5,5,10)),
 Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5)),
 Equipment("Eriks Frosted Tips",(None),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20)),
 Equipment("Engineering Mug",(None),"EngMug.jpg","Do people even have these anymore?","hand",(1,0,2)),
@@ -142,7 +142,7 @@ Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(5,0,10)),
 Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.","off-hand",(5,6,9)),
 Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5)),
 Equipment("Fast Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
-Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,25)),
+Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,10)),
 Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog watch...","off-hand",(0,15,20))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
@@ -154,8 +154,8 @@ Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportu
 Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,"iron ring",None,"Smoke up folks! You've earned your Iron Ring!",""),
 Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,"femtosecond laser",None,"Oh my! You've earned the right to use my laser!",""),
 Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
-Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
-Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,"cold beer",None,"Here, you've earned this",""),
+Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(100,50,10),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
+Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,"cold beer","3w textbook","I've been looking all over for that! Have cold one on me.",""),
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
 #General
