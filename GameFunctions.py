@@ -145,9 +145,9 @@ def Attack(E):
            if Outcome:
                print "You defeated " + enemy.name + ".\n"
                print enemy.Dinfo + ".\n"
-           if enemy.drop:
-               print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
-               CurrentPlace.placeItem(ITEMS[enemy.drop])
+               if enemy.drop:
+                   print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+                   CurrentPlace.placeItem(ITEMS[enemy.drop])
            else:
                print "Oh no! You died, without ever finding your iron ring"
     else:
