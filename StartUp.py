@@ -84,6 +84,8 @@ Equipment("McMaster map",(1,2,1),"MACMap.jpg","A map of McMaster you can... wear
 Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3)),
 Equipment("Pizza Box",(3,1,1),"PizzaBox.jpg","Fully equipped with crusted cheese.","body",(1,5,1)),
 Equipment("Starbucks Apron",(5,0,1),"Apron.jpg","If you put this on do you immediately know how to make a frappe?","body",(1,5,5)),
+Equipment("Maroon Jumpsuit",(5,1,1),"MaroonSuit.jpg","Overalls of the Maroons","body",(1,10,5)),
+Equipment("Redsuit",(2,4,2),"Redsuit.jpg","Overalls of drunks... I mean engineers","body",(5,10,5)),
 #Hand Items
 Equipment("MSP430",(2,3,1),"MSP430.jpg","A literal piece of garbage.","hand",(-5,0,-5)),
 Equipment("Old Headphones",(1,7,1),"OldHeadphones.jpg","Old frayed apple headphones. Good for whipping.","hand",(5,0,5)),
@@ -102,6 +104,7 @@ Equipment("Eng Phys Pen",(3,3,0),"PhysPen.jpg","It would be amazing if this thin
 Equipment("Butter Knife",(3,6,1),"ButterKnife.jpg","Meant for spreading, not stabbing...","hand",(4,0,5)),
 Equipment("Pee Bottle",(2,1,1),"PeeBottle.jpg","It is literally a bottle of urine.","hand",(10,0,0)),
 Equipment("Tofu",(4,3,0),"Carrot.jpg","Vegan's delight","hand",(1,1,5)),
+Equipment("Space Pop",(4,0,1),"SpacePop.jgp","Get ready to go to space pop city.","hand",(10,5,20)),
 #Off-Hand Items
 Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,25)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,100,10)),
@@ -116,6 +119,7 @@ Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an
 Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5)),
 Equipment("Adderall",(4,0,1),"Adderall.jpg","Speed up, my dude!","off-hand",(0,0,50)),
 Equipment("Drumstick",(4,3,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,15,25)),
+Equipment("Bottle Opener",(3,7,1),"BottleOpener.jpg","I wish I had a bottle of wine right about now...","off-hand",(0,10,15)),
 #Special/Dropped Items
 Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000)),
 Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(500,0,999)),
