@@ -41,7 +41,7 @@ Map("Police Station",(3,5,1),"You are at the Police Station. The path between JH
 Map("Keyes",(3,6,1),"You are in Keyes. You can head to the Lot M if you go forward.\nThe Nuclear Reactor is to your left. JHE-BSB connection at your rear.","Damn, Our oWN hip res and snack station thats open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering a chicken fingers & fries super combo...",()),
 Map("Nuclear Reactor",(2,6,1),"You are at the McMaster Nuclear Reactor. Go down to enter.\nRight is Mary Keyes. Left is ABB.","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous stucture draws you closer as you consider what it would be\nlike to swim in that sweet blue pool...",('l')),
 Map("ABB",(1,6,1),"You are in ABB. You can go upstairs. Thode is in front of you.\nJHE Annex behind you. The Nuclear Reactor is to your right.","You scan the display cases of old lab apparatus and wonder if you would\never be able to create something like this even with 20 years of study.\nMost of them look like they could serve a purpose in the dark arts...\nYou stare at the electron microscope structure and wonder if it could even see your GPA...\nA tear rolls down your cheek. You collect yourself and plan what to do next.",('l')),
-Map("Club Thode",(1,7,1),"You are in Thode Library. ABB is at your rear.\nYou can head to the campus exit by going forward.","Oh the Reactor Cafe,\nYou think of the good old days when you could actually see the reactor from the Reactor Cafe...\nAfter overhearing someone ask whether keV is bigger than MeV you first contemplate your existence,\nthen contemplate your next move...",('r')),
+Map("Club Thode",(1,7,1),"You are in Thode Library. ABB is at your rear.\nYou can head to the campus exit by going forward.","Oh the Reactor Cafe,\nYou think of the good old days when you could actually see the reactor from the Reactor Cafe...\nAfter overhearing someone ask whether keV is bigger than MeV you first contemplate your existence,\nthen contemplate your next move...",('l','f')),
 Map("JHE Annex",(1,5,1),"You are in the JHE Annex. The Eng Phys Office is up the stairs.\nThe entrance to Hatch is to your rear.\nABB in front of you.","They made a big engineering building, got money, then added more.\nYou wonder why Eng Phys classes get pushed into the rooms in this side of JHE...\nHmm...",('l')),
 Map("DANGER",(2,7,1),"You are at the exit of campus.\nHead to club Thode by going left. Head to Mary Keyes if you go right.","A faint glow can be seen in the distance but is impossible to make out.\nWarning signs litter the trail as you squint to get a better look.\nA chill is sent down your spine as you faintly see the flickering stretched shadows of\nfighting dance on the road ahead.\nYou cannot go straight... yet.",('f')),
 Map("ETB",(0,3,1),"You are at ETB. To your right is the Hatch Building.","The memories of actually doing something in first year flood your mind.\nGear trains. Python. 3D printing.\nEngineering had such a different meaning in your first year...\nYou snap out of your day dream and plan your next move.",('l','f','b')),
@@ -108,7 +108,7 @@ Equipment("Space Pop",(4,0,1),"SpacePop.jgp","Get ready to go to space pop city.
 #Off-Hand Items
 Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,10)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,100,10)),
-Equipment("An Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5)),
+Equipment("Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5)),
 Equipment("Diary of the Fallen",(3,6,0),"Diary.jpg","The personal notes of an ancient Hero.","off-hand",(69,69,69)),
 Equipment("Wood Shield",(4,3,2),"Shield.jpg","An old wooden shield used in a play, you think...","off-hand",(5,75,-5)),
 Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(5,5,30)),
@@ -143,7 +143,7 @@ Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's numbe
 Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5)),
 Equipment("Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,10)),
-Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog watch...","off-hand",(0,15,20))]
+Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog clock...","off-hand",(0,15,20))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -159,7 +159,7 @@ Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
 #General
-Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,"crucific",None,"","I am slain!"),
+Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
 Enemy("Steven the first year","Have you got the LONCAPA Python code?",(3,6,1),(5,1,10),15,'engineering mug',None,"","I'm a failure at home and at school!"),
 Enemy("Phil the drunk","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,"puke",None,"","mhmh spooky ghost urggh ectoplasm noooooo"),
 Enemy("Jana the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
