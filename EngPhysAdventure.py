@@ -35,13 +35,16 @@ while(PLAYER.alive):
         
         if verb == 'equip':
                 Equip(objectName)
-          
         
         if verb == 'drop':
                 Drop(objectName)
 
         if verb == 'attack':
                 Attack(objectName)
+
+        if verb == 'talk':
+            Talk(ObjectName)
+        
                         
 
     

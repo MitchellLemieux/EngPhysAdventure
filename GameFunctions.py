@@ -126,6 +126,7 @@ def Attack(E):
     global ENEMIES
     global MAPS
     global PLAYER
+    global ITEMS
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
@@ -135,10 +136,11 @@ def Attack(E):
         if (enemy.location == tuple(PLAYER.location)) and (enemy.alive):
             Outcome = Combat(PLAYER,enemy)
             if Outcome:
-                print "You defeated " + enemy.name + "."
-                if enemy.item:
-                    print enemy.name + " dropped the " + enemy.item.name + "."
-                    CurrentPlace.placeItem(enemy.item)
+                print "You defeated " + enemy.name + ".\n"
+                print enemy.Dinfo
+                if enemy.drop:
+                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+                    CurrentPlace.placeItem(ITEMS[enemy.drop])
             else:
                 print "Oh no! You died, without ever finding your iron ring"
         else:
@@ -146,5 +148,31 @@ def Attack(E):
                         
     else:
         print "They don't appear to be here."
+
+def Talk(E):
+    global ENEMIES
+    global MAPS
+    global PLAYER
+    global ITEMS
+    x = PLAYER.location[0]
+    y = PLAYER.location[1]
+    z = PLAYER.location[2]
+    if E in ENEMIES:
+        enemy = ENEMIES[E]
+        if (enemy.location == tuple(PLAYER.location)) and (enemy.alive):
+            if ITEMS[enemy.need] in PLAYER.inv:
+                print enemy.Sinfo
+                MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+                enemy.drop = None
+                PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+        
+            else:
+                print enemy.info
+        else:
+            print "They don't appear to be here."
+    else:
+        print "They don't appear to be here."
+        
+    
     
     
