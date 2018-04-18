@@ -141,7 +141,7 @@ Equipment("Puke",(None),"Puke.jpg","Ew, literally a pool of vomit","body",(1,0,-
 Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(5,0,10)),
 Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.","off-hand",(5,6,9)),
 Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5)),
-Equipment("Fast Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
+Equipment("Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,10)),
 Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog watch...","off-hand",(0,15,20))]
 
@@ -169,7 +169,7 @@ Enemy("Mitch the TA","Where's my phone?",(0,3,1),(10,5,10),25,"phone",None,"","T
 Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,"eriks frosted tips",None,"","Man, that's dumb!"),
 Enemy("Megan the Bartender","Hey kid, want some beer?",(4,3,1),(1,20,75),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
 Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,"fake gun",None,"","We aren't able to arrest you anyway!"),
-Enemy("Andreas the nerd","Full send, dude",(3,2,1),(10,15,5),50,"fast visor glasses",None,"","Dude, that was definitely a full send"),
+Enemy("Andreas the nerd","Full send, dude",(3,2,1),(10,15,5),50,"visor glasses",None,"","Dude, that was definitely a full send"),
 Enemy("Eric the baller","Huge talking to people play.",(1,7,2),(20,15,20),75,"coldsteel katana",None,"","This is sub-optimal."),
 Enemy("Mario the mixologist","Yo check out my meme page. You ever heard coco jay?",(1,4,1),(15,10,20),50,"stylish watch",None,"","si saben como consigo, por que me invitan?")]
 
