@@ -164,9 +164,11 @@ def Talk(E):
     z = PLAYER.location[2]
     if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
-        if enemy.need and ITEMS[enemy.need]in PLAYER.inv:
+        if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]:
             print enemy.Sinfo
+            print enemy.name + " took the " + enemy.need + "."
             MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+            print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
         else:
@@ -178,15 +180,18 @@ def Talk(E):
 def Stats():
     global PLAYER
     print "HEALTH: " + str(PLAYER.health)
-    print "ATTACK: " + str(PLAYER.stats[0])
-    print "DEFENSE: " + str(PLAYER.stats[1])
-    print "SPEED: " + str(PLAYER.stats[2])
+    print "ATK: " + str(PLAYER.stats[0])
+    print "DEF: " + str(PLAYER.stats[1])
+    print "SPD: " + str(PLAYER.stats[2])
 
 def Inspect(Item):
     global ITEMS
     global PLAYER
-    if Item in ITEMS and ITEMS[Item].location == tuple(PLAYER.location):
-            print ITEMS[Item].info + "\n"
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
+            print "\n"+ITEMS[Item].info
+            print "ATK :" + str(ITEMS[Item].stats[0])
+            print "DEF :" + str(ITEMS[Item].stats[1])
+            print "SPD :" + str(ITEMS[Item].stats[2])
     else:
         print "That doesn't seem to be around here.\n"
             
