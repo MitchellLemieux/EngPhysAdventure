@@ -92,7 +92,6 @@ Equipment("Empty Bottle",(5,1,1),"EmptyBottle.jpg","Dasani, more like Dishonest!
 Equipment("Banana Wires",(3,3,1),"BanWires.jpg","Alligator clips added for extra whippage.","hand",(8,0,8)),
 Equipment("Wrench",(1,3,1),"Wrench.jpg","It's a wrench. 22mm.","hand",(10,0,0)),
 Equipment("Pencil",(2,4,1),"Pencil.jpg","HB2. Sharpened.","hand",(2,0,5)),
-Equipment("Crucifix",(2,0,1),"Crucifix.jpg","The Power of Chirst compels you!","hand",(5,0,4)),
 Equipment("Squash Racket",(5,0,1),"Racket.jpg","Dr.Buijs' Racket? Voltage Divider!","hand",(5,0,10)),
 Equipment("Willy Dog",(4,1,1),"Hotdog.jpg","Definitely not vegan","hand",(1,0,2)),
 Equipment("Needa Pita",(3,6,1),"Pita.jpg","Better have gotten black olives on that","hand",(2,0,1)),
@@ -131,7 +130,15 @@ Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Kni
 Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420)),
 Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10)),
 Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5)),
-Equipment("Eriks Frosted Tips",(None),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20))]
+Equipment("Eriks Frosted Tips",(None),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20)),
+Equipment("Engineering Mug",(None),"EngMug.jpg","Do people even have these anymore?","hand",(1,0,2)),
+Equipment("Crucifix",(None),"Crucifix.jpg","The Power of Chirst compels you!","hand",(10,0,10)),
+Equipment("Huge Shirt",(None,"HugeShirt.jpg","This shirt is WAY too big","body",(0,5,5)),
+Equipment("Puke",(None),"Puke.jpg","Ew, literally a pool of vomit","body",(1,0,-10)),
+Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(5,0,10)),
+Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.",(5,6,9),
+Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5))]
+
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -145,18 +152,18 @@ Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4
 Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
 Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,"cold beer",None,"Here, you've earned this",""),
 #Special
-Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(999,999,999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
+Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
 #General
-Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"","I am slain!"),
-Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"","I'm a failure at school and at home!"),
-Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"","y u do dis"),
-Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"","I was going to bring it back I swear!"),
-Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"","That was definitely not your bus pass!"),
-Enemy("Brian the hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,"",""),
-Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,"",""),
+Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,"crucific",None,"","I am slain!"),
+Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,'engineering mug',None,"","I'm a failure at school and at home!"),
+Enemy("Phil the drunk","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,"puke",None,"","mhmh spooky ghost urggh ectoplasm noooooo"),
+Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
+Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,"huge shirt",None,"","That was definitely not your bus pass!"),
+Enemy("Brian the hipster","Have you ever heard of Frank Ocean?",(2,2,1),(5,2,10),10,"guitar",None,"","That's not vegan."),
+Enemy("Mitch the TA","Where's my phone?",(0,3,1),(10,5,10),25,"phone",None,"","There's my phone."),
 Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,"eriks frosted tips",None,"","Man, that's dumb!"),
-Enemy("Peewee the High Schooler","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"",""),
-Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"","We are able to arrest you anyway!")]
+Enemy("Megan the Bartender","Hey kid, want some beer?",(4,3,1),(1,20,75),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
+Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,"fake gun",None,"","We aren't able to arrest you anyway!")]
 
 def WorldMap():
     global MAPS
