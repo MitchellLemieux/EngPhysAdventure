@@ -139,7 +139,7 @@ Equipment("Crucifix",(None),"Crucifix.jpg","The Power of Chirst compels you!","h
 Equipment("Huge Shirt",(None,"HugeShirt.jpg","This shirt is WAY too big","body",(0,5,5)),
 Equipment("Puke",(None),"Puke.jpg","Ew, literally a pool of vomit","body",(1,0,-10)),
 Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(5,0,10)),
-Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.",(5,6,9),
+Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.",(5,6,9)),
 Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5)),
 Equipment("Fast Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,25)),
