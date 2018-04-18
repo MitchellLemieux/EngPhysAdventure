@@ -67,7 +67,11 @@ def Move(direction):
         z = PLAYER.location[2]
         Place = MAPS[x][y][z]
     if Place:
-        print Place.lore + "\n" + Place.info + Place.search()
+        if Place.travelled:
+            print Place.lore + "\n" + Place.info + Place.search()
+            Place.travelled = 0
+        else:
+            print Place.info + Place.search()
         return Place
     else:
         PLAYER.location = list(CurrentPlace.coords)

@@ -114,6 +114,7 @@ class Map:  #Map Location Storage
         self.items = []
         self.ENEMY = []
         self.walls = walls
+        self.travelled = 1
 
     def placeItem(self,item): #Works with the drop method in the character class
         if item:
