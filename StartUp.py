@@ -75,7 +75,6 @@ Equipment("Wendy's Bag",(1,1,1),"WendyBag.jpg","Fully equipped with grease stain
 Equipment("An Empty Bucket",(5,0,0),"Bucket.jpg","The smell of cheap soap still lingers.","head",(-5,10,1)),
 Equipment("Gas Mask",(3,5,1),"GasMask.jpg","The best defence agains a Brian methane extrusion.","head",(5,10,10)),
 Equipment("Hard Hat",(4,2,1),"HardHat.jpg","You don't really want to look like a Civil kid. But at least it protects your head.","head",(1,15,5)),
-Equipment("Fast Visor Glasses",(1,7,2),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(5,2,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
@@ -137,8 +136,10 @@ Equipment("Huge Shirt",(None,"HugeShirt.jpg","This shirt is WAY too big","body",
 Equipment("Puke",(None),"Puke.jpg","Ew, literally a pool of vomit","body",(1,0,-10)),
 Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(5,0,10)),
 Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.",(5,6,9),
-Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5))]
-
+Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5)),
+Equipment("Fast Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
+Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,25)),
+Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog watch...","off-hand",(0,15,20))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -163,7 +164,10 @@ Enemy("Brian the hipster","Have you ever heard of Frank Ocean?",(2,2,1),(5,2,10)
 Enemy("Mitch the TA","Where's my phone?",(0,3,1),(10,5,10),25,"phone",None,"","There's my phone."),
 Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,"eriks frosted tips",None,"","Man, that's dumb!"),
 Enemy("Megan the Bartender","Hey kid, want some beer?",(4,3,1),(1,20,75),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
-Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,"fake gun",None,"","We aren't able to arrest you anyway!")]
+Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,"fake gun",None,"","We aren't able to arrest you anyway!"),
+Enemy("Andreas the nerd","Full send, dude",(3,2,1),(10,15,5),50,"fast visor glasses",None,"","Dude, that was definitely a full send"),
+Enemy("Eric the baller","Huge talking to people play.",(1,7,2),(20,15,20),75,"coldsteel katana",None,"","This is sub-optimal."),
+Enemy("Mario the mixologist","Yo check out my meme page. You ever heard coco jay?",(1,4,1),(15,10,20),50,"stylish watch",None,"","si saben como consigo, por que me invitan?")]
 
 def WorldMap():
     global MAPS
