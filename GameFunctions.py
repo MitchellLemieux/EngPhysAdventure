@@ -186,16 +186,17 @@ def Stats():
     print "HEALTH: " + str(PLAYER.health)
     print "ATK: " + str(PLAYER.stats[0])
     print "DEF: " + str(PLAYER.stats[1])
-    print "SPD: " + str(PLAYER.stats[2])
+    print "SPD: " + str(PLAYER.stats[2])+"\n"
 
 def Inspect(Item):
     global ITEMS
     global PLAYER
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
             print "\n"+ITEMS[Item].info
-            print "ATK :" + str(ITEMS[Item].stats[0])
-            print "DEF :" + str(ITEMS[Item].stats[1])
-            print "SPD :" + str(ITEMS[Item].stats[2])
+            print "ATK : " + str(ITEMS[Item].stats[0])
+            print "DEF : " + str(ITEMS[Item].stats[1])
+            print "SPD : " + str(ITEMS[Item].stats[2])
+            print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
     else:
         print "That doesn't seem to be around here.\n"
             
