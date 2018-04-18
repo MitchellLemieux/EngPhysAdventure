@@ -149,14 +149,14 @@ Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(99
 #General
 Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"","I am slain!"),
 Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"","I'm a failure at school and at home!"),
-Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"","y u do dis",""),
-Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"","I was going to bring it back I swear!",""),
-Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"","That was definitely not your bus pass!",""),
+Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"","y u do dis"),
+Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"","I was going to bring it back I swear!"),
+Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"","That was definitely not your bus pass!"),
 Enemy("Brian the hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,"",""),
 Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,"",""),
 Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,"eriks frosted tips",None,"","Man, that's dumb!"),
 Enemy("Peewee the High Schooler","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"",""),
-Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"We are able to arrest you anyway!","","")]
+Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"","We are able to arrest you anyway!")]
 
 def WorldMap():
     global MAPS
