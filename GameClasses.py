@@ -86,14 +86,19 @@ class Character: #When the equip function is called we need to make sure the ite
         print Head + Body + Hand + OffHand
 
 class Enemy:
-    def __init__(self,name,info,location,stats,health,drop,need,Sinfo):
+    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo):
         self.name = str(name)
         self.info = str(info)
         self.location = location
         self.stats = stats
         self.health = health
         self.item = None
+        self.Sinfo = Sinfo
+        self.Dinfo = Dinfo
+        self.need = need
+        self.drop = drop
         self.alive = True
+        
     
 
 class Map:  #Map Location Storage
