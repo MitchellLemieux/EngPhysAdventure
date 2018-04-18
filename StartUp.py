@@ -16,7 +16,7 @@ MAPS = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XR
 #Example: Start = Map("Start",(0,0,0),"You start here")
 LOCATIONS=[
 Map("Starting Location",(2,3,1),"You are out front of JHE. BSB is to your right.\nHatch to your left. JHE field is to your rear.","You see the Iron Ring shining in the morning sun. The campus is bustling with student life.\nThere are people in all directions with the remnants of Kipling pranks still scattered about JHE.",()),
-Map("Inside JHE",(2,4,1),"You enter JHE lobby. To your right you can exit towards BSB.\nTo your left you can head into Hatch.","JHE lobby is alive. Students rushing in all directions as the smell of\nburnt coffee and sorrow tickles your nose. You scan the faces around\nyou but see no one familiar. There is an confused air about this place\nas Kipling was just last night. Many engineers happy. Many more still\nsuffering.",()),
+Map("Inside JHE",(2,4,1),"You enter JHE lobby. To your right you can exit towards BSB.\nTo your left you can head into Hatch. You can also go upstairs.","JHE lobby is alive. Students rushing in all directions as the smell of\nburnt coffee and sorrow tickles your nose. You scan the faces around\nyou but see no one familiar. There is an confused air about this place\nas Kipling was just last night. Many engineers happy. Many more still\nsuffering.",()),
 Map("Nuclear Research Building",(2,5,1),"You are in the Nuclear Research Building. To your left lies the JHE-Annex.\nThe Reactor is in front of you. The Police Station is to your right. JHE lobby is behind you.","NRB. You have barely ever been in here other than to suffer through\n3 hours of waiting for a water-level PID controller to reach steady state.\nYou wonder how any one could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because they are\nall still lost in here...",()),
 Map("Inside Hatch",(1,4,1),"You are in Hatch lobby. In front of you lies JHE-Annex.\nTo your right is the JHE lobby. To your rear you can exit Hatch.","The new Hatch building. That 'fresh building' smell still lingers.\nYou see many members of the various clubs rushing from room to room.\nThe Kipling clock ticks away... only 365 more...\nWho is this Gerald Hatch anyway?",()),
 Map("In Front of Hatch",(1,3,1),"You are out front of Hatch. ETB to your left.\nThe entrance to Hatch in front of you. The McMaster Map to your rear. Starting Location to your right.","As you stare at the newly completed building you get shoved by a\ndehydrated engineer. What a punce. The sun still shines and you are\nirritated by the constant sound of Hamilton sirens which you have yet\nto grown acustomed to...",()),
@@ -42,7 +42,7 @@ Map("Keyes",(3,6,1),"You are in Keyes. You can head to the Lot M if you go forwa
 Map("Nuclear Reactor",(2,6,1),"You are at the McMaster Nuclear Reactor. Go down to enter.\nRight is Mary Keyes. Left is ABB.","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous stucture draws you closer as you consider what it would be\nlike to swim in that sweet blue pool...",('l')),
 Map("ABB",(1,6,1),"You are in ABB. You can go upstairs. Thode is in front of you.\nJHE Annex behind you. The Nuclear Reactor is to your right.","You scan the display cases of old lab apparatus and wonder if you would\never be able to create something like this even with 20 years of study.\nMost of them look like they could serve a purpose in the dark arts...\nYou stare at the electron microscope structure and wonder if it could even see your GPA...\nA tear rolls down your cheek. You collect yourself and plan what to do next.",('l')),
 Map("Club Thode",(1,7,1),"You are in Thode Library. ABB is at your rear.\nYou can head to the campus exit by going forward.","Oh the Reactor Cafe,\nYou think of the good old days when you could actually see the reactor from the Reactor Cafe...\nAfter overhearing someone ask whether keV is bigger than MeV you first contemplate your existence,\nthen contemplate your next move...",('r')),
-Map("JHE Annex",(1,5,1),"You are in the JHE Annex. The entrance to Hatch is to your rear.\nABB in front of you.","They made a big engineering building, got money, then added more.\nYou wonder why Eng Phys classes get pushed into the rooms in this side of JHE...\nHmm...",('l')),
+Map("JHE Annex",(1,5,1),"You are in the JHE Annex. The entrance to Hatch is to your rear.\nABB in front of you. The Eng Phys Office is upstairs.","They made a big engineering building, got money, then added more.\nYou wonder why Eng Phys classes get pushed into the rooms in this side of JHE...\nHmm...",('l')),
 Map("DANGER",(2,7,1),"You are at the exit of campus.\nHead to club Thode by going left. Head to Mary Keyes if you go right.","A faint glow can be seen in the distance but is impossible to make out.\nWarning signs litter the trail as you squint to get a better look.\nA chill is sent down your spine as you faintly see the flickering stretched shadows of\nfighting dance on the road ahead.\nYou cannot go straight... yet.",('f')),
 Map("ETB",(0,3,1),"You are at ETB. To your right is the Hatch Building.","The memories of actually doing something in first year flood your mind.\nGear trains. Python. 3D printing.\nEngineering had such a different meaning in your first year...\nYou snap out of your day dream and plan your next move.",('l','f','b')),
 Map("Lot M",(3,7,1),"You arrive at Lot M. To your left is the campus exit.\nMary Keyes is behind you.","After 3 days of hiking you arrive at Lot M.\nAfter 2 more days of looking for your car you give up and contemplate what to do next.",('f','r')),
@@ -56,7 +56,7 @@ Map("Custodial Closet",(5,0,0),"You are in a custodial closet.\nYou can only go 
 Map("NRB Basement",(2,5,0),"You are in the NRB Basement.\nYou can only go back up to the main floor.","You head down the stairs to the basement...\nThe forgotten dreams of PhD students linger in the air.\nYou recall lost hours in 3L labs waiting to reach steady state...\nYou snap out of memoreies of boredom and gather your thoughts.",('f','b','l','r')),
 #Upper Level (X,Y,2)
 Map("2nd Floor ABB",(1,6,2),"You are on the 2nd floor of ABB.\nYou can only go back down the stairs.","You were told JHE would be your home.\nNope.\nInstead you recall countless hours of Haugen lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the 2nd floor windows...",('f','b','l','r')),
-Map("2nd Floor JHE",(2,4,2),"You are on the 2nd floor of JHE.\nYou can only go back down the stairs.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years...\nYou shake your fist and plan your next move",('f','b','l','r')),
+Map("2nd Floor JHE",(2,4,2),"You are on the 2nd floor of JHE.\nYou can only go back down the stairs.","You spend 20 minutes staring at the 1970 graduating class wondering\nif you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years.\nYou shake your fist and plan your next move",('f','b','l','r')),
 Map("2nd Floor ETB",(0,3,2),"You are on the 2nd floor of ETB.\nYou can only go back down the stairs.","You realize you really have never come up here.\nYou see 4th year Eng Phys students hurry out of a long-winded lecture they dont care about.\nAfter picking a booger.\nYou plan your next move.",('f','b','l','r')),
 Map("Eng Phys Office",(1,5,2),"You are oat the Eng Phys Office.\nYou can only go back down the stairs.","The portrait of Novog makes you jealous as you realize you could\nnever pull off a hair style like that.\nYou scan the display case of past Eng Phys projects.\nThey display these as trophies...\nTrophies which only tell a story of suffering you think to yourself...",('f','b','l','r')),
 Map("The Pheonix Loft",(4,3,2),"You are in the Phoenix Loft.\nYou can only go back down the stairs.","The history up here is incredible. So many relics from a time long past.\nFrom old play constumes to furniture.\nAfter a quick Shakespearean sonnet you think of what to do next.",('f','b','l','r')),
@@ -135,28 +135,29 @@ Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cop
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
-#Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo)
+#- Enemy.Dinfo = "Something said on death"
+#Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo,Dinfo)
 #Bosses
 ENEMIES = [
-Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),500,None,None,""),
-Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,None,None,"Smoke up folks! You've earned your Iron Ring!"),
-Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,None,None,"Oh my! You've earned the right to use my laser!"),
-Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,None,None,"Here, take this. It is the windor into the electronics world!"),
-Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,None,None,"I've beeen looking all over for this! Where did you find it? Take this!"),
-Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,None,None,"Here, you've earned this"),
+Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),500,None,None,"",""),
+Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,None,None,"Smoke up folks! You've earned your Iron Ring!",""),
+Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,None,None,"Oh my! You've earned the right to use my laser!",""),
+Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,None,None,"Here, take this. It is the windor into the electronics world!",""),
+Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,None,None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
+Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,None,None,"Here, you've earned this",""),
 #Special
-Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,None,None,"THANKS! TOKE UP MY DUDES!"),
+Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,None,None,"THANKS! TOKE UP MY DUDES!",""),
 #General
-Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"I am slain!"),
-Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"I'm a failure at school and at home!"),
-Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"y u do dis"),
-Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"I was going to bring it back I swear!"),
-Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"That was definitely not your bus pass!"),
-Enemy("Brian the hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,""),
-Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,""),
-Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,None,None,""),
-Enemy("Peewee the High School","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,""),
-Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"We are able to arrest you anyway!")]
+Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"I am slain!",""),
+Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"I'm a failure at school and at home!",""),
+Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"y u do dis",""),
+Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"I was going to bring it back I swear!",""),
+Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"That was definitely not your bus pass!",""),
+Enemy("Brian the hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,"",""),
+Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,"",""),
+Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,None,None,"",""),
+Enemy("Peewee the High School","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"",""),
+Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"We are able to arrest you anyway!","")]
 
 def WorldMap():
     global MAPS
