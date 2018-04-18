@@ -24,12 +24,15 @@ print "Typing an item/person to interact with type the ENTIRE name as you read i
 print "Thats it. Good luck!"
 print "=================================================================================================="
 
+playername = raw_input("First, what is your name?\n")
+PLAYER.name = playername
+
 x = PLAYER.location[0]
 y = PLAYER.location[1]
 z = PLAYER.location[2]
 CurrentPlace = MAPS[x][y][z]
 print CurrentPlace.lore + "\n" + CurrentPlace.info + "\n" + CurrentPlace.search()
-
+CurrentPlace.travelled = 0
 
 while(PLAYER.alive):
     
