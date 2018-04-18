@@ -75,7 +75,6 @@ Equipment("Wendy's Bag",(1,1,1),"WendyBag.jpg","Fully equipped with grease stain
 Equipment("An Empty Bucket",(5,0,0),"Bucket.jpg","The smell of cheap soap still lingers.","head",(-5,10,1)),
 Equipment("Gas Mask",(3,5,1),"GasMask.jpg","The best defence agains a Brian methane extrusion.","head",(5,10,10)),
 Equipment("Hard Hat",(4,2,1),"HardHat.jpg","You don't really want to look like a Civil kid. But at least it protects your head.","head",(1,15,5)),
-Equipment("Erik's Frosted Tips",(4,3,2),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20)),
 Equipment("Fast Visor Glasses",(1,7,2),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
@@ -113,25 +112,26 @@ Equipment("Diary of the Fallen",(3,6,0),"Diary.jpg","The personal notes of an an
 Equipment("Wood Shield",(4,3,2),"Shield.jpg","An old wooden shielf used in a play, you think...","off-hand",(5,75,-5)),
 Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(5,5,30)),
 Equipment("Paint Brush",(3,0,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,0,20)),
-Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,30,-5)),
 Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,20,5)),
 Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,25,15)),
 Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5)),
 Equipment("Adderall",(4,0,1),"Adderall.jpg","Speed up, my dude!","off-hand",(0,0,50)),
 Equipment("Drumstick",(4,3,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,15,25)),
-#Special Items
+#Special/Dropped Items
 Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000)),
-Equipment("Femto Second Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(500,0,999)),
-Equipment("Glasses of Dr.Minnick",(None),"MinnickGlasses.jpg","The Spectacles of an ancient wizard.","head",(999,500,500)),
-Equipment("Kenrick's Personal Oscilloscope",(None),"Oscilloscope.jpg","The window into the electronics world...","off-hand",(0,350,350)),
+Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(500,0,999)),
+Equipment("Minnicks Glasses",(None),"MinnickGlasses.jpg","The Spectacles of an ancient wizard.","head",(999,500,500)),
+Equipment("Kenricks Oscilloscope",(None),"Oscilloscope.jpg","The window into the electronics world...","off-hand",(0,350,350)),
 Equipment("Joint of Destiny",(None),"Joint.jpg","A tighly rolled spliff filled with Devil's lettuce... for real.","off-hand",(420,420,420)),
 Equipment("PID control system",(None),"PID.jpg","A PID control system. Kp = 69, my dude.","head",(69,0,10)),
 Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of a neutron star, ok maybe not.","hand",(100,0,50)),
 Equipment("Horrible Assignment",(None),"BadAss.jpg","A barely legible report on Fourier analysis.","off-hand",(1,1,5)),
 Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(20,0,-20)),
-Equipment("Green Band Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420)),
+Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420)),
 Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(15,5,10)),
-Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5))]
+Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5)),
+Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,30,-5)),
+Equipment("Eriks Frosted Tips",(4,3,2),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -139,25 +139,25 @@ Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cop
 #Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo,Dinfo)
 #Bosses
 ENEMIES = [
-Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),500,None,None,"",""),
-Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,None,None,"Smoke up folks! You've earned your Iron Ring!",""),
-Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,None,None,"Oh my! You've earned the right to use my laser!",""),
-Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,None,None,"Here, take this. It is the windor into the electronics world!",""),
-Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,None,None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
-Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,None,None,"Here, you've earned this",""),
+Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),500,"minnicks glasses",None,"",""),
+Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),400,"iron ring",None,"Smoke up folks! You've earned your Iron Ring!",""),
+Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,2),(250,0,100),400,"femtosecond laser",None,"Oh my! You've earned the right to use my laser!",""),
+Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(400,50,350),300,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
+Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(75,50,10),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
+Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(4,3,1),(200,100,1),500,"cold beer",None,"Here, you've earned this",""),
 #Special
-Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,None,None,"THANKS! TOKE UP MY DUDES!",""),
+Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",(None),(999,999,999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
 #General
 Enemy("Father Frobenius","You need prayer.",(2,0,1),(10,10,10),25,None,None,"I am slain!",""),
 Enemy("Steven the first year","Have you go the LONCAPA Python code?",(3,6,1),(5,1,10),15,None,None,"I'm a failure at school and at home!",""),
 Enemy("Phil the drunk first","MHhmgh, Soouh whatu we getta druuuunk",(5,1,1),(10,5,1),15,None,None,"y u do dis",""),
-Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,None,None,"I was going to bring it back I swear!",""),
+Enemy("Susie the vegan","Did I mention I'm vegan?",(4,3,0),(15,1,5),10,"3w textbook",None,"I was going to bring it back I swear!",""),
 Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(5,10,4),10,None,None,"That was definitely not your bus pass!",""),
 Enemy("Brian the hipster","Have you ever heard of Macklemore?",(2,2,1),(5,2,10),10,None,None,"",""),
-Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,None,None,"",""),
-Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,None,None,"",""),
+Enemy("Mitch the TA","I'll have your marks back within the week, okay?",(0,3,1),(10,5,10),25,'lenovo laptop',None,"",""),
+Enemy("Erik the arts student","Can you come see my exhibit?",(3,0,1),(5,15,5),20,'eriks frosted tips',None,"",""),
 Enemy("Peewee the High School","What is the entrance average for Engineering???",(1,2,1),(1,5,75),10,None,None,"",""),
-Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,None,None,"We are able to arrest you anyway!","")]
+Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),75,"fake gun",None,"We are able to arrest you anyway!","")]
 
 def WorldMap():
     global MAPS
