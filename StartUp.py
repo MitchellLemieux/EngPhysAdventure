@@ -99,7 +99,7 @@ Equipment("Needa Pita",(3,6,1),"Pita.jpg","Better have gotten black olives on th
 Equipment("Dirty Needle",(1,1,1),"Needle.jpg","This isn't clean. Somone find me a SharpXchange!",'hand',(10,0,5)),
 Equipment("Used Plunger",(5,0,0),"Plunger.jpg","Used. Lovely...","hand",(10,0,10)),
 Equipment("Broken Wine Bottle",(4,3,1),"WineBottle.jpg","A broken wine bottle from 1996, good year.","hand",(25,0,15)),
-Equipment("Used Condom",(2,1,1),"Condom.jpg","The audacity of some people to leave their filth around. Probably would suck to get hit by...","hand",(10,0,-10)),
+Equipment("Plastic Bag",(2,1,1),"Condom.jpg","The audacity of some people to leave their filth around.","hand",(10,0,-10)),
 Equipment("Eng Phys Pen",(3,3,0),"PhysPen.jpg","It would be amazing if this thing actually worked. Plug it in and find all of 2P04","hand",(15,0,10)),
 Equipment("Butter Knife",(3,6,1),"ButterKnife.jpg","Meant for spreading, not stabbing...","hand",(4,0,5)),
 Equipment("Pee Bottle",(2,1,1),"PeeBottle.jpg","It is literally a bottle of urine.","hand",(10,0,0)),
