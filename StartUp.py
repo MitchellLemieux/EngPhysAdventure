@@ -46,7 +46,7 @@ Map("JHE Annex",(1,5,1),"You are in the JHE Annex. The entrance to Hatch is to y
 Map("DANGER",(2,7,1),"You are at the exit of campus.\nHead to club Thode by going left. Head to Mary Keyes if you go right.","A faint glow can be seen in the distance but is impossible to make out.\nWarning signs litter the trail as you squint to get a better look.\nA chill is sent down your spine as you faintly see the flickering stretched shadows of\nfighting dance on the road ahead.\nYou cannot go straight... yet.",('f')),
 Map("ETB",(0,3,1),"You are at ETB. To your right is the Hatch Building.","The memories of actually doing something in first year flood your mind.\nGear trains. Python. 3D printing.\nEngineering had such a different meaning in your first year...\nYou snap out of your day dream and plan your next move.",('l','f','b')),
 Map("Lot M",(3,7,1),"You arrive at Lot M. To your left is the campus exit.\nMary Keyes is behind you.","After 3 days of hiking you arrive at Lot M.\nAfter 2 more days of looking for your car you give up and contemplate what to do next.",('f','r')),
-#Basement Level (X,Y,-Z)
+#Basement Level (X,Y,0)
 Map("The Quantum Tunne",(3,3,0),"You are at the Quantum Tunnel.\nGo up to return to the main floor of BSB","What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'",('f','b','l','r')),
 Map("Inside the Reactor",(2,6,0),"You are inside the Nuclear Reactor.\nGo up to head outside.","The hum of air conditioning drowns your thoughts.\nYou lose yourself staring into the faint blue glow of the pool as you slowly approach its edge.",('f','b','l','r')),
 Map("Club Thode Basement",(1,7,0),"SHHHH you are in the Quiet Study.\nGo up to head outside.","You feel the laser glares burning into the back of your neck as\nyou hastily walk amongst the rows of desks.\nIs it possible to book a study room down here without finding a fallic object drawn on the white board?\nYou'll never know.",('f','b','l','r')),
@@ -54,7 +54,7 @@ Map("Bridges",(4,3,0),"You are in Bridges Cafe.\nYou can only go back up to the 
 Map("Secret Trapdoor!",(3,6,0),"You fell into a Secret Room!\nGo up to climb out.","A dark room which you can barely see 2 feet in front of you...\nThere are stacks of failed midterms all around you.\nA suit of armor and a chainmail flag with a skull on it are barely visible.\nWho made this place anyway?",('f','b','l','r')),
 Map("Custodial Closet",(5,0,0),"You are in a custodial closet.\nYou can only go up to go back to MUSC.","You enter the custodial closet and a formidable stench fills your nostrils...\nEw.",('f','b','l','r')),
 Map("NRB Basement",(2,5,0),"You are in the NRB Basement.\nYou can only go back up to the main floor.","You head down the stairs to the basement...\nThe forgotten dreams of PhD students linger in the air.\nYou recall lost hours in 3L labs waiting to reach steady state...\nYou snap out of memoreies of boredom and gather your thoughts.",('f','b','l','r')),
-#Upper Level (X,Y,+Z)
+#Upper Level (X,Y,2)
 Map("2nd Floor ABB",(1,6,2),"You are on the 2nd floor of ABB.\nYou can only go back down the stairs.","You were told JHE would be your home.\nNope.\nInstead you recall countless hours of Haugen lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the 2nd floor windows...",('f','b','l','r')),
 Map("2nd Floor JHE",(2,4,2),"You are on the 2nd floor of JHE.\nYou can only go back down the stairs.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years...\nYou shake your fist and plan your next move",('f','b','l','r')),
 Map("2nd Floor ETB",(0,3,2),"You are on the 2nd floor of ETB.\nYou can only go back down the stairs.","You realize you really have never come up here.\nYou see 4th year Eng Phys students hurry out of a long-winded lecture they dont care about.\nAfter picking a booger.\nYou plan your next move.",('f','b','l','r')),
@@ -79,7 +79,7 @@ Equipment("Erik's Frosted Tips",(4,3,2),"FrostedTips.jpg","Ever wanted to look r
 Equipment("Fast Visor Glasses",(1,7,2),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
-Equipment("Big Hits Shirt",(5,2,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(50,75,25)),
+Equipment("Big Hits Shirt",(5,2,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
 Equipment("Ocons Chainmail",(3,6,0),"OconMail.jpg","The sacred chainmail forged by the legend himself","body",(75,100,50)),
 Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,10)),
 Equipment("McMaster map",(1,2,1),"MACMap.jpg","A map of McMaster you can... wear? I guess?","body",(1,5,5)),
@@ -87,7 +87,7 @@ Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impres
 Equipment("Pizza Box",(3,1,1),"PizzaBox.jpg","Fully equipped with crusted cheese.","body",(1,5,1)),
 Equipment("Starbucks Apron",(5,0,1),"Apron.jpg","If you put this on do you immediately know how to make a frappe?","body",(1,5,5)),
 #Hand Items
-Equipment("MSP430",(2,3,1),"MSP430.jpg","A literal piece of garbage.","hand",(-5,-5,-5)),
+Equipment("MSP430",(2,3,1),"MSP430.jpg","A literal piece of garbage.","hand",(-5,0,-5)),
 Equipment("Old Headphones",(1,7,1),"OldHeadphones.jpg","Old frayed apple headphones. Good for whipping.","hand",(5,0,5)),
 Equipment("Empty Bottle",(5,1,1),"EmptyBottle.jpg","Dasani, more like Dishonest! Amirite?!","hand",(1,0,1)),
 Equipment("Banana Wires",(3,3,1),"BanWires.jpg","Alligator clips added for extra whippage.","hand",(8,0,8)),
@@ -100,7 +100,7 @@ Equipment("Needa Pita",(3,6,1),"Pita.jpg","Better have gotten black olives on th
 Equipment("Dirty Needle",(1,1,1),"Needle.jpg","This isn't clean. Somone find me a SharpXchange!",'hand',(10,0,5)),
 Equipment("Used Plunger",(5,0,0),"Plunger.jpg","Used. Lovely...","hand",(10,-10,10)),
 Equipment("Broken Wine Bottle",(4,3,1),"WineBottle.jpg","A broken wine bottle from 1996, good year.","hand",(25,0,15)),
-Equipment("Used Condom",(2,1,1),"Condom.jpg","The audacity of some people to leave their filth around. Probably would suck to get hit by...","hand",(10,-10,-10)),
+Equipment("Used Condom",(2,1,1),"Condom.jpg","The audacity of some people to leave their filth around. Probably would suck to get hit by...","hand",(10,0,-10)),
 Equipment("Eng Phys Pen",(3,3,0),"PhysPen.jpg","It would be amazing if this thing actually worked. Plug it in and find all of 2P04","hand",(15,0,10)),
 Equipment("Butter Knife",(3,6,1),"ButterKnife.jpg","Meant for spreading, not stabbing...","hand",(4,0,5)),
 Equipment("Pee Bottle",(2,1,1),"PeeBottle.jpg","It is literally a bottle of urine.","hand",(10,0,0)),
@@ -112,7 +112,7 @@ Equipment("An Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3
 Equipment("Diary of the Fallen",(3,6,0),"Diary.jpg","The personal notes of an ancient Hero.","off-hand",(69,69,69)),
 Equipment("Wood Shield",(4,3,2),"Shield.jpg","An old wooden shielf used in a play, you think...","off-hand",(5,75,-5)),
 Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(5,5,30)),
-Equipment("Paint Brush",(3,0,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,-10,20)),
+Equipment("Paint Brush",(3,0,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,0,20)),
 Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,30,-5)),
 Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,20,5)),
 Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,25,15)),
