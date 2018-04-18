@@ -124,7 +124,9 @@ class Map:  #Map Location Storage
         if item in self.items:
             self.items.remove(item)
             
-    def RemoveEnemy(self,enemy)
+    def RemoveEnemy(self,enemy):
+        if enemy in self.ENEMY:
+            self.ENEMY.remove(item)
 
     def search(self):
         description = ""
