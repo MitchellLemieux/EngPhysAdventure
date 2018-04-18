@@ -1,18 +1,16 @@
 #Developer testing 
 from GameFunctions import *
 
-print "=================================================================================================="
-print "Hello, and welcome to...\n"
-print "The Great"
-print "___________                __________.__"                 
+print "=================================================================================="
+print "Hello, and welcome to..."
+print "___________THE GREAT       __________.__"                 
 print "\_   _____/ ____    ____   \______   \  |__ ___.__. ______"
 print " |    __)_ /    \  / ___\   |     ___/  |  <   |  |/  ___/"
 print " |        \   |  \/ /_/  >  |    |   |   Y  \___  |\___ \ "
 print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-print "        \/     \//_____/                  \/\/         \/ "
-print "Text Based Adventure. (v4.20)\n"
-print "A campus full of intrigue awaits..."
-print "Created by: Mitchell Lemieux & Tyler Kashak\n"
+print "        \/     \//_____/ TEXT ADVENURE    \/\/ (v4.20) \/\n"
+print "Created by: Mitchell Lemieux & Tyler Kashak"
+print "Special Thanks: Erik, Eric, Brian, Megan, and Brendan <3\n"
 print "Before you go any further there are some things you must know..."
 print "Your orientation never changes. When you enter you will be facing the"
 print "entrance of JHE and you will ALWAYS face that way."
@@ -23,7 +21,7 @@ print "Typing stats will show your stats (ATTACK/DEFENCE/SPEED)."
 print "Typing search will give you an idea of your surroundings."
 print "Typing an item/person to interact with type the ENTIRE name as you read it."
 print "Thats it. Good luck!"
-print "=================================================================================================="
+print "=================================================================================="
 
 playername = raw_input("First, what is your name?\n")
 PLAYER.name = playername
