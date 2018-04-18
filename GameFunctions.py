@@ -177,7 +177,10 @@ def Talk(E):
 
 def Stats():
     global PLAYER
-    print "HEALTH: " + str(PLAYER.health)+"\n"+str(PLAYER.stats)
+    print "HEALTH: " + str(PLAYER.health)
+    print "ATTACK: " + str(PLAYER.stats[0])
+    print "DEFENSE: " + str(PLAYER.stats[1])
+    print "SPEED: " + str(PLAYER.stats[2])
 
 def Inspect(Item):
     global ITEMS
