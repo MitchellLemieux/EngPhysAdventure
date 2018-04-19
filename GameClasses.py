@@ -109,6 +109,7 @@ class Interact:
         self.name = name
         self.location = location
         self.info = info
+        self.Sinfo = Sinfo
         self.need = need
         self.drop = drop
         self.quest = False

@@ -211,16 +211,16 @@ def Inspect(Item):
         print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
             
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        if Item.need and PLAYER.inv[ITEMS[Item.need].worn]==ITEMS[Item.need]:
-            PLAYER.inv[ITEMS[Item.need].worn] = PLAYER.emptyinv[ITEMS[Item.need].worn]
-            Item.quest = True
-            print Item.Sinfo
-            if Item.drop:
-                MAPS[x][y][z].placeItem(ITEMS[Item.drop])
-                print "You see a " + ITEMS[Item.drop].name +".\n"
-                Item.drop = None
+        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
+            PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
+            INTERACT[Item].quest = True
+            print INTERACT[Item].Sinfo
+            if INTERACT[Item].drop:
+                MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
+                print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
+                INTERACT[Item].drop = None
         else:
-            print Item.info
+            print INTERACT[Item].info
     else:
         print "That doesn't seem to be around here.\n"
 
