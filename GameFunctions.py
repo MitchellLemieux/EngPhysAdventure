@@ -18,7 +18,10 @@ EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
-
+QUESTS = {"talk to mysterious man": 1,
+          "Kitai Get Silicon Substrate": 1,
+          "Preston Get Dumbbell": 1, 
+          "Buijs Kill Chris" : 1}
 
 def Equip(Item):
     global PLAYER
@@ -179,10 +182,15 @@ def Talk(E):
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+        elif enemy.quest and enemy.drop:
+            print enemy.Sinfo
+            print "You see a " + ITEMS[enemy.drop].name +".\n"
+            enemy.drop = None
         elif enemy.quest:
             print enemy.Sinfo
         else:
             print enemy.info
+        enemy.spoke = True
     else:
         print "They don't appear to be here.\n"
 
@@ -230,6 +238,23 @@ def Inventory():
     for i in PLAYER.inv:
         print i.upper() + ": " + PLAYER.inv[i].name
     print ""
+
+def Story():
+    global PLAYER
+    global QUESTS
+    global ITEMS
+    global ENEMIES
+    global INTERACT
+    global MAPS
+    #Talk to hooded man
+    if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
+        MAPS[4][4][1].place(ENEMY["dr.kitai"])
+        MAPS[2][4][2].place(ENEMY["dr.preston"])
+        MAPS[1][6][2].place(ENEMY["dr.lapierre"])
+        QUESTS["talk to mysterious man"] = 0
     
+        
+        
+        
     
     

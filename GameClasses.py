@@ -30,6 +30,7 @@ class Character: #When the equip function is called we need to make sure the ite
         self.health = health
         self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats)
         self.alive = True
+        self.spoke = False
         
         for i in inv:
             inv[i].location = self.location
@@ -103,6 +104,7 @@ class Enemy:
         self.drop = drop
         self.alive = True
         self.quest = False
+        self.spoke = False
         
 class Interact:
     def __init__(self,name,location,info,Sinfo,need,drop):
