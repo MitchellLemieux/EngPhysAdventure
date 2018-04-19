@@ -32,10 +32,10 @@ Map("Statue of Sir William McMaster",(5,2,1),"WILLIAM MCMASTER STATUE:\nHamilton
 Map("BSB Field",(3,2,1),"BSB FIELD:\nThe turning circle is to your right. JHE field is to your left.\nEntrance to BSB to your front. The Art Museum is to your rear.","You look up to see the flags flapping happily in the morning breeze.\nThat sun dial at their feet ticking to the tune of celestial magic.\nAfter swatting Neil Degrasse quotes from your thoughts and a quick smell of the flowerbed...\nYou consider what to do next.",()),
 Map("JHE Field",(2,2,1),"JHE FIELD:\nBSB Field is to your right. McMaster map to your left. The Bus Stop is at your rear.\nThe entrance to JHE is in front of you.","The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everyone knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.",()),
 Map("McMaster Student Centre",(5,0,1),"MUSC:\nMills is to your left. The Archway is in front of you.\nA custodial closet is down the stairs.","The Student Centre is alive. After counting the number of jean jackets\nin the Starbucks line like the Count from Sesame Street you snap back into reality.\n(Oops there goes gravity).\nThe bustling atmosphere disorients you and it becomes difficult to think straight...",('r','b')),
-Map("The McMaster Archway",(5,1,1),"ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. Willy Dog to your left.","Probably the most beautiful structure at Mac.\nThose Western kids have that Big Ben lookalike but this takes the cake.\nYou snap a quick selfie in front of the Archway for the 'gram.",('r')),
+Map("The McMaster Archway",(5,1,1),"ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. Willy Dog to your left.","Probably the most beautiful structure at Mac.\nThose Western kids have that Big Ben lookalike but this takes the cake.\nYou snap a quick selfie in front of the Archway for the 'gram.",()),
 Map("Inside University Hall",(6,1,1),"UNIVERSITY HALL:\nThe Archway is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f')),
-Map("The Phoenix",(5,4,1),"THE PHOENIX:\nYoU are in the camPus watering hole. General Sciences Building is to your left.\nHamilton Hall is to your rear. The trail to Bates is in front of you.\nYou can also go down the stairs to Bridges Cafe.","At last, the Phoenix. A little drinky-poo wouldn't hurt anyone.\nThe clinking of glasses and the hopsy aroma makes you salivate.\nMemories of drunken karaoke flood your head and a smile comes across your face.\nAfter scanning the multiple coats of arms you think of what to do next.",()),
-Map("BSB",(3,3,1),"BSB:\nBSB field is at your rear. The Phoenix to your right.\nThe entrance to JHE is to your left. The Quantum Tunnel is down the stairs.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA chill runs down your spine as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",()),
+Map("The Phoenix",(5,4,1),"THE PHOENIX:\nGeneral Sciences Building is to your left.\nHamilton Hall is to your rear. The trail to Bates is in front of you.\nYou can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\People's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come speak with him.",('r')),
+Map("BSB",(3,3,1),"BSB:\nBSB field is at your rear. Exit BSB to your right.\nThe entrance to JHE is to your left. The Quantum Tunnel is down the stairs.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA chill runs down your spine as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",()),
 Map("Between JHE and BSB",(3,4,1),"JHE/BSB JUNCTION:\nEnter JHE to your left. BSB is behind you.\nThe Police station is in front of you.","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day... After ignoring a shady e-textbook salesman you consider what to do next.",()),
 Map("Police Station",(3,5,1),"POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The tandem accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner you gather your surroundings.",()),
 Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the the bridge if you go forward. The GO station is to your left.\nThe tandem accelerator is at your rear. Bates is to your right.","Damn, Our oWN hip res and snack station thats open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering a chicken fingers & fries super combo...",()),
@@ -104,6 +104,7 @@ Equipment("Bike Helmet",(3,7,1),"BikeHelmet.jpg","One of those fast Tour de Fran
 Equipment("Surgical Mask",(0,1,1),"SurgicalMask.jpg","Don't touch me I'm sterile!","head",(0,2,3)),
 Equipment("Phils Braces",(2,5,0),"PhilBraces.jpg","Bark AND the bite.","head",(3,2,1)),
 Equipment("Santa Hat",(0,0,1),"SantaHat.jpg","Happy Holidays!","head",(0,3,2)),
+Equipment("Party Hat",(4,3,1),"PartyHat.jpg","Found in a Chirstmas Cracker","head",(0,5,3)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
@@ -166,6 +167,9 @@ Equipment("Jar of Mayo",(0,2,1),"Mayo.jpg","Is mayonaise an instrument?","off-ha
 Equipment("Jar of Horse Radish",(4,5,1),"HRaddish.jpg","Apparently not an instrument...","off-hand",(2,0,4)),
 Equipment("Tarzan VHS",(0,2,1),"Tarzan.jpg","If only I had a VCR...","off-hand",(0,2,6)),
 Equipment("Couch Cushion",(1,7,1),"CCushion.jpg","I hope I find I pillow fight.","off-hand",(0,10,1)),
+Equipment("VH Sauce",(1,4,1),"VHSauce.jpg","Sweet and sour. Nice.","off-hand",(1,2,1)),
+Equipment("Franks Red Hot",(0,4,1),"FranksRed.jpg","I put that...","off-hand",(3,0,2)),
+Equipment("Old Candle",(2,0,0),"OldCandle.jpg","Seems like it's had some use.","off-hand",(0,2,2)),
 #Special/Dropped Items
 Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000)),
 Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(125,0,999)),
@@ -190,7 +194,8 @@ Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off
 Equipment("Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(3,4,30)),
 Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,10)),
 Equipment("Vomit",(None),"Vomit.jpg","Literally spew.","off-hand",(0,0,1)),
-Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog clock...","off-hand",(0,15,20))]
+Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog clock...","off-hand",(0,15,20)),
+Equipment("Ancient Incantation",(None),"Incantation.jpg","An old tattered scroll with an incantation written in Latin.","off-hand",(1,1,1))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -202,7 +207,7 @@ Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),200,"iron ring",None,"S
 Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,0),(250,100,999),200,"femtosecond laser",None,"Oh my! You've earned the right to use my laser!",""),
 Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(200,100,200),100,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
 Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(150,50,50),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
-Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(5,4,1),(200,100,50),300,"cold beer","3w textbook","I've been looking all over for that! Have cold one on me.",""),
+Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(1,6,2),(200,100,50),300,"cold beer","3w textbook","I've been looking all over for that! Have cold one on me.",""),
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
 #General
@@ -211,20 +216,22 @@ Enemy("Steven the first year","Have you got the LONCAPA Python code?",(3,6,1),(5
 Enemy("Phil the drunk","MHhmgh, Soouh whatu we getta druuuunk",(5,5,1),(10,5,1),15,"vomit",None,"","mhmh spooky ghost urggh ectoplasm noooooo"),
 Enemy("Jana the vegan","Did I mention I'm vegan?",(5,4,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
 Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(10,10,5),40,"huge shirt",None,"","That was definitely not your bus pass!"),
-Enemy("Brian the hipster","Have you ever heard of Frank Ocean?",(2,2,1),(5,2,10),10,"guitar",None,"","That's not vegan."),
-Enemy("Mitch the TA","Where's my phone?",(0,3,1),(10,5,10),25,"phone",None,"","There's my phone."),
-Enemy("Erik the Sk8r","Check out this trey flip. It's pretty tight, eh?",(0,0,0),(5,15,5),20,"eriks frosted tips",None,"","Man, that's dumb!"),
-Enemy("Megan the Bartender","Hey kid, want some beer?",(5,4,1),(1,20,75),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
+Enemy("Brian the hipster","Man, you were a RIOT at the Phoenix last night!",(2,2,1),(5,2,10),10,"guitar",None,"","That's not vegan."),
+Enemy("Mitch the TA","Hey, I saw your picture on instagram!\nThey let you get away with doing that to the\nWilly McMaster statue?",(0,3,1),(10,5,10),25,"phone",None,"","There's my phone."),
+Enemy("Erik the Sk8r","Check out this trey flip. It's pretty tight, eh?",(0,0,0),(15,15,40),20,"eriks frosted tips",None,"","Man, that's dumb!"),
+Enemy("Megan the Bartender","Hey kid, want some beer?",(5,4,1),(15,20,10),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
 Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),50,"fake gun",None,"","We aren't able to arrest you anyway!"),
 Enemy("Andreas the Nerd","Full send, dude",(3,2,1),(10,15,5),50,"visor glasses",None,"","Dude, that was definitely a full send"),
 Enemy("Eric the Baller","Huge talking to people play.",(0,5,0),(20,15,20),50,"coldsteel katana",None,"","This is sub-optimal."),
 Enemy("Mario the Mixologist","Yo check out my meme page. You ever heard coco jay?",(1,4,1),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
-Enemy("Undead Grad Student","Mussst eeaaat funnnndingg... Er, I mean braaaains.",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!")]
-
+Enemy("Undead Grad Student","Mussst eeaaat funnnndingg... Er, I mean braaaains.",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!"),
+Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seak out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"","")]
+ 
 #Stationary Objects to interact with
 #Interact(name,location,info,Sinfo,need,drop)
 INTERACT = [
-Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","puke")]
+Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","puke"),
+Interact("Ancient Mirror",(4,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of (PERSON) himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this.'","ancient incantation","")]
 
 def WorldMap():
     global MAPS
