@@ -102,8 +102,16 @@ class Enemy:
         self.need = need
         self.drop = drop
         self.alive = True
+        self.quest = False
         
-    
+class Interact:
+    def __init__(self,name,location,info,Sinfo,need,drop):
+        self.name = name
+        self.location = location
+        self.info = info
+        self.need = need
+        self.drop = drop
+        self.quest = False
 
 class Map:  #Map Location Storage
     def __init__(self,name,coords,info,lore,walls):
@@ -113,6 +121,7 @@ class Map:  #Map Location Storage
         self.lore = lore#Description of the location
         self.items = []
         self.ENEMY = []
+        self.interact = []
         self.walls = walls
         self.travelled = 1
 
@@ -124,6 +133,11 @@ class Map:  #Map Location Storage
     def placeEnemy(self,Enemy):
         self.ENEMY.append(Enemy)
         Enemy.location = self.coords
+        
+    def placeInteract(self,Interact):
+        self.interact.append(Interact)
+        Interact.location = self.coords
+        
     
     def Remove(self,item):
         if item in self.items:
