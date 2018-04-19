@@ -144,6 +144,8 @@ Equipment("Lamp",(0,5,1),"Lamp.jpg","I love lamp.","hand",(8,0,4)),
 Equipment("Mop",(0,0,1),"Mop.jpg","I'm going to clean up this town.","hand",(6,0,4)),
 Equipment("Skateboard",(0,0,0),"Skateboard.jpg","Cowabunga, dude.","hand",(9,0,10)),
 Equipment("RCA TV",(5,6,1),"RCATV.jpg","They still make these?","hand",(15,0,-999)),
+Equipment("Candlestick",(4,0,0),"Candlestick.jpg","Lumiere is up to no good.",(10,0,5)),
+Equipment("Tire Iron",(5,7,1),"TireIron.jpg","Is this even a real tool? Or just a murder weapon...",(11,0,3)),
 #Off-Hand Items
 Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,10)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,25,5)),
