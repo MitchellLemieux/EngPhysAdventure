@@ -5,6 +5,7 @@ import StartUp
 MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
+INTERACT = StartUp.InteractDictionary()
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
@@ -23,6 +24,7 @@ def Equip(Item):
     global PLAYER
     global ITEMS
     global MAPS
+    global INTERACT
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
@@ -33,6 +35,8 @@ def Equip(Item):
         drop = PLAYER.equip(ITEMS[Item])
         Place.Remove(ITEMS[Item])
         Place.placeItem(drop)
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
+        print "You can't equip that, gosh"
     else:
         print "That doesn't seem to be around here."
 
@@ -108,7 +112,6 @@ def Combat(P,E):
             if First.health:
                 Damage = int(random()*FDamage)
                 Second.health = max(0,Second.health - Damage)
-                
             
             if Second.health:
                 Damage = int(random()*SDamage)
@@ -168,13 +171,16 @@ def Talk(E):
     z = PLAYER.location[2]
     if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
-        if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]:
+        if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print enemy.Sinfo
             print enemy.name + " took the " + enemy.need + "."
+            enemy.quest = True
             MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+        elif enemy.quest:
+            print enemy.Sinfo
         else:
             print enemy.info
     else:
@@ -189,14 +195,32 @@ def Stats():
     print "SPD: " + str(PLAYER.stats[2])+"\n"
 
 def Inspect(Item):
+    global MAPS
     global ITEMS
     global PLAYER
+    global INTERACT
+    x = PLAYER.location[0]
+    y = PLAYER.location[1]
+    z = PLAYER.location[2]
+    
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
-            print "\n"+ITEMS[Item].info
-            print "ATK : " + str(ITEMS[Item].stats[0])
-            print "DEF : " + str(ITEMS[Item].stats[1])
-            print "SPD : " + str(ITEMS[Item].stats[2])
-            print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
+        print "\n"+ITEMS[Item].info
+        print "ATK : " + str(ITEMS[Item].stats[0])
+        print "DEF : " + str(ITEMS[Item].stats[1])
+        print "SPD : " + str(ITEMS[Item].stats[2])
+        print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
+            
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
+        if Item.need and PLAYER.inv[ITEMS[Item.need].worn]==ITEMS[Item.need]:
+            PLAYER.inv[ITEMS[Item.need].worn] = PLAYER.emptyinv[ITEMS[Item.need].worn]
+            Item.quest = True
+            print Item.Sinfo
+            if Item.drop:
+                MAPS[x][y][z].placeItem(ITEMS[Item.drop])
+                print "You see a " + ITEMS[Item.drop].name +".\n"
+                Item.drop = None
+        else:
+            print Item.info
     else:
         print "That doesn't seem to be around here.\n"
 
