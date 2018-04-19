@@ -199,8 +199,13 @@ def Inspect(Item):
             print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
     else:
         print "That doesn't seem to be around here.\n"
-            
-        
+
+def Inventory():
+    global PLAYER
+    print "\n"
+    for i in PLAYER.inv:
+        print i.upper() + ": " + PLAYER.inv[i].name
+    print ""
     
     
     

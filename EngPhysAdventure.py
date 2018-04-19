@@ -1,27 +1,28 @@
 #Developer testing 
 from GameFunctions import *
 
-print "=================================================================================="
-print "Hello, and welcome to..."
-print "___________THE GREAT       __________.__"                 
+print "=================================================================================================="
+print "Hello, and welcome to...\n"
+print "The Great..."
+print "___________                __________.__"                 
 print "\_   _____/ ____    ____   \______   \  |__ ___.__. ______"
 print " |    __)_ /    \  / ___\   |     ___/  |  <   |  |/  ___/"
 print " |        \   |  \/ /_/  >  |    |   |   Y  \___  |\___ \ "
 print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-print "        \/     \//_____/ TEXT ADVENURE    \/\/ (v4.20) \/\n"
-print "Created by: Mitchell Lemieux & Tyler Kashak"
-print "Special thanks to Erik, Eric, Brian, Megan, and Brendan <3\n"
-print "Before you go any further there are some things you must know..."
+print "        \/     \//_____/                  \/\/         \/ "
+print "Text Based Adventure.\n"
+print "A campus full of interesting characters awaits"
+print "But before you go any further there are some things you must know..."
 print "Your orientation never changes. When you enter you will be facing the"
-print "entrance of JHE and you will ALWAYS face that way."
+print "entrance of JHE and you will always face that way."
 print "The commands which allow you to interact with your environment are:"
 print "forward = f, backward = b, left = l, right = r, up = u, down = d"
-print "talk (person name), attack (person name), inspect (item name)"
-print "equip (item name), drop (item name), stats (show stats)"
+print "talk = (person name), attack = (person name), inspect = (item name)"
+print "Typing stats will show your stats (ATTACK/DEFENCE/SPEED)."
 print "Typing search will give you an idea of your surroundings."
-print "Be sure to type the FULL name of whatever you wish to interact with."
+print "Typing an item/person to interact with type the ENTIRE name as you read it."
 print "Thats it. Good luck!"
-print "=================================================================================="
+print "=================================================================================================="
 
 playername = raw_input("First, what is your name?\n")
 PLAYER.name = playername
@@ -52,8 +53,11 @@ while(PLAYER.alive):
             
         elif (verb == 'stats'):
             Stats()
+            
+        elif (verb == 'inventory'):
+            Inventory()
 
-
+        
     elif (len(direction) == 2):
         verb = direction[0]
         objectName = direction [1]
@@ -61,18 +65,18 @@ while(PLAYER.alive):
         if verb == 'equip':
             Equip(objectName)
         
-        if verb == 'drop':
+        elif verb == 'drop':
             Drop(objectName)
 
-        if verb == 'attack':
+        elif verb == 'attack':
             Attack(objectName)
 
-        if verb == 'talk':
+        elif verb == 'talk':
             Talk(objectName)
             
-        if verb == 'inspect':
+        elif verb == 'inspect':
             Inspect(objectName)
-                        
+                    
 
     
 
