@@ -208,7 +208,7 @@ Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(99
 #General
 Enemy("Father Frobenius","You need prayer. Recharge at the altar.",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
 Enemy("Steven the first year","Have you got the LONCAPA Python code?",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
-Enemy("Phil the drunk","MHhmgh, Soouh whatu we getta druuuunk",(5,5,1),(10,5,1),15,"puke",None,"","mhmh spooky ghost urggh ectoplasm noooooo"),
+Enemy("Phil the drunk","MHhmgh, Soouh whatu we getta druuuunk",(5,5,1),(10,5,1),15,"vomit",None,"","mhmh spooky ghost urggh ectoplasm noooooo"),
 Enemy("Jana the vegan","Did I mention I'm vegan?",(5,4,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
 Enemy("Larry the bus driver","Is that even your bus pass?",(2,1,1),(10,10,5),40,"huge shirt",None,"","That was definitely not your bus pass!"),
 Enemy("Brian the hipster","Have you ever heard of Frank Ocean?",(2,2,1),(5,2,10),10,"guitar",None,"","That's not vegan."),
