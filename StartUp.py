@@ -38,7 +38,7 @@ Map("The Phoenix",(5,4,1),"THE PHOENIX:\nGeneral Sciences Building is to your le
 Map("BSB",(3,3,1),"BSB:\nBSB field is at your rear. Exit BSB to your right.\nThe entrance to JHE is to your left. The Quantum Tunnel is down the stairs.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA chill runs down your spine as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",()),
 Map("Between JHE and BSB",(3,4,1),"JHE/BSB JUNCTION:\nEnter JHE to your left. BSB is behind you.\nThe Police station is in front of you.","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day... After ignoring a shady e-textbook salesman you consider what to do next.",()),
 Map("Police Station",(3,5,1),"POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The tandem accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner you gather your surroundings.",()),
-Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the the bridge if you go forward. The GO station is to your left.\nThe tandem accelerator is at your rear. Bates is to your right.","Damn, Our oWN hip res and snack station thats open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering a chicken fingers & fries super combo...",()),
+Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the the bridge if you go forward. The GO station is to your left.\nThe tandem accelerator is at your rear. Bates is to your right.","Damn, a new res and snack station thats open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering a chicken fingers & fries super combo...",()),
 Map("Nuclear Reactor",(2,6,1),"NUCLEAR REACTOR:\nGo down to enter. Right is the GO station.\nLeft is ABB.","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous stucture draws you closer as you consider what it would be\nlike to swim in that sweet blue pool...",()),
 Map("ABB",(1,6,1),"ABB:\nYou can go upstairs. Thode is in front of you.\nJHE Annex is behind you. The Nuclear Reactor is to your right.\nLOT I is to your left.","As you scan the display cases of old lab apparatus and wonder if you would\never be able to create something like this even with 20 years of study.\nMost of them look like they could serve a purpose in the dark arts...\nYou stare at the electron microscope structure and wonder if it could even see your GPA...\nA tear rolls down your cheek. You collect yourself and plan what to do next.",()),
 Map("Thode",(1,7,1),"THODE:\nABB is at your rear. The campus exit is to your right.\nCootes Dr. is to your left.","Oh the Reactor Cafe,\nYou think of the good old days when you could actually see the reactor from the Reactor Cafe...\nAfter overhearing someone ask whether keV is bigger than MeV you first contemplate your existence,\nthen contemplate your next move...",('f')),
@@ -69,7 +69,7 @@ Map("The Quantum Tunne",(3,3,0),"QUANTUM TUNNEL:\nGo up to return to the main fl
 Map("Inside the Reactor",(2,6,0),"INSIDE THE REACTOR:\nGo up to head outside.","The hum of air conditioning drowns your thoughts.\nYou lose yourself staring into the faint blue glow of the pool as you slowly approach its edge.",('f','b','l','r','d')),
 Map("Club Thode Basement",(1,7,0),"THODE BASEMENT:\nGo up to head outside.","You feel the laser glares burning into the back of your neck as\nyou hastily walk amongst the rows of desks.\nIs it possible to book a study room down here without finding a fallic object drawn on the white board?\nYou'll never know.",('f','b','l','r','d')),
 Map("Bridges",(5,4,0),"BRIDGES CAFE:\nYou can only go back up to the Phoenix.","You feel guility walking in here after you performed a\nbeat down on a double big mac in a drunken stupor only hours eariler.\nYou scan the menu to try and find the most non-vegan vegan thing on the menu.\nYou settle with sweet potato fries.",('f','b','l','r','d')),
-Map("Secret Trapdoor!",(4,6,0),"SECRET ROOM!:\nGo up to climb out.","A dark room which you can barely see 2 feet in front of you...\nThere are stacks of failed midterms all around you.\nA suit of armor and a chainmail flag with a skull on it are barely visible.\nWho made this place anyway?",('f','b','l','r','d')),
+Map("Secret Trapdoor!",(0,2,0),"SECRET ROOM!:\nGo up to climb out.","A dark room which you can barely see 2 feet in front of you...\nThere are stacks of failed midterms all around you.\nA suit of armor and a chainmail flag with a skull on it are barely visible.\nWho made this place anyway?",('f','b','l','r','d')),
 Map("Custodial Closet",(5,0,0),"CUSTODIAL CLOSET:\nYou can only go up to go back to MUSC.","You enter the custodial closet and a formidable stench fills your nostrils...\nEw.",('f','b','l','r','d')),
 Map("NRB Basement",(2,5,0),"BASEMENT OF NRB:\nYou can only go back up to the main floor.","You head down the stairs to the basement...\nThe forgotten dreams of PhD students linger in the air.\nYou recall lost hours in 3L labs waiting to reach steady state...\nYou snap out of memoreies of boredom and gather your thoughts.",('f','b','l','r','d')),
 Map("Chapel Undercroft",(2,0,0),"CHAPEL UNDERCROFT:\nYou can only go back up to the main floor.","You struggle down the dimly lit stair way into the undercroft.\nThe distinct smell of mould enters your nose as you travel further into the cold musty basement.\nThe faint glow of candles cause the shadows of ancient statues to flicker on the walls of the room...\nAfter a chill goes down your spine you plan your next move.",('f','b','l','r','d')),
@@ -108,7 +108,7 @@ Equipment("Party Hat",(4,3,1),"PartyHat.jpg","Found in a Chirstmas Cracker","hea
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
-Equipment("Okons Chainmail",(4,6,0),"OkonMail.jpg","The sacred chainmail forged by the legend himself","body",(25,50,25)),
+Equipment("Okons Chainmail",(0,2,0),"OkonMail.jpg","The sacred chainmail forged by the legend himself","body",(25,50,25)),
 Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,10)),
 Equipment("McMaster map",(1,2,1),"MACMap.jpg","A map of McMaster you can... wear? I guess?","body",(1,5,5)),
 Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3)),
@@ -152,9 +152,9 @@ Equipment("Tire Iron",(5,7,1),"TireIron.jpg","Is this even a real tool? Or just 
 Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,10)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,25,5)),
 Equipment("Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5)),
-Equipment("Diary of the Fallen",(4,6,0),"Diary.jpg","The personal notes of an ancient Hero.","off-hand",(45,45,45)),
-Equipment("Wood Shield",(5,4,2),"Shield.jpg","An old wooden shield used in a play, you think...","off-hand",(5,40,-5)),
-Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(5,5,30)),
+Equipment("Diary of the Fallen",(0,2,0),"Diary.jpg","The personal notes of an ancient Hero.","off-hand",(45,45,45)),
+Equipment("Wood Shield",(5,4,2),"Shield.jpg","An old wooden shield used in a play, you think...","off-hand",(5,20,-5)),
+Equipment("Casio",(2,2,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(5,5,10)),
 Equipment("Paint Brush",(3,0,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,0,20)),
 Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,20,-5)),
 Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,20,5)),
@@ -177,7 +177,7 @@ Equipment("Minnicks Glasses",(None),"MinnickGlasses.jpg","The Spectacles of an a
 Equipment("Kenricks Oscilloscope",(None),"Oscilloscope.jpg","The window into the electronics world...","off-hand",(0,150,50)),
 Equipment("Joint of Destiny",(None),"Joint.jpg","A tighly rolled spliff filled with Devil's lettuce... for real.","off-hand",(420,420,420)),
 Equipment("PID control system",(None),"PID.jpg","A PID control system. Kp = 69, my dude.","head",(45,0,10)),
-Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of a neutron star, ok maybe not.","hand",(100,0,75)),
+Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of a neutron star, ok maybe not.","hand",(20,0,75)),
 Equipment("Horrible Assignment",(None),"BadAss.jpg","A barely legible report on Fourier analysis.","off-hand",(3,0,0)),
 Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(15,0,20)),
 Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420)),
@@ -195,21 +195,34 @@ Equipment("Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling
 Equipment("ColdSteel Katana",(None),"katana.jpg","This could probably kill a buffalo fish...","hand",(20,10,10)),
 Equipment("Vomit",(None),"Vomit.jpg","Literally spew.","off-hand",(0,0,1)),
 Equipment("Stylish Watch",(None),"watch.jpg","If only you learned how to tell time on an analog clock...","off-hand",(0,15,20)),
+Equipment("Capstone Tools",(None),"CapTools.jpg","Shouldn't the 4A06 students be using these?","off-hand",(1,1,1)),
+Equipment("Silicon Substrate",(0,3,2),"Substrate.jpg","A bulk silicon wafer.","off-hand",(1,1,1)),
+Equipment("Voltage Divider",(None),"VDivider.jpg","It is a Voltage Divider!","off-hand",(20,25,20)),
+Equipment("Dumbell",(1,0,1),"Dumbell.jpg","The pump is the greatest feeling in the world.","off-hand",(5,0,2)),
+Equipment("Green Lantern Shirt",(None),"GLShirt.jpg","Darkest day... Darkest night...","body",(15,15,10)),
 Equipment("Ancient Incantation",(None),"Incantation.jpg","An old tattered scroll with an incantation written in Latin.","off-hand",(1,1,1))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
 #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
 #Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo,Dinfo)
-#Bosses
+#Bosses/Profs
 ENEMIES = [
-Enemy("Dr.Minnick","I'm jealous of people who are stupid, they have more opportunities to learn!",(3,3,1),(500,500,500),200,"minnicks glasses",None,"",""),
-Enemy("Dr.Novog","Whats up folks.",(2,6,0),(420,420,420),200,"iron ring",None,"Smoke up folks! You've earned your Iron Ring!",""),
-Enemy("Dr.Haugen","Pedrotti Cubed!",(1,6,0),(250,100,999),200,"femtosecond laser",None,"Oh my! You've earned the right to use my laser!",""),
-Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(3,4,1),(200,100,200),100,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
-Enemy("Dr.Kitai","It's just a midterm. Don't kill youself.",(0,3,2),(150,50,50),150,"led of power",None,"I've beeen looking all over for this! Where did you find it? Take this!",""),
-Enemy("Dr.Knights","Whoever took the 3W text book... Shall feel my eternal wrath",(1,6,2),(200,100,50),300,"cold beer","3w textbook","I've been looking all over for that! Have cold one on me.",""),
+Enemy("Dr.Minnick","",(None),(500,500,500),200,"minnicks glasses",None,"",""),
+Enemy("Dr.Novog","",(None),(420,420,420),200,"iron ring",None,"Smoke up folks! You've earned your Iron Ring!",""),
+Enemy("Dr.Haugen","",(None),(250,100,999),200,"femtosecond laser",None,"Oh my! You've earned the right to use my laser!",""),
+Enemy("Dr.Kitai","I've been trying to develop a new LED...\nBut I need some silicon. Find me a Silicon Substrate please!",(None),(150,50,50),150,"led of power","silicon substrate","I've beeen looking for one just like this. Where did you find it?\nNevermind... just be on the look out for more of your professors.","It was only a midterm, don't off yourself."),
+Enemy("Dr.Knights","",(None),(200,100,50),300,"cold beer","3w textbook","I've been looking all over for that! Have cold one on me.",""),
+Enemy("Dr.Preston","I would like to improve my already impressive dad strength.\nBring me a dumbell.",(None),(250,150,100),300,"green lantern shirt","dumbell","Yes! Now I can get the pump I've been after!\nGo look for more professors. They have much more to tell than I.","HOW DID YOU OVERCOME MY DAD STRENGTH?!"),
+Enemy("Dr.Kleimann","",(None),(300,150,100),300,"","","",""),
+Enemy("Dr.Bujis","I've been looking for you.\nThere is a traitor amongst the Eng Phys faculty!\nHis name is Chris and he was last seen in the Tandem Accelerator.\nBring me what he has stolen!",(None),(250,150,100),300,"voltage divider","capstone tools","","It is a voltage divider!"),
+Enemy("Dr.Cassidy","",(None),(350,200,200),300,"","","",""),
+Enemy("Dr.LaPierre","",(None),(450,300,200),300,"","coffee","",""),
+Enemy("Dan Fitzgreen","",(None),(100,75,100),200,"","","",""),
+Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(None),(200,100,200),100,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
+Enemy("Chris","The tools should be coming any day now.",(4,5,1),(100,100,100),100,"capstone tools",None,"","I was going to quit anyway!"),
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
+Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seak out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
 #General
 Enemy("Father Frobenius","You need prayer. Recharge at the altar.",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
 Enemy("Steven the first year","Have you got the LONCAPA Python code?",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
@@ -224,8 +237,7 @@ Enemy("Bill the MAC Cop","Give me your student card!",(3,5,1),(50,25,10),50,"fak
 Enemy("Andreas the Nerd","Full send, dude",(3,2,1),(10,15,5),50,"visor glasses",None,"","Dude, that was definitely a full send"),
 Enemy("Eric the Baller","Huge talking to people play.",(0,5,0),(20,15,20),50,"coldsteel katana",None,"","This is sub-optimal."),
 Enemy("Mario the Mixologist","Yo check out my meme page. You ever heard coco jay?",(1,4,1),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
-Enemy("Undead Grad Student","Mussst eeaaat funnnndingg... Er, I mean braaaains.",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!"),
-Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seak out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"","")]
+Enemy("Undead Grad Student","Mussst eeaaat funnnndingg... Er, I mean braaaains.",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!")]
  
 #Stationary Objects to interact with
 #Interact(name,location,info,Sinfo,need,drop)
