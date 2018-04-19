@@ -16,10 +16,10 @@ MAPS = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XR
 #Example: Start = Map("Start",(0,0,0),"You start here")
 LOCATIONS=[
 Map("Starting Location",(2,3,1),"FRONT OF JHE:\nBSB is to your right. Hatch to your left.\nJHE field is to your rear.","You see the Iron Ring out front of JHE shining in the morning sun. The campus is bustling with student life.\nThere are people in all directions with the remnants of Kipling pranks still scattered about JHE.",()),
-Map("Inside JHE",(2,4,1),"JHE LOBBY:\nTo your right you can exit towards BSB. To your left you can head into Hatch.\nForward is the Nuclear Research building.","JHE lobby is alive. Students rushing in all directions as the smell of\nburnt coffee and sorrow tickles your nose. You scan the faces around\nyou but see no one familiar. There is an confused air about this place\nas Kipling was just last night. Many engineers happy. Many more still\nsuffering.",()),
+Map("Inside JHE",(2,4,1),"JHE LOBBY:\nTo your right you can exit towards BSB. To your left you can head into Hatch.\nForward is the Nuclear Research building. Behind you is the exit of JHE.","JHE lobby is alive. Students rushing in all directions as the smell of\nburnt coffee and sorrow tickles your nose. You scan the faces around\nyou but see no one familiar. There is an confused air about this place\nas Kipling was just last night. Many engineers happy. Many more still\nsuffering.",()),
 Map("Nuclear Research Building",(2,5,1),"NUCLEAR RESEARCH BUILDING:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.","You have barely ever been in here other than to suffer through\n3 hours of waiting for a water-level PID controller to reach steady state.\nYou wonder how any one could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because they are\nall still lost in here...",()),
 Map("Inside Hatch",(1,4,1),"INSIDE HATCH:\nIn front of you lies JHE-Annex. To your right is the JHE lobby. To your rear you can exit Hatch.\nTo your left is an alley way.","The new Hatch building. That 'fresh building' smell still lingers.\nYou see many members of the various clubs rushing from room to room.\nThe Kipling clock ticks away... only 365 more...\nWho is this Gerald Hatch anyway?",()),
-Map("In Front of Hatch",(1,3,1),"OUTSIDE HATCH:\nETB to your left. The entrance to Hatch in front of you.\nThe McMaster Map to your rear. Starting Location to your right.","As you stare at the newly completed building you get shoved by a\ndehydrated engineer. The sun still shines and you are\nirritated by the constant sound of Hamilton sirens which you have yet\nto grow acustomed to...",()),
+Map("In Front of Hatch",(1,3,1),"OUTSIDE HATCH:\nETB to your left. The entrance to Hatch in front of you.\nThe McMaster Map to your rear. JHE Entrance is to your right.","As you stare at the newly completed building you get shoved by a\ndehydrated engineer. The sun still shines and you are\nirritated by the constant sound of Hamilton sirens which you have yet\nto grow acustomed to...",()),
 Map("Map of McMaster",(1,2,1),"MCMASTER MAP:\nIn front of you lies the Hatch Building. To your right, JHE Field.\nTo your rear lies the Health Sci Library. T-13 is to your left.","Has anyone even used this thing?\nA lost freshman asks you for directions even though the map is clearly\nnext to you.\nAfter sending them in the wrong direction you plan your next move.",()),
 Map("Health Sciences Library",(1,1,1),"HEALTH SCIENCES LIBRARY:\nIn front of you is the McMaster Map. To your right is the bus stop.\nMDCL is behind you. The Hospital West wing is to your left.","You are constantly asked to be quiet\neven though you have yet to make a sound.\nAfter scanning the tables and see no one you recognize you take a seat\nin an arm chair and stare out towards the centre of campus daydreaming\nof a life where these study rooms weren't constantly full.",()),
 Map("The Bus Stop",(2,1,1),"BUS STOP:\nHealth Sciences Library to your left. JHE field in front of you.\nThe Chapel is behind you. Art Museum to your right.","Students gather around to catch the next bus. You get pushed and shoved\nas they desperately clammer on-board. You overhear an arguement\nbetween a student and the Bus Driver when suddenly the altercation\nturns to blows and pours onto the sidewalk.",()),
@@ -30,7 +30,7 @@ Map("The Willy Dog stand",(4,1,1),"WILLY DOG STAND:\nThe turning circle lies in 
 Map("Mills Library",(4,0,1),"MILLS LIBRARY:\nThe Willy Dog Stand is in front of you. MUSC is to your right.","This is definitely not Thode. You wonder if anything gets done in this\nlibrary. All of the debauchery taking place on the 6th floor sends a\nchill down your spine as you gather your wits.",('l','b')),
 Map("Statue of Sir William McMaster",(5,2,1),"WILLIAM MCMASTER STATUE:\nHamilton Hall is in front of you. The Archway is behind you.\nTurning Circle is to your left.","Do you think you'll ever do something worth a statue of yourself\nchilling on a bench? What if Sir Willy McMaster was actually in that statue\nHan Solo style? After a quick selfie with Willy you plan your next move.",('r')),
 Map("BSB Field",(3,2,1),"BSB FIELD:\nThe turning circle is to your right. JHE field is to your left.\nEntrance to BSB to your front. The Art Museum is to your rear.","You look up to see the flags flapping happily in the morning breeze.\nThat sun dial at their feet ticking to the tune of celestial magic.\nAfter swatting Neil Degrasse quotes from your thoughts and a quick smell of the flowerbed...\nYou consider what to do next.",()),
-Map("JHE Field",(2,2,1),"JHE FIELD:\nBSB Field is to your right. McMaster map to your left. The Bus Stop is at your rear.\nThe Starting location is in front of you.","The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everyone knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.",()),
+Map("JHE Field",(2,2,1),"JHE FIELD:\nBSB Field is to your right. McMaster map to your left. The Bus Stop is at your rear.\nThe entrance to JHE is in front of you.","The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everyone knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.",()),
 Map("McMaster Student Centre",(5,0,1),"MUSC:\nMills is to your left. The Archway is in front of you.\nA custodial closet is down the stairs.","The Student Centre is alive. After counting the number of jean jackets\nin the Starbucks line like the Count from Sesame Street you snap back into reality.\n(Oops there goes gravity).\nThe bustling atmosphere disorients you and it becomes difficult to think straight...",('r','b')),
 Map("The McMaster Archway",(5,1,1),"ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. Willy Dog to your left.","Probably the most beautiful structure at Mac.\nThose Western kids have that Big Ben lookalike but this takes the cake.\nYou snap a quick selfie in front of the Archway for the 'gram.",('r')),
 Map("Inside University Hall",(6,1,1),"UNIVERSITY HALL:\nThe Archway is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f')),
@@ -221,7 +221,7 @@ Enemy("Undead Grad Student","Mussst eeaaat funnnndingg... Er, I mean braaaains."
 #Stationary Objects to interact with
 #Interact(name,location,info,Sinfo,need,drop)
 INTERACT = [
-Interact("Garbage Can",(2,3,1),"It's a garbage can.","Yes, you have chosen wisely.","msp430","puke")]
+Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","puke")]
 
 def WorldMap():
     global MAPS
@@ -242,6 +242,13 @@ def WorldMap():
             z = position[2]
             MAPS[x][y][z].placeEnemy(i)
     for i in ITEMS:
+        if i.location:
+            position = i.location
+            x = position[0]
+            y = position[1]
+            z = position[2]
+            MAPS[x][y][z].placeItem(i)
+    for i in INTERACT:
         if i.location:
             position = i.location
             x = position[0]
