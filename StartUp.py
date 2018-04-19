@@ -102,6 +102,7 @@ Equipment("Laser Safety Glasses",(1,6,0),"LSGlasses.jpg","Protection from the UV
 Equipment("Raybans",(5,5,1),"Raybans.jpg","GQ Teen says Raybans, Board Shorts, Vans, and a Muscle Tee.","head",(0,1,3)),
 Equipment("Bike Helmet",(3,7,1),"BikeHelmet.jpg","One of those fast Tour de France ones.","head",(0,8,10)),
 Equipment("Surgical Mask",(0,1,1),"SurgicalMask.jpg","Don't touch me I'm sterile!","head",(0,2,3)),
+Equipment("Phils Braces",(2,5,0),"PhilBraces.jpg","Bark AND the bite.","head",(3,2,1)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
