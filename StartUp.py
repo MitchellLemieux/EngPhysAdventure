@@ -133,7 +133,6 @@ Equipment("Dirty Needle",(0,1,1),"Needle.jpg","This isn't clean. Somone find me 
 Equipment("Used Plunger",(5,0,0),"Plunger.jpg","Used. Lovely...","hand",(10,0,10)),
 Equipment("Broken Wine Bottle",(4,3,1),"WineBottle.jpg","A broken wine bottle from 1996, good year.","hand",(15,0,5)),
 Equipment("Plastic Bag",(2,1,1),"Condom.jpg","The audacity of some people to leave their filth around.","hand",(10,0,-10)),
-Equipment("Eng Phys Pen",(3,3,0),"PhysPen.jpg","It would be amazing if this thing actually worked. Plug it in and find all of 2P04.","hand",(5,0,5)),
 Equipment("Butter Knife",(4,6,1),"ButterKnife.jpg","Meant for spreading, not stabbing...","hand",(4,0,5)),
 Equipment("Pee Bottle",(2,1,1),"PeeBottle.jpg","It is literally a bottle of urine.","hand",(10,0,0)),
 Equipment("Tofu",(5,4,0),"Carrot.jpg","Vegan's delight.","hand",(1,0,5)),
@@ -200,6 +199,7 @@ Equipment("Silicon Substrate",(0,3,2),"Substrate.jpg","A bulk silicon wafer.","o
 Equipment("Voltage Divider",(None),"VDivider.jpg","It is a Voltage Divider!","off-hand",(20,25,20)),
 Equipment("Dumbell",(1,0,1),"Dumbell.jpg","The pump is the greatest feeling in the world.","off-hand",(5,0,2)),
 Equipment("Green Lantern Shirt",(None),"GLShirt.jpg","Darkest day... Darkest night...","body",(15,15,10)),
+Equipment("Eng Phys Pen",(None),"PhysPen.jpg","It would be amazing if this thing actually worked. Plug it in and find all of 2P04.","hand",(5,0,5)),
 Equipment("Ancient Incantation",(None),"Incantation.jpg","An old tattered scroll with an incantation written in Latin.","off-hand",(1,1,1))]
 
 #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
@@ -216,13 +216,13 @@ Enemy("Dr.Preston","I would like to improve my already impressive dad strength.\
 Enemy("Dr.Kleimann","",(None),(300,150,100),300,"","","",""),
 Enemy("Dr.Bujis","I've been looking for you.\nThere is a traitor amongst the Eng Phys faculty!\nHis name is Chris and he was last seen in the Tandem Accelerator.\nBring me what he has stolen!",(None),(250,150,100),300,"voltage divider","capstone tools","","It is a voltage divider!"),
 Enemy("Dr.Cassidy","",(None),(350,200,200),300,"","","",""),
-Enemy("Dr.LaPierre","",(None),(450,300,200),300,"","coffee","",""),
+Enemy("Dr.LaPierre","Fetch me a Coffee will you.",(None),(450,300,200),300,"eng phys pen","coffee","Here. I nice pen for your troubles.\nGo find Dr.Knights, he has more for you to do.","I can't believe you've done this."),
 Enemy("Dan Fitzgreen","",(None),(100,75,100),200,"","","",""),
 Enemy("Kenrick","The oscilloscope is the window into the electronic world.",(None),(200,100,200),100,"kenricks oscilloscope",None,"Here, take this. It is the windor into the electronics world!",""),
 Enemy("Chris","The tools should be coming any day now.",(4,5,1),(100,100,100),100,"capstone tools",None,"","I was going to quit anyway!"),
 #Special
 Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
-Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seak out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
+Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
 #General
 Enemy("Father Frobenius","You need prayer. Recharge at the altar.",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
 Enemy("Steven the first year","Have you got the LONCAPA Python code?",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
