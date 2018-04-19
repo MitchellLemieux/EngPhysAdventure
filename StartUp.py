@@ -103,6 +103,7 @@ Equipment("Raybans",(5,5,1),"Raybans.jpg","GQ Teen says Raybans, Board Shorts, V
 Equipment("Bike Helmet",(3,7,1),"BikeHelmet.jpg","One of those fast Tour de France ones.","head",(0,8,10)),
 Equipment("Surgical Mask",(0,1,1),"SurgicalMask.jpg","Don't touch me I'm sterile!","head",(0,2,3)),
 Equipment("Phils Braces",(2,5,0),"PhilBraces.jpg","Bark AND the bite.","head",(3,2,1)),
+Equipment("Santa Hat",(0,0,1),"SantaHat.jpg","Happy Holidays!","head",(0,3,2)),
 #Body Items
 Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,10,5)),
 Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(25,30,20)),
@@ -144,8 +145,8 @@ Equipment("Lamp",(0,5,1),"Lamp.jpg","I love lamp.","hand",(8,0,4)),
 Equipment("Mop",(0,0,1),"Mop.jpg","I'm going to clean up this town.","hand",(6,0,4)),
 Equipment("Skateboard",(0,0,0),"Skateboard.jpg","Cowabunga, dude.","hand",(9,0,10)),
 Equipment("RCA TV",(5,6,1),"RCATV.jpg","They still make these?","hand",(15,0,-999)),
-Equipment("Candlestick",(4,0,0),"Candlestick.jpg","Lumiere is up to no good.",(10,0,5)),
-Equipment("Tire Iron",(5,7,1),"TireIron.jpg","Is this even a real tool? Or just a murder weapon...",(11,0,3)),
+Equipment("Candlestick",(4,0,0),"Candlestick.jpg","Lumiere is up to no good.","hand",(10,0,5)),
+Equipment("Tire Iron",(5,7,1),"TireIron.jpg","Is this even a real tool? Or just a murder weapon...","hand",(11,0,3)),
 #Off-Hand Items
 Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(10,0,10)),
 Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,25,5)),
