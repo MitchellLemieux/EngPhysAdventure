@@ -1,28 +1,27 @@
 #Developer testing 
 from GameFunctions import *
 
-print "=================================================================================================="
+print "========================================================================"
 print "Hello, and welcome to..."
 print "___________ THE GREAT      __________.__"                 
-print "\_   _____/ ____    ____   \______   \  |__ ___.__. ______"
-print " |    __)_ /    \  / ___\   |     ___/  |  |   |  |/  ___/"
-print " |        \   |  \/ /_/  >  |    |   |      \___  |\___ \ "
+print "\_   _____/ ____    ______ \______   \  |__ ___.__. ______"
+print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
+print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
 print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
 print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ "
 print "A campus full of interesting characters awaits"
 print "Created by: Mitchell Lemieux & Tyler Kashak"
-print "Special thanks to Erik, Eric, Megan, Brian, and Brendan <3"
+print "Special thanks to Erik, Eric, Megan, Brian, and Brendan <3\n"
 print "Before you go any further there are some things you must know..."
 print "Your orientation never changes. When you enter you will be facing the"
-print "entrance of JHE and you will always face that way."
+print "entrance of JHE and you will always face that way.\n"
 print "The commands which allow you to interact with your environment are:"
 print "forward = f, backward = b, left = l, right = r, up = u, down = d"
 print "talk (person name), attack (person name), inspect (item name)"
-print "equip (item name), drop (item name) stats will show your stats."
-print "search will search the are, inventory will show the items on you."
+print "equip (item name), drop (item name), stats will show your stats."
+print "search will search the area, inventory will show the items on you."
 print "Be sure to type the ENTIRE name of what you want to interact with."
-print "Thats it. Good luck!"
-print "=================================================================================================="
+print "========================================================================"
 
 playername = raw_input("First, what is your name?\n")
 PLAYER.name = playername
