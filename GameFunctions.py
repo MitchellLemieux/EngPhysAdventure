@@ -15,7 +15,8 @@ EMPTYBODY = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','body',(
 EMPTYHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','hand',(0,0,0))
 EMPTYOFFHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0))
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-STARTINV = {'head':ITEMS['visor glasses'],'body':ITEMS['green lantern shirt'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['voltage divider']}
+STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+#STARTINV = {'head':ITEMS['visor glasses'],'body':ITEMS['green lantern shirt'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['voltage divider']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 
