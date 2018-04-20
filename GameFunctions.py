@@ -15,7 +15,7 @@ EMPTYBODY = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','body',(
 EMPTYHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','hand',(0,0,0))
 EMPTYOFFHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0))
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+STARTINV = {'head':ITEMS['visor glasses'],'body':ITEMS['green lantern shirt'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['voltage divider']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 
@@ -71,9 +71,11 @@ def Move(direction):
         Place = MAPS[x][y][z]
     if Place:
         if Place.travelled:
+            print "========================================================================"
             print Place.lore + "\n\n" + Place.info + Place.search()
             Place.travelled = 0
         else:
+            print "========================================================================"
             print Place.info
             print Place.search()
         return Place
@@ -220,13 +222,13 @@ def Inspect(Item):
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True
-            print INTERACT[Item].Sinfo
+            print "\n" + INTERACT[Item].Sinfo + "\n"
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
                 INTERACT[Item].drop = None
         else:
-            print INTERACT[Item].info
+            print "\n" + INTERACT[Item].info + "\n"
     else:
         print "That doesn't seem to be around here.\n"
 
@@ -302,8 +304,8 @@ def Story():
         QUESTS["knights get book"] = 0
     
 
-    if ENEMIES['dr.haugen'].spoke and QUEST['haugen kill soleymani']:
-        QUEST['haugen kill soleymani'] = 0
+    if ENEMIES['dr.haugen'].spoke and QUESTS['haugen kill soleymani']:
+        QUESTS['haugen kill soleymani'] = 0
         
 
     
