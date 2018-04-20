@@ -26,20 +26,27 @@ print "========================================================================"
 playername = raw_input("First, what is your name?\n")
 PLAYER.name = playername
 
+
+#Start in phoenix
+PLAYER.location = [5,4,1]
+
 x = PLAYER.location[0]
 y = PLAYER.location[1]
 z = PLAYER.location[2]
 CurrentPlace = MAPS[x][y][z]
-print CurrentPlace.lore + "\n" + CurrentPlace.info + "\n" + CurrentPlace.search()
+print CurrentPlace.lore + "\n\n" + CurrentPlace.info + "\n" + CurrentPlace.search()
 CurrentPlace.travelled = 0
+
+
 
 while(PLAYER.alive):
     
-  
     #Getting input and splitting it at the spaces
     direction = raw_input('What do you want to do?\n').lower().split(" ",1)
+    for i in direction:
+        i.strip()
     #print direction
-    
+    Story()
     if len(direction) == 1:
 
         verb = direction[0]

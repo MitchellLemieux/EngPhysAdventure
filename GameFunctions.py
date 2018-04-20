@@ -18,10 +18,6 @@ EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
-QUESTS = {"talk to mysterious man": 1,
-          "Kitai Get Silicon Substrate": 1,
-          "Preston Get Dumbbell": 1, 
-          "Buijs Kill Chris" : 1}
 
 def Equip(Item):
     global PLAYER
@@ -75,10 +71,11 @@ def Move(direction):
         Place = MAPS[x][y][z]
     if Place:
         if Place.travelled:
-            print Place.lore + "\n" + Place.info + Place.search()
+            print Place.lore + "\n\n" + Place.info + Place.search()
             Place.travelled = 0
         else:
-            print Place.info + Place.search()
+            print Place.info
+            print Place.search()
         return Place
     else:
         PLAYER.location = list(CurrentPlace.coords)
@@ -178,10 +175,11 @@ def Talk(E):
             print enemy.Sinfo
             print enemy.name + " took the " + enemy.need + "."
             enemy.quest = True
-            MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
-            print "You see a " + ITEMS[enemy.drop].name +".\n"
-            enemy.drop = None
-            PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+            if enemy.drop:
+                MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+                print "You see a " + ITEMS[enemy.drop].name +".\n"
+                enemy.drop = None
+                PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
         elif enemy.quest and enemy.drop:
             print enemy.Sinfo
             print "You see a " + ITEMS[enemy.drop].name +".\n"
@@ -239,6 +237,21 @@ def Inventory():
         print i.upper() + ": " + PLAYER.inv[i].name
     print ""
 
+QUESTS = {"talk to mysterious man": 1,
+          "preston get dumbbell": 1,
+          "buijs kill chris" : 1,
+          "dan fix reactor" : 1,
+          "novog get donut" : 1,
+          "feynman mirror" :1,
+          
+          "kitai get silicon substrate": 1,
+          "lapierre get coffee": 1,
+          "knights get book": 1,
+          "haugen kill soleymani" : 1,
+          
+         
+          }
+
 def Story():
     global PLAYER
     global QUESTS
@@ -246,15 +259,51 @@ def Story():
     global ENEMIES
     global INTERACT
     global MAPS
+    
     #Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
-        MAPS[4][4][1].place(ENEMY["dr.kitai"])
-        MAPS[2][4][2].place(ENEMY["dr.preston"])
-        MAPS[1][6][2].place(ENEMY["dr.lapierre"])
+        MAPS[4][4][1].placeEnemy(ENEMIES["dr.kitai"])
+        MAPS[2][4][2].placeEnemy(ENEMIES["dr.preston"])
+        MAPS[1][6][2].placeEnemy(ENEMIES["dr.lapierre"])
+        MAPS[5][4][1].removeEnemy(ENEMIES["hooded man"])
         QUESTS["talk to mysterious man"] = 0
+
     
         
+    if ENEMIES['dr.preston'].quest and QUESTS["preston get dumbbell"]:
+        MAPS[2][5][1].placeEnemy(ENEMIES["dr.buijs"])
+        QUESTS["preston get dumbbell"] = 0
         
+    if ENEMIES['dr.buijs'].quest and QUESTS['buijs kill chris']:
+        MAPS[2][5][0].placeEnemy(ENEMIES['dan fitzgreen'])
+        QUESTS['buijs kill chris'] = 0
+
+    if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
+        MAPS[2][6][0].placeEnemy(ENEMIES['dr.novog'])
+        QUESTS["dan fix reactor"] = 0
         
+    if ENEMIES['dr.novog'].quest and QUESTS["novog get donut"]:
+        QUESTS['novog get donut'] = 0
+
+    if INSPECT['ancient mirror'].quest and QUESTS["feynman mirror"]:
+        QUESTS["feynman mirror"] = 0
+
+    if ENEMIES['dr.kitai'].quest and QUESTS['kitai get silicon substrate']:
+        MAPS[1][5][2].placeEnemy(ENEMIES['dr.kleimann'])
+        QUESTS['kitai get silicon substrate'] = 0
     
+    
+    if ENEMIES['dr.lapierre'].quest and QUESTS["lapierre get coffee"]:
+        MAPS[5][4][1].placeEnemy(ENEMIES['dr.knights'])
+        QUESTS["lapierre get coffee"]= 0
+        
+    if ENEMIES['dr.knights'].quest and QUESTS["knights get book"]:
+        MAPS[1][6][0].placeEnemy(ENEMIES['dr.haugen'])
+        QUESTS["knights get book"] = 0
+    
+
+    if ENEMIES['dr.haugen'].spoke and QUEST['haugen kill soleymani']:
+        QUEST['haugen kill soleymani'] = 0
+        
+
     
