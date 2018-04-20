@@ -285,7 +285,7 @@ def Story():
     if ENEMIES['dr.novog'].quest and QUESTS["novog get donut"]:
         QUESTS['novog get donut'] = 0
 
-    if INSPECT['ancient mirror'].quest and QUESTS["feynman mirror"]:
+    if INTERACT['ancient mirror'].quest and QUESTS["feynman mirror"]:
         QUESTS["feynman mirror"] = 0
 
     if ENEMIES['dr.kitai'].quest and QUESTS['kitai get silicon substrate']:

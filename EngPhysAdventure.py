@@ -28,7 +28,7 @@ PLAYER.name = playername
 
 
 #Start in phoenix
-PLAYER.location = [5,4,1]
+PLAYER.location = [2,3,1]
 
 x = PLAYER.location[0]
 y = PLAYER.location[1]
