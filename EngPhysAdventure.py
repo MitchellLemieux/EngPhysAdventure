@@ -82,7 +82,8 @@ while(PLAYER.alive):
             
         elif verb == 'inspect':
             Inspect(objectName)
-                    
+        elif verb == 'eat':
+            Eat(objectName)
 
     
 
