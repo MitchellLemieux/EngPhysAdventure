@@ -34,7 +34,7 @@ x = PLAYER.location[0]
 y = PLAYER.location[1]
 z = PLAYER.location[2]
 CurrentPlace = MAPS[x][y][z]
-print CurrentPlace.lore + "\n\n" + CurrentPlace.info + "\n" + CurrentPlace.search()
+print CurrentPlace.lore + "\n\n" + CurrentPlace.info + "\n" + CurrentPlace.search() + "\n"
 CurrentPlace.travelled = 0
 
 
@@ -43,8 +43,8 @@ while(PLAYER.alive):
     
     #Getting input and splitting it at the spaces
     direction = raw_input('What do you want to do?\n').lower().split(" ",1)
-    for i in direction:
-        i.strip()
+    for i in range(len(direction)):
+        direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
     #print direction
     Story()
     if len(direction) == 1:

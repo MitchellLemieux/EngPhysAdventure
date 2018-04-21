@@ -16,7 +16,7 @@ EMPTYHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','hand',(
 EMPTYOFFHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0))
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-#STARTINV = {'head':ITEMS['visor glasses'],'body':ITEMS['green lantern shirt'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['voltage divider']}
+#STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['diary of the fallen']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 
@@ -77,8 +77,8 @@ def Move(direction):
             Place.travelled = 0
         else:
             print "========================================================================"
-            print Place.info
-            print Place.search()
+            print "\n"+Place.info
+            print "\n" +Place.search()
         return Place
     else:
         PLAYER.location = list(CurrentPlace.coords)
@@ -87,8 +87,7 @@ def Move(direction):
 
 #Combat System
 def Combat(P,E):
-     if E:
-            
+     if E:      
         #Speed
         PSpeed = P.stats[2]
         ESpeed = E.stats[2]
@@ -142,7 +141,7 @@ def Attack(E):
     y = PLAYER.location[1]
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
-    if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
+    if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if random() <= 0.01:
             print "An oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death.\n"
@@ -172,17 +171,18 @@ def Talk(E):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    if E in ENEMIES and (ENEMIES[E].location == tuple(PLAYER.location)) and (ENEMIES[E].alive):
+    if E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print enemy.Sinfo
             print enemy.name + " took the " + enemy.need + "."
+            PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+            PLAYER.updateStats()
             enemy.quest = True
             if enemy.drop:
                 MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
-                enemy.drop = None
-                PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
+                enemy.drop = None      
         elif enemy.quest and enemy.drop:
             print enemy.Sinfo
             print "You see a " + ITEMS[enemy.drop].name +".\n"
@@ -214,9 +214,9 @@ def Inspect(Item):
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
         print "\n"+ITEMS[Item].info
-        print "ATK : " + str(ITEMS[Item].stats[0])
-        print "DEF : " + str(ITEMS[Item].stats[1])
-        print "SPD : " + str(ITEMS[Item].stats[2])
+        print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
+        print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
+        print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
         print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
             
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
@@ -224,6 +224,7 @@ def Inspect(Item):
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True
             print "\n" + INTERACT[Item].Sinfo + "\n"
+            PLAYER.updateStats()
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
@@ -246,7 +247,6 @@ QUESTS = {"talk to mysterious man": 1,
           "dan fix reactor" : 1,
           "novog get donut" : 1,
           "feynman mirror" :1,
-          
           "kitai get silicon substrate": 1,
           "lapierre get coffee": 1,
           "knights get book": 1,
@@ -282,6 +282,7 @@ def Story():
         QUESTS['buijs kill chris'] = 0
 
     if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
+        ENEMIES['dan fitzgreen'].quest = True
         MAPS[2][6][0].placeEnemy(ENEMIES['dr.novog'])
         QUESTS["dan fix reactor"] = 0
         

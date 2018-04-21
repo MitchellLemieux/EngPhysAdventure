@@ -151,7 +151,7 @@ class Map:  #Map Location Storage
             self.ENEMY.remove(enemy)
 
     def search(self):
-        description = ""
+        description = "\n"
         length = len(self.items)
         if length:
             description = "\nYou see"
