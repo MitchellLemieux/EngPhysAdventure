@@ -65,10 +65,26 @@ def Move(direction):
     CurrentPlace = MAPS[x][y][z]
     Place = 0
     if direction not in CurrentPlace.walls:
-        PLAYER.move(direction)
-        x = PLAYER.location[0]
-        y = PLAYER.location[1]
-        z = PLAYER.location[2]
+       global MAPS
+    global PLAYER
+    x = PLAYER.location[0]
+    y = PLAYER.location[1]
+    z = PLAYER.location[2]
+    CurrentPlace = MAPS[x][y][z]
+    Place = 0
+    if direction not in CurrentPlace.walls:
+        if direction == 'f':
+            y += 1
+        elif direction == 'b':
+            y -= 1
+        elif direction == 'r':
+            x += 1
+        elif direction == 'l':
+            x -= 1
+        elif direction == 'u':
+            z += 1
+        elif direction == 'd':
+            z -= 1
         Place = MAPS[x][y][z]
     if Place:
         if Place.travelled:
