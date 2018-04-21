@@ -69,20 +69,6 @@ class Character: #When the equip function is called we need to make sure the ite
         self.updateStats()
         return drop
 
-    def move(self,direction):
-        if (direction == 'f'):
-            self.location[1] += 1
-        if (direction == 'b'):
-            self.location[1] -= 1
-        if (direction == 'l'):
-            self.location[0] -=  1
-        if (direction == 'r'):
-            self.location[0] += 1
-        if (direction == 'u'):
-            self.location[2] += 1
-        if (direction == 'd'):
-            self.location[2] -= 1
-
     def ShowInventory(self):
         Head = "head\t\t"+self.inv['head'].name+"\t"+str(self.inv['head'].stats)+"\n"
         Body = "body\t\t"+self.inv['body'].name+"\t"+str(self.inv['body'].stats)+"\n"
