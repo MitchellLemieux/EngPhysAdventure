@@ -237,7 +237,9 @@ def Inspect(Item):
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
-        print "WORN: " + str(ITEMS[Item].worn).upper()+"\n"
+        print "WORN: " + str(ITEMS[Item].worn).upper()
+        if ITEMS[Item].health > -101: #if edible it shows that health stat plus what your final health would be if eaten
+            print "Edible: " + str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
             
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
