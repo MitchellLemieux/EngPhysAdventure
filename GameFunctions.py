@@ -195,7 +195,7 @@ def Talk(E):
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print enemy.Sinfo
             print enemy.name + " took the " + enemy.need + "."
-            #ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
+            ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
             PLAYER.updateStats()
             enemy.quest = True
@@ -223,7 +223,7 @@ def Stats():
     print "DEF: " + str(PLAYER.stats[1])
     print "SPD: " + str(PLAYER.stats[2])+"\n"
 
-def Inspect(Item):
+def Inspect(Item): #Item is the inspect item
     global MAPS
     global ITEMS
     global PLAYER
@@ -232,22 +232,22 @@ def Inspect(Item):
     y = PLAYER.location[1]
     z = PLAYER.location[2]
     
-    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
         print "\n"+ITEMS[Item].info
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
         print "WORN: " + str(ITEMS[Item].worn).upper()
         if ITEMS[Item].health > -101: #if edible it shows that health stat plus what your final health would be if eaten
-            print "Edible: " + str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
-            
-    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
+            print "Edible: Yes " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
+        
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True
             print "\n" + INTERACT[Item].Sinfo + "\n"
             PLAYER.updateStats()
-            #ITEMS[Item].location = (None, None, None) #Brendan added this, used to clear the item location
+            ITEMS[INTERACT[Item].need].location = (None, None, None) #Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
