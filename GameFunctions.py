@@ -10,10 +10,10 @@ INTERACT = StartUp.InteractDictionary()
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
 
-EMPTYHEAD = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','head',(0,0,0))
-EMPTYBODY = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','body',(0,0,0))
-EMPTYHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','hand',(0,0,0))
-EMPTYOFFHAND = Equipment('EMPTY',(0,0,0),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0))
+EMPTYHEAD = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','head',(0,0,0),-101)
+EMPTYBODY = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','body',(0,0,0),-101)
+EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','hand',(0,0,0),-101)
+EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['diary of the fallen']}
@@ -195,6 +195,7 @@ def Talk(E):
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print enemy.Sinfo
             print enemy.name + " took the " + enemy.need + "."
+            #ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
             PLAYER.updateStats()
             enemy.quest = True
@@ -244,6 +245,7 @@ def Inspect(Item):
             INTERACT[Item].quest = True
             print "\n" + INTERACT[Item].Sinfo + "\n"
             PLAYER.updateStats()
+            #ITEMS[Item].location = (None, None, None) #Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
@@ -260,6 +262,33 @@ def Inventory():
         print i.upper() + ": " + PLAYER.inv[i].name
     print ""
 
+def Eat(Item):
+    global PLAYER
+    global ITEMS
+    global MAPS
+    x = PLAYER.location[0]
+    y = PLAYER.location[1]
+    z = PLAYER.location[2]
+    
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
+        if ITEMS[Item].health > -101:
+            PLAYER.health = PLAYER.health + ITEMS[Item].health
+            PLAYER.health = min(100, PLAYER.health)
+            print "You've eaten the " + ITEMS[Item].name + ".\n HEALTH: " + str(PLAYER.health)
+            ITEMS[Item].location = (None, None, None) #used to clear the item location
+            if ITEMS[Item] == PLAYER.inv[ITEMS[Item].worn]:
+                PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
+                PLAYER.updateStats()
+                print "The " + ITEMS[Item].name + " has been removed from your inventory."
+            else:
+                MAPS[x][y][z].Remove(ITEMS[Item])
+           
+           
+        else:
+            print "You can't eat that!"
+    else:
+        print "That doesn't seem to be around here.\n"
+
 QUESTS = {"talk to mysterious man": 1,
           "preston get dumbbell": 1,
           "buijs kill chris" : 1,
@@ -273,6 +302,7 @@ QUESTS = {"talk to mysterious man": 1,
           
          
           }
+
 
 def Story():
     global PLAYER

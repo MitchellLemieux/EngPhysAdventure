@@ -12,13 +12,14 @@ def tupleAdd(a,b,c,d): #adds 4 tuples element-wise, used to calculate stats of c
     return tuple(map(operator.add,i,j))
 
 class Equipment:
-    def __init__(self,name,location,image,info,worn,stats):
+    def __init__(self,name,location,image,info,worn,stats,health):
         self.name = str(name)
         self.image = str(image) 
         self.info = str(info)
         self.worn = str(worn)
         self.stats = stats
         self.location = location
+        self.health = health
     
 class Character: #When the equip function is called we need to make sure the item is actually in the room
     
