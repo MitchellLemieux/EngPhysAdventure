@@ -36,9 +36,9 @@ def Equip(Item):
         Place.Remove(ITEMS[Item])
         Place.placeItem(drop)
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        print "You can't equip that, gosh"
+        print "\nYou can't equip that, gosh\n"
     else:
-        print "That doesn't seem to be around here."
+        print "\nThat doesn't seem to be around here.\n"
 
 def Drop(Item):
     global MAPS
@@ -58,14 +58,6 @@ def Drop(Item):
 
 def Move(direction):
     global MAPS
-    global PLAYER
-    x = PLAYER.location[0]
-    y = PLAYER.location[1]
-    z = PLAYER.location[2]
-    CurrentPlace = MAPS[x][y][z]
-    Place = 0
-    if direction not in CurrentPlace.walls:
-       global MAPS
     global PLAYER
     x = PLAYER.location[0]
     y = PLAYER.location[1]
@@ -238,8 +230,9 @@ def Inspect(Item): #Item is the inspect item
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
         print "WORN: " + str(ITEMS[Item].worn).upper()
         if ITEMS[Item].health > -101: #if edible it shows that health stat plus what your final health would be if eaten
-            print "Edible: Yes " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
-        
+            print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
+        else:
+            print""
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
@@ -258,9 +251,10 @@ def Inspect(Item): #Item is the inspect item
 
 def Inventory():
     global PLAYER
+    print ""
     for i in PLAYER.inv:
         print i.upper() + ": " + PLAYER.inv[i].name
-
+    print ""
 def Eat(Item):
     global PLAYER
     global ITEMS
@@ -279,7 +273,7 @@ def Eat(Item):
                 PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
                 ITEMS[Item].location = (None, None, None)
                 PLAYER.updateStats()
-                print "The " + ITEMS[Item].name + " has been removed from your inventory."
+                print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
             else:
                 MAPS[x][y][z].Remove(ITEMS[Item])
            

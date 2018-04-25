@@ -47,7 +47,7 @@ class Character: #When the equip function is called we need to make sure the ite
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
             print Equip.info
-            print "\nYou've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
+            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip

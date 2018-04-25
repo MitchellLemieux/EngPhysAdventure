@@ -1,5 +1,5 @@
-#Developer testing 
 from GameFunctions import *
+import StartUp
 
 print "========================================================================"
 print "Hello, and welcome to..."
@@ -24,69 +24,83 @@ print "Be sure to type the ENTIRE name of what you want to interact with."
 print "========================================================================"
 
 playername = raw_input("First, what is your name?\n")
-PLAYER.name = playername
 print "========================================================================"
 
 
-#Start in phoenix
-PLAYER.location = [2,3,1]
-
-x = PLAYER.location[0]
-y = PLAYER.location[1]
-z = PLAYER.location[2]
-CurrentPlace = MAPS[x][y][z]
-print CurrentPlace.lore + "\n\n" + CurrentPlace.info + CurrentPlace.search()
-CurrentPlace.travelled = 0
-
 def Main():
-    
     global PLAYER
+    global ITEMS
+    global MAPS
+    global INTERACT
+    global playername
+    global QUESTS
+    PLAYER.name = playername
+    x = 2
+    y = 3
+    z = 1
+    PLAYER.location[0] = x
+    PLAYER.location[1] = y
+    PLAYER.location[2] = z
+
+    CurrentPlace = MAPS[x][y][z]
+    print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
+    CurrentPlace.travelled = 0
+
     while(PLAYER.alive):
-        
-        #Getting input and splitting it at the spaces
         direction = raw_input('What do you want to do?\n').lower().split(" ",1)
         for i in range(len(direction)):
-            direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
-        #print direction
-        OUTCOME = Story()
-        if len(direction) == 1:
+           direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
 
+        if len(direction) == 1:
             verb = direction[0]
-            
+
             if verb in ['u','d','l','r','f','b']:
                 CurrentPlace = Move(verb)
 
             elif (verb == 'search'):
                 print CurrentPlace.search()
-                
+
             elif (verb == 'stats'):
                 Stats()
                 
             elif (verb == 'inventory'):
                 Inventory()
 
-            
         elif (len(direction) == 2):
             verb = direction[0]
-            objectName = direction [1]
-            
+            objectName = direction[1]
+
             if verb == 'equip':
                 Equip(objectName)
-            
+                
             elif verb == 'drop':
                 Drop(objectName)
 
             elif verb == 'attack':
                 Attack(objectName)
-
+                
             elif verb == 'talk':
                 Talk(objectName)
-                
+
             elif verb == 'inspect':
                 Inspect(objectName)
+
             elif verb == 'eat':
                 Eat(objectName)
 
         print "========================================================================"
-
+    if not Story() and raw_input("Would you like to play again?[Y/N]: ").lower() == 'y':
+        print "========================================================================"
+        PLAYER.health = 100
+        for i in PLAYER.inv:
+            PLAYER.inv[i] = PLAYER.emptyinv[i]
+        PLAYER.alive = True
+        StartUp.Reset()
+        MAPS = StartUp.WorldMap()
+        ITEMS = StartUp.ItemDictionary()
+        ENEMIES = StartUp.EnemyDictionary()
+        INTERACT = StartUp.InteractDictionary()
+        for i in QUESTS:
+            QUESTS[i] = 1
+        Main()
 Main()
