@@ -38,51 +38,55 @@ CurrentPlace = MAPS[x][y][z]
 print CurrentPlace.lore + "\n\n" + CurrentPlace.info + CurrentPlace.search()
 CurrentPlace.travelled = 0
 
-while(PLAYER.alive):
+def Main():
     
-    #Getting input and splitting it at the spaces
-    direction = raw_input('What do you want to do?\n').lower().split(" ",1)
-    for i in range(len(direction)):
-        direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
-    #print direction
-    Story()
-    if len(direction) == 1:
-
-        verb = direction[0]
+    global PLAYER
+    while(PLAYER.alive):
         
-        if verb in ['u','d','l','r','f','b']:
-            CurrentPlace = Move(verb)
+        #Getting input and splitting it at the spaces
+        direction = raw_input('What do you want to do?\n').lower().split(" ",1)
+        for i in range(len(direction)):
+            direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
+        #print direction
+        OUTCOME = Story()
+        if len(direction) == 1:
 
-        elif (verb == 'search'):
-            print CurrentPlace.search()
+            verb = direction[0]
             
-        elif (verb == 'stats'):
-            Stats()
+            if verb in ['u','d','l','r','f','b']:
+                CurrentPlace = Move(verb)
+
+            elif (verb == 'search'):
+                print CurrentPlace.search()
+                
+            elif (verb == 'stats'):
+                Stats()
+                
+            elif (verb == 'inventory'):
+                Inventory()
+
             
-        elif (verb == 'inventory'):
-            Inventory()
-
-        
-    elif (len(direction) == 2):
-        verb = direction[0]
-        objectName = direction [1]
-        
-        if verb == 'equip':
-            Equip(objectName)
-        
-        elif verb == 'drop':
-            Drop(objectName)
-
-        elif verb == 'attack':
-            Attack(objectName)
-
-        elif verb == 'talk':
-            Talk(objectName)
+        elif (len(direction) == 2):
+            verb = direction[0]
+            objectName = direction [1]
             
-        elif verb == 'inspect':
-            Inspect(objectName)
-        elif verb == 'eat':
-            Eat(objectName)
+            if verb == 'equip':
+                Equip(objectName)
+            
+            elif verb == 'drop':
+                Drop(objectName)
 
-    print "========================================================================"
+            elif verb == 'attack':
+                Attack(objectName)
 
+            elif verb == 'talk':
+                Talk(objectName)
+                
+            elif verb == 'inspect':
+                Inspect(objectName)
+            elif verb == 'eat':
+                Eat(objectName)
+
+        print "========================================================================"
+
+Main()

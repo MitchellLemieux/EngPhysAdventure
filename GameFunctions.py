@@ -310,7 +310,10 @@ QUESTS = {
           "maxwell portal": 1,
           #endgame stuff
           'end game start' :1,
-          'hooded man 2':1,
+          'the dark lord' :1,
+          'university man':1,
+          'restored order': 1,
+          'create chaos': 1
           }
 
 
@@ -397,10 +400,44 @@ def Story():
 
     #endgame
 
-    """if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
+    if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
         MAPS[5][2][1].placeEnemy(ENEMIES['hooded man'])
-        ENEMIES['hooded man'].info =    
-    """
+        MAPS[5][2][1].lore = "You approach the statue and notice the mysterious Hooded Man beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
+        MAPS[5][2][1].travelled = 1
+        ENEMIES['hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the Quantum Relics which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is Dr.Cassidy himself!"   
+        QUESTS['end game start'] = 0
+
+    if not QUESTS['end game start'] and ENEMIES['hooded man'].spoke and QUESTS['the dark lord']:
+        MAPS[5][2][1].removeEnemy(ENEMIES['hooded man'])
+        MAPS[5][2][1].placeEnemy(ENEMIES['dr.cassidy'])
+        QUESTS['the dark lord'] = 0
+
+    if ENEMIES['dr.cassidy'].spoke and QUESTS['university man']:
+        MAPS[5][2][1].placeEnemy(ENEMIES['sir william mcmaster'])
+        ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
+        QUESTS['university man'] = 0
+
+    if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
+        ENEMIES['dr.cassidy'].info = "Take the power you hold in your Iron Ring and destroy all of the professors!"
+        DEATHS = [ENEMIES[i].alive for i in ['dr.minnick','dr.novog','dr.haugen','dr.kitai','dr.knights','dr.preston','dr.kleimann','dr.buijs','dr.lapierre','dr.nagasaki']]
+        if True in DEATHS:
+            pass
+        else:
+            QUESTS['create chaos'] = 0
+            PLAYER.alive = False
+            return 1
+            
+    elif not ENEMIES['dr.cassidy'].alive and QUESTS['restored order']:
+        QUESTS['restored order'] = 0
+        return 2
+
+    else:
+        return 0
+        
+        
+                    
+        
+        
         
         
 
