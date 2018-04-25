@@ -47,15 +47,15 @@ class Character: #When the equip function is called we need to make sure the ite
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
             print Equip.info
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
+            print "\nYou've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            print Equip.info
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.'
+            print "\n"+ Equip.info
+            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n'
         else:
-            print "That doesn't seem to be around here."
+            print "\nThat doesn't seem to be around here.\n"
         self.updateStats()
         return drop
 
@@ -63,7 +63,7 @@ class Character: #When the equip function is called we need to make sure the ite
         drop = 0
         if(Equip == self.inv[Equip.worn]):
             self.inv[Equip.worn] = self.emptyinv[Equip.worn]
-            print "You've dropped the " + Equip.name
+            print "\nYou've dropped the " + Equip.name
             drop = Equip
         else:
             print "You aren't carrying that item."
@@ -156,7 +156,7 @@ class Map:  #Map Location Storage
                 if enemy.alive:
                     description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of", "hunk of meat that used to be ", "remains of "]) + enemy.name + ".\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of "]) + enemy.name + ".\n"
         if self.interact:
             for item in self.interact:  
                 description = description + item.info + "\n"

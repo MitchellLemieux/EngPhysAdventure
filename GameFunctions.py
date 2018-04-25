@@ -15,8 +15,8 @@ EMPTYBODY = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','hand',(0,0,0),-101)
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-#STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['the solar ray'],'off-hand':ITEMS['diary of the fallen']}
+#STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['solar ray'],'off-hand':ITEMS['green bang bong']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 
@@ -92,16 +92,15 @@ def Move(direction):
         PLAYER.location[2] = z
         if Place.travelled:
             print "========================================================================"
-            print Place.lore + "\n\n" + Place.info + Place.search()
+            print Place.lore +"\n\n"+Place.info + Place.search()
             Place.travelled = 0
         else:
             print "========================================================================"
-            print "\n"+Place.info
-            print "\n" +Place.search()
-        return Place
+            print Place.info + Place.search()
+            return Place
     else:
         PLAYER.location = list(CurrentPlace.coords)
-        print "You can't go that way!\n"
+        print "\nYou can't go that way!\n"
         return CurrentPlace
 
 #Combat System
@@ -139,10 +138,10 @@ def Combat(P,E):
                 First.health = max(0,First.health - Damage)
 
      if First == P:           
-         print "You attack dealing " + str(SSHealth - Second.health) + " damage.\n" + Second.name + " deals " + str(FSHealth - First.health) + " damage.\n"
+         print "\nYou attack dealing " + str(SSHealth - Second.health) + " damage.\n" + Second.name + " deals " + str(FSHealth - First.health) + " damage.\n"
          print  "You have " + str(First.health) + " health remaining.\n" + Second.name + " has " + str(Second.health) + " health remaining.\n"
      else:
-         print First.name + " dealt " + str(SSHealth - Second.health) + " damage.\n" + "You attack dealing " + str(FSHealth - First.health) + " damage.\n"
+         print "\n"+First.name + " dealt " + str(SSHealth - Second.health) + " damage.\n" + "You attack dealing " + str(FSHealth - First.health) + " damage.\n"
          print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
      if P.health == 0:
         P.alive = False
@@ -163,7 +162,7 @@ def Attack(E):
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if random() <= 0.01:
-            print "An oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death.\n"
+            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death."
             print enemy.Dinfo + ".\n"
             if enemy.drop:
                print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
@@ -171,15 +170,15 @@ def Attack(E):
         else:
            Outcome = Combat(PLAYER,enemy) 
            if Outcome:
-               print "You defeated " + enemy.name + ".\n"
-               print enemy.Dinfo + ".\n"
+               print "\nYou defeated " + enemy.name + ".\n"
+               print enemy.name+": "+enemy.Dinfo
                if enemy.drop:
                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                    CurrentPlace.placeItem(ITEMS[enemy.drop])
            else:
                print "Oh no! You died, without ever finding your iron ring"
     else:
-        print "They don't appear to be here."
+        print "\nThey don't appear to be here.\n"
                         
 
 def Talk(E):
@@ -193,8 +192,8 @@ def Talk(E):
     if E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
+            print "\n"+ enemy.name + " took the " + enemy.need + "."
             print enemy.Sinfo
-            print enemy.name + " took the " + enemy.need + "."
             ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
             PLAYER.updateStats()
@@ -204,21 +203,21 @@ def Talk(E):
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
-            print enemy.Sinfo
+            print "\n"+enemy.Sinfo
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
         elif enemy.quest:
-            print enemy.Sinfo
+            print "\n"+enemy.Sinfo+"\n"
         else:
-            print enemy.info
+            print "\n" + enemy.info+"\n"
         enemy.spoke = True
     else:
-        print "They don't appear to be here.\n"
+        print "\nThey don't appear to be here.\n"
 
 
 def Stats():
     global PLAYER
-    print "HEALTH: " + str(PLAYER.health)
+    print "\nHEALTH: " + str(PLAYER.health)
     print "ATK: " + str(PLAYER.stats[0])
     print "DEF: " + str(PLAYER.stats[1])
     print "SPD: " + str(PLAYER.stats[2])+"\n"
@@ -245,7 +244,7 @@ def Inspect(Item): #Item is the inspect item
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True
-            print "\n" + INTERACT[Item].Sinfo + "\n"
+            print "\n" + INTERACT[Item].Sinfo +"\n"
             PLAYER.updateStats()
             ITEMS[INTERACT[Item].need].location = (None, None, None) #Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
@@ -253,16 +252,14 @@ def Inspect(Item): #Item is the inspect item
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +".\n"
                 INTERACT[Item].drop = None
         else:
-            print "\n" + INTERACT[Item].info + "\n"
+            print INTERACT[Item].info + "\n"
     else:
-        print "That doesn't seem to be around here.\n"
+        print "\nThat doesn't seem to be around here.\n"
 
 def Inventory():
     global PLAYER
-    print "\n"
     for i in PLAYER.inv:
         print i.upper() + ": " + PLAYER.inv[i].name
-    print ""
 
 def Eat(Item):
     global PLAYER
@@ -276,10 +273,11 @@ def Eat(Item):
         if ITEMS[Item].health > -101:
             PLAYER.health = PLAYER.health + ITEMS[Item].health
             PLAYER.health = min(100, PLAYER.health)
-            print "You've eaten the " + ITEMS[Item].name + ".\n HEALTH: " + str(PLAYER.health)
+            print "\nYou've eaten the " + ITEMS[Item].name + ".\nHEALTH: "+ str(PLAYER.health)+"\n"
             ITEMS[Item].location = (None, None, None) #used to clear the item location
             if ITEMS[Item] == PLAYER.inv[ITEMS[Item].worn]:
                 PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
+                ITEMS[Item].location = (None, None, None)
                 PLAYER.updateStats()
                 print "The " + ITEMS[Item].name + " has been removed from your inventory."
             else:
@@ -287,9 +285,9 @@ def Eat(Item):
            
            
         else:
-            print "You can't eat that!"
+            print "\You can't eat that!"
     else:
-        print "That doesn't seem to be around here.\n"
+        print "\nThat doesn't seem to be around here.\n"
 
 QUESTS = {
           "talk to mysterious man": 1,
@@ -312,7 +310,7 @@ QUESTS = {
           "maxwell portal": 1,
           #endgame stuff
           'end game start' :1,
-          'hooded man 2',:1,
+          'hooded man 2':1,
           }
 
 
@@ -378,24 +376,24 @@ def Story():
         QUESTS['kitai get silicon substrate'] = 0
 
     if ENEMIES['dr.kleimann'].quest and QUESTS["kleimann get solar cell"]:
-        MAPS[3][3][1].placeEnemy(ENEMIES['dr. minnick'])
+        MAPS[3][3][1].placeEnemy(ENEMIES['dr.minnick'])
         QUESTS["kleimann get solar cell"] = 0
 
     if ENEMIES['dr.minnick'].quest and QUESTS["minnick get oscilloscope"]:
         ENEMIES['dr.minnick'].quest = False
-        ENEMIES['dr.minnick'].item ='iron ring'
+        ENEMIES['dr.minnick'].drop ='iron ring'
         ENEMIES['dr.minnick'].need = 'faradays cage'
         ENEMIES['dr.minnick'].info = 'I need to wait for tyler to write this!'
         ENEMIES['dr.minnick'].Sinfo = 'I special need to wait for tyler to write this!'
-        MAPS[3][3][1].removeEnemy['dr.minnick']
-        MAPS[1][6][0].placeEnemy['dr.minnick']
+        MAPS[3][3][1].removeEnemy(ENEMIES['dr.minnick'])
+        MAPS[1][7][0].placeEnemy(ENEMIES['dr.minnick'])
         QUESTS["minnick get oscilloscope"] = 0
 
     if INTERACT['display case'] and QUESTS["get key to display case"]:
         QUESTS["get key to display case"] = 0
 
     if ENEMIES['dr.minnick'].quest and QUESTS["maxwell portal"]:
-        QUESTS["get key to display case"] = 0
+        QUESTS['maxwell portal'] = 0
 
     #endgame
 

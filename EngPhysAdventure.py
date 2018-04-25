@@ -25,6 +25,7 @@ print "========================================================================"
 
 playername = raw_input("First, what is your name?\n")
 PLAYER.name = playername
+print "========================================================================"
 
 
 #Start in phoenix
@@ -34,10 +35,8 @@ x = PLAYER.location[0]
 y = PLAYER.location[1]
 z = PLAYER.location[2]
 CurrentPlace = MAPS[x][y][z]
-print CurrentPlace.lore + "\n\n" + CurrentPlace.info + "\n" + CurrentPlace.search() + "\n"
+print CurrentPlace.lore + "\n\n" + CurrentPlace.info + CurrentPlace.search()
 CurrentPlace.travelled = 0
-
-
 
 while(PLAYER.alive):
     
@@ -85,5 +84,5 @@ while(PLAYER.alive):
         elif verb == 'eat':
             Eat(objectName)
 
-    
+    print "========================================================================"
 
