@@ -291,18 +291,28 @@ def Eat(Item):
     else:
         print "That doesn't seem to be around here.\n"
 
-QUESTS = {"talk to mysterious man": 1,
+QUESTS = {
+          "talk to mysterious man": 1,
+          #Nuke
           "preston get dumbbell": 1,
           "buijs kill chris" : 1,
           "dan fix reactor" : 1,
           "novog get donut" : 1,
           "feynman mirror" :1,
+          #Optics
           "kitai get silicon substrate": 1,
-          "lapierre get coffee": 1,
           "knights get book": 1,
           "haugen kill soleymani" : 1,
-          
-         
+          "einstein fridge": 1,
+          #Semiconductor
+          "lapierre get coffee": 1,
+          "kleimann get solar cell": 1,
+          "minnick get oscilloscope": 1,
+          "get key to display case": 1,
+          "maxwell portal": 1,
+          #endgame stuff
+          'end game start' :1,
+          'hooded man 2',:1,
           }
 
 
@@ -320,10 +330,11 @@ def Story():
         MAPS[2][4][2].placeEnemy(ENEMIES["dr.preston"])
         MAPS[1][6][2].placeEnemy(ENEMIES["dr.lapierre"])
         MAPS[5][4][1].removeEnemy(ENEMIES["hooded man"])
+        ENEMIES['hooded man'].spoke = False
         QUESTS["talk to mysterious man"] = 0
 
     
-        
+    #Nuke quests
     if ENEMIES['dr.preston'].quest and QUESTS["preston get dumbbell"]:
         MAPS[2][5][1].placeEnemy(ENEMIES["dr.buijs"])
         QUESTS["preston get dumbbell"] = 0
@@ -343,11 +354,8 @@ def Story():
     if INTERACT['ancient mirror'].quest and QUESTS["feynman mirror"]:
         QUESTS["feynman mirror"] = 0
 
-    if ENEMIES['dr.kitai'].quest and QUESTS['kitai get silicon substrate']:
-        MAPS[1][5][2].placeEnemy(ENEMIES['dr.kleimann'])
-        QUESTS['kitai get silicon substrate'] = 0
     
-    
+    #Optics quests
     if ENEMIES['dr.lapierre'].quest and QUESTS["lapierre get coffee"]:
         MAPS[5][4][1].placeEnemy(ENEMIES['dr.knights'])
         QUESTS["lapierre get coffee"]= 0
@@ -359,6 +367,48 @@ def Story():
 
     if ENEMIES['dr.haugen'].spoke and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
+
+    if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
+        QUESTS['einstein fridge'] = 0
+    
+
+    #Semiconductor quests    
+    if ENEMIES['dr.kitai'].quest and QUESTS['kitai get silicon substrate']:
+        MAPS[1][5][2].placeEnemy(ENEMIES['dr.kleimann'])
+        QUESTS['kitai get silicon substrate'] = 0
+
+    if ENEMIES['dr.kleimann'].quest and QUESTS["kleimann get solar cell"]:
+        MAPS[3][3][1].placeEnemy(ENEMIES['dr. minnick'])
+        QUESTS["kleimann get solar cell"] = 0
+
+    if ENEMIES['dr.minnick'].quest and QUESTS["minnick get oscilloscope"]:
+        ENEMIES['dr.minnick'].quest = False
+        ENEMIES['dr.minnick'].item ='iron ring'
+        ENEMIES['dr.minnick'].need = 'faradays cage'
+        ENEMIES['dr.minnick'].info = 'I need to wait for tyler to write this!'
+        ENEMIES['dr.minnick'].Sinfo = 'I special need to wait for tyler to write this!'
+        MAPS[3][3][1].removeEnemy['dr.minnick']
+        MAPS[1][6][0].placeEnemy['dr.minnick']
+        QUESTS["minnick get oscilloscope"] = 0
+
+    if INTERACT['display case'] and QUESTS["get key to display case"]:
+        QUESTS["get key to display case"] = 0
+
+    if ENEMIES['dr.minnick'].quest and QUESTS["maxwell portal"]:
+        QUESTS["get key to display case"] = 0
+
+    #endgame
+
+    """if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
+        MAPS[5][2][1].placeEnemy(ENEMIES['hooded man'])
+        ENEMIES['hooded man'].info =    
+    """
         
+        
+
+    
+        
+    
+
 
     
