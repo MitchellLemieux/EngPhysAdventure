@@ -410,12 +410,12 @@ def Story():
 
     if ENEMIES['dr.cassidy'].spoke and QUESTS['university man']:
         MAPS[5][2][1].placeEnemy(ENEMIES['sir william mcmaster'])
-        ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
+        ENEMIES['dr.cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
         QUESTS['university man'] = 0
 
     if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
         ENEMIES['dr.cassidy'].info = "Take the power you hold in your Iron Ring and destroy all of the professors!"
-        DEATHS = [ENEMIES[i].alive for i in ['dr.minnick','dr.novog','dr.haugen','dr.kitai','dr.knights','dr.preston','dr.kleimann','dr.buijs','dr.lapierre','dr.nagasaki']]
+        DEATHS = [ENEMIES[i].alive for i in ['dr.minnick','dr.novog','dr.kitai','dr.knights','dr.preston','dr.kleimann','dr.buijs','dr.lapierre','dr.nagasaki']]
         if True in DEATHS:
             pass
         else:
@@ -425,6 +425,7 @@ def Story():
             
     elif not ENEMIES['dr.cassidy'].alive and QUESTS['restored order']:
         QUESTS['restored order'] = 0
+        PLAYER.alive = False
         return 2
 
     else:
