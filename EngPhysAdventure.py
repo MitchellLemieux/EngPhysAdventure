@@ -2,11 +2,10 @@ from GameFunctions import *
 import StartUp
 import Opening
 
-Opening.Opening()
+#Opening.Opening()
 
 playername = raw_input("First, what is your name?\n")
 print "========================================================================"
-
 
 def Main():
     global PLAYER
@@ -78,7 +77,7 @@ def Main():
                print "\nI don't understand that command!\n"
 
         print "========================================================================"
-    if not Story() and raw_input("Would you like to play again?[Y/N]: ").lower() == 'y':
+    if Story()== 0 and raw_input("Would you like to play again?[Y/N]: ").lower() == 'y':
         print "========================================================================"
         PLAYER.health = 100
         for i in PLAYER.inv:
@@ -93,12 +92,13 @@ def Main():
             QUESTS[i] = 1
         Main()
     elif Story() == 1:
-        Opening.Closing()
-        raw_input("Thanks for playing!!")
-        print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
-
+        if raw_input("Type 'C' to continue\n").lower() == 'c': 
+            Opening.Closing()
+            print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
+            raw_input("Thanks for playing!!")
     elif Story() == 2:
-        Opening.Closing()
-        print "Having defeated Dr.Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
-    
+        if raw_input("Type 'C' to continue\n").lower() == 'c': 
+            Opening.Closing()
+            print "Having defeated Dr.Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
+            raw_input("Thanks for playing!!")
 Main()

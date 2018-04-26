@@ -85,5 +85,4 @@ def Closing():
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
     print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
     time.sleep(2)
-    print "Thanks for playing!"
 

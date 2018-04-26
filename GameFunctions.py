@@ -198,6 +198,7 @@ def Talk(E):
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
             print "\n"+enemy.Sinfo
+            MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
         elif enemy.quest:
@@ -338,10 +339,11 @@ def Story():
         
     if ENEMIES['dr.buijs'].quest and QUESTS['buijs kill chris']:
         MAPS[2][5][0].placeEnemy(ENEMIES['dan fitzgreen'])
+        ENEMIES['dan fitzgreen'].quest = True
+        
         QUESTS['buijs kill chris'] = 0
 
     if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
-        ENEMIES['dan fitzgreen'].quest = True
         MAPS[2][6][0].placeEnemy(ENEMIES['dr.novog'])
         QUESTS["dan fix reactor"] = 0
         
@@ -419,12 +421,10 @@ def Story():
         if True in DEATHS:
             pass
         else:
-            QUESTS['create chaos'] = 0
             PLAYER.alive = False
             return 1
             
     elif not ENEMIES['dr.cassidy'].alive and QUESTS['restored order']:
-        QUESTS['restored order'] = 0
         PLAYER.alive = False
         return 2
 
