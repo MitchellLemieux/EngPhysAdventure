@@ -42,11 +42,11 @@ class Character: #When the equip function is called we need to make sure the ite
     def equip(self,Equip):
         drop = 0
         if self.inv[Equip.worn] == Equip:
-            print 'This item is already equipped'
+            print '\nThis item is already equipped\n'
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            print Equip.info
+            print "\n"+Equip.info
             print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
