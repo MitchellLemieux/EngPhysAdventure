@@ -57,5 +57,33 @@ def Opening():
     time.sleep(DELAY)
 
 def Closing():
-    pass
+    print "And so, the fate of McMaster has been decided..."
+    time.sleep(DELAY)
+    print "Our hero has unlocked the secrets of McMaster University"
+    time.sleep(DELAY)
+    print "and lived to tell the tale.\n"
+    time.sleep(DELAY)
+    print "          THE GREAT ENG PHYS TEXT ADVENTURE\n"
+    time.sleep(DELAY)
+    print "Created by:\nMitchell Lemieux, Tyler Kashak, and Brendan Fallon\n"
+    time.sleep(DELAY)
+    print "Special Thanks:\nEric, Erik, Brian, and Megan\n"
+    time.sleep(DELAY)
+    print "                A____ ________"
+    print "                /_  H|\_____  \ "
+    print "                 |  O|  ___|  |"
+    print "                 |  L| /___   <"
+    print "                 |  L|  ___\   |"
+    print "                 |  Y| /W O O D|"
+    print "                 |___|/________/"
+    print "                      Production."
+    time.sleep(2)
+    print "___________                __________.__"                 
+    print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
+    print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
+    print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
+    print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
+    print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
+    time.sleep(2)
+    print "Thanks for playing!"
 
