@@ -242,7 +242,7 @@ def Inspect(Item): #Item is the inspect item
             INTERACT[Item].quest = True
             print "\n" + INTERACT[Item].Sinfo
             PLAYER.updateStats()
-            ITEMS[INTERACT[Item].need].location = (None, None, None) #Brendan added this, used to clear the item location
+            ITEMS[INTERACT[Item].need].location=(None,None,None) #Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."

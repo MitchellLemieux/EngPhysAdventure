@@ -118,7 +118,7 @@ class Map:  #Map Location Storage
     def placeItem(self,item): #Works with the drop method in the character class
         if item:
             self.items.append(item)
-            item.location = self.coords
+            item.location=self.coords
             
     def placeEnemy(self,Enemy):
         self.ENEMY.append(Enemy)

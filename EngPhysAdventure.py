@@ -2,7 +2,7 @@ from GameFunctions import *
 import StartUp
 import Opening
 
-#Opening.Opening()
+Opening.Opening()
 
 playername = raw_input("First, what is your name?\n")
 print "========================================================================"
