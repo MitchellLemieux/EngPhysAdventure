@@ -285,7 +285,7 @@ def Reset():
 
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
-    INTERACT1 = [
+    INTERACT = [
     Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","msp430"),
     Interact("Broken Reactor",(4,5,0),"It's an old broken reactor.","After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nYou feel like ancient mechanisms beyond your comprehension are coming to life.\nWithin the pink glow you see an aparition of Dr.Novog!\n'What's up folks! This is the only channel safe for communication\n'Come meet me in the basement of the Nuclear Reactor ASAP and bring that Pink Donut!'\nAs the aparition fades a hooded figure emerges from behind a lab bench.\n'The Dark Lord demands that donut!'\nThe assassin lunges for you but is quickly met by your blow.\nAs they fall to the ground you notice an insignia on their robe that tickles your 'thats familiar' bone...\nYou pull back their hood to reveal the face of an Eng Phys PhD student!\nYou don't remember their name... But you know they are in the faculty...","flux capacitor",'pink donut'),
     Interact("Fridge",(1,6,0),"Seems like a regular fridge to me.","You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!",'relativistic key','pedrotti cubed'),
