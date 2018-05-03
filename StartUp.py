@@ -8,7 +8,7 @@ from GameClasses import *
 
 XRANGE = 7
 YRANGE = 9
-ZRANGE = 3
+ZRANGE = 4
 
 def Reset():
     global MAPS1
@@ -87,7 +87,7 @@ def Reset():
     Map("Parking Garage",(0,0,0),"PARKING GARAGE:\nYou can only go back up to the Hospital.","The smooth floor down here makes an excellent skate surfrace.\nRad.\nIf only you learned how to kickflip.",('f','b','l','r','d')),
     Map("Mills Basement",(4,0,0),"MILLS BASEMENT:\nYou can only go back up to Mills.","Jeez has anyone ever been down here?\nThe rows of bookshelves seem to go on forever...\nIf only you could possess all of the knowledge they hold.",('f','b','l','r','d')),
     Map("Tandem Basement",(4,5,0),"TANDEM BASEMENT:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d')),
-    #Upper Level (X,Y,2)
+    #Upper Level (X,Y,2) and Third Floor Thode
     Map("2nd Floor ITB",(0,5,2),"2ND FLOOR ITB:\nYou can only go back down the stairs.","Walking around up here you don't find much other than lab benches with strange instruments.\nThis place gives you the impression that there must be some high level engineering physics going on...",('f','b','l','r','u')),
     Map("2nd Floor ABB",(1,6,2),"2ND FLOOR ABB:\nYou can only go back down the stairs.","You were told JHE would be your home.\nNope.\nInstead you recall countless hours of Haugen lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the windows on a spring afternoon...",('f','b','l','r','u')),
     Map("2nd Floor JHE",(2,4,2),"2ND FLOOR JHE:\nYou can only go back down the stairs.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years...\nYou shake your fist and plan your next move",('f','b','l','r','u')),
@@ -97,7 +97,8 @@ def Reset():
     Map("Upstairs Chapel",(2,0,2),"2ND FLOOR CHAPEL:\nYou can only go back down the stairs.","The combination of ringing bells and echoes from the organ is deafening.\nYou can barely collect your thoughts.\nThe cobwebs and dust give you the impression this place been ill-travelled\nand long forgotten.",('f','b','l','r','u')),
     Map("2nd Floor W Wing",(0,1,2),"2ND FLOOR W WING:\nYou can only go back down the stairs.","The endless number of rooms are mezmerizing.\nYou don't even know which way to go.\nAfter being lost for 2 hours you cirlce back to where you entered.",('f','b','l','r','u')),
     Map("2nd Floor BSB",(3,3,2),"2ND FLOOR BSB:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r','u')),
-    Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can only go back down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe countless hours spent slamming together a report made of nonsense, hopes,\ncaffeine, and dreams send you into a state of shock.\nComing to your senses... You plan your next move.",('f','b','l','r','u'))]
+    Map("3rd Floor Thode",(1,7,3),"3RD FLOOR THODE:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u')),
+    Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can only go back down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe countless hours spent slamming together a report made of nonsense, hopes,\ncaffeine, and dreams send you into a state of shock.\nComing to your senses... You plan your next move.",('f','b','l','r'))]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
@@ -261,9 +262,10 @@ def Reset():
     Enemy("Sir William McMaster","'You must rid the univsersity of the evil Dr.Cassidy has planned!'",(None),(175,125,100),125,"iron ring","","","The spirit of Sir William McMaster bursts with a fiercely bright explosion.\nYou look down to see your Iron Ring as well as the deed to McMaster!\nDr.Cassidy quickly picks up the deed and turns to you.\n'Excellent!' he says coupled with maniacal laughter.\n'Too fulfill your true destiny, take the power you hold in your Iron Ring and destroy all of the professors'\n'Only after they are gone can Engineering Physics truly reign supreme!'"),
     Enemy("Chris","'The tools should be coming any day now.'",(4,5,1),(50,75,50),50,"capstone tools",None,"","I was going to quit anyway!"),
     #Special
-    Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong",None,"THANKS! TOKE UP MY DUDES!",""),
+    Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong","brendan fallons lunchbox","THANKS! TOKE UP MY DUDES!",""),
     Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
+    Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Absolutely righteous!",""),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first year","'Have you got the LONCAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
     Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1),(10,5,1),15,"vomit","phils braces","'UHhhh i thinka im gonna- im gon-'\nPhil vomits.","mhmh spooky ghost urggh ectoplasm noooooo"),
