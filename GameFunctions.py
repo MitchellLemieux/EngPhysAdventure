@@ -1,6 +1,6 @@
 from GameClasses import *
 import StartUp
-
+import Hero
 
 MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
@@ -88,7 +88,7 @@ def Move(direction):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
         if random() <= 0.01:
             MAPS[x][y][z].placeEnemy(bf)
-            
+            Hero.Hero()
         if Place.travelled:
             print "========================================================================"
             print Place.lore +"\n\n"+Place.info + Place.search()
