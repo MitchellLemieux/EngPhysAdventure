@@ -177,7 +177,7 @@ def Reset():
     Equipment("Lenovo Laptop",(1,5,2),"Lenovo.jpg","This heap of computing majesty could block bullets... I think...","off-hand",(5,15,-5),-101),
     Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,10,5),-101),
     Equipment("Brendan Fallons Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,10,5),-101),
-    Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5),3),
+    Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5),5),
     Equipment("Adderall",(5,3,1),"Adderall.jpg","Speed up, my dude!","off-hand",(0,0,50),-101),
     Equipment("Drumstick",(5,4,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,10,15),-101),
     Equipment("Bottle Opener",(3,7,1),"BottleOpener.jpg","I wish I had a bottle of wine right about now...","off-hand",(0,5,15),-101),
