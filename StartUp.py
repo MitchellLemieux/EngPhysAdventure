@@ -166,7 +166,7 @@ def Reset():
     Equipment("Car Keys",(4,2,1),"CarKeys.jpg","Volkswagen car keys.\nHmm...","off-hand",(5,0,5),-101),
     Equipment("Febreze",(1,0,1),"Ferbreze.jpg","Kills 99.9% of odour at the source!","hand",(6,0,10),-4),
     #Off-Hand Items
-    Equipment("Cricket",(3,3,2),"Cricket.jpg","Makes the sound commonly heard at 2W lectures.",(1,1,1),3),
+    Equipment("Cricket",(3,3,2),"Cricket.jpg","Makes the sound commonly heard at 2W lectures.","off-hand",(1,1,1),3),
     Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(3,0,9),1),
     Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,10,5),-101),
     Equipment("Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5),2),
