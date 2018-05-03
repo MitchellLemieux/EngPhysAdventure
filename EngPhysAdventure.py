@@ -2,7 +2,7 @@ from GameFunctions import *
 import StartUp
 import Opening
 
-Opening.Opening()
+#Opening.Opening()
 
 playername = raw_input("First, what is your name?\n")
 print "========================================================================"
@@ -28,7 +28,7 @@ def Main():
 
     while(PLAYER.alive):
         direction = raw_input('What do you want to do?\n').lower().split(" ",1)
-        Story()
+        
         for i in range(len(direction)):
            direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
 
@@ -77,20 +77,11 @@ def Main():
                print "\nI don't understand that command!\n"
 
         print "========================================================================"
-    if Story()== 0 and raw_input("Would you like to play again?[Y/N]: ").lower() == 'y':
+        Story()
+    
+    if Story()== 0:
         print "========================================================================"
-        PLAYER.health = 100
-        for i in PLAYER.inv:
-            PLAYER.inv[i] = PLAYER.emptyinv[i]
-        PLAYER.alive = True
-        StartUp.Reset()
-        MAPS = StartUp.WorldMap()
-        ITEMS = StartUp.ItemDictionary()
-        ENEMIES = StartUp.EnemyDictionary()
-        INTERACT = StartUp.InteractDictionary()
-        for i in QUESTS:
-            QUESTS[i] = 1
-        Main()
+        raw_input("Thanks for playing!! Better luck next time!")
     elif Story() == 1:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
             Opening.Closing()

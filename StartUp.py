@@ -11,17 +11,17 @@ YRANGE = 9
 ZRANGE = 3
 
 def Reset():
-    global MAPS
-    global LOCATIONS
-    global ENEMIES
-    global ITEMS
-    global INTERACT
+    global MAPS1
+    global LOCATIONS1
+    global ENEMIES1
+    global ITEMS1
+    global INTERACT1
     
-    MAPS = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
+    MAPS1 = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
 
     #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
     #Example: Start = Map("Start",(0,0,0),"You start here")
-    LOCATIONS=[
+    LOCATIONS1=[
     Map("Starting Location",(2,3,1),"FRONT OF JHE:\nBSB is to your right. Hatch to your left.\nJHE field is to your rear. Enter JHE by going forward.","You hear a booming voice that sounds oddly like a game developer. \n'type inspect rules sign.'\nYou see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people in all directions with the remnants of Kipling pranks\nstill scattered about JHE.",()),
     Map("Inside JHE",(2,4,1),"JHE LOBBY:\nTo your right you can exit towards BSB. To your left you can head into Hatch.\nForward is the Nuclear Research building. Behind you is the exit of JHE.\nThere are also stairs going up.","JHE lobby is alive.\nStudents rushing in all directions as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is an confused air about this place as Kipling was just last night.\nMany engineers happy. Many more still grinding.",()),
     Map("Nuclear Research Building",(2,5,1),"NUCLEAR RESEARCH BUILDING:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.\nThere are stairs going down.","You have barely ever been in here other than to struggle through\n3 hours of waiting for a water-level PID controller to reach steady state.\nYou wonder how any one could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because\nthey are all still lost in here...",()),
@@ -103,7 +103,7 @@ def Reset():
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
     #Example: Gun = Equipment("Gun",(0,0,0),"Gun.jpg","It shoots people.","hand",(100,0,100),-101)
     #Head Items
-    ITEMS = [
+    ITEMS1 = [
     Equipment("Fireball Hat",(2,2,1),"EngHat.jpg","Kind of like the hat you bought in first year and thought you'd wear it forever...","head",(0,3,1),-101),
     Equipment("Pope Hat",(2,0,2),"PopeHat.jpg","Does the Pope where a silly hat? Now you do.","head",(0,3,2),-101),
     Equipment("Goggles",(3,2,1),"Goggles.jpg","Got PPE?","head",(2,0,2),-101),
@@ -243,7 +243,7 @@ def Reset():
     #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
     #Example: Man = Enemy("Man","A Man",(1,1,1),drop,need,Sinfo,Dinfo)
     #Bosses/Profs
-    ENEMIES = [
+    ENEMIES1 = [
     Enemy("Dr.Minnick","'Hello and welcome to how we retrieve your iron ring.'\n'The Quantum Order does not know exactly what you have done.'\n'However, we have felt the consequences of your actions.'\n'I believe the only way to explain this is to show you.'\n'The Quantum Order has gathered intelligence that Kenrick has been using\nhis oscilloscope for evil.'\n'I need you to confront him and return his oscilloscope if we are to go further.'",(None),(400,400,400),200,"minnicks glasses","kenricks oscilloscope","'Ah, you have returned.'\n'You see, Kenrick has retrofitted his oscilloscope and created some sort\nof 'window' into the electronics world.'\n'Using this window he has been attempting to access the minds of the greatest\nPhysicists in history and use their power for evil!'\n'Our intelligence does not go any further and we do not know what he has done.'\n'All that we do know is that after last night you must be rooted in all of this just as the prophecy foretold.'\n'Take these, if you truly are the one, they will reveal what you need to see.'\n'I suggest you start in the museum.'\n'Also, my lab has since been compromised so I will work in secret in basement of Thode.'\n'Once you have found the next relic, my workbench will be ready...'","'I'm jealous of stupid people, they have more opportunities to learn!'"),
     Enemy("Dr.Novog","What's up folks?",(None),(420,420,420),100,"ancient incantation",'pink donut',"'Alright folks, heres the scoop.'\n'I could only talk to you via the fusion network because the integrity of faculty\ncommunication has been compromised.'\n'The Engineering Physics professors are actually members of an Ancient Council known as The Quantum Order.'\n'For years we have kept McMast-'\n'An assassin?'\n'Hmm... I see, things are worse than we thought.'\n'We have known of this uprising within the faculty for some time but\nwere unaware of just how strong they have grown.'\n'As you have heard, a prophecy foretold of an adventurer dictating the future of the faculty.'\n'This evil group wants nothing more than to take advantage of your power and influence for their own plans.'\n'The choices you make will be yours and yours alone however the Quantum Order\nurges that you consider the consequences of your actions.'\n'It is our duty to assist you in realizing your ability but what comes of your power is out of our hands.'\n'You must contact the oracles who foretold of your coming, they will give you the knowledge you require.'\n'Each member of the Quantum Order only knows of the location one oracle and I do not know the other\nmembers which know of an oracle's location.'\n'For that reason I can only help you so much.'\nDr.Novog pushes a button on a nearby control panel.\nA crane arm descends into the Reactor pool to retrieve an ancient crate from its depths.\n'Take this incantation and find the ancient mirror in the basement of Mills Library... it is your time.'",""),
     Enemy("Dr.Haugen","'Hello, as you are likely aware, there has been a disturbance...'\n'You losing your Iron Ring was no accident, it was taken from you.'\n'The Quantum Order is an ancient fold whose goal is to protect the\nUniversity from certain doom and misuse of our knowledge.'\n'There has been an item of importance stolen from us we need it returned immediately.'\n'Especially if you are to find your Iron Ring.'\n'The council has received intelligence that Dr.Soleymani has stolen Einstein's brain from the McMaster vault.'\n'You must retrieve it at once, she can be found somewhere in the hospital.'\n'Do not underestimate her! She has been tempted by a Dark Lord.'\n'The Quantum Order requires that you defeat her and return the brain at once!'",(None),(250,100,999),200,"femtosecond laser","einsteins brain","'Oh my! You've returned! I knew you could do it!'\n'Quickly, hand it over!'\nYou hand Dr.Haugen the brain and he opens the fridge placing it inside.\n'Now, it needs to be hit by my femt-'\nSuddenly a rabid graduate student bursts into the lab!\n'Hand over the brain, the Dark Lord demands it!' he says.\n'If you strike me down, I will become more powerful than\nyou could possibly imagine' Dr.Haugen replies.\nThe Grad Student lunges at Dr.Haugen who disappears entirely!\nJust before the perplexed Grad Student turns towards you he is met by your blow\nand falls to the floor.","Oh my!"),
@@ -255,7 +255,7 @@ def Reset():
     Enemy("Dr.Cassidy","'Yes, I was the one who sent you on this quest.'\n'My associates were no match for you, they did not have the strength to acquire the Relics for me.'\n'I know the Quantum Order has told you that the prophecy spoke of you bringing peace.'\n'You have been lead to believe the Order fights for what is just and fair.'\n'But you have been mislead.'\n'They only wish to keep the power of the Quantum Relics to themselves so that they\nalone decide the fate of the University.'\n'I only ever wanted to reveal the true power of Engineering Physics to the students.'\n'They thought my methods were unsafe.'\n'They thought the power I intended to reveal would pollute the minds of the students\nand cloud their judgement.'\n'The Quantum Order only wishes to suppress the true power we hold!'\n'They don't trust the students, they think they are incapable of managing the power I intended to give them.'\n'We are the premier stream and we deserve to rule McMaster as such!'\n'Join me, together we can harness the powers given to you by the oracles.'\n'With the relics we may enter the Shadow Realm and retrieve the deed to the university\nfrom the spirit of Sir William McMaster.'\n'We can then overthrow the Quantum Order and shape the university to our liking and\nfinally Engineering Physics will reign supreme!'\n\nJust as Dr.Cassidy finishes speaking the ground begins to shake and you are blinded\nby a glow emanating from the statue of Sir William McMaster.\nYou recover from shielding your eyes and see the spirit of William McMaster\nemerging from a rift in fabric of spacetime!\n'Just wait hero.'\n'I took your Iron Ring from you after you desecrated my statue last night for a reason'\n'I have known of Dr.Cassidy's intentions for some time and as you are the one\nthe prophecy has spoke of I knew he would jump at this opportunity to take my deed.'\n'I had to find a way to force him into playing his hand.'\n'Now the opportunity to rid Engineering Physics of this tyrannical Dark Lord has come!'\nDr.Cassidy quickly interjects.\n'You see, he only wants to restrict the power of our faculty!'\n'Destroy him and we shall finally rule the university!'",(None),(175,125,200),125,"","","","Dr.Cassidy falls to the ground.\nThe spirit of Sir William McMaster approaches and puts his hand on your shoulder.\n'You have chosen wisely.'\n'Dr.Cassidy had been driven mad in his quest for ultimate power.'\n'You have ensured the safety of McMaster and remained true to your values.'\n'McMaster University is an institution meant to allow all facets of learning coexist in harmony.'\n'No faculty should rule over the rest.'\n'For your actions, I believe you are a worthy engineer.'\n'Here is your Iron Ring, continue to wear it with pride.'"),
     Enemy("Dr.LaPierre","'Fetch me a Coffee will you.'",(None),(100,100,200),300,"eng phys pen","coffee","Here. I nice pen for your troubles.\nGo find Dr.Knights, he has more for you to do.","I can't believe you've done this."),
     Enemy("Dr.Nagasaki","'My grand invention is almost complete...'",(0,5,2),(100,100,100),75,"flux capacitor","ambifacient lunar waneshaft","'Yes!'\n'I have been looking for one exactly like that!'\n'Quicky, go to the basement of the Tandem Accelerator!'\n'The High Council is counting on you.'","NOOOO! NOW I WILL NEVER PLEASE THE DARK LORD!"),
-    Enemy("Dan Fitzgreen",(None),(100,75,100),400,"ambifacient lunar waneshaft","","'Been a lot stirring around the faculty since last night.'\n'I used to be an adventurous student like you before the High Council and I decided to part ways.'\n'I know what you seek and I am here to help.'\n'You need to fire up that old reactor in the basement of the Tandem Accelerator.'\n'It needs some sort of high power instrument to bring it to life...'\n'I think Dr.Nagasaki has been working on something like that, he is probably somewhere in ITB.'\n'He will likely need this...'","I'm moving to the physics department"),
+    Enemy("Dan Fitzgreen","",(None),(100,75,100),400,"ambifacient lunar waneshaft","","'Been a lot stirring around the faculty since last night.'\n'I used to be an adventurous student like you before the High Council and I decided to part ways.'\n'I know what you seek and I am here to help.'\n'You need to fire up that old reactor in the basement of the Tandem Accelerator.'\n'It needs some sort of high power instrument to bring it to life...'\n'I think Dr.Nagasaki has been working on something like that, he is probably somewhere in ITB.'\n'He will likely need this...'","I'm moving to the physics department"),
     Enemy("Kenrick","'The oscilloscope is the window into the electronic world.'",(3,4,1),(100,100,200),75,"kenricks oscilloscope",None,"","Oh no! My window! The Dark Lord will know I've failed him!"),
     Enemy("Dr.Soleymani","'Are you interested in a research position?'",(0,1,2),(100,100,100),75,"einsteins brain",None,"","NOOO! The Dark Lord will never forgive me!"),
     Enemy("Sir William McMaster","'You must rid the univsersity of the evil Dr.Cassidy has planned!'",(None),(175,125,100),125,"iron ring","","","The spirit of Sir William McMaster bursts with a fiercely bright explosion.\nYou look down to see your Iron Ring as well as the deed to McMaster!\nDr.Cassidy quickly picks up the deed and turns to you.\n'Excellent!' he says coupled with maniacal laughter.\n'Too fulfill your true destiny, take the power you hold in your Iron Ring and destroy all of the professors'\n'Only after they are gone can Engineering Physics truly reign supreme!'"),
@@ -283,8 +283,8 @@ def Reset():
 
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
-    INTERACT = [
-    Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","puke"),
+    INTERACT1 = [
+    Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","msp430"),
     Interact("Broken Reactor",(4,5,0),"It's an old broken reactor.","After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nYou feel like ancient mechanisms beyond your comprehension are coming to life.\nWithin the pink glow you see an aparition of Dr.Novog!\n'What's up folks! This is the only channel safe for communication\n'Come meet me in the basement of the Nuclear Reactor ASAP and bring that Pink Donut!'\nAs the aparition fades a hooded figure emerges from behind a lab bench.\n'The Dark Lord demands that donut!'\nThe assassin lunges for you but is quickly met by your blow.\nAs they fall to the ground you notice an insignia on their robe that tickles your 'thats familiar' bone...\nYou pull back their hood to reveal the face of an Eng Phys PhD student!\nYou don't remember their name... But you know they are in the faculty...","flux capacitor",'pink donut'),
     Interact("Fridge",(1,6,0),"Seems like a regular fridge to me.","You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!",'relativistic key','pedrotti cubed'),
     Interact("Optical Bench",(1,6,0),"Dr.Haugen's personal optical bench...","You place Dr.Haugen's femtosecond laser on the bench and aim it at the fridge.\nTurning the laser on (remembering your laser safety glasses, of course)\nfires the high intensity beam at the fridge.\nThe room begins to shake and smoke begins to billow out of the cracks of the fridge.\nThe door swings open and a glowing apparition of Albert Einstein emerges!\n'You have come a long way, but your quest is not yet over.'\n'For there still remains a great evil on this campus'\n'Dr.Haugen was entrusted with protecting the contents of my fridge.'\n'I have known of your destiny since your frist year here at McMaster.'\n'You will be the one who determines the fate of the faculty.'\n'It is therefore my responsibility to prepare you for what lies ahead.'\n'This key opens a compartment in my fridge which holds one of three Quantum Relics.'\n'These items give the holder the power to shape the fate of the entire university.'\n'I cannot tell you much more. Perhaps I have said too much.'\n'Take this. Good Luck.'","femtosecond laser","relativistic key"),
@@ -307,65 +307,65 @@ def Reset():
 Reset()
 
 def WorldMap():
-    global MAPS
-    global LOCATIONS
-    global ENEMIES
-    global ITEMS
-    for i in LOCATIONS:
+    global MAPS1
+    global LOCATIONS1
+    global ENEMIES1
+    global ITEMS1
+    for i in LOCATIONS1:
         position = i.coords
         x = position[0]
         y = position[1]
         z = position[2]
-        MAPS[x][y][z] = i
-    for i in ENEMIES:
+        MAPS1[x][y][z] = i
+    for i in ENEMIES1:
         if i.location:
             position = i.location
             x = position[0]
             y = position[1]
             z = position[2]
-            MAPS[x][y][z].placeEnemy(i)
+            MAPS1[x][y][z].placeEnemy(i)
         else:
             i.location = (None,None,None)
-    for i in ITEMS:
+    for i in ITEMS1:
         if i.location:
             position = i.location
             x = position[0]
             y = position[1]
             z = position[2]
-            MAPS[x][y][z].placeItem(i)
+            MAPS1[x][y][z].placeItem(i)
         else:
             i.location = (None,None,None)
-    for i in INTERACT:
+    for i in INTERACT1:
         if i.location:
             position = i.location
             x = position[0]
             y = position[1]
             z = position[2]
-            MAPS[x][y][z].placeItem(i)
+            MAPS1[x][y][z].placeItem(i)
         else:
             i.location = (None,None,None)
-    return tuple(MAPS)
+    return tuple(MAPS1)
 
 def ItemDictionary():
-    global ITEMS
+    global ITEMS1
     ItemDictionary = {}
-    for item in ITEMS:
+    for item in ITEMS1:
         name = item.name.lower()
         ItemDictionary.update({name:item})
     return ItemDictionary
 
 def EnemyDictionary():
-    global ENEMIES
+    global ENEMIES1
     EnemyDictionary = {}
-    for enemy in ENEMIES:
+    for enemy in ENEMIES1:
         name = enemy.name.lower()
         EnemyDictionary.update({name:enemy})
     return EnemyDictionary
 
 def InteractDictionary():
-    global INTERACT
+    global INTERACT1
     InteractDictionary = {}
-    for interact in INTERACT:
+    for interact in INTERACT1:
         name = interact.name.lower()
         InteractDictionary.update({name:interact})
     return InteractDictionary

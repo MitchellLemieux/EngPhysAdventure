@@ -16,7 +16,7 @@ EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-#STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['solar ray'],'off-hand':ITEMS['green bang bong']}
+#STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 
@@ -59,6 +59,8 @@ def Drop(Item):
 def Move(direction):
     global MAPS
     global PLAYER
+    global ENEMIES
+    bf = ENEMIES['brendan fallon']
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
@@ -82,6 +84,11 @@ def Move(direction):
         PLAYER.location[0] = x
         PLAYER.location[1] = y
         PLAYER.location[2] = z
+        if bf.location != (None,None,None):
+            MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
+        if random() <= 0.01:
+            MAPS[x][y][z].placeEnemy(bf)
+            
         if Place.travelled:
             print "========================================================================"
             print Place.lore +"\n\n"+Place.info + Place.search()
@@ -246,7 +253,6 @@ def Inspect(Item): #Item is the inspect item
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
-                INTERACT[Item].drop = None
             print ""
         else:
             print INTERACT[Item].info + "\n"
@@ -368,7 +374,9 @@ def Story():
         QUESTS['haugen kill soleymani'] = 0
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
+        MAPS[1][6][0].removeEnemy(ENEMIES['dr.haugen'])
         QUESTS['einstein fridge'] = 0
+        
     
 
     #Semiconductor quests    
