@@ -119,7 +119,7 @@ def Reset():
     Equipment("Phils Braces",(2,5,0),"PhilBraces.jpg","Bark AND the bite.","head",(3,2,1),-101),
     Equipment("Santa Hat",(0,0,1),"SantaHat.jpg","Happy Holidays!","head",(0,3,2),-101),
     Equipment("Plastic Bag",(2,1,1),"PBag.jpg","The audacity of some people to leave their filth around.","head",(0,1,-10),-101),
-    Equipment("Party Hat",(3,6,1),"PartyHat.jpg","Found in a Chirstmas Cracker","head",(0,5,3),-101),
+    Equipment("Party Hat",(3,6,1),"PartyHat.jpg","A nice hat from a cracker.","head",(0,5,3),-101),
     #Body Items
     Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,7,5),-101),
     Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(10,5,5),-101),
@@ -212,6 +212,7 @@ def Reset():
     Equipment("Clean Needle",(None),"CleanNeedle.jpg","No more spreadin' disease!","hand",(9,0,9),-101),
     Equipment("Puke",(None),"Puke.jpg","Ew, literally a pool of vomit","body",(1,0,-10),-2),
     Equipment("Guitar",(None),"Guitar.jpg","Monster Mash.","hand",(10,3,5),-101),
+    Equipment("Swordfish",(None),"Swordfish.jpg","I'd better be careful eating this!","off-hand",(10,5,5),12),
     Equipment("Phone",(None),"Phone.jpg","This thing has been dropped Graham's number times.","off-hand",(5,6,9),-101),
     Equipment("Meow Mix",(None),"MeowMix.jpg","I love chicken, I love liver...","off-hand",(5,0,5),1),
     Equipment("Visor Glasses",(None),"FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!","head",(1,5,35),-101),
@@ -266,6 +267,7 @@ def Reset():
     Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong","brendan fallons lunchbox","THANKS! TOKE UP MY DUDES!",""),
     Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs of Eng Phys if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
+    Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,3,0),(10,10,10),15,"swordfish","horrible assignmnet","Nice! Take this swordfish. I needed 45 cooking for that.",""),
     Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Absolutely righteous!",""),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first year","'Have you got the LONCAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
@@ -286,7 +288,7 @@ def Reset():
 
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
-    INTERACT = [
+    INTERACT1 = [
     Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430... Yes, you have chosen wisely.","msp430","msp430"),
     Interact("Broken Reactor",(4,5,0),"It's an old broken reactor.","After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nYou feel like ancient mechanisms beyond your comprehension are coming to life.\nWithin the pink glow you see an aparition of Dr.Novog!\n'What's up folks! This is the only channel safe for communication\n'Come meet me in the basement of the Nuclear Reactor ASAP and bring that Pink Donut!'\nAs the aparition fades a hooded figure emerges from behind a lab bench.\n'The Dark Lord demands that donut!'\nThe assassin lunges for you but is quickly met by your blow.\nAs they fall to the ground you notice an insignia on their robe that tickles your 'thats familiar' bone...\nYou pull back their hood to reveal the face of an Eng Phys PhD student!\nYou don't remember their name... But you know they are in the faculty...","flux capacitor",'pink donut'),
     Interact("Fridge",(1,6,0),"Seems like a regular fridge to me.","You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!",'relativistic key','pedrotti cubed'),
