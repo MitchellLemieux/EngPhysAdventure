@@ -172,7 +172,7 @@ def Attack(E):
            Outcome = Combat(PLAYER,enemy) 
            if Outcome:
                print "You defeated " + enemy.name + ".\n"
-               print enemy.name+": "+enemy.Dinfo
+               print enemy.Dinfo
                if enemy.drop:
                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                    CurrentPlace.placeItem(ITEMS[enemy.drop])
