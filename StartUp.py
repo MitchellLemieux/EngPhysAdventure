@@ -269,7 +269,7 @@ def Reset():
     Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit",None,(9999,9999,9999),999,"green bang bong","Brendan Fallon's lunchbox","THANKS! TOKE UP MY DUDES!",""),
     Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs of if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
-    Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,3,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
+    Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,3,0),(10,10,10),15,"swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
     Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Absolutely righteous!",""),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
