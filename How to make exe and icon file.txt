@@ -1,0 +1,17 @@
+How to make exe
+1. Download all files
+2. Use command prompt to navigate in prompt to the folder with setup.py
+3. Run: python setup.py py2exe
+4. Wait for things to happen and it will generator dist
+
+How to change the icon to something
+4. Install resource hacker 
+5. Follow guide to replace
+6. Repalce the icon newicon_Hbg_icon (or whatever it is at the time)
+
+*if there's 
+Notes
+how to replace exe icon using resource hacker and 48x48 icon
+https://www.howtogeek.com/75983/stupid-geek-tricks-how-to-modify-the-icon-of-an-.exe-file/
+use to make icons
+http://icoconvert.com/ 
