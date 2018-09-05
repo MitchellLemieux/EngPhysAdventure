@@ -353,6 +353,8 @@ def WorldMap():
             MAPS1[x][y][z].placeItem(i)
         else:
             i.location = (None,None,None)
+        if i.need:
+            i.need = i.need.lower()
     return tuple(MAPS1)
 
 def ItemDictionary():
