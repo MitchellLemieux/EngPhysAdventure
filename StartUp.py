@@ -333,6 +333,7 @@ def WorldMap():
             MAPS1[x][y][z].placeEnemy(i)
         else:
             i.location = (None,None,None)
+        i.need = i.need.lower()
     for i in ITEMS1:
         if i.location:
             position = i.location
