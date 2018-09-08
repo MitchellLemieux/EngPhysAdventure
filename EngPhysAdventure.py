@@ -2,6 +2,9 @@ from GameFunctions import *
 import StartUp
 import Opening
 
+#If there was a title screen it would go here
+print "Version: Alpha 4.20 Sept 2018\n\n\n\n"
+
 Opening.Opening()
 
 playername = raw_input("First, what is your name?\n")
@@ -15,6 +18,10 @@ def Main():
     global playername
     global QUESTS
     PLAYER.name = playername
+    if playername == "Brendan Fallon":
+        print "\nYou are now playing as: THE MAN\n"
+        PLAYER.health = 999
+        
     x = 2
     y = 3
     z = 1
