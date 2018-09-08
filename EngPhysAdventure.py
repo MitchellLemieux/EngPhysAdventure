@@ -3,7 +3,6 @@ import StartUp
 import Opening
 
 #If there was a title screen it would go here
-# "EPTA Version: Alpha 1.00 Sept 2018\n\n\n\n"
 
 Opening.Opening()
 
