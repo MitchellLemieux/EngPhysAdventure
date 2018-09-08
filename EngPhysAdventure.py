@@ -3,7 +3,7 @@ import StartUp
 import Opening
 
 #If there was a title screen it would go here
-print "Version: Alpha 4.20 Sept 2018\n\n\n\n"
+print "EPTBA Version: Alpha 4.20 Sept 2018\n\n\n\n"
 
 Opening.Opening()
 
@@ -97,6 +97,6 @@ def Main():
     elif Story() == 2:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
             Opening.Closing()
-            print "Having defeated Dr.Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
+            print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
             raw_input("Thanks for playing!!")
 Main()
