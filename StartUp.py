@@ -100,7 +100,7 @@ def Reset():
     Map("2nd Floor UH",(6,1,2),"2ND FLOOR UH:\nYou can only go back down the stairs.","You make your way up the rickety staircase into a room from a time long past.\nYou notice a dust covered table with some old instruments and clutter thrown about.",('f','b','l','r','u')),
     Map("2nd Floor BSB",(3,3,2),"2ND FLOOR BSB:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r','u')),
     Map("Climbing MDCL",(1,0,2),"CLIMBING MDCL:\nYou can continue climbing or go back down...","You struggle and find yourself on the outer wall of MDCL.",('f','b','l','r')),
-    Map("Roof of MDCL",(1,0,3),"MDCL Roof:\nYou can only go back down.","With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!",('f','b','l','r')),
+    Map("Roof of MDCL",(1,0,3),"MDCL Roof:\nYou can only go back down.","With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!",('f','b','l','r','u')),
     Map("3rd Floor Thode",(1,7,3),"3RD FLOOR THODE:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u')),
     Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'))]
 
@@ -192,7 +192,7 @@ def Reset():
     Equipment("Tarzan VHS",(0,2,1),"Tarzan.jpg","If only I had a VCR...","off-hand",(0,2,6),3),
     Equipment("Couch Cushion",(1,7,1),"CCushion.jpg","I hope I find I pillow fight.","off-hand",(4,10,1),-101),
     Equipment("VH Sauce",(1,4,1),"VHSauce.jpg","Sweet and sour. Nice.","off-hand",(1,2,1),1),
-    Equipment("Franks Red Hot",(0,4,1),"FranksRed.jpg","I put that...","off-hand",(3,0,2),1),
+    Equipment("Frank's Red Hot",(0,4,1),"FranksRed.jpg","I put that...","off-hand",(3,0,2),1),
     Equipment("Old Candle",(2,0,0),"OldCandle.jpg","Seems like it's had some use.","off-hand",(0,2,2),-101),
     Equipment("Shampoo",(0,0,1),"Shampoo.jpg","Yeah, I could use a shower...","off-hand",(4,0,3),-101),
     Equipment("Holy Bible",(2,0,1),"Bible.jpg","King James version...","off-hand",(3,0,3),-101),
