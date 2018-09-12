@@ -31,7 +31,7 @@ def Opening():
     time.sleep(DELAY)
     print "e v e n i n g  a t  t h e  P h o e n i x.\n"
     time.sleep(DELAY)
-    print "O u r  h e r o  a w a k e n s  i n  f r o n t  o f  J H E"
+    print "T h e  h e r o  a w a k e n s  i n  f r o n t  o f  J H E"
     time.sleep(DELAY)
     print "w i t h  a  c o n s i d e r a b l e  h e a d a c h e  b u t"
     time.sleep(DELAY)
