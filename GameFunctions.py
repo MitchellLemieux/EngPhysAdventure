@@ -1,6 +1,8 @@
 from GameClasses import *
 import StartUp
 import Hero
+from nltk.metrics import edit_distance
+
 
 MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
@@ -441,8 +443,10 @@ def Story():
         return 0
         
         
-                    
-        
+def SpellCheck(Word,Psblties):
+    Distance = [edit_distance(Word,key) for key in Psblties]
+    index = Distance.index(min(Distance))
+    return Psblties[index]
         
         
         

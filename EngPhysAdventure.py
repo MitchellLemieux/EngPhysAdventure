@@ -16,11 +16,14 @@ def Main():
     global INTERACT
     global playername
     global QUESTS
+    KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys())
+    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat']
+    
     PLAYER.name = playername
     if playername == "Brendan Fallon":
         print "\nYou are now playing as: THE MAN\n"
         PLAYER.health = 999
-        
+       
     x = 2
     y = 3
     z = 1
@@ -40,6 +43,9 @@ def Main():
 
         if len(direction) == 1:
             verb = direction[0]
+            if len(verb)>1:
+                verb = SpellCheck(verb,VERBS)
+
 
             if verb in ['u','d','l','r','f','b']:
                 CurrentPlace = Move(verb)
@@ -60,7 +66,9 @@ def Main():
 
         elif (len(direction) == 2):
             verb = direction[0]
-            objectName = direction[1]
+            if len(verb)>1:
+                verb = SpellCheck(verb,VERBS)
+            objectName = SpellCheck(direction[1],KEYS)
 
             if verb == 'equip':
                 Equip(objectName)
