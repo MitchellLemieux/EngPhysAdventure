@@ -1,6 +1,6 @@
 #The Great Engineering Text Adventure
 #Authors: Mitchell Lemieux, Tyler Kashak
-#Music: Brian, Erik
+#Music: Brian, Erik What music do we have lol? 
 #Start Date: April 14th, 2018
 #Library of Items and Locations
 
