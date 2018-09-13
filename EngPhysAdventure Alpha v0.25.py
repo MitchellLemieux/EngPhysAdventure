@@ -3,8 +3,8 @@ import StartUp
 import Opening
 
 #If there was a title screen it would go here
-#Version: Alpha v0.24
-#Updated: Sept 11, 2018
+#Version: Alpha v0.25
+#Updated: Sept 13, 2018
 
 Opening.Opening()
 
