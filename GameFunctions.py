@@ -448,6 +448,18 @@ def SpellCheck(Word,Psblties):
     Distance = [edit_distance(Word,key) for key in Psblties]
     index = Distance.index(min(Distance))
     return Psblties[index]
+
+def DisplayTime(value): #converts and displays the time given seconds, for speedrunning
+    '''From seconds to Days;Hours:Minutes;Seconds'''
+    valueD = (((value/365)/24)/60)
+    Days = int (valueD)
+    valueH = (valueD-Days)*365
+    Hours = int(valueH)
+    valueM = (valueH - Hours)*24
+    Minutes = int(valueM)
+    valueS = (valueM - Minutes)*60
+    Seconds = int(valueS)
+    print "Your time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
         
 
 
