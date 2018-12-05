@@ -22,7 +22,7 @@ def Main():
     VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat']
     
     PLAYER.name = playername
-    if playername == "Brendan Fallon":
+    if playername == "Tyler Kashak":
         print "\nYou are now playing as: THE MAN\n"
         PLAYER.health = 999
        
