@@ -18,19 +18,7 @@ def Reset():
     global INTERACT1
     
     MAPS1 = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
-#fixes
-#should be able to walk from upstairs parts that are connected
-#
-#features
-#speed run time and step count
-#safe files for infinite laptop loop
-#restart or exit command once the gain ends (or keep playing if done the story)
-#
-#stretch features
-#Music and sound effects
-#keeping an online synced leaderboard (website)
-#stats kept
-#starting screen
+
 
     #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
     #Example: Start = Map("Start",(0,0,0),"You start here")
