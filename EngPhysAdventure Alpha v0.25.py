@@ -40,6 +40,7 @@ def Main():
     CurrentPlace.travelled = 0
     
     stepcount = 0   #these are speedrunning counters
+    commandcount = 0
     timestart = time.time()
     print "Your time starts now!"
     while(PLAYER.alive):
@@ -56,7 +57,7 @@ def Main():
 
             if verb in ['u','d','l','r','f','b']:
                 CurrentPlace = Move(verb)
-
+                stepcount += 1 #increments the stepcount and then displays after you take a step
             elif (verb == 'search'):
                 x = PLAYER.location[0]
                 y = PLAYER.location[1]
@@ -97,9 +98,8 @@ def Main():
             else:
                print "\nI don't understand that command!\n"
 
-        stepcount += 1 #increments the stepcount and then displays after you take a step
-        print "Total Stepcount: ", stepcount
-        
+        commandcount += 1 #increments the command count after every command but doesn't print
+        print "Step Count: ", stepcount
         print "========================================================================"
         Story()
 
@@ -109,17 +109,20 @@ def Main():
     if Story()== 0:
         print "========================================================================"
         DisplayTime(runtime) #displays the runtime for speed running
+        print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
         raw_input("Thanks for playing!! Better luck next time!")
     elif Story() == 1:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
             Opening.Closing()
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
             DisplayTime(runtime)
+            print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
             raw_input("Thanks for playing!!")
     elif Story() == 2:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
             Opening.Closing()
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
             DisplayTime(runtime)
+            print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
             raw_input("Thanks for playing!!")
 Main()

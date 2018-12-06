@@ -459,7 +459,7 @@ def DisplayTime(value): #converts and displays the time given seconds, for speed
     Minutes = int(valueM)
     valueS = (valueM - Minutes)*60
     Seconds = int(valueS)
-    print "Your time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
+    print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
         
 
 
