@@ -39,7 +39,7 @@ def Main():
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     CurrentPlace.travelled = 0
     
-    stepcount = 0   #these are speedrunning things
+    stepcount = 0   #these are speedrunning counters
     timestart = time.time()
     print "Your time starts now!"
     while(PLAYER.alive):
