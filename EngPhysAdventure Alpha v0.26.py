@@ -6,8 +6,7 @@ from Opening import * #this imports the code and all the code dependancies (func
 #Version: Alpha v0.26 - The SpeedRun Update
 #Updated: Dec 6, 2018
 
-#Opening.Opening()
-#TODO Uncomment this before release
+Opening.Opening()
 
 playername = raw_input("First, what is your name?\n")
 
@@ -99,7 +98,6 @@ def Main():
                print "\nI don't understand that command!\n"
 
         commandcount += 1 #increments the command count after every command but doesn't print
-        print "Step Count: ", stepcount
         print "========================================================================"
         Story()
 
