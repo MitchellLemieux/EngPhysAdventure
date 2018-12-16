@@ -123,7 +123,7 @@ def Combat(P,E):
             Second = P
         else:
             Combatants = [E,P]
-            First = choice(Combatatants)
+            First = choice(Combatants)
             Combatants.remove(First)
             Second = Combatants[0]   
         #Max damage each can deal
