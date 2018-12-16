@@ -10,7 +10,6 @@ should be able to walk from upstairs parts that are connected
 Dan Fitzgreen doesn't say anything when you talk to him
 
 --features--
-Shouldn't be able to acess places until unlocked by story
 have that speed run time, steps, and other data saved to a stat file [encrypted] to be sent in and put on the leaderboard
 	date, Name input, computer name?, steps, time played, version,
 	[this will later be the save file but] location, enemies killed, inventory, stats, quest status

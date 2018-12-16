@@ -127,8 +127,11 @@ class Map:  #Map Location Storage
     def placeInteract(self,Interact):
         self.interact.append(Interact)
         Interact.location = self.coords
-        
-    
+
+    def removeWall(self, wall): #this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
+        if wall in self.walls: 
+            self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
+            
     def Remove(self,item):
         if item in self.items:
             self.items.remove(item)

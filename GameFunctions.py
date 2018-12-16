@@ -69,7 +69,7 @@ def Move(direction):
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
     Place = 0
-    if direction not in CurrentPlace.walls:
+    if direction not in CurrentPlace.walls: 
         if direction == 'f':
             y += 1
         elif direction == 'b':
@@ -247,9 +247,9 @@ def Inspect(Item): #Item is the inspect item
         else:
             print""
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
-        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
+        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
-            INTERACT[Item].quest = True
+            INTERACT[Item].quest = True #this turns on the quest flag for the interactable once interacted with if you have the item
             print "\n" + INTERACT[Item].Sinfo
             PLAYER.updateStats()
             ITEMS[INTERACT[Item].need].location=(None,None,None) #Brendan added this, used to clear the item location
@@ -298,6 +298,9 @@ def Eat(Item):
         print "\nThat doesn't seem to be around here.\n"
 
 QUESTS = {
+          #sidequest
+          'secret spaces': 1,
+          
           "talk to mysterious man": 1,
           #Nuke
           "preston get dumbbell": 1,
@@ -332,6 +335,11 @@ def Story():
     global ENEMIES
     global INTERACT
     global MAPS
+    #Side Quests
+    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:
+        MAPS[0][2][1].removeWall("d")
+        QUESTS["secret spaces"] = 0
+
     
     #Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
