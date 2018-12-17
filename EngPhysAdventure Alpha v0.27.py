@@ -6,7 +6,7 @@ from Opening import * #this imports the code and all the code dependancies (func
 #Version: Alpha v0.27 - 
 #Updated: Dec 15, 2018
 
-#Opening()
+Opening()
 
 playername = raw_input("First, what is your name?\n")
 
@@ -42,7 +42,15 @@ def Main():
     commandcount = 0
     timestart = time.time()
     print "Your time starts now!"
+    #save = ['r','r','r','f'] trying to make a save file
+    #i=0
     while(PLAYER.alive):
+        
+        
+        #if i < len(save):
+        #    direction = save[i].lower().split(" ",1)
+        #    i = i + 1
+        #else:
         direction = raw_input('What do you want to do?\n').lower().split(" ",1)
         
         for i in range(len(direction)):

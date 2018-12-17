@@ -459,13 +459,13 @@ def SpellCheck(Word,Psblties):
 
 def DisplayTime(value): #converts and displays the time given seconds, for speedrunning
     '''From seconds to Days;Hours:Minutes;Seconds'''
-    valueD = (((value/365)/24)/60)
+    valueD = (((value/24)/60)/60)
     Days = int (valueD)
-    valueH = (valueD-Days)*365
-    Hours = int(valueH)
-    valueM = (valueH - Hours)*24
-    Minutes = int(valueM)
-    valueS = (valueM - Minutes)*60
+    valueH = (value-Days*24*3600)
+    Hours = int(valueH/3600)
+    valueM = (valueH - Hours*3600)
+    Minutes = int(valueM/60)
+    valueS = (valueM - Minutes*60)
     Seconds = int(valueS)
     print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
         

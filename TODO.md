@@ -7,7 +7,7 @@ https://www.youtube.com/watch?v=xSGnLPTjaXo
 
 --fixes--
 should be able to walk from upstairs parts that are connected
-Dan Fitzgreen doesn't say anything when you talk to him
+
 
 --features--
 have that speed run time, steps, and other data saved to a stat file [encrypted] to be sent in and put on the leaderboard
@@ -23,9 +23,15 @@ restart or exit command once the gain ends (or keep playing if done the story)
 
 --stretch features--
 Music and sound effects
-keeping an online synced leaderboard (website)
+keeping an online synced leaderboard (website, raspberry pi server)
 stats kept
 starting screen
 	GUI using pygame text based one?
-should you not be able to access Okon's stuff until you do the quest?
-	Places those places one you read the item
+interriors
+
+--0.27 Update
+Added 2nd floor hatch
+diaolog for Dan Fitz
+Updated the 2nd floors so you can walk between them
+Fixed the Time display program (was broken for hours)
+Tryed to start making a load from save file but made infinite loops
