@@ -3,10 +3,10 @@ import StartUp
 from Opening import * #this imports the code and all the code dependancies (functions imported in that)
 
 #If there was a title screen it would go here
-#Version: Alpha v0.27 - 
-#Updated: Dec 15, 2018
+#Version: Alpha v0.26.1 - Hotfix 
+#Updated: Dec 22, 2018
 
-#Opening()
+Opening()
 
 playername = raw_input("First, what is your name?\n")
 
