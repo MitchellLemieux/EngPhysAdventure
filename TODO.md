@@ -26,6 +26,7 @@ safe files for infinite laptop loop
 	or be able to save whenever you want with a command?
 restart or exit command once the gain ends (or keep playing if done the story)
 	maybe using saves?
+Have the text scroll by first time?
 
 --stretch features--
 Music and sound effects

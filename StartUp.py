@@ -203,7 +203,8 @@ def Reset():
     Equipment("Paper Towels",(0,5,2),"PaperTowels.jpg","WHERE'S THE PAPER TOWELS?","off-hand",(2,0,1),-101),
     Equipment("Cheese",(5,7,1),"Cheese.jpg","Not just cheddar, the smelly kind.","off-hand",(1,1,1),5),
     #Special/Dropped Items
-    Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000),-100),
+    #TODO Remove Iron Ring from spawning
+    Equipment("Iron Ring",(3,3,1),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000),-100),
     Equipment("Gilded Blunderbuss",(None),"Blunderbuss.jpg","A beautiful firearm with infinite ammo.","hand",(200,5,50),-101),
     Equipment("Potato",None,"Potato.jpg","A most versatile vegetable.\nGood for breakfast, lunch, and dinner.","off-hand",(1,1,1),5),
     Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(125,0,999),-101),

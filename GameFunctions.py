@@ -413,8 +413,8 @@ def Story():
 
     if ENEMIES['dr. minnick'].quest and QUESTS["minnick get oscilloscope"]:
         ENEMIES['dr. minnick'].quest = False
-        ENEMIES['dr. minnick'].drop ='Gauss Eye'
-        ENEMIES['dr. minnick'].need = "Faraday's Cage"
+        ENEMIES['dr. minnick'].drop ='gauss eye' #this has to be lowercase or it throws a key error - All items are defined as lower case when stored
+        ENEMIES['dr. minnick'].need = "faraday's cage" #this has to be lowercase or it throws a key error
         ENEMIES['dr. minnick'].info = "I need to complete Kenrick's design... use my glasses to find what we need!"
         ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
         MAPS[3][3][1].removeEnemy(ENEMIES['dr. minnick'])
