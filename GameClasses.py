@@ -127,8 +127,11 @@ class Map:  #Map Location Storage
     def placeInteract(self,Interact):
         self.interact.append(Interact)
         Interact.location = self.coords
-        
-    
+
+    def removeWall(self, wall): #this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
+        if wall in self.walls: 
+            self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
+            
     def Remove(self,item):
         if item in self.items:
             self.items.remove(item)
@@ -154,7 +157,7 @@ class Map:  #Map Location Storage
         if self.ENEMY:
             for enemy in self.ENEMY: 
                 if enemy.alive:
-                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n"])
+                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
                     description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of "]) + enemy.name + ".\n"
         if self.interact:

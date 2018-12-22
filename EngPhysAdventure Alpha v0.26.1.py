@@ -3,8 +3,8 @@ import StartUp
 from Opening import * #this imports the code and all the code dependancies (functions imported in that)
 
 #If there was a title screen it would go here
-#Version: Alpha v0.26 - The SpeedRun Update
-#Updated: Dec 6, 2018
+#Version: Alpha v0.26.1 - Hotfix 
+#Updated: Dec 22, 2018
 
 Opening()
 
@@ -42,8 +42,19 @@ def Main():
     commandcount = 0
     timestart = time.time()
     print "Your time starts now!"
+    #this should be a function but
+    f = open("SaveFile.txt","w+")
+    f.write(playername + '\n')
+    f.write(str(time.time()) + '\n')
+    f.close()
+    save = []
+    ####
     while(PLAYER.alive):
-        direction = raw_input('What do you want to do?\n').lower().split(" ",1)
+        
+        line = raw_input('What do you want to do?\n')
+        save.append(line)
+        direction = line.lower().split(" ",1)
+
         
         for i in range(len(direction)):
            direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
@@ -104,17 +115,26 @@ def Main():
         
     timeend = time.time()
     runtime = timeend-timestart
+    #dumb save file stuff
+    save.append("Player Stats")
+    save.append(stepcount)
+    save.append(commandcount)
+    save.append(runtime)
+ 
     if Story()== 0:
         print "========================================================================"
         DisplayTime(runtime) #displays the runtime for speed running
         print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
+        saveGame(save)
         raw_input("Thanks for playing!! Better luck next time!")
+        
     elif Story() == 1:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
             Closing()
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
             DisplayTime(runtime)
             print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
+            saveGame(save)
             raw_input("Thanks for playing!!")
     elif Story() == 2:
         if raw_input("Type 'C' to continue\n").lower() == 'c': 
@@ -122,5 +142,6 @@ def Main():
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
             DisplayTime(runtime)
             print "Total Step Count: ", stepcount, "\nTotal Command Count: ", commandcount
+            saveGame(save)
             raw_input("Thanks for playing!!")
 Main()

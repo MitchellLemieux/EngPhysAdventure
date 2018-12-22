@@ -69,7 +69,7 @@ def Move(direction):
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
     Place = 0
-    if direction not in CurrentPlace.walls:
+    if direction not in CurrentPlace.walls: 
         if direction == 'f':
             y += 1
         elif direction == 'b':
@@ -247,9 +247,9 @@ def Inspect(Item): #Item is the inspect item
         else:
             print""
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
-        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:
+        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
-            INTERACT[Item].quest = True
+            INTERACT[Item].quest = True #this turns on the quest flag for the interactable once interacted with if you have the item
             print "\n" + INTERACT[Item].Sinfo
             PLAYER.updateStats()
             ITEMS[INTERACT[Item].need].location=(None,None,None) #Brendan added this, used to clear the item location
@@ -297,7 +297,21 @@ def Eat(Item):
     else:
         print "\nThat doesn't seem to be around here.\n"
 
+def saveGame(savefile):
+    global PLAYER
+    f = open("SaveFile.txt","a+")
+    for i in range(len(savefile)):
+        f.write(str(savefile[i]) + '\n')
+    f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
+    f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
+    f.write(str(PLAYER.health) + '\n')
+    for i in PLAYER.inv:
+        f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
+    f.close()
 QUESTS = {
+          #sidequest
+          'secret spaces': 1,
+          
           "talk to mysterious man": 1,
           #Nuke
           "preston get dumbbell": 1,
@@ -332,6 +346,11 @@ def Story():
     global ENEMIES
     global INTERACT
     global MAPS
+    #Side Quests
+    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:
+        MAPS[0][2][1].removeWall("d")
+        QUESTS["secret spaces"] = 0
+
     
     #Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
@@ -394,8 +413,8 @@ def Story():
 
     if ENEMIES['dr. minnick'].quest and QUESTS["minnick get oscilloscope"]:
         ENEMIES['dr. minnick'].quest = False
-        ENEMIES['dr. minnick'].drop ='gauss eye'
-        ENEMIES['dr. minnick'].need = 'faradays cage'
+        ENEMIES['dr. minnick'].drop ='gauss eye' #this has to be lowercase or it throws a key error - All items are defined as lower case when stored
+        ENEMIES['dr. minnick'].need = "faraday's cage" #this has to be lowercase or it throws a key error
         ENEMIES['dr. minnick'].info = "I need to complete Kenrick's design... use my glasses to find what we need!"
         ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
         MAPS[3][3][1].removeEnemy(ENEMIES['dr. minnick'])
@@ -451,13 +470,13 @@ def SpellCheck(Word,Psblties):
 
 def DisplayTime(value): #converts and displays the time given seconds, for speedrunning
     '''From seconds to Days;Hours:Minutes;Seconds'''
-    valueD = (((value/365)/24)/60)
+    valueD = (((value/24)/60)/60)
     Days = int (valueD)
-    valueH = (valueD-Days)*365
-    Hours = int(valueH)
-    valueM = (valueH - Hours)*24
-    Minutes = int(valueM)
-    valueS = (valueM - Minutes)*60
+    valueH = (value-Days*24*3600)
+    Hours = int(valueH/3600)
+    valueM = (valueH - Hours*3600)
+    Minutes = int(valueM/60)
+    valueS = (valueM - Minutes*60)
     Seconds = int(valueS)
     print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
         
