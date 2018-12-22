@@ -3,7 +3,7 @@ import StartUp
 from Opening import * #this imports the code and all the code dependancies (functions imported in that)
 
 #If there was a title screen it would go here
-#Version: Alpha v0.27 - 
+version = "Alpha v0.27 - Dev Update"
 #Updated: Dec 15, 2018
 
 #Opening()
@@ -44,6 +44,7 @@ def Main():
     print "Your time starts now!"
     #this should be a function but
     f = open("SaveFile.txt","w+")
+    f.write(version + '\n')
     f.write(playername + '\n')
     f.write(str(time.time()) + '\n')
     f.close()
