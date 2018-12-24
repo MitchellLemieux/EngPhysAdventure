@@ -132,7 +132,7 @@ class Map:  #Map Location Storage
         if wall in self.walls: 
             self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
             
-    def Remove(self,item):
+    def removeItem(self,item):
         if item in self.items:
             self.items.remove(item)
             

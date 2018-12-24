@@ -13,18 +13,19 @@ Fix the map (doesn't show layout right as bsb is bellow JHE)
 
 
 --current update features--
-add try and except that if there is a bug it exits safely with a display and saves your file
+
 have that speed run time, steps, and other data saved to a stat file [encrypted] to be sent in and put on the leaderboard
 	date, Name input, computer name?, steps, time played, version,
 	[this will later be the save file but] location, enemies killed, inventory, stats, quest status
 	Key logging save file doesn't work for rng featues like bighits, Brendan fallon, etc 
 Add leaderboard in the QT
+add try and except that if there is a bug it exits safely with a display and saves your file
 safe files for infinite laptop loop
 	will it just be at locations 
 	or be able to save whenever you want with a command?
 restart or exit command once the gain ends (or keep playing if done the story)
 	maybe using saves?
-Have the text scroll by first time?
+Have the text scroll by first time? And Also auto limit text display to roll over (no need to \n it)
 1 crazy idea feature
 Creative Mode
 
@@ -44,3 +45,4 @@ Fixed the Time display program (was broken for hours)
 Tryed to start making a load from save file but made infinite loops
 save and load files as a developer
 fixed the key errors which broke the game and made it uplayable
+Changed name of map class Remove to removeItem to be more clear and fit camelcase

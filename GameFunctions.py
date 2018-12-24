@@ -36,7 +36,7 @@ def Equip(Item):
         #this is different than the equip method in the Character class.
         #Makes sure the item is dropped at the current location
         drop = PLAYER.equip(ITEMS[Item])
-        Place.Remove(ITEMS[Item])
+        Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         print "\nYou can't equip that, gosh\n"
@@ -288,7 +288,7 @@ def Eat(Item):
                 PLAYER.updateStats()
                 print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
             else:
-                MAPS[x][y][z].Remove(ITEMS[Item])
+                MAPS[x][y][z].removeItem(ITEMS[Item])
     
         #if Item == "Jar of Peanut Butter" and (PLAYER.name == "Mitch Lemieux" or PLAYER.name == "Erik Reimers"):
         #        PLAYER.health = 0 #makethis function happen later, you die if you're mitch or erik and eat peanut butter!
@@ -299,7 +299,7 @@ def Eat(Item):
 
 def saveGame(savefile):
     global PLAYER
-    f = open("SaveFile.txt","a+")
+    f = open("LogFile.txt","a+")
     for i in range(len(savefile)):
         f.write(str(savefile[i]) + '\n')
     f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
