@@ -94,7 +94,7 @@ def Reset():
     Map("2nd Floor ABB",(1,6,2),"2ND FLOOR ABB:\nThe Eng Phys Office is behind you. You can down the stairs to ABB.","You were told JHE would be your home.\nNope.\nInstead you recall countless hours lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the windows on a spring afternoon...",('f','l','r','u')),
     Map("2nd Floor JHE",(2,4,2),"2ND FLOOR JHE:\nTo the left is 2nd Floor Hatch. You can go down the stairs to JHE Lobby.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years.\nYou shake your fist and plan your next move.",('f','b','r','u')),
     Map("2nd Floor ETB",(0,3,2),"2ND FLOOR ETB:\nYou can only go back down the stairs.","You realize you really have never come up here.\nYou see 4th year Eng Phys students hurry out of a long-winded lecture.\nAfter picking a booger.\nYou plan your next move.",('f','b','l','r','u')),
-    Map("Eng Phys Office",(1,5,2),"ENG PHYS OFFICE:\n2nd Floor Abb is infront of you. 2nd Floor Hatch is behind you. You can go down the stairs to JHE Annex.","The portrait of Dr. Novog makes you jealous as you realize you could\nnever pull off a hairstyle like that.\nYou scan the display case of past Eng Phys projects.\nThey display these as trophies...\nTrophies which only tell a story of endless grind you think to yourself...",('b','l','r','u')),
+    Map("Eng Phys Office",(1,5,2),"ENG PHYS OFFICE:\n2nd Floor Abb is infront of you. 2nd Floor Hatch is behind you. You can go down the stairs to JHE Annex.","The portrait of Dr. Novog makes you jealous as you realize you could\nnever pull off a hairstyle like that.\nYou scan the display case of past Eng Phys projects.\nThey display these as trophies...\nTrophies which only tell a story of endless grind you think to yourself...",('l','r','u')),
     Map("2nd Floor Hatch",(1,4,2),"2ND FLOOR Hatch:\nIn front of you lies the Eng Phys Office. To your right is 2nd Floor JHE.\nHatch is downstairs.","You see various meeting rooms with 1st years occupying them.\nThe MES office is full but nothing seems to be getting done.\nThere's therapy dogs scattered everywhere for Paws and Play.\nYou can't get a session with a real therapist but at least there is this",('b','l','u')),
     Map("The Pheonix Loft",(5,4,2),"PHOENIX LOFT:\nYou can only go back down the stairs.","The history up here is incredible. So many relics from a time long past.\nFrom old costumes from plays to furniture.\nAfter a quick Shakespearean sonnet you think of what to do next.",('f','b','l','r','u')),
     Map("Upstairs Chapel",(2,0,2),"2ND FLOOR CHAPEL:\nYou can only go back down the stairs.","The combination of ringing bells and echoes from the organ is deafening.\nYou can barely collect your thoughts.\nThe cobwebs and dust give you the impression this place has been ill-travelled\nand long forgotten.",('f','b','l','r','u')),
@@ -203,8 +203,8 @@ def Reset():
     Equipment("Paper Towels",(0,5,2),"PaperTowels.jpg","WHERE'S THE PAPER TOWELS?","off-hand",(2,0,1),-101),
     Equipment("Cheese",(5,7,1),"Cheese.jpg","Not just cheddar, the smelly kind.","off-hand",(1,1,1),5),
     #Special/Dropped Items
-    
-    Equipment("Iron Ring",(None),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000),-100),
+    #TODO remove iron ring before release
+    Equipment("Iron Ring",(3,3,1),"IronRing.jpg","The One Ring to Rule them ALL.","hand",(1000,1000,1000),-100),
     Equipment("Gilded Blunderbuss",(None),"Blunderbuss.jpg","A beautiful firearm with infinite ammo.","hand",(200,5,50),-101),
     Equipment("Potato",None,"Potato.jpg","A most versatile vegetable.\nGood for breakfast, lunch, and dinner.","off-hand",(1,1,1),5),
     Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(125,0,999),-101),
@@ -245,6 +245,7 @@ def Reset():
     Equipment("Pink Donut",(None),"PinkDonut.jpg","This is what fusion is all about?","off-hand",(1,1,1,),2),
     Equipment("Fanny Pack",(None),"FannyPack.jpg","Made for style. Not for carrying.","body",(3,8,15,),-101),
     Equipment("Einstein's Brain",(None),"Brain.jpg","Feel's kind of weird walking around with this...","off-hand",(1,1,1),10),
+    Equipment("Haugen's Clothes",(None),"HaugenShirt.jpg","OH My. The clothes of the gentle dolphin now gone.\nFeels kinda wet.","body",(5,10,10),10),
     Equipment("Pedrotti Cubed",(None),"Pedrotti.jpg","'Property of Harold Haugen, one of the 3 Quantum Relics' is inscribed on the first page.","off-hand",(50,150,250),-101),
     Equipment("Gamma Glove",(None),"GammaGauntlet.jpg","Shorter than it really is due to length contraction, one of the 3 Quantum Relics","hand",(250,100,20),-101),
     Equipment("Relativistic Key",(None),"Relativistickey.jpg","You can feel the power radiating from this thing.","hand",(1,1,1),-101),

@@ -54,6 +54,7 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
+        #febreeze isn't droped
         #Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
@@ -164,10 +165,11 @@ def Attack(E):
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
-        enemy = ENEMIES[E]
+        enemy = ENEMIES[E] #making it the object from the name
         if random() <= 0.01:
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death."
             print enemy.Dinfo + ".\n"
+            enemy.alive = False
             if enemy.drop:
                print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                CurrentPlace.placeItem(ITEMS[enemy.drop])
@@ -297,11 +299,11 @@ def Eat(Item):
     else:
         print "\nThat doesn't seem to be around here.\n"
 
-def saveGame(savefile):
+def logGame(log):
     global PLAYER
     f = open("LogFile.txt","a+")
-    for i in range(len(savefile)):
-        f.write(str(savefile[i]) + '\n')
+    for i in range(len(log)):
+        f.write(str(log[i]) + '\n')
     f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
     f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
     f.write(str(PLAYER.health) + '\n')
@@ -393,11 +395,14 @@ def Story():
         QUESTS["knights get book"] = 0
     
 
-    if ENEMIES['dr. haugen'].spoke and QUESTS['haugen kill soleymani']:
+    if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
+        ENEMIES['dr. haugen'].alive = False
+        MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][0].placeItem(ITEMS["haugen's clothes"])
+        
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
-        MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
         QUESTS['einstein fridge'] = 0
         
     

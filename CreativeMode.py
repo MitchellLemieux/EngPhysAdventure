@@ -9,10 +9,22 @@ global INTERACT
 global playername
 global QUESTS
 
-def saveGame(PLAYER, ITEMS, MAPS, INTERACT, QUESTS):
+def saveGame(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, extrainfo):
     f = open("SaveFile.txt","w+")
-    x = [PLAYER, ITEMS, MAPS, INTERACT, QUESTS]
-    
+    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, extrainfo]
+    #x = PLAYER
+##print type(PLAYER)
+##print type(ITEMS)
+##print type(MAPS)
+##print type(INTERACT)
+##print type(QUESTS)
+##
+##<type 'instance'>
+##<type 'dict'>
+##<type 'tuple'>
+##<type 'dict'>
+##<type 'dict'>
+
     pickle.dump(x, f)
     
     f.close()
@@ -20,20 +32,12 @@ def saveGame(PLAYER, ITEMS, MAPS, INTERACT, QUESTS):
     
 def loadGame():
     global PLAYER
-    global ITEMS
-    global MAPS
-    global INTERACT
-    global playername
-    global QUESTS
     f = open("SaveFile.txt","r+")
-    save = pickle.load(f)
+    loaddata = pickle.load(f)
     f.close()
-    PLAYER = save[0]
-    ITEMS = save[1]
-    MAPS = save[2]
-    INTERACT = save[3]
-    QUESTS = save[4]
-   
+    print "You game has been loaded!"
+    return loaddata
+    
     print "Your game has been loaded " + str(PLAYER.name)
     return save
 

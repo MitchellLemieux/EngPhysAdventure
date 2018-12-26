@@ -61,7 +61,7 @@ class Character: #When the equip function is called we need to make sure the ite
 
     def drop(self,Equip):
         drop = 0
-        if(Equip == self.inv[Equip.worn]):
+        if(Equip.name == self.inv[Equip.worn].name):
             self.inv[Equip.worn] = self.emptyinv[Equip.worn]
             print "\nYou've dropped the " + Equip.name
             drop = Equip
@@ -109,9 +109,9 @@ class Map:  #Map Location Storage
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
         self.lore = lore#Description of the location
-        self.items = []
-        self.ENEMY = []
-        self.interact = []
+        self.items = [] #list of equipment objects at that location
+        self.ENEMY = [] #list of enermy objects at that location
+        self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
 
@@ -132,9 +132,10 @@ class Map:  #Map Location Storage
         if wall in self.walls: 
             self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
             
-    def removeItem(self,item):
-        if item in self.items:
-            self.items.remove(item)
+    def removeItem(self,item): #had to be rewritted with load or else load function would create duplciate glitch
+        for i in self.items:  #weird way to write it but loops through the items in that lcoation and if the name matches it removes it
+            if i.name ==item.name:
+                self.items.remove(i)
             
     def removeEnemy(self,enemy):
         if enemy in self.ENEMY:
@@ -159,7 +160,7 @@ class Map:  #Map Location Storage
                 if enemy.alive:
                     description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of "]) + enemy.name + ".\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chaulk outline of"]) + enemy.name + ".\n"
         if self.interact:
             for item in self.interact:  
                 description = description + item.info + "\n"
