@@ -310,6 +310,7 @@ def logGame(log):
     for i in PLAYER.inv:
         f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
     f.close()
+    
 QUESTS = {
           #sidequest
           'secret spaces': 1,

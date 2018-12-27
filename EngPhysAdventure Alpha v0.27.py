@@ -54,22 +54,15 @@ def Main():
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     CurrentPlace.travelled = 0
     
-    stepcount = 0   #these are speedrunning counters
-    commandcount = 0
-    timestart = time.time()
+    stepcount, commandcount, runtime = 0   #these are speedrunning counters
+    timestart = time.time() #makes the time start variable (in seconds from 1970)
     print "Your time starts now!"
-    #this should be a function but
-    f = open("LogFile.txt","w+")
-    f.write(versionname + '\n')
-    f.write(playername + '\n')
-    f.write(str(time.time()) + '\n')
-    f.close()
-    log = []
-   
-    
+  
+    log = [versionname + '\n',  playername + '\n', str(time.time()) + '\n')] #initialize the log function with certain variables
+        
     while(PLAYER.alive): #main game loop that runs while the player is alive (player is killed in story once done)
  
-        line = raw_input('What do you want to do?\n')
+        line = raw_input('What do you want to do?\n') 
         log.append(line)
         direction = line.lower().split(" ",1)
 
@@ -103,13 +96,8 @@ def Main():
                 #TODO add: computer name, words and characters per minute, enemies killed, items eaten, items equiped, enemies talked, quantum relecs found
                 extrainfo = [version, versionname, timestart, stepcount, commandcount]
                 CreativeMode.saveGame(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS,extrainfo)
-            elif verb == 'loadgame': #this whole load function may have problems with adding items and going between version of savefiles (may need an updater)
-                #so one when you do this "load" it saves all the object variables to new/different locations
-                #as a quick fix get around this we can reference the name of the things in all functions instead of the object
-                #however figuring out how to "overwrite"/reindex the loaded objects so we don't just keep leaking memory
-                #even with 'overwriting' all the attributes it still 'remembers' the old object list
-                #game me troubles with removing items... everything else works but needs a full play test for bugs and someone who knows what they're doing
-                #'old' objects and 'new' objects are different by instance location
+            elif verb == 'loadgame':
+                #this function loads the game off of the save file
                 save = CreativeMode.loadGame()
                 loadplayer = save[0]
                 loaditems = save[1]
@@ -119,9 +107,7 @@ def Main():
                 loadquest = save[5]
                 loadextra = save[6]
 
-                #with this load function it's best to reference things by name until I can figure out the object overwriting. Ineffecient but works
-                #acording to this lists make new functions: http://interactivepython.org/runestone/static/CS152f17/Lists/ObjectsandReferences.html
-                #use (a is b) to see if a and b refer to the same memory location
+                
                 PLAYER.__dict__ = loadplayer.__dict__ #YOU HAVE TO USE THIS DARN .__dict___ thing to copy the object atributes https://stackoverflow.com/questions/36243488/how-can-i-overwrite-an-object-in-python
                 for item in ITEMS:
                     ITEMS[item] = loaditems[item] #assignment better when no subitems? .__dict for when there is
@@ -138,7 +124,16 @@ def Main():
                             if MAPS[x][y][z]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
                                 MAPS[x][y][z].__dict__ = loadmap[x][y][z].__dict__
                 
-
+                #this whole load function may have problems with adding items and going between version of savefiles (may need an updater)
+                #so one when you do this "load" it saves all the object variables to new/different locations
+                #as a quick fix get around this we can reference the name of the things in all functions instead of the object
+                #however figuring out how to "overwrite"/reindex the loaded objects so we don't just keep leaking memory
+                #even with 'overwriting' all the attributes it still 'remembers' the old object list
+                #game me troubles with removing items... everything else works but needs a full play test for bugs and someone who knows what they're doing
+                #'old' objects and 'new' objects are different by instance location
+                #with this load function it's best to reference things by name until I can figure out the object overwriting. Ineffecient but works
+                #acording to this lists make new functions: http://interactivepython.org/runestone/static/CS152f17/Lists/ObjectsandReferences.html
+                #use (a is b) to see if a and b refer to the same memory location
                 
             else:
                print "\nI don't understand that command!\n"

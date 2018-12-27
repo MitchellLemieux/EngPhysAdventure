@@ -13,16 +13,20 @@ Fix the map (doesn't show layout right as bsb is bellow JHE)
 
 
 --current update features--
+safe files for infinite laptop loop
+	will it just be at locations 
+	or be able to save whenever you want with a command?
+encrypt safe file/logfile
+document
+release 0.27
 
 have that speed run time, steps, and other data saved to a stat file [encrypted] to be sent in and put on the leaderboard
 	date, Name input, computer name?, steps, time played, game version,
 	[this will later be the save file but] location, enemies killed, inventory, stats, quest status
 	Key logging save file doesn't work for rng featues like bighits, Brendan fallon, etc but can be used for debugging (so can have a logloader) 
 Add leaderboard in the QT
+
 add try and except that if there is a bug it exits safely with a display and saves your file
-safe files for infinite laptop loop
-	will it just be at locations 
-	or be able to save whenever you want with a command?
 restart or exit command once the gain ends (or keep playing if done the story)
 	maybe using saves?
 Have the text scroll by first time? And Also auto limit text display to roll over at 72 characters (no need to \n it).
