@@ -6,10 +6,12 @@ import operator
 from random import *
 
 
-def tupleAdd(a,b,c,d): #adds 4 tuples element-wise, used to calculate stats of character
+def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
     j = tuple(map(operator.add,c,d))
-    return tuple(map(operator.add,i,j))
+    k = tuple(map(operator.add,e,f))
+    ij = tuple(map(operator.add,i,j))
+    return tuple(map(operator.add,ij,k))
 
 class Equipment:
     def __init__(self,name,location,image,info,worn,stats,health):
@@ -29,16 +31,19 @@ class Character: #When the equip function is called we need to make sure the ite
         self.inv = inv
         self.emptyinv = emptyinv
         self.health = health
-        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats)
+        self.maxhealth = 100
+        self.basestats = [0,0,0]
+        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0)) #adds tuples together to new stats to make actual stats
         self.alive = True
         self.spoke = False
+        
         
         for i in inv:
             inv[i].location = self.location
         
-    def updateStats(self):
-        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats)
-        
+    def updateStats(self): #updates stats based on changing equipment
+        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0))
+
     def equip(self,Equip):
         drop = 0
         if self.inv[Equip.worn] == Equip:
@@ -160,7 +165,7 @@ class Map:  #Map Location Storage
                 if enemy.alive:
                     description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chaulk outline of"]) + enemy.name + ".\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chaulk outline of "]) + enemy.name + ".\n"
         if self.interact:
             for item in self.interact:  
                 description = description + item.info + "\n"

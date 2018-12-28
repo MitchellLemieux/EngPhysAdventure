@@ -1,14 +1,17 @@
 from GameClasses import *
 import StartUp
-import Hero
-#from nltk.metrics import edit_distance
-#import distance
+import AsciiArt
 
 
-MAPS = StartUp.WorldMap()
+#This is where the global variables are defined. Global variables used to pass info between functions and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
+#TODO Ask Mitch why these aren't just in the main file
+MAPS = StartUp.WorldMap() 
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
+GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': []} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
+
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
@@ -19,9 +22,11 @@ EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #gets to have the Iron Ring when he graduates
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
+Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
 
 def Equip(Item):
     global PLAYER
@@ -92,7 +97,7 @@ def Move(direction):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
         if random() <= 0.003:
             MAPS[x][y][z].placeEnemy(bf)
-            Hero.Hero()
+            AsciiArt.Hero()
         if Place.travelled:
             print "========================================================================"
             print Place.lore +"\n\n"+Place.info + Place.search()
@@ -244,7 +249,7 @@ def Inspect(Item): #Item is the inspect item
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
         print "WORN: " + str(ITEMS[Item].worn).upper()
-        if ITEMS[Item].health > -101: #if edible it shows that health stat plus what your final health would be if eaten
+        if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
             print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
         else:
             print""
@@ -277,12 +282,19 @@ def Eat(Item):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    
+
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
-        if ITEMS[Item].health > -101:
+        if Item == "jar of peanut butter" and (PLAYER.name == "Mitchell Lemieux" or "Erik Reimers"):
+            print "Oh NO! You're " + PLAYER.name + " ! Don't you remember?\nYOU'RE ALERGIC TO PEANUT BUTTER?\nYou DIE due to your lack of responsibility."
+            PLAYER.health = 0
+            PLAYER.alive = False
+        elif ITEMS[Item].health:
             PLAYER.health = PLAYER.health + ITEMS[Item].health
-            PLAYER.health = min(100, PLAYER.health)
+            PLAYER.health = min(PLAYER.maxhealth, PLAYER.health) #made the minimum of your added health and food so players health doesn't clip over
+            PLAYER.health = max(PLAYER.health, 0) #prevents clipping bellow 0
             print "\nYou've eaten the " + ITEMS[Item].name + ".\nHEALTH: "+ str(PLAYER.health)+"\n"
+            if PLAYER.health == 0:
+                PLAYER.alive = False
             ITEMS[Item].location = (None, None, None) #used to clear the item location
             if ITEMS[Item] == PLAYER.inv[ITEMS[Item].worn]:
                 PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
@@ -292,23 +304,22 @@ def Eat(Item):
             else:
                 MAPS[x][y][z].removeItem(ITEMS[Item])
     
-        #if Item == "Jar of Peanut Butter" and (PLAYER.name == "Mitch Lemieux" or PLAYER.name == "Erik Reimers"):
-        #        PLAYER.health = 0 #makethis function happen later, you die if you're mitch or erik and eat peanut butter!
         else:
             print "You can't eat that!"
     else:
         print "\nThat doesn't seem to be around here.\n"
 
-def logGame(log):
+def logGame(log, writePlayer): #this makes a log file which records all player actions for debugging
     global PLAYER
-    f = open("LogFile.txt","a+")
+    f = open("MetaChache.txt","w+") #metacache is a fake name for the log file
     for i in range(len(log)):
         f.write(str(log[i]) + '\n')
-    f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
-    f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
-    f.write(str(PLAYER.health) + '\n')
-    for i in PLAYER.inv:
-        f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
+    if writePlayer:
+        f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
+        f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
+        f.write(str(PLAYER.health) + '\n')
+        for i in PLAYER.inv:
+            f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
     f.close()
     
 QUESTS = {
