@@ -165,7 +165,7 @@ class Map:  #Map Location Storage
                 if enemy.alive:
                     description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chaulk outline of "]) + enemy.name + ".\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + enemy.name + ".\n"
         if self.interact:
             for item in self.interact:  
                 description = description + item.info + "\n"

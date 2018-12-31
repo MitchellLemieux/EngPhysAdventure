@@ -1,6 +1,9 @@
 from GameClasses import *
 import StartUp
 import AsciiArt
+import Opening #used for the EPTA all the way down quest
+import time
+import os #used to put files in the cache folder
 
 
 #This is where the global variables are defined. Global variables used to pass info between functions and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
@@ -9,12 +12,13 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
-GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,
-            'runtime': 0, 'stepcount':0,'commandcount':0,'log': []} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
-
+GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": ""} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
+#version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
+
 
 EMPTYHEAD = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','head',(0,0,0),-101)
 EMPTYBODY = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','body',(0,0,0),-101)
@@ -27,6 +31,15 @@ TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITE
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
+
+#Setting up the game path for the game to the cache folder
+#using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
+GAMEINFO['savepath'] = os.path.join(os.getcwd(), "cache","")
+try:
+    os.makedirs(GAMEINFO['savepath']) #gets the directory then makes the path if it's not there
+except:
+    print "\n"#does nothing if the path is already there
+
 
 def Equip(Item):
     global PLAYER
@@ -171,8 +184,9 @@ def Attack(E):
     CurrentPlace = MAPS[x][y][z]
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E] #making it the object from the name
-        if random() <= 0.01:
-            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death."
+        if random() <= 0.01: #bigHits feature
+            AsciiArt.BigHits()
+            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
             print enemy.Dinfo + ".\n"
             enemy.alive = False
             if enemy.drop:
@@ -309,23 +323,18 @@ def Eat(Item):
     else:
         print "\nThat doesn't seem to be around here.\n"
 
-def logGame(log, writePlayer): #this makes a log file which records all player actions for debugging
-    global PLAYER
-    f = open("MetaChache.txt","w+") #metacache is a fake name for the log file
+def logGame(log): #this makes a log file which records all player actions for debugging
+    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt" #metacache is a fake name for the log file
+    f = open(fpath,"w+") 
     for i in range(len(log)):
         f.write(str(log[i]) + '\n')
-    if writePlayer:
-        f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
-        f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
-        f.write(str(PLAYER.health) + '\n')
-        for i in PLAYER.inv:
-            f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
     f.close()
     
 QUESTS = {
-          #sidequest
+          #sidequests
           'secret spaces': 1,
-          
+          'EPTA all the way down': 1,
+          #Talk to hooded man
           "talk to mysterious man": 1,
           #Nuke
           "preston get dumbbell": 1,
@@ -361,10 +370,39 @@ def Story():
     global INTERACT
     global MAPS
     #Side Quests
-    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:
+    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]: #Unlocks the secret space once you get the scroll
         MAPS[0][2][1].removeWall("d")
         QUESTS["secret spaces"] = 0
+    
+    if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']: #when you put the pen in the laptop it restarts the game
+    #TODO as homework see if there's a way to do this with recursion instead of simulating it
+        playgame = raw_input('========================================================================\nWould you like to play? \n').lower()
+        if playgame == "yes" or playgame =="y":
+            print "You click on the game and it begins in the terminal. The drumming \nintensifies. You're not sure if you made the right choice.\n========================================================================\n\n\n"
+            import CreativeMode #this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler
+            QUESTS['EPTA all the way down'] = 0 #Truns off the quest, has to be before the game saves so the quest is ended when you come back
+            CreativeMode.saveGame(str(GAMEINFO['layersdeep'])) #saving game to be reloaded after death or won the game
+            log =  GAMEINFO['log'] #keeps the log as a temporary variable to keep a running log in the nested game
+            #TODO enable this opening as well before release
+            #Opening.Opening()
+            newplayername = raw_input("First, what is your name?\n")
+            layers = GAMEINFO['layersdeep'] #saves layersdeep to a temporary variable for after the load
+            CreativeMode.loadGame("basegame") #should display the exact start
+            GAMEINFO['layersdeep'] = layers + 1 #increments the global layers deep because you're now in a lower level, using the memory of the local variable
 
+            GAMEINFO['playername']= PLAYER.name = newplayername #this is done for the log
+            GAMEINFO['gamestart'] = time.time() #Settign the game and timestart for for this layer
+            GAMEINFO['timestart'] = GAMEINFO['gamestart']
+            #Passes the log and adds onto it to keep a HUGE running log (TODO Make this more effecient with log appending)
+            GAMEINFO['log'] = log + [str(playgame),"--NESTED GAME--", GAMEINFO['layersdeep'], GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['timestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
+        elif playgame == "no" or playgame =="n":
+            print "You decide against it, fearing the worst. You safely edject the pen, \ndrop it on the floor, and smash it to pieces. Better safe than sorry.\nThe drumming stops.\n========================================================================"
+            QUESTS['EPTA all the way down'] = 0
+            GAMEINFO['log'] += [str(playgame)] #adds your command to the log
+        else:
+            print "It was a yes or no question. When you look back the files are gone.\nEven flexpde. Good riddance.\n========================================================================"
+            QUESTS['EPTA all the way down'] = 0
+            GAMEINFO['log'] += [str(playgame)] #adds your command to the log
     
     #Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
@@ -474,6 +512,7 @@ def Story():
             
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
         PLAYER.alive = False
+        QUESTS['restored order'] = 0 #turn this off so you can continue playing the game
         return 2
 
     else:
