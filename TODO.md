@@ -9,7 +9,10 @@ https://docs.python.org/2/tutorial/inputoutput.html - save structured data
 --fixes--
 Fix the map (doesn't show layout right as bsb is bellow JHE)
 Hooded man doesn't have death Diologe
-Broken when you play as Tyler Kashak?
+Too broken when you play as Tyler?
+Dr. Novog doesn't death quest
+can kill dr. cassidy after you kill mcamster and still give you the same dialog
+still a problem with layers, saving and loading, hope it works for 0.27 release
 
 --current update features--
 Test winning in the nested file
@@ -20,6 +23,9 @@ document
 Playtest and release 0.27
 
 0.28
+game difficulty disclaimer
+added push to the statue after you get the 3 quantum rellics
+Name everything and attack dialougs (use x to do y)
 Save file update
 	Encrypt the save and log files
 	When you load allow you to select 
