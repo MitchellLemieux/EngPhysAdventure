@@ -1,17 +1,24 @@
 from GameClasses import *
 import StartUp
-import Hero
-#from nltk.metrics import edit_distance
-#import distance
+import AsciiArt
+import Opening #used for the EPTA all the way down quest
+import time
+import os #used to put files in the cache folder
 
 
-MAPS = StartUp.WorldMap()
+#This is where the global variables are defined. Global variables used to pass info between functions and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
+#TODO Ask Mitch why these aren't just in the main file
+MAPS = StartUp.WorldMap() 
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
+GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": ""} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
+#version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
+
 
 EMPTYHEAD = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','head',(0,0,0),-101)
 EMPTYBODY = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','body',(0,0,0),-101)
@@ -19,9 +26,20 @@ EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #gets to have the Iron Ring when he graduates
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
+Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
+
+#Setting up the game path for the game to the cache folder
+#using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
+GAMEINFO['savepath'] = os.path.join(os.getcwd(), "cache","")
+try:
+    os.makedirs(GAMEINFO['savepath']) #gets the directory then makes the path if it's not there
+except:
+    print "\n"#does nothing if the path is already there
+
 
 def Equip(Item):
     global PLAYER
@@ -36,7 +54,7 @@ def Equip(Item):
         #this is different than the equip method in the Character class.
         #Makes sure the item is dropped at the current location
         drop = PLAYER.equip(ITEMS[Item])
-        Place.Remove(ITEMS[Item])
+        Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         print "\nYou can't equip that, gosh\n"
@@ -54,6 +72,7 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
+        #febreeze isn't droped
         #Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
@@ -91,7 +110,7 @@ def Move(direction):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
         if random() <= 0.003:
             MAPS[x][y][z].placeEnemy(bf)
-            Hero.Hero()
+            AsciiArt.Hero()
         if Place.travelled:
             print "========================================================================"
             print Place.lore +"\n\n"+Place.info + Place.search()
@@ -164,10 +183,12 @@ def Attack(E):
     z = PLAYER.location[2]
     CurrentPlace = MAPS[x][y][z]
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
-        enemy = ENEMIES[E]
-        if random() <= 0.01:
-            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches " + enemy.name + " to death."
+        enemy = ENEMIES[E] #making it the object from the name
+        if random() <= 0.01: #bigHits feature
+            AsciiArt.BigHits()
+            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
             print enemy.Dinfo + ".\n"
+            enemy.alive = False
             if enemy.drop:
                print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                CurrentPlace.placeItem(ITEMS[enemy.drop])
@@ -242,7 +263,7 @@ def Inspect(Item): #Item is the inspect item
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
         print "WORN: " + str(ITEMS[Item].worn).upper()
-        if ITEMS[Item].health > -101: #if edible it shows that health stat plus what your final health would be if eaten
+        if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
             print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
         else:
             print""
@@ -275,12 +296,19 @@ def Eat(Item):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    
+
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
-        if ITEMS[Item].health > -101:
+        if Item == "jar of peanut butter" and (PLAYER.name == "Mitchell Lemieux" or "Erik Reimers"):
+            print "Oh NO! You're " + PLAYER.name + " ! Don't you remember?\nYOU'RE ALERGIC TO PEANUT BUTTER?\nYou DIE due to your lack of responsibility."
+            PLAYER.health = 0
+            PLAYER.alive = False
+        elif ITEMS[Item].health:
             PLAYER.health = PLAYER.health + ITEMS[Item].health
-            PLAYER.health = min(100, PLAYER.health)
+            PLAYER.health = min(PLAYER.maxhealth, PLAYER.health) #made the minimum of your added health and food so players health doesn't clip over
+            PLAYER.health = max(PLAYER.health, 0) #prevents clipping bellow 0
             print "\nYou've eaten the " + ITEMS[Item].name + ".\nHEALTH: "+ str(PLAYER.health)+"\n"
+            if PLAYER.health == 0:
+                PLAYER.alive = False
             ITEMS[Item].location = (None, None, None) #used to clear the item location
             if ITEMS[Item] == PLAYER.inv[ITEMS[Item].worn]:
                 PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
@@ -288,30 +316,25 @@ def Eat(Item):
                 PLAYER.updateStats()
                 print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
             else:
-                MAPS[x][y][z].Remove(ITEMS[Item])
+                MAPS[x][y][z].removeItem(ITEMS[Item])
     
-        #if Item == "Jar of Peanut Butter" and (PLAYER.name == "Mitch Lemieux" or PLAYER.name == "Erik Reimers"):
-        #        PLAYER.health = 0 #makethis function happen later, you die if you're mitch or erik and eat peanut butter!
         else:
             print "You can't eat that!"
     else:
         print "\nThat doesn't seem to be around here.\n"
 
-def saveGame(savefile):
-    global PLAYER
-    f = open("SaveFile.txt","a+")
-    for i in range(len(savefile)):
-        f.write(str(savefile[i]) + '\n')
-    f.write(str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])) + '\n')
-    f.write(str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])) + '\n')    
-    f.write(str(PLAYER.health) + '\n')
-    for i in PLAYER.inv:
-        f.write(str( i.upper() + ": " + PLAYER.inv[i].name) + '\n')
+def logGame(log): #this makes a log file which records all player actions for debugging
+    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt" #metacache is a fake name for the log file
+    f = open(fpath,"w+") 
+    for i in range(len(log)):
+        f.write(str(log[i]) + '\n')
     f.close()
+    
 QUESTS = {
-          #sidequest
+          #sidequests
           'secret spaces': 1,
-          
+          'EPTA all the way down': 1,
+          #Talk to hooded man
           "talk to mysterious man": 1,
           #Nuke
           "preston get dumbbell": 1,
@@ -347,10 +370,38 @@ def Story():
     global INTERACT
     global MAPS
     #Side Quests
-    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:
+    if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]: #Unlocks the secret space once you get the scroll
         MAPS[0][2][1].removeWall("d")
         QUESTS["secret spaces"] = 0
+    
+    if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']: #when you put the pen in the laptop it restarts the game
+    #TODO as homework see if there's a way to do this with recursion instead of simulating it
+        playgame = raw_input('========================================================================\nWould you like to play? \n').lower()
+        if playgame == "yes" or playgame =="y":
+            print "You click on the game and it begins in the terminal. The drumming \nintensifies. You're not sure if you made the right choice.\n========================================================================\n\n\n"
+            import CreativeMode #this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler
+            QUESTS['EPTA all the way down'] = 0 #Truns off the quest, has to be before the game saves so the quest is ended when you come back
+            CreativeMode.saveGame(str(GAMEINFO['layersdeep'])) #saving game to be reloaded after death or won the game
+            log =  GAMEINFO['log'] #keeps the log as a temporary variable to keep a running log in the nested game
+            Opening.Opening()
+            newplayername = raw_input("First, what is your name?\n")
+            layers = GAMEINFO['layersdeep'] #saves layersdeep to a temporary variable for after the load
+            CreativeMode.loadGame("basegame") #should display the exact start
+            GAMEINFO['layersdeep'] = layers + 1 #increments the global layers deep because you're now in a lower level, using the memory of the local variable
 
+            GAMEINFO['playername']= PLAYER.name = newplayername #this is done for the log
+            GAMEINFO['gamestart'] = time.time() #Settign the game and timestart for for this layer
+            GAMEINFO['timestart'] = GAMEINFO['gamestart']
+            #Passes the log and adds onto it to keep a HUGE running log (TODO Make this more effecient with log appending)
+            GAMEINFO['log'] = log + [str(playgame),"--NESTED GAME--", GAMEINFO['layersdeep'], GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['timestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
+        elif playgame == "no" or playgame =="n":
+            print "You decide against it, fearing the worst. You safely edject the pen, \ndrop it on the floor, and smash it to pieces. Better safe than sorry.\nThe drumming stops.\n========================================================================"
+            QUESTS['EPTA all the way down'] = 0
+            GAMEINFO['log'] += [str(playgame)] #adds your command to the log
+        else:
+            print "It was a yes or no question. When you look back the files are gone.\nEven flexpde. Good riddance.\n========================================================================"
+            QUESTS['EPTA all the way down'] = 0
+            GAMEINFO['log'] += [str(playgame)] #adds your command to the log
     
     #Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
@@ -393,11 +444,14 @@ def Story():
         QUESTS["knights get book"] = 0
     
 
-    if ENEMIES['dr. haugen'].spoke and QUESTS['haugen kill soleymani']:
+    if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
+        ENEMIES['dr. haugen'].alive = False
+        MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][0].placeItem(ITEMS["haugen's clothes"])
+        
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
-        MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
         QUESTS['einstein fridge'] = 0
         
     
@@ -456,7 +510,7 @@ def Story():
             return 1
             
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
-        PLAYER.alive = False
+        PLAYER.alive = False #does this so you can get out of the loop
         return 2
 
     else:
