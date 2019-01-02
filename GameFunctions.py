@@ -383,8 +383,7 @@ def Story():
             QUESTS['EPTA all the way down'] = 0 #Truns off the quest, has to be before the game saves so the quest is ended when you come back
             CreativeMode.saveGame(str(GAMEINFO['layersdeep'])) #saving game to be reloaded after death or won the game
             log =  GAMEINFO['log'] #keeps the log as a temporary variable to keep a running log in the nested game
-            #TODO enable this opening as well before release
-            #Opening.Opening()
+            Opening.Opening()
             newplayername = raw_input("First, what is your name?\n")
             layers = GAMEINFO['layersdeep'] #saves layersdeep to a temporary variable for after the load
             CreativeMode.loadGame("basegame") #should display the exact start
@@ -511,8 +510,7 @@ def Story():
             return 1
             
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
-        PLAYER.alive = False
-        QUESTS['restored order'] = 0 #turn this off so you can continue playing the game
+        PLAYER.alive = False #does this so you can get out of the loop
         return 2
 
     else:

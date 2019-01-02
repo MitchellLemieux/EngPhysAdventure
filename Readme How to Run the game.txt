@@ -7,5 +7,5 @@ Readme How to Run the game
 6. Give advanced feedback: https://goo.gl/forms/LbLxflbmLF61YvmD2
 
 
-Version: Alpha v0.26 - The SpeedRun Update
-Updated: Dec 15, 2018
+Version: Alpha v0.27 - Save Files
+Updated: Jan 2, 2019

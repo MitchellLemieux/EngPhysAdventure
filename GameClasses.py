@@ -23,8 +23,7 @@ class Equipment:
         self.location = location
         self.health = health
     
-class Character: #When the equip function is called we need to make sure the item is actually in the room
-    
+class Character:
     def __init__(self,name,location,health,inv,emptyinv):
         self.name = str(name)
         self.location = location
@@ -36,7 +35,6 @@ class Character: #When the equip function is called we need to make sure the ite
         self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0)) #adds tuples together to new stats to make actual stats
         self.alive = True
         self.spoke = False
-        
         
         for i in inv:
             inv[i].location = self.location
@@ -90,9 +88,9 @@ class Enemy:
         self.stats = stats
         self.health = health
         self.item = None
-        self.Sinfo = Sinfo
-        self.Dinfo = Dinfo
-        self.need = need
+        self.Sinfo = Sinfo #special info displayed if you give them what they need
+        self.Dinfo = Dinfo #death info displayed if they need
+        self.need = need #what the need, if you talk to them with this item you'll get the drop and it will set the quest flag to True
         self.drop = drop
         self.alive = True
         self.quest = False

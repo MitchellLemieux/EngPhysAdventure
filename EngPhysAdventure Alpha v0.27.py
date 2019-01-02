@@ -17,7 +17,7 @@ import CreativeMode
 #If there was a title screen it would go here
 GAMEINFO['version'] = 0.27
 GAMEINFO['versionname'] = "Alpha v0.27 - Dev Update"
-#Updated: Dec 15, 2018
+#Updated: Jan 2, 2019
 
 
 
@@ -25,8 +25,8 @@ GAMEINFO['versionname'] = "Alpha v0.27 - Dev Update"
 def Setup():
     global PLAYER
     global GAMEINFO
-    #TODO uncomment that guy
-    #Opening()
+    
+    Opening()
     print "========================================================================" #standard display width breaker, 72 characters
 
     GAMEINFO['playername'] = raw_input("First, what is your name?\n")
@@ -111,7 +111,6 @@ def Main():
             elif (verb == 'inventory'):
                 Inventory()
             elif verb == 'savegame':
-                #TODO refine the runtime function and double check it works, even with nested game
                 #TODO add: computer name, words and characters per minute, # enemies killed, # items eaten, # items equiped, # enemies talked, # quantum relecs found
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart']) #adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time() #resets timestart so it's not doubly added at the end
@@ -156,6 +155,7 @@ def Main():
         GAMEINFO['commandcount'] += 1 #increments the command count after every command but doesn't print
         print "========================================================================"
         Story() #runs through the story quests checks
+        #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0: #gets you out of the EPTA all the way down quest and back into the sublayer
             End()
             print "\n========================================================================\n\nYou finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?"
@@ -183,7 +183,6 @@ def End():
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #writes the log file
         if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit: ").lower() =='r': #lets the player restart the game
-            #TODO should it display the opening again and ask for a name as well?
             CreativeMode.loadGame("basegame") #loads in the savefile global variables
             GAMEINFO['timestart'] = time.time() #reset instance start time
             Main() #re-enters the main loop
@@ -195,7 +194,6 @@ def End():
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
         elif Story() == 2: #The good storyline ending. 
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
-        
         DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #logs the data to be submitted
@@ -203,6 +201,9 @@ def End():
         endchoice = raw_input("Thanks for playing!!\nType 'C' to continue, 'R' to restart, anything else will exit: ").lower() #this input is to hold the screen until the player decides what to do
         if endchoice == "c":
             PLAYER.alive = True
+            print "========================================================================"
+            QUESTS['restored order'] = 0 #turn this off so you can continue playing the game without the quest redoing
+            QUESTS['create chaos'] = 0 
             Main() #returns to the main (hopefully in the same state)
         if endchoice == "r":
             CreativeMode.loadGame("basegame") #loads in the savefile global variables

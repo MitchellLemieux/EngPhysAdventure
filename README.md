@@ -4,6 +4,8 @@
 This is the main file for the Eng Phys Text Adventure (EPTA). This game utilizes some poorly done OOP (sorry Mitch), it has it's strengths though! 
 The comments, organization, and optimization. In general try to keep this structure and put any other long ascii display or mode into another file:
 
+AsciiArt.py = Where all of the ascii art display files are
+
 EngPhysAdventure ____ = the setup, main loop, and ending. Run this to run the game.
 
 GameFunctions.py = The main mechanics of the game and the quests. All non-class functions. 
@@ -13,6 +15,7 @@ GameClasses.py = Class definitions and their coresponding functions.
 Startup.py = All the map locations, items, npcs (called enemies), and interactables. Also creates the dictionaries of them.
 
 Setup.py = Py2exe file used to compile into an exe. Run using "python setup.py py2exe" in command prompt.
+
 
 
 

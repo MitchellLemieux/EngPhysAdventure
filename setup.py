@@ -11,5 +11,14 @@ setup( console= [
 )
 
 
-print "\n\nDon't forget to:\n0.Check that the openning is enabled and all dev items (iron ring) aren't spawning\n1.Replace the icon with resource hacker\n2.Make sure all the version names are updated\n3.Update the readme and update callout file\n4.Make sure the patch notes are updated but redacted\n5.Zip folders, readme, and patchnotes as zip SFX .exe file\n6.Upload that .exe and update callout file to release folder"
-
+reminder = ["\n\nDon't forget to:\n",
+            "1. Check all the TODOs in the game\n",
+            "2. Check that the openning is enabled and all dev items (iron ring) aren't spawning\n",
+            "3.Replace the icon with resource hacker\n",
+            "4.Make sure all the version names are updated\n",
+            "5.Update the readme and patch notes release files\n",
+            "6.Make sure the patch notes are updated but redacted\n",
+            "7.Zip folders, readme, and patchnotes as zip SFX .exe file\n",
+            "8.Upload that .exe to release folder"]
+for i in reminder:
+    print i

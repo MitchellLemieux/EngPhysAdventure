@@ -1,0 +1,36 @@
+--Patch Notes--
+Updated January 2nd!
+
+Alpha 0.27 - Save Files - Jan 2, 2019
+CHANGE Removed walls the 2nd floors so you can walk between them where you can on campus
+ADDED Comments to a lot of code and Brendan learned how it works, still not sure why it does though 
+ADDED save files and load functions for the game!
+	Can type savegame, loadgame, or restart to do those functions
+	The save filename is based on your character name so to load the game fresh you need name your character the same each time
+ADDED Don't eat the peanut butter if you're alergic
+BUGFIX Random events
+BUGFIX Questline
+CHANGED Made health more versatile
+CHANGED Added a new player
+ADDED Don't listen to the drums 
+ADDED Now more texted based than ever!
+ADDED You can restart the game and continue at the end now 
+ADDED EPIPEN, 2nd floor hatch
+
+
+
+
+Alpha 0.26.1 - Hotfix - December 22, 2018
+CHANGE Some secrets now require you to do the quest!
+BUG FIX So you can actually finsh the game without it crashing
+BUG FIX Time Display was corrected
+
+Alpha 0.26 - The SpeedRun Update - 
+ADDED step, command, and time counters that display at the end for speedrunning!
+ADDED A command log for later developer debugging
+
+
+
+Alpha 0.25 - September 13, 2018 - Initial release!
+Base game and storyline
+

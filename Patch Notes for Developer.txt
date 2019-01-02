@@ -1,0 +1,43 @@
+--Developer Patch Notes--
+Updated January 2nd!
+[] is the notes for release to the public with the game files which are redacted
+
+--Alpha 0.27 Update - 
+ADDED MAP 2nd floor hatch
+ADDED diaolog for Dan Fitz
+CHANGE Removed walls the 2nd floors so you can walk between them where you can on campus
+Tryed to start making a load from log file but made infinite loops (make load from log once you have a debug file to do)
+CHANGE Changed name of map class Remove to removeItem to be more clear and fit camelcase
+ADDED Comments to a lot of code and Brendan learned how it works, still not sure why it does though
+ADDED Creative mode file with developer functions to help, 
+ADDED save files and load functions made for the devloper and now the player!
+	Save and load files are in the Creative mode function and you can call it giving in the save/load file name
+	[The save keyword and filename is based on your character name]
+ADDED Made you die if you're Mitch or Erik and eat penut butter [Don't eat the peanut butter if you're alergic]
+BUGFIX Haugen didn't Disapear
+BUGFIX BigHits didn't kill people
+ADDED Haugen's clothes (once he disapears, fixed that as well), added epipen (which in the future could prevents you from dying)
+ADDED FEATURE max health and base stats for the character class (which adds to stats regardless of equipment) and are modifyable
+CHANGED ITEMS Made the health qualifyier 0 or empty for it to not be food so you can heal or detrement as much as you want [made health more versatile]
+	SO I HAD TO CHANGE ALL THE EQUIPMENT ITEMS TO "". Actually it was fine cause idle has a find and replace function.
+CHANGED Made Tyler Kashak Ridiculous [Added a new player]
+CHANGED Structure of the game and made start and end functions in the main file so the game could be non-linearly played
+ADDED Made the infinite eng phys game adventure on the laptop (had to make it inspectible and get rid of the CD inspectible) [Don't put the pen in the laptop]
+	Took a lot of woork and had to changed the structure but I think it works. Uses save files and a non-linear structure to work 
+	The start Part of it is in the quest but also part of it is in the main file at the end, will hcange this later
+ADDED Nice Ascii art for TYLER and Big Hits  [now more texted based than ever!]
+ADDED You can restart the game and continue at the end now and then save
+
+Alpha 0.26.1
+BUG FIX Fixed a key error with the gauss eye and einstein's brain that broke the game
+ADDED a log that logs commands for debugging
+CHANGE Made so Okon's stash isn't avalible until you do the ladder [Some secrets now require you to do the quest!]
+BUG FIX Fixed the Time display program (was broken for hours)
+
+Alpha 0.26
+Added movement, command, and time counters that display at the end
+
+
+Alpha 0.25
+Initial release!
+Base game and storyline
