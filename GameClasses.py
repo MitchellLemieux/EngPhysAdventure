@@ -107,7 +107,7 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls):
+    def __init__(self,name,coords,info,lore,walls,inside):
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
@@ -117,6 +117,10 @@ class Map:  #Map Location Storage
         self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
+        self.inside = inside
+        #self.interrior = interrior #interrior is a list of inner map locations
+        
+        
 
     def placeItem(self,item): #Works with the drop method in the character class
         if item:

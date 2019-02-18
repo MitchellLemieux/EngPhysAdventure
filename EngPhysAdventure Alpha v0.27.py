@@ -26,7 +26,7 @@ def Setup():
     global PLAYER
     global GAMEINFO
     
-    Opening()
+    #Opening()
     print "========================================================================" #standard display width breaker, 72 characters
 
     GAMEINFO['playername'] = raw_input("First, what is your name?\n")

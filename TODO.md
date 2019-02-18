@@ -13,6 +13,11 @@ Too broken when you play as Tyler?
 Dr. Novog doesn't death quest
 can kill dr. cassidy after you kill mcamster and still give you the same dialog
 still a problem with layers, saving and loading, hope it works for 0.27 release
+talk to hooded man after he disapears
+droesn't drop iron ring after you kill cassidy
+add savegame info to the sign
+Save files in the wrong location? Where is Doug?
+Can't play as tyler Kashak after you stop
 
 --current update features--
 Test winning in the nested file
@@ -20,10 +25,12 @@ document
 	Comment functions
 	The Game run loop diagrams
 	Current best strategy for winning
-Playtest and release 0.27
+
 
 0.28
+Updating all the people and places
 game difficulty disclaimer
+time mechanic
 added push to the statue after you get the 3 quantum rellics
 Name everything and attack dialougs (use x to do y)
 Save file update
@@ -47,6 +54,7 @@ Comment all the code and add documentation
 --stretch features--
 0.29
 Music and sound effects (zelda for key things, Brian & Erik to make the game music)
+Start hollywood expansion
 stats kept, acheivements
 starting screen
 	GUI using pygame text based one? But all in Ascii
@@ -59,5 +67,9 @@ Make it something that you want to play with some sort of grinding leading to so
 Making it a web game
 
 
+0.28 Updated
+Black screen with green take
+	LOL JUST MAKE THE TEXT GREEN in command prompt
+	I liked 51 255 51
 
 

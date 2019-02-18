@@ -119,6 +119,8 @@ def Move(direction):
             print "========================================================================"
             print Place.info + Place.search()
             return Place
+            
+        
     else:
         PLAYER.location[0] = CurrentPlace.coords[0]
         PLAYER.location[1] = CurrentPlace.coords[1]
