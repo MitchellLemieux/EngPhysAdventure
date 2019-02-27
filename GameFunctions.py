@@ -239,6 +239,8 @@ def Talk(E):
         else:
             print "\n" + enemy.info+"\n"
         enemy.spoke = True
+    elif E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive==False):
+        print "\nI don't think they can do that anymore.\n"
     else:
         print "\nThey don't appear to be here.\n"
 
@@ -331,7 +333,16 @@ def logGame(log): #this makes a log file which records all player actions for de
     for i in range(len(log)):
         f.write(str(log[i]) + '\n')
     f.close()
-    
+
+def NameChange(): #A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
+    global PLAYER
+    global ENEMIES
+    global MAPS
+    #ENEMIES['yourself'].name = playername
+    ENEMIES['yourself'].name = PLAYER.name #yourself gets renamed to player name
+    ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) #adds that new entity to the dictionary
+    MAPS[2][4][1].placeEnemy(ENEMIES[PLAYER.name.lower()]) #then placed on the map
+    return
 QUESTS = {
           #sidequests
           'secret spaces': 1,

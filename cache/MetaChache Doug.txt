@@ -1,394 +1,46 @@
 Alpha v0.27 - Dev Update
-doug
-Mon Feb 18 11:04:46 2019
+Doug
+Wed Feb 27 00:19:26 2019
 --LOG START--
+f
+talk Doug
 l
 l
-l
-lf
-f
-f
-f
-equip ladder
-equip old ladder
-l
-f
-equip old ladder
-b
-b
+r
 b
 r
 r
 r
-inspect coat arms
-l
-l
-l
-l
-b
+r
+f
+f
 b
 d
-equip okons chainmail
-equip diary of the fallen
-u
-r
-r
-r
-r
-r
-f
-f
-f
-r
-r
-f
-r
-f
-equip cheese
-b
-b
-b
-b
-b
-l
-l
-l
-l
-l
-l
-b
-b
-r
-u
-u
-u
-inspect mouse
-equip gilder blunderbuss
-d
-d
-f
-f
-fr
-r
-r
-r
-r
-f
-r
-b
-b
-b
-f
-f
-r
-f
-f
-talk hooded man
-l
-l
-l
-lr
-r
-r
-r
-d
-attack jana the vegan
-u
-l
-l
-f
-f
-r
-l
-f
-b
-l
-r
-b
-r
-attack chris
-stats
-l
-l
-b
-f
-l
-f
-r
-r
-r
-b
-l
-attack bill the mac cop
-b
-b
-r
-l
-drop gilded blunderbus
-inventor
-l
-l
-l
-u
-equip silicon substrate
-d
-r
-r
-r
-r
-b
-f
-l
-f
-r
-talk dr. kitai
-l
-f
-equip solar cell
-l
-l
 f
 u
-b
-talk dr. kelimean
-d
-r
-b
-r
-b
-talk dr. minnick
-equip miniick's glasses
-search
-talk dr. minnick
-b
-r
-f
-l
-l
-b
-f
-f
-equip coffee
-l
-f
-u
-f
-talk dr. lapiere
-d
-r
-r
-r
-stats
-r
-b
-b
-d
-equip 3w textbook
-u
-talk dr. knights
-l
+talk Hooded Man
+Talk Megan the Bartender
 l
 l
 l
 b
-l
 b
-b
-r
-r
 b
 l
 f
-l
-b
-equip dumbbell
-f
-f
-f
-r
-f
-r
-l
-u
-talk dr. preston
-d
-f
-talk dr. buijs
-r
-r
-equip capstone tools
-l
-l
-talk dr. buijs
-d
-talk dan fitzgreen
-u
-l
-l
-u
-talk dr. nagaski
-d
-r
-r
-r
-r
-d
-u
-l
-l
-d
-talk dan fitzgreen
-u
-r
-r
-l
-l
-d
-talk dan fitzgreen
-search
-equip ambifacient lunar waneshaft
-u
-l
-l
-u
-talk dr. naagaski
-equip flux capacitor
-d
-r
-r
-r
-r
-d
-inspect broken reactor
-equip pink donut
-u
-l
-l
-d
-u
-f
-d
-talk dr. novog
-equip ancient incantation
-u
-b
-b
-b
-r
-r
-b
-b
-b
-b
-d
-inspect ancient mirror
-equip gamma glove
-u
-f
-f
-l
-f
-f
-attack kenrick
-l
-l
-l
-l
-b
-b
-b
-u
-attack dr. soleymani
-d
 r
 f
 f
-r
-r
-drop gamma glvoe
-u
-d
-inventor
-f
-equip kenricks osicliope
-b
-talk dr. minniick
-equip miniick's glasses
-b
-r
-l
-inspect sun dial
-equip rusty key
-l
-f
-f
-l
-f
-f
-inspect display case
-equip faraday's cage
-f
-d
-talk dr. miniick
-equip gauss eye
-u
-l
-l
-b
-b
-b
-b
-b
-b
-u
-equip einstein's brain
-d
-f
-f
-r
-r
-f
-f
-l
-f
-d
-talk dr. haugen
-u
-d
-equip femstosecond laser
-inspect optical bench
-equip relativistic key
-inspect fridge
-equip pedrotti cubed
-u
-b
-b
-r
-r
-b
-equip gamma glove
-f
-f
-inventor
-r
-b
-b
-r
-
-b
-talk hooded man
-talk dr. cassidy
-attack dr. cassidy
+attack doug
 --END OF LOG--
-Stepcount: 300
-Command Count: 377
-Run Time: 571.066000223
+Stepcount: 26
+Command Count: 30
+Run Time: 3282.00600004
 --Character STATS--
-(5, 2, 1)
-(425, 400, 395)
-32
-HEAD: Gauss Eye
-BODY: Okons Chainmail
-HAND: Gamma Glove
-OFF-HAND: Pedrotti Cubed
----THEY WON---
+(2, 4, 1)
+(0, 0, 0)
+0
+HEAD: EMPTY
+BODY: EMPTY
+HAND: EMPTY
+OFF-HAND: EMPTY

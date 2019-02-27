@@ -25,13 +25,14 @@ GAMEINFO['versionname'] = "Alpha v0.27 - Dev Update"
 def Setup():
     global PLAYER
     global GAMEINFO
-    
+    #TODO re-enamble before release
     #Opening()
     print "========================================================================" #standard display width breaker, 72 characters
 
     GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     
     PLAYER.name = GAMEINFO['playername']
+    NameChange() #changes the name of all name related things in the game
        
     x = 2
     y = 3
@@ -45,7 +46,7 @@ def Setup():
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     
     GAMEINFO['gamestart'] = time.time() #Gives the local start date of the game in seconds since epoch of 1970
-
+    
     CreativeMode.saveGame("basegame") #Use this to get a base state newgame, keep it in each time so don't have to worry about updating
     #This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
     if PLAYER.name == "Tyler Kashak": #He realizes he's the main character and can do anything he wants

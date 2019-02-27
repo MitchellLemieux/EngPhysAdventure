@@ -44,7 +44,7 @@ def Reset():
     Map("Inside University Hall",(6,1,1),"UNIVERSITY HALL:\nThe exit is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f'),True),
     Map("The Phoenix",(5,4,1),"THE PHOENIX:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over.",('r'),True),
     Map("BSB",(3,3,1),"BSB:\nBSB field is at your rear. Exit BSB to your right.\nThe entrance to JHE is to your left. The Quantum Tunnel is down the stairs.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
-    Map("Between JHE and BSB",(3,4,1),"JHE/BSB JUNCTION:\nEnter JHE to your left. General Sciences building to your right.\nBSB is behind you. The Police station is in front of you.","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
+    Map("Front BSB",(3,4,1),"FRONT OF BSB:\nEnter JHE to your left. General Sciences building to your right.\nBSB is behind you. The Police station is in front of you.","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1),"POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
     Map("Nuclear Reactor",(2,6,1),"NUCLEAR REACTOR:\nRight is the GO station. Left is ABB.\n NRB is at your rear. The campus exit lies in front of you.\nGo down to enter.","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous structure draws you closer as you consider what it would be\nlike to swim in that sweet blue pool...",(),True),
@@ -89,6 +89,7 @@ def Reset():
     Map("JHE Basement",(2,4,0),"JHE BASEMENT:\nYou can only go back up to the main floor.","You see the remnants of failed clubs and the shattered dreams of past engineers...\nThis place is a bit chilly.",('f','b','l','r','d'),True),
     Map("Mills Basement",(4,0,0),"MILLS BASEMENT:\nYou can only go back up to Mills.","Jeez has anyone ever been down here?\nThe rows of bookshelves seem to go on forever...\nIf only you could possess all of the knowledge they hold.",('f','b','l','r','d'),True),
     Map("Tandem Basement",(4,5,0),"TANDEM BASEMENT:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d'),True),
+    #Map("Quantum Tunnel",(3,3,-1),"TANDEM BASEMENT:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d'),True),
     #Map("WEST Hospital Basement",(1,0,0),"HOSPITAL EAST BASEMENT:\nIn front of you is the West Wing. MDCL is to your right.\nThe Parking Garage is below you.","You smile as you overhear a conversation between a doctor and a family.\nTurns out their child is going to make a full recovery.\nThanks science.",('l','b')),
     #Upper Level (X,Y,2) and Third Floor Thode
     Map("2nd Floor ITB",(0,5,2),"2ND FLOOR ITB:\nYou can only go back down the stairs.","Walking around up here you don't find much other than lab benches with strange instruments.\nThis place gives you the impression that there must be some high level engineering physics going on...",('f','b','l','r','u'),True),
@@ -257,6 +258,7 @@ def Reset():
     Equipment("Old Scroll",(None),"OldScroll.jpg","It reads:\n'A permanent title is too much to bear.'\n'My secret cache, is under there.'","off-hand",(0,0,0),""),
     Equipment("Ancient Incantation",(None),"Incantation.jpg","An old tattered scroll with an incantation written in Latin.","off-hand",(1,1,1),""),
     Equipment("Declaration of Independence",(None),"DOI.jpg","I'm going to steal the Declaration of Independence...","off-hand",(1,1,1),""),
+    Equipment("Self Worth",(None),"DOI.jpg","Wow, I had this in my all along!\nNow all I have to do is wait to go back to my bad habits and this will\nbe worthless!","off-hand",(20,20,20),-10),
     Equipment("Gauss Eye",(None),"GaussEye.jpg","You can feel the electromagnetic energy emanating from it, one of the 3 quantum relics",'head',(100,100,100),"")]
 
 
@@ -286,6 +288,7 @@ def Reset():
     #Special
     Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit.\nDo you have my lunch box?",None,(9999,9999,9999),999,"green bang bong","Brendan Fallon's lunchbox","THANKS! TOKE UP MY DUDES!",""),
     Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
+    Enemy("Yourself","Wait, but I'm you? Sorry I'm a little busy to think about this right now.",None,(100,100,100),100,"self worth",None,"","\nCongradulations, you've conquered yourself! It wasn't that hard!"),
     #Enemy("Special Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
     Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,3,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
@@ -307,9 +310,7 @@ def Reset():
     Enemy("Eric the Baller","'Huge talking to people play.'",(0,5,0),(20,15,20),50,"Cold Steel Katana",None,"","This is sub-optimal."),
     Enemy("Mario the Mixologist","'Yo check out my meme page, you ever heard coco jay?'",(1,4,1),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
     Enemy("Paul the Janitor","'Hey brother, I really could use some Febreze.'",(0,5,1),(20,20,20),20,"bleach squirt bottle","Febreze","Rock on brother! Thanks so much!","NOOO, Now I can't go see Black Sabbath!"),
-    Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!"),
-    Enemy("Yourself","Wait, but I'm you?",(2,4,1),(100,100,100),100,None,None,"","\nCongradulations, you've conquered yourself! It wasn't that hard!")]
-    
+    Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!")]    
     
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
