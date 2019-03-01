@@ -43,8 +43,8 @@ def Reset():
     Map("The McMaster Archway",(5,1,1),"ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. The Willy Dog stand is to your left.","Probably the most beautiful structure at Mac.\nYou notice a hole that appears to have melted through the glass of the lamp underneath...\nYou snap a quick selfie in front of the Archway for the 'gram.",(),False),
     Map("Inside University Hall",(6,1,1),"UNIVERSITY HALL:\nThe exit is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f'),True),
     Map("The Phoenix",(5,4,1),"THE PHOENIX:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over.",('r'),True),
-    Map("BSB",(3,3,1),"BSB:\nBSB field is at your rear. Exit BSB to your right.\nThe entrance to JHE is to your left. The Quantum Tunnel is down the stairs.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
-    Map("Front BSB",(3,4,1),"FRONT OF BSB:\nEnter JHE to your left. General Sciences building to your right.\nBSB is behind you. The Police station is in front of you.","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
+    Map("BSB",(3,4,1),"BSB:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
+    Map("Front BSB",(3,3,1),"FRONT OF BSB:\nBSB field is at your rear. A road is to your right.\nThe entrance to JHE is to your left. BSB is infront of you","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1),"POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
     Map("Nuclear Reactor",(2,6,1),"NUCLEAR REACTOR:\nRight is the GO station. Left is ABB.\n NRB is at your rear. The campus exit lies in front of you.\nGo down to enter.","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous structure draws you closer as you consider what it would be\nlike to swim in that sweet blue pool...",(),True),
@@ -74,7 +74,7 @@ def Reset():
     Map("MDCL",(1,0,1),"MDCL:\nThe East Wing of the Hospital is to your left. Health Sci library is forward.","After a solid 5 minutes of meditation in the reflection area.\nYou make your next decision feeling refreshed.",('b','r'),True),
     #Basement Level (X,Y,0)
     Map("Secret Room",(6,1,0),"SECRET ROOM:\nYou can only climb up and out.","You inspect the floorboards and find one is loose.\nUpon lifting it you reveal a secret room!\nYou climb down and find yourself surrounded by stacks of ancient books and\nforgotten items from McMaster's past.",('f','b','l','r','d'),True),
-    Map("The Quantum Tunnel",(3,3,0),"QUANTUM TUNNEL:\nGo up to return to the main floor of BSB","What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'",('f','b','l','r','d'),True),
+    Map("The Quantum Tunnel",(3,4,0),"QUANTUM TUNNEL:\nGo up to return to the main floor of BSB","What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'",('f','b','l','r','d'),True),
     Map("Inside the Reactor",(2,6,0),"INSIDE THE REACTOR:\nGo up to head outside.","The hum of air conditioning drowns your thoughts.\nYou lose yourself staring into the faint blue glow of the pool as you slowly approach its edge.",('f','b','l','r','d'),True),
     Map("Thode Basement",(1,7,0),"THODE BASEMENT:\nGo up to head outside.","You feel the laser glares burning into the back of your neck as\nyou hastily walk amongst the rows of desks.\nIs it possible to book a study room down here without finding a phallic object drawn on the whiteboard?\nYou'll never know.",('f','b','l','r','d'),True),
     Map("Bridges",(5,4,0),"BRIDGES CAFE:\nYou can only go back up to the Phoenix.","You feel guilty walking in here after you performed a\nbeat down on a double big mac combo in a drunken stupor only hours earlier.\nAfter pledging to be more vegan in the future, you plan what to do next.",('f','b','l','r','d'),True),
@@ -102,11 +102,23 @@ def Reset():
     Map("Upstairs Chapel",(2,0,2),"2ND FLOOR CHAPEL:\nYou can only go back down the stairs.","The combination of ringing bells and echoes from the organ is deafening.\nYou can barely collect your thoughts.\nThe cobwebs and dust give you the impression this place has been ill-travelled\nand long forgotten.",('f','b','l','r','u'),True),
     Map("2nd Floor W Wing",(0,1,2),"2ND FLOOR W WING:\nYou can only go back down the stairs.","The endless number of rooms are mesmerizing.\nYou don't even know which way to go.\nAfter being lost for 2 hours you circle back to where you entered.",('f','b','l','r','u'),True),
     Map("2nd Floor UH",(6,1,2),"2ND FLOOR UH:\nYou can only go back down the stairs.","You make your way up the rickety staircase into a room from a time long past.\nYou notice a dust covered table with some old instruments and clutter thrown about.",('f','b','l','r','u'),True),
-    Map("2nd Floor BSB",(3,3,2),"2ND FLOOR BSB:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r','u'),True),
+    Map("2nd Floor BSB",(3,4,2),"2ND FLOOR BSB:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r',),True), #TODO put 'u' wall back in after capstone moved
     Map("Climbing MDCL",(1,0,2),"CLIMBING MDCL:\nYou can continue climbing or go back down...","You struggle and find yourself on the outer wall of MDCL.",('f','b','l','r'),True),
     Map("Roof of MDCL",(1,0,3),"MDCL Roof:\nYou can only go back down.","With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!",('f','b','l','r','u'),False),
     Map("3rd Floor Thode",(1,7,3),"3RD FLOOR THODE:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u'),True),
-    Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True)]
+    Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True),
+    #TODO CAPSTONE ROOM, To be Moved to interrior
+    Map("Capstone Doorway",(3,4,3),"Capstone Doorway:\nFill Me.","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True),
+    Map("Circuit Smart",(4,4,3),"Circuit Smart:\nFill Me.","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True),
+    Map("Milli",(4,3,3),"Milli:\nFill Me.","Great Job Mili!",('d','u'),True),
+    Map("NANOrims",(4,2,3),"NANOrims:\nFill Me.","NANNNOOORYMMSS.",('d','u'),True),
+    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.:\nFill Me.","S.T.A.R.S. PLEASE WORK",('d','u'),True),
+    Map("FRAS",(3,3,3),"FRAS:\nFill Me.","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True),
+    Map("T.A. Area",(2,4,3),"T.A. Area:\nFill Me.","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True),
+    Map("ZebraShark",(2,3,3),"ZebraShark:\nFill Me.","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True),
+    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE:\nFill Me.","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True),
+    Map("Electronics Lab",(1,4,3),"Peter's Lab:\nFill Me.","I'm just glad to not have to be in here anymore.",('d','u'),True),
+    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office:\nFill Me.","The grand sorcerer's mystic place",('d','u'),True)]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
@@ -129,7 +141,7 @@ def Reset():
     Equipment("Plastic Bag",(2,1,1),"PBag.jpg","The audacity of some people to leave their filth around.","head",(0,1,-10),""),
     Equipment("Party Hat",(3,6,1),"PartyHat.jpg","A nice hat from a cracker.","head",(0,5,3),""),
     #Body Items
-    Equipment("Eng Phys Shirt",(3,3,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,7,5),""),
+    Equipment("Eng Phys Shirt",(3,4,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,7,5),""),
     Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(10,5,5),""),
     Equipment("Okons Chainmail",(0,2,0),"OkonMail.jpg","The sacred chainmail forged by the legend himself","body",(25,50,25),""),
     Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,5),""),
@@ -149,7 +161,7 @@ def Reset():
     Equipment("Hulk Hands",(0,3,0),"HulkHands.jpg","These pack a serious punch...","hand",(15,5,20),""),
     Equipment("Old Headphones",(1,5,1),"OldHeadphones.jpg","Old frayed apple headphones. Good for whipping.","hand",(5,0,5),""),
     Equipment("Empty Bottle",(4,1,1),"EmptyBottle.jpg","Dasani, more like Dishonest! Amirite?!","hand",(1,0,1),""),
-    Equipment("Banana Wires",(3,3,1),"BanWires.jpg","Alligator clips added for extra whippage.","hand",(8,0,8),3),
+    Equipment("Banana Wires",(3,4,1),"BanWires.jpg","Alligator clips added for extra whippage.","hand",(8,0,8),3),
     Equipment("Wrench",(1,3,1),"Wrench.jpg","It's a wrench. 22mm.","hand",(9,0,2),""),
     Equipment("Pencil",(2,4,1),"Pencil.jpg","HB2. Sharpened.","hand",(2,0,5),""),
     Equipment("Squash Racket",(5,0,1),"Racket.jpg","Dr. Buijs' Racket? Voltage Divider!","hand",(5,0,8),""),
@@ -176,7 +188,7 @@ def Reset():
     Equipment("Shovel",(5,0,0),"Shovel.jpg","Call a spade a spade.","hand",(15,0,5),""),
     Equipment("Febreze",(1,0,1),"Ferbreze.jpg","Kills 99.9% of odour at the source!","hand",(6,0,10),-4),
     #Off-Hand Items
-    Equipment("Cricket",(3,3,2),"Cricket.jpg","Makes the sound commonly heard at 2W lectures.","off-hand",(1,1,1),3),
+    Equipment("Cricket",(3,4,2),"Cricket.jpg","Makes the sound commonly heard at 2W lectures.","off-hand",(1,1,1),3),
     Equipment("Coffee",(2,4,1),"Coffee.jpg","The fuel of thinkers.","off-hand",(3,0,9),1),
     Equipment("Griffiths Electrodynamics",(2,4,2),"Griffiths.jpg","The holy scriptures which govern the fabric of our being","off-hand",(0,10,5),""),
     Equipment("Ice-Cold Pint",(4,3,1),"Pint.jpg","Ale of the Gods.","off-hand",(3,0,-5),2),
@@ -185,7 +197,7 @@ def Reset():
     Equipment("Casio",(2,7,1),"Casio.jpg","This one can do integrals. That's illegal.","off-hand",(1,5,10),""),
     Equipment("Paint Brush",(3,1,1),"Brush.jpg","You can feel the emotions of a failed arts student coursing through this thing.","off-hand",(5,0,5),""),
     Equipment("Priceless Painting",(3,0,1),"Painting.jpg","This painting is supposed to be worth millions...","off-hand",(1,10,5),""),
-    Equipment("Brendan Fallon's Lunchbox",(3,3,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,10,5),""),
+    Equipment("Brendan Fallon's Lunchbox",(3,4,0),"Lunchbox.jpg","The Lunch Box of an Ancient Hero. Full of samosas","off-hand",(5,10,5),""),
     Equipment("Jar of Peanut Butter",(4,0,1),"Peanut.jpg","Death paste to those who are allergic... Could prove effective...","off-hand",(0,5,5),5),
     Equipment("Adderall",(5,3,1),"Adderall.jpg","Speed up, my dude!","off-hand",(0,0,50),2),
     Equipment("Drumstick",(5,4,2),"Drumstick.jpg","'Property of E-Smooth'","off-hand",(0,10,15),""),
@@ -281,7 +293,7 @@ def Reset():
     Enemy("Dr. LaPierre","'Bring me a Coffee please, Daniel Parent is failing me as a research student.\n I am rather tired.'",(None),(100,100,200),300,"Eng Phys USB pen","coffee","Here is a nice pen for your troubles.\nGo find Dr. Knights, he has more for you to do.","I can't believe you've done this."),
     Enemy("Dr. Nagasaki","'My grand invention is almost complete...'",(0,5,2),(100,100,100),75,"flux capacitor","ambifacient lunar waneshaft","'Yes!'\n'I have been looking for one exactly like that!'\n'Quicky, go to the basement of the Tandem Accelerator!'\n'The High Council is counting on you.'","NOOOO! NOW I WILL NEVER PLEASE THE DARK LORD!"),
     Enemy("Dan Fitzgreen","Hello, although I've turned to the dark side to do Physics Labs\n I'm still a great guy. Did I mention I worked at CERN!?",(None),(100,75,100),400,"ambifacient lunar waneshaft","","'Been a lot stirring around the faculty since last night.'\n'I used to be an adventurous student like you before the High Council and I decided to part ways.'\n'I know what you seek and I am here to help.'\n'You need to fire up that old reactor in the basement of the Tandem Accelerator.'\n'It needs some sort of high power instrument to bring it to life...'\n'I think Dr. Nagasaki has been working on something like that, he is probably somewhere in ITB.'\n'He will likely need this...'","I'm moving to the physics department"),
-    Enemy("Kenrick","'The oscilloscope is the window into the electronic world.'",(3,4,1),(100,100,200),75,"Kenrick's oscilloscope",None,"","Oh no! My window! The Dark Lord will know I've failed him!"),
+    Enemy("Kenrick","'The oscilloscope is the window into the electronic world.'",(3,3,1),(100,100,200),75,"Kenrick's oscilloscope",None,"","Oh no! My window! The Dark Lord will know I've failed him!"),
     Enemy("Dr. Soleymani","'Are you interested in a research position?'",(0,1,2),(100,100,100),75,"Einstein's Brain",None,"","NOOO! The Dark Lord will never forgive me!"),
     Enemy("Sir William McMaster","'You must rid the university of the evil Dr. Cassidy has planned!'",(None),(175,125,100),125,"iron ring","","","The spirit of Sir William McMaster bursts with a fiercely bright explosion.\nYou look down to see your Iron Ring as well as the deed to McMaster!\nDr. Cassidy quickly picks up the deed and turns to you.\n'Excellent!' he says coupled with maniacal laughter.\n'Too fulfill your true destiny, take the power you hold in your Iron Ring and destroy all of the professors'\n'Only after they are gone can Engineering Physics truly reign supreme!'"),
     Enemy("Chris","'The tools should be coming any day now.'",(4,5,1),(50,75,50),50,"capstone tools",None,"","I was going to quit anyway!"),
@@ -291,7 +303,7 @@ def Reset():
     Enemy("Yourself","Wait, but I'm you? Sorry I'm a little busy to think about this right now.",None,(100,100,100),100,"self worth",None,"","\nCongradulations, you've conquered yourself! It wasn't that hard!"),
     #Enemy("Special Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
-    Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,3,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
+    Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,4,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
     Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Thanks!","'I can't believe you've done this."),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
@@ -341,7 +353,7 @@ def Reset():
     Interact("Mouse",(1,0,3),"It's a mouse scurrying around...\nDid it just stare at you?","The mouse rushes over and takes the cheese.\nIt runs into a small opening it has made in the roof of the building.\nIt returns with something in it's mouth!","cheese","gilded blunderbuss"),
     Interact("Tri-Coloured Glasses",(6,1,2),"Looks like a set of glasses with multiple coloured lenses...","Its a cipher...\nOn the back of the declaration you can see different coded messages using the coloured lenses...\nRED:'Lithium Carbon Boron Mangnesium(-g)'\nBLUE:'Jerry likes presents.'\nGREEN:'Guardians of De Galaxy character.'","declaration of independence",None),
     Interact("Uneven Earth",(3,7,1),"This patch of dirt looks out of place...","You begin digging and find an old box!\nYou open it up and read a note...\n'In the eldest of halls. The attic holds all.'","shovel","declaration of independence"),
-    Interact("Coat of Arms",(3,4,1),"Under closer inspection you notice the book is a different kind of stone\nthan the rest...\nIf only you could get up there for a closer look...","With some effort you climb the rickety ladder and remove the book from the wall.\nReaching into the hole you pull out an old scroll!","old ladder","old scroll"),
+    Interact("Coat of Arms",(3,3,1),"Under closer inspection you notice the book is a different kind of stone\nthan the rest...\nIf only you could get up there for a closer look...","With some effort you climb the rickety ladder and remove the book from the wall.\nReaching into the hole you pull out an old scroll!","old ladder","old scroll"),
     Interact("Ancient Mirror",(4,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do.","ancient incantation","gamma glove")]
 
 Reset()
