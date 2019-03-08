@@ -16,7 +16,7 @@ import CreativeMode
 
 #If there was a title screen it would go here
 GAMEINFO['version'] = 0.27
-GAMEINFO['versionname'] = "Alpha v0.27 - Dev Update"
+GAMEINFO['versionname'] = "Alpha v0.28 - "
 #Updated: Jan 2, 2019
 
 

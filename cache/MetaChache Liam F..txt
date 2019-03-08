@@ -1,0 +1,19 @@
+Alpha v0.27 - Dev Update
+Liam F.
+Thu Mar 07 16:17:58 2019
+--LOG START--
+equip msp430
+r
+attack Kenrick
+--END OF LOG--
+Stepcount: 1
+Command Count: 3
+Run Time: 215.597000122
+--Character STATS--
+(3, 3, 1)
+(-5, 0, -5)
+0
+HEAD: EMPTY
+BODY: EMPTY
+HAND: MSP430
+OFF-HAND: EMPTY

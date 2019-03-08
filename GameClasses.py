@@ -167,7 +167,7 @@ class Map:  #Map Location Storage
                 if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
                     description = description + enemy.name + " is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
                 elif enemy.alive:
-                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
+                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
                     description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + enemy.name + ".\n"
         if self.interact:

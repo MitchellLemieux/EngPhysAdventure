@@ -11,7 +11,7 @@ I0
 tp4
 sS'name'
 p5
-S'r'
+S'Doug'
 p6
 sS'inv'
 p7
@@ -4116,134 +4116,135 @@ S'b'
 p1130
 S'l'
 p1131
-g6
-S'd'
+S'r'
 p1132
-tp1133
+S'd'
+p1133
+tp1134
 sS'coords'
-p1134
+p1135
 g1038
 sS'lore'
-p1135
-S'The smooth floor down here makes an excellent skate surface.\nRad.\nIf only you learned how to kickflip.'
 p1136
-sS'travelled'
+S'The smooth floor down here makes an excellent skate surface.\nRad.\nIf only you learned how to kickflip.'
 p1137
+sS'travelled'
+p1138
 I1
 sS'inside'
-p1138
+p1139
 I01
 sba(iGameClasses
 Map
-p1139
-(dp1140
+p1140
+(dp1141
 g12
 S'HOSPITAL EAST WING:\nIn front of you is the West Wing. MDCL is to your right.\nThe Parking Garage is below you.'
-p1141
+p1142
 sg1108
-(lp1142
+(lp1143
 sg5
 S'East Hospital'
-p1143
+p1144
 sg1124
-(lp1144
+(lp1145
 g477
 ag362
 ag507
 asg1126
-(lp1145
+(lp1146
 sg1128
 (g1131
 g1130
-tp1146
-sg1134
-g368
+tp1147
 sg1135
+g368
+sg1136
 S'You smile as you overhear a conversation between a doctor and a family.\nTurns out their child is going to make a full recovery.\nThanks science.'
-p1147
-sg1137
-I1
+p1148
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1148
+sbaNaNaa(lp1149
 Na(iGameClasses
 Map
-p1149
-(dp1150
+p1150
+(dp1151
 g12
 S'HOSPITAL WEST WING:\nIn front of your is T-13. To your right is the Health Sci Library.\nThe East Wing of the Hospital is behind you.\nYou can go upstairs.'
-p1151
+p1152
 sg1108
-(lp1152
+(lp1153
 sg5
 S'West Hospital'
-p1153
+p1154
 sg1124
-(lp1154
+(lp1155
 g99
 a(iGameClasses
 Interact
-p1155
-(dp1156
+p1156
+(dp1157
 g12
 S'Would you like to exchange a needle?'
-p1157
+p1158
 sg5
 S'SharpXChange'
-p1158
+p1159
 sg1115
 S'clean needle'
-p1159
+p1160
 sg1118
 I00
 sg20
 g105
 sg1119
 S'dirty needle'
-p1160
+p1161
 sg1120
 S'Needle Accepted!'
-p1161
+p1162
 sbasg1126
-(lp1162
+(lp1163
 sg1128
 g1131
-sg1134
-g105
 sg1135
+g105
+sg1136
 S"Doctors and Nurses rush around you.\nYou remember why you didn't want to become a doctor as you\nnearly faint looking at a patient's paper cut in the waiting room.\nAfter a drink from the water fountain you plan what to do."
-p1163
-sg1137
-I1
+p1164
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1164
-(dp1165
+p1165
+(dp1166
 g12
 S'2ND FLOOR W WING:\nYou can only go back down the stairs.'
-p1166
+p1167
 sg1108
-(lp1167
+(lp1168
 (iGameClasses
 Enemy
-p1168
-(dp1169
+p1169
+(dp1170
 g12
 S"'Are you interested in a research position?'"
-p1170
+p1171
 sg3
 (I100
 I100
 I100
-tp1171
+tp1172
 sg5
 S'Dr. Soleymani'
-p1172
+p1173
 sg1115
 S"einstein's brain"
-p1173
+p1174
 sg37
 I01
 sg1117
@@ -4255,7 +4256,7 @@ sg20
 (I0
 I1
 I2
-tp1174
+tp1175
 sg1119
 Nsg40
 I00
@@ -4263,161 +4264,161 @@ sg1120
 g66
 sg1121
 S'NOOO! The Dark Lord will never forgive me!'
-p1175
+p1176
 sbasg5
 S'2nd Floor W Wing'
-p1176
+p1177
 sg1124
-(lp1177
-sg1126
 (lp1178
+sg1126
+(lp1179
 sg1128
 (g1129
 g1130
 g1131
-g6
+g1132
 S'u'
-p1179
-tp1180
-sg1134
-g1174
+p1180
+tp1181
 sg1135
+g1175
+sg1136
 S"The endless number of rooms are mesmerizing.\nYou don't even know which way to go.\nAfter being lost for 2 hours you circle back to where you entered."
-p1181
-sg1137
-I1
+p1182
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1182
+sbaNaa(lp1183
 (iGameClasses
 Map
-p1183
-(dp1184
+p1184
+(dp1185
 g12
 S'SECRET ROOM!:\nGo up to climb out.'
-p1185
+p1186
 sg1108
-(lp1186
+(lp1187
 sg5
 S'Secret Trapdoor!'
-p1187
+p1188
 sg1124
-(lp1188
+(lp1189
 g671
 ag1040
 asg1126
-(lp1189
+(lp1190
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1190
-sg1134
-g677
+g1133
+tp1191
 sg1135
+g677
+sg1136
 S'You uncover a trapdoor after pulling up a loose floor tile.\nUpon descending you see stacks of failed midterms and assorted books all around you.\nA suit of armor and a chainmail flag with a skull on it are barely visible.\nWho made this place anyway?'
-p1191
-sg1137
-I1
+p1192
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1192
-(dp1193
+p1193
+(dp1194
 g12
 S'T-13:\nETB is in front of you. The McMaster Map is to your right.\nThe West Wing of the Hospital is behind you.'
-p1194
+p1195
 sg1108
-(lp1195
+(lp1196
 sg5
 S'T-13'
-p1196
+p1197
 sg1124
-(lp1197
+(lp1198
 g1010
 ag138
 asg1126
-(lp1198
-sg1128
 (lp1199
+sg1128
+(lp1200
 g1131
-ag1132
-asg1134
+ag1133
+asg1135
 g144
-sg1135
+sg1136
 S"How many bad invigilators does it take to screw in a light bulb?\nI'm not sure but they took my damn Casio FX-911+C..."
-p1200
-sg1137
-I1
+p1201
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1201
+sbaNaNaa(lp1202
 (iGameClasses
 Map
-p1202
-(dp1203
+p1203
+(dp1204
 g12
 S'ETB BASEMENT:\nYou can only go back up to the main floor.'
-p1204
+p1205
 sg1108
-(lp1205
+(lp1206
 sg5
 S'ETB Basement'
-p1206
+p1207
 sg1124
-(lp1207
+(lp1208
 g913
 asg1126
-(lp1208
+(lp1209
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1209
-sg1134
+g1133
+tp1210
+sg1135
 (I0
 I3
 I0
-tp1210
-sg1135
+tp1211
+sg1136
 S'After getting lost in a maze of corridors and locked rooms you stumble\nacross a door that is slightly ajar.\nYou open the door to reveal a rather small dark room.\nYou flick on the light switch.'
-p1211
-sg1137
-I1
+p1212
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1212
-(dp1213
+p1213
+(dp1214
 g12
 S'ETB:\nTo your right is the Hatch Building. An alleyway is in front of you.\nT-13 is behind you. You can also go upstairs.'
-p1214
+p1215
 sg1108
-(lp1215
+(lp1216
 (iGameClasses
 Enemy
-p1216
-(dp1217
+p1217
+(dp1218
 g12
 S"'Hey, I saw your picture on Instagram!'\n'They let you get away with doing that to the Willy McMaster statue?'"
-p1218
+p1219
 sg3
 (I10
 I5
 I10
-tp1219
+tp1220
 sg5
 S'Mitch the TA'
-p1220
+p1221
 sg1115
 S'phone'
-p1221
+p1222
 sg37
 I01
 sg1117
@@ -4434,117 +4435,117 @@ sg1120
 g66
 sg1121
 S"There's my phone."
-p1222
+p1223
 sbasg5
 S'ETB'
-p1223
+p1224
 sg1124
-(lp1224
+(lp1225
 g687
 asg1126
-(lp1225
+(lp1226
 sg1128
 g1131
-sg1134
-g693
 sg1135
+g693
+sg1136
 S'The memories of actually doing something in first year flood your mind.\nGear trains. Python. 3D printing.\nEngineering had such a different meaning in your first year...\nYou plan your next move.'
-p1226
-sg1137
-I1
+p1227
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1227
-(dp1228
+p1228
+(dp1229
 g12
 S'2ND FLOOR ETB:\nYou can only go back down the stairs.'
-p1229
+p1230
 sg1108
-(lp1230
+(lp1231
 sg5
 S'2nd Floor ETB'
-p1231
+p1232
 sg1124
-(lp1232
+(lp1233
 g943
 asg1126
-(lp1233
+(lp1234
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp1234
-sg1134
-g949
+g1132
+g1180
+tp1235
 sg1135
+g949
+sg1136
 S'You realize you really have never come up here.\nYou see 4th year Eng Phys students hurry out of a long-winded lecture.\nAfter picking a booger.\nYou plan your next move.'
-p1235
-sg1137
-I1
+p1236
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1236
+sbaNaa(lp1237
 Na(iGameClasses
 Map
-p1237
-(dp1238
+p1238
+(dp1239
 g12
 S'ALLEY:\nITB is in front of you. ETB is behind you.\nYou can enter Hatch to your right.'
-p1239
+p1240
 sg1108
-(lp1240
+(lp1241
 sg5
 S'Alley'
-p1241
+p1242
 sg1124
-(lp1242
+(lp1243
 g1054
 ag935
 asg1126
-(lp1243
+(lp1244
 sg1128
 g1131
-sg1134
-g941
 sg1135
+g941
+sg1136
 S'As you head down the narrow path between ITB and ETB you hear car horns blaring down Main Street.\nYou gather up some trash and put it in a garbage can like a good McMasterian.\nThen plan your next move.'
-p1244
-sg1137
-I1
+p1245
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1245
+sbaNaNaa(lp1246
 (iGameClasses
 Map
-p1246
-(dp1247
+p1247
+(dp1248
 g12
 S'ITB BASEMENT:\nYou can only go back up to the main floor.'
-p1248
+p1249
 sg1108
-(lp1249
+(lp1250
 (iGameClasses
 Enemy
-p1250
-(dp1251
+p1251
+(dp1252
 g12
 S"'Huge talking to people play.'"
-p1252
+p1253
 sg3
 (I20
 I15
 I20
-tp1253
+tp1254
 sg5
 S'Eric the Baller'
-p1254
+p1255
 sg1115
 S'cold steel katana'
-p1255
+p1256
 sg37
 I01
 sg1117
@@ -4556,7 +4557,7 @@ sg20
 (I0
 I5
 I0
-tp1256
+tp1257
 sg1119
 Nsg40
 I00
@@ -4564,57 +4565,57 @@ sg1120
 g66
 sg1121
 S'This is sub-optimal.'
-p1257
+p1258
 sbasg5
 S'ITB Basement'
-p1258
+p1259
 sg1124
-(lp1259
-sg1126
 (lp1260
+sg1126
+(lp1261
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1261
-sg1134
-g1256
+g1133
+tp1262
 sg1135
+g1257
+sg1136
 S"As if the upstairs floor plan wasn't bad enough...\nAfter another 3 hours wandering around you are back where you started\nand don't feel like you learned anything..."
-p1262
-sg1137
-I1
+p1263
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1263
-(dp1264
+p1264
+(dp1265
 g12
 S'ITB:\nJHE-Annex is to your right. Lot I is in front of you.\nAn alley is behind you. You can go up OR down the stairs.'
-p1265
+p1266
 sg1108
-(lp1266
+(lp1267
 (iGameClasses
 Enemy
-p1267
-(dp1268
+p1268
+(dp1269
 g12
 S"'Hey brother, I really could use some Febreze.'"
-p1269
+p1270
 sg3
 (I20
 I20
 I20
-tp1270
+tp1271
 sg5
 S'Paul the Janitor'
-p1271
+p1272
 sg1115
 S'bleach squirt bottle'
-p1272
+p1273
 sg37
 I01
 sg1117
@@ -4626,61 +4627,61 @@ sg20
 g818
 sg1119
 S'febreze'
-p1273
+p1274
 sg40
 I00
 sg1120
 S'Rock on brother! Thanks so much!'
-p1274
+p1275
 sg1121
 S"NOOO, Now I can't go see Black Sabbath!"
-p1275
+p1276
 sbasg5
 S'ITB'
-p1276
+p1277
 sg1124
-(lp1277
+(lp1278
 g812
 asg1126
-(lp1278
+(lp1279
 sg1128
 g1131
-sg1134
-g818
 sg1135
+g818
+sg1136
 S'McMaster, back at it again with the horrible floor plan.\nAfter getting lost for 5 hours you finally reach the lobby\nand decide what to do.'
-p1279
-sg1137
-I1
+p1280
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1280
-(dp1281
+p1281
+(dp1282
 g12
 S'2ND FLOOR ITB:\nYou can only go back down the stairs.'
-p1282
+p1283
 sg1108
-(lp1283
+(lp1284
 (iGameClasses
 Enemy
-p1284
-(dp1285
+p1285
+(dp1286
 g12
 S"'My grand invention is almost complete...'"
-p1286
+p1287
 sg3
 (I100
 I100
 I100
-tp1287
+tp1288
 sg5
 S'Dr. Nagasaki'
-p1288
+p1289
 sg1115
 S'flux capacitor'
-p1289
+p1290
 sg37
 I01
 sg1117
@@ -4692,66 +4693,66 @@ sg20
 g978
 sg1119
 S'ambifacient lunar waneshaft'
-p1290
+p1291
 sg40
 I00
 sg1120
 S"'Yes!'\n'I have been looking for one exactly like that!'\n'Quicky, go to the basement of the Tandem Accelerator!'\n'The High Council is counting on you.'"
-p1291
+p1292
 sg1121
 S'NOOOO! NOW I WILL NEVER PLEASE THE DARK LORD!'
-p1292
+p1293
 sbasg5
 S'2nd Floor ITB'
-p1293
+p1294
 sg1124
-(lp1294
+(lp1295
 g972
 asg1126
-(lp1295
+(lp1296
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp1296
-sg1134
-g978
+g1132
+g1180
+tp1297
 sg1135
+g978
+sg1136
 S"Walking around up here you don't find much other than lab benches with strange instruments.\nThis place gives you the impression that there must be some high level engineering physics going on..."
-p1297
-sg1137
-I1
+p1298
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1298
+sbaNaa(lp1299
 Na(iGameClasses
 Map
-p1299
-(dp1300
+p1300
+(dp1301
 g12
 S'LOT I:\nABB is to your right. Cootes Drive is in front of you.\nITB is to your rear.'
-p1301
+p1302
 sg1108
-(lp1302
+(lp1303
 sg5
 S'Lot I'
-p1303
+p1304
 sg1124
-(lp1304
+(lp1305
 g441
 ag907
 a(iGameClasses
 Interact
-p1305
-(dp1306
+p1306
+(dp1307
 g12
 S"A red Dodge Avenger...\nPeering into the window you can't really see much."
-p1307
+p1308
 sg5
 S'Red Car'
-p1308
+p1309
 sg1115
 Nsg1118
 I00
@@ -4760,40 +4761,40 @@ g447
 sg1119
 Nsg1120
 S'N/A'
-p1309
+p1310
 sba(iGameClasses
 Interact
-p1310
-(dp1311
+p1311
+(dp1312
 g12
 S"A blue Ford Mustang...\nPeering into the window you can't really see much."
-p1312
+p1313
 sg5
 S'Blue Car'
-p1313
+p1314
 sg1115
 S'potato'
-p1314
+p1315
 sg1118
 I00
 sg20
 g447
 sg1119
 S'tire iron'
-p1315
+p1316
 sg1120
 S'You smash open the window with the tire iron, breaking it in the process.\nYou unlock and open the door...\nTo reveal a potato.'
-p1316
+p1317
 sba(iGameClasses
 Interact
-p1317
-(dp1318
+p1318
+(dp1319
 g12
 S"An old Datsun...\nPeering into the window you can't really see much."
-p1319
+p1320
 sg5
 S'Old Car'
-p1320
+p1321
 sg1115
 Nsg1118
 I00
@@ -4801,371 +4802,371 @@ sg20
 g447
 sg1119
 Nsg1120
-g1309
+g1310
 sba(iGameClasses
 Interact
-p1321
-(dp1322
+p1322
+(dp1323
 g12
 S"A new Volkswagen...\nPeering into the window you can't really see much."
-p1323
+p1324
 sg5
 S'New Car'
-p1324
+p1325
 sg1115
 S'bowling ball'
-p1325
+p1326
 sg1118
 I00
 sg20
 g447
 sg1119
 S'car keys'
-p1326
+p1327
 sg1120
 S'You open the car and rummage around.\nUnderneath one of the seats you find a bowling ball!'
-p1327
+p1328
 sbasg1126
-(lp1328
+(lp1329
 sg1128
 g1131
-sg1134
-g447
 sg1135
+g447
+sg1136
 S"Nope, your car isn't here.\nMaybe you parked in Lot M? Maybe not.\nAfter scoffing at all of the prof Mercedes that are way too nice...\nYou think of what to do."
-p1329
-sg1137
-I1
+p1330
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1330
+sbaNaNaa(lp1331
 Na(iGameClasses
 Map
-p1331
-(dp1332
+p1332
+(dp1333
 g12
 S'COOTES DRIVE:\nThode is to your right. Lot I is behind you.'
-p1333
+p1334
 sg1108
-(lp1334
+(lp1335
 sg5
 S'Cootes Dr.'
-p1335
+p1336
 sg1124
-(lp1336
+(lp1337
 g920
 asg1126
-(lp1337
+(lp1338
 sg1128
 (g1129
 g1131
-tp1338
-sg1134
-g926
+tp1339
 sg1135
+g926
+sg1136
 S'You notice a series of pickup trucks for what must be a landscaping or construction company.\nThere is construction gear spread all over the place.\nThe sound of sirens grows louder as an ambulance suddenly rushes by.\nYou collect yourself and consider what to do next.'
-p1339
-sg1137
-I1
+p1340
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1340
-NaNaNaNaa(lp1341
-(lp1342
+sbaNaNaa(lp1341
+NaNaNaNaa(lp1342
+(lp1343
 Na(iGameClasses
 Map
-p1343
-(dp1344
+p1344
+(dp1345
 g12
 S'MDCL:\nThe East Wing of the Hospital is to your left. Health Sci library is forward.'
-p1345
+p1346
 sg1108
-(lp1346
+(lp1347
 sg5
 S'MDCL'
-p1347
+p1348
 sg1124
-(lp1348
+(lp1349
 g193
 ag185
 asg1126
-(lp1349
+(lp1350
 sg1128
 (g1130
-g6
-tp1350
-sg1134
-g191
+g1132
+tp1351
 sg1135
+g191
+sg1136
 S'After a solid 5 minutes of meditation in the reflection area.\nYou make your next decision feeling refreshed.'
-p1351
-sg1137
-I1
+p1352
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1352
-(dp1353
+p1353
+(dp1354
 g12
 S'CLIMBING MDCL:\nYou can continue climbing or go back down...'
-p1354
+p1355
 sg1108
-(lp1355
+(lp1356
 sg5
 S'Climbing MDCL'
-p1356
+p1357
 sg1124
-(lp1357
-sg1126
 (lp1358
+sg1126
+(lp1359
 sg1128
 (g1129
 g1130
 g1131
-g6
-tp1359
-sg1134
+g1132
+tp1360
+sg1135
 (I1
 I0
 I2
-tp1360
-sg1135
+tp1361
+sg1136
 S'You struggle and find yourself on the outer wall of MDCL.'
-p1361
-sg1137
-I1
+p1362
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1362
-(dp1363
+p1363
+(dp1364
 g12
 S'MDCL Roof:\nYou can only go back down.'
-p1364
+p1365
 sg1108
-(lp1365
+(lp1366
 sg5
 S'Roof of MDCL'
-p1366
+p1367
 sg1124
-(lp1367
+(lp1368
 (iGameClasses
 Interact
-p1368
-(dp1369
+p1369
+(dp1370
 g12
 S"It's a mouse scurrying around...\nDid it just stare at you?"
-p1370
+p1371
 sg5
 S'Mouse'
-p1371
+p1372
 sg1115
 S'gilded blunderbuss'
-p1372
+p1373
 sg1118
 I00
 sg20
 (I1
 I0
 I3
-tp1373
+tp1374
 sg1119
 S'cheese'
-p1374
+p1375
 sg1120
 S"The mouse rushes over and takes the cheese.\nIt runs into a small opening it has made in the roof of the building.\nIt returns with something in it's mouth!"
-p1375
+p1376
 sbasg1126
-(lp1376
+(lp1377
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp1377
-sg1134
-g1373
+g1132
+g1180
+tp1378
 sg1135
+g1374
+sg1136
 S'With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!'
-p1378
-sg1137
-I1
+p1379
 sg1138
+I1
+sg1139
 I00
-sbaa(lp1379
+sbaa(lp1380
 Na(iGameClasses
 Map
-p1380
-(dp1381
+p1381
+(dp1382
 g12
 S'HEALTH SCIENCES LIBRARY:\nIn front of you is the McMaster Map. To your right is the bus stop.\nMDCL is behind you. The Hospital West Wing is to your left.'
-p1382
+p1383
 sg1108
-(lp1383
+(lp1384
 sg5
 S'Health Sciences Library'
-p1384
+p1385
 sg1124
-(lp1385
-sg1126
 (lp1386
+sg1126
+(lp1387
 sg1128
-(tsg1134
+(tsg1135
 (I1
 I1
 I1
-tp1387
-sg1135
+tp1388
+sg1136
 S"You are constantly asked to be quiet even though you have yet to make a sound.\nAfter scanning the tables and see no one you recognize you take a seat\nin an armchair and stare out towards the centre of campus.\nYou daydream of a life where these study rooms weren't constantly full."
-p1388
-sg1137
-I1
+p1389
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1389
+sbaNaNaa(lp1390
 Na(iGameClasses
 Map
-p1390
-(dp1391
+p1391
+(dp1392
 g12
 S'MCMASTER MAP:\nIn front of you lies the entrance to Hatch. To your right, JHE Field.\nTo your rear lies the Health Sci Library. T-13 is to your left.'
-p1392
+p1393
 sg1108
-(lp1393
+(lp1394
 sg5
 S'Map of McMaster'
-p1394
+p1395
 sg1124
-(lp1395
+(lp1396
 (iGameClasses
 Interact
-p1396
-(dp1397
+p1397
+(dp1398
 g12
 S"It's the map of McMaster.'\n ________________________________________________\n|Map of McMaster                                 |\n|                                       BATES    |\n|                                                |\n| ETB        JHE         BSB                     |\n|                                                |\n|                                      STATUE    |\n|                                                |\n| HOSPITAL                                       |\n|          MDCL         CHAPEL              MUSC |\n|________________________________________________|"
-p1398
+p1399
 sg5
 S'McMaster Map'
-p1399
+p1400
 sg1115
 S"minnick's glasses"
-p1400
+p1401
 sg1118
 I00
 sg20
 (I1
 I2
 I1
-tp1401
+tp1402
 sg1119
 S"minnick's glasses"
-p1402
+p1403
 sg1120
 S"Through Minnick's glasses the true map is revealled!\nYou read:\n'Harness the sun.'\n ________________________________________________\n|Map of McMaster                                 |\n|                                       BATES    |\n|                                                |\n| ETB        JHE         BSB                     |\n|                                                |\n|                        \\/            STATUE    |\n|                        /\\                      |\n| HOSPITAL                                       |\n|          MDCL         CHAPEL              MUSC |\n|________________________________________________|\nDr. Minnick's glasses glow hot as you quickly swat them off of your face."
-p1403
+p1404
 sbasg1126
-(lp1404
+(lp1405
 sg1128
-(tsg1134
-g1401
-sg1135
+(tsg1135
+g1402
+sg1136
 S'Has anyone even used this thing?\nA lost freshman asks you for directions even though the map is clearly next to you.\nAfter sending them in the wrong direction you plan your next move.'
-p1405
-sg1137
-I1
+p1406
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1406
+sbaNaNaa(lp1407
 Na(iGameClasses
 Map
-p1407
-(dp1408
+p1408
+(dp1409
 g12
 S'OUTSIDE HATCH:\nETB to your left. Enter Hatch by going forward.\nThe McMaster Map to your rear. JHE Entrance is to your right.'
-p1409
+p1410
 sg1108
-(lp1410
+(lp1411
 sg5
 S'In Front of Hatch'
-p1411
+p1412
 sg1124
-(lp1412
+(lp1413
 g1075
 asg1126
-(lp1413
+(lp1414
 sg1128
-(tsg1134
+(tsg1135
 g1081
-sg1135
+sg1136
 S'You stare at the newly completed building.\nThe sun still shines and you are irritated by the constant drone of the Hamiltonian sirens\nwhich you have yet to grow accustomed to...'
-p1414
-sg1137
-I1
+p1415
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p1415
-(dp1416
+p1416
+(dp1417
 g12
 S"Peter Johnason's Office:\nFill Me."
-p1417
+p1418
 sg1108
-(lp1418
+(lp1419
 sg5
 S"Peter Johnason's Office"
-p1419
+p1420
 sg1124
-(lp1420
-sg1126
 (lp1421
+sg1126
+(lp1422
 sg1128
-(g1132
-g1179
-tp1422
-sg1134
+(g1133
+g1180
+tp1423
+sg1135
 (I1
 I3
 I3
-tp1423
-sg1135
+tp1424
+sg1136
 S"The grand sorcerer's mystic place"
-p1424
-sg1137
-I1
+p1425
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1425
+sbaa(lp1426
 Na(iGameClasses
 Map
-p1426
-(dp1427
+p1427
+(dp1428
 g12
 S'INSIDE HATCH:\nIn front of you lies JHE-Annex. To your right is the JHE lobby.\nTo your rear you can exit.\nTo your left is an alley.'
-p1428
+p1429
 sg1108
-(lp1429
+(lp1430
 (iGameClasses
 Enemy
-p1430
-(dp1431
+p1431
+(dp1432
 g12
 S"'Yo check out my meme page, you ever heard coco jay?'"
-p1432
+p1433
 sg3
 (I15
 I10
 I20
-tp1433
+tp1434
 sg5
 S'Mario the Mixologist'
-p1434
+p1435
 sg1115
 S'stylish watch'
-p1435
+p1436
 sg37
 I01
 sg1117
@@ -5182,342 +5183,342 @@ sg1120
 g66
 sg1121
 S'si ya saben como consigo, por que me invitan?'
-p1436
+p1437
 sbasg5
 S'Inside Hatch'
-p1437
+p1438
 sg1124
-(lp1438
+(lp1439
 g310
 asg1126
-(lp1439
+(lp1440
 sg1128
-(tsg1134
+(tsg1135
 g316
-sg1135
+sg1136
 S"That 'fresh building' smell still lingers.\nYou see members of the various clubs rushing from room to room including a man carrying a rocket.\nThe Kipling clock ticks away... only 364 more...\nWho is this Gerald Hatch anyway?"
-p1440
-sg1137
-I1
+p1441
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1441
-(dp1442
+p1442
+(dp1443
 g12
 S'2ND FLOOR Hatch:\nIn front of you lies the Eng Phys Office. To your right is 2nd Floor JHE.\nHatch is downstairs.'
-p1443
+p1444
 sg1108
-(lp1444
+(lp1445
 sg5
 S'2nd Floor Hatch'
-p1445
+p1446
 sg1124
-(lp1446
-sg1126
 (lp1447
+sg1126
+(lp1448
 sg1128
 (g1130
 g1131
-g1179
-tp1448
-sg1134
+g1180
+tp1449
+sg1135
 (I1
 I4
 I2
-tp1449
-sg1135
+tp1450
+sg1136
 S"You see various meeting rooms with 1st years occupying them.\nThe MES office is full but nothing seems to be getting done.\nThere's therapy dogs scattered everywhere for Paws and Play.\nYou can't get a session with a real therapist but at least there is this"
-p1450
-sg1137
-I1
+p1451
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1451
-(dp1452
+p1452
+(dp1453
 g12
 S"Peter's Lab:\nFill Me."
-p1453
+p1454
 sg1108
-(lp1454
+(lp1455
 sg5
 S'Electronics Lab'
-p1455
+p1456
 sg1124
-(lp1456
-sg1126
 (lp1457
+sg1126
+(lp1458
 sg1128
-(g1132
-g1179
-tp1458
-sg1134
+(g1133
+g1180
+tp1459
+sg1135
 (I1
 I4
 I3
-tp1459
-sg1135
+tp1460
+sg1136
 S"I'm just glad to not have to be in here anymore."
-p1460
-sg1137
-I1
+p1461
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1461
+sbaa(lp1462
 Na(iGameClasses
 Map
-p1462
-(dp1463
+p1463
+(dp1464
 g12
 S'JHE ANNEX:\nHatch is to your rear. ABB in front of you.\nITB is to your left. NRB to your right.\nThe Eng Phys office is up the stairs.'
-p1464
+p1465
 sg1108
-(lp1465
+(lp1466
 sg5
 S'JHE Annex'
-p1466
+p1467
 sg1124
-(lp1467
+(lp1468
 g899
 asg1126
-(lp1468
+(lp1469
 sg1128
-(tsg1134
+(tsg1135
 g905
-sg1135
+sg1136
 S'They made a big engineering building, got money, then added more.\nYou wonder why Eng Phys classes get pushed into the rooms in this side of JHE...\nHmm...'
-p1469
-sg1137
-I1
+p1470
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1470
-(dp1471
+p1471
+(dp1472
 g12
 S'ENG PHYS OFFICE:\n2nd Floor Abb is infront of you. 2nd Floor Hatch is behind you. You can go down the stairs to JHE Annex.'
-p1472
+p1473
 sg1108
-(lp1473
+(lp1474
 sg5
 S'Eng Phys Office'
-p1474
+p1475
 sg1124
-(lp1475
-sg1126
 (lp1476
+sg1126
+(lp1477
 sg1128
 (g1131
-g6
-g1179
-tp1477
-sg1134
+g1132
+g1180
+tp1478
+sg1135
 (I1
 I5
 I2
-tp1478
-sg1135
+tp1479
+sg1136
 S'The portrait of Dr. Novog makes you jealous as you realize you could\nnever pull off a hairstyle like that.\nYou scan the display case of past Eng Phys projects.\nThey display these as trophies...\nTrophies which only tell a story of endless grind you think to yourself...'
-p1479
-sg1137
-I1
+p1480
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1480
+sbaNaa(lp1481
 (iGameClasses
 Map
-p1481
-(dp1482
+p1482
+(dp1483
 g12
 S'ABB BASEMENT:\nYou can only go back up to the main floor.'
-p1483
+p1484
 sg1108
-(lp1484
+(lp1485
 sg5
 S'ABB Basement'
-p1485
+p1486
 sg1124
-(lp1486
+(lp1487
 g536
 a(iGameClasses
 Interact
-p1487
-(dp1488
+p1488
+(dp1489
 g12
 S'Seems like a regular fridge to me.'
-p1489
+p1490
 sg5
 S'Fridge'
-p1490
+p1491
 sg1115
 S'pedrotti cubed'
-p1491
+p1492
 sg1118
 I00
 sg20
 g542
 sg1119
 S'relativistic key'
-p1492
+p1493
 sg1120
 S"You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!"
-p1493
+p1494
 sba(iGameClasses
 Interact
-p1494
-(dp1495
+p1495
+(dp1496
 g12
 S"Dr. Haugen's personal optical bench..."
-p1496
+p1497
 sg5
 S'Optical Bench'
-p1497
+p1498
 sg1115
 S'relativistic key'
-p1498
+p1499
 sg1118
 I00
 sg20
 g542
 sg1119
 S'femtosecond laser'
-p1499
+p1500
 sg1120
 S"You place Dr. Haugen's femtosecond laser on the bench and aim it at the fridge.\nTurning the laser on (remembering your laser safety glasses, of course)\nfires the high-intensity beam at the fridge.\nThe room begins to shake and smoke begins to billow out of the cracks of the fridge.\nThe door swings open and a glowing apparition of Albert Einstein emerges!\n'You have come a long way, but your quest is not yet over.'\n'For there still remains a great evil on this campus'\n'Dr. Haugen was entrusted with protecting the contents of my fridge.'\n'I have known of your destiny since your first year here at McMaster.'\n'You will be the one who determines the fate of the faculty.'\n'It is, therefore, my responsibility to prepare you for what lies ahead.'\n'This key opens a compartment in my fridge which holds one of three Quantum Relics.'\n'These items give the holder the power to shape the fate of the entire university.'\n'I cannot tell you much more. Perhaps I have said too much.'\n'Take this. Good Luck.'"
-p1500
+p1501
 sbasg1126
-(lp1501
+(lp1502
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1502
-sg1134
-g542
+g1133
+tp1503
 sg1135
+g542
+sg1136
 S'The Laser lab is pretty darn cool.\nWalking around here you notice a number of PhD students looking rather shifty.\nHmmm...\nYou wonder why that is.'
-p1503
-sg1137
-I1
+p1504
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1504
-(dp1505
+p1505
+(dp1506
 g12
 S'ABB:\nThode is in front of you. JHE Annex is behind you.\nThe Nuclear Reactor is to your right. LOT I is to your left.\nYou can go up or down the stairs.'
-p1506
+p1507
 sg1108
-(lp1507
+(lp1508
 sg5
 S'ABB'
-p1508
+p1509
 sg1124
-(lp1509
+(lp1510
 (iGameClasses
 Interact
-p1510
-(dp1511
+p1511
+(dp1512
 g12
 S"It's a display case full of all sorts of old-time Engineering Physics wizardry."
-p1512
+p1513
 sg5
 S'Display Case'
-p1513
+p1514
 sg1115
 S"faraday's cage"
-p1514
+p1515
 sg1118
 I00
 sg20
 (I1
 I6
 I1
-tp1515
+tp1516
 sg1119
 S'rusty key'
-p1516
+p1517
 sg1120
 S'The rusty key fits perfectly!\nAs you turn the key glowing square forms on the back\nof the display case and opens revealing an old relic...'
-p1517
+p1518
 sbasg1126
-(lp1518
+(lp1519
 sg1128
-(tsg1134
-g1515
-sg1135
+(tsg1135
+g1516
+sg1136
 S'You stare at the electron microscope structure and wonder if it could even see your GPA...\nA tear rolls down your cheek. You collect yourself and plan what to do next.'
-p1519
-sg1137
-I1
+p1520
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1520
-(dp1521
+p1521
+(dp1522
 g12
 S'2ND FLOOR ABB:\nThe Eng Phys Office is behind you. You can down the stairs to ABB.'
-p1522
+p1523
 sg1108
-(lp1523
+(lp1524
 sg5
 S'2nd Floor ABB'
-p1524
+p1525
 sg1124
-(lp1525
-sg1126
 (lp1526
+sg1126
+(lp1527
 sg1128
 (g1129
 g1131
-g6
-g1179
-tp1527
-sg1134
+g1132
+g1180
+tp1528
+sg1135
 (I1
 I6
 I2
-tp1528
-sg1135
+tp1529
+sg1136
 S'You were told JHE would be your home.\nNope.\nInstead you recall countless hours lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the windows on a spring afternoon...'
-p1529
-sg1137
-I1
+p1530
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1530
+sbaNaa(lp1531
 (iGameClasses
 Map
-p1531
-(dp1532
+p1532
+(dp1533
 g12
 S'THODE BASEMENT:\nGo up to head outside.'
-p1533
+p1534
 sg1108
-(lp1534
+(lp1535
 sg5
 S'Thode Basement'
-p1535
+p1536
 sg1124
-(lp1536
+(lp1537
 (iGameClasses
 Interact
-p1537
-(dp1538
+p1538
+(dp1539
 g12
 S'Looks like an old dusty workbench.'
-p1539
+p1540
 sg5
 S'Workbench'
-p1540
+p1541
 sg1115
 g66
 sg1118
@@ -5526,113 +5527,113 @@ sg20
 (I1
 I7
 I0
-tp1541
+tp1542
 sg1119
 Nsg1120
 g66
 sbasg1126
-(lp1542
+(lp1543
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1543
-sg1134
-g1541
+g1133
+tp1544
 sg1135
+g1542
+sg1136
 S"You feel the laser glares burning into the back of your neck as\nyou hastily walk amongst the rows of desks.\nIs it possible to book a study room down here without finding a phallic object drawn on the whiteboard?\nYou'll never know."
-p1544
-sg1137
-I1
+p1545
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1545
-(dp1546
+p1546
+(dp1547
 g12
 S'THODE:\nABB is at your rear. The campus exit is to your right.\nCootes Drive is to your left. You can go up or down the stairs.'
-p1547
+p1548
 sg1108
-(lp1548
+(lp1549
 sg5
 S'Thode'
-p1549
+p1550
 sg1124
-(lp1550
+(lp1551
 g318
 ag850
 asg1126
-(lp1551
+(lp1552
 sg1128
 g1129
-sg1134
-g324
 sg1135
+g324
+sg1136
 S'Oh the Reactor Cafe.\nYou think of the good old days when you could actually see the reactor from the Cafe...\nAfter overhearing someone ask whether keV is bigger than MeV you first contemplate your existence,\nthen contemplate your next move...'
-p1552
-sg1137
-I1
+p1553
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1553
-(dp1554
+p1554
+(dp1555
 g12
 S'2ND FLOOR THODE:\nYou can go up or down the stairs.'
-p1555
+p1556
 sg1108
-(lp1556
+(lp1557
 sg5
 S'2nd Floor Thode'
-p1557
+p1558
 sg1124
-(lp1558
+(lp1559
 g746
 asg1126
-(lp1559
+(lp1560
 sg1128
 (g1129
 g1130
 g1131
-g6
-tp1560
-sg1134
-g752
+g1132
+tp1561
 sg1135
+g752
+sg1136
 S"As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move."
-p1561
-sg1137
-I1
+p1562
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1562
-(dp1563
+p1563
+(dp1564
 g12
 S'3RD FLOOR THODE:\nYou can only go back down the stairs.'
-p1564
+p1565
 sg1108
-(lp1565
+(lp1566
 (iGameClasses
 Enemy
-p1566
-(dp1567
+p1567
+(dp1568
 g12
 S'I would really like a cricket to continue my research...'
-p1568
+p1569
 sg3
 (I10
 I10
 I10
-tp1569
+tp1570
 sg5
 S'Connor the Biologist'
-p1570
+p1571
 sg1115
 Nsg37
 I01
@@ -5645,71 +5646,71 @@ sg20
 (I1
 I7
 I3
-tp1571
+tp1572
 sg1119
 S'cricket'
-p1572
+p1573
 sg40
 I00
 sg1120
 S'Thanks!'
-p1573
+p1574
 sg1121
 S"'I can't believe you've done this."
-p1574
+p1575
 sbasg5
 S'3rd Floor Thode'
-p1575
+p1576
 sg1124
-(lp1576
-sg1126
 (lp1577
+sg1126
+(lp1578
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp1578
-sg1134
-g1571
+g1132
+g1180
+tp1579
 sg1135
+g1572
+sg1136
 S"After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move."
-p1579
-sg1137
-I1
+p1580
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1580
-NaNaNaNaa(lp1581
-(lp1582
+sbaa(lp1581
+NaNaNaNaa(lp1582
+(lp1583
 (iGameClasses
 Map
-p1583
-(dp1584
+p1584
+(dp1585
 g12
 S'CHAPEL UNDERCROFT:\nYou can only go back up to the main floor.'
-p1585
+p1586
 sg1108
-(lp1586
+(lp1587
 (iGameClasses
 Enemy
-p1587
-(dp1588
+p1588
+(dp1589
 g12
 S"'Mussst eeaaat funnnndingg... Er, I mean braaains.'"
-p1589
+p1590
 sg3
 (I20
 I10
 I1
-tp1590
+tp1591
 sg5
 S'Undead Grad Student'
-p1591
+p1592
 sg1115
 S'horrible assignment'
-p1592
+p1593
 sg37
 I01
 sg1117
@@ -5726,58 +5727,58 @@ sg1120
 g66
 sg1121
 S'My 12 year post-grad was for nothiiiiiingggggg!'
-p1593
+p1594
 sbasg5
 S'Chapel Undercroft'
-p1594
+p1595
 sg1124
-(lp1595
+(lp1596
 g568
 asg1126
-(lp1596
+(lp1597
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1597
-sg1134
-g574
+g1133
+tp1598
 sg1135
+g574
+sg1136
 S'You struggle down the dimly lit stairway into the undercroft.\nThe distinct smell of mould enters your nose as you travel further into the musty basement.\nThe faint glow of candles cause the shadows of ancient statues to flicker on the walls of the room...\nYou plan your next move.'
-p1598
-sg1137
-I1
+p1599
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1599
-(dp1600
+p1600
+(dp1601
 g12
 S'MCMASTER CHAPEL:\nThe Bus Stop is in front of you back out the door. There is a set of stairs going up.\nAs well as an old stairway leading downward.'
-p1601
+p1602
 sg1108
-(lp1602
+(lp1603
 (iGameClasses
 Enemy
-p1603
-(dp1604
+p1604
+(dp1605
 g12
 S"'You need prayer. Recharge at the altar.'"
-p1605
+p1606
 sg3
 (I10
 I10
 I10
-tp1606
+tp1607
 sg5
 S'Father Frobenius'
-p1607
+p1608
 sg1115
 S'crucifix'
-p1608
+p1609
 sg37
 I01
 sg1117
@@ -5794,92 +5795,92 @@ sg1120
 g66
 sg1121
 S'I am slain!'
-p1609
+p1610
 sbasg5
 S'The Chapel'
-p1610
+p1611
 sg1124
-(lp1611
+(lp1612
 g1017
 asg1126
-(lp1612
+(lp1613
 sg1128
-(g6
+(g1132
 g1131
 g1130
-tp1613
-sg1134
-g1023
+tp1614
 sg1135
+g1023
+sg1136
 S"The low drone of the organ draws you in.\nThe pews are relatively empty and the lighting quite dim.\nYou think it would be in your best interest\nto pray especially with exam season just around the corner...\nIt can't hurt, right? It'd probably work better than those healing stones\non your desk."
-p1614
-sg1137
-I1
+p1615
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1615
-(dp1616
+p1616
+(dp1617
 g12
 S'2ND FLOOR CHAPEL:\nYou can only go back down the stairs.'
-p1617
+p1618
 sg1108
-(lp1618
+(lp1619
 sg5
 S'Upstairs Chapel'
-p1619
+p1620
 sg1124
-(lp1620
+(lp1621
 g222
 ag170
 ag928
 asg1126
-(lp1621
+(lp1622
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp1622
-sg1134
-g176
+g1132
+g1180
+tp1623
 sg1135
+g176
+sg1136
 S'The combination of ringing bells and echoes from the organ is deafening.\nYou can barely collect your thoughts.\nThe cobwebs and dust give you the impression this place has been ill-travelled\nand long forgotten.'
-p1623
-sg1137
-I1
+p1624
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp1624
+sbaNaa(lp1625
 Na(iGameClasses
 Map
-p1625
-(dp1626
+p1626
+(dp1627
 g12
 S'BUS STOP:\nHealth Sciences Library to your left. JHE field in front of you.\nThe chapel is behind you. Art Museum to your right.'
-p1627
+p1628
 sg1108
-(lp1628
+(lp1629
 (iGameClasses
 Enemy
-p1629
-(dp1630
+p1630
+(dp1631
 g12
 S"'Is that even your bus pass?'"
-p1631
+p1632
 sg3
 (I10
 I10
 I5
-tp1632
+tp1633
 sg5
 S'Larry the bus driver'
-p1633
+p1634
 sg1115
 S'huge shirt'
-p1634
+p1635
 sg37
 I01
 sg1117
@@ -5896,54 +5897,54 @@ sg1120
 g66
 sg1121
 S'That was definitely not your bus pass!'
-p1635
+p1636
 sbasg5
 S'The Bus Stop'
-p1636
+p1637
 sg1124
-(lp1637
+(lp1638
 g279
 ag606
 asg1126
-(lp1638
+(lp1639
 sg1128
-(tsg1134
+(tsg1135
 g285
-sg1135
+sg1136
 S'Students gather around to catch the next bus.\nYou get pushed and shoved as they desperately clammer on-board.\nYou overhear an argument between a student and the Bus Driver when suddenly the altercation\nturns to blows and pours onto the sidewalk.'
-p1639
-sg1137
-I1
+p1640
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1640
+sbaNaNaa(lp1641
 Na(iGameClasses
 Map
-p1641
-(dp1642
+p1642
+(dp1643
 g12
 S'JHE FIELD:\nBSB Field is to your right. McMaster map to your left.\nThe Bus Stop is at your rear. The entrance to JHE is in front of you.'
-p1643
+p1644
 sg1108
-(lp1644
+(lp1645
 (iGameClasses
 Enemy
-p1645
-(dp1646
+p1646
+(dp1647
 g12
 S"'HAHA, you were a RIOT at the Phoenix last night!'"
-p1647
+p1648
 sg3
 (I5
 I2
 I10
-tp1648
+tp1649
 sg5
 S'Brian the Weeb'
-p1649
+p1650
 sg1115
 S'guitar'
-p1650
+p1651
 sg37
 I01
 sg1117
@@ -5960,107 +5961,107 @@ sg1120
 g66
 sg1121
 S"That's not vegan."
-p1651
+p1652
 sbasg5
 S'JHE Field'
-p1652
+p1653
 sg1124
-(lp1653
+(lp1654
 g590
 ag878
 asg1126
-(lp1654
+(lp1655
 sg1128
-(tsg1134
+(tsg1135
 g596
-sg1135
+sg1136
 S'The morning sun warms your face as you scoff at a hipster slack-lining.\nStudents lie in the grass around the field even though everybody knows\nnothing gets done studying outside.\nAfter narrowly dodging a frisbee you plan what to do.'
-p1655
-sg1137
-I1
+p1656
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p1656
-(dp1657
+p1657
+(dp1658
 g12
 S'THE ECLIPSE:\nFill Me.'
-p1658
+p1659
 sg1108
-(lp1659
+(lp1660
 sg5
 S'THE ECLIPSE'
-p1660
+p1661
 sg1124
-(lp1661
-sg1126
 (lp1662
+sg1126
+(lp1663
 sg1128
-(g1132
-g1179
-tp1663
-sg1134
+(g1133
+g1180
+tp1664
+sg1135
 (I2
 I2
 I3
-tp1664
-sg1135
-S'W DANG The Eclipse! But yeah this windshield is a bit much'
-p1665
-sg1137
-I1
+tp1665
+sg1136
+S'AW DANG The Eclipse! But yeah this windshield is a bit much'
+p1666
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1666
+sbaa(lp1667
 Na(iGameClasses
 Map
-p1667
-(dp1668
+p1668
+(dp1669
 g12
 S'FRONT OF JHE:\nBSB is to your right. Hatch to your left.\nJHE field is to your rear. Enter JHE by going forward.'
-p1669
+p1670
 sg1108
-(lp1670
+(lp1671
 sg5
 S'Starting Location'
-p1671
+p1672
 sg1124
-(lp1672
+(lp1673
 g200
 a(iGameClasses
 Interact
-p1673
-(dp1674
+p1674
+(dp1675
 g12
 S"It's a garbage can."
-p1675
+p1676
 sg5
 S'Garbage Can'
-p1676
+p1677
 sg1115
 S'vomit'
-p1677
+p1678
 sg1118
 I00
 sg20
 g206
 sg1119
 S'msp430'
-p1678
+p1679
 sg1120
 S'You throw the MSP430 in... Yes, you have chosen wisely.'
-p1679
+p1680
 sba(iGameClasses
 Interact
-p1680
-(dp1681
+p1681
+(dp1682
 g12
 S"Welcome to The Great ENG PHYS Text Adventure!\n\nHere are the rules of the realm:\nYour orientation never changes. When you enter you will be facing the\nentrance of JHE and you will always face that way.\n\nThe commands which allow you to interact with your environment are:\nforward = f, backward = b, left = l, right = r, up = u, down = d\ntalk (person name) -talk to someone near you\nattack (person name) -attacks someone\ninspect (item name) -let's you interact with interactables and gives stats of items, can't inspect people\nequip (item name) -you pick up an item, drops any item you have in that slot\ndrop (item name) -drops an item in your inventory\neat (item name) -eat an item\nstats -will show your stats\nsearch - will search the area for things to interact with.\ninventory -will show your current inventory.\n\nBe sure to type the ENTIRE name of what you want to interact with.\nThat's it! Good Luck!"
-p1682
+p1683
 sg5
 S'Rules Sign'
-p1683
+p1684
 sg1115
 g66
 sg1118
@@ -6072,77 +6073,77 @@ g66
 sg1120
 g66
 sbasg1126
-(lp1684
+(lp1685
 sg1128
-(tsg1134
+(tsg1135
 g206
-sg1135
+sg1136
 S"You hear a booming voice that sounds oddly like a game developer. \ntype: 'inspect rules sign!'\nYou see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE."
-p1685
-sg1137
-I1
+p1686
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p1686
-(dp1687
+p1687
+(dp1688
 g12
 S'ZebraShark:\nFill Me.'
-p1688
+p1689
 sg1108
-(lp1689
+(lp1690
 sg5
 S'ZebraShark'
-p1690
+p1691
 sg1124
-(lp1691
-sg1126
 (lp1692
+sg1126
+(lp1693
 sg1128
-(g1132
-g1179
-tp1693
-sg1134
+(g1133
+g1180
+tp1694
+sg1135
 (I2
 I3
 I3
-tp1694
-sg1135
+tp1695
+sg1136
 S'Where are they? O.m.g. is that a pool downstairs?'
-p1695
-sg1137
-I1
+p1696
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1696
+sbaa(lp1697
 (iGameClasses
 Map
-p1697
-(dp1698
+p1698
+(dp1699
 g12
 S'JHE BASEMENT:\nYou can only go back up to the main floor.'
-p1699
+p1700
 sg1108
-(lp1700
+(lp1701
 (iGameClasses
 Enemy
-p1701
-(dp1702
+p1702
+(dp1703
 g12
 S"'I need a snack that smiles back!'"
-p1703
+p1704
 sg3
 (I17
 I12
 I15
-tp1704
+tp1705
 sg5
 S'Zack the Snack'
-p1705
+p1706
 sg1115
 S'fanny pack'
-p1706
+p1707
 sg37
 I01
 sg1117
@@ -6154,67 +6155,67 @@ sg20
 (I2
 I4
 I0
-tp1707
+tp1708
 sg1119
 S'goldfish'
-p1708
+p1709
 sg40
 I00
 sg1120
 S'Whoa thats whack! Check out this fanny pack.'
-p1709
+p1710
 sg1121
 S'Why are you the way you are?'
-p1710
+p1711
 sbasg5
 S'JHE Basement'
-p1711
+p1712
 sg1124
-(lp1712
-sg1126
 (lp1713
+sg1126
+(lp1714
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1714
-sg1134
-g1707
+g1133
+tp1715
 sg1135
+g1708
+sg1136
 S'You see the remnants of failed clubs and the shattered dreams of past engineers...\nThis place is a bit chilly.'
-p1715
-sg1137
-I1
+p1716
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1716
-(dp1717
+p1717
+(dp1718
 g12
 S'JHE LOBBY:\nTo your right you can exit towards BSB. To your left you can head into Hatch.\nForward is the Nuclear Research building. Behind you lies the exit.\nThere are also stairs going up and down.'
-p1718
+p1719
 sg1108
-(lp1719
+(lp1720
 (iGameClasses
 Enemy
-p1720
-(dp1721
+p1721
+(dp1722
 g12
 S"Wait, but I'm you? Sorry I'm a little busy to think about this right now."
-p1722
+p1723
 sg3
 (I100
 I100
 I100
-tp1723
+tp1724
 sg5
 g6
 sg1115
 S'self worth'
-p1724
+p1725
 sg37
 I01
 sg1117
@@ -6231,24 +6232,24 @@ sg1120
 g66
 sg1121
 S"\nCongradulations, you've conquered yourself! It wasn't that hard!"
-p1725
+p1726
 sbasg5
 S'Inside JHE'
-p1726
+p1727
 sg1124
-(lp1727
+(lp1728
 g333
 ag341
 a(iGameClasses
 Interact
-p1728
-(dp1729
+p1729
+(dp1730
 g12
 S'This heap of computing majesty could block bullets... I think...'
-p1730
+p1731
 sg5
 S'Lenovo Laptop'
-p1731
+p1732
 sg1115
 g66
 sg1118
@@ -6257,353 +6258,353 @@ sg20
 g339
 sg1119
 S'eng phys usb pen'
-p1732
+p1733
 sg1120
 S'You plug in the Eng Phs USB Pen.\nYou find all of 2P04 files, who uses FlexPDE anymore? You also find a \nweird exe called the Eng Phys Text Adventure! That sounds like fun.\nYou hear a drumming in your ears, is that coming from the pen?'
-p1733
+p1734
 sbasg1126
-(lp1734
+(lp1735
 sg1128
-(tsg1134
+(tsg1135
 g339
-sg1135
+sg1136
 S'JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night.\nMany engineers happy. Many more still grinding.'
-p1735
-sg1137
-I1
+p1736
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1736
-(dp1737
+p1737
+(dp1738
 g12
 S'2ND FLOOR JHE:\nTo the left is 2nd Floor Hatch. You can go down the stairs to JHE Lobby.'
-p1738
+p1739
 sg1108
-(lp1739
+(lp1740
 sg5
 S'2nd Floor JHE'
-p1740
+p1741
 sg1124
-(lp1741
+(lp1742
 g820
 ag1025
 asg1126
-(lp1742
+(lp1743
 sg1128
 (g1129
 g1130
-g6
-g1179
-tp1743
-sg1134
-g826
+g1132
+g1180
+tp1744
 sg1135
+g826
+sg1136
 S'You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years.\nYou shake your fist and plan your next move.'
-p1744
-sg1137
-I1
+p1745
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1745
-(dp1746
+p1746
+(dp1747
 g12
 S'T.A. Area:\nFill Me.'
-p1747
+p1748
 sg1108
-(lp1748
+(lp1749
 sg5
 S'T.A. Area'
-p1749
+p1750
 sg1124
-(lp1750
-sg1126
 (lp1751
+sg1126
+(lp1752
 sg1128
-(g1132
-g1179
-tp1752
-sg1134
+(g1133
+g1180
+tp1753
+sg1135
 (I2
 I4
 I3
-tp1753
-sg1135
+tp1754
+sg1136
 S'Is this where the PSRs get lost? Also just storage space for STARS'
-p1754
-sg1137
-I1
+p1755
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1755
+sbaa(lp1756
 (iGameClasses
 Map
-p1756
-(dp1757
+p1757
+(dp1758
 g12
 S'BASEMENT OF NRB:\nYou can only go back up to the main floor.'
-p1758
+p1759
 sg1108
-(lp1759
+(lp1760
 sg5
 S'NRB Basement'
-p1760
+p1761
 sg1124
-(lp1761
+(lp1762
 g634
 asg1126
-(lp1762
+(lp1763
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1763
-sg1134
-g640
+g1133
+tp1764
 sg1135
+g640
+sg1136
 S'You head down the stairs to the basement...\nThe forgotten dreams of PhD students linger in the air.\nThere is an endless amount of engineering wizardry in the rooms around you.'
-p1764
-sg1137
-I1
+p1765
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1765
-(dp1766
+p1766
+(dp1767
 g12
 S'NUCLEAR RESEARCH BUILDING:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.\nThere are stairs going down.'
-p1767
+p1768
 sg1108
-(lp1768
+(lp1769
 sg5
 S'Nuclear Research Building'
-p1769
+p1770
 sg1124
-(lp1770
+(lp1771
 g679
 asg1126
-(lp1771
+(lp1772
 sg1128
-(tsg1134
+(tsg1135
 g685
-sg1135
+sg1136
 S"You have barely ever been in here other than to struggle through\n3 hours of waiting for a water level PID controller to reach steady state.\nYou wonder how anyone could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because\nthey are all still lost in here..."
-p1772
-sg1137
-I1
+p1773
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1773
+sbaNaNaa(lp1774
 (iGameClasses
 Map
-p1774
-(dp1775
+p1775
+(dp1776
 g12
 S'INSIDE THE REACTOR:\nGo up to head outside.'
-p1776
+p1777
 sg1108
-(lp1777
+(lp1778
 sg5
 S'Inside the Reactor'
-p1778
+p1779
 sg1124
-(lp1779
-sg1126
 (lp1780
+sg1126
+(lp1781
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1781
-sg1134
+g1133
+tp1782
+sg1135
 (I2
 I6
 I0
-tp1782
-sg1135
+tp1783
+sg1136
 S'The hum of air conditioning drowns your thoughts.\nYou lose yourself staring into the faint blue glow of the pool as you slowly approach its edge.'
-p1783
-sg1137
-I1
+p1784
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1784
-(dp1785
+p1785
+(dp1786
 g12
 S'NUCLEAR REACTOR:\nRight is the GO station. Left is ABB.\n NRB is at your rear. The campus exit lies in front of you.\nGo down to enter.'
-p1786
+p1787
 sg1108
-(lp1787
+(lp1788
 sg5
 S'Nuclear Reactor'
-p1788
+p1789
 sg1124
-(lp1789
+(lp1790
 g995
 asg1126
-(lp1790
+(lp1791
 sg1128
-(tsg1134
+(tsg1135
 g1001
-sg1135
+sg1136
 S"As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous structure draws you closer as you consider what it would be\nlike to swim in that sweet blue pool..."
-p1791
-sg1137
-I1
+p1792
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1792
+sbaNaNaa(lp1793
 Na(iGameClasses
 Map
-p1793
-(dp1794
+p1794
+(dp1795
 g12
 S'CAMPUS EXIT:\nHead to Thode by going left. Head down Cootes trail if you go right.\nThe Reactor is behind you.'
-p1795
+p1796
 sg1108
-(lp1796
+(lp1797
 sg5
 S'Campus Exit'
-p1797
+p1798
 sg1124
-(lp1798
+(lp1799
 g405
 asg1126
-(lp1799
+(lp1800
 sg1128
 g1129
-sg1134
-g411
 sg1135
+g411
+sg1136
 S'A faint glow can be seen in the distance.\nWarning signs litter the trail as you squint to get a better look.\nA chill is sent down your spine as you see the flickering stretched shadows of\nfighting dance on the road ahead.\nYou cannot go straight... yet.'
-p1800
-sg1137
-I1
+p1801
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1801
-NaNaNaNaa(lp1802
-(lp1803
+sbaNaNaa(lp1802
+NaNaNaNaa(lp1803
+(lp1804
 Na(iGameClasses
 Map
-p1804
-(dp1805
+p1805
+(dp1806
 g12
 S'ART MUSEUM:\nThe exit lies in front of you.'
-p1806
+p1807
 sg1108
-(lp1807
+(lp1808
 sg5
 S'Inside the Art Museum'
-p1808
+p1809
 sg1124
-(lp1809
+(lp1810
 g552
 a(iGameClasses
 Interact
-p1810
-(dp1811
+p1811
+(dp1812
 g12
 S'An old oil painting of the founding fathers of McMaster.\nDated:April 20th, 1887'
-p1812
+p1813
 sg5
 S'Old Painting'
-p1813
+p1814
 sg1115
 S"minnick's glasses"
-p1814
+p1815
 sg1118
 I00
 sg20
 g558
 sg1119
 S"minnick's glasses"
-p1815
+p1816
 sg1120
 S"Through Dr. Minnick's glasses a glowing green inscription is revealed!\n'In the hall where we eternally meet,\nThe second clue lies beneath your feet.'\nWhile reading the secret message Dr. Minnick's glasses get increasingly hotter and you quickly swat them off your face."
-p1816
+p1817
 sbasg1126
-(lp1817
+(lp1818
 sg1128
-(g6
+(g1132
 g1131
 g1130
-tp1818
-sg1134
-g558
+tp1819
 sg1135
+g558
+sg1136
 S'Who knew McMaster had such a beautiful gallery.\nYou tilt your head endlessly until the art sort of makes sense.\nAfter telling yourself you could totally make every piece in the place had you been given\na chance you put your pinky out.\nThen contemplate your next move.'
-p1819
-sg1137
-I1
+p1820
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1820
+sbaNaNaa(lp1821
 Na(iGameClasses
 Map
-p1821
-(dp1822
+p1822
+(dp1823
 g12
 S'OUTSIDE ART MUSEUM:\nYou can enter the museum to your rear. Bus Stop is to your left.\nWilly-dog stand to your right. BSB field lies in front of you.'
-p1823
+p1824
 sg1108
-(lp1824
+(lp1825
 sg5
 S'Outside the Art Museum'
-p1825
+p1826
 sg1124
-(lp1826
+(lp1827
 g560
 asg1126
-(lp1827
+(lp1828
 sg1128
-(tsg1134
+(tsg1135
 g566
-sg1135
+sg1136
 S'Standing out front of the art museum you feel you are already being critiqued.\nAfter narrowly escaping a conversation with an arts student\nabout their installation piece of a dirty coffee table...\nYou plan your next move.'
-p1828
-sg1137
-I1
+p1829
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1829
+sbaNaNaa(lp1830
 Na(iGameClasses
 Map
-p1830
-(dp1831
+p1831
+(dp1832
 g12
 S'BSB FIELD:\nThe turning circle is to your right. JHE field is to your left.\nEntrance to BSB is in front of you. The Art Museum is to your rear.'
-p1832
+p1833
 sg1108
-(lp1833
+(lp1834
 (iGameClasses
 Enemy
-p1834
-(dp1835
+p1835
+(dp1836
 g12
 S"'I heard some jebroni took the 3W Textbook and hid in Bridges cafe.'\n'Full send, dude!'"
-p1836
+p1837
 sg3
 (I10
 I15
 I5
-tp1837
+tp1838
 sg5
 S'Andreas the Nerd'
-p1838
+p1839
 sg1115
 S'visor glasses'
-p1839
+p1840
 sg37
 I01
 sg1117
@@ -6620,108 +6621,108 @@ sg1120
 g66
 sg1121
 S'Dude, that was definitely a full send'
-p1840
+p1841
 sbasg5
 S'BSB Field'
-p1841
+p1842
 sg1124
-(lp1842
+(lp1843
 g544
 a(iGameClasses
 Interact
-p1843
-(dp1844
+p1844
+(dp1845
 g12
 S"You can't even tell time on an analog clock.\nHow are you supposed to use this?"
-p1845
+p1846
 sg5
 S'Sun Dial'
-p1846
+p1847
 sg1115
 S'rusty key'
-p1847
+p1848
 sg1118
 I00
 sg20
 g550
 sg1119
 S"minnick's glasses"
-p1848
+p1849
 sg1120
 S"Through Dr. Minnick's glasses, you see a green glowing handprint appears\non the face of the sundial!\nYou place your hand on it and a compartment opens."
-p1849
+p1850
 sbasg1126
-(lp1850
+(lp1851
 sg1128
-(tsg1134
+(tsg1135
 g550
-sg1135
+sg1136
 S'You look up to see the flags flapping happily in the morning breeze.\nThat sundial at their feet ticking to the tune of celestial magic.\nAfter swatting Neil Degrasse quotes from your thoughts...\nYou consider what to do next.'
-p1851
-sg1137
-I1
+p1852
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p1852
-(dp1853
+p1853
+(dp1854
 g12
 S'S.T.A.R.S.:\nFill Me.'
-p1854
+p1855
 sg1108
-(lp1855
+(lp1856
 sg5
 S'S.T.A.R.S.'
-p1856
+p1857
 sg1124
-(lp1857
-sg1126
 (lp1858
+sg1126
+(lp1859
 sg1128
-(g1132
-g1179
-tp1859
-sg1134
+(g1133
+g1180
+tp1860
+sg1135
 (I3
 I2
 I3
-tp1860
-sg1135
+tp1861
+sg1136
 S'S.T.A.R.S. PLEASE WORK'
-p1861
-sg1137
-I1
+p1862
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1862
+sbaa(lp1863
 Na(iGameClasses
 Map
-p1863
-(dp1864
+p1864
+(dp1865
 g12
 S'FRONT OF BSB:\nBSB field is at your rear. A road is to your right.\nThe entrance to JHE is to your left. BSB is infront of you'
-p1865
+p1866
 sg1108
-(lp1866
+(lp1867
 (iGameClasses
 Enemy
-p1867
-(dp1868
+p1868
+(dp1869
 g12
 S"'The oscilloscope is the window into the electronic world.'"
-p1869
+p1870
 sg3
 (I100
 I100
 I200
-tp1870
+tp1871
 sg5
 S'Kenrick'
-p1871
+p1872
 sg1115
 S"kenrick's oscilloscope"
-p1872
+p1873
 sg37
 I01
 sg1117
@@ -6733,7 +6734,7 @@ sg20
 (I3
 I3
 I1
-tp1873
+tp1874
 sg1119
 Nsg40
 I00
@@ -6741,107 +6742,107 @@ sg1120
 g66
 sg1121
 S"Oh no! My window! The Dark Lord will know I've failed him!"
-p1874
+p1875
 sbasg5
 S'Front BSB'
-p1875
+p1876
 sg1124
-(lp1876
+(lp1877
 (iGameClasses
 Interact
-p1877
-(dp1878
+p1878
+(dp1879
 g12
 S'Under closer inspection you notice the book is a different kind of stone\nthan the rest...\nIf only you could get up there for a closer look...'
-p1879
+p1880
 sg5
 S'Coat of Arms'
-p1880
+p1881
 sg1115
 S'old scroll'
-p1881
+p1882
 sg1118
 I00
 sg20
-g1873
+g1874
 sg1119
 S'old ladder'
-p1882
+p1883
 sg1120
 S'With some effort you climb the rickety ladder and remove the book from the wall.\nReaching into the hole you pull out an old scroll!'
-p1883
+p1884
 sbasg1126
-(lp1884
+(lp1885
 sg1128
-(tsg1134
-g1873
-sg1135
+(tsg1135
+g1874
+sg1136
 S"You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day..."
-p1885
-sg1137
-I1
+p1886
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p1886
-(dp1887
+p1887
+(dp1888
 g12
 S'FRAS:\nFill Me.'
-p1888
+p1889
 sg1108
-(lp1889
+(lp1890
 sg5
 S'FRAS'
-p1890
+p1891
 sg1124
-(lp1891
-sg1126
 (lp1892
+sg1126
+(lp1893
 sg1128
-(g1132
-g1179
-tp1893
-sg1134
+(g1133
+g1180
+tp1894
+sg1135
 (I3
 I3
 I3
-tp1894
-sg1135
+tp1895
+sg1136
 S"Yeah that's a tank. This is a 3D printed Tank."
-p1895
-sg1137
-I1
+p1896
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1896
+sbaa(lp1897
 (iGameClasses
 Map
-p1897
-(dp1898
+p1898
+(dp1899
 g12
 S'QUANTUM TUNNEL:\nGo up to return to the main floor of BSB'
-p1899
+p1900
 sg1108
-(lp1900
+(lp1901
 (iGameClasses
 Enemy
-p1901
-(dp1902
+p1902
+(dp1903
 g12
 S'I am NOT going to finish this assignment... if only I had one to copy.'
-p1903
+p1904
 sg3
 (I10
 I10
 I10
-tp1904
+tp1905
 sg5
 S'Liam the Gamer'
-p1905
+p1906
 sg1115
 S'swordfish'
-p1906
+p1907
 sg37
 I01
 sg1117
@@ -6853,156 +6854,156 @@ sg20
 g730
 sg1119
 S'horrible assignment'
-p1907
+p1908
 sg40
 I00
 sg1120
 S'Nice! Take this swordfish. I needed 45 cooking for that.'
-p1908
+p1909
 sg1121
 g66
 sbasg5
 S'The Quantum Tunnel'
-p1909
+p1910
 sg1124
-(lp1910
+(lp1911
 g835
 ag724
 asg1126
-(lp1911
+(lp1912
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp1912
-sg1134
-g730
+g1133
+tp1913
 sg1135
+g730
+sg1136
 S"What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'"
-p1913
-sg1137
-I1
+p1914
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1914
-(dp1915
+p1915
+(dp1916
 g12
 S'BSB:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.'
-p1916
+p1917
 sg1108
-(lp1917
+(lp1918
 sg5
 S'BSB'
-p1918
+p1919
 sg1124
-(lp1919
+(lp1920
 g484
 asg1126
-(lp1920
+(lp1921
 sg1128
-(tsg1134
+(tsg1135
 g490
-sg1135
+sg1136
 S"You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead."
-p1921
-sg1137
-I1
+p1922
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1922
-(dp1923
+p1923
+(dp1924
 g12
 S'2ND FLOOR BSB:\nYou can only go back down the stairs.'
-p1924
+p1925
 sg1108
-(lp1925
+(lp1926
 sg5
 S'2nd Floor BSB'
-p1926
+p1927
 sg1124
-(lp1927
+(lp1928
 g656
 asg1126
-(lp1928
+(lp1929
 sg1128
 (g1129
 g1130
 g1131
-g6
-tp1929
-sg1134
-g662
+g1132
+tp1930
 sg1135
+g662
+sg1136
 S'Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.'
-p1930
-sg1137
-I1
+p1931
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p1931
-(dp1932
+p1932
+(dp1933
 g12
 S'Capstone Doorway:\nFill Me.'
-p1933
+p1934
 sg1108
-(lp1934
+(lp1935
 sg5
 S'Capstone Doorway'
-p1935
+p1936
 sg1124
-(lp1936
-sg1126
 (lp1937
+sg1126
+(lp1938
 sg1128
-g1179
-sg1134
+g1180
+sg1135
 (I3
 I4
 I3
-tp1938
-sg1135
+tp1939
+sg1136
 S'You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?'
-p1939
-sg1137
-I1
+p1940
 sg1138
+I1
+sg1139
 I01
-sbaa(lp1940
+sbaa(lp1941
 Na(iGameClasses
 Map
-p1941
-(dp1942
+p1942
+(dp1943
 g12
 S'POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.'
-p1943
+p1944
 sg1108
-(lp1944
+(lp1945
 (iGameClasses
 Enemy
-p1945
-(dp1946
+p1946
+(dp1947
 g12
 S"'Give me your student card!'"
-p1947
+p1948
 sg3
 (I50
 I25
 I10
-tp1948
+tp1949
 sg5
 S'Bill the MAC Cop'
-p1949
+p1950
 sg1115
 S'solar cell'
-p1950
+p1951
 sg37
 I01
 sg1117
@@ -7019,54 +7020,54 @@ sg1120
 g66
 sg1121
 S"We aren't able to arrest you anyway!"
-p1951
+p1952
 sbasg5
 S'Police Station'
-p1952
+p1953
 sg1124
-(lp1953
+(lp1954
 g91
 ag627
 asg1126
-(lp1954
+(lp1955
 sg1128
-(tsg1134
+(tsg1135
 g97
-sg1135
+sg1136
 S'Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner, you think of what to do next.'
-p1955
-sg1137
-I1
+p1956
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp1956
+sbaNaNaa(lp1957
 Na(iGameClasses
 Map
-p1957
-(dp1958
+p1958
+(dp1959
 g12
 S'GO STATION:\nThe Reactor is to your left. Keyes is to your right.\nCootes Trail is in front of you. The Police Station is behind you.'
-p1959
+p1960
 sg1108
-(lp1960
+(lp1961
 (iGameClasses
 Enemy
-p1961
-(dp1962
+p1962
+(dp1963
 g12
 S"'Have you got the LON-CAPA Python code?'"
-p1963
+p1964
 sg3
 (I5
 I1
 I10
-tp1964
+tp1965
 sg5
 S'Steven the first-year'
-p1965
+p1966
 sg1115
 S'engineering mug'
-p1966
+p1967
 sg37
 I01
 sg1117
@@ -7083,162 +7084,162 @@ sg1120
 g66
 sg1121
 S"I'm a failure at home and at school!"
-p1967
+p1968
 sbasg5
 S'GO Station'
-p1968
+p1969
 sg1124
-(lp1969
+(lp1970
 g492
 asg1126
-(lp1970
+(lp1971
 sg1128
-(tsg1134
+(tsg1135
 g498
-sg1135
+sg1136
 S'The rush of people and buses around you is disorienting.\nYou nearly get hit by 3 buses and 2 MAC Cop cars as\nyou play a strange game of real-life frogger.\nReaching a bench you sit down, catch your breath, and plan what to do next.'
-p1971
-sg1137
-I1
+p1972
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1972
+sbaNaNaa(lp1973
 Na(iGameClasses
 Map
-p1973
-(dp1974
+p1974
+(dp1975
 g12
 S'COOTES TRAIL:\nCampus exit is to your left. GO station to your rear.\nThe Bridge to Lot M is to your right.'
-p1975
+p1976
 sg1108
-(lp1976
+(lp1977
 sg5
 S'Cootes Trail'
-p1977
+p1978
 sg1124
-(lp1978
+(lp1979
 g146
 ag229
 a(iGameClasses
 Interact
-p1979
-(dp1980
+p1980
+(dp1981
 g12
 S'This patch of dirt looks out of place...'
-p1981
+p1982
 sg5
 S'Uneven Earth'
-p1982
+p1983
 sg1115
 S'declaration of independence'
-p1983
+p1984
 sg1118
 I00
 sg20
 g152
 sg1119
 S'shovel'
-p1984
+p1985
 sg1120
 S"You begin digging and find an old box!\nYou open it up and read a note...\n'In the eldest of halls. The attic holds all.'"
-p1985
+p1986
 sbasg1126
-(lp1986
+(lp1987
 sg1128
 g1129
-sg1134
-g152
 sg1135
+g152
+sg1136
 S'The flickering light through the trees dances off of the trail ahead of you.\nYou smile as you see a squirrel gathering nuts,\nprobably for his little squirrel family.\nWith this new positive outlook on life you plan your next move.'
-p1987
-sg1137
-I1
+p1988
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp1988
-NaNaNaNaa(lp1989
-(lp1990
+sbaNaNaa(lp1989
+NaNaNaNaa(lp1990
+(lp1991
 (iGameClasses
 Map
-p1991
-(dp1992
+p1992
+(dp1993
 g12
 S'MILLS BASEMENT:\nYou can only go back up to Mills.'
-p1993
+p1994
 sg1108
-(lp1994
+(lp1995
 sg5
 S'Mills Basement'
-p1995
+p1996
 sg1124
-(lp1996
+(lp1997
 g514
 a(iGameClasses
 Interact
-p1997
-(dp1998
+p1998
+(dp1999
 g12
 S"It's an old mirror from a time long past."
-p1999
+p2000
 sg5
 S'Ancient Mirror'
-p2000
+p2001
 sg1115
 S'gamma glove'
-p2001
+p2002
 sg1118
 I00
 sg20
 g520
 sg1119
 S'ancient incantation'
-p2002
+p2003
 sg1120
 S"You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do."
-p2003
+p2004
 sbasg1126
-(lp2004
+(lp2005
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp2005
-sg1134
-g520
+g1133
+tp2006
 sg1135
+g520
+sg1136
 S'Jeez has anyone ever been down here?\nThe rows of bookshelves seem to go on forever...\nIf only you could possess all of the knowledge they hold.'
-p2006
-sg1137
-I1
+p2007
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2007
-(dp2008
+p2008
+(dp2009
 g12
 S'MILLS LIBRARY:\nThe Willy Dog Stand is in front of you. MUSC is to your right.\nYou can go downstairs.'
-p2009
+p2010
 sg1108
-(lp2010
+(lp2011
 sg5
 S'Mills Library'
-p2011
+p2012
 sg1124
-(lp2012
+(lp2013
 g295
 a(iGameClasses
 Interact
-p2013
-(dp2014
+p2014
+(dp2015
 g12
 S"It's a guide to the Bruce trail."
-p2015
+p2016
 sg5
 S'Blue Book'
-p2016
+p2017
 sg1115
 g66
 sg1118
@@ -7251,14 +7252,14 @@ sg1120
 g66
 sba(iGameClasses
 Interact
-p2017
-(dp2018
+p2018
+(dp2019
 g12
 S"Flipping through you read:\n'The mitochondria is the powerhouse of the cell.'"
-p2019
+p2020
 sg5
 S'Red Book'
-p2020
+p2021
 sg1115
 g66
 sg1118
@@ -7270,76 +7271,76 @@ g66
 sg1120
 g66
 sbasg1126
-(lp2021
+(lp2022
 sg1128
 (g1131
 g1130
-tp2022
-sg1134
-g301
+tp2023
 sg1135
+g301
+sg1136
 S'This is definitely not Thode.\nYou wonder if anything gets done in this library.\nAll of the debauchery taking place on the 6th floor sends a shudder through your body.\nYou notice a stack of books...'
-p2023
-sg1137
-I1
+p2024
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2024
+sbaNaNaa(lp2025
 Na(iGameClasses
 Map
-p2025
-(dp2026
+p2026
+(dp2027
 g12
 S'WILLY DOG STAND:\nThe turning circle lies in front of you. Mills library at your rear.\nThe Archway to your right. The Art Museum is to your left.'
-p2027
+p2028
 sg1108
-(lp2028
+(lp2029
 sg5
 S'The Willy Dog stand'
-p2029
+p2030
 sg1124
-(lp2030
+(lp2031
 g154
 ag1061
 asg1126
-(lp2031
+(lp2032
 sg1128
-(tsg1134
+(tsg1135
 g160
-sg1135
+sg1136
 S"Oh, that sweet sweet aroma.\nMany drunken nights flash through your head.\nThat Willy dog cart is more of a staple to McMaster students than the Archway next to it.\nWas it named Willy Dog after Sir William McMaster?\nYou'll never know..."
-p2032
-sg1137
-I1
+p2033
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2033
+sbaNaNaa(lp2034
 Na(iGameClasses
 Map
-p2034
-(dp2035
+p2035
+(dp2036
 g12
 S'TURNING CIRCLE:\nWilly Dog stand is to your rear. BSB-field is to your left.\nThe Willy McMaster Statue is to your right. Head down the road if you go forward.'
-p2036
+p2037
 sg1108
-(lp2037
+(lp2038
 (iGameClasses
 Enemy
-p2038
-(dp2039
+p2039
+(dp2040
 g12
-g1947
+g1948
 sg3
 (I50
 I25
 I10
-tp2040
+tp2041
 sg5
 S'Will the MAC Cop'
-p2041
+p2042
 sg1115
 S'fake gun'
-p2042
+p2043
 sg37
 I01
 sg1117
@@ -7355,265 +7356,265 @@ I00
 sg1120
 g66
 sg1121
-g1951
+g1952
 sbasg5
 S'Turning Circle'
-p2043
+p2044
 sg1124
-(lp2044
+(lp2045
 g162
 ag236
 asg1126
-(lp2045
+(lp2046
 sg1128
-(tsg1134
+(tsg1135
 g168
-sg1135
+sg1136
 S'The circle thing with the three trees in it is looking pretty nice\nin the morning sun.\nStudents rush all around.\nThe aroma from the Willy Dog stand is making you pretty hungry...'
-p2046
-sg1137
-I1
+p2047
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p2047
-(dp2048
+p2048
+(dp2049
 g12
 S'NANOrims:\nFill Me.'
-p2049
+p2050
 sg1108
-(lp2050
+(lp2051
 sg5
 S'NANOrims'
-p2051
+p2052
 sg1124
-(lp2052
-sg1126
 (lp2053
+sg1126
+(lp2054
 sg1128
-(g1132
-g1179
-tp2054
-sg1134
+(g1133
+g1180
+tp2055
+sg1135
 (I4
 I2
 I3
-tp2055
-sg1135
+tp2056
+sg1136
 S'NANNNOOORYMMSS.'
-p2056
-sg1137
-I1
+p2057
 sg1138
+I1
+sg1139
 I01
-sbaa(lp2057
+sbaa(lp2058
 Na(iGameClasses
 Map
-p2058
-(dp2059
+p2059
+(dp2060
 g12
 S'A ROAD:\nEnter BSB to your left. Hamilton Hall to your right.\nThe turning circle is behind you. General Sciences building in front of you.'
-p2060
+p2061
 sg1108
-(lp2061
+(lp2062
 sg5
 S'Campus Road'
-p2062
+p2063
 sg1124
-(lp2063
+(lp2064
 g287
 ag326
 asg1126
-(lp2064
+(lp2065
 sg1128
-(tsg1134
+(tsg1135
 g293
-sg1135
+sg1136
 S"A lost first year's parent drives by in a mini-van\nclearly ignoring the 'no access' sign.\nYou thank your astrology sign for making sure they looked up and saw you."
-p2065
-sg1137
-I1
+p2066
 sg1138
+I1
+sg1139
 I00
 sbaNa(iGameClasses
 Map
-p2066
-(dp2067
+p2067
+(dp2068
 g12
 S'Milli:\nFill Me.'
-p2068
+p2069
 sg1108
-(lp2069
+(lp2070
 sg5
 S'Milli'
-p2070
+p2071
 sg1124
-(lp2071
-sg1126
 (lp2072
+sg1126
+(lp2073
 sg1128
-(g1132
-g1179
-tp2073
-sg1134
+(g1133
+g1180
+tp2074
+sg1135
 (I4
 I3
 I3
-tp2074
-sg1135
+tp2075
+sg1136
 S'Great Job Mili!'
-p2075
-sg1137
-I1
+p2076
 sg1138
+I1
+sg1139
 I01
-sbaa(lp2076
+sbaa(lp2077
 Na(iGameClasses
 Map
-p2077
-(dp2078
+p2078
+(dp2079
 g12
 S'GENERAL SCIENCES BUILDING:\nThe Phoenix is to your right. The junction between JHE & BSB is to your left.\nThe Tandem Accelerator is in front of you. Exit to your rear.'
-p2079
+p2080
 sg1108
-(lp2080
+(lp2081
 sg5
 S'General Sciences'
-p2081
+p2082
 sg1124
-(lp2082
+(lp2083
 g702
 asg1126
-(lp2083
+(lp2084
 sg1128
-(tsg1134
+(tsg1135
 g708
-sg1135
+sg1136
 S"Have you ever been in here?\nI haven't.\nYou see a group of people huddled around a pentagram-wearing goat heads.\nMaybe? I seriously don't know what goes on in here."
-p2084
-sg1137
-I1
+p2085
 sg1138
+I1
+sg1139
 I01
 sbaNa(iGameClasses
 Map
-p2085
-(dp2086
+p2086
+(dp2087
 g12
 S'Circuit Smart:\nFill Me.'
-p2087
+p2088
 sg1108
-(lp2088
+(lp2089
 sg5
 S'Circuit Smart'
-p2089
+p2090
 sg1124
-(lp2090
-sg1126
 (lp2091
+sg1126
+(lp2092
 sg1128
-(g1132
-g1179
-tp2092
-sg1134
+(g1133
+g1180
+tp2093
+sg1135
 (I4
 I4
 I3
-tp2093
-sg1135
+tp2094
+sg1136
 S'(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.'
-p2094
-sg1137
-I1
+p2095
 sg1138
+I1
+sg1139
 I01
-sbaa(lp2095
+sbaa(lp2096
 (iGameClasses
 Map
-p2096
-(dp2097
+p2097
+(dp2098
 g12
 S'TANDEM BASEMENT:\nYou can only go back up the stairs.'
-p2098
+p2099
 sg1108
-(lp2099
+(lp2100
 sg5
 S'Tandem Basement'
-p2100
+p2101
 sg1124
-(lp2101
+(lp2102
 (iGameClasses
 Interact
-p2102
-(dp2103
+p2103
+(dp2104
 g12
 S"It's an old broken reactor."
-p2104
+p2105
 sg5
 S'Broken Reactor'
-p2105
+p2106
 sg1115
 S'pink donut'
-p2106
+p2107
 sg1118
 I00
 sg20
 (I4
 I5
 I0
-tp2107
+tp2108
 sg1119
 S'flux capacitor'
-p2108
+p2109
 sg1120
 S"After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nYou feel like ancient mechanisms beyond your comprehension are coming to life.\nWithin the pink glow you see an apparition of Dr. Novog!\n'What's up folks! This is the only channel safe for communication\n'Come meet me in the basement of the Nuclear Reactor ASAP and bring that Pink Donut!'\nAs the aparition fades a hooded figure emerges from behind a lab bench.\n'The Dark Lord demands that donut!'\nThe assassin lunges for you but is quickly met by your blow.\nAs they fall to the ground you notice an insignia on their robe that tickles your 'that's familiar' bone...\nYou pull back their hood to reveal the face of an Eng Phys PhD student!\nYou don't remember their name... But you know they are in the faculty..."
-p2109
+p2110
 sbasg1126
-(lp2110
+(lp2111
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp2111
-sg1134
-g2107
+g1133
+tp2112
 sg1135
+g2108
+sg1136
 S"An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here."
-p2112
-sg1137
-I1
+p2113
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2113
-(dp2114
+p2114
+(dp2115
 g12
 S'TANDEM ACCELERATOR:\nThe General Sciences Building is behind you. The Police station is to your left.\nA trail is to your right. Keyes is in front of you.'
-p2115
+p2116
 sg1108
-(lp2116
+(lp2117
 (iGameClasses
 Enemy
-p2117
-(dp2118
+p2118
+(dp2119
 g12
 S"'The tools should be coming any day now.'"
-p2119
+p2120
 sg3
 (I50
 I75
 I50
-tp2120
+tp2121
 sg5
 S'Chris'
-p2121
+p2122
 sg1115
 S'capstone tools'
-p2122
+p2123
 sg37
 I01
 sg1117
@@ -7630,179 +7631,179 @@ sg1120
 g66
 sg1121
 S'I was going to quit anyway!'
-p2123
+p2124
 sbasg5
 S'Tandem Accelerator'
-p2124
+p2125
 sg1124
-(lp2125
+(lp2126
 g115
 asg1126
-(lp2126
+(lp2127
 sg1128
-(tsg1134
+(tsg1135
 g121
-sg1135
+sg1136
 S'Turns out the Tandem Accelerator is NOT a rad place to ride a 2-person bike...\nBummed out you remind yourself you graduated and consider what to do next.'
-p2127
-sg1137
-I1
+p2128
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2128
+sbaNaNaa(lp2129
 Na(iGameClasses
 Map
-p2129
-(dp2130
+p2130
+(dp2131
 g12
 S'MARY KEYES:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.'
-p2131
+p2132
 sg1108
-(lp2132
+(lp2133
 sg5
 S'Keyes'
-p2133
+p2134
 sg1124
-(lp2134
+(lp2135
 g804
 ag885
 asg1126
-(lp2135
+(lp2136
 sg1128
-(tsg1134
+(tsg1135
 g810
-sg1135
+sg1136
 S"A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo..."
-p2136
-sg1137
-I1
+p2137
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2137
+sbaNaNaa(lp2138
 Na(iGameClasses
 Map
-p2138
-(dp2139
+p2139
+(dp2140
 g12
 S'THE BRIDGE:\nLot M is to your right. Keyes is at your rear.\nHead down Cootes trail if you go left.'
-p2140
+p2141
 sg1108
-(lp2141
+(lp2142
 sg5
 S'The Bridge'
-p2142
+p2143
 sg1124
-(lp2143
+(lp2144
 g842
 asg1126
-(lp2144
+(lp2145
 sg1128
 g1129
-sg1134
-g848
 sg1135
+g848
+sg1136
 S'You narrowly avoid a GO bus\npick yourself up and brush yourself off.\nThen plan your next move.'
-p2145
-sg1137
-I1
+p2146
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2146
-NaNaNaNaa(lp2147
-(lp2148
+sbaNaNaa(lp2147
+NaNaNaNaa(lp2148
+(lp2149
 (iGameClasses
 Map
-p2149
-(dp2150
+p2150
+(dp2151
 g12
 S'CUSTODIAL CLOSET:\nYou can only go up to go back to MUSC.'
-p2151
+p2152
 sg1108
-(lp2152
+(lp2153
 sg5
 S'Custodial Closet'
-p2153
+p2154
 sg1124
-(lp2154
+(lp2155
 g449
 ag303
 ag178
 ag60
 asg1126
-(lp2155
+(lp2156
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp2156
-sg1134
-g67
+g1133
+tp2157
 sg1135
+g67
+sg1136
 S'You enter the custodial closet and a formidable stench fills your nostrils...\nEw.'
-p2157
-sg1137
-I1
+p2158
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2158
-(dp2159
+p2159
+(dp2160
 g12
 S'MUSC:\nMills is to your left. The Archway is in front of you.\nA custodial closet is down the stairs.'
-p2160
+p2161
 sg1108
-(lp2161
+(lp2162
 sg5
 S'McMaster Student Centre'
-p2162
+p2163
 sg1124
-(lp2163
+(lp2164
 g789
 ag130
 asg1126
-(lp2164
+(lp2165
 sg1128
-(g6
+(g1132
 g1130
-tp2165
-sg1134
-g136
+tp2166
 sg1135
+g136
+sg1136
 S'The Student Centre is alive.\nAfter counting the number of jean jackets in the Starbucks line like the Count from Sesame Street\nyou snap back to reality.\n(Oops there goes gravity).\nYou notice a Starbucks employee arguing with his manager before throwing their apron to the ground.'
-p2166
-sg1137
-I1
+p2167
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2167
+sbaNaNaa(lp2168
 Na(iGameClasses
 Map
-p2168
-(dp2169
+p2169
+(dp2170
 g12
 S'ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. The Willy Dog stand is to your left.'
-p2170
+p2171
 sg1108
-(lp2171
+(lp2172
 sg5
 S'The McMaster Archway'
-p2172
+p2173
 sg1124
-(lp2173
+(lp2174
 g796
 a(iGameClasses
 Interact
-p2174
-(dp2175
+p2175
+(dp2176
 g12
 S'It appears the hole was caused by some sort of laser...'
-p2176
+p2177
 sg5
 S'Old Lamp'
-p2177
+p2178
 sg1115
 g66
 sg1118
@@ -7814,106 +7815,106 @@ g66
 sg1120
 g66
 sbasg1126
-(lp2178
+(lp2179
 sg1128
-(tsg1134
+(tsg1135
 g802
-sg1135
+sg1136
 S"Probably the most beautiful structure at Mac.\nYou notice a hole that appears to have melted through the glass of the lamp underneath...\nYou snap a quick selfie in front of the Archway for the 'gram."
-p2179
-sg1137
-I1
+p2180
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2180
+sbaNaNaa(lp2181
 Na(iGameClasses
 Map
-p2181
-(dp2182
+p2182
+(dp2183
 g12
 S'WILLIAM MCMASTER STATUE:\nHamilton Hall is in front of you. The Archway is behind you.\nTurning Circle is to your left.'
-p2183
+p2184
 sg1108
-(lp2184
+(lp2185
 sg5
 S'Statue of Sir William McMaster'
-p2185
+p2186
 sg1124
-(lp2186
-sg1126
 (lp2187
+sg1126
+(lp2188
 sg1128
-g6
-sg1134
+g1132
+sg1135
 (I5
 I2
 I1
-tp2188
-sg1135
+tp2189
+sg1136
 S'Approaching the statue you notice massive burn marks on the lawn and chunks\nout of the tree...\nHmm...\nWhat if Sir Willy McMaster was actually in that statue Han Solo style?\nAfter a quick selfie with Willy you plan your next move.'
-p2189
-sg1137
-I1
+p2190
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2190
+sbaNaNaa(lp2191
 Na(iGameClasses
 Map
-p2191
-(dp2192
+p2192
+(dp2193
 g12
 S'HAMILTON HALL:\nThe Phoenix is in front of you. A road is to your left.\nThe Willy McMaster Statue is to your rear.'
-p2193
+p2194
 sg1108
-(lp2194
+(lp2195
 sg5
 S'Hamilton Hall'
-p2195
+p2196
 sg1124
-(lp2196
+(lp2197
 g1090
 ag264
 asg1126
-(lp2197
+(lp2198
 sg1128
-g6
-sg1134
-g270
+g1132
 sg1135
+g270
+sg1136
 S"You think about helping some first years in the Math help centre.\nThen you don't.\nThey should learn to fight through it if they're going to make it through the\nnext 4 years."
-p2198
-sg1137
-I1
+p2199
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2199
+sbaNaNaa(lp2200
 (iGameClasses
 Map
-p2200
-(dp2201
+p2201
+(dp2202
 g12
 S'BRIDGES CAFE:\nYou can only go back up to the Phoenix.'
-p2202
+p2203
 sg1108
-(lp2203
+(lp2204
 (iGameClasses
 Enemy
-p2204
-(dp2205
+p2205
+(dp2206
 g12
 S"'Did I mention I'm vegan?'"
-p2206
+p2207
 sg3
 (I15
 I1
 I5
-tp2207
+tp2208
 sg5
 S'Jana the vegan'
-p2208
+p2209
 sg1115
 S'3w textbook'
-p2209
+p2210
 sg37
 I01
 sg1117
@@ -7930,55 +7931,55 @@ sg1120
 g66
 sg1121
 S'I was going to bring it back I swear!'
-p2210
+p2211
 sbasg5
 S'Bridges'
-p2211
+p2212
 sg1124
-(lp2212
+(lp2213
 g107
 asg1126
-(lp2213
+(lp2214
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp2214
-sg1134
-g113
+g1133
+tp2215
 sg1135
+g113
+sg1136
 S'You feel guilty walking in here after you performed a\nbeat down on a double big mac combo in a drunken stupor only hours earlier.\nAfter pledging to be more vegan in the future, you plan what to do next.'
-p2215
-sg1137
-I1
+p2216
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2216
-(dp2217
+p2217
+(dp2218
 g12
 S'THE PHOENIX:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.'
-p2218
+p2219
 sg1108
-(lp2219
+(lp2220
 (iGameClasses
 Enemy
-p2220
-(dp2221
+p2221
+(dp2222
 g12
 S"I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done."
-p2222
+p2223
 sg3
 (I999
 I999
 I999
-tp2223
+tp2224
 sg5
 S'Hooded Man'
-p2224
+p2225
 sg1115
 g66
 sg37
@@ -7992,7 +7993,7 @@ sg20
 (I5
 I4
 I1
-tp2225
+tp2226
 sg1119
 Nsg40
 I00
@@ -8002,22 +8003,22 @@ sg1121
 g66
 sba(iGameClasses
 Enemy
-p2226
-(dp2227
+p2227
+(dp2228
 g12
 S"'Wait... I recognize you... you have a $420E69 tab!'"
-p2228
+p2229
 sg3
 (I15
 I20
 I10
-tp2229
+tp2230
 sg5
 S'Megan the Bartender'
-p2230
+p2231
 sg1115
 S'meow mix'
-p2231
+p2232
 sg37
 I01
 sg1117
@@ -8026,7 +8027,7 @@ I00
 sg19
 I20
 sg20
-g2225
+g2226
 sg1119
 Nsg40
 I00
@@ -8034,87 +8035,87 @@ sg1120
 g66
 sg1121
 S'Nuuuuuuuuuuuu'
-p2232
+p2233
 sbasg5
 S'The Phoenix'
-p2233
+p2234
 sg1124
-(lp2234
-sg1126
 (lp2235
+sg1126
+(lp2236
 sg1128
-g6
-sg1134
-g2225
+g1132
 sg1135
+g2226
+sg1136
 S"Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over."
-p2236
-sg1137
-I1
+p2237
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2237
-(dp2238
+p2238
+(dp2239
 g12
 S'PHOENIX LOFT:\nYou can only go back down the stairs.'
-p2239
+p2240
 sg1108
-(lp2240
+(lp2241
 sg5
 S'The Pheonix Loft'
-p2241
+p2242
 sg1124
-(lp2242
+(lp2243
 g965
 ag427
 asg1126
-(lp2243
+(lp2244
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp2244
-sg1134
-g433
+g1132
+g1180
+tp2245
 sg1135
+g433
+sg1136
 S'The history up here is incredible. So many relics from a time long past.\nFrom old costumes from plays to furniture.\nAfter a quick Shakespearean sonnet you think of what to do next.'
-p2245
-sg1137
-I1
+p2246
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp2246
+sbaNaa(lp2247
 Na(iGameClasses
 Map
-p2247
-(dp2248
+p2248
+(dp2249
 g12
 S'TRAIL TO PHOENIX:\nBates lies in front of you. The Phoenix at your rear.\nThe Tandem Accelerator is to your left.'
-p2249
+p2250
 sg1108
-(lp2250
+(lp2251
 (iGameClasses
 Enemy
-p2251
-(dp2252
+p2252
+(dp2253
 g12
 S"'MHhmgh, Soouh whatu we getta druuuunk'"
-p2253
+p2254
 sg3
 (I10
 I5
 I1
-tp2254
+tp2255
 sg5
 S'Phil the drunk'
-p2255
+p2256
 sg1115
 S'vomit'
-p2256
+p2257
 sg37
 I01
 sg1117
@@ -8126,60 +8127,60 @@ sg20
 g604
 sg1119
 S"phil's braces"
-p2257
+p2258
 sg40
 I00
 sg1120
 S"'UHhhh i thinka im gonna- im gon-'\nPhil vomits."
-p2258
+p2259
 sg1121
 S'mhmh spooky ghost urggh ectoplasm noooooo'
-p2259
+p2260
 sbasg5
 S'Trail'
-p2260
+p2261
 sg1124
-(lp2261
+(lp2262
 g598
 asg1126
-(lp2262
+(lp2263
 sg1128
-g6
-sg1134
-g604
+g1132
 sg1135
+g604
+sg1136
 S"Longboarding down this trail going Mach 16 was a blast and a half.\nDodging deer and first years like it's some sort of cube runner.\nNice."
-p2263
-sg1137
-I1
+p2264
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2264
+sbaNaNaa(lp2265
 Na(iGameClasses
 Map
-p2265
-(dp2266
+p2266
+(dp2267
 g12
 S'BATES:\nLOT M lies in front of you. Keyes is to your left.\nThe trail to the Phoenix is behind you.'
-p2267
+p2268
 sg1108
-(lp2268
+(lp2269
 sg5
 S'Bates'
-p2269
+p2270
 sg1124
-(lp2270
+(lp2271
 g987
 a(iGameClasses
 Interact
-p2271
-(dp2272
+p2272
+(dp2273
 g12
 S'Old RCA TV with VHS slot...'
-p2273
+p2274
 sg5
 S'RCA TV'
-p2274
+p2275
 sg1115
 g66
 sg1118
@@ -8188,51 +8189,51 @@ sg20
 g993
 sg1119
 S'tarzan vhs'
-p2275
+p2276
 sg1120
 S"You put the VHS into the slot and press play...\nThe opening scenes to Tarzan begin but suddenly the screen goes black and a message\nis displayed!\n'DrOWN I Need EveryThing graBs'"
-p2276
+p2277
 sbasg1126
-(lp2277
+(lp2278
 sg1128
-g6
-sg1134
-g993
+g1132
 sg1135
+g993
+sg1136
 S'Memories of ridiculous res parties fill your mind.\nYou also recall the landfill of a room that was more of a circus attraction\nthan a living space.\nOh how distant first year seems...'
-p2278
-sg1137
-I1
+p2279
 sg1138
+I1
+sg1139
 I01
-sbaNaNaa(lp2279
+sbaNaNaa(lp2280
 Na(iGameClasses
 Map
-p2280
-(dp2281
+p2281
+(dp2282
 g12
 S'LOT M:\nTo your left is the bridge. Bates is behind you.'
-p2282
+p2283
 sg1108
-(lp2283
+(lp2284
 (iGameClasses
 Enemy
-p2284
-(dp2285
+p2285
+(dp2286
 g12
 S"'Righteous! Could you help me get into my car?\nI lost my keys and can't find my car.\nI REALLY need what is in there.'"
-p2286
+p2287
 sg3
 (I14
 I20
 I5
-tp2287
+tp2288
 sg5
 S'Rod the climber'
-p2288
+p2289
 sg1115
 S'delicious meal'
-p2289
+p2290
 sg37
 I01
 sg1117
@@ -8244,67 +8245,67 @@ sg20
 g50
 sg1119
 S'bowling ball'
-p2290
+p2291
 sg40
 I00
 sg1120
 S'Thanks!\nNow I can learn to bowl that perfect strike.\nTake this, I just cooked it up.'
-p2291
+p2292
 sg1121
 S'Ouch!'
-p2292
+p2293
 sbasg5
 S'Lot M'
-p2293
+p2294
 sg1124
-(lp2294
+(lp2295
 g754
 ag695
 ag43
 ag348
 asg1126
-(lp2295
+(lp2296
 sg1128
 (g1129
-g6
-tp2296
-sg1134
-g50
+g1132
+tp2297
 sg1135
+g50
+sg1136
 S'After 3 days of hiking you arrive at Lot M.\nAfter 2 more days of looking for your car you give up and contemplate what to do next.'
-p2297
-sg1137
-I1
+p2298
 sg1138
+I1
+sg1139
 I00
-sbaNaNaa(lp2298
-NaNaNaNaa(lp2299
-(lp2300
-NaNaNaNaa(lp2301
+sbaNaNaa(lp2299
+NaNaNaNaa(lp2300
+(lp2301
+NaNaNaNaa(lp2302
 (iGameClasses
 Map
-p2302
-(dp2303
+p2303
+(dp2304
 g12
 S'SECRET ROOM:\nYou can only climb up and out.'
-p2304
+p2305
 sg1108
-(lp2305
+(lp2306
 sg5
 S'Secret Room'
-p2306
+p2307
 sg1124
-(lp2307
+(lp2308
 (iGameClasses
 Interact
-p2308
-(dp2309
+p2309
+(dp2310
 g12
 S"You blow the dust off, open it, and read:\n'The ability to peer into history would be a most formidable power.'\n'I have potentially produced a piece of the puzzle but without a\n'device capable of maintaining the field density long enough I fear\n'it will never become a reality.'\n'Thus I have decided to hide my invention until the time comes where\nsomeone can realize my dream.'\n'If you are reading this, find the place where you can see\ncampus in its entirety.'\n'If you ARE the hero, the next steps shall be revealed.'\n-M. Faraday"
-p2310
+p2311
 sg5
 S'Old Journal'
-p2311
+p2312
 sg1115
 g66
 sg1118
@@ -8313,87 +8314,87 @@ sg20
 (I6
 I1
 I0
-tp2312
+tp2313
 sg1119
 g66
 sg1120
 g66
 sbasg1126
-(lp2313
+(lp2314
 sg1128
 (g1129
 g1130
 g1131
-g6
 g1132
-tp2314
-sg1134
-g2312
+g1133
+tp2315
 sg1135
+g2313
+sg1136
 S"You inspect the floorboards and find one is loose.\nUpon lifting it you reveal a secret room!\nYou climb down and find yourself surrounded by stacks of ancient books and\nforgotten items from McMaster's past."
-p2315
-sg1137
-I1
+p2316
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2316
-(dp2317
+p2317
+(dp2318
 g12
 S'UNIVERSITY HALL:\nThe exit is to your left.'
-p2318
+p2319
 sg1108
-(lp2319
+(lp2320
 sg5
 S'Inside University Hall'
-p2320
+p2321
 sg1124
-(lp2321
+(lp2322
 g1003
 asg1126
-(lp2322
+(lp2323
 sg1128
-(g6
+(g1132
 g1130
 g1129
-tp2323
-sg1134
+tp2324
+sg1135
 (I6
 I1
 I1
-tp2324
-sg1135
+tp2325
+sg1136
 S'The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.'
-p2325
-sg1137
-I1
+p2326
 sg1138
+I1
+sg1139
 I01
 sba(iGameClasses
 Map
-p2326
-(dp2327
+p2327
+(dp2328
 g12
 S'2ND FLOOR UH:\nYou can only go back down the stairs.'
-p2328
+p2329
 sg1108
-(lp2329
+(lp2330
 sg5
 S'2nd Floor UH'
-p2330
+p2331
 sg1124
-(lp2331
+(lp2332
 (iGameClasses
 Interact
-p2332
-(dp2333
+p2333
+(dp2334
 g12
 S'Looks like a set of glasses with multiple coloured lenses...'
-p2334
+p2335
 sg5
 S'Tri-Coloured Glasses'
-p2335
+p2336
 sg1115
 Nsg1118
 I00
@@ -8401,63 +8402,63 @@ sg20
 (I6
 I1
 I2
-tp2336
+tp2337
 sg1119
 S'declaration of independence'
-p2337
+p2338
 sg1120
 S"Its a cipher...\nOn the back of the declaration you can see different coded messages using the coloured lenses...\nRED:'Lithium Carbon Boron Mangnesium(-g)'\nBLUE:'Jerry likes presents.'\nGREEN:'Guardians of De Galaxy character.'"
-p2338
+p2339
 sbasg1126
-(lp2339
+(lp2340
 sg1128
 (g1129
 g1130
 g1131
-g6
-g1179
-tp2340
-sg1134
-g2336
+g1132
+g1180
+tp2341
 sg1135
+g2337
+sg1136
 S'You make your way up the rickety staircase into a room from a time long past.\nYou notice a dust covered table with some old instruments and clutter thrown about.'
-p2341
-sg1137
-I1
+p2342
 sg1138
+I1
+sg1139
 I01
-sbaNaa(lp2342
-NaNaNaNaa(lp2343
+sbaNaa(lp2343
 NaNaNaNaa(lp2344
 NaNaNaNaa(lp2345
 NaNaNaNaa(lp2346
 NaNaNaNaa(lp2347
 NaNaNaNaa(lp2348
-NaNaNaNaatp2349
-a(dp2350
+NaNaNaNaa(lp2349
+NaNaNaNaatp2350
+a(dp2351
 S'dr. soleymani'
-p2351
-g1168
-sS'dr. knights'
 p2352
+g1169
+sS'dr. knights'
+p2353
 (iGameClasses
 Enemy
-p2353
-(dp2354
+p2354
+(dp2355
 g12
 S"'Whoever took the 3W Textbook from the QT shall feel my eternal wrath...'"
-p2355
+p2356
 sg3
 (I200
 I100
 I50
-tp2356
+tp2357
 sg5
 S'Dr. Knights'
-p2357
+p2358
 sg1115
 S'cold beer'
-p2358
+p2359
 sg37
 I01
 sg1117
@@ -8466,24 +8467,21 @@ I00
 sg19
 I300
 sg20
-(NNNtp2359
+(NNNtp2360
 sg1119
 S'3w textbook'
-p2360
+p2361
 sg40
 I00
 sg1120
 S"'I've been looking all over for that, have a cold one on me!'\n'But before you go you should know that a difficult road lies ahead.'\n'It will not be easy to have your Iron Ring returned to you'\n'Dr. Haugen should be the one you seek next.'"
-p2361
+p2362
 sg1121
 S"'What are you doing?!'"
-p2362
-sbsS'r'
 p2363
-g1720
-sS'bill the mac cop'
+sbsS'bill the mac cop'
 p2364
-g1945
+g1946
 sS'dr. kleimann'
 p2365
 (iGameClasses
@@ -8512,7 +8510,7 @@ I00
 sg19
 I300
 sg20
-g2359
+g2360
 sg1119
 S'solar cell'
 p2372
@@ -8526,7 +8524,7 @@ S'You have betrayed The Order!'
 p2374
 sbsS'mario the mixologist'
 p2375
-g1430
+g1431
 sS'sir william mcmaster'
 p2376
 (iGameClasses
@@ -8555,7 +8553,7 @@ I00
 sg19
 I125
 sg20
-g2359
+g2360
 sg1119
 g66
 sg40
@@ -8567,10 +8565,10 @@ S"The spirit of Sir William McMaster bursts with a fiercely bright explosion.\nY
 p2383
 sbsS'will the mac cop'
 p2384
-g2038
+g2039
 sS'eric the baller'
 p2385
-g1250
+g1251
 sS'dan fitzgreen'
 p2386
 (iGameClasses
@@ -8599,7 +8597,7 @@ I00
 sg19
 I400
 sg20
-g2359
+g2360
 sg1119
 g66
 sg40
@@ -8612,7 +8610,7 @@ S"I'm moving to the physics department"
 p2394
 sbsS'yourself'
 p2395
-g1720
+g1721
 sS'dr. buijs'
 p2396
 (iGameClasses
@@ -8641,7 +8639,7 @@ I00
 sg19
 I300
 sg20
-g2359
+g2360
 sg1119
 S'capstone tools'
 p2403
@@ -8655,7 +8653,7 @@ S'It is a voltage divider!'
 p2405
 sbsS'kenrick'
 p2406
-g1867
+g1868
 sS'dr. haugen'
 p2407
 (iGameClasses
@@ -8684,7 +8682,7 @@ I00
 sg19
 I200
 sg20
-g2359
+g2360
 sg1119
 S"einstein's brain"
 p2414
@@ -8696,29 +8694,32 @@ p2415
 sg1121
 S'Oh my!'
 p2416
-sbsS'chris'
+sbsS'doug'
 p2417
-g2117
-sS'dr. preston'
+g1721
+sS'chris'
 p2418
+g2118
+sS'dr. preston'
+p2419
 (iGameClasses
 Enemy
-p2419
-(dp2420
+p2420
+(dp2421
 g12
 S"'I would like to improve my already impressive dad strength.'\n'Bring me a dumbbell.'"
-p2421
+p2422
 sg3
 (I250
 I150
 I100
-tp2422
+tp2423
 sg5
 S'Dr. Preston'
-p2423
+p2424
 sg1115
 S'green lantern shirt'
-p2424
+p2425
 sg37
 I01
 sg1117
@@ -8727,44 +8728,44 @@ I00
 sg19
 I300
 sg20
-g2359
+g2360
 sg1119
 S'dumbbell'
-p2425
+p2426
 sg40
 I00
 sg1120
 S"'Yes! Now I can get the pump I've been after!'\n'Go look for Dr. Buijs he has much more to tell than I.'"
-p2426
+p2427
 sg1121
 S'HOW DID YOU OVERCOME MY DAD STRENGTH?!'
-p2427
-sbsS'dr. nagasaki'
 p2428
-g1284
-sS'connor the biologist'
+sbsS'dr. nagasaki'
 p2429
-g1566
-sS'dr. novog'
+g1285
+sS'connor the biologist'
 p2430
+g1567
+sS'dr. novog'
+p2431
 (iGameClasses
 Enemy
-p2431
-(dp2432
+p2432
+(dp2433
 g12
 S"What's up folks?"
-p2433
+p2434
 sg3
 (I420
 I420
 I420
-tp2434
+tp2435
 sg5
 S'Dr. Novog'
-p2435
+p2436
 sg1115
 S'ancient incantation'
-p2436
+p2437
 sg37
 I01
 sg1117
@@ -8773,49 +8774,49 @@ I00
 sg19
 I100
 sg20
-g2359
+g2360
 sg1119
 S'pink donut'
-p2437
+p2438
 sg40
 I00
 sg1120
 S"'Alright folks, here's the scoop.'\n'I could only talk to you via the fusion network because the integrity of faculty\ncommunication has been compromised.'\n'The Engineering Physics professors are actually members of an Ancient Council known as The Quantum Order.'\n'For years we have kept McMast-'\n'An assassin?'\n'Hmm... I see, things are worse than we thought.'\n'We have known of this uprising within the faculty for some time but\nwere unaware of just how strong they have grown.'\n'As you have heard, a prophecy foretold of an adventurer dictating the future of the faculty.'\n'This evil group wants nothing more than to take advantage of your power and influence for their own plans.'\n'The choices you make will be yours and yours alone, however, the Quantum Order\nurges that you consider the consequences of your actions.'\n'It is our duty to assist you in realizing your ability but what comes of your power is out of our hands.'\n'You must contact the oracles who foretold of your coming, they will give you the knowledge you require.'\n'Each member of the Quantum Order only knows of the location one Oracle.'\n'For that reason I can only help you so much.'\nDr. Novog pushes a button on a nearby control panel.\nA crane arm descends into the Reactor pool to retrieve a crate from its depths.\n'Take this incantation and find the ancient mirror in the basement of Mills Library... it is your time.'"
-p2438
+p2439
 sg1121
 g66
 sbsS'mitch the ta'
-p2439
-g1216
-sS'rod the climber'
 p2440
-g2284
-sS'jana the vegan'
+g1217
+sS'rod the climber'
 p2441
-g2204
-sS'steven the first-year'
+g2285
+sS'jana the vegan'
 p2442
-g1961
-sS'dr. minnick'
+g2205
+sS'steven the first-year'
 p2443
+g1962
+sS'dr. minnick'
+p2444
 (iGameClasses
 Enemy
-p2444
-(dp2445
+p2445
+(dp2446
 g12
 S"'Hello and welcome to how we retrieve your iron ring.'\n'The Quantum Order does not know exactly what you have done.'\n'However, we have felt the consequences of your actions.'\n'I believe the only way to explain this is to show you.'\n'The Quantum Order has gathered intelligence that Kenrick has been using\nhis oscilloscope for evil.'\n'I need you to confront him and return his oscilloscope if we are to go further.'"
-p2446
+p2447
 sg3
 (I400
 I400
 I400
-tp2447
+tp2448
 sg5
 S'Dr. Minnick'
-p2448
+p2449
 sg1115
 S"minnick's glasses"
-p2449
+p2450
 sg37
 I01
 sg1117
@@ -8824,38 +8825,38 @@ I00
 sg19
 I200
 sg20
-g2359
+g2360
 sg1119
 S"kenrick's oscilloscope"
-p2450
+p2451
 sg40
 I00
 sg1120
 S"'Ah, you have returned.'\n'You see, Kenrick has retrofitted his oscilloscope and created some sort\nof 'window' into the electronics world.'\n'Using this window he has been attempting to access the minds of the greatest\nphysicists in history and use their power for evil!'\n'Our intelligence does not go any further and we do not know what he has done.'\n'All that we do know is that after last night you must be rooted in all of this just as the prophecy foretold.'\n'Take these, if you truly are the one, they will reveal what you need to see.'\n'I suggest you start in the museum.'\n'Also, my lab has since been compromised so I will work in secret in the basement of Thode.'\n'Once you have found the next relic, my workbench will be ready...'"
-p2451
+p2452
 sg1121
 S"'I'm jealous of stupid people, they have more opportunities to learn!'"
-p2452
-sbsS'brendan fallon'
 p2453
+sbsS'brendan fallon'
+p2454
 (iGameClasses
 Enemy
-p2454
-(dp2455
+p2455
+(dp2456
 g12
 S"What's up dude? I'm here to bless up your shit.\nDo you have my lunch box?"
-p2456
+p2457
 sg3
 (I9999
 I9999
 I9999
-tp2457
+tp2458
 sg5
 S'Brendan Fallon'
-p2458
+p2459
 sg1115
 S'green bang bong'
-p2459
+p2460
 sg37
 I01
 sg1117
@@ -8864,40 +8865,40 @@ I00
 sg19
 I999
 sg20
-g2359
+g2360
 sg1119
 S"brendan fallon's lunchbox"
-p2460
+p2461
 sg40
 I00
 sg1120
 S'THANKS! TOKE UP MY DUDES!'
-p2461
+p2462
 sg1121
 g66
 sbsS'paul the janitor'
-p2462
-g1267
-sS'dr. kitai'
 p2463
+g1268
+sS'dr. kitai'
+p2464
 (iGameClasses
 Enemy
-p2464
-(dp2465
+p2465
+(dp2466
 g12
 S"Sorry I need to go see the windshield people.\nBut I've been trying to develop a new LED...'\n'But I need some silicon, find me a Silicon Substrate please!'"
-p2466
+p2467
 sg3
 (I150
 I50
 I50
-tp2467
+tp2468
 sg5
 S'Dr. Kitai'
-p2468
+p2469
 sg1115
 S'led of power'
-p2469
+p2470
 sg37
 I01
 sg1117
@@ -8906,53 +8907,53 @@ I00
 sg19
 I150
 sg20
-g2359
+g2360
 sg1119
 S'silicon substrate'
-p2470
+p2471
 sg40
 I00
 sg1120
 S"'I've been looking for one just like this, how did you get it?'\n'Maybe you are th-'\n'Nevermind... just be on the lookout for Dr. Kleiman.'"
-p2471
+p2472
 sg1121
 S"'It was only a midterm, don't off yourself.'"
-p2472
-sbsS'hooded man'
 p2473
-g2220
-sS'liam the gamer'
+sbsS'hooded man'
 p2474
-g1901
-sS'zack the snack'
+g2221
+sS'liam the gamer'
 p2475
-g1701
-sS'larry the bus driver'
+g1902
+sS'zack the snack'
 p2476
-g1629
-sS'megan the bartender'
+g1702
+sS'larry the bus driver'
 p2477
-g2226
-sS'dr. lapierre'
+g1630
+sS'megan the bartender'
 p2478
+g2227
+sS'dr. lapierre'
+p2479
 (iGameClasses
 Enemy
-p2479
-(dp2480
+p2480
+(dp2481
 g12
 S"'Bring me a Coffee please, Daniel Parent is failing me as a research student.\n I am rather tired.'"
-p2481
+p2482
 sg3
 (I100
 I100
 I200
-tp2482
+tp2483
 sg5
 S'Dr. LaPierre'
-p2483
+p2484
 sg1115
 S'eng phys usb pen'
-p2484
+p2485
 sg37
 I01
 sg1117
@@ -8961,53 +8962,53 @@ I00
 sg19
 I300
 sg20
-g2359
+g2360
 sg1119
 S'coffee'
-p2485
+p2486
 sg40
 I00
 sg1120
 S'Here is a nice pen for your troubles.\nGo find Dr. Knights, he has more for you to do.'
-p2486
+p2487
 sg1121
 S"I can't believe you've done this."
-p2487
-sbsS'father frobenius'
 p2488
-g1603
-sS'brian the weeb'
+sbsS'father frobenius'
 p2489
-g1645
-sS'phil the drunk'
+g1604
+sS'brian the weeb'
 p2490
-g2251
-sS'undead grad student'
+g1646
+sS'phil the drunk'
 p2491
-g1587
-sS'erik the sk8r'
+g2252
+sS'undead grad student'
 p2492
+g1588
+sS'erik the sk8r'
+p2493
 g1110
 sS'andreas the nerd'
-p2493
-g1834
-sS'dr. cassidy'
 p2494
+g1835
+sS'dr. cassidy'
+p2495
 (iGameClasses
 Enemy
-p2495
-(dp2496
+p2496
+(dp2497
 g12
 S"'Yes, I was the one who sent you on this quest.'\n'My associates were no match for you, they did not have the strength to acquire the Relics for me.'\n'I know the Quantum Order has told you that the prophecy spoke of you bringing peace.'\n'You have been lead to believe the Order fights for what is just and fair.'\n'But you have been mislead.'\n'They only wish to keep the power of the Quantum Relics to themselves so that they\nalone decide the fate of the University.'\n'I only ever wanted to reveal the true power of Engineering Physics to the students.'\n'They thought my methods were unsafe.'\n'They thought the power I intended to reveal would pollute the minds of the students\nand cloud their judgement.'\n'The Quantum Order only wishes to suppress the true power we hold!'\n'They don't trust the students, they think they are incapable of managing the power I intended to give them.'\n'We are the premier stream and we deserve to rule McMaster as such!'\n'Join me, together we can harness the powers given to you by the oracles.'\n'With the relics we may enter the Shadow Realm and retrieve the deed to the university\nfrom the spirit of Sir William McMaster.'\n'We can then overthrow the Quantum Order and shape the university to our liking and\nfinally Engineering Physics will reign supreme!'\n\nJust as Dr. Cassidy finishes speaking the ground begins to shake and you are blinded\nby a glow emanating from the statue of Sir William McMaster.\nYou recover from shielding your eyes and see the spirit of William McMaster\nemerging from a rift in fabric of spacetime!\n'Just wait, hero.'\n'I took your Iron Ring from you after you desecrated my statue last night for a reason'\n'I have known of Dr. Cassidy's intentions for some time and as you are the one\nthe prophecy has spoken of I knew he would jump at this opportunity to take my deed.'\n'I had to find a way to force him into playing his hand.'\n'Now the opportunity to rid Engineering Physics of this tyrannical Dark Lord has come!'\nDr. Cassidy quickly interjects.\n'You see, he only wants to restrict the power of our faculty!'\n'Destroy him and we shall finally rule the university!'"
-p2497
+p2498
 sg3
 (I175
 I125
 I200
-tp2498
+tp2499
 sg5
 S'Dr. Cassidy'
-p2499
+p2500
 sg1115
 g66
 sg37
@@ -9018,7 +9019,7 @@ I00
 sg19
 I125
 sg20
-g2359
+g2360
 sg1119
 g66
 sg40
@@ -9027,187 +9028,187 @@ sg1120
 g66
 sg1121
 S"Dr. Cassidy falls to the ground.\nThe spirit of Sir William McMaster approaches and puts his hand on your shoulder.\n'You have chosen wisely.'\n'Dr. Cassidy had been driven mad in his quest for ultimate power.'\n'You have ensured the safety of McMaster and remained true to your values.'\n'McMaster University is an institution meant to allow all facets of learning coexist in harmony.'\n'No faculty should rule over the rest.'\n'For your actions, I believe you are a worthy engineer.'\n'Here is your Iron Ring, continue to wear it with pride.'"
-p2500
-sbsa(dp2501
+p2501
+sbsa(dp2502
 S'red book'
-p2502
-g2017
-sS'workbench'
 p2503
-g1537
-sS'rules sign'
+g2018
+sS'workbench'
 p2504
-g1680
-sS'old car'
+g1538
+sS'rules sign'
 p2505
-g1317
-sS'red car'
+g1681
+sS'old car'
 p2506
-g1305
-sS'fridge'
+g1318
+sS'red car'
 p2507
-g1487
-sS'old painting'
+g1306
+sS'fridge'
 p2508
-g1810
-sS'optical bench'
+g1488
+sS'old painting'
 p2509
-g1494
-sS'garbage can'
+g1811
+sS'optical bench'
 p2510
-g1673
-sS'uneven earth'
+g1495
+sS'garbage can'
 p2511
-g1979
-sS'lenovo laptop'
+g1674
+sS'uneven earth'
 p2512
-g1728
-sS'new car'
+g1980
+sS'lenovo laptop'
 p2513
-g1321
-sS'mouse'
+g1729
+sS'new car'
 p2514
-g1368
-sS'coat of arms'
+g1322
+sS'mouse'
 p2515
-g1877
-sS'rca tv'
+g1369
+sS'coat of arms'
 p2516
-g2271
-sS'sharpxchange'
+g1878
+sS'rca tv'
 p2517
-g1155
-sS'tri-coloured glasses'
+g2272
+sS'sharpxchange'
 p2518
-g2332
-sS'mcmaster map'
+g1156
+sS'tri-coloured glasses'
 p2519
-g1396
-sS'blue car'
+g2333
+sS'mcmaster map'
 p2520
-g1310
-sS'blue book'
+g1397
+sS'blue car'
 p2521
-g2013
-sS'broken reactor'
+g1311
+sS'blue book'
 p2522
-g2102
-sS'sun dial'
+g2014
+sS'broken reactor'
 p2523
-g1843
-sS'old lamp'
+g2103
+sS'sun dial'
 p2524
-g2174
-sS'old journal'
+g1844
+sS'old lamp'
 p2525
-g2308
-sS'display case'
+g2175
+sS'old journal'
 p2526
-g1510
-sS'ancient mirror'
+g2309
+sS'display case'
 p2527
-g1997
-sa(dp2528
+g1511
+sS'ancient mirror'
+p2528
+g1998
+sa(dp2529
 S'secret spaces'
-p2529
-I1
-sS'the dark lord'
 p2530
 I1
-sS'create chaos'
+sS'the dark lord'
 p2531
 I1
-sS'preston get dumbbell'
+sS'create chaos'
 p2532
 I1
-sS'kitai get silicon substrate'
+sS'preston get dumbbell'
 p2533
 I1
-sS'knights get book'
+sS'kitai get silicon substrate'
 p2534
 I1
-sS'lapierre get coffee'
+sS'knights get book'
 p2535
 I1
-sS'talk to mysterious man'
+sS'lapierre get coffee'
 p2536
 I1
-sS'minnick get oscilloscope'
+sS'talk to mysterious man'
 p2537
 I1
-sS'maxwell portal'
+sS'minnick get oscilloscope'
 p2538
 I1
-sS'feynman mirror'
+sS'maxwell portal'
 p2539
 I1
-sS'EPTA all the way down'
+sS'feynman mirror'
 p2540
 I1
-sS'kleimann get solar cell'
+sS'EPTA all the way down'
 p2541
 I1
-sS'einstein fridge'
+sS'kleimann get solar cell'
 p2542
 I1
-sS'university man'
+sS'einstein fridge'
 p2543
 I1
-sS'dan fix reactor'
+sS'university man'
 p2544
 I1
-sS'get key to display case'
+sS'dan fix reactor'
 p2545
 I1
-sS'buijs kill chris'
+sS'get key to display case'
 p2546
 I1
-sS'haugen kill soleymani'
+sS'buijs kill chris'
 p2547
 I1
-sS'restored order'
+sS'haugen kill soleymani'
 p2548
 I1
-sS'novog get donut'
+sS'restored order'
 p2549
 I1
-sS'end game start'
+sS'novog get donut'
 p2550
 I1
-sa(dp2551
+sS'end game start'
+p2551
+I1
+sa(dp2552
 S'playername'
-p2552
+p2553
 g6
 sS'layersdeep'
-p2553
-I0
-sS'timestart'
 p2554
 I0
-sS'savepath'
+sS'timestart'
 p2555
-S'D:\\Files\\bflaw\\Documents\\GitHub\\EngPhysAdventure\\cache\\'
+I0
+sS'savepath'
 p2556
-sS'gamestart'
+S'D:\\Files\\bflaw\\Documents\\GitHub\\EngPhysAdventure\\cache\\'
 p2557
-F1551441462.382
-sS'commandcount'
+sS'gamestart'
 p2558
+F1551996177.856
+sS'commandcount'
+p2559
 I0
 sS'log'
-p2559
-(lp2560
+p2560
+(lp2561
 sS'stepcount'
-p2561
+p2562
 I0
 sS'version'
-p2562
+p2563
 F0.27
 sS'versionname'
-p2563
-S'Alpha v0.27 - Dev Update'
 p2564
-sS'runtime'
+S'Alpha v0.28 - '
 p2565
+sS'runtime'
+p2566
 I0
 sa.

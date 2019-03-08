@@ -112,7 +112,7 @@ def Reset():
     Map("Circuit Smart",(4,4,3),"Circuit Smart:\nFill Me.","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True),
     Map("Milli",(4,3,3),"Milli:\nFill Me.","Great Job Mili!",('d','u'),True),
     Map("NANOrims",(4,2,3),"NANOrims:\nFill Me.","NANNNOOORYMMSS.",('d','u'),True),
-    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.:\nFill Me.","S.T.A.R.S. PLEASE WORK",('d','u'),True),
+    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.:\nFill Me.","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True), #S.T.A.R.S. System T69
     Map("FRAS",(3,3,3),"FRAS:\nFill Me.","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True),
     Map("T.A. Area",(2,4,3),"T.A. Area:\nFill Me.","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True),
     Map("ZebraShark",(2,3,3),"ZebraShark:\nFill Me.","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True),
