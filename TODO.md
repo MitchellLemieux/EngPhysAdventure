@@ -28,7 +28,6 @@ document
 
 
 0.28
-Disable writing byte code and make all other users do this, delete the files and document
 Updating all the people and places
 game difficulty disclaimer
 time mechanic
@@ -72,5 +71,9 @@ Making it a web game
 Black screen with green take
 	LOL JUST MAKE THE TEXT GREEN in command prompt
 	I liked 51 255 51
+Rearanged the bsb field and renamed it
+Added capstone room stuff
+Added git.ignore file to ignore .pyc files and the cache folder (should reduce amout of eronius writes)
+	Also cleaned up entire github tree to ignore these files
 
 
