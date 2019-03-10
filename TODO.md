@@ -28,6 +28,7 @@ document
 
 
 0.28
+Disable writing byte code and make all other users do this, delete the files and document
 Updating all the people and places
 game difficulty disclaimer
 time mechanic

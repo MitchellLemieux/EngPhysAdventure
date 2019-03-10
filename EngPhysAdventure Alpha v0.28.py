@@ -15,8 +15,8 @@ from Opening import * #this imports the code and all the code dependancies (func
 import CreativeMode
 
 #If there was a title screen it would go here
-GAMEINFO['version'] = 0.27
-GAMEINFO['versionname'] = "Alpha v0.28 - "
+GAMEINFO['version'] = 0.28
+GAMEINFO['versionname'] = "Alpha v0.28 - Major overhall"
 #Updated: Jan 2, 2019
 
 
