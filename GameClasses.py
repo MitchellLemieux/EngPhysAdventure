@@ -119,8 +119,7 @@ class Map:  #Map Location Storage
         self.travelled = 1
         self.inside = inside
         #self.interrior = interrior #interrior is a list of inner map locations
-        #have matrix to go inside of each object with an exit
-        #possibly add an inside identifier then when you move a direction
+
         
         
         

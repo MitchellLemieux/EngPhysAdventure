@@ -82,8 +82,9 @@ def Main():
 
   
     #Main game loop section that runs while the player is alive (player is killed in story once done)
-    while(PLAYER.alive): 
- 
+    while(PLAYER.alive):
+        Music()#A janky way to loop and play music! Will only do on next command
+         
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)
         direction = line.lower().split(" ",1)

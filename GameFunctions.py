@@ -4,6 +4,7 @@ import AsciiArt
 import Opening #used for the EPTA all the way down quest
 import time
 import os #used to put files in the cache folder
+import playsound #used to play music and sound effects
 
 
 #This is where the global variables are defined. Global variables used to pass info between functions and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
@@ -13,8 +14,10 @@ ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
 GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
-            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": ""} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
+            'musicOn': 0.0} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
 #version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
+#   musicOn is the indicator for when to next reloop the music
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
@@ -56,6 +59,7 @@ def Equip(Item):
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"), False) #plays the sound with 'multithreading'
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         print "\nYou can't equip that, gosh\n"
     else:
@@ -72,7 +76,7 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
-        #febreeze isn't droped
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"), False) #plays the sound with 'multithreading'
         #Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
@@ -102,6 +106,7 @@ def Move(direction):
         elif direction == 'd':
             z -= 1
         Place = MAPS[x][y][z]
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"), False) #plays the sound with 'multithreading'
     if Place:
         PLAYER.location[0] = x
         PLAYER.location[1] = y
@@ -111,6 +116,7 @@ def Move(direction):
         if random() <= 0.003:
             MAPS[x][y][z].placeEnemy(bf)
             AsciiArt.Hero()
+            
         if Place.travelled:
             print "========================================================================"
             print Place.lore +"\n\n"+Place.info + Place.search()
@@ -170,9 +176,11 @@ def Combat(P,E):
          print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
      if P.health == 0:
         P.alive = False
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","Gta5Wasted.mp3"), False) #plays the sound with 'multithreading'
         return 0
      if E.health == 0:
         E.alive = False
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","WilhelmScream.mp3"), False) #plays the sound with 'multithreading'
         return 1
 
 def Attack(E):
@@ -386,6 +394,8 @@ def Story():
     if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]: #Unlocks the secret space once you get the scroll
         MAPS[0][2][1].removeWall("d")
         QUESTS["secret spaces"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Secret.wav"), False) #plays the sound with 'multithreading'
+
     
     if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']: #when you put the pen in the laptop it restarts the game
     #TODO as homework see if there's a way to do this with recursion instead of simulating it
@@ -424,6 +434,7 @@ def Story():
         MAPS[5][4][1].removeEnemy(ENEMIES["hooded man"])
         ENEMIES['hooded man'].spoke = False
         QUESTS["talk to mysterious man"] = 0
+        #small item
 
     #Nuke quests
     if ENEMIES['dr. preston'].quest and QUESTS["preston get dumbbell"]:
@@ -547,8 +558,14 @@ def DisplayTime(value): #converts and displays the time given seconds, for speed
     valueS = (valueM - Minutes*60)
     Seconds = int(valueS)
     print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
-        
 
+def Music(): #a check system to play the song every 43.5 seconds while alive
+    length = time.time()-GAMEINFO['timestart'] #checks to see if it's past the time it should have played (will make it choppy but limitted by this module)
+    if length > GAMEINFO['musicOn']:
+        audiopath = os.path.join(os.getcwd(), "MediaAssets","","ErikBeepBoxSong.mp3") #points to the eddited star wars theme
+        playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
+        GAMEINFO['musicOn'] += 60 #increments by minute until it will next have to be played
+    
 
 ###this function definitions were added for the compiler so they don't have to be referenced
 def _edit_dist_init(len1, len2):

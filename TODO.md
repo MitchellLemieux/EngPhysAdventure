@@ -53,7 +53,8 @@ Comment all the code and add documentation
 
 --stretch features--
 0.29
-Music and sound effects (zelda for key things, Brian & Erik to make the game music)
+Fix sound and sound effects (zelda for key things, Brian & Erik to make the game music)
+	https://pythonbasics.org/python-play-sound/
 Start hollywood expansion
 stats kept, acheivements
 starting screen
@@ -75,5 +76,11 @@ Rearanged the bsb field and renamed it
 Added capstone room stuff
 Added git.ignore file to ignore .pyc files and the cache folder (should reduce amout of eronius writes)
 	Also cleaned up entire github tree to ignore these files
+MUSIC ADDED!
+	Using simple playsound module, can't be stopped but works and compiles
+	Future versions could use pygame mixer but would be a full overhall possibly
+Added lots of sound effects but not enough XD 
+	Please add more!
+
 
 

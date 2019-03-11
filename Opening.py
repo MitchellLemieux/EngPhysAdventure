@@ -1,7 +1,15 @@
 import time
+#import pygame
+#from pygame import mixer
+import playsound
+import os
 DELAY = 1.5
 
+
 def Opening():
+    #IT WORKS!
+    audiopath = os.path.join(os.getcwd(), "MediaAssets","","StarWarsOpenningFadeOut.mp3") #points to the eddited star wars theme
+    playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
     time.sleep(0.5)
     print "                A____ ________"
     print "                /_  H|\_____  \ "
@@ -15,7 +23,7 @@ def Opening():
     print ""
     print "         A short time ago on a campus not so far,"
     print "         far away....\n"
-    time.sleep(1.5) #5.5 seconds
+    time.sleep(1.7) #5.5 seconds
     print "___________                __________.__"                 
     print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
     print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
@@ -45,7 +53,7 @@ def Opening():
     print "I t  w i l l  t r u l y  b e  a  t e s t  o f  s k i l l  a s"
     time.sleep(DELAY)
     print "w e l l  a s  w i t s  t o  s o l v e  t h i s  m y s t e r y.\n"
-    time.sleep(DELAY)
+    time.sleep(DELAY*2)
     print "T h e  h e r o  m u s t  u n c o v e r  t h e  t r u t h"
     time.sleep(DELAY)
     print "a b o u t  l a s t  n i g h t  i f  t h e y  a r e  t o"
@@ -56,6 +64,9 @@ def Opening():
     time.sleep(DELAY)
     print "t o  t h e  f a c u l t y.\n"
     time.sleep(DELAY)
+    for i in range(14):
+        print "\n"
+        time.sleep(DELAY)
 
 def Closing():
     print "And so, the fate of McMaster has been decided..."
@@ -86,4 +97,41 @@ def Closing():
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
     print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
     time.sleep(2)
+
+
+
+
+
+
+
+#This works great but doesn't compile with displaying text. I got it to compile
+#   pygame2exe but doesn't show any text in the exe so might need to use pygame
+#   which would be dumb. Can get i
+####mixer.init()
+####mixer.music.load("StarWarsOpenningFadeOut.mp3")
+####mixer.music.play()
+####time.sleep(0.2) #needs this delay before the next comand?
+####Opening()
+####mixer.music.stop()
+####mixer.music.load("ErikBeepBox-Song.wav")
+####mixer.music.play()
+####time.sleep(10)
+####mixer.music.stop()
+
+###Trying to make a pygame screen
+###https://www.youtube.com/watch?v=gTvVDJofGdI
+###creating basic window
+##pygame.init() #initializes modules of pygame
+##screen = pygame.display.set_mode((600,500)) #making a screen object with that pixel dimensions
+##myfont = pygame.font.SysFont("Arial",12)
+##done = False
+##while not done:
+##    for event in pygame.event.get(): #basic window with object
+##        if event.type==pygame.QUIT:
+##            done = True
+##    text1 = myfont.render("Text",1,(0,255,0)) #makes the object attributes
+##    screen.blit(text1, (400,10)) #adds font to the screen
+##    pygame.draw.rect(screen,(255,0,0),pygame.Rect(100,100,100,100)) #draws a rectangle, 3 args screen object, colour, and 
+##    pygame.display.update()
+
 
