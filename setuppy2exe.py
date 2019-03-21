@@ -5,7 +5,7 @@ import py2exe
 setup( console= [
         {
 
-            "script": "EngPhysAdventure Alpha v0.27.py",
+            "script": "EngPhysAdventure Alpha v0.28.py",
             "icon_resources": [(0, "newicon_Hbg_icon.ico")]
         }
      ]
@@ -20,9 +20,10 @@ reminder = ["\n\nDon't forget to:\n",
             "5.Replace the icon with resource hacker\n",
             "6.Make sure all the version names are updated\n",
             "7.Update the readme and patch notes release files\n",
-            "8.Make sure the patch notes are updated but redacted\n",
-            "9.Zip folders, readme, and patchnotes as zip SFX .exe file\n",
-            "10.Upload that .exe to release folder"]
+            "8. Delete the build folder",
+            "9.Make sure the patch notes are updated but redacted\n",
+            "10.Zip folders, readme, and patchnotes as zip SFX .exe file\n",
+            "11.Upload that .exe to release folder"]
 for i in reminder:
     print i
 

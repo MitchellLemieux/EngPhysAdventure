@@ -1,6 +1,10 @@
 #This is the To-do list
 appearently labeling TODO is the convention to mark things in code
 
+Bugs
+Peanut butter Kills anyone
+Sound effect for dropping something even though it's not dropped?
+
 Write to a file and encrypt it after finishing
 https://www.guru99.com/reading-and-writing-files-in-python.html
 https://www.youtube.com/watch?v=xSGnLPTjaXo
@@ -81,6 +85,7 @@ MUSIC ADDED!
 	Future versions could use pygame mixer but would be a full overhall possibly
 Added lots of sound effects but not enough XD 
 	Please add more!
+Seperated Story()/Quests into a seperate file
 
 
 

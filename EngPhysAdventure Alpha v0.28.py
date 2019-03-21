@@ -13,6 +13,8 @@ from GameFunctions import *
 import StartUp
 from Opening import * #this imports the code and all the code dependancies (functions imported in that)
 import CreativeMode
+import Quests
+
 
 #If there was a title screen it would go here
 GAMEINFO['version'] = 0.28
@@ -83,7 +85,7 @@ def Main():
   
     #Main game loop section that runs while the player is alive (player is killed in story once done)
     while(PLAYER.alive):
-        Music()#A janky way to loop and play music! Will only do on next command
+        #Music()#TODO enable musiA janky way to loop and play music! Will only do on next command
          
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)
@@ -156,7 +158,7 @@ def Main():
     
         GAMEINFO['commandcount'] += 1 #increments the command count after every command but doesn't print
         print "========================================================================"
-        Story() #runs through the story quests checks
+        Quests.Story() #runs through the story quests checks
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0: #gets you out of the EPTA all the way down quest and back into the sublayer
             End()
