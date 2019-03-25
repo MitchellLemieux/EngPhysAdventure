@@ -10,37 +10,44 @@ import playsound #used to play music and sound effects
 
 global QUESTS
 
-QUESTS = { #How do I make this a global variable in a new file?
-          #sidequests
-          'secret spaces': 1,
-          'EPTA all the way down': 1,
-          #Talk to hooded man
-          "talk to mysterious man": 1,
-          #Nuke
-          "preston get dumbbell": 1,
-          "buijs kill chris" : 1,
-          "dan fix reactor" : 1,
-          "novog get donut" : 1,
-          "feynman mirror" :1,
-          #Optics
-          "kitai get silicon substrate": 1,
-          "knights get book": 1,
-          "haugen kill soleymani" : 1,
-          "einstein fridge": 1,
-          #Semiconductor
-          "lapierre get coffee": 1,
-          "kleimann get solar cell": 1,
-          "minnick get oscilloscope": 1,
-          "get key to display case": 1,
-          "maxwell portal": 1,
-          #endgame stuff
-          'end game start' :1,
-          'the dark lord' :1,
-          'university man':1,
-          'restored order': 1,
-          'create chaos': 1
-          }
+#List of quests that then get's built into a dictionary
+#it's defined here for convience of working but is dealing with a global variable defined in gamefunctions
 
+questlist = [
+          #sidequests
+          'secret spaces',
+          'EPTA all the way down',
+          #Talk to hooded man
+          "talk to mysterious man",
+          #Nuke
+          "preston get dumbbell",
+          "buijs kill chris",
+          "dan fix reactor",
+          "novog get donut",
+          "feynman mirror",
+          #Optics
+          "kitai get silicon substrate",
+          "knights get book",
+          "haugen kill soleymani",
+          "einstein fridge",
+          #Semiconductor
+          "lapierre get coffee",
+          "kleimann get solar cell",
+          "minnick get oscilloscope",
+          "get key to display case",
+          "maxwell portal",
+          #endgame stuff
+          'end game start',
+          'the dark lord' ,
+          'university man',
+          'restored order',
+          'create chaos'
+          ]
+
+#building the quest dictionary because you can't just overwrite the dumb dictionaries for some dumb reason
+for quest in questlist:
+    QUESTS.update({quest:1})
+    
 
 def Story():
     global PLAYER
@@ -94,37 +101,47 @@ def Story():
         ENEMIES['hooded man'].spoke = False
         QUESTS["talk to mysterious man"] = 0
         #small item
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Song_Correct.wav"), False)
 
     #Nuke quests
     if ENEMIES['dr. preston'].quest and QUESTS["preston get dumbbell"]:
         MAPS[2][5][1].placeEnemy(ENEMIES["dr. buijs"])
         QUESTS["preston get dumbbell"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
+
         
     if ENEMIES['dr. buijs'].quest and QUESTS['buijs kill chris']:
         MAPS[2][5][0].placeEnemy(ENEMIES['dan fitzgreen'])
         ENEMIES['dan fitzgreen'].quest = True
-        
         QUESTS['buijs kill chris'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
         MAPS[2][6][0].placeEnemy(ENEMIES['dr. novog'])
+        MAPS[4][5][0].placeEnemy(ENEMIES['stefan boltzmann'])
         QUESTS["dan fix reactor"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
     if ENEMIES['dr. novog'].quest and QUESTS["novog get donut"]:
         QUESTS['novog get donut'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if INTERACT['ancient mirror'].quest and QUESTS["feynman mirror"]:
         QUESTS["feynman mirror"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
+
 
     
     #Optics quests
     if ENEMIES['dr. lapierre'].quest and QUESTS["lapierre get coffee"]:
         MAPS[5][4][1].placeEnemy(ENEMIES['dr. knights'])
         QUESTS["lapierre get coffee"]= 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
     if ENEMIES['dr. knights'].quest and QUESTS["knights get book"]:
         MAPS[1][6][0].placeEnemy(ENEMIES['dr. haugen'])
         QUESTS["knights get book"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
     
 
     if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
@@ -132,10 +149,13 @@ def Story():
         ENEMIES['dr. haugen'].alive = False
         MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
         MAPS[1][6][0].placeItem(ITEMS["haugen's clothes"])
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
         QUESTS['einstein fridge'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
+
         
     
 
@@ -143,10 +163,12 @@ def Story():
     if ENEMIES['dr. kitai'].quest and QUESTS['kitai get silicon substrate']:
         MAPS[1][5][2].placeEnemy(ENEMIES['dr. kleimann'])
         QUESTS['kitai get silicon substrate'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. kleimann'].quest and QUESTS["kleimann get solar cell"]:
         MAPS[3][4][1].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["kleimann get solar cell"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. minnick'].quest and QUESTS["minnick get oscilloscope"]:
         ENEMIES['dr. minnick'].quest = False
@@ -157,12 +179,15 @@ def Story():
         MAPS[3][4][1].removeEnemy(ENEMIES['dr. minnick'])
         MAPS[1][7][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["minnick get oscilloscope"] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if INTERACT['display case'] and QUESTS["get key to display case"]:
         QUESTS["get key to display case"] = 0
 
     if ENEMIES['dr. minnick'].quest and QUESTS["maxwell portal"]:
         QUESTS['maxwell portal'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
+
 
     #endgame
 
@@ -173,28 +198,36 @@ def Story():
         MAPS[5][2][1].travelled = 1
         ENEMIES['hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the Quantum Relics which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is Dr. Cassidy himself!"   
         QUESTS['end game start'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if not QUESTS['end game start'] and ENEMIES['hooded man'].spoke and QUESTS['the dark lord']:
         MAPS[5][2][1].removeEnemy(ENEMIES['hooded man'])
         MAPS[5][2][1].placeEnemy(ENEMIES['dr. cassidy'])
         QUESTS['the dark lord'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. cassidy'].spoke and QUESTS['university man']:
         MAPS[5][2][1].placeEnemy(ENEMIES['sir william mcmaster'])
         ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
         QUESTS['university man'] = 0
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
         ENEMIES['dr. cassidy'].info = "Take the power you hold in your Iron Ring and destroy all of the professors!"
         DEATHS = [ENEMIES[i].alive for i in ['dr. minnick','dr. novog','dr. kitai','dr. knights','dr. preston','dr. kleimann','dr. buijs','dr. lapierre','dr. nagasaki']]
         if True in DEATHS:
+            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
             pass
         else:
             PLAYER.alive = False
+            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
+
             return 1
             
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
         PLAYER.alive = False #does this so you can get out of the loop
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
+
         return 2
 
     else:

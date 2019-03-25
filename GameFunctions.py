@@ -1,3 +1,6 @@
+#This is the file used for most backend, interaction, startup/global variables,  functions of the game
+
+
 from GameClasses import *
 import StartUp
 import AsciiArt
@@ -18,7 +21,10 @@ GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timesta
 #version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
 #   musicOn is the indicator for when to next reloop the music
 
-QUESTS = {"Dogs": 0} #initializing the quests global variable to be later overwritten
+QUESTS = {}  #initializing the quests global variable to be later writen into
+
+GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DisableMusic': 0}
+#disable openning and/or music, speedrun disables openning;lore read times; might disable secrets or opens them, hardcore for now disables eating but might make enemies harder, 
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
@@ -30,11 +36,13 @@ EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #gets to have the Iron Ring when he graduates
+TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #Setting a starting inventory bugs these somehow making them glitchy in the game, however having the item be dropped/spawned later somehow fixes this so that's the quick fix. Also gets to have the Iron Ring when he graduates
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
+MAPS[6][1][1].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
+MAPS[0][3][0].placeItem(ITEMS["hulk hands"])
 
 #Setting up the game path for the game to the cache folder
 #using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
@@ -94,17 +102,17 @@ def Move(direction):
     CurrentPlace = MAPS[x][y][z]
     Place = 0
     if direction not in CurrentPlace.walls: 
-        if direction == 'f':
+        if direction in ['f','forward']:
             y += 1
-        elif direction == 'b':
+        elif direction in ['b','back']:
             y -= 1
-        elif direction == 'r':
+        elif direction in ['r','right']:
             x += 1
-        elif direction == 'l':
+        elif direction in ['l','left']:
             x -= 1
-        elif direction == 'u':
+        elif direction in ['u','up']:
             z += 1
-        elif direction == 'd':
+        elif direction in ['d','down']:
             z -= 1
         Place = MAPS[x][y][z]
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"), False) #plays the sound with 'multithreading'
@@ -114,7 +122,7 @@ def Move(direction):
         PLAYER.location[2] = z
         if bf.location != (None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
-        if random() <= 0.003:
+        if random() <= 0.003: #TODO make bang bong less awesome of BF more rare so he doesn't spawn and can't run train
             MAPS[x][y][z].placeEnemy(bf)
             AsciiArt.Hero()
             
@@ -177,7 +185,7 @@ def Combat(P,E):
          print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
      if P.health == 0:
         P.alive = False
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","Gta5Wasted.mp3"), False) #plays the sound with 'multithreading'
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXdeath.mp3"), False) #plays the sound with 'multithreading'
         return 0
      if E.health == 0:
         E.alive = False
@@ -195,7 +203,12 @@ def Attack(E):
     CurrentPlace = MAPS[x][y][z]
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E] #making it the object from the name
-        if random() <= 0.01: #bigHits feature
+        bgchance = 0.01
+        if PLAYER.inv['head'] == ITEMS['skull helmet']:
+            bgchance += 0.1 
+        if PLAYER.inv['body'] == ITEMS['big hits shirt']:
+            bgchance += 0.1
+        if random() <= bgchance: #bigHits feature TODO have oblivion sound effects 
             AsciiArt.BigHits()
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
             print enemy.Dinfo + ".\n"
@@ -239,6 +252,7 @@ def Talk(E):
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
+            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
             print "\n"+enemy.Sinfo
             MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
@@ -255,6 +269,7 @@ def Talk(E):
 
 
 def Stats():
+    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
     global PLAYER
     print "\nHEALTH: " + str(PLAYER.health)
     print "ATK: " + str(PLAYER.stats[0])
@@ -271,6 +286,7 @@ def Inspect(Item): #Item is the inspect item
     z = PLAYER.location[2]
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
         print "\n"+ITEMS[Item].info
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
@@ -282,6 +298,7 @@ def Inspect(Item): #Item is the inspect item
             print""
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
+            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True #this turns on the quest flag for the interactable once interacted with if you have the item
             print "\n" + INTERACT[Item].Sinfo
@@ -297,6 +314,7 @@ def Inspect(Item): #Item is the inspect item
         print "\nThat doesn't seem to be around here.\n"
 
 def Inventory():
+    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
     global PLAYER
     print ""
     for i in PLAYER.inv:
@@ -310,8 +328,8 @@ def Eat(Item):
     y = PLAYER.location[1]
     z = PLAYER.location[2]
 
-    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
-        if Item == "jar of peanut butter" and (PLAYER.name == "Mitchell Lemieux" or "Erik Reimers"):
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location and not(GAMESETTINGS['HardcoreMode']):
+        if Item == "jar of peanut butter" and (PLAYER.name in ["Mitchell Lemieux","Erik Reimers"]):
             print "Oh NO! You're " + PLAYER.name + " ! Don't you remember?\nYOU'RE ALERGIC TO PEANUT BUTTER?\nYou DIE due to your lack of responsibility."
             PLAYER.health = 0
             PLAYER.alive = False
@@ -336,6 +354,9 @@ def Eat(Item):
     else:
         print "\nThat doesn't seem to be around here.\n"
 
+
+#BackEnd Functions
+        
 def logGame(log): #this makes a log file which records all player actions for debugging
     fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt" #metacache is a fake name for the log file
     f = open(fpath,"w+") 
@@ -353,8 +374,7 @@ def NameChange(): #A dumb backend workaround to change the players name. TODO ot
     MAPS[2][4][1].placeEnemy(ENEMIES[PLAYER.name.lower()]) #then placed on the map
     return
         
-        
-def SpellCheck(Word,Psblties):
+def SpellCheck(Word,Psblties): #Spellchecks words in the background to check things closest
     Distance = [edit_distance(Word,key) for key in Psblties]
     index = Distance.index(min(Distance))
     return Psblties[index]
@@ -377,7 +397,11 @@ def Music(): #a check system to play the song every 43.5 seconds while alive
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","ErikBeepBoxSong.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
         GAMEINFO['musicOn'] += 60 #increments by minute until it will next have to be played
-    
+
+
+def PrintT(printout): #TODO a possible macro function to auto format and display our text
+
+    return
 
 ###this function definitions were added for the compiler so they don't have to be referenced
 def _edit_dist_init(len1, len2):

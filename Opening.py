@@ -3,14 +3,86 @@ import time
 #from pygame import mixer
 import playsound
 import os
+from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables to be used in the start screen
+
+
 DELAY = 1.5
 
+LINEBREAK = "========================================================================" #standard display with 72 characters
+CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
+
+def StartScreen():
+    global GAMEINFO
+    global GAMESETTINGS
+    audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
+    playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
+    print "                A____ ________"
+    print "                /_  H|\_____  \ "
+    print "                 |  O|  ___|  |"
+    print "                 |  L| /___   <"
+    print "                 |  L|  ___\   |"
+    print "                 |  Y| /W O O D|"
+    print "                 |___|/________/"
+    print "                      Production."
+    time.sleep(3)
+    print CLEARSCREEN
+    start = True
+    while(start):
+        print LINEBREAK
+        print "___________                __________.__"                 
+        print "\_   _____/    _     _____ \______   \  |__ ___.__. ______"
+        print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
+        print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
+        print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
+        print "        \/     \//_____/  TEXT ADVENTURE  \/\/         \/ "
+        print "                    Version Alpha " +str(GAMEINFO['version']) + "                    \n\n"
+        print "Play New Game[P]   Settings[S]  Disclaimers[D]   Exit[E]  "
+        #TODO add load game functionality
+        #print "Play New Game[p]   Load Game[L]    Settings[S]   Exit[E]  "      
+        choice = raw_input('Choose what you want to do: ').lower()
+        if choice in ['p', 'play new game','play']:
+            start = False
+##        elif choice in ['l', 'load game','load']:
+##            print linebreak
+##            print "Load Game\n\n"
+        
+        elif choice in ['s', 'settings','setting']:
+            settingscreen = True
+            while(settingscreen):
+                print LINEBREAK
+                print "Settings\n\n[0]Disable Opening:  "+ str(int(GAMESETTINGS['DisableOpening']))+'\n[1]Speed Run:        ' + str(int(GAMESETTINGS['SpeedRun'])) +'\n[2]Hardcore Mode:    ' + str(int(GAMESETTINGS['HardcoreMode'])) +'\n[3]Disable Music:    ' + str(int(GAMESETTINGS['DisableMusic'])) +'\n[B]Back '
+                Schoice = raw_input('Choose which settings you want to toggle: ').lower()
+                if Schoice in ['b', 'back', 'leave', 'exit']:
+                    settingscreen = False
+                elif Schoice =='0':
+                    GAMESETTINGS['DisableOpening'] = not(GAMESETTINGS['DisableOpening'])
+                elif Schoice =='1':
+                    GAMESETTINGS['SpeedRun'] = not(GAMESETTINGS['SpeedRun'])
+                elif Schoice =='2':
+                    GAMESETTINGS['HardcoreMode'] = not(GAMESETTINGS['HardcoreMode'])
+                elif Schoice =='3':
+                    GAMESETTINGS['DisableMusic'] = not(GAMESETTINGS['DisableMusic'])                   
+                else:
+                    print "\nPlease choose one of the options."
+        elif choice in ['d', 'disclaimers','disclaimer']:
+            print LINEBREAK
+            print "Disclaimer\n\nThis game is difficult, requires reading and focus on every piece of text, and awareness of small details in order to advance the game.\n\n"
+            print "We feel here that we're trying to provide an experience that's challenging but rewarding, not punishing. That being said we are always open to feedback.\n\n"
+            print "This game is a work in progress and there may be bugs. We do our best to avoid, catch, and fix errors promptly. If you do come across one however please submit them to our bug response form:\n\n"
+            print "This is a work of fiction. Names, characters, businesses, places, events, locales, and incidents are either the products of the author's imagination or used in a fictitious manner. Any resemblance to actual persons, living or dead, or actual events is purely coincidental.\n\n"
+            print "By playing this game you give up the right to any information or files uploaded to the developers for benevolent development of the game.\n\n"
+
+        elif choice in ['e', 'exit','leave']: 
+            exit()
+        else:
+            print "\nPlease choose one of the starting options."
 
 def Opening():
     #IT WORKS!
     audiopath = os.path.join(os.getcwd(), "MediaAssets","","StarWarsOpenningFadeOut.mp3") #points to the eddited star wars theme
     playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
     time.sleep(0.5)
+    print CLEARSCREEN
     print "                A____ ________"
     print "                /_  H|\_____  \ "
     print "                 |  O|  ___|  |"
@@ -20,17 +92,20 @@ def Opening():
     print "                 |___|/________/"
     print "                      Production."
     time.sleep(3.5) #4 seconds
+    print CLEARSCREEN
     print ""
     print "         A short time ago on a campus not so far,"
     print "         far away....\n"
-    time.sleep(1.7) #5.5 seconds
+    time.sleep(3) #5.5 seconds
+    print CLEARSCREEN
+    print 
     print "___________                __________.__"                 
     print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
     print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
     print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
     print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ "
-    time.sleep(2)
+    time.sleep(7.5)
     print ""
     print "T h e  c a m p u s  i s  i n  a  s t a t e  o f  u n r e s t."
     time.sleep(DELAY)
@@ -66,7 +141,7 @@ def Opening():
     time.sleep(DELAY)
     for i in range(14):
         print "\n"
-        time.sleep(DELAY)
+        time.sleep(DELAY/2)
 
 def Closing():
     print "And so, the fate of McMaster has been decided..."
@@ -89,6 +164,8 @@ def Closing():
     print "                 |  Y| /W O O D|"
     print "                 |___|/________/"
     print "                      Production."
+    time.sleep(2)
+    print "This is a work of fiction. Names, characters, businesses, places, events,'nlocales, and incidents are either the products of the author's imagination\nor used in a fictitious manner. Any resemblance\nto actual persons, living or dead, or actual events is\npurely coincidental.\n\n"
     time.sleep(2)
     print "___________                __________.__"                 
     print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"

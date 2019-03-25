@@ -9,27 +9,30 @@
 
 #In general try to keep this structure and put any other long ascii display or mode into another file.
 
-from GameFunctions import *
+from GameFunctions import * #this imports the code and all the code dependancies (functions imported in that)
 import StartUp
-from Opening import * #this imports the code and all the code dependancies (functions imported in that)
-import CreativeMode
+import Opening    #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
+import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests
 
 
 #If there was a title screen it would go here
 GAMEINFO['version'] = 0.28
 GAMEINFO['versionname'] = "Alpha v0.28 - Major overhall"
-#Updated: Jan 2, 2019
+#Updated: Mar 25, 2019
 
-
+LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
 
 #begining section of the game (not in the main loop), seperated for nested game
 def Setup():
     global PLAYER
     global GAMEINFO
-    #TODO re-enamble before release
-    #Opening()
-    print "========================================================================" #standard display width breaker, 72 characters
+    Opening.StartScreen() #Startscreen loop where you can play new game, loadgame, choose settings, or exit
+    
+
+    if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
+    
+    print LINEBREAK
 
     GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     
@@ -48,7 +51,6 @@ def Setup():
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     
     GAMEINFO['gamestart'] = time.time() #Gives the local start date of the game in seconds since epoch of 1970
-    
     CreativeMode.saveGame("basegame") #Use this to get a base state newgame, keep it in each time so don't have to worry about updating
     #This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
     if PLAYER.name == "Tyler Kashak": #He realizes he's the main character and can do anything he wants
@@ -79,13 +81,13 @@ def Main():
     #global SETTINGS #TODO will import the settings later
     #global keyword brings in a global variable into a function and allows it to be altered
     KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()) #keys used for the spellchecking function
-    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
+    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
     
 
   
     #Main game loop section that runs while the player is alive (player is killed in story once done)
     while(PLAYER.alive):
-        #Music()#TODO enable musiA janky way to loop and play music! Will only do on next command
+        if not(GAMESETTINGS['DisableMusic']): Music()#TODO make music in a non-jank way! Will only do on next command
          
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)
@@ -101,10 +103,10 @@ def Main():
                 verb = SpellCheck(verb,VERBS)
 
 
-            if verb in ['u','d','l','r','f','b']:
+            if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward']:
                 CurrentPlace = Move(verb)
                 GAMEINFO['stepcount'] += 1 #increments the stepcount after taking a step (whether sucessful or not)
-            elif (verb == 'search'):
+            elif verb in ['search','look']:
                 x = PLAYER.location[0]
                 y = PLAYER.location[1]
                 z = PLAYER.location[2]
@@ -136,13 +138,13 @@ def Main():
                 verb = SpellCheck(verb,VERBS)
             objectName = SpellCheck(direction[1],KEYS)
 
-            if verb == 'equip':
+            if verb in ['equip','get','wear']:
                 Equip(objectName)
                 
             elif verb == 'drop':
                 Drop(objectName)
 
-            elif verb == 'attack':
+            elif verb in ['attack','kill']:
                 Attack(objectName)
                 
             elif verb == 'talk':
@@ -151,13 +153,13 @@ def Main():
             elif verb == 'inspect':
                 Inspect(objectName)
 
-            elif verb == 'eat':
+            elif verb in ['eat','drink','inhale','ingest','devour']:
                 Eat(objectName)
             else:
                print "\nI don't understand that command!\n"
     
         GAMEINFO['commandcount'] += 1 #increments the command count after every command but doesn't print
-        print "========================================================================"
+        print LINEBREAK
         Quests.Story() #runs through the story quests checks
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0: #gets you out of the EPTA all the way down quest and back into the sublayer
@@ -181,8 +183,9 @@ def End():
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
     #TODO, condense this story display code
-    if Story()== 0: #player dies 
-        print "========================================================================"
+    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","NoWorries.mp3"), False)
+    if Quests.Story()== 0: #player dies 
+        print LINEBREAK
         DisplayTime(GAMEINFO['runtime']) #displays the runtime for speed running
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #writes the log file
@@ -192,11 +195,11 @@ def End():
             Main() #re-enters the main loop
         return #returns the game so you don't get the final dialog
     elif raw_input("Type 'C' to continue\n").lower() == 'c':
-        Closing() #plays the closing
+        Opening.Closing() #plays the closing
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
-        if Story() == 1: #The bad storyline ending
+        if Quests.Story() == 1: #The bad storyline ending
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
-        elif Story() == 2: #The good storyline ending. 
+        elif Quests.Story() == 2: #The good storyline ending. 
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
         DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
@@ -205,7 +208,7 @@ def End():
         endchoice = raw_input("Thanks for playing!!\nType 'C' to continue, 'R' to restart, anything else will exit: ").lower() #this input is to hold the screen until the player decides what to do
         if endchoice == "c":
             PLAYER.alive = True
-            print "========================================================================"
+            print LINEBREAK
             QUESTS['restored order'] = 0 #turn this off so you can continue playing the game without the quest redoing
             QUESTS['create chaos'] = 0 
             Main() #returns to the main (hopefully in the same state)
@@ -215,7 +218,14 @@ def End():
             Main() #re-enters the main loop
     return
 
-#runs the main functions (the whole game bassically)
+#TODO enable bug catcher before 
+#try: #runs the main functions (the whole game bassically)
 Setup()
 Main()
-#end function is run at the end of main loop so you can restart the game
+    #end function is run at the end of main loop so you can restart the game
+##except:
+##    AsciiArt.Error()
+##    CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+##    print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+##    print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D" 
+##    raw_input("Type anything to exit: ")

@@ -117,11 +117,11 @@ class Map:  #Map Location Storage
         self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
-        self.inside = inside
+        self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
+        #TODO Interriors lot of work but rewarding at end
+        #self.size = size #size of interrior (xRange,yRange, zRange) if it's a thing, none if no interrior
         #self.interrior = interrior #interrior is a list of inner map locations
-
-        
-        
+        #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
         
 
     def placeItem(self,item): #Works with the drop method in the character class

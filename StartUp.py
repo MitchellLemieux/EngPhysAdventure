@@ -3,6 +3,7 @@
 #Music: Brian, Erik What music do we have lol? 
 #Start Date: April 14th, 2018
 #Library of Items and Locations
+#Latest Edit 22/2/2019
 
 from GameClasses import *
 #the bounds of the map
@@ -43,7 +44,7 @@ def Reset():
     Map("The McMaster Archway",(5,1,1),"ARCHWAY:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. The Willy Dog stand is to your left.","Probably the most beautiful structure at Mac.\nYou notice a hole that appears to have melted through the glass of the lamp underneath...\nYou snap a quick selfie in front of the Archway for the 'gram.",(),False),
     Map("Inside University Hall",(6,1,1),"UNIVERSITY HALL:\nThe exit is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f'),True),
     Map("The Phoenix",(5,4,1),"THE PHOENIX:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over.",('r'),True),
-    Map("BSB",(3,4,1),"BSB:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
+    Map("BSB",(3,4,1),"BSB:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.\nThe Quantum Tunnel is beneath you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
     Map("Front BSB",(3,3,1),"FRONT OF BSB:\nBSB field is at your rear. A road is to your right.\nThe entrance to JHE is to your left. BSB is infront of you","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1),"POLICE STATION:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus P.D cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Keyes",(4,6,1),"MARY KEYES:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
@@ -108,17 +109,17 @@ def Reset():
     Map("3rd Floor Thode",(1,7,3),"3RD FLOOR THODE:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u'),True),
     Map("2nd Floor Thode",(1,7,2),"2ND FLOOR THODE:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True),
     #TODO CAPSTONE ROOM, To be Moved to interrior
-    Map("Capstone Doorway",(3,4,3),"Capstone Doorway:\nFill Me.","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True),
-    Map("Circuit Smart",(4,4,3),"Circuit Smart:\nFill Me.","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True),
-    Map("Milli",(4,3,3),"Milli:\nFill Me.","Great Job Mili!",('d','u'),True),
-    Map("NANOrims",(4,2,3),"NANOrims:\nFill Me.","NANNNOOORYMMSS.",('d','u'),True),
-    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.:\nFill Me.","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True), #S.T.A.R.S. System T69
-    Map("FRAS",(3,3,3),"FRAS:\nFill Me.","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True),
-    Map("T.A. Area",(2,4,3),"T.A. Area:\nFill Me.","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True),
-    Map("ZebraShark",(2,3,3),"ZebraShark:\nFill Me.","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True),
-    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE:\nFill Me.","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True),
-    Map("Electronics Lab",(1,4,3),"Peter's Lab:\nFill Me.","I'm just glad to not have to be in here anymore.",('d','u'),True),
-    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office:\nFill Me.","The grand sorcerer's mystic place",('d','u'),True)]
+    Map("Capstone Doorway",(3,4,3),"Capstone Doorway:\n","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True),
+    Map("Circuit Smart",(4,4,3),"Circuit Smart:\n","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True),
+    Map("Milli",(4,3,3),"Milli:\n","Great Job Mili!",('d','u'),True),
+    Map("NANOrims",(4,2,3),"NANOrims:\n","NANNNOOORYMMSS.",('d','u'),True),
+    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.:\n","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True), #S.T.A.R.S. System T69
+    Map("FRAS",(3,3,3),"FRAS:\n","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True),
+    Map("T.A. Area",(2,4,3),"T.A. Area:\n","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True),
+    Map("ZebraShark",(2,3,3),"ZebraShark:\n","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True),
+    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE:\n","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True),
+    Map("Electronics Lab",(1,4,3),"Peter's Lab:\n","I'm just glad to not have to be in here anymore.",('d','u'),True),
+    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office:\n","The grand sorcerer's mystic place",('d','u'),True)]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
@@ -134,15 +135,16 @@ def Reset():
     Equipment("Hard Hat",(4,2,1),"HardHat.jpg","You don't really want to look like a Civil kid. But at least it protects your head.","head",(1,10,5),""),
     Equipment("Laser Safety Glasses",(1,6,0),"LSGlasses.jpg","Protection from the UV, my dude.","head",(0,3,5),""),
     Equipment("Raybans",(5,5,1),"Raybans.jpg","GQ Teen says Raybans, Board Shorts, Vans, and a Muscle Tee.","head",(0,1,3),""),
-    Equipment("Bike Helmet",(3,7,1),"BikeHelmet.jpg","One of those fast Tour de France ones.","head",(0,8,10),""),
+    Equipment("Bike Helmet",(3,7,1),"BikeHelmet.jpg","One of those fast Tour de France ones.\nDoes this belong to Dr. Minnick? Great!","head",(0,8,10),""),
     Equipment("Surgical Mask",(0,1,1),"SurgicalMask.jpg","Don't touch me I'm sterile!","head",(0,2,3),""),
     Equipment("Phil's Braces",(2,5,0),"PhilBraces.jpg","Bark AND the bite.","head",(3,2,1),""),
     Equipment("Santa Hat",(0,0,1),"SantaHat.jpg","Happy Holidays!","head",(0,3,2),""),
     Equipment("Plastic Bag",(2,1,1),"PBag.jpg","The audacity of some people to leave their filth around.","head",(0,1,-10),""),
     Equipment("Party Hat",(3,6,1),"PartyHat.jpg","A nice hat from a cracker.","head",(0,5,3),""),
+    Equipment("Skull Helmet",(0,2,0),"SkullHelmet.jpg","A note left beside the helmet says 'A leftover relic from a purple hero'\nOMG Is that the Helm of Oreyn Bearclaw from completing the fighter's\nguild storyline? Better watch out.","head",(35,30,10),""), #Should go somewhere burried in hollywood after
     #Body Items
     Equipment("Eng Phys Shirt",(3,4,0),"EngPhysShirt.jpg","Rolling Rock baby! Premium Stream my ass... More like premium pain...","body",(0,7,5),""),
-    Equipment("Big Hits Shirt",(6,1,1),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(10,5,5),""),
+    Equipment("Big Hits Shirt",(None),"BigHits.jpg","The Shirt of the Hero of Kyvach!","body",(10,5,5),""),
     Equipment("Okons Chainmail",(0,2,0),"OkonMail.jpg","The sacred chainmail forged by the legend himself","body",(25,50,25),""),
     Equipment("Hazmat Suit",(2,5,1),"Hazmat.jpg","Protection from all sorts of McCrindle farts...","body",(0,10,5),""),
     Equipment("Priest Gown",(2,0,2),"Gown.jpg","Wearing this gives people the impression you are a holy person...","body",(1,5,3),""),
@@ -158,7 +160,7 @@ def Reset():
     Equipment("Tony Hawk Shirt",(3,5,1),"TonyHAwkShirt.jpg","A shirt personally made by tony hawk!","body",(5,5,5),""),
     #Hand Items
     Equipment("MSP430",(2,3,1),"MSP430.jpg","A literal piece of garbage.","hand",(-5,0,-5),-5),
-    Equipment("Hulk Hands",(0,3,0),"HulkHands.jpg","These pack a serious punch...","hand",(15,5,20),""),
+    Equipment("Hulk Hands",(None),"HulkHands.jpg","These pack a serious punch...","hand",(15,5,20),""),
     Equipment("Old Headphones",(1,5,1),"OldHeadphones.jpg","Old frayed apple headphones. Good for whipping.","hand",(5,0,5),""),
     Equipment("Empty Bottle",(4,1,1),"EmptyBottle.jpg","Dasani, more like Dishonest! Amirite?!","hand",(1,0,1),""),
     Equipment("Banana Wires",(3,4,1),"BanWires.jpg","Alligator clips added for extra whippage.","hand",(8,0,8),3),
@@ -223,12 +225,12 @@ def Reset():
     Equipment("Femtosecond Laser",(None),"Laser.jpg","Haugen's personal femtosecond laser.","hand",(125,0,999),""),
     Equipment("Minnick's Glasses",(None),"MinnickGlasses.jpg","The spectacles of a wizard from the High Order of the Ancient Council.","head",(100,100,100),""),
     Equipment("Kenrick's Oscilloscope",(None),"Oscilloscope.jpg","The window into the electronics world...","off-hand",(0,150,50),""),
-    Equipment("Joint of Destiny",(None),"Joint.jpg","A tighly rolled spliff filled with Devil's lettuce... for real.","off-hand",(420,420,420),""),
-    Equipment("PID control system",(None),"PID.jpg","A PID control system. Kp = 69, my dude.","head",(45,0,10),""),
+    Equipment("Joint of Destiny",(None),"Joint.jpg","A tighly rolled spliff filled with Devil's lettuce... for real.","off-hand",(420,420,420),""), #unimplemented?
+    Equipment("PID control system",(None),"PID.jpg","A PID control system. Kp = 69, my dude.","head",(45,0,10),""), #also not in the game?
     Equipment("LED of Power",(None),"LED.jpg","An LED with the power output of a neutron star, ok maybe not.","hand",(21,0,20),""),
     Equipment("Horrible Assignment",(None),"BadAss.jpg","A barely legible report on Fourier analysis.","off-hand",(3,0,0),""),
     Equipment("Cold Beer",(None),"ColdBeer.jpg","A freshly brewed pint from Andy Knights himself.","off-hand",(15,0,20),2),
-    Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(420,420,420),""),
+    Equipment("Green Bang Bong",(None),"GBB.jpg","The sacred glass flute providing righteous tokes since '69.","off-hand",(69,69,69),""), #set to 69 from 420 to nerf BF
     Equipment("3W Textbook",(None),"3WText.jpg","Text book that probably has useful information if you could read it. Too bad it has never been in the QT","off-hand",(5,5,10),""),
     Equipment("Fake Gun",(None),"FakeGun.jpg","Is this seriously what at the MAC cops carry...","hand",(5,0,5),""),
     Equipment("Erik's Frosted Tips",(None),"FrostedTips.jpg","Ever wanted to look rad as hell? Now you can!","head",(0,3,20),""),
@@ -307,7 +309,7 @@ def Reset():
     Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Thanks!","'I can't believe you've done this."),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
-    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1),(10,5,1),15,"vomit","Phil's braces","'UHhhh i thinka im gonna- im gon-'\nPhil vomits.","mhmh spooky ghost urggh ectoplasm noooooo"),
+    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1),(10,5,1),15,"coffee","Phil's braces","'UHhhh i thinka im gonna- im gon-'\nPhil vomits.","mhmh spooky ghost urggh ectoplasm noooooo"),
     Enemy("Jana the vegan","'Did I mention I'm vegan?'",(5,4,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
     Enemy("Larry the bus driver","'Is that even your bus pass?'",(2,1,1),(10,10,5),40,"huge shirt",None,"","That was definitely not your bus pass!"),
     Enemy("Rod the climber","'Righteous! Could you help me get into my car?\nI lost my keys and can't find my car.\nI REALLY need what is in there.'",(5,7,1),(14,20,5),40,"delicious meal","bowling ball","Thanks!\nNow I can learn to bowl that perfect strike.\nTake this, I just cooked it up.","Ouch!"),
@@ -316,6 +318,7 @@ def Reset():
     Enemy("Erik the Sk8r","'Check out this tre flip, pretty tight eh?'",(0,0,0),(15,15,40),20,"Erik's frosted tips",None,"","Man, that's dumb!"),
     Enemy("Megan the Bartender","'Wait... I recognize you... you have a $420E69 tab!'",(5,4,1),(15,20,10),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
     Enemy("Bill the MAC Cop","'Give me your student card!'",(3,5,1),(50,25,10),50,"solar cell",None,"","We aren't able to arrest you anyway!"),
+    Enemy("Stefan Boltzmann","Taste my lightning!",(None),(95,50,75),75,"pink donut",None,"","'I WILL GET YOU FOR THIS!'\nAs Boltzmann falls to the ground you notice the pink plasma desorb from his body.\nThe donut then floats in the mid-air and an apparition of Dr. Novog forms!\n'Whats up folks?'\n'The faculty is in big trouble, I need you to bring this energy source to the basement of the nuclear reactor.'\n'I will explain more then!'"),
     Enemy("Zack the Snack","'I need a snack that smiles back!'",(2,4,0),(17,12,15),25,"fanny pack","goldfish","Whoa thats whack! Check out this fanny pack.","Why are you the way you are?"),
     Enemy("Will the MAC Cop","'Give me your student card!'",(4,2,1),(50,25,10),50,"fake gun",None,"","We aren't able to arrest you anyway!"),
     Enemy("Andreas the Nerd","'I heard some jebroni took the 3W Textbook and hid in Bridges cafe.'\n'Full send, dude!'",(3,2,1),(10,15,5),50,"visor glasses",None,"","Dude, that was definitely a full send"),
@@ -329,7 +332,7 @@ def Reset():
     INTERACT1 = [
     #Interact("Attack Fan",(1,1,1),"It's a garbage can.","You throw the MSP430 in... Yes, you have chosen wisely.","msp430","Vomit"),
     Interact("Garbage Can",(2,3,1),"It's a garbage can.","You throw the MSP430 in... Yes, you have chosen wisely.","msp430","Vomit"),
-    Interact("Broken Reactor",(4,5,0),"It's an old broken reactor.","After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nYou feel like ancient mechanisms beyond your comprehension are coming to life.\nWithin the pink glow you see an apparition of Dr. Novog!\n'What's up folks! This is the only channel safe for communication\n'Come meet me in the basement of the Nuclear Reactor ASAP and bring that Pink Donut!'\nAs the aparition fades a hooded figure emerges from behind a lab bench.\n'The Dark Lord demands that donut!'\nThe assassin lunges for you but is quickly met by your blow.\nAs they fall to the ground you notice an insignia on their robe that tickles your 'that's familiar' bone...\nYou pull back their hood to reveal the face of an Eng Phys PhD student!\nYou don't remember their name... But you know they are in the faculty...","flux capacitor",'pink donut'),
+    Interact("Broken Reactor",(4,5,0),"It's an old broken reactor.","After some elbow grease and a bit of luck you manage to complete the reactor.\nThere is a low whirr as the device starts and begins to glow with a\npink hue.\nSuddenly, you hear the door crash open behind you!\nDr. Kleimann enters in a hurry.\n'Finally, the power I need!' he says as he rushed past you and reaches for the glowing plasma.\nThe plasma appears to bend to his will and is absorbed by his outstretched hand!\n'I AM COMPLEEEEEEEEETE!' he bellows in a demonic tone.\n'You fool, did you not recognize the deliberate mispelling of this mortal's name?'\n'Two n's? That is a characteristic of a name fit for a physics GOD!'\n'It is I, STEFAN BOLTZMANN! And you have given me the power I need to free myself\nfrom this mortal form!'\nAfter glowing, levitating, and transforming... Stefan Boltzmann lunges at you!","flux capacitor",None),
     Interact("Fridge",(1,6,0),"Seems like a regular fridge to me.","You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!",'relativistic key','Pedrotti cubed'),
     Interact("Optical Bench",(1,6,0),"Dr. Haugen's personal optical bench...","You place Dr. Haugen's femtosecond laser on the bench and aim it at the fridge.\nTurning the laser on (remembering your laser safety glasses, of course)\nfires the high-intensity beam at the fridge.\nThe room begins to shake and smoke begins to billow out of the cracks of the fridge.\nThe door swings open and a glowing apparition of Albert Einstein emerges!\n'You have come a long way, but your quest is not yet over.'\n'For there still remains a great evil on this campus'\n'Dr. Haugen was entrusted with protecting the contents of my fridge.'\n'I have known of your destiny since your first year here at McMaster.'\n'You will be the one who determines the fate of the faculty.'\n'It is, therefore, my responsibility to prepare you for what lies ahead.'\n'This key opens a compartment in my fridge which holds one of three Quantum Relics.'\n'These items give the holder the power to shape the fate of the entire university.'\n'I cannot tell you much more. Perhaps I have said too much.'\n'Take this. Good Luck.'","femtosecond laser","relativistic key"),
     Interact("Old Painting",(3,0,1),"An old oil painting of the founding fathers of McMaster.\nDated:April 20th, 1887","Through Dr. Minnick's glasses a glowing green inscription is revealed!\n'In the hall where we eternally meet,\nThe second clue lies beneath your feet.'\nWhile reading the secret message Dr. Minnick's glasses get increasingly hotter and you quickly swat them off your face.","Minnick's glasses","Minnick's glasses"),

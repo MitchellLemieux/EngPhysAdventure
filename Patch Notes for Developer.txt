@@ -1,8 +1,40 @@
 --Developer Patch Notes--
 Updated January 2nd!
-[] is the notes for release to the public with the game files which are redacted
+[] is the notes for release to the public with the game files which are redacted, or just see the release notes
 
---Alpha 0.27 Update - 
+--Alpha 0.28.2 Update-
+0.28.2 - Bugfix
+BUGFIX fixed the hulk hands and big hits shirt glitch
+CHANGE nerfed the bang bong to 69 69 69
+CHANGE Made Phil drop coffee so that you can still do quest after you drink the first one
+BUGFIX fixed the save files not actually saving the game quests, and now saves settings
+ADDED added skull helmet in basement of T13 as part of Okon's stash
+ADDED made skull helmet add 10% and big hits add other 10% chance to big hits events
+
+0.28.1 - Hotfix
+BUGFIX Hot fix to fix error at end of the game that wouldn't let you win
+
+0.28 - What's that sound?
+NOTE Black screen with green take, LOL JUST MAKE THE TEXT GREEN in command prompt, I liked 51 255 51
+CHANGE Rearanged the bsb field and renamed it
+ADDED Added capstone room outline optop of bsb
+ADDED git.ignore file to ignore .pyc files and the cache folder (should reduce amout of eronius writes)
+	Also cleaned up entire github tree to ignore these files
+ADDED MUSIC ADDED!
+	Using simple playsound module, can't be stopped but works and compiles
+NOTE	Future versions could use pygame mixer but would be a full overhall possibly
+ADDED lots of sound effects but not enough XD, want custom ones too
+CHANGE Seperated Story()/Quests into a seperate file
+	This means game functions are now backend game functions and startup stuff
+ADDED a simple bug catcher that if the game breaks it saves the game before anything happens
+CHANGE Refined the opening and music
+ADDED start screen with credits and disclaimer
+ADDED Stephan Boltzman Reveal part of Nuke Quest
+ADDED a lot more accepted words in the parser
+NOTE Held the feedback session
+
+
+Alpha 0.27 Update 
 ADDED MAP 2nd floor hatch
 ADDED diaolog for Dan Fitz
 CHANGE Removed walls the 2nd floors so you can walk between them where you can on campus

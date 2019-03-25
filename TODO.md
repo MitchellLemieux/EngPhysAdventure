@@ -26,16 +26,14 @@ Can't play as tyler Kashak after you stop
 --current update features--
 Test winning in the nested file
 document
-	Comment functions
 	The Game run loop diagrams
-	Current best strategy for winning
 
 
-0.28
+
+0.29
+Music that works with the compilier via mixer or something jank
 Updating all the people and places
-game difficulty disclaimer
 time mechanic
-added push to the statue after you get the 3 quantum rellics
 Name everything and attack dialougs (use x to do y)
 Save file update
 	Encrypt the save and log files
@@ -55,9 +53,7 @@ Make save files reconsile simple additions automatically
 Creative Mode
 Comment all the code and add documentation
 
---stretch features--
-0.29
-Fix sound and sound effects (zelda for key things, Brian & Erik to make the game music)
+
 	https://pythonbasics.org/python-play-sound/
 Start hollywood expansion
 stats kept, acheivements
@@ -65,6 +61,7 @@ starting screen
 	GUI using pygame text based one? But all in Ascii
 0.30
 interriors
+
 0.31 - want a balance update and full feature update, maybe DLC
 Beyond
 DLC
@@ -72,20 +69,10 @@ Make it something that you want to play with some sort of grinding leading to so
 Making it a web game
 
 
-0.28 Updated
-Black screen with green take
-	LOL JUST MAKE THE TEXT GREEN in command prompt
-	I liked 51 255 51
-Rearanged the bsb field and renamed it
-Added capstone room stuff
-Added git.ignore file to ignore .pyc files and the cache folder (should reduce amout of eronius writes)
-	Also cleaned up entire github tree to ignore these files
-MUSIC ADDED!
-	Using simple playsound module, can't be stopped but works and compiles
-	Future versions could use pygame mixer but would be a full overhall possibly
-Added lots of sound effects but not enough XD 
-	Please add more!
-Seperated Story()/Quests into a seperate file
+0.29 Updated
 
 
+print '\n'.join(textwrap.wrap("knsjdgnfdsfds fdfngjfnjfdnjsgngfjkdnsjkgfnsknfdnsgjndfjncxcxnfdjngjdsnjjdnfbmnnfdnbjdfbjkzxjcvnnbjfdnbjsfnbjfdnbcnkxbnjfdnjfnsjnbjnbjnxcjbnjbnfdjnbfdjsnjbnckjxnxbvcjnjbnfdjbbnfdjnbjdnxnjkvbbbbbbbbbbbbbb", 70))
+https://dzone.com/articles/python-thread-part-1
+https://www.python-course.eu/python3_inheritance.php
 
