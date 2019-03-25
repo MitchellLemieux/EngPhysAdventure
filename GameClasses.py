@@ -107,7 +107,7 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls):
+    def __init__(self,name,coords,info,lore,walls,inside):
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
@@ -117,6 +117,12 @@ class Map:  #Map Location Storage
         self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
+        self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
+        #TODO Interriors lot of work but rewarding at end
+        #self.size = size #size of interrior (xRange,yRange, zRange) if it's a thing, none if no interrior
+        #self.interrior = interrior #interrior is a list of inner map locations
+        #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
+        
 
     def placeItem(self,item): #Works with the drop method in the character class
         if item:
@@ -144,7 +150,7 @@ class Map:  #Map Location Storage
         if enemy in self.ENEMY:
             self.ENEMY.remove(enemy)
 
-    def search(self):
+    def search(self): #TODO improve search to automatically spit out the direction stuff
         description = "\n"
         length = len(self.items)
         if length:
@@ -159,9 +165,11 @@ class Map:  #Map Location Storage
                 description = description + " a " +self.items[0].name + ".\n"
         
         if self.ENEMY:
-            for enemy in self.ENEMY: 
-                if enemy.alive:
-                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes .\n","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
+            for enemy in self.ENEMY:
+                if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
+                    description = description + enemy.name + " is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
+                elif enemy.alive:
+                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
                     description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + enemy.name + ".\n"
         if self.interact:

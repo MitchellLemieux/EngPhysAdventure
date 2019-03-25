@@ -1,5 +1,30 @@
 --Patch Notes--
-Updated January 2nd!
+Updated March 22nd!
+
+--Alpha 0.28.2 Update-
+0.28.2 - Bugfix
+BUGFIX fixed the hulk hands and big hits shirt glitch
+CHANGE nerfed the bang bong 
+CHANGE Made Phil drop coffee so that you can still do quest after you drink the first one
+BUGFIX fixed the save files not actually saving the game quests, and now saves settings
+ADDED added new secret item and probabilities 
+
+0.28.1 - Hotfix
+BUGFIX Hot fix to fix error at end of the game that wouldn't let you win
+
+0.28 - What's that sound?
+CHANGE Rearanged the bsb field and renamed it
+ADDED Developing capstone room interrior
+ADDED MUSIC ADDED!
+	Using simple  module, can't be stopped but works and compiles
+ADDED lots of sound effects but not enough XD, want custom ones too
+CHANGE Improved code modularity and cleaned up github
+ADDED a simple bug catcher that if the game breaks it saves the game before anything happens
+CHANGE Refined the opening and music
+ADDED start screen with credits and disclaimer
+ADDED New person to fight in part of quest
+ADDED a lot more accepted words in the parser
+NOTE Held the feedback session
 
 Alpha 0.27 - Save Files - Jan 2, 2019
 CHANGE Removed walls the 2nd floors so you can walk between them where you can on campus

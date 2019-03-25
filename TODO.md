@@ -1,6 +1,10 @@
 #This is the To-do list
 appearently labeling TODO is the convention to mark things in code
 
+Bugs
+Peanut butter Kills anyone
+Sound effect for dropping something even though it's not dropped?
+
 Write to a file and encrypt it after finishing
 https://www.guru99.com/reading-and-writing-files-in-python.html
 https://www.youtube.com/watch?v=xSGnLPTjaXo
@@ -13,18 +17,23 @@ Too broken when you play as Tyler?
 Dr. Novog doesn't death quest
 can kill dr. cassidy after you kill mcamster and still give you the same dialog
 still a problem with layers, saving and loading, hope it works for 0.27 release
+talk to hooded man after he disapears
+droesn't drop iron ring after you kill cassidy
+add savegame info to the sign
+Save files in the wrong location? Where is Doug?
+Can't play as tyler Kashak after you stop
 
 --current update features--
 Test winning in the nested file
 document
-	Comment functions
 	The Game run loop diagrams
-	Current best strategy for winning
-Playtest and release 0.27
 
-0.28
-game difficulty disclaimer
-added push to the statue after you get the 3 quantum rellics
+
+
+0.29
+Music that works with the compilier via mixer or something jank
+Updating all the people and places
+time mechanic
 Name everything and attack dialougs (use x to do y)
 Save file update
 	Encrypt the save and log files
@@ -44,14 +53,15 @@ Make save files reconsile simple additions automatically
 Creative Mode
 Comment all the code and add documentation
 
---stretch features--
-0.29
-Music and sound effects (zelda for key things, Brian & Erik to make the game music)
+
+	https://pythonbasics.org/python-play-sound/
+Start hollywood expansion
 stats kept, acheivements
 starting screen
 	GUI using pygame text based one? But all in Ascii
 0.30
 interriors
+
 0.31 - want a balance update and full feature update, maybe DLC
 Beyond
 DLC
@@ -59,5 +69,10 @@ Make it something that you want to play with some sort of grinding leading to so
 Making it a web game
 
 
+0.29 Updated
 
+
+print '\n'.join(textwrap.wrap("knsjdgnfdsfds fdfngjfnjfdnjsgngfjkdnsjkgfnsknfdnsgjndfjncxcxnfdjngjdsnjjdnfbmnnfdnbjdfbjkzxjcvnnbjfdnbjsfnbjfdnbcnkxbnjfdnjfnsjnbjnbjnxcjbnjbnfdjnbfdjsnjbnckjxnxbvcjnjbnfdjbbnfdjnbjdnxnjkvbbbbbbbbbbbbbb", 70))
+https://dzone.com/articles/python-thread-part-1
+https://www.python-course.eu/python3_inheritance.php
 

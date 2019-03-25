@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#Run using python ascii_image_generator.py --file path_to_image.jpg --cols 300
 """
 Created on Wed Jun 14 20:05:09 2017
 

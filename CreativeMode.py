@@ -14,8 +14,10 @@ def saveGame(savename):
     global INTERACT
     global QUESTS
     global GAMEINFO
+    global GAMESETTINGS
+    
     f = open(GAMEINFO['savepath'] + "SaveFile "+savename+".txt","w+")
-    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO] #puts all info into a list to be saved
+    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] #puts all info into a list to be saved
 ##    types in x
 ##    <type 'instance'>
 ##    <type 'dict'>
@@ -23,7 +25,8 @@ def saveGame(savename):
 ##    <type 'dict'>
 ##    <type 'dict'>
 ##    <type 'dict'>
-##    <type 'list'>
+##    <type 'dict'>
+##    <type 'dict'>
     pickle.dump(x, f) #pickles the list of gamedata to the save file
     f.close()
     return
@@ -37,6 +40,7 @@ def loadGame(loadname):
     global INTERACT
     global QUESTS
     global GAMEINFO
+    global GAMESETTINGS
     try:
         f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".txt","r+")
         save = pickle.load(f)
@@ -49,6 +53,8 @@ def loadGame(loadname):
         loadinter = save[4]
         loadquest = save[5]
         loadinfo = save[6]
+        loadsettings = save[7]
+        
         
         for info in GAMEINFO: #when itterating through list the itterating variable is the string of the key
             GAMEINFO[info] = loadinfo[info]                   
@@ -61,6 +67,8 @@ def loadGame(loadname):
             INTERACT[inter] = loadinter[inter]
         for quest in QUESTS:
             QUESTS[quest] = loadquest[quest]
+        for setting in GAMESETTINGS:
+            GAMESETTINGS[setting] = loadsettings[setting]
         #for some reason putting MAPS load below these other ones fixed a bunch of bugs
         for x in range(XRANGE):
             for y in range(YRANGE):
@@ -71,6 +79,7 @@ def loadGame(loadname):
         GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
         GAMEINFO['log'].append("loadgame") #adds the load game command to the log
 
+        
         #Displayes the current place info again to show it's been loaded
         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]]
         print "========================================================================"
