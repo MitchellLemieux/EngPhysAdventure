@@ -3,8 +3,19 @@ Readme How to Run the game
 2. Go to dist folder and run EngPhysAdventure.exe
 3. Make a shortcut to your desktop by right clicking and selecting "Create shortcut" and then move that shortcut to your desktop
 4. Enjoy!
-5. Give feedback: https://goo.gl/forms/LbLxflbmLF61YvmD2
+5. Give feedback: https://goo.gl/forms/OEMQCupWvEtibd0E3
+6. Report any pesky bugs: https://goo.gl/forms/Jo6P7oMj86OiLvE63
+Thanks!
+
+    	                   A____ ________
+    	                   /_  H|\_____  \ 
+    	                    |  O|  ___|  |
+    	                    |  L| /___   <
+    	                    |  L|  ___\   |
+     	                    |  Y| /W O O D|
+    	                    |___|/________/
+  	                      Production
 
 
-Version: Alpha v0.28 - What's that sound?
-Updated: Mar 22, 2019
+Version: Alpha v0.28.2 - BugFix
+Updated: Mar 25, 2019

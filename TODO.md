@@ -70,9 +70,11 @@ Making it a web game
 
 
 0.29 Updated
+Made a new string pareser mod that is adaptable, checks for overages, and can control delay called printT (see documentation or examples)
+Made items, people, interactables, and places all have different symbols around them
+	[People], ~Places~, <Things>, /Interactables/
 
 
-print '\n'.join(textwrap.wrap("knsjdgnfdsfds fdfngjfnjfdnjsgngfjkdnsjkgfnsknfdnsgjndfjncxcxnfdjngjdsnjjdnfbmnnfdnbjdfbjkzxjcvnnbjfdnbjsfnbjfdnbcnkxbnjfdnjfnsjnbjnbjnxcjbnjbnfdjnbfdjsnjbnckjxnxbvcjnjbnfdjbbnfdjnbjdnxnjkvbbbbbbbbbbbbbb", 70))
 https://dzone.com/articles/python-thread-part-1
 https://www.python-course.eu/python3_inheritance.php
 

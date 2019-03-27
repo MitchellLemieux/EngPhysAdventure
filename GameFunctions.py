@@ -7,14 +7,17 @@ import AsciiArt
 import time
 import os #used to put files in the cache folder
 import playsound #used to play music and sound effects
+from printT import * #import it all
 
 
-#This is where the global variables are defined. Global variables used to pass info between functions and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
+#This is where the global variables are defined. Global variables used to pass info between functions (but should not be and TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
 #TODO Ask Mitch why these aren't just in the main file
+
 MAPS = StartUp.WorldMap() 
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
+
 GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
             'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
             'musicOn': 0.0} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
@@ -128,7 +131,8 @@ def Move(direction):
             
         if Place.travelled:
             print "========================================================================"
-            print Place.lore +"\n\n"+Place.info + Place.search()
+            printT(Place.lore)
+            print "\n\n"+Place.info + Place.search()
             Place.travelled = 0
         else:
             print "========================================================================"
@@ -211,7 +215,7 @@ def Attack(E):
         if random() <= bgchance: #bigHits feature TODO have oblivion sound effects 
             AsciiArt.BigHits()
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
-            print enemy.Dinfo + ".\n"
+            printT(enemy.Dinfo) #slow version
             enemy.alive = False
             if enemy.drop:
                print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
@@ -220,7 +224,7 @@ def Attack(E):
            Outcome = Combat(PLAYER,enemy) 
            if Outcome:
                print "You defeated " + enemy.name + ".\n"
-               print enemy.Dinfo
+               printT(enemy.Dinfo)
                if enemy.drop:
                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                    CurrentPlace.placeItem(ITEMS[enemy.drop])
@@ -242,7 +246,7 @@ def Talk(E):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print "\n"+ enemy.name + " took the " + enemy.need + "."
-            print enemy.Sinfo
+            printT(enemy.Sinfo) #default print speed
             ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
             PLAYER.updateStats()
@@ -253,14 +257,14 @@ def Talk(E):
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
             playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
-            print "\n"+enemy.Sinfo
+            printT(enemy.Sinfo)
             MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
         elif enemy.quest:
-            print "\n"+enemy.Sinfo+"\n"
+            printT(enemy.Sinfo)
         else:
-            print "\n" + enemy.info+"\n"
+            printT(enemy.info)
         enemy.spoke = True
     elif E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive==False):
         print "\nI don't think they can do that anymore.\n"
@@ -287,7 +291,7 @@ def Inspect(Item): #Item is the inspect item
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
-        print "\n"+ITEMS[Item].info
+        printT(ITEMS[Item].info,72,0.1) #fast version
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
@@ -301,7 +305,7 @@ def Inspect(Item): #Item is the inspect item
             playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True #this turns on the quest flag for the interactable once interacted with if you have the item
-            print "\n" + INTERACT[Item].Sinfo
+            printT(INTERACT[Item].Sinfo) #special slow version
             PLAYER.updateStats()
             ITEMS[INTERACT[Item].need].location=(None,None,None) #Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
@@ -309,7 +313,7 @@ def Inspect(Item): #Item is the inspect item
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
             print ""
         else:
-            print INTERACT[Item].info + "\n"
+            printT(INTERACT[Item].info,72,0.1) #fast version
     else:
         print "\nThat doesn't seem to be around here.\n"
 
@@ -399,9 +403,6 @@ def Music(): #a check system to play the song every 43.5 seconds while alive
         GAMEINFO['musicOn'] += 60 #increments by minute until it will next have to be played
 
 
-def PrintT(printout): #TODO a possible macro function to auto format and display our text
-
-    return
 
 ###this function definitions were added for the compiler so they don't have to be referenced
 def _edit_dist_init(len1, len2):

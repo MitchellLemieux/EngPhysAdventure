@@ -1,10 +1,10 @@
-#ENG PHYS TEXT BASED ADVENTURE
-#Mitchell Lemieux and Tyler Kashak
-#Wrote on April 14,2018: Icemageddon
-
+"""
+ENG PHYS TEXT BASED ADVENTURE
+Mitchell Lemieux and Tyler Kashak
+Wrote on April 14,2018: Icemageddon
+"""
 import operator
 from random import *
-
 
 def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
@@ -150,7 +150,8 @@ class Map:  #Map Location Storage
         if enemy in self.ENEMY:
             self.ENEMY.remove(enemy)
 
-    def search(self): #TODO improve search to automatically spit out the direction stuff
+    def search(self): #TODO improve search to automatically spit out the direction stuff,
+        #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
         description = "\n"
         length = len(self.items)
         if length:
@@ -158,23 +159,32 @@ class Map:  #Map Location Storage
             if length > 1:
                 for i in range(length):
                     if (i == length-1):
-                        description = description+" and a "+self.items[i].name + ".\n"
+                        if isinstance(self.items[i],Equipment):
+                            description = description+" and a <"+self.items[i].name + ">.\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                        else:
+                            description = description+" and a /"+self.items[i].name + "/.\n" #inspectable highlight
                     else:
-                        description = description + " a "+self.items[i].name + ","
+                        if isinstance(self.items[i],Equipment):
+                            description = description + " a <"+self.items[i].name + ">,"
+                        else:
+                            description = description + " a /"+self.items[i].name + "/,"
             else:
-                description = description + " a " +self.items[0].name + ".\n"
+                if isinstance(self.items[0],Equipment):
+                    description = description + " a <" +self.items[0].name + ">.\n" #equipment highlight
+                else:
+                    description = description + " a /" +self.items[0].name + "/.\n" #inspectable highlight
         
-        if self.ENEMY:
+        if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + enemy.name + " is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
+                    description = description + "[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
                 elif enemy.alive:
-                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
+                    description = description + "[" + enemy.name + "] is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + enemy.name + ".\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + "]" + enemy.name + "].\n"
         if self.interact:
             for item in self.interact:  
-                description = description + item.info + "\n"
+                description = description + "/" + item.info + "/\n"
                 
         if (description == ""):
             description = "\nThere isn't a whole lot to see."

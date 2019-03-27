@@ -10,7 +10,12 @@ DELAY = 1.5
 
 LINEBREAK = "========================================================================" #standard display with 72 characters
 CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
-
+#Graphics , audio, difficulty, modes, advanced
+#screen width, default read speed/On/Off, suggestion for green
+#music on/off, sound levels eventually?
+#Eventually easy-medium-hardcore
+#eventually speed run, hardcore mode, dev mode, iron man eventually
+#all of the settings individually not grouped into modes
 def StartScreen():
     global GAMEINFO
     global GAMESETTINGS

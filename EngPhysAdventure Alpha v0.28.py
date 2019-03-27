@@ -1,14 +1,15 @@
-#Notes
-#This is the main file for the Eng Phys Text Adventure (EPTA). This game utilizes some poorly done OOP (sorry Mitch), it has it's strengths though!
-#The comments, organization, and optimization are bad but generally:
-#this file = the setup, main loop, and ending. Run this to run the game.
-#GameFunctions.py = The main mechanics of the game and the quests. All non-class functions. 
-#GameClasses.py = Class definitions and their coresponding functions.
-#Startup.py = All the map locations, items, npcs (called enemies), and interactables. Also creates the dictionaries of them.
-#Setup.py = Py2exe file used to compile into an exe. Run using "python setup.py py2exe" in command prompt.
+"""
+###Notes###
+This is the main file for the Eng Phys Text Adventure (EPTA). This game utilizes some poorly done OOP (sorry Mitch), it has it's strengths though!
+The comments, organization, and optimization are bad but generally:
+this file = the setup, main loop, and ending. Run this to run the game.
+GameFunctions.py = The main mechanics of the game and the quests. All non-class functions. 
+GameClasses.py = Class definitions and their coresponding functions.
+Startup.py = All the map locations, items, npcs (called enemies), and interactables. Also creates the dictionaries of them.
+Setup.py = Py2exe file used to compile into an exe. Run using "python setup.py py2exe" in command prompt.
 
-#In general try to keep this structure and put any other long ascii display or mode into another file.
-
+In general try to keep this structure and put any other long ascii or modules into another file.
+"""
 from GameFunctions import * #this imports the code and all the code dependancies (functions imported in that)
 import StartUp
 import Opening    #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
@@ -17,7 +18,7 @@ import Quests
 
 
 #If there was a title screen it would go here
-GAMEINFO['version'] = 0.28
+GAMEINFO['version'] = "0.28.2"
 GAMEINFO['versionname'] = "Alpha v0.28 - Major overhall"
 #Updated: Mar 25, 2019
 
@@ -219,13 +220,13 @@ def End():
     return
 
 #TODO enable bug catcher before 
-#try: #runs the main functions (the whole game bassically)
-Setup()
-Main()
+try: #runs the main functions (the whole game bassically)
+    Setup()
+    Main()
     #end function is run at the end of main loop so you can restart the game
-##except:
-##    AsciiArt.Error()
-##    CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
-##    print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
-##    print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D" 
-##    raw_input("Type anything to exit: ")
+except:
+    AsciiArt.Error()
+    CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+    print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+    print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D" 
+    raw_input("Type anything to exit: ")
