@@ -125,7 +125,7 @@ def Move(direction):
         PLAYER.location[2] = z
         if bf.location != (None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
-        if random() <= 0.003: #TODO make bang bong less awesome of BF more rare so he doesn't spawn and can't run train
+        if random() <= 0.003: 
             MAPS[x][y][z].placeEnemy(bf)
             AsciiArt.Hero()
             

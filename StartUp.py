@@ -44,7 +44,7 @@ def Reset():
     Map("The McMaster Archway",(5,1,1),"~ARCHWAY~:\nMUSC at your rear. Statue of Willy in front of you.\nEntrance to University Hall is to your right. The Willy Dog stand is to your left.","Probably the most beautiful structure at Mac.\nYou notice a hole that appears to have melted through the glass of the lamp underneath...\nYou snap a quick selfie in front of the Archway for the 'gram.",(),False),
     Map("Inside University Hall",(6,1,1),"~UNIVERSITY HALL~:\nThe exit is to your left.","The glares from portraits of old white founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",('r','b','f'),True),
     Map("The Phoenix",(5,4,1),"~THE PHOENIX~:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over.",('r'),True),
-    Map("BSB",(3,4,1),"~BSB~:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.\nThe Quantum Tunnel is beneath you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True),
+    Map("BSB",(3,4,1),"~BSB~:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.\nThe Quantum Tunnel is beneath you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True,(6,6,5)),
     Map("Front BSB",(3,3,1),"~FRONT OF BSB~:\nBSB field is at your rear. A road is to your right.\nThe entrance to JHE is to your left. BSB is infront of you","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1),"~POLICE STATION~:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus PD cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Keyes",(4,6,1),"~MARY KEYES~:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
@@ -63,7 +63,7 @@ def Reset():
     Map("General Sciences",(4,4,1),"~GENERAL SCIENCES BUILDING~:\nThe Phoenix is to your right. The junction between JHE & BSB is to your left.\nThe Tandem Accelerator is in front of you. Exit to your rear.","Have you ever been in here?\nI haven't.\nYou see a group of people huddled around a pentagram-wearing goat heads.\nMaybe? I seriously don't know what goes on in here.",(),True),
     Map("Tandem Accelerator",(4,5,1),"~TANDEM ACCELERATOR~:\nThe General Sciences Building is behind you. The Police station is to your left.\nA trail is to your right. Keyes is in front of you.","Turns out the Tandem Accelerator is NOT a rad place to ride a 2-person bike...\nBummed out you remind yourself you graduated and consider what to do next.",(),True),
     Map("The Bridge",(4,7,1),"~THE BRIDGE~:\nLot M is to your right. Keyes is at your rear.\nHead down Cootes trail if you go left.","You narrowly avoid a GO bus\npick yourself up and brush yourself off.\nThen plan your next move.",('f'),False),
-    Map("Cootes Trail",(3,7,1),"~COOTES TRAIL~:\nCampus exit is to your left. GO station to your rear.\nThe Bridge to Lot M is to your right.","The flickering light through the trees dances off of the trail ahead of you.\nYou smile as you see a squirrel gathering nuts,\nprobably for his little squirrel family.\nWith this new positive outlook on life you plan your next move.",('f'),False),
+    Map("Cootes Trail",(3,7,1),"~COOTES TRAIL~:\nCampus exit is to your left. GO station to your rear.\nThe Bridge to Lot M is to your right.","The flickering light through the trees `ces off of the trail ahead of you.\nYou smile as you see a squirrel gathering nuts,\nprobably for his little squirrel family.\nWith this new positive outlook on life you plan your next move.",('f'),False),
     Map("GO Station",(3,6,1),"~GO STATION~:\nThe Reactor is to your left. Keyes is to your right.\nCootes Trail is in front of you. The Police Station is behind you.","The rush of people and buses around you is disorienting.\nYou nearly get hit by 3 buses and 2 MAC Cop cars as\nyou play a strange game of real-life frogger.\nReaching a bench you sit down, catch your breath, and plan what to do next.",(),False),
     Map("Cootes Dr.",(0,7,1),"~COOTES DRIVE~:\nThode is to your right. Lot I is behind you.","You notice a series of pickup trucks for what must be a landscaping or construction company.\nThere is construction gear spread all over the place.\nThe sound of sirens grows louder as an ambulance suddenly rushes by.\nYou collect yourself and consider what to do next.",('f','l'),False),
     Map("Lot I",(0,6,1,),"~LOT I~:\nABB is to your right. Cootes Drive is in front of you.\nITB is to your rear.","Nope, your car isn't here.\nMaybe you parked in Lot M? Maybe not.\nAfter scoffing at all of the prof Mercedes that are way too nice...\nYou think of what to do.",('l'),False),
@@ -109,17 +109,17 @@ def Reset():
     Map("3rd Floor Thode",(1,7,3),"~3RD FLOOR THODE~:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u'),True),
     Map("2nd Floor Thode",(1,7,2),"~2ND FLOOR THODE~:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True),
     #TODO CAPSTONE ROOM, To be Moved to interrior
-    Map("Capstone Doorway",(3,4,3),"Capstone Doorway~:\n","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True),
-    Map("Circuit Smart",(4,4,3),"Circuit Smart~:\n","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True),
-    Map("Milli",(4,3,3),"Milli~:\n","Great Job Mili!",('d','u'),True),
-    Map("NANOrims",(4,2,3),"NANOrims~:\n","NANNNOOORYMMSS.",('d','u'),True),
-    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.~:\n","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True), #S.T.A.R.S. System T69
-    Map("FRAS",(3,3,3),"FRAS~:\n","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True),
-    Map("T.A. Area",(2,4,3),"T.A. Area~:\n","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True),
-    Map("ZebraShark",(2,3,3),"ZebraShark~:\n","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True),
-    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE~:\n","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True),
-    Map("Electronics Lab",(1,4,3),"Peter's Lab~:\n","I'm just glad to not have to be in here anymore.",('d','u'),True),
-    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office~:\n","The grand sorcerer's mystic place",('d','u'),True)]
+    Map("Capstone Doorway",(3,4,3),"Capstone Doorway~:\n","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True,"bsb"),
+    Map("Circuit Smart",(4,4,3),"Circuit Smart~:\n","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True,"bsb"),
+    Map("Milli",(4,3,3),"Milli~:\n","Great Job Mili!",('d','u'),True,"bsb"),
+    Map("NANOrims",(4,2,3),"NANOrims~:\n","NANNNOOORYMMSS.",('d','u'),True,"bsb"),
+    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.~:\n","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True,"bsb"), #S.T.A.R.S. System T69
+    Map("FRAS",(3,3,3),"FRAS~:\n","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True,"bsb"),
+    Map("T.A. Area",(2,4,3),"T.A. Area~:\n","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True,"bsb"),
+    Map("ZebraShark",(2,3,3),"ZebraShark~:\n","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True,"bsb"),
+    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE~:\n","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True,"bsb"),
+    Map("Electronics Lab",(1,4,3),"Peter's Lab~:\n","I'm just glad to not have to be in here anymore.",('d','u'),True,"bsb"),
+    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office~:\n","The grand sorcerer's mystic place",('d','u'),True,"bsb")]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
@@ -259,6 +259,7 @@ def Reset():
     Equipment("Flux Capacitor",(None),"FluxCapacitor.jpg","If only I could go back to 1985...","hand",(1,1,1,),""),
     Equipment("Pink Donut",(None),"PinkDonut.jpg","This is what fusion is all about?","off-hand",(1,1,1,),2),
     Equipment("Fanny Pack",(None),"FannyPack.jpg","Made for style. Not for carrying.","body",(3,8,15,),""),
+    Equipment("STARS Wireless Fix",(None),"StarsFix.jpg","IT took 6 weeks to make this code? Who knew debugging could be this hard?","off-hand",(1,1,1),""),
     Equipment("Einstein's Brain",(None),"Brain.jpg","Feel's kind of weird walking around with this...","off-hand",(1,1,1),10),
     Equipment("Haugen's Clothes",(None),"HaugenShirt.jpg","OH My. The clothes of the gentle dolphin now gone.\nFeels kinda wet.","body",(5,10,10),10),
     Equipment("Pedrotti Cubed",(None),"Pedrotti.jpg","'Property of Harold Haugen, one of the 3 Quantum Relics' is inscribed on the first page.","off-hand",(50,150,250),""),
@@ -325,7 +326,8 @@ def Reset():
     Enemy("Eric the Baller","'Huge talking to people play.'",(0,5,0),(20,15,20),50,"Cold Steel Katana",None,"","This is sub-optimal."),
     Enemy("Mario the Mixologist","'Yo check out my meme page, you ever heard coco jay?'",(1,4,1),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
     Enemy("Paul the Janitor","'Hey brother, I really could use some Febreze.'",(0,5,1),(20,20,20),20,"bleach squirt bottle","Febreze","Rock on brother! Thanks so much!","NOOO, Now I can't go see Black Sabbath!"),
-    Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!")]    
+    Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!"),
+    Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!")]    
     
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
