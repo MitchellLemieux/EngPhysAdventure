@@ -6,8 +6,8 @@ import time
 
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
-
-def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
+#TODO put delay back to 2.5 seconds
+def printT(text, char=72, delay = 0.1): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
     This function removes newlines from our old text then prints out each line to the chacter limit and with delays inbetween
     Can override parser to make newline split using (\S). Use (\S) (\S) to split and make a blank space with a delay, resets the sentence variable

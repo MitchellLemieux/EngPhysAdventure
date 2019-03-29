@@ -117,7 +117,10 @@ def Move(direction):
             z += 1
         elif direction in ['d','down']:
             z -= 1
-        Place = MAPS[x][y][z]
+        if (MAPS[x][y][z].size) or ( CurrentPlace.size): #this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
+            Place = MAPS[x][y][z].goInside(CurrentPlace,MAPS,PLAYER,ENEMIES,direction)
+        else: #if you're not going into an interrior 
+            Place = MAPS[x][y][z] 
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"), False) #plays the sound with 'multithreading'
     if Place:
         PLAYER.location[0] = x

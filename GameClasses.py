@@ -192,6 +192,12 @@ class Map:  #Map Location Storage
             
         return description
 
-    #def goInside(self,character,direction):
-        
+    def goInside(self,CurrentPlace,MAPS,PLAYER,ENEMIES,direction):
+        """
+        This function is used to not only go inside the interrior of the building but move within there
+        """
+        if  not(CurrentPlace.size): #if the previous place was not inside you step into the interrior
+            print "You are trying to go inside"
+
+        return 
 
