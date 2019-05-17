@@ -107,7 +107,7 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside, size = (None)): #size = (None) means default is none object unless otherwise defined
+    def __init__(self,name,coords,info,lore,walls,inside, size = (None), mapped = 0): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
@@ -119,7 +119,8 @@ class Map:  #Map Location Storage
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
         #TODO Interriors lot of work but rewarding at end
-        self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior 
+        self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
+        self.mapped = mapped
         
         #self.interrior = interrior #interrior is a list of inner map locations
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     

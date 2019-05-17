@@ -73,6 +73,20 @@ Making it a web game
 Made a new string pareser mod that is adaptable, checks for overages, and can control delay called printT (see documentation or examples)
 Made items, people, interactables, and places all have different symbols around them
 	[People], ~Places~, <Things>, /Interactables/
+Made a display map for where you've traveled, and where you are
+	Made it in the orientation of front but could be changed
+	For each map object added a mapped attribute so you can explore
+		(which in object definition is default to 0 to save changing the startup file)
+	Each spot will be - until it has been in your explore site radius, even though you haven't visted it
+	Want to fix sight based on height but for some reason bugs out the game
+Code Conventions to Follow
+	Made a good convention that if the function is over 40 lines, definetly by 50 then move it to it's own file
+	Also following the PP8 convention style guide for some but need to redo the game at one point
+		camel case for variables ex) dogNose
+		lowercase with _ for functions ex) nose_colour
+		Pascal case (letter of first words capatalized) for classes and objects 
+	Try to comit one commit all day, or when a major stuff is done
+
 
 
 https://dzone.com/articles/python-thread-part-1
