@@ -122,10 +122,11 @@ class Map:  #Map Location Storage
         self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
         self.mapped = mapped
         
-        #self.interrior = interrior #interrior is a list of inner map locations
+        #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
         
-        #Made another coordinate d, dimension to specify interriors
+        #OR Make another coordinate d, dimension to specify interriors, but I'm leaning away from this
+        #   although it would look cleaner on a spreadsheet
     def placeItem(self,item): #Works with the drop method in the character class
         if item:
             self.items.append(item)
@@ -199,6 +200,7 @@ class Map:  #Map Location Storage
         """
         if  not(CurrentPlace.size): #if the previous place was not inside you step into the interrior
             print "You are trying to go inside"
-
+            
+            
         return 
 

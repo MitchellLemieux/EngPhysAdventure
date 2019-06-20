@@ -193,7 +193,7 @@ def Story():
 
     if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
         MAPS[5][2][1].placeEnemy(ENEMIES['hooded man'])
-        print "\nYou feel a strange pull twoards the McMaster Statue.\n"
+        print "\nYou feel a strange pull towards the McMaster Statue.\n"
         MAPS[5][2][1].lore = "You approach the statue and notice the mysterious Hooded Man beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
         MAPS[5][2][1].travelled = 1
         ENEMIES['hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the Quantum Relics which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is Dr. Cassidy himself!"   

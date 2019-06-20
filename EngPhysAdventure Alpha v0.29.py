@@ -15,6 +15,7 @@ import StartUp
 import Opening    #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests
+import MapDisplay
 
 
 #If there was a title screen it would go here
@@ -88,7 +89,7 @@ def Main():
     #Main game loop section that runs while the player is alive (player is killed in story once done)
     while(PLAYER.alive):
         if not(GAMESETTINGS['DisableMusic']): Music()#TODO make music in a non-jank way! Will only do on next command
-        if not(GAMESETTINGS['HardcoreMode']): display_map()
+        if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()
         
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)

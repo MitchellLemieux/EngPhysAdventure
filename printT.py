@@ -1,3 +1,9 @@
+"""This function is used as our special printer to define the width and timing of lines.
+It was made so that you wouldn't have to manually add newline characters to keep text alined
+but also to enable spacing and other functions with words
+
+
+"""
 #Try to implement in non-annoying way, like for slow for enemy special & death info and lore but
     #fast for all other things (like 0.1-1 seconds)
     #and make sure it's disableable through speedrun and a special options
