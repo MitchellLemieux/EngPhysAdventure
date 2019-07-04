@@ -1,10 +1,10 @@
-#ENG PHYS TEXT BASED ADVENTURE
-#Mitchell Lemieux and Tyler Kashak
-#Wrote on April 14,2018: Icemageddon
-
+"""
+ENG PHYS TEXT BASED ADVENTURE
+Mitchell Lemieux and Tyler Kashak
+Wrote on April 14,2018: Icemageddon
+"""
 import operator
 from random import *
-
 
 def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
@@ -12,6 +12,9 @@ def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats 
     k = tuple(map(operator.add,e,f))
     ij = tuple(map(operator.add,i,j))
     return tuple(map(operator.add,ij,k))
+
+# WHEN UPDATING ANY CLASS ATRIBUTE WILL NEED TO UPDATE IN CSVSaver to Reflect it!
+#       Unless someone does something fancy to automatically update it but I don't feel it's necessary.
 
 class Equipment:
     def __init__(self,name,location,image,info,worn,stats,health):
@@ -107,23 +110,25 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside):
+    def __init__(self,name,coords,info,lore,walls,inside, size = (None), mapped = 0): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
         self.lore = lore#Description of the location
         self.items = [] #list of equipment objects at that location
         self.ENEMY = [] #list of enermy objects at that location
-        self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
         #TODO Interriors lot of work but rewarding at end
-        #self.size = size #size of interrior (xRange,yRange, zRange) if it's a thing, none if no interrior
-        #self.interrior = interrior #interrior is a list of inner map locations
+        self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
+        self.mapped = mapped
+        
+        #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
         
-
+        #OR Make another coordinate d, dimension to specify interriors, but I'm leaning away from this
+        #   although it would look cleaner on a spreadsheet
     def placeItem(self,item): #Works with the drop method in the character class
         if item:
             self.items.append(item)
@@ -150,7 +155,8 @@ class Map:  #Map Location Storage
         if enemy in self.ENEMY:
             self.ENEMY.remove(enemy)
 
-    def search(self): #TODO improve search to automatically spit out the direction stuff
+    def search(self): #TODO improve search to automatically spit out the direction stuff,
+        #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
         description = "\n"
         length = len(self.items)
         if length:
@@ -158,28 +164,45 @@ class Map:  #Map Location Storage
             if length > 1:
                 for i in range(length):
                     if (i == length-1):
-                        description = description+" and a "+self.items[i].name + ".\n"
+                        if isinstance(self.items[i],Equipment):
+                            description = description+" and a <"+self.items[i].name + ">.\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                        else:
+                            description = description+" and a /"+self.items[i].name + "/.\n" #inspectable highlight
                     else:
-                        description = description + " a "+self.items[i].name + ","
+                        if isinstance(self.items[i],Equipment):
+                            description = description + " a <"+self.items[i].name + ">,"
+                        else:
+                            description = description + " a /"+self.items[i].name + "/,"
             else:
-                description = description + " a " +self.items[0].name + ".\n"
+                if isinstance(self.items[0],Equipment):
+                    description = description + " a <" +self.items[0].name + ">.\n" #equipment highlight
+                else:
+                    description = description + " a /" +self.items[0].name + "/.\n" #inspectable highlight
         
-        if self.ENEMY:
+        if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + enemy.name + " is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
+                    description = description + "[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
                 elif enemy.alive:
-                    description = description + enemy.name + " is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
+                    description = description + "[" + enemy.name + "] is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + enemy.name + ".\n"
-        if self.interact:
-            for item in self.interact:  
-                description = description + item.info + "\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + "[" + enemy.name + "].\n"
+        # if self.interact:
+        #     for item in self.interact:
+        #         description = description + "/" + item.info + "/\n"
                 
         if (description == ""):
             description = "\nThere isn't a whole lot to see."
             
         return description
 
-
+    def goInside(self,CurrentPlace,MAPS,PLAYER,ENEMIES,direction):
+        """
+        This function is used to not only go inside the interrior of the building but move within there
+        """
+        if  not(CurrentPlace.size): #if the previous place was not inside you step into the interrior
+            print "You are trying to go inside"
+            
+            
+        return 
 

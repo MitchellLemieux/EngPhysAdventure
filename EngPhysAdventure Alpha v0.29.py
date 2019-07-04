@@ -1,24 +1,26 @@
-#Notes
-#This is the main file for the Eng Phys Text Adventure (EPTA). This game utilizes some poorly done OOP (sorry Mitch), it has it's strengths though!
-#The comments, organization, and optimization are bad but generally:
-#this file = the setup, main loop, and ending. Run this to run the game.
-#GameFunctions.py = The main mechanics of the game and the quests. All non-class functions. 
-#GameClasses.py = Class definitions and their coresponding functions.
-#Startup.py = All the map locations, items, npcs (called enemies), and interactables. Also creates the dictionaries of them.
-#Setup.py = Py2exe file used to compile into an exe. Run using "python setup.py py2exe" in command prompt.
+"""
+###Notes###
+This is the main file for the Eng Phys Text Adventure (EPTA). This game utilizes some poorly done OOP (sorry Mitch), it has it's strengths though!
+The comments, organization, and optimization are bad but generally:
+this file = the setup, main loop, and ending. Run this to run the game.
+GameFunctions.py = The main mechanics of the game and the quests. All non-class functions. 
+GameClasses.py = Class definitions and their coresponding functions.
+Startup.py = All the map locations, items, npcs (called enemies), and interactables. Also creates the dictionaries of them.
+Setup.py = Py2exe file used to compile into an exe. Run using "python setup.py py2exe" in command prompt.
 
-#In general try to keep this structure and put any other long ascii display or mode into another file.
-
+In general try to keep this structure and put any other long ascii or modules into another file.
+"""
 from GameFunctions import * #this imports the code and all the code dependancies (functions imported in that)
 import StartUp
 import Opening    #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests
+import MapDisplay
 
 
 #If there was a title screen it would go here
-GAMEINFO['version'] = 0.28
-GAMEINFO['versionname'] = "Alpha v0.28 - Major overhall"
+GAMEINFO['version'] = "0.29"
+GAMEINFO['versionname'] = "Alpha v0.29 - Developer Update"
 #Updated: Mar 25, 2019
 
 LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
@@ -27,9 +29,8 @@ LINEBREAK = "===================================================================
 def Setup():
     global PLAYER
     global GAMEINFO
+    # TODO Re-enable Opening before release
     Opening.StartScreen() #Startscreen loop where you can play new game, loadgame, choose settings, or exit
-    
-
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
     
     print LINEBREAK
@@ -38,7 +39,7 @@ def Setup():
     
     PLAYER.name = GAMEINFO['playername']
     NameChange() #changes the name of all name related things in the game
-       
+
     x = 2
     y = 3
     z = 1
@@ -88,7 +89,8 @@ def Main():
     #Main game loop section that runs while the player is alive (player is killed in story once done)
     while(PLAYER.alive):
         if not(GAMESETTINGS['DisableMusic']): Music()#TODO make music in a non-jank way! Will only do on next command
-         
+        if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()
+        
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)
         direction = line.lower().split(" ",1)
@@ -218,14 +220,15 @@ def End():
             Main() #re-enters the main loop
     return
 
-#TODO enable bug catcher before 
-#try: #runs the main functions (the whole game bassically)
-Setup()
-Main()
-    #end function is run at the end of main loop so you can restart the game
-##except:
-##    AsciiArt.Error()
-##    CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
-##    print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
-##    print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D" 
-##    raw_input("Type anything to exit: ")
+#TODO enable bug catcher before release
+try: #runs the main functions (the whole game bassically)
+    Setup()
+    Main()
+#end function is run at the end of main loop so you can restart the game
+except:
+   AsciiArt.Error()
+   CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+   logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
+   print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+   print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
+   raw_input("Type anything to exit: ")

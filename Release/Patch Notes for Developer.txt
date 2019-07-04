@@ -1,6 +1,36 @@
 --Developer Patch Notes--
 Updated January 2nd!
-[] is the notes for release to the public with the game files which are redacted, or just see the release notes
+[] is the notes for release to the public. Or just See the release notes
+Keywords are ADDED, BUGFIX, CHANGE, NOTE
+
+--Alpha 0.29 Update- Developer Update - July 3, 2019
+#First Kipling release and 1 year birthday! New features coming soon
+ADDED Made a new string pareser mod that is adaptable, checks for overages, and can control delay called printT (see documentation or examples) [Text now prints better!]
+ADDED Made items, people, interactables, and places all have different symbols around them
+	* [People], ~Places~, <Things>, /Interactables/
+ADDED Made an exploratory map for where you've traveled, and where you are
+	* Made it in the orientation of front but could be changed
+	* For each map object added a mapped attribute so you can explore
+		(which in object definition is default to 0 to save changing the startup file)
+	* Each spot will be - until it has been in your explore site radius, even though you haven't visted it
+	* No big map or map options made yet
+ADDED Code Conventions to Follow [Better coding practices and documentation!]
+	* Made a good convention that if the function is over 40 lines, definetly by 50 then move it to it's own file
+	* Also following the PP8 convention style guide for some but need to redo the game at one point
+		* camel case for variables ex) dogNose
+		* lowercase with _ for functions/methods ex) nose_colour
+		* Pascal case (letter of first words capatalized) for classes and objects ex) DogMan
+	* Try to commit one commit all day, or when a major stuff is done
+ADDED Added a notepad for how to install from PIP and added Playsound to the files so you don't have to install it
+CHANGE New Dev and Release folders to seperate the game files, dev files, and files for exe release
+CHANGE Added CSVs to the ignore file
+CHANGE Removed Interact list storage from Map class because it actually was not being used
+ADDED I partially added a CSV functionality. Can export entities to CSV and can write item code but not read in or do anything else [Better item/people development]
+    * Partially did this because if my plans go through a lot of things will be changed in the code restructuring and this code will need to be changed anyways
+    * Other part was I did not want to write this much backend code at the time when so little is being developed
+ADDED Made for speedrun it turns off the text delay in printT
+ADDED Made the game write the log file as well as save when ever it crashes
+BUGFIX Fixed some typos
 
 --Alpha 0.28.2 Update-
 0.28.2 - Bugfix

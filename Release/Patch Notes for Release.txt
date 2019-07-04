@@ -1,5 +1,17 @@
 --Patch Notes--
-Updated March 22nd!
+
+--Alpha 0.29 Update- Developer Update - July 3, 2019
+#First Kipling release and 1 year birthday! New features coming soon
+ADDED Text now prints better! Text will be delayed normally and fill the whole page
+ADDED Made items, people, interactables, and places all have different symbols around them
+	* [People], ~Places~, <Things>, /Interactables/
+ADDED Made an exploratory map for where you've traveled, and where you are
+	* Made it in the orientation of front
+ADDED Better coding practices and documentation!
+ADDED Better item/people development
+ADDED Made for speedrun it turns off the text delay
+ADDED Made the game write the log file as well as save when ever it crashes
+BUGFIX Fixed some typos
 
 --Alpha 0.28.2 Update-
 0.28.2 - Bugfix

@@ -1,0 +1,24 @@
+**Installing Modules/Packages using PIP**
+
+Some development packages for EBTA are not installed by default for Python 2.7.
+We can use PIP, which does come isntalled by default, to install these from the command line or download from the internet and install.
+
+Lets use an example to illustrate:
+Say you need to instal Playsound.
+Open your command prompt and type:
+pip install Playsounds
+And pip should automatically install it.
+
+You can also search for the playsounds package on google and then downloaded it.
+To install from a download use:
+pip install C:\Users\bfallon\Downloads\playsound-1.2.2-py2.py3-none-any.whl
+Where the filepath is to the downloaded file
+
+The package will be installed to this location by default
+C:\Python27\Lib\site-packages
+
+If you have any problem it may be because PIP is installing the package to the wrong location or version of Python.
+Try copying the files to the default location C:\Python27\Lib\site-packages.
+If that doesn't work try searching up the issue as many people have done this before
+
+For some simple packages we may just put them into the EBTA files because they're so small
