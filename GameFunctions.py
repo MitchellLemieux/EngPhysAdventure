@@ -9,11 +9,9 @@ import os #used to put files in the cache folder
 import playsound #used to play music and sound effects
 from printT import * #import it all
 
-
-
-
-#This is where the global variables are defined. Global variables used to pass info between functions (but should not be and TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
-# TODO Ask Mitch why these aren't just in the main file
+# This is where the global variables are defined. Global variables used to pass info between functions
+# TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one
+#   place while making it clear in the code which one is being referenced
 
 MAPS = StartUp.WorldMap() 
 ITEMS = StartUp.ItemDictionary()

@@ -1,5 +1,4 @@
 --Patch Notes--
-Updated March 22nd!
 
 --Alpha 0.29 Update- Developer Update - July 3, 2019
 #First Kipling release and 1 year birthday! New features coming soon

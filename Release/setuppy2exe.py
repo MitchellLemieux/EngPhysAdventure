@@ -26,7 +26,7 @@ reminder = ["\n\nDon't forget to:\n",
             "Copy this setup and icon to parent folder befor running\n",
             "Run This Py2exe\n"
             "Delete the build folder\n",
-            "Copy Media Assets folder to dist\n",
+            "Copy Media Assets folder to dist, Rename dist to EngPhysAdventure, and make sure you can run it\n",
             "Replace the icon with resource hacker\n",
             "Make sure all the version names are updated\n",
             "Zip folders, readme, and patchnotes as zip SFX .exe file\n",
