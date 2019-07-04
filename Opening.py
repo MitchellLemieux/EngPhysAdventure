@@ -55,6 +55,8 @@ def StartScreen():
             settingscreen = True
             while(settingscreen):
                 print LINEBREAK
+                # TODO Have Game Settings Save
+                # TODO Make a DEV mode that disables error catching and enables creative
                 print "Settings\n\n[0]Disable Opening:  "+ str(int(GAMESETTINGS['DisableOpening']))+'\n[1]Speed Run:        ' + str(int(GAMESETTINGS['SpeedRun'])) +'\n[2]Hardcore Mode:    ' + str(int(GAMESETTINGS['HardcoreMode'])) +'\n[3]Disable Music:    ' + str(int(GAMESETTINGS['DisableMusic'])) +'\n[B]Back '
                 Schoice = raw_input('Choose which settings you want to toggle: ').lower()
                 if Schoice in ['b', 'back', 'leave', 'exit']:

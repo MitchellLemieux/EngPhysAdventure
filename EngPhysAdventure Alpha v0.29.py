@@ -20,7 +20,7 @@ import MapDisplay
 
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.29"
-GAMEINFO['versionname'] = "Alpha v0.28 - Major overhall"
+GAMEINFO['versionname'] = "Alpha v0.29 - Developer Update"
 #Updated: Mar 25, 2019
 
 LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
@@ -29,9 +29,9 @@ LINEBREAK = "===================================================================
 def Setup():
     global PLAYER
     global GAMEINFO
-    #TODO Re-enable Opening before release
-    #Opening.StartScreen() #Startscreen loop where you can play new game, loadgame, choose settings, or exit
-    #if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
+    # TODO Re-enable Opening before release
+    Opening.StartScreen() #Startscreen loop where you can play new game, loadgame, choose settings, or exit
+    if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
     
     print LINEBREAK
 
@@ -39,7 +39,7 @@ def Setup():
     
     PLAYER.name = GAMEINFO['playername']
     NameChange() #changes the name of all name related things in the game
-       
+
     x = 2
     y = 3
     z = 1
@@ -220,14 +220,15 @@ def End():
             Main() #re-enters the main loop
     return
 
-#TODO enable bug catcher before 
-#try: #runs the main functions (the whole game bassically)
-Setup()
-Main()
+#TODO enable bug catcher before release
+try: #runs the main functions (the whole game bassically)
+    Setup()
+    Main()
 #end function is run at the end of main loop so you can restart the game
-##except:
-##    AsciiArt.Error()
-##    CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
-##    print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
-##    print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D" 
-##    raw_input("Type anything to exit: ")
+except:
+   AsciiArt.Error()
+   CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+   logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
+   print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+   print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
+   raw_input("Type anything to exit: ")

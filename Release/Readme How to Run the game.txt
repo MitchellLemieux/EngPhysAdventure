@@ -17,5 +17,5 @@ Thanks!
   	                      Production
 
 
-Version: Alpha v0.28.2 - BugFix
-Updated: Mar 25, 2019
+Version: Alpha v0.29 - Developer Update
+Updated: July 3, 2019

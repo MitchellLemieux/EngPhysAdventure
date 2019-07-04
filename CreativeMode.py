@@ -4,7 +4,7 @@
 import pickle
 from GameFunctions import * #importing the global dictionaries/values
 from StartUp import XRANGE, YRANGE, ZRANGE #Importing the map bound variables from StartUp to be used in the load function
-
+import CSVSaves
 
 def saveGame(savename):
     global PLAYER
@@ -15,7 +15,12 @@ def saveGame(savename):
     global QUESTS
     global GAMEINFO
     global GAMESETTINGS
-    
+
+    # this saves current state to csv file, disabled by default for releasing exe
+    # TODO Make these files into the loading with encryption
+    # CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+
+
     f = open(GAMEINFO['savepath'] + "SaveFile "+savename+".txt","w+")
     x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] #puts all info into a list to be saved
 ##    types in x

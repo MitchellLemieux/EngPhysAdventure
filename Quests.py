@@ -64,7 +64,7 @@ def Story():
         
     
     if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']: #when you put the pen in the laptop it restarts the game
-    #TODO as homework see if there's a way to do this with recursion instead of simulating it
+    # TODO as homework see if there's a way to do this with recursion instead of simulating it
         playgame = raw_input('========================================================================\nWould you like to play? \n').lower()
         if playgame == "yes" or playgame =="y":
             print "You click on the game and it begins in the terminal. The drumming \nintensifies. You're not sure if you made the right choice.\n========================================================================\n\n\n"

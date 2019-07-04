@@ -10,13 +10,17 @@ import playsound #used to play music and sound effects
 from printT import * #import it all
 
 
+
+
 #This is where the global variables are defined. Global variables used to pass info between functions (but should not be and TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one place while making it clear in the code which one is being referenced
-#TODO Ask Mitch why these aren't just in the main file
+# TODO Ask Mitch why these aren't just in the main file
 
 MAPS = StartUp.WorldMap() 
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
+
+
 
 GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
             'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
@@ -42,6 +46,7 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #Setting a starting inventory bugs these somehow making them glitchy in the game, however having the item be dropped/spawned later somehow fixes this so that's the quick fix. Also gets to have the Iron Ring when he graduates
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
+# TODO Make PLAYER into PLAYERS a dictionary of playable characters objects
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
 MAPS[6][1][1].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
@@ -49,6 +54,7 @@ MAPS[0][3][0].placeItem(ITEMS["hulk hands"])
 
 #Setting up the game path for the game to the cache folder
 #using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
+# joining an empty string just gives a slash
 GAMEINFO['savepath'] = os.path.join(os.getcwd(), "cache","")
 try:
     os.makedirs(GAMEINFO['savepath']) #gets the directory then makes the path if it's not there
@@ -117,7 +123,7 @@ def Move(direction):
             z += 1
         elif direction in ['d','down']:
             z -= 1
-        #TODO Reimplement
+        #TODO Reimplement interriors
         #if (MAPS[x][y][z].size) or ( CurrentPlace.size): #this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
         #    Place = MAPS[x][y][z].goInside(CurrentPlace,MAPS,PLAYER,ENEMIES,direction)
         #else: #if you're not going into an interrior 
@@ -212,7 +218,7 @@ def Attack(E):
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E] #making it the object from the name
         bgchance = 0.01
-        if PLAYER.inv['head'] == ITEMS['skull helmet']:
+        if PLAYER.inv['head'] == ITEMS['helm of orin bearclaw']:
             bgchance += 0.1 
         if PLAYER.inv['body'] == ITEMS['big hits shirt']:
             bgchance += 0.1
@@ -295,7 +301,7 @@ def Inspect(Item): #Item is the inspect item
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
-        printT(ITEMS[Item].info,72,0.1) #fast version
+        printT(ITEMS[Item].info,72,0) # fast version for reading things
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"

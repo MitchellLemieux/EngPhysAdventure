@@ -13,6 +13,9 @@ def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats 
     ij = tuple(map(operator.add,i,j))
     return tuple(map(operator.add,ij,k))
 
+# WHEN UPDATING ANY CLASS ATRIBUTE WILL NEED TO UPDATE IN CSVSaver to Reflect it!
+#       Unless someone does something fancy to automatically update it but I don't feel it's necessary.
+
 class Equipment:
     def __init__(self,name,location,image,info,worn,stats,health):
         self.name = str(name)
@@ -114,7 +117,6 @@ class Map:  #Map Location Storage
         self.lore = lore#Description of the location
         self.items = [] #list of equipment objects at that location
         self.ENEMY = [] #list of enermy objects at that location
-        self.interact = [] #list of interactable objects at that location
         self.walls = walls
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
@@ -184,10 +186,10 @@ class Map:  #Map Location Storage
                 elif enemy.alive:
                     description = description + "[" + enemy.name + "] is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + "]" + enemy.name + "].\n"
-        if self.interact:
-            for item in self.interact:  
-                description = description + "/" + item.info + "/\n"
+                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + "[" + enemy.name + "].\n"
+        # if self.interact:
+        #     for item in self.interact:
+        #         description = description + "/" + item.info + "/\n"
                 
         if (description == ""):
             description = "\nThere isn't a whole lot to see."

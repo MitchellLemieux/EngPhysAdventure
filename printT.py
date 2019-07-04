@@ -1,7 +1,8 @@
 """This function is used as our special printer to define the width and timing of lines.
 It was made so that you wouldn't have to manually add newline characters to keep text alined
-but also to enable spacing and other functions with words
-
+but also to enable spacing and other functions with words.
+It actually removes any \n or newlines from the text. Adding them to the lore won't make any problems but they will
+just be ignored if using this function.
 
 """
 #Try to implement in non-annoying way, like for slow for enemy special & death info and lore but
@@ -12,19 +13,24 @@ import time
 
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
-#TODO put delay back to 2.5 seconds
-def printT(text, char=72, delay = 0.1): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
+# TODO put delay back to 2.5 seconds before game release
+def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
     This function removes newlines from our old text then prints out each line to the chacter limit and with delays inbetween
     Can override parser to make newline split using (\S). Use (\S) (\S) to split and make a blank space with a delay, resets the sentence variable
     It also splits into paragraphs every 5 punctuation marks (.,!,?) so try to avoid those
     See examples and comments for more details
     """#these are docstrings for function, which come up on idle
+
+    # If speed run is enabled this will override the text delay and make it 0 for all outputs
+    from GameFunctions import GAMESETTINGS  # Imports game settings, hopefully will let it compile
+    if GAMESETTINGS['SpeedRun'] == 1:
+        delay = 0
     
     #print "="*char #reference width of screen
     intext = text.replace('\n', ' ').lstrip().rstrip() #removes newlines from the string and replaces it with spaces, if there's a newline at the start it removes it
 
-    #this is the custom phrase parser that splits at the right width. Probably not optimal but works and okay fast
+    # this is the custom phrase parser that splits at the right width. Probably not optimal but works and okay fast
     intext =  intext.split(" ") #splits up input text into a list of words (using spaces)
     phrase = "" #phrase accumulator to be seperated and printed on a seperate line after reaching the page width
     sentence = 0 #Paragraph counter. counts number of sentenes to split via paragraphs
@@ -84,5 +90,4 @@ printT("Please stop the sentence here.(\S) (\S)I repeat please stop it here!")
 #McMaster Map
 #print "Through Minnick's glasses the true map is revealled!\nYou read:\n'Harness the sun.'\n ________________________________________________\n|Map of McMaster                                 |\n|                                       BATES    |\n|                                                |\n| ETB        JHE         BSB                     |\n|                                                |\n|                        \/            STATUE    |\n|                        /\                      |\n| HOSPITAL                                       |\n|          MDCL         CHAPEL              MUSC |\n|________________________________________________|\nDr. Minnick's glasses glow hot as you quickly swat them off of your face."
 #printT("Through Minnick's glasses the true map is revealled!(\S)You read:'Harness the sun.'(\S) ________________________________________________(\S)|Map of McMaster                                 |(\S)|                                       BATES    |(\S)|                                                |(\S)| ETB        JHE         BSB                     |(\S)|                                                |(\S)|                        \/            STATUE    |(\S)|                        /\                      |(\S)| HOSPITAL                                       |(\S)|          MDCL         CHAPEL              MUSC |(\S)|________________________________________________|(\S) (\S)Dr. Minnick's glasses glow hot as you quickly swat them off of your face.",72,0.1)
-       
 
