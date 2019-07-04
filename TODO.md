@@ -80,8 +80,19 @@ starting screen
 - [ ] Make game setting save and dev mode
 - [ ] Interiors
 - [ ] Capstone Room
-- [ ] People
+- [ ] People & Items
 - [ ] Make high pitch willhelm screen when women die
+- [ ] Capstone Minigames
+- [ ] Turn into BETA
+
+# Done so Far
+* Changed Music to 4 min Bboy version
+* Added some dev files for ending tests
+    - [x] Light, tash, legit
+    - [ ] Dark,
+    - [x] Tkashak, 
+    - [x] Full Legit, 
+    - [ ] Secrets)
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1

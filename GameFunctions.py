@@ -406,9 +406,9 @@ def DisplayTime(value): #converts and displays the time given seconds, for speed
 def Music(): #a check system to play the song every 43.5 seconds while alive
     length = time.time()-GAMEINFO['timestart'] #checks to see if it's past the time it should have played (will make it choppy but limitted by this module)
     if length > GAMEINFO['musicOn']:
-        audiopath = os.path.join(os.getcwd(), "MediaAssets","","ErikBeepBoxSong.mp3") #points to the eddited star wars theme
+        audiopath = os.path.join(os.getcwd(), "MediaAssets","","Bboy.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
-        GAMEINFO['musicOn'] += 60 #increments by minute until it will next have to be played
+        GAMEINFO['musicOn'] += 238  # increments by song length (3 min 58 secons exactly) until it will next have to be played
 
 
 
