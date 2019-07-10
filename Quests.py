@@ -44,7 +44,7 @@ questlist = [
           'create chaos'
           ]
 
-#building the quest dictionary because you can't just overwrite the dumb dictionaries for some dumb reason
+# building the quest dictionary because you can't just overwrite the dumb dictionaries for some dumb reason
 for quest in questlist:
     QUESTS.update({quest:1})
     
@@ -92,7 +92,7 @@ def Story():
             QUESTS['EPTA all the way down'] = 0
             GAMEINFO['log'] += [str(playgame)] #adds your command to the log
     
-    #Talk to hooded man
+    # Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
         MAPS[4][4][1].placeEnemy(ENEMIES["dr. kitai"])
         MAPS[2][4][2].placeEnemy(ENEMIES["dr. preston"])
@@ -103,7 +103,7 @@ def Story():
         #small item
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Song_Correct.wav"), False)
 
-    #Nuke quests
+    # Nuke quests
     if ENEMIES['dr. preston'].quest and QUESTS["preston get dumbbell"]:
         MAPS[2][5][1].placeEnemy(ENEMIES["dr. buijs"])
         QUESTS["preston get dumbbell"] = 0
@@ -130,9 +130,7 @@ def Story():
         QUESTS["feynman mirror"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
 
-
-    
-    #Optics quests
+    # Optics quests
     if ENEMIES['dr. lapierre'].quest and QUESTS["lapierre get coffee"]:
         MAPS[5][4][1].placeEnemy(ENEMIES['dr. knights'])
         QUESTS["lapierre get coffee"]= 0
@@ -142,7 +140,6 @@ def Story():
         MAPS[1][6][0].placeEnemy(ENEMIES['dr. haugen'])
         QUESTS["knights get book"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
-    
 
     if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
@@ -156,10 +153,7 @@ def Story():
         QUESTS['einstein fridge'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
 
-        
-    
-
-    #Semiconductor quests    
+    # Semiconductor quests
     if ENEMIES['dr. kitai'].quest and QUESTS['kitai get silicon substrate']:
         MAPS[1][5][2].placeEnemy(ENEMIES['dr. kleimann'])
         QUESTS['kitai get silicon substrate'] = 0
@@ -188,8 +182,7 @@ def Story():
         QUESTS['maxwell portal'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
 
-
-    #endgame
+    # endgame
 
     if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
         MAPS[5][2][1].placeEnemy(ENEMIES['hooded man'])
@@ -225,7 +218,7 @@ def Story():
             return 1
             
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
-        PLAYER.alive = False #does this so you can get out of the loop
+        PLAYER.alive = False  # does this so you can get out of the main loop
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_HeartContainer.wav"), False)
 
         return 2

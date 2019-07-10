@@ -18,11 +18,10 @@ def saveGame(savename):
 
     # this saves current state to csv file, disabled by default for releasing exe
     # TODO Make these files into the loading with encryption
-    # CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+    CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
 
-
-    f = open(GAMEINFO['savepath'] + "SaveFile "+savename+".txt","w+")
-    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] #puts all info into a list to be saved
+    f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".txt", "w+")
+    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
 ##    types in x
 ##    <type 'instance'>
 ##    <type 'dict'>

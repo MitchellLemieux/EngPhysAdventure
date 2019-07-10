@@ -3,6 +3,9 @@ import time
 #from pygame import mixer
 import playsound
 import os
+import fnmatch  # Used to fins the savefiles and display them
+import CreativeMode
+from printT import *
 from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables to be used in the start screen
 
 
@@ -19,66 +22,144 @@ CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 def StartScreen():
     global GAMEINFO
     global GAMESETTINGS
-    audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
-    playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
-    print "                A____ ________"
-    print "                /_  H|\_____  \ "
-    print "                 |  O|  ___|  |"
-    print "                 |  L| /___   <"
-    print "                 |  L|  ___\   |"
-    print "                 |  Y| /W O O D|"
-    print "                 |___|/________/"
-    print "                      Production."
-    time.sleep(3)
-    print CLEARSCREEN
-    start = True
-    while(start):
+
+    if GAMESETTINGS['DevMode']:
+        1 + 1  # If in dev mode do nothing and skip intro
+    else:
+        # If no Dev Mode do the blip intro
+        audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
+        playsound.playsound(audiopath, False) # plays the startup sound with 'multi-threading'
+        print "                A____ ________"
+        print "                /_  H|\_____  \ "
+        print "                 |  O|  ___|  |"
+        print "                 |  L| /___   <"
+        print "                 |  L|  ___\   |"
+        print "                 |  Y| /W O O D|"
+        print "                 |___|/________/"
+        print "                      Production."
+        time.sleep(3)  # Delay for intro sound
+        print CLEARSCREEN
+
+
+    start = True  # start is the variable that keeps you in the start screen loop
+    while start:
         print LINEBREAK
-        print "___________                __________.__"                 
-        print "\_   _____/    _     _____ \______   \  |__ ___.__. ______"
-        print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
-        print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
-        print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-        print "        \/     \//_____/  TEXT ADVENTURE  \/\/         \/ "
-        print "                    Version Alpha " +str(GAMEINFO['version']) + "                    \n\n"
-        print "Play New Game[P]   Settings[S]  Disclaimers[D]   Exit[E]  "
-        #TODO add load game functionality
-        #print "Play New Game[p]   Load Game[L]    Settings[S]   Exit[E]  "      
+        print "       ___________                __________.__"
+        print "       \_   _____/    _     _____ \______   \  |__ ___.__. ______"
+        print "        |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
+        print "        |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
+        print "       /_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
+        print "               \/     \//_____/  TEXT ADVENTURE  \/\/         \/ "
+        print "                    Version " +str(GAMEINFO['versionname'])
+        print "                    Release Date: " + GAMEINFO['releasedate'] + "                    \n\n"
+        print "Play New Game[P]  Load Game[L]   Settings[S]   Disclaimers[D]  Exit[E]"
         choice = raw_input('Choose what you want to do: ').lower()
+        # Play new Game
         if choice in ['p', 'play new game','play']:
             start = False
-##        elif choice in ['l', 'load game','load']:
-##            print linebreak
-##            print "Load Game\n\n"
-        
+
+        # Loading Screen and Game
+        # TODO Maybe add this loading screen to CreativeMode so you can load in-game
+        elif choice in ['l', 'load game','load', 'loadgame']:
+             loadscreen = True
+             while loadscreen:
+                print LINEBREAK
+                print "Load Game\n"
+                # print os.listdir(path)  # Gives a list of all files in the directory
+                # This Gets and save files in the cache and stores in lists
+                loadnumber = 0  # The loadfile display incrementer
+                loadnumberlist = []  # list to store loadnumbers
+                loadnamelist = []  # list to store loadname
+                # Iterates through display string which has all files in the directory
+                for file in os.listdir(GAMEINFO['savepath']):
+                    if file == "SaveFile basegame.txt":  # ignores the basegame file
+                        next
+                    # Searches for the keyword in the files of the savefile directory
+                    elif fnmatch.fnmatch(file, 'SaveFile*'):
+                        loadnumber += 1  # Itterates the loadnumber for the next one
+                        # Saving load number as string so can compare Lchoice string later
+                        loadnumberlist.append(str(loadnumber))
+                        # For some reason strip is being dumb and have to strip "SaveFile" and the " " separately
+                        loadnamelist.append(file.lstrip("SaveFile").strip().rstrip(".txt"))
+
+                # Displays the save files was numbered list starting from 1
+                for i in range(loadnumber):
+                    print "[" + loadnumberlist[i] + "]" + loadnamelist[i]
+                print "[B]Back\n"
+
+                Lchoice = raw_input('Choose which game you want to load: ')
+                if Lchoice in ['b', 'back', 'leave', 'exit']:  # if you choose back the loop exits
+                    loadscreen = False
+
+                elif Lchoice in loadnamelist:  # if user enters loadname
+                    loadscreen = False
+                    start = False
+                    CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
+                    GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
+                    GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+                elif Lchoice in loadnumberlist:  # if user enters loadnumber has to lookup the load name
+                    loadscreen = False
+                    start = False
+                    CreativeMode.loadGame(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
+                    GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
+                    GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+
+                else:
+                    print "\nPlease choose one of the options."
+
+        # Setting Screen
         elif choice in ['s', 'settings','setting']:
             settingscreen = True
             while(settingscreen):
                 print LINEBREAK
-                # TODO Have Game Settings Save
                 # TODO Make a DEV mode that disables error catching and enables creative
-                print "Settings\n\n[0]Disable Opening:  "+ str(int(GAMESETTINGS['DisableOpening']))+'\n[1]Speed Run:        ' + str(int(GAMESETTINGS['SpeedRun'])) +'\n[2]Hardcore Mode:    ' + str(int(GAMESETTINGS['HardcoreMode'])) +'\n[3]Disable Music:    ' + str(int(GAMESETTINGS['DisableMusic'])) +'\n[B]Back '
+
+                print "Settings\n*These may change if you load a previous game\n\n"
+                print '[0]Disable Opening:  ' + str(GAMESETTINGS['DisableOpening'])
+                print '[1]Speed Run:        ' + str(GAMESETTINGS['SpeedRun'])
+                print '[2]Hardcore Mode:    ' + str(GAMESETTINGS['HardcoreMode'])
+                print '[3]Disable Music:    ' + str(GAMESETTINGS['DisableMusic'])
+                print '[4]Developer Mode:   ' + str(GAMESETTINGS['DevMode'])
+                print '[B]Back\n '
+
                 Schoice = raw_input('Choose which settings you want to toggle: ').lower()
                 if Schoice in ['b', 'back', 'leave', 'exit']:
                     settingscreen = False
                 elif Schoice =='0':
-                    GAMESETTINGS['DisableOpening'] = not(GAMESETTINGS['DisableOpening'])
+                    # Have to make sure the values toggle to 0 and 1 not true and false for saving
+                    GAMESETTINGS['DisableOpening'] = int(not(GAMESETTINGS['DisableOpening']))
+                    print "Hi I'm a dog"
                 elif Schoice =='1':
-                    GAMESETTINGS['SpeedRun'] = not(GAMESETTINGS['SpeedRun'])
+                    GAMESETTINGS['SpeedRun'] = int(not(GAMESETTINGS['SpeedRun']))
                 elif Schoice =='2':
-                    GAMESETTINGS['HardcoreMode'] = not(GAMESETTINGS['HardcoreMode'])
+                    GAMESETTINGS['HardcoreMode'] = int(not(GAMESETTINGS['HardcoreMode']))
                 elif Schoice =='3':
-                    GAMESETTINGS['DisableMusic'] = not(GAMESETTINGS['DisableMusic'])                   
+                    GAMESETTINGS['DisableMusic'] = int(not(GAMESETTINGS['DisableMusic']))
+                elif Schoice =='4':
+                    GAMESETTINGS['DevMode'] = int(not(GAMESETTINGS['DevMode']))
                 else:
                     print "\nPlease choose one of the options."
+            # Saving Settings Once out of the screen, These setting should be readable and changeable by a person
+            f = open("settings.ini", "w+")
+            for setting in GAMESETTINGS:
+                f.write(setting + "\n" + str(GAMESETTINGS[setting]) + "\n")
+            f.close()
+
+        # Disclaimer screen
         elif choice in ['d', 'disclaimers','disclaimer']:
             print LINEBREAK
-            print "Disclaimer\n\nThis game is difficult, requires reading and focus on every piece of text, and awareness of small details in order to advance the game.\n\n"
-            print "We feel here that we're trying to provide an experience that's challenging but rewarding, not punishing. That being said we are always open to feedback.\n\n"
-            print "This game is a work in progress and there may be bugs. We do our best to avoid, catch, and fix errors promptly. If you do come across one however please submit them to our bug response form:\n\n"
-            print "This is a work of fiction. Names, characters, businesses, places, events, locales, and incidents are either the products of the author's imagination or used in a fictitious manner. Any resemblance to actual persons, living or dead, or actual events is purely coincidental.\n\n"
-            print "By playing this game you give up the right to any information or files uploaded to the developers for benevolent development of the game.\n\n"
 
+            printT("Disclaimer (\S) (\S) This game is difficult, requires reading and focus on every piece of text, "
+                   "and awareness of small details in order to advance the game. We feel here that we're trying to "
+                   "provide an experience that's challenging but rewarding, not punishing. That being said we are "
+                   "always open to feedback.(\S) This game is a work in progress and there may be bugs. We do our best "
+                   "to avoid, catch, and fix errors promptly. If you do come across one however please submit them to "
+                   "our bug response form: https://goo.gl/forms/Jo6P7oMj86OiLvE63 (\S) This is a work of fiction. "
+                   "Names, characters, businesses, places, events, locales, and incidents are either the products of "
+                   "the author's imagination or used in a fictitious manner. Any resemblance to actual persons, living "
+                   "or dead, or actual events is purely coincidental. By playing this game you give up the right to"
+                   "any information or files uploaded to the developers for benevolent development of the game.",72,0)
+        # Exiting
         elif choice in ['e', 'exit','leave']: 
             exit()
         else:
@@ -172,7 +253,9 @@ def Closing():
     print "                 |___|/________/"
     print "                      Production."
     time.sleep(2)
-    print "This is a work of fiction. Names, characters, businesses, places, events,'nlocales, and incidents are either the products of the author's imagination\nor used in a fictitious manner. Any resemblance\nto actual persons, living or dead, or actual events is\npurely coincidental.\n\n"
+    printT("This is a work of fiction. Names, characters, businesses, places, events, locales, and incidents are "
+           "either the products of the author's imagination or used in a fictitious manner. Any resemblance to actual "
+           "persons, living or dead, or actual events is purely coincidental. (\S)",72,0)
     time.sleep(2)
     print "___________                __________.__"                 
     print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"

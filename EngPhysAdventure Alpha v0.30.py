@@ -17,11 +17,12 @@ import CreativeMode #don't import * from these b.c. these pull global variables 
 import Quests
 import MapDisplay
 
-
+# TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
-GAMEINFO['version'] = "0.29"
-GAMEINFO['versionname'] = "Alpha v0.29 - Developer Update"
-#Updated: Mar 25, 2019
+GAMEINFO['version'] = "0.30"
+GAMEINFO['versionname'] = "Alpha v0.30 - Kipling Update"
+GAMEINFO['releasedate'] = "July XX, 2019"
+
 
 LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
 
@@ -29,8 +30,10 @@ LINEBREAK = "===================================================================
 def Setup():
     global PLAYER
     global GAMEINFO
-    # TODO Re-enable Opening before release
-    Opening.StartScreen() #Startscreen loop where you can play new game, loadgame, choose settings, or exit
+
+    if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
+        return
+
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
     
     print LINEBREAK
@@ -38,7 +41,7 @@ def Setup():
     GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     
     PLAYER.name = GAMEINFO['playername']
-    NameChange() #changes the name of all name related things in the game
+    NameChange()  # changes the name of all name related things in the game
 
     x = 2
     y = 3
@@ -51,9 +54,9 @@ def Setup():
     
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     
-    GAMEINFO['gamestart'] = time.time() #Gives the local start date of the game in seconds since epoch of 1970
-    CreativeMode.saveGame("basegame") #Use this to get a base state newgame, keep it in each time so don't have to worry about updating
-    #This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
+    GAMEINFO['gamestart'] = time.time()  # Gives the local start date of the game in seconds since epoch of 1970
+    CreativeMode.saveGame("basegame")  # Use this to get a base state newgame, keep it in each time so don't have to worry about updating
+    # This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
     if PLAYER.name == "Tyler Kashak": #He realizes he's the main character and can do anything he wants
         AsciiArt.One()
         print "\nHe is beginning to believe\n\nYOU are the One\n"
@@ -71,7 +74,7 @@ def Setup():
     
 
 def Main():
-    #These are all the global dictionaries/objects in the game
+    # These are all the global dictionaries/objects in the game
     global PLAYER #The main character. player is an object instance of class character.
     global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
     global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
@@ -119,6 +122,9 @@ def Main():
             elif (verb == 'inventory'):
                 Inventory()
             elif verb == 'savegame':
+                print GAMESETTINGS['DevMode']
+                f.open("chicken",'r') # this is a  purposeful error
+                f.close
                 #TODO add: computer name, words and characters per minute, # enemies killed, # items eaten, # items equiped, # enemies talked, # quantum relecs found
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart']) #adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time() #resets timestart so it's not doubly added at the end
@@ -220,15 +226,39 @@ def End():
             Main() #re-enters the main loop
     return
 
-#TODO enable bug catcher before release
-try: #runs the main functions (the whole game bassically)
+
+# ---------GAME STARTS HERE  ---------
+
+# TODO Reset settings before release before release
+
+# Reading in game settings, has to be at start of game befor anything so it reads in settings
+try:  # In case settings file isn't there
+    with open("settings.ini", 'r') as f:
+        data = f.readlines()  # reads in data seperated by newline into a list
+    f.close()
+    data = [f.strip() for f in data]  # removes the \n in each list element wise (very useful for list operations)
+    for i in range(0, len(data), 2):
+       GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
+except:
+    print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
+
+
+# Start Screen, was moved to here because if in Setup() the dev mode is based on the startup settings
+Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
+
+# The Actual Start of the game when you hit Play, depending on if in Dev Mode or not
+if GAMESETTINGS['DevMode'] == 1:  # If Dev mode enabled no error catching
     Setup()
     Main()
-#end function is run at the end of main loop so you can restart the game
-except:
-   AsciiArt.Error()
-   CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
-   logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
-   print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
-   print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
-   raw_input("Type anything to exit: ")
+else:  # Dev mode not enabled so error catching
+    try:  # runs the main functions (the whole game bassically)
+        Setup()
+        Main()
+    # end function is run at the end of main loop so you can restart the game
+    except:
+        AsciiArt.Error()
+        CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+        logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
+        print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+        print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
+        raw_input("Type anything to exit: ")

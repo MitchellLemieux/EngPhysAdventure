@@ -14,6 +14,7 @@ import time
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
 # TODO put delay back to 2.5 seconds before game release
+# TODO Make an alignment option so can align to left, centre, or right side of screen
 def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
     This function removes newlines from our old text then prints out each line to the chacter limit and with delays inbetween
@@ -23,20 +24,21 @@ def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new 
     """#these are docstrings for function, which come up on idle
 
     # If speed run is enabled this will override the text delay and make it 0 for all outputs
-    from GameFunctions import GAMESETTINGS  # Imports game settings, hopefully will let it compile
+    from GameFunctions import GAMESETTINGS  # Imports game settings, hopefully to avoid import problems
     if GAMESETTINGS['SpeedRun'] == 1:
         delay = 0
     
-    #print "="*char #reference width of screen
-    intext = text.replace('\n', ' ').lstrip().rstrip() #removes newlines from the string and replaces it with spaces, if there's a newline at the start it removes it
+    # print "="*char #reference width of screen
+    # removes newlines from the string and replaces it with spaces, if there's a newline at the start it removes it
+    intext = text.replace('\n', ' ').lstrip().rstrip()
 
     # this is the custom phrase parser that splits at the right width. Probably not optimal but works and okay fast
-    intext =  intext.split(" ") #splits up input text into a list of words (using spaces)
-    phrase = "" #phrase accumulator to be seperated and printed on a seperate line after reaching the page width
-    sentence = 0 #Paragraph counter. counts number of sentenes to split via paragraphs
-    for word in intext: #loops through words in sentence list
+    intext =  intext.split(" ")  # splits up input text into a list of words (using spaces)
+    phrase = ""  # phrase accumulator to be separated and printed on a separate line after reaching the page width
+    sentence = 0  # Paragraph counter. counts number of sentences to split via paragraphs
+    for word in intext:  # loops through words in sentence list
         if (("." in word) or ("!" in word) or ("?" in word)) and (not("dr." in word.lower())): sentence += 1 #if a punctuation is in word it counts as a sentence (so try to avoid .,!,? for other uses)
-        phrase = phrase + word #adds new text phrase with no space
+        phrase = phrase + word  # adds new text phrase with no space
 
         if ("(\S)" in word): #uses (\S) to custom deliminate spaces, should be before others are is the master short. Use of (\S) is arbitrary, can be any uncommon characters
             phrase = phrase.rstrip(word) #removes the last word from the phrase
@@ -65,10 +67,10 @@ def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new 
             print phrase
             time.sleep(delay)
             phrase = word #resets phrase with current word variable
-        phrase += " " #adds inbetween space after word is sucessfully added
+        phrase += " "  # adds inbetween space after word is sucessfully added
         
-    print phrase.lstrip().rstrip() #prints the final part of the phrase that doesn't evenly fit in so wasn't split
-    time.sleep(delay/2) #final delay but half speed b.c. half text?
+    print phrase.lstrip().rstrip()  # prints the final part of the phrase that doesn't evenly fit in so wasn't split
+    time.sleep(delay/2)  # final delay but half speed b.c. half text?
 
 ###Examples###
 """ #These comment out multiple lines of code using text, won't compile so is bassically a multiline comment

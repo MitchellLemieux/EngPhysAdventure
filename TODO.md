@@ -20,11 +20,15 @@ https://docs.python.org/2/tutorial/inputoutput.html - save structured data
 1. add savegame info to the sign
 1. Save files in the wrong location? Where is Doug?
 1. Can't play as tyler Kashak after you stop
+1. When you exit from the start screen or otherwise the error catcher catches you
+1. Map loading is maybe weird?
 1. Many more
 
 # 0.31 TOTAL Rebuild, realease to BETA
+- [ ] Make Dev mode go right into game with " " name, speedrun, etc
 - [ ] Redo so no more global variables
 - [ ] Make all things entities and inherited classes
+- [ ] Map out and find a good way to do code execution flowchart for loading/quests
 - [ ] Rename code files and put things in proper modules so they make sense
 - [ ] Get rid of dumb map dictionary calling and add linked list
 - [ ] Make PP8 Style using Pycharm
@@ -77,22 +81,42 @@ starting screen
 
 
 # 0.30 NEXT will be kipling
-- [ ] Make game setting save and dev mode
+- [x] Make game load, setting save, and dev mode
 - [ ] Interiors
 - [ ] Capstone Room
 - [ ] People & Items
 - [ ] Make high pitch willhelm screen when women die
 - [ ] Capstone Minigames
+- [ ] Pack-a-punch
 - [ ] Turn into BETA
 
 # Done so Far
-* Changed Music to 4 min Bboy version
-* Added some dev files for ending tests
+* CHANGE Music to 4 min Bboy version
+* ADDED some dev files for ending tests
     - [x] Light, tash, legit
     - [ ] Dark,
     - [x] Tkashak, 
     - [x] Full Legit, 
-    - [ ] Secrets)
+    - [ ] Secrets
+* ADDED Ability to load from load screen
+    * Took a long time, stuff with loading and game path always takes a long time to develope, maybe consider re-doing
+    execution flowchart (try mapping it out) for big rebuild
+    * Basically displays the savegame file and lets you select one
+* ADDED Settings ini file save to parent folder for starting a new game
+* ADDED Dev mode that disables error catching and startup blip
+* ADDED more random character dialogs: _ eating too much Lava Pizza, checking their atomic clock, 
+contemplating how much Mayo is too much, bathing in Mayonnaise, in a sushi coma, 
+phasing in and out of this dimension, eating an XLarge Pho with too much spice, reading a book under a tree, 
+wondering how you can read their thoughts, playing 4D chess, pondering necromancy, 
+unsuccessfully painting their WarHammer figure with Mili, Synthesizing Gold Nanoparticles, creating an AI Dog, petting a cat,
+carrying a soccer ball, playing football by themself, balancing a tennis racket on their nose,
+building a tower in Minecraft, Catching a shiny Pikachu, checking their Hearthstone Bot,
+solving time traveling, computing the eigenvalue of the inverse Mobius strip, watching Gilmore Girls, 
+watching Little House on the Prairie, getting shot by an auto-turret in Rust, trying to think of a capstone idea, being watched
+* ADDED more random death descriptors
+* CHANGED Mapped attribute in map class to default to 1 in dictionary not argument
+* CHANGED Deleted Hooded lore file because it wasn't being used
+
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1

@@ -1,7 +1,6 @@
 --Developer Patch Notes--
-Updated January 2nd!
 [] is the notes for release to the public. Or just See the release notes
-Keywords are ADDED, BUGFIX, CHANGE, NOTE
+Keywords are ADDED, BUGFIX, CHANGE, NOTE 
 
 --Alpha 0.29 Update- Developer Update - July 3, 2019
 #First Kipling release and 1 year birthday! New features coming soon

@@ -5,7 +5,7 @@ import py2exe
 setup( console= [
         {
 
-            "script": "EngPhysAdventure Alpha v0.29.py",
+            "script": "EngPhysAdventure Alpha v0.30.py",
             "icon_resources": [(0, "newicon_Hbg_icon.ico")]
         }
      ]

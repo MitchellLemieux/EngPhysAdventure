@@ -20,7 +20,7 @@ INTERACT = StartUp.InteractDictionary()
 
 
 
-GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timestart':0,
+GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gamestart':0,'timestart':0,
             'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
             'musicOn': 0.0} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
 #version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
@@ -28,8 +28,11 @@ GAMEINFO = {'version':0,'versionname':"",'playername':" ",'gamestart':0,'timesta
 
 QUESTS = {}  #initializing the quests global variable to be later writen into
 
-GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DisableMusic': 0}
-#disable openning and/or music, speedrun disables openning;lore read times; might disable secrets or opens them, hardcore for now disables eating but might make enemies harder, 
+GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DisableMusic': 0, 'DevMode': 0, 'loadgame':0}
+# disable openning and/or music, speedrun disables openning;lore read times; might disable secrets or opens them,
+# hardcore for now disables eating but might make enemies harder,
+# DevMode disables the main error catching + Startup Blip
+# loadgame is a flag for loading to skip the setup
 
 STARTLOCATION = (2,3,1)
 STARTHEALTH = 100
@@ -370,8 +373,9 @@ def Eat(Item):
 #BackEnd Functions
         
 def logGame(log): #this makes a log file which records all player actions for debugging
-    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt" #metacache is a fake name for the log file
-    f = open(fpath,"w+") 
+    # TODO add settings and more description to log
+    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt"  # metacache is a fake name for the log file
+    f = open(fpath,"w+")
     for i in range(len(log)):
         f.write(str(log[i]) + '\n')
     f.close()

@@ -110,7 +110,7 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside, size = (None), mapped = 0): #size = (None) means default is none object unless otherwise defined
+    def __init__(self,name,coords,info,lore,walls,inside, size = (None)): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)
@@ -122,7 +122,7 @@ class Map:  #Map Location Storage
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
         #TODO Interriors lot of work but rewarding at end
         self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
-        self.mapped = mapped
+        self.mapped = 0
         
         #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
@@ -184,9 +184,27 @@ class Map:  #Map Location Storage
                 if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
                     description = description + "[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
                 elif enemy.alive:
-                    description = description + "[" + enemy.name + "] is " + choice(["standing in the corner.\n","wandering around.\n","reading a book.\n","creating a grand unified field theory.\n","eating a frighteningly large burrito.\n","playing runescape.\n","browsing math memes.\n","taking a hit from a laser bong.","laying down crying.","watching the Big Lez show on full volume.\n","eating a Big Mac.\n"])
+                    description = description + "[" + enemy.name + "] is " \
++ choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
+          "eating a frighteningly large burrito","playing runescape","browsing math memes",
+          "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
+          "eating a Big Mac", "eating too much Lava Pizza", "contemplating how much Mayo is too much",
+          "bathing in Mayonnaise", "in a sushi coma", "phasing in and out of this dimension", "drinking spicy Pho broth",
+          "reading a book under a tree", "wondering how you can read their thoughts?", "playing 4D chess",
+          "pondering necromancy", "unsuccessfully painting their WarHammer miniature with Mili",
+          "Synthesizing Gold Nanoparticles", "creating an AI Dog", "petting a cat", "carrying a soccer ball",
+          "playing football by themself", "balancing a tennis racket on their nose", "digging down in Minecraft",
+          "catching a shiny Pikachu", "checking their Hearthstone Bot", "solving time travel", "watching Gilmore Girls",
+          "computing the eigenvalue of the inverse Mobius strip", "watching Little House on the Prairie",
+          "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched"]) + ".\n"
+
+
                 else:
-                    description = description + "Oh look, its the " + choice(["decaying ", "broken ", "bloodied ", "mutilated "]) + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of "]) + "[" + enemy.name + "].\n"
+                    description = description + "Oh look, its the " \
+                                  + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
+                                  + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
+                                  + "[" + enemy.name + "].\n"
+
         # if self.interact:
         #     for item in self.interact:
         #         description = description + "/" + item.info + "/\n"
