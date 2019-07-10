@@ -9,7 +9,7 @@ import os #used to put files in the cache folder
 import playsound #used to play music and sound effects
 from printT import * #import it all
 
-# This is where the global variables are defined. Global variables used to pass info between functions
+# This is where the global variables are instantiated and defined. Global variables used to pass info between functions
 # TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one
 #   place while making it clear in the code which one is being referenced
 
@@ -23,7 +23,7 @@ INTERACT = StartUp.InteractDictionary()
 GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gamestart':0,'timestart':0,
             'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
             'musicOn': 0.0} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
-#version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
+# version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
 #   musicOn is the indicator for when to next reloop the music
 
 QUESTS = {}  #initializing the quests global variable to be later writen into
@@ -95,8 +95,8 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"), False) #plays the sound with 'multithreading'
-        #Same as equip function. 'None' passed to function if item doesn't exist
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"), False) # plays the sound with 'multithreading'
+        # Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
 
@@ -311,20 +311,27 @@ def Inspect(Item): #Item is the inspect item
             print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
         else:
             print""
-    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: #this is for item = interactable
+    # If the entered item is an intractable and is at that location
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: # this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
             playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
-            INTERACT[Item].quest = True #this turns on the quest flag for the interactable once interacted with if you have the item
+            INTERACT[Item].quest = True # this turns on the quest flag for the interactable once interacted with if you have the item
             printT(INTERACT[Item].Sinfo) #special slow version
             PLAYER.updateStats()
-            ITEMS[INTERACT[Item].need].location=(None,None,None) #Brendan added this, used to clear the item location
+            ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
             print ""
+
+        elif INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface)
+            INTERACT[Item].quest = True  # this turns on the quest flag so it can trigger quest events
+            printT(INTERACT[Item].info)
+            printT(INTERACT[Item].Sinfo)
         else:
             printT(INTERACT[Item].info,72,0.1) #fast version
+
     else:
         print "\nThat doesn't seem to be around here.\n"
 
@@ -370,7 +377,7 @@ def Eat(Item):
         print "\nThat doesn't seem to be around here.\n"
 
 
-#BackEnd Functions
+# BackEnd Functions
         
 def logGame(log): #this makes a log file which records all player actions for debugging
     # TODO add settings and more description to log
@@ -380,14 +387,14 @@ def logGame(log): #this makes a log file which records all player actions for de
         f.write(str(log[i]) + '\n')
     f.close()
 
-def NameChange(): #A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
+def NameChange(): # A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
     global PLAYER
     global ENEMIES
     global MAPS
-    #ENEMIES['yourself'].name = playername
-    ENEMIES['yourself'].name = PLAYER.name #yourself gets renamed to player name
-    ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) #adds that new entity to the dictionary
-    MAPS[2][4][1].placeEnemy(ENEMIES[PLAYER.name.lower()]) #then placed on the map
+    # ENEMIES['yourself'].name = playername
+    ENEMIES['yourself'].name = PLAYER.name # yourself gets renamed to player name
+    ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
+    MAPS[2][4][1].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
     return
         
 def SpellCheck(Word,Psblties): #Spellchecks words in the background to check things closest
@@ -395,8 +402,9 @@ def SpellCheck(Word,Psblties): #Spellchecks words in the background to check thi
     index = Distance.index(min(Distance))
     return Psblties[index]
 
-def DisplayTime(value): #converts and displays the time given seconds, for speedrunning
+def DisplayTime(value): # converts and displays the time given seconds, for speedrunning
     '''From seconds to Days;Hours:Minutes;Seconds'''
+    # Figured out there is an effecient way to do this using time module but whatev.
     valueD = (((value/24)/60)/60)
     Days = int (valueD)
     valueH = (value-Days*24*3600)
@@ -413,8 +421,6 @@ def Music(): #a check system to play the song every 43.5 seconds while alive
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","Bboy.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
         GAMEINFO['musicOn'] += 238  # increments by song length (3 min 58 secons exactly) until it will next have to be played
-
-
 
 
 ###this function definitions were added for the compiler so they don't have to be referenced
@@ -486,11 +492,3 @@ def edit_distance(s1, s2, substitution_cost=1, transpositions=False):
                             substitution_cost=substitution_cost, transpositions=transpositions)
     return lev[len1][len2]
 ################this is the start of the file 
-        
-
-    
-        
-    
-
-
-    

@@ -42,6 +42,10 @@ def StartScreen():
 
 
     start = True  # start is the variable that keeps you in the start screen loop
+
+    if GAMESETTINGS['DevMode']:  # If in DevMode it skips the loading screen
+        start = False  # turning off loading screen
+
     while start:
         print LINEBREAK
         print "       ___________                __________.__"

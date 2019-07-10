@@ -1,6 +1,6 @@
 #The Great Engineering Text Adventure
 #Authors: Mitchell Lemieux, Tyler Kashak
-#Music: Brian, Erik What music do we have lol? 
+#Music: Brian, Erik What music do we have lol?
 #Start Date: April 14th, 2018
 #Library of Items and Locations
 #Latest Edit 22/2/2019
@@ -20,13 +20,13 @@ def Reset():
     global ENEMIES1
     global ITEMS1
     global INTERACT1
-    
+
     MAPS1 = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
 
     #def __init__(self,name,coords,info,lore,walls,inside)
     #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
     #Example: Start = Map("Start",(0,0,0),"RONT OF JHE:\nBSB is to your right.","You start here",(),False)
-    LOCATIONS1=[ 
+    LOCATIONS1=[
     Map("Starting Location",(2,3,1),"~FRONT OF JHE~:\nBSB is to your right. Hatch to your left.\nJHE field is to your rear. Enter JHE by going forward.","You hear a booming voice that sounds oddly like a game developer. \ntype: 'inspect rules sign!'\nYou see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE.",(),False),
     Map("Inside JHE",(2,4,1),"~JHE LOBBY~:\nTo your right you can exit towards BSB. To your left you can head into Hatch.\nForward is the Nuclear Research building. Behind you lies the exit.\nThere are also stairs going up and down.","JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night.\nMany engineers happy(\S)Many more still grinding.",(),True),
     Map("Nuclear Research Building",(2,5,1),"~NUCLEAR RESEARCH BUILDING~:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.\nThere are stairs going down.","You have barely ever been in here other than to struggle through\n3 hours of waiting for a water level PID controller to reach steady state.\nYou wonder how anyone could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because\nthey are all still lost in here...",(),True),
@@ -49,18 +49,18 @@ def Reset():
     Map("The Phoenix",(5,4,1),"~THE PHOENIX~:\nGeneral Sciences Building is to your left. Hamilton Hall is to your rear.\nThe trail to Bates is in front of you. You can also go down the stairs to Bridges Cafe.","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 tequila shots' as something you said.\nYou see a mysterious Hooded Man as he beckons you to come over.",('r'),True),
     Map("BSB",(3,4,1),"~BSB~:\nEnter JHE to your left. General Sciences building to your right.\nFront of BSB is behind you. The Police station is in front of you.\nThe Quantum Tunnel is beneath you.","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a cold sweat from your brow you plan ahead.",(),True,(6,6,5)),
     #TODO CAPSTONE ROOM, To be Moved to interrior
-    Map("Capstone Doorway",(3,4,3),"Capstone Doorway~:\n","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True,1),
-    Map("Circuit Smart",(4,4,3),"Circuit Smart~:\n","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True,1),
-    Map("Milli",(4,3,3),"Milli~:\n","Great Job Mili!",('d','u'),True,1),
-    Map("NANOrims",(4,2,3),"NANOrims~:\n","NANNNOOORYMMSS.",('d','u'),True,1),
-    Map("S.T.A.R.S.",(3,2,3),"S.T.A.R.S.~:\n","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True,1), #S.T.A.R.S. System T69
-    Map("FRAS",(3,3,3),"FRAS~:\n","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True,1),
-    Map("T.A. Area",(2,4,3),"T.A. Area~:\n","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True,1),
-    Map("ZebraShark",(2,3,3),"ZebraShark~:\n","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True,1),
-    Map("THE ECLIPSE",(2,2,3),"THE ECLIPSE~:\n","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True,1),
-    Map("Electronics Lab",(1,4,3),"Peter's Lab~:\n","I'm just glad to not have to be in here anymore.",('d','u'),True,1),
-    Map("Peter Johnason's Office",(1,3,3),"Peter Johnason's Office~:\n","The grand sorcerer's mystic place",('d','u'),True,1),
-    
+    Map("Capstone Doorway",(5,8,3),"Capstone Doorway~:\n","You walk into the room that is a mess. This is a disaster,\nhow did this happen? Do these people live here?",('u'),True,1),
+    Map("Circuit Smart",(6,8,3),"Circuit Smart~:\n","(Print text of spagetti)\nIf you unplugged one wire of this these people would go insane.",('d','u'),True,1),
+    Map("Milli",(6,7,3),"Milli~:\n","Great Job Mili!",('d','u'),True,1),
+    Map("NANOrims",(6,6,3),"NANOrims~:\n","NANNNOOORYMMSS.",('d','u'),True,1),
+    Map("S.T.A.R.S.",(5,6,3),"S.T.A.R.S.~:\n","S.T.A.R.S. PLEASE WORK.\nYou see a man wearing a pink shirt and a giant robot point a cannon where ever he goes.\nIs this how the world ends?",('d','u'),True,1), #S.T.A.R.S. System T69
+    Map("FRAS",(5,7,3),"FRAS~:\n","Yeah that's a tank. This is a 3D printed Tank.",('d','u'),True,1),
+    Map("T.A. Area",(4,8,3),"T.A. Area~:\n","Is this where the PSRs get lost? Also just storage space for STARS",('d','u'),True,1),
+    Map("ZebraShark",(4,7,3),"ZebraShark~:\n","Where are they? O.m.g. is that a pool downstairs?",('d','u'),True,1),
+    Map("THE ECLIPSE",(4,6,3),"THE ECLIPSE~:\n","AW DANG The Eclipse! But yeah this windshield is a bit much",('d','u'),True,1),
+    Map("Electronics Lab",(3,8,3),"Peter's Lab~:\n","I'm just glad to not have to be in here anymore.",('d','u'),True,1),
+    Map("Peter Johnason's Office",(3,7,3),"Peter Johnason's Office~:\n","The grand sorcerer's mystic place",('d','u'),True,1),
+
     Map("Front BSB",(3,3,1),"~FRONT OF BSB~:\nBSB field is at your rear. A road is to your right.\nThe entrance to JHE is to your left. BSB is infront of you","You look up and see the McMaster coat of arms engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1),"~POLICE STATION~:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus PD cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Keyes",(4,6,1),"~MARY KEYES~:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
@@ -111,7 +111,7 @@ def Reset():
     #Upper Level (X,Y,2) and Third Floor Thode
     Map("2nd Floor ITB",(0,5,2),"~2ND FLOOR ITB~:\nYou can only go back down the stairs.","Walking around up here you don't find much other than lab benches with strange instruments.\nThis place gives you the impression that there must be some high level engineering physics going on...",('f','b','l','r','u'),True),
     Map("2nd Floor ABB",(1,6,2),"~2ND FLOOR ABB~:\nThe Eng Phys Office is behind you. You can down the stairs to ABB.","You were told JHE would be your home.\nNope.\nInstead you recall countless hours lectures on the 2nd floor\nas you drifted in and out of daydreams staring out the windows on a spring afternoon...",('f','l','r','u'),True),
-    Map("2nd Floor JHE",(2,4,2),"~2ND FLOOR JHE~:\nTo the left is 2nd Floor Hatch. You can go down the stairs to JHE Lobby.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years.\nYou shake your fist and plan your next move.",('f','b','r','u'),True),
+    Map("2nd Floor JHE",(2,4,2),"~2ND FLOOR JHE~:\nTo the left is 2nd Floor Hatch. You can go down the stairs to JHE Lobby.","You spend 20 minutes staring at the 1970 graduating class wondering if you could ever pull off a moustache like that...\nAfter realizing the cool lecture halls were only given to first years.\nYou shake your fist and plan your next move.",('f','b','r'),True),
     Map("2nd Floor ETB",(0,3,2),"~2ND FLOOR ETB~:\nYou can only go back down the stairs.","You realize you really have never come up here.\nYou see 4th year Eng Phys students hurry out of a long-winded lecture.\nAfter picking a booger.\nYou plan your next move.",('f','b','l','r','u'),True),
     Map("Eng Phys Office",(1,5,2),"~ENG PHYS OFFICE~:\n2nd Floor Abb is infront of you. 2nd Floor Hatch is behind you. You can go down the stairs to JHE Annex.","The portrait of Dr. Novog makes you jealous as you realize you could\nnever pull off a hairstyle like that.\nYou scan the display case of past Eng Phys projects.\nThey display these as trophies...\nTrophies which only tell a story of endless grind you think to yourself...",('l','r','u'),True),
     Map("2nd Floor Hatch",(1,4,2),"~2ND FLOOR Hatch~:\nIn front of you lies the Eng Phys Office. To your right is 2nd Floor JHE.\nHatch is downstairs.","You see various meeting rooms with 1st years occupying them.\nThe MES office is full but nothing seems to be getting done.\nThere's therapy dogs scattered everywhere for Paws and Play.\nYou can't get a session with a real therapist but at least there is this",('b','l','u'),True),
@@ -119,11 +119,21 @@ def Reset():
     Map("Upstairs Chapel",(2,0,2),"~2ND FLOOR CHAPEL~:\nYou can only go back down the stairs.","The combination of ringing bells and echoes from the organ is deafening.\nYou can barely collect your thoughts.\nThe cobwebs and dust give you the impression this place has been ill-travelled\nand long forgotten.",('f','b','l','r','u'),True),
     Map("2nd Floor W Wing",(0,1,2),"~2ND FLOOR W WING~:\nYou can only go back down the stairs.","The endless number of rooms are mesmerizing.\nYou don't even know which way to go.\nAfter being lost for 2 hours you circle back to where you entered.",('f','b','l','r','u'),True),
     Map("2nd Floor UH",(6,1,2),"~2ND FLOOR UH~:\nYou can only go back down the stairs.","You make your way up the rickety staircase into a room from a time long past.\nYou notice a dust covered table with some old instruments and clutter thrown about.",('f','b','l','r','u'),True),
-    Map("2nd Floor BSB",(3,4,2),"~2ND FLOOR BSB~:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r',),True), #TODO put 'u' wall back in after capstone moved
+    Map("2nd Floor BSB",(3,4,2),"~2ND FLOOR BSB~:\nYou can only go back down the stairs.","Despite the horrible numbering of floors the layout of the building is great.\nNot a complaint with this one.",('f','b','l','r'),True),
     Map("Climbing MDCL",(1,0,2),"~CLIMBING MDCL~:\nYou can continue climbing or go back down...","You struggle and find yourself on the outer wall of MDCL.",('f','b','l','r'),True),
     Map("Roof of MDCL",(1,0,3),"~MDCL Roof~:\nYou can only go back down.","With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!",('f','b','l','r','u'),False),
     Map("3rd Floor Thode",(1,7,3),"~3RD FLOOR THODE~:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u'),True),
-    Map("2nd Floor Thode",(1,7,2),"~2ND FLOOR THODE~:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True)]
+    Map("2nd Floor Thode",(1,7,2),"~2ND FLOOR THODE~:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True),
+    Map("3rd Floor JHE Stairs", (2, 4, 3), "~3RD FLOOR JHE Stairs~:\nYou can only go back down the stairs.",
+            "You reach the top of the stairwell but the doors into the 3rd floor are barred with solid sheet metal. "
+            "You can't go any further It seems like more construction and but you wonder where they'll put the "
+            "displaced 1st years in the meantime.", ('f', 'b', 'l', 'r', 'u'), True),
+    Map("3rd Floor BSB", (3, 4, 3), "~3RD FLOOR BSB~:\nYou can only go back down the stairs.",
+            "You swear you see a tumbleweed roll by. There's no one in sight but plenty of bathrooms. Is the Geography "
+            "department up here?? After learning about the Oak Ridges Moraine bring yourself back to reality.",
+            ('f', 'b', 'l', 'r', 'u'), True)
+
+    ]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
@@ -135,6 +145,8 @@ def Reset():
     Equipment("Wrench", (1,3,1), "Wrench.jpg", "It's a wrench. 22mm.", "hand", (9,0,2),""),
     Equipment("LED of Power", (None), "LED.jpg", "An LED with the power output of a neutron star, ok maybe not.", "hand", (21,0,20),""),
     Equipment("Green Bang Bong", (None), "GBB.jpg", "The sacred glass flute providing righteous tokes since '69.", "off-hand", (69,69,69),""),
+    Equipment("Squid Hat", (3, 4, 3), "SquidHat.jpg", "The finest headwear you can aquire at Canada's Wonderland. Making you the fairest of all the arthropods.", "head", (4, 4, 7), ""),
+    Equipment("WAW Case", (2, 4, 3), "WAWCase.jpg", "Call of Duty World at War for the PS3. The first game to indroduce Zombies Mode. A fine game but defiently not school appropriate. You open the case and the disk isn't in it.","off-hand", (1, 1, 1), ""),
     Equipment("Gas Mask", (3,5,1), "GasMask.jpg", "No one cared who I was till I put on the mask.", "head", (3,6,5),""),
     Equipment("Surgical Mask", (0,1,1), "SurgicalMask.jpg", "Don't touch me I'm sterile!", "head", (0,2,3),""),
     Equipment("Tofu", (5,4,0), "Carrot.jpg", "Vegan's delight.", "hand", (1,0,5),2),
@@ -310,7 +322,7 @@ def Reset():
     Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3),(10,10,10),15,None,"cricket","Thanks!","'I can't believe you've done this."),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1),(10,10,10),25,"crucifix",None,"","I am slain!"),
     Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
-    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1),(10,5,1),15,"coffee","Phil's braces","'UHhhh i thinka im gonna- im gon-'\nPhil vomits.","mhmh spooky ghost urggh ectoplasm noooooo"),
+    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1),(10,5,1),15,"coffee","Phil's braces","'UHhhh i thinka im gonna- im gon-' Phil vomits. Thanks man, I'll buy you a coffee. I gotta go rock climbing!","mhmh spooky ghost urggh ectoplasm noooooo"),
     Enemy("Jana the vegan","'Did I mention I'm vegan?'",(5,4,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
     Enemy("Larry the bus driver","'Is that even your bus pass?'",(2,1,1),(10,10,5),40,"huge shirt",None,"","That was definitely not your bus pass!"),
     Enemy("Rod the climber","'Righteous! Could you help me get into my car?\nI lost my keys and can't find my car.\nI REALLY need what is in there.'",(5,7,1),(14,20,5),40,"delicious meal","bowling ball","Thanks!\nNow I can learn to bowl that perfect strike.\nTake this, I just cooked it up.","Ouch!"),
@@ -327,8 +339,8 @@ def Reset():
     Enemy("Mario the Mixologist","'Yo check out my meme page, you ever heard coco jay?'",(1,4,1),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
     Enemy("Paul the Janitor","'Hey brother, I really could use some Febreze.'",(0,5,1),(20,20,20),20,"bleach squirt bottle","Febreze","Rock on brother! Thanks so much!","NOOO, Now I can't go see Black Sabbath!"),
     Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0),(20,10,1),20,"horrible assignment",None,"","My 12 year post-grad was for nothiiiiiingggggg!"),
-    Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!")]    
-    
+    Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!")]
+
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
     INTERACT1 = [
@@ -365,7 +377,12 @@ def Reset():
     Interact("Tri-Coloured Glasses",(6,1,2),"Looks like a set of glasses with multiple coloured lenses...","Its a cipher...\nOn the back of the declaration you can see different coded messages using the coloured lenses...\nRED:'Lithium Carbon Boron Mangnesium(-g)'\nBLUE:'Jerry likes presents.'\nGREEN:'Guardians of De Galaxy character.'","declaration of independence",None),
     Interact("Uneven Earth",(3,7,1),"This patch of dirt looks out of place...","You begin digging and find an old box!\nYou open it up and read a note...\n'In the eldest of halls. The attic holds all.'","shovel","declaration of independence"),
     Interact("Coat of Arms",(3,3,1),"Under closer inspection you notice the book is a different kind of stone\nthan the rest...\nIf only you could get up there for a closer look...","With some effort you climb the rickety ladder and remove the book from the wall.\nReaching into the hole you pull out an old scroll!","old ladder","old scroll"),
-    Interact("Ancient Mirror",(4,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do.","ancient incantation","gamma glove")]
+    Interact("Ancient Mirror",(4,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do.","ancient incantation","gamma glove"),
+    Interact("Pack-a-Punch", (None), "Punch your fists into the air and raise a rebel yell! (\S)"
+             "There's a lots of bad'uns out there you need to send to hell!" ,
+             "Pack-a-Punch Machine:(\S) To use this machine enter your item and another to sacrafice.","", "")
+
+    ]
 
 Reset()
 

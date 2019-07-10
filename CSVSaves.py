@@ -19,6 +19,8 @@ import csv
 import os  # Used for file navigation
 from StartUp import XRANGE, YRANGE, ZRANGE  # Importing the map bound variables from StartUp to be used in the load
 
+# TODO Move all saving and loading and logging to this file and leave creative mode for creative/debug stuff
+
 csvPath = os.path.join(os.getcwd(), "Dev", "")  # Gives the base path so the CSVs can be put in the dev folder
 
 

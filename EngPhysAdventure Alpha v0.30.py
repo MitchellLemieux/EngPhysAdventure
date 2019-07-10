@@ -38,7 +38,9 @@ def Setup():
     
     print LINEBREAK
 
-    GAMEINFO['playername'] = raw_input("First, what is your name?\n")
+    # TODO Change Dev Name to "Doug" After so they don't get secret from Dev Mode
+    if GAMESETTINGS['DevMode']: GAMEINFO['playername'] = "Tyler Kashak"  # Skip name step and names your person Doug
+    else: GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     
     PLAYER.name = GAMEINFO['playername']
     NameChange()  # changes the name of all name related things in the game
@@ -123,8 +125,6 @@ def Main():
                 Inventory()
             elif verb == 'savegame':
                 print GAMESETTINGS['DevMode']
-                f.open("chicken",'r') # this is a  purposeful error
-                f.close
                 #TODO add: computer name, words and characters per minute, # enemies killed, # items eaten, # items equiped, # enemies talked, # quantum relecs found
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart']) #adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time() #resets timestart so it's not doubly added at the end
@@ -168,7 +168,10 @@ def Main():
     
         GAMEINFO['commandcount'] += 1 #increments the command count after every command but doesn't print
         print LINEBREAK
-        Quests.Story() #runs through the story quests checks
+        Quests.ebta_story()  # runs through the story quests checks and actions
+        Quests.sidequests()  # runs through all the sidequest checks and actions
+        Quests.events()  # runs through all the events checks and actions
+
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0: #gets you out of the EPTA all the way down quest and back into the sublayer
             End()
@@ -192,7 +195,7 @@ def End():
         ] #adds the final info to the log leger
     #TODO, condense this story display code
     playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","NoWorries.mp3"), False)
-    if Quests.Story()== 0: #player dies 
+    if Quests.ebta_story()== 0: #player dies
         print LINEBREAK
         DisplayTime(GAMEINFO['runtime']) #displays the runtime for speed running
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
@@ -205,9 +208,9 @@ def End():
     elif raw_input("Type 'C' to continue\n").lower() == 'c':
         Opening.Closing() #plays the closing
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
-        if Quests.Story() == 1: #The bad storyline ending
+        if Quests.ebta_story() == 1: #The bad storyline ending
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
-        elif Quests.Story() == 2: #The good storyline ending. 
+        elif Quests.ebta_story() == 2: #The good storyline ending.
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
         DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']

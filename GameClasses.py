@@ -65,7 +65,7 @@ class Character:
         self.updateStats()
         return drop
 
-    def drop(self,Equip):
+    def drop(self,Equip):  # Equip is an object not a name
         drop = 0
         if(Equip.name == self.inv[Equip.worn].name):
             self.inv[Equip.worn] = self.emptyinv[Equip.worn]
@@ -113,23 +113,23 @@ class Map:  #Map Location Storage
     def __init__(self,name,coords,info,lore,walls,inside, size = (None)): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
-        self.info = str(info)
-        self.lore = lore#Description of the location
-        self.items = [] #list of equipment objects at that location
-        self.ENEMY = [] #list of enermy objects at that location
+        self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
+        self.lore = lore  # Description of the location
+        self.items = []  # list of equipment objects at that location
+        self.ENEMY = []  # list of enermy objects at that location
         self.walls = walls
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
-        #TODO Interriors lot of work but rewarding at end
-        self.size = size #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
-        self.mapped = 0
+        #TODO Interriors rewarding at end
+        self.size = size  #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
+        self.mapped = 0  # TODO make consistent flag convention
         
         #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
         
         #OR Make another coordinate d, dimension to specify interriors, but I'm leaning away from this
         #   although it would look cleaner on a spreadsheet
-    def placeItem(self,item): #Works with the drop method in the character class
+    def placeItem(self,item):  # the item object, works with the drop method in the character class
         if item:
             self.items.append(item)
             item.location=self.coords
@@ -139,21 +139,27 @@ class Map:  #Map Location Storage
         Enemy.location = self.coords
         
     def placeInteract(self,Interact):
-        self.interact.append(Interact)
-        Interact.location = self.coords
+        if Interact:
+            self.items.append(Interact)
+            Interact.location = self.coords
 
     def removeWall(self, wall): #this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
         if wall in self.walls: 
             self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
             
-    def removeItem(self,item): #had to be rewritted with load or else load function would create duplciate glitch
-        for i in self.items:  #weird way to write it but loops through the items in that lcoation and if the name matches it removes it
+    def removeItem(self,item):  # had to be rewritted with load or else load function would create duplciate glitch
+        for i in self.items:  # weird way to write it but loops through the items in that lcoation and if the name matches it removes it
             if i.name ==item.name:
                 self.items.remove(i)
             
     def removeEnemy(self,enemy):
         if enemy in self.ENEMY:
             self.ENEMY.remove(enemy)
+
+    def removeInteract(self,Interact):  # had to be rewritted with load or else load function would create duplciate glitch
+        for i in self.items:  # weird way to write it but loops through the items in that lcoation and if the name matches it removes it
+            if i.name ==Interact.name:
+                self.items.remove(i)
 
     def search(self): #TODO improve search to automatically spit out the direction stuff,
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)

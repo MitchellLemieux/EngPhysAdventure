@@ -103,7 +103,7 @@ starting screen
     execution flowchart (try mapping it out) for big rebuild
     * Basically displays the savegame file and lets you select one
 * ADDED Settings ini file save to parent folder for starting a new game
-* ADDED Dev mode that disables error catching and startup blip
+* ADDED Dev mode that disables error catching, startup blip, Startscreen, and name input
 * ADDED more random character dialogs: _ eating too much Lava Pizza, checking their atomic clock, 
 contemplating how much Mayo is too much, bathing in Mayonnaise, in a sushi coma, 
 phasing in and out of this dimension, eating an XLarge Pho with too much spice, reading a book under a tree, 
@@ -116,7 +116,16 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
 * ADDED more random death descriptors
 * CHANGED Mapped attribute in map class to default to 1 in dictionary not argument
 * CHANGED Deleted Hooded lore file because it wasn't being used
-
+* ADDED Restructured the quests/story to separate functions and added an events function
+* ADDED 3rd floor JHE, 3rd floor BSB, Squid Hat, and COD WAW PS3 Disk Case
+* CHANGED Inspecting an intractable now triggers the quest flag if there is no item needed
+    * Made this so an inspectable with a blank need is an interface for quests
+    * I.E. it can inspecting something blank can trigger something like. PAP machine interface
+    * Will do this for items as well. 
+    * Another way to do this could be do add a script attribute so when it's inspected it runs a specified script
+    * Also want to add a sound effects attribute so it plays a sound when you talk or interact
+* ADDED PAP Event and TenThirty Event
+    * PAP is a new upgradeable weapon thing, TenThirty is you can't wear a shirt
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1
