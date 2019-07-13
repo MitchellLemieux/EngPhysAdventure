@@ -272,7 +272,12 @@ def events():
     global MAPS
 
     # PAP Event
-    insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
+    # TODO Make time not GMT so it doesn't matter which time zone you're in
+    insttime = time.gmtime(time.time() - 4*60*60 )  # Used to debug and test the time based events by adding timer
+    print time.asctime(insttime)  # Prints out the ascci time to debug
+    #insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
+
+    # Thunder, cowboys, Bell, PAP sound
 
     # Simulated times to trigger the event, based on seconds from Epoch
 
@@ -294,7 +299,7 @@ def events():
     if insttime.tm_hour == 4 or insttime.tm_hour == 16 and insttime.tm_min == 20 and QUESTS["PAP"]:
         QUESTS["PAP"] = 0
         # Signaling Event, depends whether you're inside or outside
-        print "A Bolt of lightening strike the mind control looking device on top of JHE"
+        print "A Bolt of lightening strikes the top of JHE"
         # TODO make this an interior after so you decide to go in
         MAPS[2][4][3].info = "~?~:\nYou can only go back down the stairs."
         MAPS[2][4][3].lore = "As you reach the top of the stairs you can feel the heat intensify. " \

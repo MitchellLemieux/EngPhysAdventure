@@ -25,9 +25,9 @@ https://docs.python.org/2/tutorial/inputoutput.html - save structured data
 1. Many more
 
 # 0.31 TOTAL Rebuild, realease to BETA
-- [ ] Make Dev mode go right into game with " " name, speedrun, etc
 - [ ] Redo so no more global variables
 - [ ] Make all things entities and inherited classes
+    - [ ] Different item classes with abilities and sound effects
 - [ ] Map out and find a good way to do code execution flowchart for loading/quests
 - [ ] Rename code files and put things in proper modules so they make sense
 - [ ] Get rid of dumb map dictionary calling and add linked list
@@ -87,7 +87,11 @@ starting screen
 - [ ] People & Items
 - [ ] Make high pitch willhelm screen when women die
 - [ ] Capstone Minigames
-- [ ] Pack-a-punch
+- [x] Pack-a-punch 
+    - [ ] With sounds when it starts and ends
+    - [ ] Bell dongs every hour
+- [ ] More sound effects
+- [x] Make Dev mode go right into game with " " name, speedrun, etc
 - [ ] Turn into BETA
 
 # Done so Far
@@ -126,6 +130,7 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
     * Also want to add a sound effects attribute so it plays a sound when you talk or interact
 * ADDED PAP Event and TenThirty Event
     * PAP is a new upgradeable weapon thing, TenThirty is you can't wear a shirt
+
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1
