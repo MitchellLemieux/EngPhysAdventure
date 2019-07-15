@@ -110,7 +110,7 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside, size = (None)): #size = (None) means default is none object unless otherwise defined
+    def __init__(self,name,coords,info,lore,walls,inside, size = ((None)), building = 0, links = ((None))): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       #Name of location
         self.coords = coords        #Map coordinates (X,Y,Z)
         self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
@@ -120,9 +120,18 @@ class Map:  #Map Location Storage
         self.walls = walls
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
-        #TODO Interriors rewarding at end
-        self.size = size  #size of interrior (xRange,yRange, zRange). If this is filled it has an intteior
         self.mapped = 0  # TODO make consistent flag convention
+        # TODO Interriors rewarding at end
+        # There is probably a better way to do this building stuff, maybe having an inherritted interrior class BUT
+        #   This is what I'm going with!
+        self.size = size  # size of interior (xRange,yRange, zRange). If this is a filled tuple it has an interior
+        # When you go into the building from the side it enters the doorway on that size
+        # If there's not doors on all sides have exterior outer area with links down (see diagram)
+        self.building = building  # The building number associated with the place, by default Overworld is 0
+        self.links = links  # This is a coordinate pointer (X, Y, Z, Building) for doorways and Portals
+        # Moving in the direction into the door links you to the position. So Needs to be nested tuples for multiple
+        # Using tuples here because they're faster but if want to be changed (Mutuble) can use lists
+
         
         #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
         #self.exits = exits #pairs of coordinates coresponding to interrior entrance/exit and their coresponding exterirrior exits/entrances     
