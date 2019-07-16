@@ -30,7 +30,14 @@ https://docs.python.org/2/tutorial/inputoutput.html - save structured data
     - [ ] Different item classes with abilities and sound effects
 - [ ] Map out and find a good way to do code execution flowchart for loading/quests
 - [ ] Rename code files and put things in proper modules so they make sense
-- [ ] Get rid of dumb map dictionary calling and add linked list
+- [ ] MAP tuple overhall:
+    - [ ] Get rid of dumb map tuple dictionary calling in a way that makes searching easier?
+    * Basically the constructor is nice but don't want to reference coordinates and don't want to have to loop through
+     full x,y,z ranges if are is not filled not all those buildings exist  
+        - [ ] Entity name with linked list?
+        - [ ] Faster search algorithm?
+        - [ ] Does the looping even matter?
+    - [ ] Incorporate building interior into map coordinate
 - [ ] Make PP8 Style using Pycharm
     * https://docs.python.org/2/tutorial/classes.html
 

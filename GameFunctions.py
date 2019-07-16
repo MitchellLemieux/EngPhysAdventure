@@ -101,6 +101,7 @@ def Drop(Item):
        print "You aren't carrying that item."
 
 
+
 def Move(direction):
     global MAPS
     global PLAYER
@@ -109,9 +110,9 @@ def Move(direction):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    CurrentPlace = MAPS[x][y][z]
-    Place = 0
-    if direction not in CurrentPlace.walls: 
+    currentplace = MAPS[x][y][z]  # Saving your current map location to a variable
+    place = 0
+    if direction not in currentplace.walls:
         if direction in ['f','forward']:
             y += 1
         elif direction in ['b','back']:
@@ -124,39 +125,40 @@ def Move(direction):
             z += 1
         elif direction in ['d','down']:
             z -= 1
-        #TODO Reimplement interriors
-        #if (MAPS[x][y][z].size) or ( CurrentPlace.size): #this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
-        #    Place = MAPS[x][y][z].goInside(CurrentPlace,MAPS,PLAYER,ENEMIES,direction)
-        #else: #if you're not going into an interrior 
-        Place = MAPS[x][y][z] 
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"), False) #plays the sound with 'multithreading'
-    if Place:
+        place = MAPS[x][y][z]   # place is new location requested
+
+        if place.size: # this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
+            place.go_inside(MAPS,PLAYER,ENEMIES,direction)
+
+
+    if place:
         PLAYER.location[0] = x
         PLAYER.location[1] = y
         PLAYER.location[2] = z
+        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets", "", "OOT_Steps_Stone3.wav"), False)  # plays sound
         if bf.location != (None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
         if random() <= 0.003: 
             MAPS[x][y][z].placeEnemy(bf)
             AsciiArt.Hero()
             
-        if Place.travelled:
+        if place.travelled:
             print "========================================================================"
-            printT(Place.lore)
-            print "\n\n"+Place.info + Place.search()
-            Place.travelled = 0
+            printT(place.lore)
+            print "\n\n"+place.info + place.search()
+            place.travelled = 0
         else:
             print "========================================================================"
-            print Place.info + Place.search()
-            return Place
+            print place.info + place.search()
+            return place
             
         
     else:
-        PLAYER.location[0] = CurrentPlace.coords[0]
-        PLAYER.location[1] = CurrentPlace.coords[1]
-        PLAYER.location[2] = CurrentPlace.coords[2]
+        PLAYER.location[0] = currentplace.coords[0]
+        PLAYER.location[1] = currentplace.coords[1]
+        PLAYER.location[2] = currentplace.coords[2]
         print "\nYou can't go that way!\n"
-        return CurrentPlace
+        return currentplace
 
 #Combat System
 def Combat(P,E):

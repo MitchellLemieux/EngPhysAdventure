@@ -16,7 +16,8 @@ ADDED Made an exploratory map for where you've traveled, and where you are
 ADDED Code Conventions to Follow [Better coding practices and documentation!]
 	* Made a good convention that if the function is over 40 lines, definetly by 50 then move it to it's own file
 	* Also following the PP8 convention style guide for some but need to redo the game at one point
-		* camel case for variables ex) dogNose
+		* camel case for variables outside function ex) dogNose
+		* lowercase for variables inside function (PP8)
 		* lowercase with _ for functions/methods ex) nose_colour
 		* Pascal case (letter of first words capatalized) for classes and objects ex) DogMan
 	* Try to commit one commit all day, or when a major stuff is done

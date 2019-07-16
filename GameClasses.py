@@ -27,7 +27,7 @@ class Equipment:
         self.health = health
     
 class Character:
-    def __init__(self,name,location,health,inv,emptyinv):
+    def __init__(self,name,location,health,inv,emptyinv, building = 0):
         self.name = str(name)
         self.location = location
         self.inv = inv
@@ -37,7 +37,8 @@ class Character:
         self.basestats = [0,0,0]
         self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0)) #adds tuples together to new stats to make actual stats
         self.alive = True
-        self.spoke = False
+        self.spoke = False  # What is this used for?
+        self.building = 0  # This is the building they're are in, 0 by default. TODO add this into location tuple
         
         for i in inv:
             inv[i].location = self.location
@@ -110,9 +111,9 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside, size = ((None)), building = 0, links = ((None))): #size = (None) means default is none object unless otherwise defined
-        self.name = str(name)       #Name of location
-        self.coords = coords        #Map coordinates (X,Y,Z)
+    def __init__(self,name,coords,info,lore,walls,inside, building = 0, size = None, doors = None): #size = (None) means default is none object unless otherwise defined
+        self.name = str(name)       # Name of location
+        self.coords = coords        # Map coordinates tuple (X,Y,Z) TODO Make make ground level 0 and basements -1
         self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
         self.lore = lore  # Description of the location
         self.items = []  # list of equipment objects at that location
@@ -120,17 +121,26 @@ class Map:  #Map Location Storage
         self.walls = walls
         self.travelled = 1
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
-        self.mapped = 0  # TODO make consistent flag convention
+        self.mapped = 0  # TODO make consistent flag convention for 0 as default and 1 as activated
         # TODO Interriors rewarding at end
-        # There is probably a better way to do this building stuff, maybe having an inherritted interrior class BUT
-        #   This is what I'm going with!
+        # There is probably a better way to do this building stuff, maybe having an inherited ininterior class
+        #   BUT This is what I'm going with!
         self.size = size  # size of interior (xRange,yRange, zRange). If this is a filled tuple it has an interior
         # When you go into the building from the side it enters the doorway on that size
         # If there's not doors on all sides have exterior outer area with links down (see diagram)
         self.building = building  # The building number associated with the place, by default Overworld is 0
-        self.links = links  # This is a coordinate pointer (X, Y, Z, Building) for doorways and Portals
-        # Moving in the direction into the door links you to the position. So Needs to be nested tuples for multiple
-        # Using tuples here because they're faster but if want to be changed (Mutuble) can use lists
+        self.doors = doors  # List of exterior doors tuplie of the building for entering it and which direction of enter
+        # Same idea as links: [("r",0,2,0)
+
+        # Links disabled for now
+        #self.links = links  # This is a list containing tuple coordinate pointers (direction, X, Y, Z, Building)
+        # for doorways and Portals. A link will activate when moving the specified direction out of that space
+        # ex) BSBDoor.links = [("l",2,4,1,0)], if exiting BSB player moves left to (3,3,3) in Overworld (building 0)
+        # More complicated example would have multiple links depending on the direction. This creates a distorted spaces
+        # ex) BSBLawn.links = [("f",0,6,0,1),("l",2,4,1,0), ("b",0,0,0,1)] this means depending on where the player
+        #   moves they will will go to a different spot on the interior (so you don't have to step around BSB) or JHE
+        # Walls can be used to close and open links as they won't let the player move into it and are mutable
+        # Using tuples here because they're faster but if want to be changed can use nested lists (mutable)
 
         
         #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
@@ -229,13 +239,22 @@ class Map:  #Map Location Storage
             
         return description
 
-    def goInside(self,CurrentPlace,MAPS,PLAYER,ENEMIES,direction):
+    def go_inside(self, MAPS,PLAYER,ENEMIES,direction):
         """
         This function is used to not only go inside the interrior of the building but move within there
         """
-        if  not(CurrentPlace.size): #if the previous place was not inside you step into the interrior
-            print "You are trying to go inside"
+        print "You are trying to go inside"
+        # Don't need to return the 'Global' objects from function as affecting scope outside the function
+        PLAYER.building = self.building  # Sets the player to be in that building
+        # Interior building has to have doors or outdoor space leading to Overworld so connect to that on that side
+        # Looks for the link with the oposite direction out (this may not work for corner buildings but fine for now
+        print self.doors
+        for door in self.doors:
+            if direction in door:
+                print "I'M IN THE MAINFRAME"
+        else:
+            print "You can't go that way"
+
             
-            
-        return 
+        return
 
