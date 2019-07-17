@@ -111,9 +111,9 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self,name,coords,info,lore,walls,inside, building = 0, size = None, doors = None): #size = (None) means default is none object unless otherwise defined
+    def __init__(self, name, location, info, lore, walls, inside, building = 0, size = None, doors = None): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       # Name of location
-        self.coords = coords        # Map coordinates tuple (X,Y,Z) TODO Make make ground level 0 and basements -1
+        self.location = location        # Map coordinates tuple (X,Y,Z,Dim) TODO Make make ground level 0 and basements -1
         self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
         self.lore = lore  # Description of the location
         self.items = []  # list of equipment objects at that location
@@ -151,16 +151,16 @@ class Map:  #Map Location Storage
     def placeItem(self,item):  # the item object, works with the drop method in the character class
         if item:
             self.items.append(item)
-            item.location=self.coords
+            item.location=self.location
             
     def placeEnemy(self,Enemy):
         self.ENEMY.append(Enemy)
-        Enemy.location = self.coords
+        Enemy.location = self.location
         
     def placeInteract(self,Interact):
         if Interact:
             self.items.append(Interact)
-            Interact.location = self.coords
+            Interact.location = self.location
 
     def removeWall(self, wall): #this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
         if wall in self.walls: 
@@ -206,7 +206,7 @@ class Map:  #Map Location Storage
         
         if self.ENEMY: 
             for enemy in self.ENEMY:
-                if enemy.alive and enemy.location == (2,4,1): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
+                if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
                     description = description + "[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
                 elif enemy.alive:
                     description = description + "[" + enemy.name + "] is " \

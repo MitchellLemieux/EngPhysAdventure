@@ -34,7 +34,7 @@ GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DisableMu
 # DevMode disables the main error catching + Startup Blip
 # loadgame is a flag for loading to skip the setup
 
-STARTLOCATION = (2,3,1)
+STARTLOCATION = (2,3,1,0)
 STARTHEALTH = 100
 
 
@@ -50,8 +50,8 @@ TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITE
 # TODO Make PLAYER into PLAYERS a dictionary of playable characters objects
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
-MAPS[6][1][1].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
-MAPS[0][3][0].placeItem(ITEMS["hulk hands"])
+MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
+MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
 
 #Setting up the game path for the game to the cache folder
 #using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
@@ -71,10 +71,11 @@ def Equip(Item):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    Place = MAPS[x][y][z]
+    dim = PLAYER.location[3]
+    Place = MAPS[x][y][z][dim]
     if Item in ITEMS:
-        #this is different than the equip method in the Character class.
-        #Makes sure the item is dropped at the current location
+        # this is different than the equip method in the Character class.
+        # Makes sure the item is dropped at the current location
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
@@ -91,7 +92,8 @@ def Drop(Item):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    Place = MAPS[x][y][z]
+    dim = PLAYER.location[3]
+    Place = MAPS[x][y][z][dim]
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
@@ -110,7 +112,8 @@ def Move(direction):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    currentplace = MAPS[x][y][z]  # Saving your current map location to a variable
+    dim = PLAYER.location[3]
+    currentplace = MAPS[x][y][z][dim]  # Saving your current map location to a variable
     place = 0
     if direction not in currentplace.walls:
         if direction in ['f','forward']:
@@ -125,21 +128,23 @@ def Move(direction):
             z += 1
         elif direction in ['d','down']:
             z -= 1
-        place = MAPS[x][y][z]   # place is new location requested
+        # TODO This is where links come in which direct into interriors
+        place = MAPS[x][y][z][dim]   # place is new location requested
 
-        if place.size: # this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
-            place.go_inside(MAPS,PLAYER,ENEMIES,direction)
+        # if place.size: # this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
+        #     place.go_inside(MAPS,PLAYER,ENEMIES,direction)
 
 
     if place:
         PLAYER.location[0] = x
         PLAYER.location[1] = y
         PLAYER.location[2] = z
+        PLAYER.location[3] = dim
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets", "", "OOT_Steps_Stone3.wav"), False)  # plays sound
         if bf.location != (None,None,None):
-            MAPS[bf.location[0]][bf.location[1]][bf.location[2]].removeEnemy(bf)
+            MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
         if random() <= 0.003: 
-            MAPS[x][y][z].placeEnemy(bf)
+            MAPS[x][y][z][dim].placeEnemy(bf)
             AsciiArt.Hero()
             
         if place.travelled:
@@ -154,9 +159,10 @@ def Move(direction):
             
         
     else:
-        PLAYER.location[0] = currentplace.coords[0]
-        PLAYER.location[1] = currentplace.coords[1]
-        PLAYER.location[2] = currentplace.coords[2]
+        PLAYER.location[0] = currentplace.location[0]
+        PLAYER.location[1] = currentplace.location[1]
+        PLAYER.location[2] = currentplace.location[2]
+        PLAYER.location[3] = currentplace.location[3]
         print "\nYou can't go that way!\n"
         return currentplace
 
@@ -217,7 +223,8 @@ def Attack(E):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
-    CurrentPlace = MAPS[x][y][z]
+    dim = PLAYER.location[3]
+    CurrentPlace = MAPS[x][y][z][dim]
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E] #making it the object from the name
         bgchance = 0.01
@@ -255,6 +262,7 @@ def Talk(E):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
+    dim = PLAYER.location[3]
     if E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
@@ -265,13 +273,13 @@ def Talk(E):
             PLAYER.updateStats()
             enemy.quest = True
             if enemy.drop:
-                MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+                MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
             playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
             printT(enemy.Sinfo)
-            MAPS[x][y][z].placeItem(ITEMS[enemy.drop])
+            MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
             enemy.drop = None
         elif enemy.quest:
@@ -301,6 +309,7 @@ def Inspect(Item): #Item is the inspect item
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
+    dim = PLAYER.location[3]
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
@@ -323,7 +332,7 @@ def Inspect(Item): #Item is the inspect item
             PLAYER.updateStats()
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
-                MAPS[x][y][z].placeItem(ITEMS[INTERACT[Item].drop])
+                MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
             print ""
 
@@ -351,6 +360,7 @@ def Eat(Item):
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
+    dim = PLAYER.location[3]
 
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location and not(GAMESETTINGS['HardcoreMode']):
         if Item == "jar of peanut butter" and (PLAYER.name in ["Mitchell Lemieux","Erik Reimers"]):
@@ -371,7 +381,7 @@ def Eat(Item):
                 PLAYER.updateStats()
                 print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
             else:
-                MAPS[x][y][z].removeItem(ITEMS[Item])
+                MAPS[x][y][z][dim].removeItem(ITEMS[Item])
 
         else:
             print "You can't eat that!"
@@ -396,7 +406,7 @@ def NameChange(): # A dumb backend workaround to change the players name. TODO o
     # ENEMIES['yourself'].name = playername
     ENEMIES['yourself'].name = PLAYER.name # yourself gets renamed to player name
     ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
-    MAPS[2][4][1].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
+    MAPS[2][4][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
     return
         
 def SpellCheck(Word,Psblties): #Spellchecks words in the background to check things closest

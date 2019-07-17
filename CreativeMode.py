@@ -3,7 +3,7 @@
 #Wrote on Dec  22,2018: 
 import pickle
 from GameFunctions import * #importing the global dictionaries/values
-from StartUp import XRANGE, YRANGE, ZRANGE #Importing the map bound variables from StartUp to be used in the load function
+from StartUp import XRANGE, YRANGE, ZRANGE, DRANGE #Importing the map bound variables from StartUp to be used in the load function
 import CSVSaves
 
 def saveGame(savename):
@@ -18,8 +18,8 @@ def saveGame(savename):
 
     # this saves current state to csv file, disabled by default for releasing exe
     # TODO Make these files into the loading with encryption
-    # TODO Turn off CSV saves before exporting
-    # CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+    # TODO Turn off CSV saves before compiling
+    CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
 
     f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".txt", "w+")
     x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
@@ -78,15 +78,16 @@ def loadGame(loadname):
         for x in range(XRANGE):
             for y in range(YRANGE):
                 for z in range(ZRANGE):
-                    if MAPS[x][y][z]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
-                        MAPS[x][y][z].__dict__ = loadmap[x][y][z].__dict__
+                    for dim in range (DRANGE):
+                        if MAPS[x][y][z][dim]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
+                            MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
 
         GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
         GAMEINFO['log'].append("loadgame") #adds the load game command to the log
 
         
         #Displayes the current place info again to show it's been loaded
-        CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]]
+        CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
         print "========================================================================"
         if CurrentPlace.travelled == 1: #To print out the starting location for new files
             print CurrentPlace.lore
@@ -113,7 +114,7 @@ def loadGame(loadname):
     #except KeyError as E
 
 def updateSave(save): #this file tries to autoatically update the save file
-    #TODO finish this for simple dictionary changes
+    # TODO finish this for simple dictionary changes
     global PLAYER
     global ITEMS
     global MAPS
@@ -146,8 +147,9 @@ def updateSave(save): #this file tries to autoatically update the save file
         for x in range(XRANGE):
             for y in range(YRANGE):
                 for z in range(ZRANGE):
-                    if MAPS[x][y][z]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
-                        MAPS[x][y][z].__dict__ = loadmap[x][y][z].__dict__
+                    for dim in range(DRANGE):
+                        if MAPS[x][y][z][dim]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
+                            MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
     
     
     

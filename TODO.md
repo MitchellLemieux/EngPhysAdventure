@@ -138,6 +138,7 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
     * Also want to add a sound effects attribute so it plays a sound when you talk or interact
 * ADDED PAP Event and TenThirty Event
     * PAP is a new upgradeable weapon thing, TenThirty is you can't wear a shirt
+* CHANGED Map attribute Coords to location to be more consistant
 
 
 # Things to Read

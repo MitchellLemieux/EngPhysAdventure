@@ -76,7 +76,7 @@ def sidequests():
     # Side Quests
     # Secret Spaces
     if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:  # Unlocks the secret space once you get the scroll
-        MAPS[0][2][1].removeWall("d")
+        MAPS[0][2][1][0].removeWall("d")
         QUESTS["secret spaces"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets", "", "OOT_Secret.wav"),
                             False)  # plays the sound with 'multithreading'
@@ -130,10 +130,10 @@ def ebta_story():
     
     # Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
-        MAPS[4][4][1].placeEnemy(ENEMIES["dr. kitai"])
-        MAPS[2][4][2].placeEnemy(ENEMIES["dr. preston"])
-        MAPS[1][6][2].placeEnemy(ENEMIES["dr. lapierre"])
-        MAPS[5][4][1].removeEnemy(ENEMIES["hooded man"])
+        MAPS[4][4][1][0].placeEnemy(ENEMIES["dr. kitai"])
+        MAPS[2][4][2][0].placeEnemy(ENEMIES["dr. preston"])
+        MAPS[1][6][2][0].placeEnemy(ENEMIES["dr. lapierre"])
+        MAPS[5][4][1][0].removeEnemy(ENEMIES["hooded man"])
         ENEMIES['hooded man'].spoke = False
         QUESTS["talk to mysterious man"] = 0
         #small item
@@ -141,20 +141,20 @@ def ebta_story():
 
     # Nuke quests
     if ENEMIES['dr. preston'].quest and QUESTS["preston get dumbbell"]:
-        MAPS[2][5][1].placeEnemy(ENEMIES["dr. buijs"])
+        MAPS[2][5][1][0].placeEnemy(ENEMIES["dr. buijs"])
         QUESTS["preston get dumbbell"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
         
     if ENEMIES['dr. buijs'].quest and QUESTS['buijs kill chris']:
-        MAPS[2][5][0].placeEnemy(ENEMIES['dan fitzgreen'])
+        MAPS[2][5][0][0].placeEnemy(ENEMIES['dan fitzgreen'])
         ENEMIES['dan fitzgreen'].quest = True
         QUESTS['buijs kill chris'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
-        MAPS[2][6][0].placeEnemy(ENEMIES['dr. novog'])
-        MAPS[4][5][0].placeEnemy(ENEMIES['stefan boltzmann'])
+        MAPS[2][6][0][0].placeEnemy(ENEMIES['dr. novog'])
+        MAPS[4][5][0][0].placeEnemy(ENEMIES['stefan boltzmann'])
         QUESTS["dan fix reactor"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
@@ -168,20 +168,20 @@ def ebta_story():
 
     # Optics quests
     if ENEMIES['dr. lapierre'].quest and QUESTS["lapierre get coffee"]:
-        MAPS[5][4][1].placeEnemy(ENEMIES['dr. knights'])
+        MAPS[5][4][1][0].placeEnemy(ENEMIES['dr. knights'])
         QUESTS["lapierre get coffee"]= 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
     if ENEMIES['dr. knights'].quest and QUESTS["knights get book"]:
-        MAPS[1][6][0].placeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][0][0].placeEnemy(ENEMIES['dr. haugen'])
         QUESTS["knights get book"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
         ENEMIES['dr. haugen'].alive = False
-        MAPS[1][6][0].removeEnemy(ENEMIES['dr. haugen'])
-        MAPS[1][6][0].placeItem(ITEMS["haugen's clothes"])
+        MAPS[1][6][0][0].removeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][0][0].placeItem(ITEMS["haugen's clothes"])
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
         
 
@@ -191,12 +191,12 @@ def ebta_story():
 
     # Semiconductor quests
     if ENEMIES['dr. kitai'].quest and QUESTS['kitai get silicon substrate']:
-        MAPS[1][5][2].placeEnemy(ENEMIES['dr. kleimann'])
+        MAPS[1][5][2][0].placeEnemy(ENEMIES['dr. kleimann'])
         QUESTS['kitai get silicon substrate'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. kleimann'].quest and QUESTS["kleimann get solar cell"]:
-        MAPS[3][4][1].placeEnemy(ENEMIES['dr. minnick'])
+        MAPS[3][4][1][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["kleimann get solar cell"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
@@ -207,8 +207,8 @@ def ebta_story():
         ENEMIES['dr. minnick'].need = "faraday's cage" #this has to be lowercase or it throws a key error
         ENEMIES['dr. minnick'].info = "I need to complete Kenrick's design... use my glasses to find what we need!"
         ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
-        MAPS[3][4][1].removeEnemy(ENEMIES['dr. minnick'])
-        MAPS[1][7][0].placeEnemy(ENEMIES['dr. minnick'])
+        MAPS[3][4][1][0].removeEnemy(ENEMIES['dr. minnick'])
+        MAPS[1][7][0][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["minnick get oscilloscope"] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
@@ -222,22 +222,22 @@ def ebta_story():
     # endgame
 
     if QUESTS['end game start'] and not(QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
-        MAPS[5][2][1].placeEnemy(ENEMIES['hooded man'])
+        MAPS[5][2][1][0].placeEnemy(ENEMIES['hooded man'])
         print "\nYou feel a strange pull towards the McMaster Statue.\n"
-        MAPS[5][2][1].lore = "You approach the statue and notice the mysterious Hooded Man beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
-        MAPS[5][2][1].travelled = 1
+        MAPS[5][2][1][0].lore = "You approach the statue and notice the mysterious Hooded Man beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
+        MAPS[5][2][1][0].travelled = 1
         ENEMIES['hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the Quantum Relics which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is Dr. Cassidy himself!"   
         QUESTS['end game start'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if not QUESTS['end game start'] and ENEMIES['hooded man'].spoke and QUESTS['the dark lord']:
-        MAPS[5][2][1].removeEnemy(ENEMIES['hooded man'])
-        MAPS[5][2][1].placeEnemy(ENEMIES['dr. cassidy'])
+        MAPS[5][2][1][0].removeEnemy(ENEMIES['hooded man'])
+        MAPS[5][2][1][0].placeEnemy(ENEMIES['dr. cassidy'])
         QUESTS['the dark lord'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
 
     if ENEMIES['dr. cassidy'].spoke and QUESTS['university man']:
-        MAPS[5][2][1].placeEnemy(ENEMIES['sir william mcmaster'])
+        MAPS[5][2][1][0].placeEnemy(ENEMIES['sir william mcmaster'])
         ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
         QUESTS['university man'] = 0
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"), False)
@@ -301,15 +301,15 @@ def events():
         # Signaling Event, depends whether you're inside or outside
         print "A Bolt of lightening strikes the top of JHE"
         # TODO make this an interior after so you decide to go in
-        MAPS[2][4][3].info = "~?~:\nYou can only go back down the stairs."
-        MAPS[2][4][3].lore = "As you reach the top of the stairs you can feel the heat intensify. " \
+        MAPS[2][4][3][0].info = "~?~:\nYou can only go back down the stairs."
+        MAPS[2][4][3][0].lore = "As you reach the top of the stairs you can feel the heat intensify. " \
 "Where the way was blocked before is a melted hole just big enough for you to fit through. You expect to enter the " \
 "hallway but see all the interior walls have been removed. All that remains are stone walls and boarded up windows. " \
 "Textbooks and broken lab equipment litter the ground. You turn the corner to the lecture hall where you would " \
 "fall asleep in 8:30 1D04 lecture. Glowing red hot in the centre of the room is the Pack-a-Punch Machine! " \
 "(\S) (\S) Enscribed on the side in graffiti is 'BLAZE IT'."
-        MAPS[2][4][3].travelled = 1
-        MAPS[2][4][3].placeInteract(INTERACT["pack-a-punch"])
+        MAPS[2][4][3][0].travelled = 1
+        MAPS[2][4][3][0].placeInteract(INTERACT["pack-a-punch"])
     # Event Main Activity "Pack-a-Punching" when you inspect the machine
     elif (PLAYER.location == list(INTERACT["pack-a-punch"].location)) and INTERACT["pack-a-punch"].quest:
         PAPScreen = True
@@ -399,7 +399,7 @@ def events():
                     # Adding the Stats
                     upgrade.stats = (upgrade.stats[0]+sacrifice.stats[0], upgrade.stats[1]+sacrifice.stats[1], upgrade.stats[2]+sacrifice.stats[2])  #replacing stats tuple
 
-                MAPS[2][4][3].placeItem(upgrade)   # Placing the Upgraded Item on the ground
+                MAPS[2][4][3][0].placeItem(upgrade)   # Placing the Upgraded Item on the ground
                 print "The Pack-a-Punch wirls and screaches, glowing bright, before spitting out the " + upgrade.name + " onto the ground!"
                 # TODO add pack-a-punch sound
 
@@ -412,13 +412,13 @@ def events():
 
 
     # Resetting the Event
-    elif (QUESTS["PAP"] == 0) and (not(PLAYER.location == (2,4,3))) and (not(insttime.tm_min == 20)):
+    elif (QUESTS["PAP"] == 0) and (not(PLAYER.location == (2,4,3,0))) and (not(insttime.tm_min == 20)):
         QUESTS["PAP"] = 1
         print "DONT BLAZE IT"
-        MAPS[2][4][3].info = "~3RD FLOOR JHE Stairs~:\nYou can only go back down the stairs."
-        MAPS[2][4][3].lore = "You see solid block of sheet metal covering the door. Was it always this way?"
-        MAPS[2][4][3].travelled = 1
-        MAPS[2][4][3].removeInteract(INTERACT["pack-a-punch"])
+        MAPS[2][4][3][0].info = "~3RD FLOOR JHE Stairs~:\nYou can only go back down the stairs."
+        MAPS[2][4][3][0].lore = "You see solid block of sheet metal covering the door. Was it always this way?"
+        MAPS[2][4][3][0].travelled = 1
+        MAPS[2][4][3][0].removeInteract(INTERACT["pack-a-punch"])
 
     # TENThirty Event
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)

@@ -8,11 +8,11 @@
 from GameClasses import *
 import csv
 
-#the bounds of the map
-XRANGE = 7 #when changing these also change the values in the CreativeMode.load() function
+# these define bounds of the map, they control all the loops
+XRANGE = 7  # when changing these also change the values in the CreativeMode.load() function
 YRANGE = 9
 ZRANGE = 4
-DRANGE = 2
+DRANGE = 2  # Dimensional range of the map, i.e. number of different buildings with interiors + overworld
 
 def Reset():
     global MAPS1
@@ -23,8 +23,8 @@ def Reset():
 
     MAPS1 = [[[None for y in range(ZRANGE)] for y in range(YRANGE)] for x in range(XRANGE)]#0-5,0-7,0-2
 
-    #def __init__(self,name,coords,info,lore,walls,inside)
-    #Locations: Place.name = "Name" - Place.coords = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
+    #def __init__(self,name,location,info,lore,walls,inside)
+    #Locations: Place.name = "Name" - Place.location = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
     #Example: Start = Map("Start",(0,0,0),"RONT OF JHE:\nBSB is to your right.","You start here",(),False)
     LOCATIONS1=[
     Map("Starting Location",(2,3,1),"~FRONT OF JHE~:\nBSB is to your right. Hatch to your left.\nJHE field is to your rear. Enter JHE by going forward.","You hear a booming voice that sounds oddly like a game developer. \ntype: 'inspect rules sign!'\nYou see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE.",(),False),
@@ -394,7 +394,7 @@ def WorldMap():
     global ENEMIES1
     global ITEMS1
     for i in LOCATIONS1:
-        position = i.coords
+        position = i.location
         x = position[0]
         y = position[1]
         z = position[2]

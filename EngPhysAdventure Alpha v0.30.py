@@ -48,11 +48,13 @@ def Setup():
     x = 2
     y = 3
     z = 1
+    dim = 0  # The building or dimension the player is in
     PLAYER.location[0] = x
     PLAYER.location[1] = y
     PLAYER.location[2] = z
+    PLAYER.location[3] = dim
 
-    CurrentPlace = MAPS[x][y][z]
+    CurrentPlace = MAPS[x][y][z][dim]
     
     print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
     
@@ -117,7 +119,8 @@ def Main():
                 x = PLAYER.location[0]
                 y = PLAYER.location[1]
                 z = PLAYER.location[2]
-                print MAPS[x][y][z].search()
+                dim = PLAYER.location[3]
+                print MAPS[x][y][z][dim].search()
 
             elif (verb == 'stats'):
                 Stats()
@@ -189,7 +192,7 @@ def End():
     global PLAYER
     GAMEINFO['runtime'] = GAMEINFO['runtime'] + (time.time()-GAMEINFO['timestart']) #calculates total time you've been playing by adding your loaded runtime to your instance runtime (end time - start time)
     GAMEINFO['log'] = GAMEINFO['log'] + ["--END OF LOG--", "Stepcount: "+str(GAMEINFO['stepcount']), "Command Count: " + str(GAMEINFO['commandcount']),
-      "Run Time: " + str(GAMEINFO['runtime']), "--Character STATS--",str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2])),
+      "Run Time: " + str(GAMEINFO['runtime']), "--Character STATS--",str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2], PLAYER.location[3])),
       str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])),str(PLAYER.health),"HEAD: " + str(PLAYER.inv["head"].name),
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
