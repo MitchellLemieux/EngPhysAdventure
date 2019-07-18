@@ -6,12 +6,16 @@ Wrote on April 14,2018: Icemageddon
 import operator
 from random import *
 
-def tupleAdd(a,b,c,d,e,f): #adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
+def six_tuple_add(a, b, c, d, e, f):  # adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
     j = tuple(map(operator.add,c,d))
     k = tuple(map(operator.add,e,f))
     ij = tuple(map(operator.add,i,j))
     return tuple(map(operator.add,ij,k))
+
+def two_tuple_add(a, b):  # adds 2 tuples element-wise
+    return tuple(map(operator.add,a,b))
+
 
 # WHEN UPDATING ANY CLASS ATRIBUTE WILL NEED TO UPDATE IN CSVSaver to Reflect it!
 #       Unless someone does something fancy to automatically update it but I don't feel it's necessary.
@@ -35,7 +39,7 @@ class Character:
         self.health = health
         self.maxhealth = 100
         self.basestats = [0,0,0]
-        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0)) #adds tuples together to new stats to make actual stats
+        self.stats = six_tuple_add(self.inv['head'].stats, self.inv['body'].stats, self.inv['hand'].stats, self.inv['off-hand'].stats, tuple(self.basestats), (0, 0, 0)) #adds tuples together to new stats to make actual stats
         self.alive = True
         self.spoke = False  # What is this used for?
         self.building = 0  # This is the building they're are in, 0 by default. TODO add this into location tuple
@@ -44,7 +48,7 @@ class Character:
             inv[i].location = self.location
         
     def updateStats(self): #updates stats based on changing equipment
-        self.stats = tupleAdd(self.inv['head'].stats,self.inv['body'].stats,self.inv['hand'].stats,self.inv['off-hand'].stats,tuple(self.basestats),(0,0,0))
+        self.stats = six_tuple_add(self.inv['head'].stats, self.inv['body'].stats, self.inv['hand'].stats, self.inv['off-hand'].stats, tuple(self.basestats), (0, 0, 0))
 
     def equip(self,Equip):
         drop = 0
@@ -111,9 +115,10 @@ class Interact:
         self.quest = False
 
 class Map:  #Map Location Storage
-    def __init__(self, name, location, info, lore, walls, inside, building = 0, size = None, doors = None): #size = (None) means default is none object unless otherwise defined
+    def __init__(self, name, location, info, lore, walls, inside, size=None, links=[]): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       # Name of location
-        self.location = location        # Map coordinates tuple (X,Y,Z,Dim) TODO Make make ground level 0 and basements -1
+        # Dim is the dimension/ building number associated with the place, by default Overworld is 0, Bsb is 1, etc
+        self.location = location    # Map coordinates tuple (X,Y,Z,Dim) TODO Make make ground level 0 and basements -1
         self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
         self.lore = lore  # Description of the location
         self.items = []  # list of equipment objects at that location
@@ -125,15 +130,10 @@ class Map:  #Map Location Storage
         # TODO Interriors rewarding at end
         # There is probably a better way to do this building stuff, maybe having an inherited ininterior class
         #   BUT This is what I'm going with!
-        self.size = size  # size of interior (xRange,yRange, zRange). If this is a filled tuple it has an interior
+        self.size = size  # size of interior (xRange,yRange, zRange). This tuple also flags it has/is an interior
         # When you go into the building from the side it enters the doorway on that size
         # If there's not doors on all sides have exterior outer area with links down (see diagram)
-        self.building = building  # The building number associated with the place, by default Overworld is 0
-        self.doors = doors  # List of exterior doors tuplie of the building for entering it and which direction of enter
-        # Same idea as links: [("r",0,2,0)
-
-        # Links disabled for now
-        #self.links = links  # This is a list containing tuple coordinate pointers (direction, X, Y, Z, Building)
+        self.links = links  # This is a list containing tuple coordinate pointers (direction, X, Y, Z, Building)
         # for doorways and Portals. A link will activate when moving the specified direction out of that space
         # ex) BSBDoor.links = [("l",2,4,1,0)], if exiting BSB player moves left to (3,3,3) in Overworld (building 0)
         # More complicated example would have multiple links depending on the direction. This creates a distorted spaces
@@ -239,22 +239,8 @@ class Map:  #Map Location Storage
             
         return description
 
-    def go_inside(self, MAPS,PLAYER,ENEMIES,direction):
-        """
-        This function is used to not only go inside the interrior of the building but move within there
-        """
-        print "You are trying to go inside"
+
         # Don't need to return the 'Global' objects from function as affecting scope outside the function
-        PLAYER.building = self.building  # Sets the player to be in that building
-        # Interior building has to have doors or outdoor space leading to Overworld so connect to that on that side
-        # Looks for the link with the oposite direction out (this may not work for corner buildings but fine for now
-        print self.doors
-        for door in self.doors:
-            if direction in door:
-                print "I'M IN THE MAINFRAME"
-        else:
-            print "You can't go that way"
 
             
-        return
 

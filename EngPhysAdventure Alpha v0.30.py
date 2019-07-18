@@ -89,7 +89,7 @@ def Main():
     #global SETTINGS #TODO will import the settings later
     #global keyword brings in a global variable into a function and allows it to be altered
     KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()) #keys used for the spellchecking function
-    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
+    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour','north','south','east','west'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
     
 
   
@@ -104,7 +104,7 @@ def Main():
 
         
         for i in range(len(direction)):
-           direction[i] = direction[i].strip() #Getting rid of the spaces at the end of words
+           direction[i] = direction[i].strip() # Getting rid of the spaces at the end of words
 
         if len(direction) == 1:
             verb = direction[0]
@@ -112,9 +112,9 @@ def Main():
                 verb = SpellCheck(verb,VERBS)
 
 
-            if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward']:
+            if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward','north','south','east','west']:
                 CurrentPlace = Move(verb)
-                GAMEINFO['stepcount'] += 1 #increments the stepcount after taking a step (whether sucessful or not)
+                GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
             elif verb in ['search','look']:
                 x = PLAYER.location[0]
                 y = PLAYER.location[1]
@@ -166,6 +166,7 @@ def Main():
 
             elif verb in ['eat','drink','inhale','ingest','devour']:
                 Eat(objectName)
+
             else:
                print "\nI don't understand that command!\n"
     

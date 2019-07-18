@@ -22,6 +22,7 @@ https://docs.python.org/2/tutorial/inputoutput.html - save structured data
 1. Can't play as tyler Kashak after you stop
 1. When you exit from the start screen or otherwise the error catcher catches you
 1. Map loading is maybe weird?
+1. Lot I was broken?
 1. Many more
 
 # 0.31 TOTAL Rebuild, realease to BETA
@@ -91,7 +92,13 @@ starting screen
 # 0.30 NEXT will be kipling
 - [x] Make game load, setting save, and dev mode
 - [ ] Interiors
-- [ ] Capstone Room
+    - [x] Add one dimension to everythong
+    - [x] Make links work 
+    - [ ] Make walking within interiors work (or just add walls to everything and check)
+        * Yeah do they even need a size? They do for maps but that's about it
+    - [x] Dictionary of interriors with name so it can call up the name at start
+    - [ ] Make BSB interior by adding link in on surrounding squares and link out at doorways
+    - [ ] Capstone Room
 - [ ] People & Items
 - [ ] Make high pitch willhelm screen when women die
 - [ ] Capstone Minigames
@@ -99,6 +106,15 @@ starting screen
     - [ ] With sounds when it starts and ends
     - [ ] Bell dongs every hour
 - [ ] More sound effects
+- [ ] Accept more directions and movements and fix move past walls bug with overwriting direction or changing to translation
+add verb accepts for 2 words and 1 word for
+remove
+speak
+look
+move, go, run, jog, bike, scate, drive, head
+	add cardinal directions to those directions
+
+- [ ] Fix Bugs
 - [x] Make Dev mode go right into game with " " name, speedrun, etc
 - [ ] Turn into BETA
 
@@ -138,7 +154,19 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
     * Also want to add a sound effects attribute so it plays a sound when you talk or interact
 * ADDED PAP Event and TenThirty Event
     * PAP is a new upgradeable weapon thing, TenThirty is you can't wear a shirt
+    * PAP has whole interface and triggers
+    * PAP will drop an upgraded weapon of the upgraded weapon but will cost a sacrifice
+    * IF sum of stats of Sacrifice is 1/10 or larger the upgrade weapon stats will double
+    * Else the stats of the upgrade will be the sum of the upgrade and sacrifice stats
+    * PAP will happen at 4:20 or if game is beaten fully
+    * 10:30 happens at 10:30 and your shirt always drops
 * CHANGED Map attribute Coords to location to be more consistant
+* ADDED INTERIORS 
+    * New dimension to all objects at end of all locations called dimension or building #
+    * ex) JHE located in (2,4,1,0) where 0 is the Overworld
+    * Link attribute which moves/teliports a player to a location if they move off a space in the specified direction
+    * Says when you go into an interior and leave it, also so interior name on map
+    
 
 
 # Things to Read

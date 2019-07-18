@@ -17,6 +17,9 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
+INTERIORS = ["OverWorld","BSB","Capstone Room"]  # List of interior names with the index location being the dimension/building number
+# ex) 0 is OverwWord, 1 is BSB, 2 is capstone room, etc
+
 
 
 
@@ -62,7 +65,7 @@ try:
 except:
     print "\n"#does nothing if the path is already there
 
-
+# TODO Make these functions into class methods related to each class
 def Equip(Item):
     global PLAYER
     global ITEMS
@@ -115,12 +118,14 @@ def Move(direction):
     dim = PLAYER.location[3]
     currentplace = MAPS[x][y][z][dim]  # Saving your current map location to a variable
     place = 0
+    # TODO Bugfix, walls only registers for single letter movements not full commands, another reason to make transforms
     if direction not in currentplace.walls:
+        # TODO add cardinal and make these direction additions transformations
         if direction in ['f','forward']:
             y += 1
         elif direction in ['b','back']:
             y -= 1
-        elif direction in ['r','right']:
+        elif direction in ['r','right','n','north']:
             x += 1
         elif direction in ['l','left']:
             x -= 1
@@ -129,10 +134,24 @@ def Move(direction):
         elif direction in ['d','down']:
             z -= 1
         # TODO This is where links come in which direct into interriors
-        place = MAPS[x][y][z][dim]   # place is new location requested
 
-        # if place.size: # this means it has an intterrior via the having a size flag, even if it's not a tuple. Either you are going into an interrior or already in one
-        #     place.go_inside(MAPS,PLAYER,ENEMIES,direction)
+        place = MAPS[x][y][z][dim]  # place is new location requested
+
+        # Links: If the spot has a link might be teliported/moved to that place
+        for link in currentplace.links:  # if there is links in it it will loop through
+            if direction in link:  # Searching all the links to see if any links refer to that direction
+                if dim == 0 and link[4] != 0:
+                    print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
+                elif dim != 0 and link[4] == 0: # When going to overworld from non
+                    print "You go outside."
+                elif dim != link[4]:  # Leaving one interior and entering another
+                    print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
+
+                x = link[1]
+                y = link[2]
+                z = link[3]
+                dim = link[4]
+                place = MAPS[x][y][z][dim]  # Overwrites place with the link location
 
 
     if place:
@@ -141,7 +160,7 @@ def Move(direction):
         PLAYER.location[2] = z
         PLAYER.location[3] = dim
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets", "", "OOT_Steps_Stone3.wav"), False)  # plays sound
-        if bf.location != (None,None,None):
+        if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
         if random() <= 0.003: 
             MAPS[x][y][z][dim].placeEnemy(bf)
