@@ -167,7 +167,29 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
     * Link attribute which moves/teliports a player to a location if they move off a space in the specified direction
     * Says when you go into an interior and leave it, also so interior name on map
     
+Insanity Update
+ADDED Your dad and Super crocs that show secrets
+Alex Jones 
+Rhomes around
+Brings you down to 1 health unless you have a tin foil hat
 
+Super Male Vitality
+-5, -5, -5, -5
+has been used by Alex Jones in order to maximize vitality when working up to 12 hours a day or more in the fight for freedom.
+
+
+Patriot Blend Medium Roast
+-5,-5,15, 5
+Start your day off right with our gourmet, 100% organic coffee and help us Wake Up America!
+
+Jesse Ventura
+
+I'm a peaceful warrior
+I HUNTED PREDITORS IN QUATAMALA.
+I DON"T HAVE TO DO ANYTHING. WHAT ARE YOU MY COMMANDING OFFICER
+
+More/changing voice dialoges for people
+ability for people to play audio when you talk to them
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1

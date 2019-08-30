@@ -332,7 +332,7 @@ def Inspect(Item): #Item is the inspect item
     
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
         playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
-        printT(ITEMS[Item].info,72,0) # fast version for reading things
+        printT(ITEMS[Item].info,72,0)  # fast version for reading things
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
         print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
@@ -426,6 +426,10 @@ def NameChange(): # A dumb backend workaround to change the players name. TODO o
     ENEMIES['yourself'].name = PLAYER.name # yourself gets renamed to player name
     ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
     MAPS[2][4][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
+    # ENEMIES["your dad"].name = playername + "'s dad"
+    ENEMIES["your dad"].name = PLAYER.name + "'s dad" # renaming him to your dad
+    ENEMIES.update({PLAYER.name.lower():ENEMIES["your dad"]}) # adds that new entity to the dictionary
+    MAPS[5][7][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
     return
         
 def SpellCheck(Word,Psblties): #Spellchecks words in the background to check things closest

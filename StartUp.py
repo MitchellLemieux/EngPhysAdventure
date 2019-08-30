@@ -289,9 +289,9 @@ def Reset():
     Equipment("Fake Gun", (None), "FakeGun.jpg", "Is this seriously what at the MAC cops carry...", "hand", (5,0,5),""),
     Equipment("Wool Sweater", (5,3,1,0), "WoolSweater.jpg", "Just like grandma makes.", "body", (1,4,6),""),
     Equipment("Solar Cell", (None), "SolarCell.jpg", "Harness the power of the Sun! I really hope I don't drop this...", "off-hand", (1,1,1),""),
-    Equipment("Paper Towels", (0,5,2,0), "PaperTowels.jpg", "WHERE'S THE PAPER TOWELS?", "off-hand", (2,0,1),"")
+    Equipment("Paper Towels", (0,5,2,0), "PaperTowels.jpg", "WHERE'S THE PAPER TOWELS?", "off-hand", (2,0,1),""),
+    Equipment("Crocs of the Cartographer", (None), "DadCrocks.jpg", "Grass stains on it from where you dad would cut the lawn every Sunday. Blue jeans, no shirt. (\S)f I think he used to be an alumni here?", "body", (4, 20, 69),"")
     ]  # DON"T FORGET TO REMOVE THE LAST COMA!
-
 
     #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
     #Enemies: Enemy.drop = Item dropped on death or given - Enemy.need = special item they want - Enemy.Sinfo = "Special comment they have if you bring them 'need' item"
@@ -319,7 +319,9 @@ def Reset():
     #Special
     Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit.\nDo you have my lunch box?",None,(9999,9999,9999),999,"green bang bong","Brendan Fallon's lunchbox","THANKS! TOKE UP MY DUDES!",""),
     Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1,0),(999,999,999),999,"",None,"",""),
-    Enemy("Yourself","Wait, but I'm you? Sorry I'm a little busy to think about this right now.",None,(100,100,100),100,"self worth",None,"","Congradulations, you've conquered yourself! It wasn't that hard!"),
+    Enemy("yourself","Wait, but I'm you? Sorry I'm a little busy to think about this right now.",None,(100,100,100),100,"self worth",None,"","Congratulations, you've conquered yourself! It wasn't that hard!"),
+    Enemy("your dad", "Tell your mom the mower's fixed. I'm going to wash the lawn.", None, (250, 250, 250), 200, "crocs of the cartographer", None, "Let's rock & roll!", "At least I don't have to pay the mortgage!"),
+    Enemy("Alex Jones", "YOU THINK YOU'RE A TOUGH GUY. YOU'RE AN INTELLECTUAL DUMBASS", None, (300, 300, 300), 200, " ", None, "WE'RE GUNNA DEFEAT THIS ANTI-HUMAN SCUM. WE'RE GUNNA ROCK THEIR WORLD@", "I HATE YOU. COWARDDD!!!!"),
     #Enemy("Special Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
     Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,4,0,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
