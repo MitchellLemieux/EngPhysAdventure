@@ -32,13 +32,15 @@ def Setup():
     global GAMEINFO
 
     if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
+        GAMEINFO['musicOn'] = 0.0  # resets music accumulator to 0
+        GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         return
 
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
     
     print LINEBREAK
 
-    # TODO Change Dev Name to "Doug" After so they don't get secret from Dev Mode
+    # TODO Change Dev Name to "Doug" before release so they don't get secret from Dev Mode
     if GAMESETTINGS['DevMode']: GAMEINFO['playername'] = "Tyler Kashak"  # Skip name step and names your person Doug
     else: GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     

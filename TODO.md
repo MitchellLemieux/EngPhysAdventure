@@ -9,21 +9,30 @@ https://www.youtube.com/watch?v=xSGnLPTjaXo
 https://docs.python.org/2/tutorial/inputoutput.html - save structured data
 
 # **Bugs**
-1. Peanut butter Kills anyone
-1. Sound effect for dropping something even though it's not dropped?
-1. Hooded man doesn't have death Diologe
-1. Dr. Novog doesn't death quest
-1. can kill dr. cassidy after you kill mcamster and still give you the same dialog
-1. still a problem with layers, saving and loading, hope it works for 0.27 release
-1. Can talk to hooded man after he disapears
-1. droesn't drop iron ring after you kill cassidy
-1. add savegame info to the sign
-1. Save files in the wrong location? Where is Doug?
-1. Can't play as tyler Kashak after you stop
-1. When you exit from the start screen or otherwise the error catcher catches you
-1. Map loading is maybe weird?
-1. Lot I was broken?
-1. Many more
+- [ ] Peanut butter Kills anyone
+- [ ] Sound effect for dropping something even though it's not dropped?
+- [ ] Hooded man doesn't have death Diologe
+- [ ] Dr. Novog doesn't death quest
+- [ ] can kill dr. cassidy after you kill mcamster and still give you the same dialog
+- [ ] still a problem with layers, saving and loading, hope it works for 0.27 release
+- [ ] Can talk to hooded man after he disapears
+- [ ] droesn't drop iron ring after you kill cassidy
+- [ ] add savegame info to the sign
+- [ ] Save files in the wrong location? Where is Doug?
+- [ ] Can't play as tyler Kashak after you stop
+- [ ] When you exit from the start screen or otherwise the error catcher catches you
+- [ ] Map loading is maybe weird?
+- [ ] Lot I was broken?
+- [ ] Check to make sure nest game, correct times, and everything add up
+- [ ] Many more
+
+# **Fixed Bugs**
+**Includes Date, bug, and bug fix**
+- [x] Pre0.30 - When you load game music doesn't start for a minute
+    - In Setup() return if loadgame had to set GAMEINFO['musicOn'] to 0 so music would know it's the beginning
+    - Also set GAMEINFO['timestart'] so the local time variable hopefully adds correctly
+
+        
 
 # 0.31 TOTAL Rebuild, realease to BETA
 - [ ] Redo so no more global variables
@@ -107,6 +116,8 @@ starting screen
     - [ ] Bell dongs every hour
 - [ ] More sound effects
 - [ ] Accept more directions and movements and fix move past walls bug with overwriting direction or changing to translation
+- [ ] Change dev-mode name to doug before release
+
 add verb accepts for 2 words and 1 word for
 remove
 speak
