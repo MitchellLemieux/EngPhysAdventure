@@ -14,15 +14,3 @@ cx_Freeze.setup(
 #python setup.py build
 #python setup.py bdist_msi
 
-
-#after main file
-##display_width = 800
-##display_height = 600
-##
-##gameDisplay = pygame.display.set_mode((display_width,display_height))
-##
-##audiopath = os.path.join(os.getcwd(), "MediaAssets","","ErikBeepBoxSong.mp3")
-##pygame.mixer.music.load(audiopath)
-##pygame.mixer.music.play(-1)
-###fire_sound = pygame.mixer.Sound("boom.wav")
-###pygame.mixer.Sound.play(fire_sound)

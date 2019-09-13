@@ -16,6 +16,7 @@ import Opening    #don't import * from these b.c. these pull global variables fr
 import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests
 import MapDisplay
+import pygame
 
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
@@ -92,12 +93,39 @@ def Main():
     #global keyword brings in a global variable into a function and allows it to be altered
     KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()) #keys used for the spellchecking function
     VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour','north','south','east','west'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
-    
 
+    #Yeah Going to need a WHOLE Pygame Module (at least 1 for setup)
+
+    #Pygame Display
+    pygame.init()  # Initializing Pygame
+    display_width = 800
+    display_height = 600
+    #Setting up Icon (needs to be done before display for windows systems)
+    icon = pygame.image.load("NewIcon.png") #loading image
+    pygame.display.set_icon(icon)
+    #Displaying Window
+    gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.RESIZABLE) # Makes a display surface object
+    pygame.display.set_caption('Eng Phys Text Adventure ' + GAMEINFO['versionname'])  # Sets Pygame window name
+
+    #Following this tutorial: https://www.geeksforgeeks.org/python-display-text-to-pygame-window/
+    gameDisplay.fill((255,255,255)) #filling surface with white
+    
+    #Setting up Text Display
+    font = pygame.font.Font('freesansbold.ttf', 32) #Setting up front type and size
+    text = font.render("ENG PHYS TEXT ADVENTURE", True, (0,255,0))
+    
+    audiopath = os.path.join(os.getcwd(), "MediaAssets","","Chilasim.mp3")
+    pygame.mixer.music.load(audiopath)
+    pygame.mixer.music.play(-1)
+    #fire_sound = pygame.mixer.Sound("boom.wav")
+    #pygame.mixer.Sound.play(fire_sound)
+    if not(GAMESETTINGS['DisableMusic']):
+        pygame.mixer.music.load(audiopath)
+        pygame.mixer.music.play(-1)
   
     #Main game loop section that runs while the player is alive (player is killed in story once done)
     while(PLAYER.alive):
-        if not(GAMESETTINGS['DisableMusic']): Music()#TODO make music in a non-jank way! Will only do on next command
+
         if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()
         
         line = raw_input('What do you want to do?\n') 
