@@ -6,8 +6,9 @@ import StartUp
 import AsciiArt
 import time
 import os #used to put files in the cache folder
-import playsound #used to play music and sound effects
+#import playsound #used to play music and sound effects
 from printT import * #import it all
+import pygame
 
 # This is where the global variables are instantiated and defined. Global variables used to pass info between functions
 # TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one
@@ -82,7 +83,11 @@ def Equip(Item):
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"), False) #plays the sound with 'multithreading'
+        #TODO put all sounds in definitions or make Sound Library
+        # https://nerdparadise.com/programming/pygame/part3
+        equipSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"))  #makes sound object with mixer
+        equipSound.play()
+        
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         print "\nYou can't equip that, gosh\n"
     else:
@@ -100,7 +105,8 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"), False) # plays the sound with 'multithreading'
+        dequipSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"))  #makes sound object with mixer
+        dequipSound.play()
         # Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
@@ -159,7 +165,8 @@ def Move(direction):
         PLAYER.location[1] = y
         PLAYER.location[2] = z
         PLAYER.location[3] = dim
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets", "", "OOT_Steps_Stone3.wav"), False)  # plays sound
+        moveSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"))  #makes sound object with mixer
+        moveSound.play()
         if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
         if random() <= 0.003: 
@@ -227,11 +234,13 @@ def Combat(P,E):
          print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
      if P.health == 0:
         P.alive = False
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXdeath.mp3"), False) #plays the sound with 'multithreading'
+        dieSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","EFXdeath.mp3"))  #makes sound object with mixer
+        dieSound.play()
         return 0
      if E.health == 0:
         E.alive = False
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","WilhelmScream.mp3"), False) #plays the sound with 'multithreading'
+        dieSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","WilhelmScream.mp3"))  #makes sound object with mixer
+        dieSound.play()
         return 1
 
 def Attack(E):
@@ -296,7 +305,8 @@ def Talk(E):
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:
-            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
+            questSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"))  #makes sound object with mixer
+            questSound.play()
             printT(enemy.Sinfo)
             MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
@@ -313,7 +323,8 @@ def Talk(E):
 
 
 def Stats():
-    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
+    statsSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"))  #makes sound object with mixer
+    statsSound.play()
     global PLAYER
     print "\nHEALTH: " + str(PLAYER.health)
     print "ATK: " + str(PLAYER.stats[0])
@@ -329,9 +340,11 @@ def Inspect(Item): #Item is the inspect item
     y = PLAYER.location[1]
     z = PLAYER.location[2]
     dim = PLAYER.location[3]
-    
+
+    #If item in location
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
-        playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
+        inspectSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"))  #makes sound object with mixer
+        inspectSound.play()
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
         print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
@@ -344,15 +357,18 @@ def Inspect(Item): #Item is the inspect item
     # If the entered item is an intractable and is at that location
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: # this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
-            playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_SmallItem.wav"), False)
+            questSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"))  #makes sound object with mixer
+            questSound.play()
+            
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True # this turns on the quest flag for the interactable once interacted with if you have the item
             printT(INTERACT[Item].Sinfo) #special slow version
-            PLAYER.updateStats()
+            PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
                 print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
+ 
             print ""
 
         elif INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface)
@@ -366,7 +382,9 @@ def Inspect(Item): #Item is the inspect item
         print "\nThat doesn't seem to be around here.\n"
 
 def Inventory():
-    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"), False)
+    statsSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","ComputerShutdown.mp3"))  #makes sound object with mixer
+    statsSound.play()
+    
     global PLAYER
     print ""
     for i in PLAYER.inv:
@@ -450,12 +468,7 @@ def DisplayTime(value): # converts and displays the time given seconds, for spee
     Seconds = int(valueS)
     print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
 
-def Music(): #a check system to play the song every 43.5 seconds while alive
-    length = time.time()-GAMEINFO['timestart'] #checks to see if it's past the time it should have played (will make it choppy but limitted by this module)
-    if length > GAMEINFO['musicOn']:
-        audiopath = os.path.join(os.getcwd(), "MediaAssets","","Bboy.mp3") #points to the eddited star wars theme
-        playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
-        GAMEINFO['musicOn'] += 238  # increments by song length (3 min 58 secons exactly) until it will next have to be played
+
 
 
 ###this function definitions were added for the compiler so they don't have to be referenced
@@ -526,4 +539,12 @@ def edit_distance(s1, s2, substitution_cost=1, transpositions=False):
             _edit_dist_step(lev, i + 1, j + 1, s1, s2,
                             substitution_cost=substitution_cost, transpositions=transpositions)
     return lev[len1][len2]
-################this is the start of the file 
+################this is the start of the file
+
+# Archived Jank way to play music
+##def Music(): #a check system to play the song every 43.5 seconds while alive
+##    length = time.time()-GAMEINFO['timestart'] #checks to see if it's past the time it should have played (will make it choppy but limitted by this module)
+##    if length > GAMEINFO['musicOn']:
+##        audiopath = os.path.join(os.getcwd(), "MediaAssets","","Bboy.mp3") #points to the eddited star wars theme
+##        playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
+##        GAMEINFO['musicOn'] += 238  # increments by song length (3 min 58 secons exactly) until it will next have to be played

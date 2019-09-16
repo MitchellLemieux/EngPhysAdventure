@@ -108,11 +108,11 @@ def Main():
     pygame.display.set_caption('Eng Phys Text Adventure ' + GAMEINFO['versionname'])  # Sets Pygame window name
 
     #Following this tutorial: https://www.geeksforgeeks.org/python-display-text-to-pygame-window/
-    gameDisplay.fill((255,255,255)) #filling surface with white
+    #gameDisplay.fill((255,255,255)) #filling surface with white
     
     #Setting up Text Display
-    font = pygame.font.Font('freesansbold.ttf', 32) #Setting up front type and size
-    text = font.render("ENG PHYS TEXT ADVENTURE", True, (0,255,0))
+    #font = pygame.font.Font('freesansbold.ttf', 32) #Setting up front type and size
+    #text = font.render("ENG PHYS TEXT ADVENTURE", True, (0,255,0))
     
     audiopath = os.path.join(os.getcwd(), "MediaAssets","","Chilasim.mp3")
     pygame.mixer.music.load(audiopath)
