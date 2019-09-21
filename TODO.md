@@ -1,4 +1,4 @@
-#This is the To-do list
+#This is the Bugs/To-do/Done list
 * appearently labeling TODO is the convention to mark things in code
 * Style Guide: https://guides.github.com/features/mastering-markdown/
 * Cheat Sheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
@@ -46,28 +46,9 @@
 - [ ] Make PP8 Style using Pycharm
     * https://docs.python.org/2/tutorial/classes.html
 
-# 0.31+
-- [ ] Make EpiPen able to save you
-- [ ] Add leaderboard in the QT
-  - [ ] keeping an online synced leaderboard (website, raspberry pi server)?
-- [ ] add try and except that if there is a bug it exits safely with a display and saves your file
-- [ ] Make save files reconsile simple additions automatically
-- [ ] Creative Mode
-- [ ] CSV entity importer and code writer
-- [ ] Comment all the code and add documentation
 
 
-stats kept, acheivements
-starting screen
-	GUI using pygame text based one? But all in Ascii
-
-
-# Beyond
-* Big Lez show intercut 00:38:40, 00:49:00
-
-
-
-# 0.30 NEXT will be kipling
+# 0.30.0 NEXT will be kipling
 - [x] Make game load, setting save, and dev mode
 - [ ] Interiors
     - [x] Add one dimension to everythong
@@ -87,12 +68,8 @@ starting screen
 - [ ] Accept more directions and movements and fix move past walls bug with overwriting direction or changing to translation
 - [ ] Change dev-mode name to doug before release
 
-add verb accepts for 2 words and 1 word for
-remove
-speak
-look
-move, go, run, jog, bike, scate, drive, head
-	add cardinal directions to those directions
+- [ ] Comment all the code and add documentation
+
 
 - [ ] Fix Bugs
 - [x] Make Dev mode go right into game with " " name, speedrun, etc
@@ -147,29 +124,7 @@ watching Little House on the Prairie, getting shot by an auto-turret in Rust, tr
     * Link attribute which moves/teliports a player to a location if they move off a space in the specified direction
     * Says when you go into an interior and leave it, also so interior name on map
     
-Insanity Update
-ADDED Your dad and Super crocs that show secrets
-Alex Jones 
-Rhomes around
-Brings you down to 1 health unless you have a tin foil hat
 
-Super Male Vitality
--5, -5, -5, -5
-has been used by Alex Jones in order to maximize vitality when working up to 12 hours a day or more in the fight for freedom.
-
-
-Patriot Blend Medium Roast
--5,-5,15, 5
-Start your day off right with our gourmet, 100% organic coffee and help us Wake Up America!
-
-Jesse Ventura
-
-I'm a peaceful warrior
-I HUNTED PREDITORS IN QUATAMALA.
-I DON"T HAVE TO DO ANYTHING. WHAT ARE YOU MY COMMANDING OFFICER
-
-More/changing voice dialoges for people
-ability for people to play audio when you talk to them
 
 # Things to Read
 * https://dzone.com/articles/python-thread-part-1
