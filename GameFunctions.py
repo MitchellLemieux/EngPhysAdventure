@@ -295,8 +295,8 @@ def Talk(E):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print "\n"+ enemy.name + " took the " + enemy.need + "."
-            printT(enemy.Sinfo) #default print speed
-            ITEMS[enemy.need].location = (None, None, None) #Brendan added this, used to clear the item location
+            printT(enemy.Sinfo)  # default print speed
+            ITEMS[enemy.need].location = (None, None, None)  # Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
             PLAYER.updateStats()
             enemy.quest = True
@@ -304,7 +304,7 @@ def Talk(E):
                 MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
-        elif enemy.quest and enemy.drop:
+        elif enemy.quest and enemy.drop:  # What is this for?
             questSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"))  #makes sound object with mixer
             questSound.play()
             printT(enemy.Sinfo)
