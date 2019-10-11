@@ -16,7 +16,7 @@ import Opening    #don't import * from these b.c. these pull global variables fr
 import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests
 import MapDisplay
-import pygame
+
 
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
@@ -27,22 +27,20 @@ GAMEINFO['releasedate'] = "July XX, 2019"
 
 LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
 
-#begining section of the game (not in the main loop), seperated for nested game
+# Begining section of the game (not in the main loop), Seperated for nested game
 def Setup():
     global PLAYER
     global GAMEINFO
 
     if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
-        GAMEINFO['musicOn'] = 0.0  # resets music accumulator to 0
         GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         return
 
-    if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun']): Opening.Opening() #plays the opening if disable opening is set to False
+    if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun'] or GAMESETTINGS['DevMode']): Opening.Opening() #plays the opening if disable opening is set to False
     
     print LINEBREAK
 
-    # TODO Change Dev Name to "Doug" before release so they don't get secret from Dev Mode
-    if GAMESETTINGS['DevMode']: GAMEINFO['playername'] = "Tyler Kashak"  # Skip name step and names your person Doug
+    if GAMESETTINGS['DevMode']: GAMEINFO['playername'] = "Doug Fallon"  # Skip name step and names your person Doug
     else: GAMEINFO['playername'] = raw_input("First, what is your name?\n")
     
     PLAYER.name = GAMEINFO['playername']
@@ -64,17 +62,18 @@ def Setup():
     GAMEINFO['gamestart'] = time.time()  # Gives the local start date of the game in seconds since epoch of 1970
     CreativeMode.saveGame("basegame")  # Use this to get a base state newgame, keep it in each time so don't have to worry about updating
     # This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
-    if PLAYER.name == "Tyler Kashak": #He realizes he's the main character and can do anything he wants
-        AsciiArt.One()
+    # Enables this ULTRA character is name is Tyler Kashak or in DevMode
+    if PLAYER.name == "Tyler Kashak" or GAMESETTINGS['DevMode']: #He realizes he's the main character and can do anything he wants
+        # AsciiArt.One()  # TODO Enable once Dynamic Ascii Art
         print "\nHe is beginning to believe\n\nYOU are the One\n"
-        PLAYER.__dict__ = Tyler.__dict__ #sets him to the initial Tyler character for strating inventory
+        PLAYER.__dict__ = Tyler.__dict__  # sets him to the initial Tyler character for strating inventory
         PLAYER.maxhealth = 999
         PLAYER.basestats = [420,420,420]
         PLAYER.updateStats()
-    CurrentPlace.travelled = 0 #so that it says it's been travelled, I moved it down so that it wouldn't effect the basegame save
+    CurrentPlace.travelled = 0  # so that it says it's been travelled, I moved it down so that it wouldn't effect the basegame save
    
     GAMEINFO['timestart'] = GAMEINFO['gamestart']   #runtime counter of the start of each main loop session. Needs to be global. Is equal to gamestart at the session start but will change as the user saves, loads, restarts, or does a nested game
-    print "Your time starts now!"
+    if GAMESETTINGS['SpeedRun']: print "Your time starts now!"
     
                                                                         #this time.ctime(seconds) converts to a nice readable time to be output to the log
     GAMEINFO['log'] = [GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['gamestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
@@ -91,42 +90,17 @@ def Main():
     global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
     #global SETTINGS #TODO will import the settings later
     #global keyword brings in a global variable into a function and allows it to be altered
-    KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()) #keys used for the spellchecking function
-    VERBS =['search','stats','inventory','equip','drop','attack','talk','inspect','eat','savegame','loadgame','restart','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour','north','south','east','west'] #acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
+    KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys())  # keys of all objects used for spellcheck function
+    VERBS =['search','inventory','equip','drop','attack','talk','inspect','eat','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour','north','south','east','west', 'fight', '/420e69','examine']  # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
+    DEVVERBS = ['/stats','/savegame','/loadgame','/restart']  # lists of Verbs/keywords ONLY the developer can use
+    DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
-    #Yeah Going to need a WHOLE Pygame Module (at least 1 for setup)
 
-    #Pygame Display
-    pygame.init()  # Initializing Pygame
-    display_width = 800
-    display_height = 600
-    #Setting up Icon (needs to be done before display for windows systems)
-    icon = pygame.image.load("NewIcon.png") #loading image
-    pygame.display.set_icon(icon)
-    #Displaying Window
-    gameDisplay = pygame.display.set_mode((display_width,display_height), pygame.RESIZABLE) # Makes a display surface object
-    pygame.display.set_caption('Eng Phys Text Adventure ' + GAMEINFO['versionname'])  # Sets Pygame window name
-
-    #Following this tutorial: https://www.geeksforgeeks.org/python-display-text-to-pygame-window/
-    #gameDisplay.fill((255,255,255)) #filling surface with white
-    
-    #Setting up Text Display
-    #font = pygame.font.Font('freesansbold.ttf', 32) #Setting up front type and size
-    #text = font.render("ENG PHYS TEXT ADVENTURE", True, (0,255,0))
-    
-    audiopath = os.path.join(os.getcwd(), "MediaAssets","","Chilasim.mp3")
-    pygame.mixer.music.load(audiopath)
-    pygame.mixer.music.play(-1)
-    #fire_sound = pygame.mixer.Sound("boom.wav")
-    #pygame.mixer.Sound.play(fire_sound)
-    if not(GAMESETTINGS['DisableMusic']):
-        pygame.mixer.music.load(audiopath)
-        pygame.mixer.music.play(-1)
-  
-    #Main game loop section that runs while the player is alive (player is killed in story once done)
+    # Main game loop section that runs while the player is alive (player is killed in story once done)
+    # TODO don't have main loop based on player alive but on game being played, e.g. gameExit boolean variable instead
     while(PLAYER.alive):
 
-        if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()
+        # if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()  # Minimap display area in game
         
         line = raw_input('What do you want to do?\n') 
         GAMEINFO['log'].append(line)
@@ -139,7 +113,9 @@ def Main():
         if len(direction) == 1:
             verb = direction[0]
             if len(verb)>1:
-                verb = SpellCheck(verb,VERBS)
+                # if dev mode enabled it accepts special verbs which allows you to use special functions
+                if GAMESETTINGS['DevMode']: verb = SpellCheck(verb,DEVVERBS)
+                else: verb = SpellCheck(verb,VERBS)
 
 
             if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward','north','south','east','west']:
@@ -152,31 +128,43 @@ def Main():
                 dim = PLAYER.location[3]
                 print MAPS[x][y][z][dim].search()
 
-            elif (verb == 'stats'):
+            # TODO if word based description: re-enable stats and remove from DEVVERBs
+            elif (verb == '/stats'):
                 Stats()
             elif (verb == 'inventory'):
                 Inventory()
-            elif verb == 'savegame':
-                print GAMESETTINGS['DevMode']
+            elif verb == '/savegame':
                 #TODO add: computer name, words and characters per minute, # enemies killed, # items eaten, # items equiped, # enemies talked, # quantum relecs found
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart']) #adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time() #resets timestart so it's not doubly added at the end
                 logGame(GAMEINFO['log']) #logs the game when you save it
                 CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
                 print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
-            elif verb == 'loadgame': #this function loads the game off of the save file. Was having problems with loading
+            elif verb == '/loadgame': #this function loads the game off of the save file. Was having problems with loading
                 CreativeMode.loadGame(GAMEINFO['playername']) #loads in the savefile global variables
                 GAMEINFO['timestart'] = time.time() #reset local variable starttime to current time
-            elif verb == 'restart': #this restarts the game to the base game
-                CreativeMode.loadGame("basegame") #loads in the savefile global variables
+            elif verb == '/restart': #this restarts the game to the base game
+                CreativeMode.loadGame("basegame")  # loads in the savefile global variables
                 GAMEINFO['timestart'] = time.time() #reset local variable starttime to current time
+            elif verb == '/420e69':  # This toggles game to dev mode for debugging in game
+                GAMESETTINGS['DevMode'] = int(not (GAMESETTINGS['DevMode']))
+                # Prints throw-off style text while still giving the stat
+                print "\nYou don't " + str(GAMESETTINGS['DevMode']) + "understand that command!\n"
+                # This section writes devmode to settings.ini file so you can get back to the settings
+    # TODO Before release comment out this section so DevMode isn't saved. DevMode in setting file is not for RELEASE
+                f = open("settings.ini", "w+")
+                for setting in GAMESETTINGS:
+                    f.write(setting + "\n" + str(GAMESETTINGS[setting]) + "\n")
+                f.close()
             else:
                print "\nI don't understand that command!\n"
 
-        elif (len(direction) == 2):
+        elif (len(direction) == 2):  # If the command is more than one word long
             verb = direction[0]
             if len(verb)>1:
-                verb = SpellCheck(verb,VERBS)
+                # if dev mode enabled it accepts special verbs which allows you to use special functions
+                if GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
+                else: verb = SpellCheck(verb, VERBS)
             objectName = SpellCheck(direction[1],KEYS)
 
             if verb in ['equip','get','wear']:
@@ -185,13 +173,13 @@ def Main():
             elif verb == 'drop':
                 Drop(objectName)
 
-            elif verb in ['attack','kill']:
+            elif verb in ['attack','kill', 'fight']:
                 Attack(objectName)
                 
             elif verb == 'talk':
                 Talk(objectName)
 
-            elif verb == 'inspect':
+            elif verb in ['inspect', 'examine']:
                 Inspect(objectName)
 
             elif verb in ['eat','drink','inhale','ingest','devour']:
@@ -228,26 +216,25 @@ def End():
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
     #TODO, condense this story display code
-    playsound.playsound(os.path.join(os.getcwd(), "MediaAssets","","NoWorries.mp3"), False)
-    if Quests.ebta_story()== 0: #player dies
+    if Quests.ebta_story()== 0:  # player dies and that's how they're out of the loop
         print LINEBREAK
-        DisplayTime(GAMEINFO['runtime']) #displays the runtime for speed running
-        print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
+        if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
+        if GAMESETTINGS['SpeedRun']: print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #writes the log file
         if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit: ").lower() =='r': #lets the player restart the game
             CreativeMode.loadGame("basegame") #loads in the savefile global variables
             GAMEINFO['timestart'] = time.time() #reset instance start time
             Main() #re-enters the main loop
         return #returns the game so you don't get the final dialog
-    elif raw_input("Type 'C' to continue\n").lower() == 'c':
+    elif raw_input("Type 'C' to continue\n").lower() == 'c':  # If they beat either of the storylines
         Opening.Closing() #plays the closing
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
         if Quests.ebta_story() == 1: #The bad storyline ending
             print "After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END"
         elif Quests.ebta_story() == 2: #The good storyline ending.
             print "Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END."
-        DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
-        print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
+        if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
+        if GAMESETTINGS['SpeedRun']:print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #logs the data to be submitted
         CreativeMode.saveGame(GAMEINFO['playername'] + " Winner") #saves all data to later be submited, different from the main save file
         endchoice = raw_input("Thanks for playing!!\nType 'C' to continue, 'R' to restart, anything else will exit: ").lower() #this input is to hold the screen until the player decides what to do
@@ -275,16 +262,16 @@ try:  # In case settings file isn't there
     f.close()
     data = [f.strip() for f in data]  # removes the \n in each list element wise (very useful for list operations)
     for i in range(0, len(data), 2):
-       GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
+        GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
 except:
     print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
 
 
-# Start Screen, was moved to here because if in Setup() the dev mode is based on the startup settings
+# Start Screen is after reading in settings so it can skip start screen if enabled
 Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
 
 # The Actual Start of the game when you hit Play, depending on if in Dev Mode or not
-if GAMESETTINGS['DevMode'] == 1:  # If Dev mode enabled no error catching
+if GAMESETTINGS['DevMode']:  # If Dev mode enabled no error catching
     Setup()
     Main()
 else:  # Dev mode not enabled so error catching
@@ -293,7 +280,7 @@ else:  # Dev mode not enabled so error catching
         Main()
     # end function is run at the end of main loop so you can restart the game
     except:
-        AsciiArt.Error()
+        # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
         CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
         print "Your game has been saved!: SaveFile " + GAMEINFO['playername']

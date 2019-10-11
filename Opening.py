@@ -1,7 +1,7 @@
 import time
 #import pygame
 #from pygame import mixer
-import playsound
+import playsound  # Used for openning sound and star wars openning
 import os
 import fnmatch  # Used to fins the savefiles and display them
 import CreativeMode
@@ -10,7 +10,7 @@ from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables
 
 
 DELAY = 1.5
-
+# TODO Implement these based on the size of the screen
 LINEBREAK = "========================================================================" #standard display with 72 characters
 CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
 #Graphics , audio, difficulty, modes, advanced
@@ -24,7 +24,8 @@ def StartScreen():
     global GAMESETTINGS
 
     if GAMESETTINGS['DevMode']:
-        1 + 1  # If in dev mode do nothing and skip intro
+        pass  # If in dev mode do nothing and skip intro
+# The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
     else:
         # If no Dev Mode do the blip intro
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
@@ -41,12 +42,12 @@ def StartScreen():
         print CLEARSCREEN
 
 
-    start = True  # start is the variable that keeps you in the start screen loop
+    startmenu = True  # startmenu is the variable that keeps you in the startmenu screen loop
 
     if GAMESETTINGS['DevMode']:  # If in DevMode it skips the loading screen
-        start = False  # turning off loading screen
+        startmenu = False  # turning off loading screen
 
-    while start:
+    while startmenu:
         print LINEBREAK
         print "       ___________                __________.__"
         print "       \_   _____/    _     _____ \______   \  |__ ___.__. ______"
@@ -60,7 +61,7 @@ def StartScreen():
         choice = raw_input('Choose what you want to do: ').lower()
         # Play new Game
         if choice in ['p', 'play new game','play']:
-            start = False
+            startmenu = False
 
         # Loading Screen and Game
         # TODO Maybe add this loading screen to CreativeMode so you can load in-game
@@ -97,13 +98,13 @@ def StartScreen():
 
                 elif Lchoice in loadnamelist:  # if user enters loadname
                     loadscreen = False
-                    start = False
+                    startmenu = False
                     CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
                 elif Lchoice in loadnumberlist:  # if user enters loadnumber has to lookup the load name
                     loadscreen = False
-                    start = False
+                    startmenu = False
                     CreativeMode.loadGame(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
@@ -122,8 +123,6 @@ def StartScreen():
                 print '[0]Disable Opening:  ' + str(GAMESETTINGS['DisableOpening'])
                 print '[1]Speed Run:        ' + str(GAMESETTINGS['SpeedRun'])
                 print '[2]Hardcore Mode:    ' + str(GAMESETTINGS['HardcoreMode'])
-                print '[3]Disable Music:    ' + str(GAMESETTINGS['DisableMusic'])
-                print '[4]Developer Mode:   ' + str(GAMESETTINGS['DevMode'])
                 print '[B]Back\n '
 
                 Schoice = raw_input('Choose which settings you want to toggle: ').lower()
@@ -132,20 +131,23 @@ def StartScreen():
                 elif Schoice =='0':
                     # Have to make sure the values toggle to 0 and 1 not true and false for saving
                     GAMESETTINGS['DisableOpening'] = int(not(GAMESETTINGS['DisableOpening']))
-                    print "Hi I'm a dog"
+                    # print "Hi I'm a dog"
                 elif Schoice =='1':
                     GAMESETTINGS['SpeedRun'] = int(not(GAMESETTINGS['SpeedRun']))
                 elif Schoice =='2':
                     GAMESETTINGS['HardcoreMode'] = int(not(GAMESETTINGS['HardcoreMode']))
-                elif Schoice =='3':
-                    GAMESETTINGS['DisableMusic'] = int(not(GAMESETTINGS['DisableMusic']))
-                elif Schoice =='4':
+                elif Schoice == '/420e69':  # Character that enables DevMode
                     GAMESETTINGS['DevMode'] = int(not(GAMESETTINGS['DevMode']))
+                    # Prints throw-off style text while still giving the stat
+                    print "\nPlease choose " + str(GAMESETTINGS['DevMode']) + "one of the options."
                 else:
                     print "\nPlease choose one of the options."
             # Saving Settings Once out of the screen, These setting should be readable and changeable by a person
+
             f = open("settings.ini", "w+")
             for setting in GAMESETTINGS:
+        # TODO Before release uncomment this line so DevMode isn't saved. DevMode in setting file is not for RELEASE
+                #if setting == "DevMode": continue
                 f.write(setting + "\n" + str(GAMESETTINGS[setting]) + "\n")
             f.close()
 

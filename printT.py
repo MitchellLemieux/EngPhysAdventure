@@ -25,7 +25,7 @@ def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new 
 
     # If speed run is enabled this will override the text delay and make it 0 for all outputs
     from GameFunctions import GAMESETTINGS  # Imports game settings, hopefully to avoid import problems
-    if GAMESETTINGS['SpeedRun'] == 1:
+    if GAMESETTINGS['SpeedRun'] or GAMESETTINGS['DevMode']:  # If either mode there is no text delay
         delay = 0
     
     # print "="*char #reference width of screen

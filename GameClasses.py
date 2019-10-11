@@ -95,7 +95,6 @@ class Enemy:
         self.location = location
         self.stats = stats
         self.health = health
-        self.item = None
         self.Sinfo = Sinfo #special info displayed if you give them what they need
         self.Dinfo = Dinfo #death info displayed if they need
         self.need = need #what the need, if you talk to them with this item you'll get the drop and it will set the quest flag to True

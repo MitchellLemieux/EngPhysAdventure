@@ -6,9 +6,8 @@ import StartUp
 import AsciiArt
 import time
 import os #used to put files in the cache folder
-#import playsound #used to play music and sound effects
 from printT import * #import it all
-import pygame
+
 
 # This is where the global variables are instantiated and defined. Global variables used to pass info between functions
 # TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one
@@ -25,15 +24,14 @@ INTERIORS = ["OverWorld","BSB","Capstone Room"]  # List of interior names with t
 
 
 GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gamestart':0,'timestart':0,
-            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",
-            'musicOn': 0.0} #this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",}
+#this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
 # version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
-#   musicOn is the indicator for when to next reloop the music
 
 QUESTS = {}  #initializing the quests global variable to be later writen into
 
-GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DisableMusic': 0, 'DevMode': 0, 'loadgame':0}
-# disable openning and/or music, speedrun disables openning;lore read times; might disable secrets or opens them,
+GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DevMode': 0, 'loadgame':0}
+# disable openning, speedrun disables openning;lore read times; might disable secrets or opens them,
 # hardcore for now disables eating but might make enemies harder,
 # DevMode disables the main error catching + Startup Blip
 # loadgame is a flag for loading to skip the setup
@@ -83,10 +81,7 @@ def Equip(Item):
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
-        #TODO put all sounds in definitions or make Sound Library
-        # https://nerdparadise.com/programming/pygame/part3
-        equipSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"))  #makes sound object with mixer
-        equipSound.play()
+
         
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         print "\nYou can't equip that, gosh\n"
@@ -105,8 +100,6 @@ def Drop(Item):
     if Item in ITEMS:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
-        dequipSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item_Away.wav"))  #makes sound object with mixer
-        dequipSound.play()
         # Same as equip function. 'None' passed to function if item doesn't exist
     else:
        print "You aren't carrying that item."
@@ -165,13 +158,12 @@ def Move(direction):
         PLAYER.location[1] = y
         PLAYER.location[2] = z
         PLAYER.location[3] = dim
-        moveSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Steps_Stone3.wav"))  #makes sound object with mixer
-        moveSound.play()
+
         if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
         if random() <= 0.003: 
             MAPS[x][y][z][dim].placeEnemy(bf)
-            AsciiArt.Hero()
+            # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
             
         if place.travelled:
             print "========================================================================"
@@ -193,6 +185,7 @@ def Move(direction):
         return currentplace
 
 #Combat System
+
 def Combat(P,E):
      if E:      
         #Speed
@@ -225,22 +218,18 @@ def Combat(P,E):
             if Second.health:
                 Damage = int(random()*SDamage)
                 First.health = max(0,First.health - Damage)
-
-     if First == P:           
-         print "\nYou attack dealing " + str(SSHealth - Second.health) + " damage.\n" + Second.name + " deals " + str(FSHealth - First.health) + " damage.\n"
-         print  "You have " + str(First.health) + " health remaining.\n" + Second.name + " has " + str(Second.health) + " health remaining.\n"
-     else:
-         print "\n"+First.name + " dealt " + str(SSHealth - Second.health) + " damage.\n" + "You attack dealing " + str(FSHealth - First.health) + " damage.\n"
-         print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
+     # TODO Re-implement combat and number with word ques instead of numbers
+     # if First == P:
+     #     print "\nYou attack dealing " + str(SSHealth - Second.health) + " damage.\n" + Second.name + " deals " + str(FSHealth - First.health) + " damage.\n"
+     #     print  "You have " + str(First.health) + " health remaining.\n" + Second.name + " has " + str(Second.health) + " health remaining.\n"
+     # else:
+     #     print "\n"+First.name + " dealt " + str(SSHealth - Second.health) + " damage.\n" + "You attack dealing " + str(FSHealth - First.health) + " damage.\n"
+     #     print  "You have " + str(Second.health) + " health remaining.\n" + First.name + " has " + str(First.health) + " health remaining.\n"
      if P.health == 0:
         P.alive = False
-        dieSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","EFXdeath.mp3"))  #makes sound object with mixer
-        dieSound.play()
         return 0
      if E.health == 0:
         E.alive = False
-        dieSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","WilhelmScream.mp3"))  #makes sound object with mixer
-        dieSound.play()
         return 1
 
 def Attack(E):
@@ -261,7 +250,7 @@ def Attack(E):
         if PLAYER.inv['body'] == ITEMS['big hits shirt']:
             bgchance += 0.1
         if random() <= bgchance: #bigHits feature TODO have oblivion sound effects 
-            AsciiArt.BigHits()
+            # AsciiArt.BigHits()  # TODO Enable once Dynamic Ascii Art
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
             printT(enemy.Dinfo) #slow version
             enemy.alive = False
@@ -277,7 +266,7 @@ def Attack(E):
                    print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                    CurrentPlace.placeItem(ITEMS[enemy.drop])
            else:
-               print "Oh no! You died, without ever finding your iron ring"
+               print "Oh no! " + enemy.name + " defeated you!\nYou died, without ever finding your iron ring"
     else:
         print "\nThey don't appear to be here.\n"
                         
@@ -305,8 +294,7 @@ def Talk(E):
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
                 enemy.drop = None      
         elif enemy.quest and enemy.drop:  # What is this for?
-            questSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"))  #makes sound object with mixer
-            questSound.play()
+
             printT(enemy.Sinfo)
             MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
             print "You see a " + ITEMS[enemy.drop].name +".\n"
@@ -316,15 +304,23 @@ def Talk(E):
         else:
             printT(enemy.info)
         enemy.spoke = True
+        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
+            print "\nHEALTH: " + str(ENEMIES[E].health)
+            print "ATK : " + str(ENEMIES[E].stats[0])
+            print "DEF : " + str(ENEMIES[E].stats[1])
+            print "SPD : " + str(ENEMIES[E].stats[2])
+            print "NEED : " + str(ENEMIES[E].need)
+            print "DROP : " + str(ENEMIES[E].drop)
+            print "QUESTFlag : " + str(ENEMIES[E].quest)
+
+
     elif E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive==False):
         print "\nI don't think they can do that anymore.\n"
     else:
         print "\nThey don't appear to be here.\n"
 
-
+# TODO Re-implement stats and number with word ques instead of numbers
 def Stats():
-    statsSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Link_Item.wav"))  #makes sound object with mixer
-    statsSound.play()
     global PLAYER
     print "\nHEALTH: " + str(PLAYER.health)
     print "ATK: " + str(PLAYER.stats[0])
@@ -343,22 +339,20 @@ def Inspect(Item): #Item is the inspect item
 
     #If item in location
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
-        inspectSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","EFXpunchInspect.mp3"))  #makes sound object with mixer
-        inspectSound.play()
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
-        print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
-        print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
-        print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
-        print "WORN: " + str(ITEMS[Item].worn).upper()
-        if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
-            print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
-        else:
-            print""
+        # TODO re-implement inspecting item with words instead of numbers
+        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats
+            print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
+            print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
+            print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
+            print "WORN: " + str(ITEMS[Item].worn).upper()
+            if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
+                print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
+            else:
+                print""
     # If the entered item is an intractable and is at that location
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: # this is for item = interactable
         if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
-            questSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","OOT_Fanfare_Item.wav"))  #makes sound object with mixer
-            questSound.play()
             
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True # this turns on the quest flag for the interactable once interacted with if you have the item
@@ -377,14 +371,15 @@ def Inspect(Item): #Item is the inspect item
             printT(INTERACT[Item].Sinfo)
         else:
             printT(INTERACT[Item].info,72,0.1) #fast version
+        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
+            print "NEED : " + str(INTERACT[Item].need)
+            print "DROP : " + str(INTERACT[Item].drop)
+            print "QUESTFlag : " + str(INTERACT[Item].quest)
 
     else:
         print "\nThat doesn't seem to be around here.\n"
 
 def Inventory():
-    statsSound = pygame.mixer.Sound(os.path.join(os.getcwd(), "MediaAssets","","ComputerShutdown.mp3"))  #makes sound object with mixer
-    statsSound.play()
-    
     global PLAYER
     print ""
     for i in PLAYER.inv:
@@ -407,8 +402,10 @@ def Eat(Item):
         elif ITEMS[Item].health:
             PLAYER.health = PLAYER.health + ITEMS[Item].health
             PLAYER.health = min(PLAYER.maxhealth, PLAYER.health) #made the minimum of your added health and food so players health doesn't clip over
-            PLAYER.health = max(PLAYER.health, 0) #prevents clipping bellow 0
-            print "\nYou've eaten the " + ITEMS[Item].name + ".\nHEALTH: "+ str(PLAYER.health)+"\n"
+            PLAYER.health = max(PLAYER.health, 0)  # prevents clipping bellow 0
+            print "\nYou've eaten the " + ITEMS[Item].name + "."
+            # TODO Reimplement health/food indicators with words
+            if GAMESETTINGS['DevMode']: print "\nHEALTH: "+ str(PLAYER.health)+"\n"  # if in DevMode can see stats
             if PLAYER.health == 0:
                 PLAYER.alive = False
             ITEMS[Item].location = (None, None, None) #used to clear the item location
@@ -541,10 +538,3 @@ def edit_distance(s1, s2, substitution_cost=1, transpositions=False):
     return lev[len1][len2]
 ################this is the start of the file
 
-# Archived Jank way to play music
-##def Music(): #a check system to play the song every 43.5 seconds while alive
-##    length = time.time()-GAMEINFO['timestart'] #checks to see if it's past the time it should have played (will make it choppy but limitted by this module)
-##    if length > GAMEINFO['musicOn']:
-##        audiopath = os.path.join(os.getcwd(), "MediaAssets","","Bboy.mp3") #points to the eddited star wars theme
-##        playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
-##        GAMEINFO['musicOn'] += 238  # increments by song length (3 min 58 secons exactly) until it will next have to be played
