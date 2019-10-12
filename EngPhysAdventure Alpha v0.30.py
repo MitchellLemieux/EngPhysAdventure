@@ -34,6 +34,7 @@ def Setup():
 
     if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
         GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+        GAMESETTINGS['loadgame'] = 0  # sets the parameter to 0 just so it doesn't accidentally save
         return
 
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun'] or GAMESETTINGS['DevMode']): Opening.Opening() #plays the opening if disable opening is set to False
@@ -91,7 +92,10 @@ def Main():
     #global SETTINGS #TODO will import the settings later
     #global keyword brings in a global variable into a function and allows it to be altered
     KEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys())  # keys of all objects used for spellcheck function
-    VERBS =['search','inventory','equip','drop','attack','talk','inspect','eat','up','down','left','right','back','forward','kill','get','wear','look','drink','inhale','ingest','devour','north','south','east','west', 'fight', '/420e69','examine']  # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in the elifs
+    # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in game decision area
+    VERBS =['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'up', 'down', 'left', 'right',
+            'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
+            'east', 'west', 'fight', '/420e69', 'examine', 'exit', 'leave', 'quit']
     DEVVERBS = ['/stats','/savegame','/loadgame','/restart']  # lists of Verbs/keywords ONLY the developer can use
     DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
@@ -151,11 +155,24 @@ def Main():
                 # Prints throw-off style text while still giving the stat
                 print "\nYou don't " + str(GAMESETTINGS['DevMode']) + "understand that command!\n"
                 # This section writes devmode to settings.ini file so you can get back to the settings
-    # TODO Before release comment out this section so DevMode isn't saved. DevMode in setting file is not for RELEASE
+                # TODO Before release comment out this section so DevMode isn't saved. DevMode in setting file is not for RELEASE
                 f = open("settings.ini", "w+")
                 for setting in GAMESETTINGS:
                     f.write(setting + "\n" + str(GAMESETTINGS[setting]) + "\n")
                 f.close()
+            # This normal function exits the game but also saves your progress so you can pick back up.
+            # Now at least for normal people you can't metagame by saving and loading files
+            elif verb in ['exit','leave','quit']:
+                # A FULL Copy of /savegame function bassically
+                if raw_input("\n\nAre you sure you want to save and quit the game?\nYour game will be saved.\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes','yeah']:
+                    GAMEINFO['runtime'] += (time.time() - GAMEINFO[
+                        'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
+                    GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
+                    logGame(GAMEINFO['log'])  # logs the game when you save it
+                    CreativeMode.saveGame(GAMEINFO['playername'])  # saves all data
+                    print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
+                    raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
+                    exit()
             else:
                print "\nI don't understand that command!\n"
 

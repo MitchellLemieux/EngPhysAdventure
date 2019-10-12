@@ -359,7 +359,8 @@ def events():
                 if raw_input(
                         "Upgrading: " + upgrade.name + "\nSacrificing: " + sacrifice.name + "\n\nThis cannot be undone. \nType Y if this is correct:").lower() in [
                     "y", 'yes', '1']:
-                    1 + 1  # do nothing
+                    pass  # if they're sure they want to do something go foward
+# The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
                 else:  # goes back to the loop and start again
                     break
                     upgradechoice = 0

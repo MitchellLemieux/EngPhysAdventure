@@ -21,7 +21,7 @@ def saveGame(savename):
     # TODO Turn off CSV saves before compiling
     CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
 
-    f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".txt", "w+")
+    f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".plp", "w+")  # Saved as .plp for obfuscation purposes
     x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
 ##    types in x
 ##    <type 'instance'>
@@ -34,7 +34,9 @@ def saveGame(savename):
 ##    <type 'dict'>
     pickle.dump(x, f) #pickles the list of gamedata to the save file
     f.close()
+
     return
+
     
     
 def loadGame(loadname):
@@ -47,7 +49,7 @@ def loadGame(loadname):
     global GAMEINFO
     global GAMESETTINGS
     try:
-        f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".txt","r+")
+        f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".plp","r+")  # Saved as .plp for obfuscation purposes
         save = pickle.load(f)
         f.close()
         #seperates the list

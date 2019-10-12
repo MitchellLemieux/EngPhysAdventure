@@ -5,7 +5,7 @@ from GameClasses import *
 import StartUp
 import AsciiArt
 import time
-import os #used to put files in the cache folder
+import os  # used to put files in the cache folder
 from printT import * #import it all
 
 
@@ -55,14 +55,20 @@ Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
 MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
 MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
 
-#Setting up the game path for the game to the cache folder
-#using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
+# Setting up the game path for the game to the cache folder
+# Using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
 # joining an empty string just gives a slash
 GAMEINFO['savepath'] = os.path.join(os.getcwd(), "cache","")
+
 try:
-    os.makedirs(GAMEINFO['savepath']) #gets the directory then makes the path if it's not there
+    os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
+    # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
+    # Not hiding individual files so can access and also will throw an error to access if files are hidden
+    os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
+
 except:
-    print "\n"#does nothing if the path is already there
+    print "\n"  # does nothing if the path is already there
+
 
 # TODO Make these functions into class methods related to each class
 def Equip(Item):
@@ -312,6 +318,7 @@ def Talk(E):
             print "NEED : " + str(ENEMIES[E].need)
             print "DROP : " + str(ENEMIES[E].drop)
             print "QUESTFlag : " + str(ENEMIES[E].quest)
+            print "SPOKE : " + str(ENEMIES[E].spoke)
 
 
     elif E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive==False):
@@ -427,7 +434,8 @@ def Eat(Item):
         
 def logGame(log): #this makes a log file which records all player actions for debugging
     # TODO add settings and more description to log
-    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".txt"  # metacache is a fake name for the log file
+    # metacache is a fake name for the log file. As well, saved as .plp for obfuscation purposes
+    fpath = GAMEINFO['savepath'] + "MetaChache " + GAMEINFO['playername']+".plp"
     f = open(fpath,"w+")
     for i in range(len(log)):
         f.write(str(log[i]) + '\n')

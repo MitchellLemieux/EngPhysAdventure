@@ -77,15 +77,15 @@ def StartScreen():
                 loadnamelist = []  # list to store loadname
                 # Iterates through display string which has all files in the directory
                 for file in os.listdir(GAMEINFO['savepath']):
-                    if file == "SaveFile basegame.txt":  # ignores the basegame file
+                    if file == "SaveFile basegame.plp":  # ignores the basegame file
                         next
                     # Searches for the keyword in the files of the savefile directory
-                    elif fnmatch.fnmatch(file, 'SaveFile*'):
+                    elif fnmatch.fnmatch(file, 'SaveFile*'):  # looks for files that have SaveFile in the Name
                         loadnumber += 1  # Itterates the loadnumber for the next one
                         # Saving load number as string so can compare Lchoice string later
                         loadnumberlist.append(str(loadnumber))
                         # For some reason strip is being dumb and have to strip "SaveFile" and the " " separately
-                        loadnamelist.append(file.lstrip("SaveFile").strip().rstrip(".txt"))
+                        loadnamelist.append(file.lstrip("SaveFile").strip().rstrip(".plp"))
 
                 # Displays the save files was numbered list starting from 1
                 for i in range(loadnumber):
