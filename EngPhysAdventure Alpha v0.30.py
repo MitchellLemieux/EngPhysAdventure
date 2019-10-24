@@ -31,6 +31,7 @@ LINEBREAK = "===================================================================
 def Setup():
     global PLAYER
     global GAMEINFO
+    global MAPS
 
     if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
         GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
@@ -57,8 +58,13 @@ def Setup():
     PLAYER.location[3] = dim
 
     CurrentPlace = MAPS[x][y][z][dim]
-    
-    print CurrentPlace.lore +"\n\n" + CurrentPlace.info + CurrentPlace.search()
+
+    # This prints
+    print "You wake up in " + CurrentPlace.name + "\n"
+    printT(CurrentPlace.lore)
+    printT("~" + CurrentPlace.name.upper() + "~(\S)" + CurrentPlace.search(MAPS))
+
+
     
     GAMEINFO['gamestart'] = time.time()  # Gives the local start date of the game in seconds since epoch of 1970
     CreativeMode.saveGame("basegame")  # Use this to get a base state newgame, keep it in each time so don't have to worry about updating
@@ -95,8 +101,10 @@ def Main():
     # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in game decision area
     VERBS =['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'up', 'down', 'left', 'right',
             'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
-            'east', 'west', 'fight', '/420e69', 'examine', 'exit', 'leave', 'quit']
-    DEVVERBS = ['/stats','/savegame','/loadgame','/restart']  # lists of Verbs/keywords ONLY the developer can use
+            'east', 'west', 'fight', '/420e69', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
+            'walk', 'run', 'turn']
+    # DIRECTIONS = []  # TODO Make these direction verbs defined here
+    DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
     DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
 
@@ -106,10 +114,13 @@ def Main():
 
         # if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()  # Minimap display area in game
         
-        line = raw_input('What do you want to do?\n') 
+        line = raw_input('\nWhat do you want to do?\n')
         GAMEINFO['log'].append(line)
+        # this splits it at the first spacing making it the first verb and then the rest as the object noun
+        # CURRENTLY the rest of the parser calls simply a function based on the verb and passes it the object noun name
         direction = line.lower().split(" ",1)
 
+        print LINEBREAK  # This linebreak helps split up each turn
         
         for i in range(len(direction)):
            direction[i] = direction[i].strip() # Getting rid of the spaces at the end of words
@@ -122,7 +133,8 @@ def Main():
                 else: verb = SpellCheck(verb,VERBS)
 
 
-            if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward','north','south','east','west']:
+            if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward',
+                        'north','south','east','west', 'n', 's', 'e', 'w', 'ahead', 'backward']:
                 CurrentPlace = Move(verb)
                 GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
             elif verb in ['search','look']:
@@ -130,7 +142,8 @@ def Main():
                 y = PLAYER.location[1]
                 z = PLAYER.location[2]
                 dim = PLAYER.location[3]
-                print MAPS[x][y][z][dim].search()
+                printT(MAPS[x][y][z][dim].search(MAPS))
+
 
             # TODO if word based description: re-enable stats and remove from DEVVERBs
             elif (verb == '/stats'):
@@ -182,18 +195,24 @@ def Main():
                 # if dev mode enabled it accepts special verbs which allows you to use special functions
                 if GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
                 else: verb = SpellCheck(verb, VERBS)
-            objectName = SpellCheck(direction[1],KEYS)
+            # Implemented a pass on the spellcheck for creativemode, will fix this BS later
+            # TODO Fix this BS (I.E. make the spellchecker work for multi nounbased structure OR have commands be combined
+            if verb == "/": objectName = direction[1]  # Doesn't do spell check if creative command
+            # TODO Fix this so don't have to write move verbs in two spots
+            # This is a fix so that if you type in a multiword move it doesn't spell check the direction
+            elif verb in ['go', 'move', 'walk', 'run', 'turn']: objectName = direction[1]
+            else: objectName = SpellCheck(direction[1],KEYS)  # Does do spell check if normal
 
             if verb in ['equip','get','wear']:
                 Equip(objectName)
                 
-            elif verb == 'drop':
+            elif verb in ['drop', 'throw']:
                 Drop(objectName)
 
             elif verb in ['attack','kill', 'fight']:
                 Attack(objectName)
                 
-            elif verb == 'talk':
+            elif verb in ['talk', 'speak']:
                 Talk(objectName)
 
             elif verb in ['inspect', 'examine']:
@@ -202,11 +221,18 @@ def Main():
             elif verb in ['eat','drink','inhale','ingest','devour']:
                 Eat(objectName)
 
+            elif verb in ['go', 'move', 'walk', 'run', 'turn']:  # this may or may not work
+                CurrentPlace = Move(objectName)
+                GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
+
+            elif verb == "/":  # if using a CreativeMode command
+                CreativeMode.creative_parser(objectName)
+
             else:
                print "\nI don't understand that command!\n"
-    
-        GAMEINFO['commandcount'] += 1 #increments the command count after every command but doesn't print
-        print LINEBREAK
+
+        GAMEINFO['commandcount'] += 1  # increments the command count after every command but doesn't print
+        #print LINEBREAK  # Got rid of this bottom linebreak to hopefully have the current situation more clear
         Quests.ebta_story()  # runs through the story quests checks and actions
         Quests.sidequests()  # runs through all the sidequest checks and actions
         Quests.events()  # runs through all the events checks and actions
@@ -237,12 +263,12 @@ def End():
         print LINEBREAK
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
         if GAMESETTINGS['SpeedRun']: print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
-        logGame(GAMEINFO['log']) #writes the log file
-        if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit: ").lower() =='r': #lets the player restart the game
+        logGame(GAMEINFO['log']) # writes the log file
+        if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit:\n").lower() =='r': #lets the player restart the game
             CreativeMode.loadGame("basegame") #loads in the savefile global variables
             GAMEINFO['timestart'] = time.time() #reset instance start time
             Main() #re-enters the main loop
-        return #returns the game so you don't get the final dialog
+        return # returns the game so you don't get the final dialog
     elif raw_input("Type 'C' to continue\n").lower() == 'c':  # If they beat either of the storylines
         Opening.Closing() #plays the closing
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find

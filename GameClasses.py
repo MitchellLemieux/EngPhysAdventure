@@ -118,12 +118,12 @@ class Map:  #Map Location Storage
         self.name = str(name)       # Name of location
         # Dim is the dimension/ building number associated with the place, by default Overworld is 0, Bsb is 1, etc
         self.location = location    # Map coordinates tuple (X,Y,Z,Dim) TODO Make make ground level 0 and basements -1
-        self.info = str(info)  # Description of areas around it and name, TODO Make this generate automatically
-        self.lore = lore  # Description of the location
+        self.info = str(info)  # A more detailed description of the suroundings than the search function
+        self.lore = str(lore)  # A monologue of the area and what you do when you get there
         self.items = []  # list of equipment objects at that location
         self.ENEMY = []  # list of enermy objects at that location
         self.walls = walls
-        self.travelled = 1
+        self.travelled = 1  # This defines if you've been there before TODO Name should be changed to untravlled
         self.inside = inside #Boolean that says if it's indoors for interriors and seeing the time
         self.mapped = 0  # TODO make consistent flag convention for 0 as default and 1 as activated
         # TODO Interriors rewarding at end
@@ -179,10 +179,12 @@ class Map:  #Map Location Storage
             if i.name ==Interact.name:
                 self.items.remove(i)
 
-    def search(self): #TODO improve search to automatically spit out the direction stuff,
+    # This function is the main thing that says what's in the area.
+    def search(self,MAPS):  # Is passed MAPS dictionary so it can search area around it
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
         description = "\n"
         length = len(self.items)
+        # (\S) used for printT newline
         if length:
             description = "\nYou see"
             if length > 1:
@@ -206,9 +208,9 @@ class Map:  #Map Location Storage
         if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + "[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?\n"
+                    description = description + "(\S)[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?"
                 elif enemy.alive:
-                    description = description + "[" + enemy.name + "] is " \
+                    description = description + "(\S)[" + enemy.name + "] is " \
 + choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
           "eating a frighteningly large burrito","playing runescape","browsing math memes",
           "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
@@ -220,21 +222,52 @@ class Map:  #Map Location Storage
           "playing football by themself", "balancing a tennis racket on their nose", "digging down in Minecraft",
           "catching a shiny Pikachu", "checking their Hearthstone Bot", "solving time travel", "watching Gilmore Girls",
           "computing the eigenvalue of the inverse Mobius strip", "watching Little House on the Prairie",
-          "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched"]) + ".\n"
+          "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched"]) + "."
 
 
                 else:
-                    description = description + "Oh look, its the " \
+                    description = description + "(\S)Oh look, its the " \
                                   + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
                                   + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
-                                  + "[" + enemy.name + "].\n"
+                                  + "[" + enemy.name + "]."
 
         # if self.interact:
         #     for item in self.interact:
         #         description = description + "/" + item.info + "/\n"
                 
         if (description == ""):
-            description = "\nThere isn't a whole lot to see."
+            description = "(\S)There isn't a whole lot to see."
+
+        # Auto Surrounding Descriptions
+            # Finding the locations around current location
+        location = self.location  # gets coordinates tuple
+        letterdirections = ['l','r','f','b','u','d']  # letter based list of directions to check against walls
+        tupledirections = [(-1,0,0,0),(1,0,0,0),(0,1,0,0),(0,-1,0,0),(0,0,1,0),(0,0,-1,0)]  # tuple based list of directions to add to current location
+        surroundings = [None] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
+
+        i = 0  # Counter for direction indexing
+        for direction in letterdirections:  # Looping through all the directions
+            if direction not in self.walls:  # seeing if the way you can go is in the walls
+                # Gets tuple of requested adjacent spot by adding the direction in the right order
+                dx, dy, dz, dim = tuple(map(operator.add,location,tupledirections[i]))
+                if MAPS[dx][dy][dz][dim]:  # if the map location exists
+                    surroundings[i] = MAPS[dx][dy][dz][dim].name  # store the name into the surroundings variable
+            i += 1
+
+            # Reading out the Surroundings
+        # TODO Add discovery mechanic where it prints locations as you see them
+                # Short Description
+        worddirections = ['[l]eft','[r]ight','[f]ront','[b]ack','[u]p','[d]own']
+        description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: (\S) "
+
+                # TODO for even shorter/harder list only directions
+        for i in range(6):  # use index to reference direction
+            if surroundings[i]:  # if the direction is seen
+                description += worddirections[i] + ": " + surroundings[i] + " "  # print the word direction + name
+
+                #TODO Add wordy description
+
+
             
         return description
 

@@ -91,9 +91,14 @@ def loadGame(loadname):
         #Displayes the current place info again to show it's been loaded
         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
         print "========================================================================"
-        if CurrentPlace.travelled == 1: #To print out the starting location for new files
-            print CurrentPlace.lore
-        print CurrentPlace.info + CurrentPlace.search() #prints the basic lore to give you bearing on where you are
+        if CurrentPlace.travelled == 1:  # To print out the starting location for new files
+            print "You wake up in " + CurrentPlace.name + "\n"
+            printT(CurrentPlace.lore)
+        printT("~" + CurrentPlace.name.upper() + "~" + CurrentPlace.search(MAPS))  # prints the basic lore to give you bearing on where you are
+
+
+
+
 
         #YOU HAVE TO USE THIS DARN .__dict___ thing to copy the object atributes https://stackoverflow.com/questions/36243488/how-can-i-overwrite-an-object-in-python
         #This is ineffecient but works. I think main problem I had is loading where the loaded objects are a new memory location but the game still references old locations
@@ -157,3 +162,80 @@ def updateSave(save): #this file tries to autoatically update the save file
     
     return
  
+def creative_parser(command):
+    print command
+    # Going to go:
+    # / Commandtype Classtype /Noun/ (/ / so can be multiword without needing context) Attribute/Method(make sure all only 1 word) /Value/ (/ / if string, nothing if int/float/bool)
+    # ex) / Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/
+    # Does it one section at a time, splits left by two spaces gets first two words
+    # Splits around / / characters to get the rest
+
+    #testline = "Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/"
+
+    # Parser WILL BE DIFFERENT FOR EACH COMMAND based on what is needed
+    # Seperating the first 2 spaces to get first two words
+    spaceseperate = command.lower().split(" ", 2)  # SPLIT works from the left normally but rsplit works from the right
+    slashseperate = spaceseperate[2].split("/", 4)  # splits by lines
+    # info = info[:1]  # Could use [:-1] removes last element by taking subset n-1 ellements
+    del slashseperate[-1]  # deletes last empty element
+    del slashseperate[0]  # deletes 1st empty element, not deleting empty spaces because could be empty name
+    slashseperate[1] = slashseperate[1].strip(" ")  # gets rid of empty space in attribute
+    #Maybe delete empty spaces in each attritube
+
+    commandtype = spaceseperate[0].lower()
+    classtype = spaceseperate[1].lower()
+    noun = slashseperate[0].lower()
+
+    # Might leave these prints in there so people understand
+    print commandtype
+    print classtype
+    print noun
+    print attribute
+    print value
+# Go through first 3 values (commandtype, classtype, noun) then each subsequent one based on need
+
+
+    if commandtype == "read":   # passing to the read function
+        creative_read(classtype, spaceseperate[2])
+    # elif commandtype == "set":
+    #     creative_set(classtype, spaceseperate[2])
+    # elif commandtype == "new":
+    #     creative_new(classtype, spaceseperate[2])
+    # elif commandtype == "spawn":
+    #     creative_spawn(classtype, spaceseperate[2])
+    # elif commandtype == "remove":
+    #     creative_remove(classtype, spaceseperate[2])
+    # else:
+    #     print "I don't recognize that Creative command. Options are:\nRead, Set, New, Spawn, Remove"
+
+    return
+
+# Read
+# read attributes
+#/ex) / read Enemy /Dr. Minnick/ attack
+# def creative_read(classtype, )
+#     attribute = slashseperate[1].lower()
+#     value = slashseperate[2].lower()
+#
+#
+#     return
+
+# Set
+#set attributes
+#/Set Enemy /Alex Jones/ info /I"M COMMIN/
+
+# New
+# creates a new base object
+#/ Create Enemy Dr. Minnick2.0
+
+# Spawn
+# gives you a copy of that object at that location
+#/ Spawn item msp430
+
+# Remove
+# Removes ALL of given ellement in the game at the time
+#/ Remove Enemy Dr. Minnick
+
+# needs to be error checking if that ellement doesn't exist, but will be no spellchecking
+
+

@@ -81,7 +81,7 @@ def Equip(Item):
     z = PLAYER.location[2]
     dim = PLAYER.location[3]
     Place = MAPS[x][y][z][dim]
-    if Item in ITEMS:
+    if Item in ITEMS:  # if name of Item asked for in parser is in ITEMS dictionary
         # this is different than the equip method in the Character class.
         # Makes sure the item is dropped at the current location
         drop = PLAYER.equip(ITEMS[Item])
@@ -125,24 +125,28 @@ def Move(direction):
     place = 0
     # TODO Bugfix, walls only registers for single letter movements not full commands, another reason to make transforms
     if direction not in currentplace.walls:
-        # TODO add cardinal and make these direction additions transformations
-        if direction in ['f','forward']:
+        # TODO Make these direction additions transformations (matrix transforms)
+        # These are the direction parsing
+        if direction in ['f','forward', 'ahead', 'w', 'west']:
             y += 1
-        elif direction in ['b','back']:
+        elif direction in ['b','back', 'backward', 'e', 'east']:
             y -= 1
         elif direction in ['r','right','n','north']:
             x += 1
-        elif direction in ['l','left']:
+        elif direction in ['l','left', 's', 'south']:
             x -= 1
         elif direction in ['u','up']:
             z += 1
         elif direction in ['d','down']:
             z -= 1
+        else:
+            print "I'm not sure what direction you mean."
+            return
         # TODO This is where links come in which direct into interriors
 
         place = MAPS[x][y][z][dim]  # place is new location requested
 
-        # Links: If the spot has a link might be teliported/moved to that place
+        # Interrior Links: If the spot has a link might be teliported/moved to that place
         for link in currentplace.links:  # if there is links in it it will loop through
             if direction in link:  # Searching all the links to see if any links refer to that direction
                 if dim == 0 and link[4] != 0:
@@ -171,14 +175,13 @@ def Move(direction):
             MAPS[x][y][z][dim].placeEnemy(bf)
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
             
-        if place.travelled:
-            print "========================================================================"
+        if place.travelled:  # This is the printout section for each time you move
+            print "You enter " + place.name + "\n"
             printT(place.lore)
-            print "\n\n"+place.info + place.search()
+            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS))  # (\S) used for printT newline
             place.travelled = 0
-        else:
-            print "========================================================================"
-            print place.info + place.search()
+        else:  # If returning to the place
+            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS))  # (\S) used for printT newline
             return place
             
         
