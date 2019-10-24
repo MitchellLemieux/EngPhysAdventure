@@ -11,6 +11,9 @@ cx_Freeze.setup(
         executables = executables)
 
 
-#python setup.py build
-#python setup.py bdist_msi
 
+
+### Use this to run a build folder
+#python setup.py build
+### Use this to make an installer in dist folder
+#python setup.py bdist_msi

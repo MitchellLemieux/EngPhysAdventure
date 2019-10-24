@@ -244,7 +244,6 @@ class Map:  #Map Location Storage
         letterdirections = ['l','r','f','b','u','d']  # letter based list of directions to check against walls
         tupledirections = [(-1,0,0,0),(1,0,0,0),(0,1,0,0),(0,-1,0,0),(0,0,1,0),(0,0,-1,0)]  # tuple based list of directions to add to current location
         surroundings = [None] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
-
         i = 0  # Counter for direction indexing
         for direction in letterdirections:  # Looping through all the directions
             if direction not in self.walls:  # seeing if the way you can go is in the walls

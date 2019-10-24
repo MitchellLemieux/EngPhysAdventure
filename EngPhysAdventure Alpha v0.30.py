@@ -102,7 +102,7 @@ def Main():
     VERBS =['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'up', 'down', 'left', 'right',
             'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
             'east', 'west', 'fight', '/420e69', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
-            'walk', 'run', 'turn']
+            'walk', 'run', 'turn','remember',"wait","sleep",'sit','die']
     # DIRECTIONS = []  # TODO Make these direction verbs defined here
     DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
     DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
@@ -135,13 +135,10 @@ def Main():
 
             if verb in ['u','d','l','r','f','b','up','down','left','right','back','forward',
                         'north','south','east','west', 'n', 's', 'e', 'w', 'ahead', 'backward']:
-                CurrentPlace = Move(verb)
+                CurrentPlace = Move(verb)  # TODO check if CurrentPlace is actually returned and if so, use it
                 GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
             elif verb in ['search','look']:
-                x = PLAYER.location[0]
-                y = PLAYER.location[1]
-                z = PLAYER.location[2]
-                dim = PLAYER.location[3]
+                x,y,z,dim = PLAYER.location
                 printT(MAPS[x][y][z][dim].search(MAPS))
 
 
@@ -175,7 +172,7 @@ def Main():
                 f.close()
             # This normal function exits the game but also saves your progress so you can pick back up.
             # Now at least for normal people you can't metagame by saving and loading files
-            elif verb in ['exit','leave','quit']:
+            elif verb in ['exit','leave','quit',"die"]:
                 # A FULL Copy of /savegame function bassically
                 if raw_input("\n\nAre you sure you want to save and quit the game?\nYour game will be saved.\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes','yeah']:
                     GAMEINFO['runtime'] += (time.time() - GAMEINFO[
@@ -186,6 +183,13 @@ def Main():
                     print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
                     raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
                     exit()
+            elif verb == "remember":
+                x,y,z,dim = PLAYER.location
+                place = MAPS[x][y][z][dim]
+                print "You entered " + place.name + "\n"
+                printT(place.lore)
+            elif verb in ["wait","sleep","sit"]:
+                printT("Time passes.")
             else:
                print "\nI don't understand that command!\n"
 
@@ -200,7 +204,7 @@ def Main():
             if verb == "/": objectName = direction[1]  # Doesn't do spell check if creative command
             # TODO Fix this so don't have to write move verbs in two spots
             # This is a fix so that if you type in a multiword move it doesn't spell check the direction
-            elif verb in ['go', 'move', 'walk', 'run', 'turn']: objectName = direction[1]
+            elif verb in ['go', 'move', 'walk', 'run', 'turn','look']: objectName = direction[1]
             else: objectName = SpellCheck(direction[1],KEYS)  # Does do spell check if normal
 
             if verb in ['equip','get','wear']:
@@ -227,6 +231,10 @@ def Main():
 
             elif verb == "/":  # if using a CreativeMode command
                 CreativeMode.creative_parser(objectName)
+            elif verb == "look":
+                if objectName == "around":
+                    x, y, z, dim = PLAYER.location
+                    printT(MAPS[x][y][z][dim].search(MAPS))
 
             else:
                print "\nI don't understand that command!\n"
