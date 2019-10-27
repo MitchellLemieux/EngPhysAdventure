@@ -315,7 +315,8 @@ try:  # In case settings file isn't there
     for i in range(0, len(data), 2):
         GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
 except:
-    print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
+    #print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
+    print "\n\nNo Settings Detected\n\n"
 
 
 # Start Screen is after reading in settings so it can skip start screen if enabled
