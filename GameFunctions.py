@@ -90,9 +90,9 @@ def Equip(Item):
 
         
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        print "\nYou can't equip that, gosh\n"
+        print "\nYou can't equip that, gosh"
     else:
-        print "\nThat doesn't seem to be around here.\n"
+        print "\nThat doesn't seem to be around here."
 
 def Drop(Item):
     global MAPS
@@ -178,10 +178,10 @@ def Move(direction):
         if place.travelled:  # This is the printout section for each time you move
             print "You enter " + place.name + "\n"
             printT(place.lore)
-            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS))  # (\S) used for printT newline
+            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS),72,0.75)  # (\S) used for printT newline
             place.travelled = 0
         else:  # If returning to the place
-            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS))  # (\S) used for printT newline
+            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS),72,0.25)  # (\S) used for printT newline
             return place
             
         
@@ -277,7 +277,7 @@ def Attack(E):
            else:
                print "Oh no! " + enemy.name + " defeated you!\nYou died, without ever finding your iron ring"
     else:
-        print "\nThey don't appear to be here.\n"
+        print "\nThey don't appear to be here."
                         
 
 def Talk(E):
@@ -292,7 +292,7 @@ def Talk(E):
     if E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
-            print "\n"+ enemy.name + " took the " + enemy.need + "."
+            print enemy.name + " took the " + enemy.need + "."
             printT(enemy.Sinfo)  # default print speed
             ITEMS[enemy.need].location = (None, None, None)  # Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
@@ -314,7 +314,7 @@ def Talk(E):
             printT(enemy.info)
         enemy.spoke = True
         if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
-            print "\nHEALTH: " + str(ENEMIES[E].health)
+            print "HEALTH: " + str(ENEMIES[E].health)
             print "ATK : " + str(ENEMIES[E].stats[0])
             print "DEF : " + str(ENEMIES[E].stats[1])
             print "SPD : " + str(ENEMIES[E].stats[2])
@@ -366,12 +366,12 @@ def Inspect(Item): #Item is the inspect item
             
             PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             INTERACT[Item].quest = True # this turns on the quest flag for the interactable once interacted with if you have the item
-            printT(INTERACT[Item].Sinfo) #special slow version
+            printT(INTERACT[Item].Sinfo + "(\S)") #special slow version
             PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
                 MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
-                print "You see a " + ITEMS[INTERACT[Item].drop].name +"."
+                print "You see " + ITEMS[INTERACT[Item].drop].name +".\n"
  
             print ""
 

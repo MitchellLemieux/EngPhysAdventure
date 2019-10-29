@@ -62,7 +62,7 @@ def Setup():
     # This prints
     print "You wake up in " + CurrentPlace.name + "\n"
     printT(CurrentPlace.lore)
-    printT("~" + CurrentPlace.name.upper() + "~(\S)" + CurrentPlace.search(MAPS))
+    printT("(\S)~" + CurrentPlace.name.upper() + "~(\S)" + CurrentPlace.search(MAPS))
 
 
     
@@ -101,8 +101,8 @@ def Main():
     # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in game decision area
     VERBS =['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'up', 'down', 'left', 'right',
             'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
-            'east', 'west', 'fight', '/420e69', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
-            'walk', 'run', 'turn','remember',"wait","sleep",'sit','die']
+            'east', 'west', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
+            'walk', 'run', 'turn','remember',"wait","sleep",'sit','die','pick','use','give']
     # DIRECTIONS = []  # TODO Make these direction verbs defined here
     DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
     DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
@@ -129,7 +129,8 @@ def Main():
             verb = direction[0]
             if len(verb)>1:
                 # if dev mode enabled it accepts special verbs which allows you to use special functions
-                if GAMESETTINGS['DevMode']: verb = SpellCheck(verb,DEVVERBS)
+                if verb == '/420e69': pass  # Does no spell checking so someone doesn't accidentally get 420e69
+                elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb,DEVVERBS)
                 else: verb = SpellCheck(verb,VERBS)
 
 
@@ -139,7 +140,7 @@ def Main():
                 GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
             elif verb in ['search','look']:
                 x,y,z,dim = PLAYER.location
-                printT(MAPS[x][y][z][dim].search(MAPS))
+                printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" +MAPS[x][y][z][dim].search(MAPS),72,0.5)
 
 
             # TODO if word based description: re-enable stats and remove from DEVVERBs
@@ -203,8 +204,8 @@ def Main():
             # TODO Fix this BS (I.E. make the spellchecker work for multi nounbased structure OR have commands be combined
             if verb == "/": objectName = direction[1]  # Doesn't do spell check if creative command
             # TODO Fix this so don't have to write move verbs in two spots
-            # This is a fix so that if you type in a multiword move it doesn't spell check the direction
-            elif verb in ['go', 'move', 'walk', 'run', 'turn','look']: objectName = direction[1]
+            # This is a fix so that if you type in a multiword move it doesn't spell check the second part
+            elif verb in ['go', 'move', 'walk', 'run', 'turn','look','pick']: objectName = direction[1]
             else: objectName = SpellCheck(direction[1],KEYS)  # Does do spell check if normal
 
             if verb in ['equip','get','wear']:
@@ -234,8 +235,27 @@ def Main():
             elif verb == "look":
                 if objectName == "around":
                     x, y, z, dim = PLAYER.location
-                    printT(MAPS[x][y][z][dim].search(MAPS))
-
+                    printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" +MAPS[x][y][z][dim].search(MAPS),72,0.5)
+            elif verb == "pick":  # Allows for pick up to be a thing
+                if objectName.lstrip().startswith("up"):  # if up is the second word
+                    objectName = objectName.lstrip().split("up")[1].lstrip()  # strips down to just the object name
+                    Equip(objectName)  # Equipts it
+            elif verb == "use":  # this makes it so you can use items if the interacble is in the area
+                x, y, z, dim = PLAYER.location
+                # checks all interactables in area to see if item is needed
+                for interactable in MAPS[x][y][z][dim].items:  # for all itmes+interactables in the area
+                    if isinstance(interactable,Interact):  # if it's in interactable
+                        if interactable.need == objectName:
+                            print "\nYou use the " + objectName + " with the " + interactable.name + ".\n"
+                            Inspect(interactable.name.lower())
+            elif verb == "give":
+                x, y, z, dim = PLAYER.location
+                # checks all Enemies in area to see if item is needed
+                for enemy in MAPS[x][y][z][dim].ENEMY:  # for all enemy in the area
+                    if enemy.need == objectName:
+                        print "\nYou give the " + objectName + " to " + enemy.name + ".\n"
+                        Talk(enemy.name.lower())
+                Talk(objectName)
             else:
                print "\nI don't understand that command!\n"
 

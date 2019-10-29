@@ -11,8 +11,8 @@ setup( console= [
      ]
 )
 
-# TODO make the icon apear automatically, moving the media files, and make an installer
-# TODO figure out tags
+
+# TODO figure out Git(Hub) tags, how to revert history, and how to mark versions
 reminder = ["\n\nDon't forget to:\n",
             "Have all your code documented and ready to go!\n",
             "Check all the TODOs in the game\n",

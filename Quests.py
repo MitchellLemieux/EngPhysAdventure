@@ -1,6 +1,6 @@
 # ENG PHYS TEXT  ADVENTURE
 # Mitchell Lemieux, Tyler Kashak, and Brendan Fallon
-# Wrote on Mar  21,2019:
+# First written on Mar  21,2019 by Brendan Fallon:
 """
 This Quests.py file is used to write the story, quests, and events of the game by changing objects based on conditions.
 EngPhysStory() is the main Eng Phys storyline  and returns once its finished

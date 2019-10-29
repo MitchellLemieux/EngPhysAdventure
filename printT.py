@@ -15,7 +15,7 @@ import time
     #and can define their window character size (small-med-large) for text reading
 # TODO put delay back to 2.5 seconds before game release
 # TODO Make an alignment option so can align to left, centre, or right side of screen
-def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
+def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
     This function removes newlines from our old text then prints out each line to the chacter limit and with delays inbetween
     Can override parser to make newline split using (\S). Use (\S) (\S) to split and make a blank space with a delay, resets the sentence variable

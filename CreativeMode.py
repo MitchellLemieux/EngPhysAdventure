@@ -19,7 +19,7 @@ def saveGame(savename):
     # this saves current state to csv file, disabled by default for releasing exe
     # TODO Make these files into the loading with encryption
     # TODO Turn off CSV saves before compiling
-    CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+    #CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
 
     f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".plp", "w+")  # Saved as .plp for obfuscation purposes
     x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
@@ -94,7 +94,7 @@ def loadGame(loadname):
         if CurrentPlace.travelled == 1:  # To print out the starting location for new files
             print "You wake up in " + CurrentPlace.name + "\n"
             printT(CurrentPlace.lore)
-        printT("~" + CurrentPlace.name.upper() + "~" + CurrentPlace.search(MAPS))  # prints the basic lore to give you bearing on where you are
+        printT("(\S) ~" + CurrentPlace.name.upper() + "~ (\S)" + CurrentPlace.search(MAPS),72,0.75)  # prints the basic lore to give you bearing on where you are
 
 
 

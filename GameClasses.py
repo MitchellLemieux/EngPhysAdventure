@@ -57,8 +57,8 @@ class Character:
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            print "\n"+Equip.info
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ".\n"
+            print "\n"+Equip.info + "\n"
+            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + "."
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
@@ -95,9 +95,9 @@ class Enemy:
         self.location = location
         self.stats = stats
         self.health = health
-        self.Sinfo = Sinfo #special info displayed if you give them what they need
-        self.Dinfo = Dinfo #death info displayed if they need
-        self.need = need #what the need, if you talk to them with this item you'll get the drop and it will set the quest flag to True
+        self.Sinfo = Sinfo  # special info displayed if you give them what they need
+        self.Dinfo = Dinfo  # death info displayed if they need
+        self.need = need  # what the need, if you talk to them with this item you'll get the drop and it will set the quest flag to True
         self.drop = drop
         self.alive = True
         self.quest = False
@@ -263,7 +263,8 @@ class Map:  #Map Location Storage
         for i in range(6):  # use index to reference direction
             if surroundings[i]:  # if the direction is seen
                 description += worddirections[i] + ": " + surroundings[i] + " "  # print the word direction + name
-
+            if worddirections[i] in ['[r]ight','[b]ack'] and surroundings[i+1]:  # Adds a spaces to make 3 x 2 printout
+                description += " (\S) "
                 #TODO Add wordy description
 
 
