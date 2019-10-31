@@ -5,6 +5,12 @@ Wrote on April 14,2018: Icemageddon
 """
 import operator
 from random import *
+import colorama  # Colour module, no bolding on windows :(
+from colorama import Fore, Back, Style
+
+colorama.init()
+CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
+lightgreen = Fore.LIGHTGREEN_EX
 
 def six_tuple_add(a, b, c, d, e, f):  # adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
@@ -77,7 +83,7 @@ class Character:
             print "\nYou've dropped the " + Equip.name
             drop = Equip
         else:
-            print "You aren't carrying that item."
+            print "Maybe you're still drunk?. You aren't carrying " + Equip.name + "."
         self.updateStats()
         return drop
 
@@ -176,7 +182,7 @@ class Map:  #Map Location Storage
 
     def removeInteract(self,Interact):  # had to be rewritted with load or else load function would create duplciate glitch
         for i in self.items:  # weird way to write it but loops through the items in that lcoation and if the name matches it removes it
-            if i.name ==Interact.name:
+            if i.name == Interact.name:
                 self.items.remove(i)
 
     # This function is the main thing that says what's in the area.
@@ -185,32 +191,42 @@ class Map:  #Map Location Storage
         description = "\n"
         length = len(self.items)
         # (\S) used for printT newline
+        # Initialize the {shortkey} used with object,interact,enemy for quick commands.
+        shortkey = 5  # Starts at 5 because 1-4 are reserved for inventory quick commands
+        # This big if statement basically does a printout to account for single object/enemy in the area grammer
         if length:
             description = "\nYou see"
-            if length > 1:
+            if length > 1:  # If there's more than one item/interact in the area
                 for i in range(length):
                     if (i == length-1):
                         if isinstance(self.items[i],Equipment):
-                            description = description+" and a <"+self.items[i].name + ">.\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            description = description+" and a {" + str(shortkey) + "}"+ Fore.MAGENTA + "<"+self.items[i].name + ">" + lightgreen +".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            shortkey += 1  # increments the shortkey
                         else:
-                            description = description+" and a /"+self.items[i].name + "/.\n" #inspectable highlight
+                            description = description+" and a {" + str(shortkey) + "}" + Fore.CYAN + "/"+self.items[i].name + "/" + lightgreen + ".\n" #inspectable highlight
+                            shortkey += 1  # increments the shortkey
                     else:
                         if isinstance(self.items[i],Equipment):
-                            description = description + " a <"+self.items[i].name + ">,"
+                            description = description + " a {" + str(shortkey) + "}"+ Fore.MAGENTA + "<"+self.items[i].name + ">" + lightgreen +","
+                            shortkey += 1  # increments the shortkey
                         else:
-                            description = description + " a /"+self.items[i].name + "/,"
-            else:
+                            description = description + " a {" + str(shortkey) + "}" + Fore.CYAN + "/"+self.items[i].name + "/" + lightgreen + ","
+                            shortkey += 1  # increments the shortkey
+            else:  # if there's only 1 item/interact in the area
                 if isinstance(self.items[0],Equipment):
-                    description = description + " a <" +self.items[0].name + ">.\n" #equipment highlight
+                    description = description + " a {" + str(shortkey) + "}"+ Fore.MAGENTA + "<"+self.items[0].name + ">" + lightgreen +".\n" # equipment highlight
+                    shortkey += 1  # increments the shortkey
                 else:
-                    description = description + " a /" +self.items[0].name + "/.\n" #inspectable highlight
+                    description = description + " a {" + str(shortkey) + "}" + Fore.CYAN + "/"+self.items[0].name + "/" + lightgreen + ".\n" # inspectable highlight
+                    shortkey += 1  # increments the shortkey
         
         if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + "(\S)[" + enemy.name + "] is playing the Eng Phys Text Based Adventure. WAIT What!?"
+                    description = description + "(\S){" + str(shortkey) + "}" + Style.BRIGHT + Fore.YELLOW + "[" + enemy.name + "]" + Style.RESET_ALL + lightgreen + " is playing the Eng Phys Text Based Adventure. WAIT What!?"
+                    shortkey += 1  # increments the shortkey
                 elif enemy.alive:
-                    description = description + "(\S)[" + enemy.name + "] is " \
+                    description = description + "(\S){" + str(shortkey) + "}" + Style.BRIGHT + Fore.YELLOW + "[" + enemy.name + "]" + Style.RESET_ALL + lightgreen + " is " \
 + choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
           "eating a frighteningly large burrito","playing runescape","browsing math memes",
           "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
@@ -223,13 +239,15 @@ class Map:  #Map Location Storage
           "catching a shiny Pikachu", "checking their Hearthstone Bot", "solving time travel", "watching Gilmore Girls",
           "computing the eigenvalue of the inverse Mobius strip", "watching Little House on the Prairie",
           "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched"]) + "."
+                    shortkey += 1  # increments the shortkey
 
 
                 else:
                     description = description + "(\S)Oh look, its the " \
                                   + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
                                   + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
-                                  + "[" + enemy.name + "]."
+                                  + "{" + str(shortkey) + "}" + Style.DIM + Fore.YELLOW + "[" + enemy.name + "]" + Style.RESET_ALL + lightgreen + "."
+                    shortkey += 1  # increments the shortkey
 
         # if self.interact:
         #     for item in self.interact:
@@ -238,11 +256,12 @@ class Map:  #Map Location Storage
         if (description == ""):
             description = "(\S)There isn't a whole lot to see."
 
-        # Auto Surrounding Descriptions
+        # --- Auto Surrounding Descriptions ---
             # Finding the locations around current location
         location = self.location  # gets coordinates tuple
-        letterdirections = ['l','r','f','b','u','d']  # letter based list of directions to check against walls
-        tupledirections = [(-1,0,0,0),(1,0,0,0),(0,1,0,0),(0,-1,0,0),(0,0,1,0),(0,0,-1,0)]  # tuple based list of directions to add to current location
+        letterdirections = ['u', 'd', 'f', 'b', 'l', 'r']  # letter based list of directions to check against walls
+        lettersthere = ""
+        tupledirections = [(0,0,1,0), (0,0,-1,0), (0,1,0,0), (0,-1,0,0), (-1,0,0,0), (1,0,0,0)]  # tuple based list of directions to add to current location
         surroundings = [None] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
         i = 0  # Counter for direction indexing
         for direction in letterdirections:  # Looping through all the directions
@@ -251,19 +270,20 @@ class Map:  #Map Location Storage
                 dx, dy, dz, dim = tuple(map(operator.add,location,tupledirections[i]))
                 if MAPS[dx][dy][dz][dim]:  # if the map location exists
                     surroundings[i] = MAPS[dx][dy][dz][dim].name  # store the name into the surroundings variable
+                    lettersthere += direction + ","
             i += 1
 
             # Reading out the Surroundings
         # TODO Add discovery mechanic where it prints locations as you see them
                 # Short Description
-        worddirections = ['[l]eft','[r]ight','[f]ront','[b]ack','[u]p','[d]own']
-        description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: (\S) "
+        worddirections = ['[U] ','[D] ','[F] ','[B] ','[L] ','[R] ']
+        description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: " + lettersthere + "(\S)"
 
                 # TODO for even shorter/harder list only directions
         for i in range(6):  # use index to reference direction
             if surroundings[i]:  # if the direction is seen
-                description += worddirections[i] + ": " + surroundings[i] + " "  # print the word direction + name
-            if worddirections[i] in ['[r]ight','[b]ack'] and surroundings[i+1]:  # Adds a spaces to make 3 x 2 printout
+                description += worddirections[i] + surroundings[i] + "\t"  # print the word direction + name
+            if worddirections[i] in ['[D] ','[B] '] and surroundings[i]:  # Adds a spaces to make 3 x 2 printout
                 description += " (\S) "
                 #TODO Add wordy description
 

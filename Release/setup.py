@@ -51,20 +51,20 @@ cx_Freeze.shortcut_table = [
      None,                      # IconIndex
      None,                      # ShowCmd
      'TARGETDIR'                # WkDir
-     ),
+     )
     # WHAT this makes it so the game starts with this, don't have this for general installer
-    ("StartupShortcut",         # Shortcut
-     "StartupFolder",           # Directory_
-     "EngPhysTextAdventure",    # Name
-     "TARGETDIR",               # Component_
-     "[TARGETDIR]EngPhysTextAdventure.exe",   # Target
-     None,                      # Arguments
-     None,                      # Description
-     None,                      # Hotkey
-     None,                      # Icon
-     None,                      # IconIndex
-     None,                      # ShowCmd
-     'TARGETDIR'                # WkDir
+##    ,("StartupShortcut",         # Shortcut
+##     "StartupFolder",           # Directory_
+##     "EngPhysTextAdventure",    # Name
+##     "TARGETDIR",               # Component_
+##     "[TARGETDIR]EngPhysTextAdventure.exe",   # Target
+##     None,                      # Arguments
+##     None,                      # Description
+##     None,                      # Hotkey
+##     None,                      # Icon
+##     None,                      # IconIndex
+##     None,                      # ShowCmd
+##     'TARGETDIR'                # WkDir
      )
 
     ]

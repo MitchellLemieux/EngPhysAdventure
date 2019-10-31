@@ -7,6 +7,12 @@ import AsciiArt
 import time
 import os  # used to put files in the cache folder
 from printT import * #import it all
+import colorama  # Colour module, no bolding on windows :(
+from colorama import Fore, Back, Style
+
+colorama.init()
+CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
+lightgreen = Fore.LIGHTGREEN_EX
 
 
 # This is where the global variables are instantiated and defined. Global variables used to pass info between functions
@@ -24,9 +30,33 @@ INTERIORS = ["OverWorld","BSB","Capstone Room"]  # List of interior names with t
 
 
 GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gamestart':0,'timestart':0,
-            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "",}
-#this dictionary is used to store misc game info to be passed between function: speedrun time, start time, etc. Values are initialized to their value types
-# version is version of the game, gamestart is the first start time of the game, runtime is the total second count, log is log of all player input, layers deep is how many layers deep in the laptop quest you are
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "","help": ""}
+#this dictionary is used to store misc game info to be passed between function:
+# speedrun time, start time, etc. Values are initialized to their value types
+# version is version of the game, gamestart is the first start time of the game, runtime is the total second count,
+# log is log of all player input, layers deep is how many layers deep in the laptop quest you are, help is help prinout,
+
+GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things (~Places~, <objects>, /interacts/, and [people]) " \
+                   "(\S) (\S)These are the commands your brain can handle in this state:" \
+                   "(\S)(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
+                   "(\S)(e)equip objects" \
+                   "(\S)(dr)drop objects" \
+                   "(\S)(exa)examine objects" \
+                   "(\S)(ea)eat objects" \
+                   "(\S)(i)inventory (check inventory)" \
+                   "(\S)(exa)examine interacts (uses an item when you have the right thing) " \
+                   "(\S)(us)use objects (use an item on a nearby interact)" \
+                   "(\S)(t)talk person  (gives them an item when you have the right thing)" \
+                   "(\S)(g)give object (gives an object to a person around you)" \
+                   "(\S)(a)attack person (Force may be necessary but be careful, you're limited by what you have)" \
+                   "(\S)(s)search (look at what's around you)" \
+                   "(\S)(r)remember (remember what you were doing here earlier)" \
+                   "(\S)exit (exit your body)" \
+                   "(\S)shortcuts (gives shortcuts list)" \
+                   "(\S)(h)help (gives you this list again)" \
+                   "(\S) (\S)While you may accept more commands that is up to you to discover."
+
+
 
 QUESTS = {}  #initializing the quests global variable to be later writen into
 
@@ -46,14 +76,17 @@ EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
 STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-TYINV = {'head':ITEMS['visor glasses'],'body':ITEMS['big hits shirt'],'hand':ITEMS['hulk hands'],'off-hand':ITEMS['green bang bong']} #Setting a starting inventory bugs these somehow making them glitchy in the game, however having the item be dropped/spawned later somehow fixes this so that's the quick fix. Also gets to have the Iron Ring when he graduates
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
+
+# OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
+TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
+
 
 # TODO Make PLAYER into PLAYERS a dictionary of playable characters objects
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
-MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
-MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
+# MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
+# MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
 
 # Setting up the game path for the game to the cache folder
 # Using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
@@ -90,9 +123,9 @@ def Equip(Item):
 
         
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        print "\nYou can't equip that, gosh"
+        print "\nYou can't carry that, gosh."
     else:
-        print "\nThat doesn't seem to be around here."
+        print "\nYou can't find that around here. Maybe it's your hungover typing."
 
 def Drop(Item):
     global MAPS
@@ -108,7 +141,7 @@ def Drop(Item):
         Place.placeItem(drop)
         # Same as equip function. 'None' passed to function if item doesn't exist
     else:
-       print "You aren't carrying that item."
+       printT("Maybe you're still drunk?. You aren't carrying " + Item + ".")
 
 
 
@@ -146,21 +179,22 @@ def Move(direction):
 
         place = MAPS[x][y][z][dim]  # place is new location requested
 
-        # Interrior Links: If the spot has a link might be teliported/moved to that place
-        for link in currentplace.links:  # if there is links in it it will loop through
-            if direction in link:  # Searching all the links to see if any links refer to that direction
-                if dim == 0 and link[4] != 0:
-                    print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
-                elif dim != 0 and link[4] == 0: # When going to overworld from non
-                    print "You go outside."
-                elif dim != link[4]:  # Leaving one interior and entering another
-                    print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
-
-                x = link[1]
-                y = link[2]
-                z = link[3]
-                dim = link[4]
-                place = MAPS[x][y][z][dim]  # Overwrites place with the link location
+        #  INTERRIORS DISABLED FOR NOW
+        # # Interrior Links: If the spot has a link might be teliported/moved to that place
+        # for link in currentplace.links:  # if there is links in it it will loop through
+        #     if direction in link:  # Searching all the links to see if any links refer to that direction
+        #         if dim == 0 and link[4] != 0:
+        #             print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
+        #         elif dim != 0 and link[4] == 0: # When going to overworld from non
+        #             print "You go outside."
+        #         elif dim != link[4]:  # Leaving one interior and entering another
+        #             print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
+        #
+        #         x = link[1]
+        #         y = link[2]
+        #         z = link[3]
+        #         dim = link[4]
+        #         place = MAPS[x][y][z][dim]  # Overwrites place with the link location
 
 
     if place:
@@ -176,12 +210,12 @@ def Move(direction):
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
             
         if place.travelled:  # This is the printout section for each time you move
-            print "You enter " + place.name + "\n"
+            print "You enter " + Back.WHITE + Fore.BLACK +  place.name + Back.RESET + lightgreen + "\n"
             printT(place.lore)
-            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS),72,0.75)  # (\S) used for printT newline
+            printT("(\S)" + Back.WHITE + Fore.BLACK + "~"+place.name.upper() + "~ (\S)" + Back.RESET + lightgreen + place.search(MAPS),72,0.75)  # (\S) used for printT newline
             place.travelled = 0
         else:  # If returning to the place
-            printT("(\S) ~"+place.name.upper() + "~ (\S)" + place.search(MAPS),72,0.25)  # (\S) used for printT newline
+            printT("(\S)" + Back.WHITE + Fore.BLACK + "~"+place.name.upper() + "~ (\S)" + Back.RESET + lightgreen + place.search(MAPS),72,0.25)  # (\S) used for printT newline
             return place
             
         
@@ -221,11 +255,11 @@ def Combat(P,E):
         SSHealth = Second.health
         while (P.health and E.health):
             if First.health:
-                Damage = int(random()*FDamage)
+                Damage = int(uniform(0.7, 1)*FDamage)
                 Second.health = max(0,Second.health - Damage)
             
             if Second.health:
-                Damage = int(random()*SDamage)
+                Damage = int(uniform(0.7, 1)*SDamage)
                 First.health = max(0,First.health - Damage)
      # TODO Re-implement combat and number with word ques instead of numbers
      # if First == P:
@@ -349,6 +383,7 @@ def Inspect(Item): #Item is the inspect item
 
     #If item in location
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
+        printT(ITEMS[Item].name.upper(),72,0)
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         # TODO re-implement inspecting item with words instead of numbers
         if GAMESETTINGS['DevMode']:  # If in devmode can see the stats
@@ -385,15 +420,24 @@ def Inspect(Item): #Item is the inspect item
             print "NEED : " + str(INTERACT[Item].need)
             print "DROP : " + str(INTERACT[Item].drop)
             print "QUESTFlag : " + str(INTERACT[Item].quest)
+    # If you try to inspect a person
+    elif Item in ENEMIES and ((list(ENEMIES[Item].location) == PLAYER.location)) and (ENEMIES[Item].alive):
+        print "\nIt's rude to stare at people!"
 
     else:
-        print "\nThat doesn't seem to be around here.\n"
+        print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
 
 def Inventory():
     global PLAYER
     print ""
-    for i in PLAYER.inv:
-        print i.upper() + ": " + PLAYER.inv[i].name
+    # Player inventory is a dictionary of objects so can access and print them out
+    print "{1}HEAD: " + PLAYER.inv['head'].name
+    print "{2}BODY: " + PLAYER.inv['body'].name
+    print "{3}HAND: " + PLAYER.inv['hand'].name
+    print "{4}OFF-HAND: " + PLAYER.inv['off-hand'].name
+    # This old method is more general/expandable but doesn't do them in order
+    # for i in PLAYER.inv:
+    #     print i.upper() + ": " + PLAYER.inv[i].name
     print ""
 def Eat(Item):
     global PLAYER
@@ -426,11 +470,18 @@ def Eat(Item):
                 print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
             else:
                 MAPS[x][y][z][dim].removeItem(ITEMS[Item])
-
         else:
             print "You can't eat that!"
+
+    # If you attempt to eat someone
+    elif Item in ENEMIES and (list(ENEMIES[Item].location) == PLAYER.location):
+        if (ENEMIES[Item].alive):
+            printT("You attempt to eat " + Item + "'s arm...(\S) (\S)They pull away ask you to politely Not.")
+        else:
+            printT("OMG WHAT'S WRONG WITH YOU. I know you're hungry but please find a more vegan option.")
+
     else:
-        print "\nThat doesn't seem to be around here.\n"
+        print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
 
 
 # BackEnd Functions

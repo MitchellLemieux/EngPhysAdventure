@@ -6,13 +6,20 @@ import os
 import fnmatch  # Used to fins the savefiles and display them
 import CreativeMode
 from printT import *
+import colorama  # Colour module, no bolding on windows :(
+from colorama import Fore, Back, Style
+
+colorama.init()
+CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
+lightgreen = Fore.LIGHTGREEN_EX
+
 from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables to be used in the start screen
 
 
 DELAY = 1.5
 # TODO Implement these based on the size of the screen
 LINEBREAK = "========================================================================" #standard display with 72 characters
-CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
+#CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
 #Graphics , audio, difficulty, modes, advanced
 #screen width, default read speed/On/Off, suggestion for green
 #music on/off, sound levels eventually?
@@ -22,22 +29,24 @@ CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 def StartScreen():
     global GAMEINFO
     global GAMESETTINGS
+    print Fore.LIGHTGREEN_EX  # This sets all text color to light green
 
     if GAMESETTINGS['DevMode']:
         pass  # If in dev mode do nothing and skip intro
 # The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
     else:
         # If no Dev Mode do the blip intro
+        print CLEARSCREEN
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) # plays the startup sound with 'multi-threading'
-        print "                A____ ________"
+        print "                " + Fore.RED + "A" + lightgreen + "____ ________"
         print "                /_  H|\_____  \ "
         print "                 |  O|  ___|  |"
         print "                 |  L| /___   <"
         print "                 |  L|  ___\   |"
         print "                 |  Y| /W O O D|"
         print "                 |___|/________/"
-        print "                      Production."
+        print "                      " +Fore.RED + "Production" + lightgreen + "."
         time.sleep(3)  # Delay for intro sound
         print CLEARSCREEN
 
@@ -48,13 +57,14 @@ def StartScreen():
         startmenu = False  # turning off loading screen
 
     while startmenu:
-        print LINEBREAK
+        print CLEARSCREEN
         print "       ___________                __________.__"
         print "       \_   _____/    _     _____ \______   \  |__ ___.__. ______"
         print "        |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
         print "        |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
         print "       /_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-        print "               \/     \//_____/  TEXT ADVENTURE  \/\/         \/ "
+        print "               \/     \//_____/  " + Fore.RED + "TEXT ADVENTURE" + Fore.LIGHTGREEN_EX +"  \/\/         \/ "
+        print "                             Now with colour!"
         print "                    Version " +str(GAMEINFO['versionname'])
         print "                    Release Date: " + GAMEINFO['releasedate'] + "                    \n\n"
         print "Play New Game[P]  Load Game[L]   Settings[S]   Disclaimers[D]  Exit[E]"
@@ -68,7 +78,7 @@ def StartScreen():
         elif choice in ['l', 'load game','load', 'loadgame']:
              loadscreen = True
              while loadscreen:
-                print LINEBREAK
+                print CLEARSCREEN
                 print "Load Game\n"
                 # print os.listdir(path)  # Gives a list of all files in the directory
                 # This Gets and save files in the cache and stores in lists
@@ -102,6 +112,7 @@ def StartScreen():
                     CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+                    print CLEARSCREEN
                 elif Lchoice in loadnumberlist:  # if user enters loadnumber has to lookup the load name
                     loadscreen = False
                     startmenu = False
@@ -116,7 +127,7 @@ def StartScreen():
         elif choice in ['s', 'settings','setting']:
             settingscreen = True
             while(settingscreen):
-                print LINEBREAK
+                print CLEARSCREEN
                 # TODO Make a DEV mode that disables error catching and enables creative
 
                 print "Settings\n*These may change if you load a previous game\n\n"
@@ -153,7 +164,7 @@ def StartScreen():
 
         # Disclaimer screen
         elif choice in ['d', 'disclaimers','disclaimer']:
-            print LINEBREAK
+            print CLEARSCREEN
 
             printT("Disclaimer (\S) (\S) This game is difficult, requires reading and focus on every piece of text, "
                    "and awareness of small details in order to advance the game. We feel here that we're trying to "
@@ -165,6 +176,7 @@ def StartScreen():
                    "the author's imagination or used in a fictitious manner. Any resemblance to actual persons, living "
                    "or dead, or actual events is purely coincidental. By playing this game you give up the right to"
                    "any information or files uploaded to the developers for benevolent development of the game.",72,0)
+            raw_input("\nHit enter to continue")
         # Exiting
         elif choice in ['e', 'exit','leave']: 
             exit()
@@ -233,9 +245,10 @@ def Opening():
     time.sleep(DELAY)
     print "t o  t h e  f a c u l t y.\n"
     time.sleep(DELAY)
-    for i in range(14):
-        print "\n"
-        time.sleep(DELAY/2)
+    print CLEARSCREEN
+    # for i in range(14):
+    #     print "\n"
+    #     time.sleep(DELAY/2)
 
 def Closing():
     print "And so, the fate of McMaster has been decided..."

@@ -29,7 +29,7 @@ def Reset():
     #Locations: Place.name = "Name" - Place.location = (X,Y,Z) - Place.info = "location information" - Place.lore = "lore"
     #Example: Start = Map("Start",(0,0,0),"RONT OF JHE:\nBSB is to your right.","You start here",(),False)
     LOCATIONS1=[
-    Map("Behind JHE",(2,3,1,0),"~~:","You hear a booming voice that sounds oddly like a game developer. (\S) type: 'inspect rules sign!'\nYou see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE.",(),False),
+    Map("Behind JHE",(2,3,1,0),"~~:","You see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE.(\S) (\S)You're acutely aware that while you're still you, what you can do is restricted.(\S)You feel compelled to stay on this specific section of campus to search for your ring.(\S)Due to your hangover, your actions are limited and need to think about everything you need to do.(\S)You must type in commands to control your body you but only certain actions are accepted.(\S)In your state, you should probably think 'help''.",(),False),
     Map("JHE Lobby",(2,4,1,0),"~~:","JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night. (\S) Many engineers happy. Many more still grinding.",(),True, 0, [("r",0,1,1,1)] ),
     Map("Nuclear Research Building",(2,5,1,0),"~NUCLEAR RESEARCH BUILDING~:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.\nThere are stairs going down.","You have barely ever been in here other than to struggle through\n3 hours of waiting for a water level PID controller to reach steady state.\nYou wonder how anyone could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because\nthey are all still lost in here...",(),True),
     Map("Hatch Building",(1,4,1,0),"~~:\nIn front of you lies JHE-Annex. To your right is the JHE lobby.\nTo your rear you can exit.\nTo your left is an alley.","That 'fresh building' smell still lingers.\nYou see members of the various clubs rushing from room to room including a man carrying a rocket.\nThe Kipling clock ticks away... only 364 more...\nWho is this Gerald Hatch anyway?",(),True),
@@ -143,6 +143,7 @@ def Reset():
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
     #       Equipment.info = "info" - Equipment.worn = 'head','hand','body',or 'off-hand' - Equipment.stats = (Atk,Def,Spd)
     #Example: Gun = Equipment("Gun",(0,0,0),"Gun.jpg","It shoots people.","hand",(100,0,100),"")
+    # TODO Sort items back into "Head", "Body", "Hand", "Off-hand", "Special" (quest items). Via CSVs is the easiest way
     ITEMS1 = [
     Equipment("Cheese", (5,7,1,0), "Cheese.jpg", "Not just cheddar, the smelly kind.", "off-hand", (1,1,1),5),
     Equipment("Delicious Meal", (None), "Meal.jpg", "A beautiful, home-cooked, meal.", "off-hand", (1,1,1),25),
@@ -291,7 +292,12 @@ def Reset():
     Equipment("Wool Sweater", (5,3,1,0), "WoolSweater.jpg", "Just like grandma makes.", "body", (1,4,6),""),
     Equipment("Solar Cell", (None), "SolarCell.jpg", "Harness the power of the Sun! I really hope I don't drop this...", "off-hand", (1,1,1),""),
     Equipment("Paper Towels", (0,5,2,0), "PaperTowels.jpg", "WHERE'S THE PAPER TOWELS?", "off-hand", (2,0,1),""),
-    Equipment("Crocs of the Cartographer", (None), "DadCrocks.jpg", "Grass stains on it from where you dad would cut the lawn every Sunday. Blue jeans, no shirt. (\S)f I think he used to be an alumni here?", "body", (4, 20, 69),"")
+    Equipment("Crocs of the Cartographer", (None), "DadCrocks.jpg", "Grass stains on it from where you dad would cut the lawn every Sunday. Blue jeans, no shirt. (\S)f I think he used to be an alumni here?", "body", (4, 20, 69),""),
+    # TODO Find a fix for duplicate item location problem, maybe simple as not checking for location but maybe that causes bugs
+    Equipment("Tyler's Visor Glasses", (None), "FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!", "head", (1, 5, 35), ""),
+    Equipment("Tyler's Big Hits Shirt", (None), "BigHits.jpg", "The Shirt of the Hero of Kyvach!", "body",(10, 5, 5), ""),
+    Equipment("Tyler's Hulk Hands", (None), "HulkHands.jpg", "These pack a serious punch...", "hand", (15, 5, 20),""),
+    Equipment("Tyler's Green Bang Bong", (None), "GBB.jpg","The sacred glass flute providing righteous tokes since '69.", "off-hand", (69, 69, 69), "")
     ]  # DON"T FORGET TO REMOVE THE LAST COMA!
 
     #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
@@ -368,9 +374,7 @@ def Reset():
     Interact("Display Case",(1,6,1,0),"It's a display case full of all sorts of old-time Engineering Physics wizardry.","The rusty key fits perfectly!\nAs you turn the key glowing square forms on the back\nof the display case and opens revealing an old relic...","rusty key","Faraday's Cage"),
     Interact("SharpXChange",(0,1,1,0),"Would you like to exchange a needle?","Needle Accepted!","dirty needle","clean needle"),
     Interact("Sun Dial",(3,2,1,0),"You can't even tell time on an analog clock.\nHow are you supposed to use this?","Through Dr. Minnick's glasses, you see a green glowing handprint appears\non the face of the sundial!\nYou place your hand on it and a compartment opens.","Minnick's glasses","rusty key"),
-    Interact("Rules Sign",(2,3,1,0),
-             "Welcome to The Great ENG PHYS Text Adventure!(\S) (\S)Here are the rules of the realm:(\S)-Your orientation never changes. When you enter you will be facing the\nentrance of JHE and you will always face that way.(\S)-The commands which allow you to interact with your environment are:(\S)*forward = f, backward = b, left = l, right = r, up = u, down = d(\S)*talk (person name) -talk to someone near you(\S)*attack (person name) -attacks someone(\S)*inspect (item name) -let's you interact with interactables and gives stats of items, can't inspect people(\S)*equip (item name) -you pick up an item, drops any item you have in that slot(\S)*drop (item name) -drops an item in your inventory(\S)*eat (item name) -eat an item\nstats -will show your stats(\S)*search - will search the area for things to interact with.(\S)*inventory -will show your current inventory.(\S) (\S)-Be sure to type the ENTIRE name of what you want to interact with.(\S)-That's it! Good Luck!"
-             ,"","",""),
+    Interact("Rules Sign",(2,3,1,0),"It reads:(\S) (\S)THERE ARE NO RULES","","",""),
     Interact("Red Book",(4,0,1,0),"Flipping through you read:\n'The mitochondria is the powerhouse of the cell.'","","",""),
     Interact("Old Journal",(6,1,0,0),"You blow the dust off, open it, and read:\n'The ability to peer into history would be a most formidable power.'\n'I have potentially produced a piece of the puzzle but without a\n'device capable of maintaining the field density long enough I fear\n'it will never become a reality.'\n'Thus I have decided to hide my invention until the time comes where\nsomeone can realize my dream.'\n'If you are reading this, find the place where you can see\ncampus in its entirety.'(\S)'If you ARE the hero, the next steps shall be revealed.'(\S)-M. Faraday","","",""),
     Interact("McMaster Map",(1,2,1,0),

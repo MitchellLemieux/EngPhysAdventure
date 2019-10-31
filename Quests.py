@@ -25,6 +25,7 @@ global QUESTS
 questlist = [
     # sidequests
     'secret spaces',
+    'rules sign',
     'EPTA all the way down',
     # Events
     'PAP',
@@ -78,6 +79,12 @@ def sidequests():
     if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:  # Unlocks the secret space once you get the scroll
         MAPS[0][2][1][0].removeWall("d")
         QUESTS["secret spaces"] = 0
+
+    # Rules Sign
+    if INTERACT["rules sign"].quest and QUESTS['rules sign']:  # Once the sign is read
+        MAPS[2][3][1][0].removeInteract(INTERACT["rules sign"])
+        printT( "The sign disapears in a flash of smoke. You look around. Are you still dreaming?")
+        QUESTS["rules sign"] = 0
 
     # EBTA All the way Down
     # when you put the pen in the laptop it opens the thing
