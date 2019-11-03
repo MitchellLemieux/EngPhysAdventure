@@ -29,7 +29,7 @@ import MapDisplay  # Used to separate minim-ap display
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.30.00"
-GAMEINFO['versionname'] = "Alpha v0.29.75 - " + Fore.RED + "Halloween Update" + lightgreen
+GAMEINFO['versionname'] = "Alpha v0.29.76 - " + Fore.RED + "Erik Update" + lightgreen
 GAMEINFO['releasedate'] = "Nov 11, 2019"
 
 

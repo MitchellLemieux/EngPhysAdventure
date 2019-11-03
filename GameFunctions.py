@@ -123,14 +123,20 @@ def Equip(Item):
 
         
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        print "\nYou can't carry that, gosh."
+        printT("Maybe if you were at your peak you could carry a " + str(INTERACT[Item].name) + " but not with this migraine.")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive:
+        printT("You attempt to pick up " + ENEMIES[Item].name + " but you're not that close... (\S)And now you're both really uncomfortable.")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and not ENEMIES[Item].alive:
+        printT("That's pretty messed up. You probably shouldn't pick up " + ENEMIES[Item].name + "'s body.")
     else:
         print "\nYou can't find that around here. Maybe it's your hungover typing."
+
 
 def Drop(Item):
     global MAPS
     global PLAYER
     global ITEMS
+    global ENEMIES
     x = PLAYER.location[0]
     y = PLAYER.location[1]
     z = PLAYER.location[2]
@@ -140,6 +146,8 @@ def Drop(Item):
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
         # Same as equip function. 'None' passed to function if item doesn't exist
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive:
+        printT("You drop " + ENEMIES[Item].name + " but they were never yours to begin with. (\S)Now you just have one less friend..")
     else:
        printT("Maybe you're still drunk?. You aren't carrying " + Item + ".")
 
@@ -149,6 +157,8 @@ def Move(direction):
     global MAPS
     global PLAYER
     global ENEMIES
+    global INTERACT
+    global ITEMS
     bf = ENEMIES['brendan fallon']
     x = PLAYER.location[0]
     y = PLAYER.location[1]
@@ -173,7 +183,7 @@ def Move(direction):
         elif direction in ['d','down']:
             z -= 1
         else:
-            print "I'm not sure what direction you mean."
+            print "You stumble over not sure where you were trying to go. You brain doesn't understand " + direction
             return
         # TODO This is where links come in which direct into interriors
 

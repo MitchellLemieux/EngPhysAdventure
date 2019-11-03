@@ -266,7 +266,7 @@ def events():
     #insttime = time.gmtime(time.time() - 4 * 60 * 60)  # Used to debug and test the time based events by adding timer
     # print time.asctime(insttime)  # Prints out the ascci time to debug (Also nice to see but breaks immersion)
     insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
-
+    #print insttime  # for debugging time
     # Thunder, cowboys, Bell, PAP sound
 
     # Simulated times to trigger the event, based on seconds from Epoch
@@ -284,7 +284,7 @@ def events():
 
     # Setting up the Event
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)
-    if insttime.tm_hour == 4 or insttime.tm_hour == 16 and insttime.tm_min == 20 and QUESTS["PAP"]:
+    if (insttime.tm_hour == 4 or insttime.tm_hour == 16) and insttime.tm_min == 20 and QUESTS["PAP"]:
         QUESTS["PAP"] = 0
         # Signaling Event, depends whether you're inside or outside
         print "A Bolt of lightening strikes the top of JHE"
@@ -415,7 +415,7 @@ def events():
 
     # TENThirty Event
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)
-    if insttime.tm_hour == 10 or insttime.tm_hour == 22 and insttime.tm_min == 30:
+    if (insttime.tm_hour == 10 or insttime.tm_hour == 22) and insttime.tm_min == 30:
         if not (PLAYER.inv['body'] == EMPTYBODY):  # If  your body isn't empty
             print "10:30 NO SHIRTY"
             print "You feel compelled to take your shirt off and drop it on the ground"

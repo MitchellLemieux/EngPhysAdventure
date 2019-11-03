@@ -85,7 +85,7 @@ VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'e
          'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
          'east', 'west', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
          'walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
-         'recall','shortcuts']
+         'recall','shortcuts','dance','sing']
 # DIRECTIONS = []  # TODO Make these wordlist verbs defined here
 DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
@@ -131,11 +131,11 @@ z =
 shortcutprint = "Shortcuts(\S)a = attack(\S)b = back(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
                         "(\S)ex = examine(\S)f = front(\S)g = give(\S)h = help(\S)i = inventory(\S)l = left(\S)" \
                         "r = right(\S)re = recall(\S)s = search(\S)t = talk(\S)u = up(\S)us = use" \
-                        "(\S) (\S)For <objects>,/interacts/, or [people] use the shortkey number beside the name or a subword of the name" \
-                        "(\S) e.g. dr 1 (examine the thing with {1} beside it)" \
-                        "(\S)" \
-                        "(\S) e.g. a brian (attack Brian the Weeb)"
-
+                        "(\S) (\S)There are also several parser shortcuts. You can type part of the full name OR use a shortkey." \
+                        "(\S) e.g. a brian = attack Brian the Weeb" \
+                        "(\S) For <objects>,/interacts/, or [people] use the order it appears in + 4. Shortkeys 1-4 are for inventory." \
+                        "(\S) e.g. exa 5 = examines first thing on the ground" \
+                        "(\S) dr 1 = drops thing in your head slot"
 
 
 def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTINGS):
@@ -223,6 +223,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             printT(GAMEINFO['help'], 72, 0.10)
         elif verb == "shortcuts":
             printT(shortcutprint, 72, 0.10)
+        elif verb in ['dance']:
+            printT("You dance like no one's watching! (\S)But they are... common this university campus.(\S) You'll see it later on Spotted At Mac.")
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 
@@ -262,16 +264,21 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                         printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i]) +".")
                         return
         # TODO make exclusion list for custom parser things like these that you don't want spellchecking on 2nd word
-        elif verb in ['go', 'move', 'walk', 'run', 'turn', 'look', 'pick', 'say']: objectName = wordlist[1]  # no spell check for certain thing
+        elif verb in ['go', 'move', 'walk', 'run', 'turn', 'look', 'say','sing']: objectName = wordlist[1]  # no spell check for certain thing
 
         #       --- Object SubWord Search ---
         # This function allows you to put in one+ word object names and still find a match
         else:
+            #       --- Exceptions ---
+            if verb in ['pick']:
+                if wordlist[1].lstrip().startswith("up"):  # if up is the second word
+                    wordlist[1] = wordlist[1].lstrip().split("up")[1].lstrip()  # strips down to just the object name
             #       --- Setup ---
             x, y, z, dim = PLAYER.location
             # A list of objects of all items in area including Inventory First
             surroundingobjects = [PLAYER.inv['head'], PLAYER.inv['body'], PLAYER.inv['hand'], PLAYER.inv['off-hand']] \
                              + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
+
 
             surobjectsfullnames = []  # list contains full names of the items around
             surobjectswords = []  # list contains
@@ -279,50 +286,73 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 name = object.name.lower()
                 if name == wordlist[1]:  # If the word is typed perfectly save it and stop the loop
                     objectName = wordlist[1]
-                    break  # break out of the loop for efficiency
                 else:  # creates list of full names and broken apart ones
                     surobjectsfullnames.append(name)
                     surobjectswords += name.split(" ")
 
-            #       --- Filtering Duplicates and extraneous words ---
-            extraneouswords = ["of", "dr.", "the","in"]
-            duplicatewords = []
+            try:
+                objectName  # if there was a direct match can skip all this subsearch nonsense
+            except:
+                #       --- Filtering Duplicates ---
 
-            # getting rid of ALL occurances of extraneous words
-            for word in extraneouswords:
-                for x in range(surobjectswords.count(word)):
-                    surobjectswords.remove(word)
+                duplicatewords = []
 
-            # Finding duplicate words so they can't be used
-            surobjectswords.sort()
-            for i in range(len(surobjectswords) - 1):
-                if surobjectswords[i] == surobjectswords[i + 1]:
-                    if surobjectswords[i] not in duplicatewords:
-                        duplicatewords.append(surobjectswords[i])
+                # Getting rrid of extraneous words was a good idea but doesn't matter because of the speed
+                # extraneouswords = ["of", "dr.", "the", "in"]
+                # # getting rid of ALL occurances of extraneous words
+                # for word in extraneouswords:
+                #     for x in range(surobjectswords.count(word)):
+                #         surobjectswords.remove(word)
 
-            # Removing duplicate words
-            # Create a dictionary, using the List items as keys. This will automatically remove any duplicates because dictionaries cannot have duplicate keys.
-            surobjectswords = list(dict.fromkeys(surobjectswords))
+                # Finding duplicate words so they can't be used
+                surobjectswords.sort()
+                for i in range(len(surobjectswords) - 1):
+                    if surobjectswords[i] == surobjectswords[i + 1]:
+                        if surobjectswords[i] not in duplicatewords:
+                            duplicatewords.append(surobjectswords[i])
 
-            #       --- Matching and returning full names ---
-            # search through each word in wordlist[1], spell check each, Search for match
-            objectlist = wordlist[1].split()
-            for word in objectlist:
-                if word in duplicatewords:
-                    continue
+                # Removing duplicate words
+                # Create a dictionary, using the List items as keys. This will automatically remove any duplicates because dictionaries cannot have duplicate keys.
+                surobjectswords = list(dict.fromkeys(surobjectswords))
+                for duplicate in duplicatewords:
+                    surobjectswords.remove(duplicate)
+
+                #       --- Matching and returning full names ---
+                # search through each word in wordlist[1] (words input), spell check each, Search for match in surroundings
+                objectlist = wordlist[1].split()
+                for word in objectlist:  # going through each word
+                    if word in duplicatewords:
+                        # If you try to give ONLY a duplicate word then it should tell the user
+                        if len(objectlist)== 1:
+                            print "Your brain can't tell which '" + word + "' you mean."
+                            return
+                        continue
+                    elif objectlist:
+                        #word = SpellCheck(word,surobjectswords)  # might not spell check single words with short list as will lead to many errors
+                        for object in surobjectsfullnames:
+                            if object.find(word) is not -1:  # does a substring search in each word
+                                if GAMESETTINGS['DevMode']: print "Parser found a substring!"  # Debug
+                                objectName = object
+                        try:
+                            objectName  # See if object is defined
+                        except:  # try one last time with old spellcheck to at least not crash
+                            objectName = SpellCheck(wordlist[1], ALLKEYS)  # Does do spell check if normal
+
+                    else:  # last option is to say we can't find it
+                        print "\nYou can't find that around here. Maybe it's your hungover typing."
+                        return
 
 
-            # SILENCE FOR DEMO
-            # print wordlist[1]
-            # print surroundingobjects
-            # print surobjectsfullnames
-            # print surobjectswords
-            # print duplicatewords
-            # print objectlist
-
-            # Old spellcheck for full name still works
-            objectName = SpellCheck(wordlist[1], ALLKEYS)  # Does do spell check if normal
-
+                # Debug for parser, although some things may need to be polled inside loop
+                if GAMESETTINGS['DevMode']:
+                    print wordlist[1]
+                    for i in surroundingobjects:
+                        print i.name
+                    print surobjectsfullnames
+                    print surobjectswords
+                    print duplicatewords
+                    print objectlist
+                    print objectName
 
 
         #  --- Parsing ---
@@ -354,10 +384,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             if objectName == "around":
                 x, y, z, dim = PLAYER.location
                 printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" + MAPS[x][y][z][dim].search(MAPS), 72, 0.5)
-        elif verb == "pick":  # Allows for pick up to be a thing
-            if objectName.lstrip().startswith("up"):  # if up is the second word
-                objectName = objectName.lstrip().split("up")[1].lstrip()  # strips down to just the object name
-                Equip(objectName)  # Equipts it
+        elif verb == "pick":  # Allows for pick up to be a thing, is formatted in exceptions above
+            Equip(objectName)  # Equipts it
         elif verb in ['us',"use"]:  # this makes it so you can use items if the interacble is in the area
             x, y, z, dim = PLAYER.location
             # checks all interactables in area to see if item is needed
@@ -373,8 +401,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 if enemy.need == objectName:
                     print "\nYou give the " + objectName + " to " + enemy.name + ".\n"
                     Talk(enemy.name.lower())
-        elif verb == "say":
-            printT("You say " + objectName)
+        elif verb in ["say",'sing']:
+            printT("You " + str(verb) + " " + objectName)
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 

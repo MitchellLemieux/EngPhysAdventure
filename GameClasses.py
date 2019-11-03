@@ -72,7 +72,7 @@ class Character:
             print "\n"+ Equip.info
             print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n'
         else:
-            print "\nThat doesn't seem to be around here.\n"
+            print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
         self.updateStats()
         return drop
 
