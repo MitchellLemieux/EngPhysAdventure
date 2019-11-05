@@ -23,7 +23,7 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
-INTERIORS = ["OverWorld","BSB","Capstone Room"]  # List of interior names with the index location being the dimension/building number
+INTERIORS = ["OverWorld","BSB","Capstone Room","Green Lake"]  # List of interior names with the index location being the dimension/building number
 # ex) 0 is OverwWord, 1 is BSB, 2 is capstone room, etc
 
 
@@ -396,6 +396,7 @@ def Inspect(Item): #Item is the inspect item
         printT(ITEMS[Item].name.upper(),72,0)
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         # TODO re-implement inspecting item with words instead of numbers
+        # TODO Take away stats from Erik Build
         if GAMESETTINGS['DevMode']:  # If in devmode can see the stats
             print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
             print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"

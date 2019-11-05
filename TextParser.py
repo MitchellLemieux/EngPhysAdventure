@@ -85,7 +85,7 @@ VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'e
          'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
          'east', 'west', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
          'walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
-         'recall','shortcuts','dance','sing']
+         'recall','shortcuts','dance','sing','pet','scratch']
 # DIRECTIONS = []  # TODO Make these wordlist verbs defined here
 DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
@@ -403,6 +403,13 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     Talk(enemy.name.lower())
         elif verb in ["say",'sing']:
             printT("You " + str(verb) + " " + objectName)
+        elif verb in ["pet","scratch"]:
+            if objectName in ENEMIES and (list(ENEMIES[objectName].location) == PLAYER.location):
+                if isinstance(ENEMIES[objectName], Animal):
+                    printT("You " + verb + " " + ENEMIES[objectName].name + ".(\S)")
+                    printT(ENEMIES[objectName].pet_me())
+                else:
+                    printT("You " + verb + " " + ENEMIES[objectName].name + ".(\S)They actually didn't mind that.")
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 

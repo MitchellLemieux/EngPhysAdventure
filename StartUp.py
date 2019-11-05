@@ -12,7 +12,7 @@ import csv
 XRANGE = 7  # when changing these also change the values in the CreativeMode.load() function
 YRANGE = 9
 ZRANGE = 4
-DRANGE = 3  # Dimensional range of the map, i.e. number of different buildings/dimensions with interiors + overworld
+DRANGE = 4  # Dimensional range of the map, i.e. number of different buildings/dimensions with interiors + overworld
 
 def Reset():
     global MAPS1
@@ -92,7 +92,7 @@ def Reset():
     Map("T-13",(0,2,1,0),"~~:\nETB is in front of you. The McMaster Map is to your right.\nThe West Wing of the Hospital is behind you.","How many bad invigilators does it take to screw in a light bulb?\nI'm not sure but they took my damn Casio FX-911+C...",['l','d'],True),
     Map("Hospital West Wing",(0,1,1,0),"~~:\nIn front of your is T-13. To your right is the Health Sci Library.\nThe East Wing of the Hospital is behind you.\nYou can go upstairs.","Doctors and Nurses rush around you.\nYou remember why you didn't want to become a doctor as you\nnearly faint looking at a patient's paper cut in the waiting room.\nAfter a drink from the water fountain you plan what to do.",('l'),True),
     Map("Hospital East Wing",(0,0,1,0),"~~:\nIn front of you is the West Wing. MDCL is to your right.\nThe Parking Garage is below you.","You smile as you overhear a conversation between a doctor and a family.\nTurns out their child is going to make a full recovery.\nThanks science.",('l','b'),True),
-    Map("MDCL",(1,0,1,0),"~~:\nThe East Wing of the Hospital is to your left. Health Sci library is forward.","After a solid 5 minutes of meditation in the reflection area.\nYou make your next decision feeling refreshed.",('b','r'),True),
+    Map("MDCL",(1,0,1,0),"~~:\nThe East Wing of the Hospital is to your left. Health Sci library is forward.","After a solid 5 minutes of meditation in the reflection area.\nYou make your next decision feeling refreshed.",('b','r','u'),True),
     #Basement Level (X,Y,0)
     Map("Secret Room",(6,1,0,0),"~SECRET ROOM~:\nYou can only climb up and out.","You inspect the floorboards and find one is loose.\nUpon lifting it you reveal a secret room!\nYou climb down and find yourself surrounded by stacks of ancient books and\nforgotten items from McMaster's past.",('f','b','l','r','d'),True),
     Map("Quantum Tunnel",(3,4,0,0),"~QUANTUM TUNNEL~:\nGo up to return to the main floor of BSB","What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'",('f','b','l','r','d'),True),
@@ -110,7 +110,9 @@ def Reset():
     Map("JHE Basement",(2,4,0,0),"~~:\nYou can only go back up to the main floor.","You see the remnants of failed clubs and the shattered dreams of past engineers...\nThis place is a bit chilly.",('f','b','l','r','d'),True),
     Map("Mills Basement",(4,0,0,0),"~~:\nYou can only go back up to Mills.","Jeez has anyone ever been down here?\nThe rows of bookshelves seem to go on forever...\nIf only you could possess all of the knowledge they hold.",('f','b','l','r','d'),True),
     Map("Tandem Accelerator Basement",(4,5,0,0),"~~:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d'),True),
-    #Map("Quantum Tunnel",(3,3,-1),"TANDEM BASEMENT:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d'),True),
+    Map("Hamilton Hall Basement", (5, 3, 0, 0),"~~:","You often stumbled down here and awkwardly to wait for your math class. You shudder at the memory and carry on.",('r'), True),
+
+        #Map("Quantum Tunnel",(3,3,-1),"TANDEM BASEMENT:\nYou can only go back up the stairs.","An old basement with all sorts of technological wizardry you don't recognize.\nIt seems like this place has been untouched for some time.\nLooking around you get the impression that not a lot of people come down here.",('f','b','l','r','d'),True),
     #Map("WEST Hospital Basement",(1,0,0),"HOSPITAL EAST BASEMENT:\nIn front of you is the West Wing. MDCL is to your right.\nThe Parking Garage is below you.","You smile as you overhear a conversation between a doctor and a family.\nTurns out their child is going to make a full recovery.\nThanks science.",('l','b')),
     #2nd Level (X,Y,2)
     Map("2nd Floor ITB",(0,5,2,0),"~~:\nYou can only go back down the stairs.","Walking around up here you don't find much other than lab benches with strange instruments.\nThis place gives you the impression that there must be some high level engineering physics going on...",('f','b','l','r','u'),True),
@@ -136,8 +138,8 @@ def Reset():
     Map("3rd Floor BSB", (3, 4, 3,0), "~3RD FLOOR BSB~:\nYou can only go back down the stairs.",
             "You swear you see a tumbleweed roll by. There's no one in sight but plenty of bathrooms. Is the Geography "
             "department up here?? After learning about the Oak Ridges Moraine bring yourself back to reality.",
-            ('f', 'b', 'l', 'r', 'u'), True)
-
+            ('f', 'b', 'l', 'r', 'u'), True),
+    Map("Green Lake",(0,0,0,3),"~~","You wake up in a peaceful place. The water is rushing by down on a nearby like. The leaves are blowing in the wind casting shadows in the green clearing. You feel the warm sun kissing your skin. (\S)Standing just in front of log house you see an old black lab. Sitting patiently waiting for you to throw his ball. He sits beside a sign that reads: Freds' Place.",('f','b','l','r','u','d'),True)
     ]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
@@ -162,10 +164,10 @@ def Reset():
     Equipment("Bike Helmet", (3,7,1,0), "BikeHelmet.jpg", "One of those fast Tour de France ones. Does this belong to Dr. Minnick? Great!", "head", (0,8,10),""),
     Equipment("Empty Bottle", (4,1,1,0), "EmptyBottle.jpg", "Dasani, more like Dishonest! Amirite?!", "hand", (1,0,1),""),
     Equipment("Hard Hat", (4,2,1,0), "HardHat.jpg", "You don't really want to look like a Civil kid. But at least it protects your head.", "head", (1,10,5),""),
-    Equipment("Priest Gown", (2,0,2,0), "Gown.jpg", "Wearing this gives people the impression you are a holy person...", "body", (1,5,3),""),
+    Equipment("Priest Gown", (2,0,2,0), "Gown.jpg", "Wearing this gives people the impression you are a holy person...", "body", (10,40,10),""),
     Equipment("Used Plunger", (5,0,0,0), "Plunger.jpg", "Used. Lovely...", "hand", (10,0,10),""),
     Equipment("Dumbbell", (1,0,1,0), "Dumbbell.jpg", "The pump is the greatest feeling in the world.", "off-hand", (5,0,2),""),
-    Equipment("Febreze", (1,0,1,0), "Ferbreze.jpg", "Kills 99.9% of odour at the source!", "hand", (6,0,10),-4),
+    Equipment("Febreze", (1,0,1,0), "Ferbreze.jpg", "Kills 99.9% of odour at the source!", "hand", (35,0,10),-4),
     Equipment("MSP430", (2,3,1,0), "MSP430.jpg", "A literal piece of garbage.", "hand", (-5,0,-5),-5),
     Equipment("Declaration of Independence", (None), "DOI.jpg", "I'm going to steal the Declaration of Independence...", "off-hand", (1,1,1),""),
     Equipment("Needa Pita", (4,6,1,0), "Pita.jpg", "Better have gotten black olives on that", "hand", (2,0,1),5),
@@ -177,7 +179,7 @@ def Reset():
     Equipment("Adderall", (5,3,1,0), "Adderall.jpg", "Speed up, my dude!", "off-hand", (0,0,50),2),
     Equipment("Visor Glasses", (None), "FastGlasses.jpg", "Damn, you are now travelling waaaay to fast. Slow down dude!", "head", (1,5,35),""),
     Equipment("Plastic Bag", (2,1,1,0), "PBag.jpg", "The audacity of some people to leave their filth around.", "head", (0,1,-10),""),
-    Equipment("Engineering Mug", (None), "EngMug.jpg", "Do people even have these anymore?", "hand", (1,0,2),""),
+    Equipment("Engineering Mug", (None), "EngMug.jpg", "Do people even have these anymore?", "hand", (20,20,20),""),
     Equipment("Broken Wine Bottle", (4,3,1,0), "WineBottle.jpg", "A broken wine bottle from 1996, good year.", "hand", (10,0,5),""),
     Equipment("Jar of Peanut Butter", (4,0,1,0), "Peanut.jpg", "Death paste to those who are allergic... Could prove effective...", "off-hand", (0,5,5),5),
     Equipment("Toilet Seat", (5,0,0,0), "Toilet.jpg", "How do you even wear this?", "body", (0,3,2),""),
@@ -188,9 +190,9 @@ def Reset():
     Equipment("Cricket", (3,4,2,0), "Cricket.jpg", "Makes the sound commonly heard at 2W lectures.", "off-hand", (1,1,1),3),
     Equipment("EpiPen", (5,7,1,0), "EpiPen.jpg", "Epinephrine Autoinjector 0.3mg. Replace if discolored. Store at 68C. Incase of alergic reaction remove the top...wait, why are you reading this label? Isn't there something else you should be doing? ", "off-hand", (7,0,5),-2),
     Equipment("Wood Shield", (5,4,2,0), "Shield.jpg", "An old wooden shield used in a play, you think...", "off-hand", (5,20,-5),""),
-    Equipment("Cold Steel Katana", (None), "Katana.jpg", "This could probably kill a buffalo fish...", "hand", (18,5,20),""),
+    Equipment("Cold Steel Katana", (None), "Katana.jpg", "This could probably kill a buffalo fish...", "hand", (45,5,20),""),
     Equipment("Flux Capacitor", (None), "FluxCapacitor.jpg", "If only I could go back to 1985...", "hand", (1,1,1),""),
-    Equipment("Swordfish", (None), "Swordfish.jpg", "I'd better be careful eating this!", "off-hand", (10,5,5),12),
+    Equipment("Swordfish", (None), "Swordfish.jpg", "I'd better be careful eating this!", "off-hand", (50,10,30),20),
     Equipment("Ancient Incantation", (None), "Incantation.jpg", "An old tattered scroll with an incantation written in Latin.", "off-hand", (1,1,1),""),
     Equipment("Meow Mix", (None), "MeowMix.jpg", "I love chicken, I love liver...", "off-hand", (5,0,5),1),
     Equipment("Phone", (None), "Phone.jpg", "This thing has been dropped Graham's number times.", "off-hand", (5,6,9),""),
@@ -202,7 +204,7 @@ def Reset():
     Equipment("Blazer", (5,6,1,0), "Blazer.jpg", "Styyyyyylishhhhhh", "body", (0,4,1),""),
     Equipment("Empty Bucket", (5,0,0,0), "Bucket.jpg", "The smell of cheap soap still lingers.", "head", (0,10,1),""),
     Equipment("Old Scroll", (None), "OldScroll.jpg", "It reads: 'A permanent title is too much to bear.' 'My secret cache, is under there.'", "off-hand", (0,0,0),""),
-    Equipment("PID control system", (None), "PID.jpg", "A PID control system. Kp = 69, my dude.", "head", (45,0,10),""),
+    Equipment("PID control system", (None), "PID.jpg", "A PID control system. Kp = 69, my dude.", "head", (45,69,10),""),
     Equipment("Voltage Divider", (None), "VDivider.jpg", "It is a Voltage Divider!", "off-hand", (20,25,20),""),
     Equipment("Frank's Red Hot", (0,4,1,0), "FranksRed.jpg", "I put that...", "off-hand", (3,0,2),1),
     Equipment("Santa Hat", (0,0,1,0), "SantaHat.jpg", "Happy Holidays!", "head", (0,3,2),""),
@@ -212,8 +214,8 @@ def Reset():
     Equipment("Shampoo", (0,0,1,0), "Shampoo.jpg", "Yeah, I could use a shower...", "off-hand", (4,0,3),""),
     Equipment("Candlestick", (4,0,0,0), "Candlestick.jpg", "Lumiere is up to no good.", "hand", (7,0,5),""),
     Equipment("Gamma Glove", (None), "GammaGauntlet.jpg", "Shorter than it really is due to length contraction, one of the 3 Quantum Relics", "hand", (250,100,20),""),
-    Equipment("Clean Needle", (None), "CleanNeedle.jpg", "No more spreadin' disease!", "hand", (9,0,9),""),
-    Equipment("Laser Safety Glasses", (1,6,0,0), "LSGlasses.jpg", "Protection from the UV, my dude.", "head", (0,3,5),""),
+    Equipment("Clean Needle", (None), "CleanNeedle.jpg", "No more spreadin' disease!", "hand", (25,0,9),""),
+    Equipment("Laser Safety Glasses", (1,6,0,0), "LSGlasses.jpg", "Protection from the UV, my dude.", "head", (0,10,5),""),
     Equipment("Tarzan VHS", (0,2,1,0), "Tarzan.jpg", "If only I had a VCR...", "off-hand", (0,2,6),3),
     Equipment("Priceless Painting", (3,0,1,0), "Painting.jpg", "This painting is supposed to be worth millions...", "off-hand", (1,10,5),""),
     Equipment("Paint Brush", (3,1,1,0), "Brush.jpg", "You can feel the emotions of a failed arts student coursing through this thing.", "off-hand", (5,0,5),""),
@@ -234,7 +236,7 @@ def Reset():
     Equipment("Old Candle", (2,0,0,0), "OldCandle.jpg", "Seems like it's had some use.", "off-hand", (0,2,2),""),
     Equipment("Tire Iron", (5,7,1,0), "TireIron.jpg", "Is this even a real tool? Or just a murder weapon...", "hand", (11,0,3),""),
     Equipment("Ukelele", (4,4,1,0), "Ukelele.jpg", "Wasting away again in Margaritaville...", "hand", (6,0,5),""),
-    Equipment("Fanny Pack", (None), "FannyPack.jpg", "Made for style. Not for carrying.", "body", (3,8,15),""),
+    Equipment("Fanny Pack", (None), "FannyPack.jpg", "Made for style. Not for carrying.", "body", (10,60,30),""),
     Equipment("STARS Wireless Fix", (None), "StarsFix.jpg", "IT took 6 weeks to make this code? Who knew debugging could be this hard?", "off-hand", (1,1,1),""),
     Equipment("Brendan Fallon's Lunchbox", (3,4,0,0), "Lunchbox.jpg", "The Lunch Box of an Ancient Hero. Full of samosas", "off-hand", (5,10,5),""),
     Equipment("Eng Phys USB Pen", (None), "PhysPen.jpg", "It would be amazing if this thing actually worked. If I had a laptop I could plug it in and find all of 2P04.", "hand", (5,0,5),""),
@@ -246,7 +248,7 @@ def Reset():
     Equipment("Relativistic Key", (None), "Relativistickey.jpg", "You can feel the power radiating from this thing.", "hand", (1,1,1),""),
     Equipment("Willy Dog", (4,1,1,0), "Hotdog.jpg", "Definitely not vegan", "hand", (1,0,2),5),
     Equipment("Solar Ray", (None), "SolarRay.jpg", "The literal power of the Sun!", "hand", (100,20,50),""),
-    Equipment("Helm of Orin Bearclaw", (0,2,0,0), "SkullHelmet.jpg", "A note left beside the helmet says 'A leftover relic from a purple hero'", "head", (35,30,10),""),
+    Equipment("Helm of Orin Bearclaw", (1,0,3,0), "SkullHelmet.jpg", "A note left beside the helmet says 'A leftover relic from a purple hero'", "head", (35,30,10),""),
     Equipment("Maroon Jumpsuit", (5,1,1,0), "MaroonSuit.jpg", "Overalls of the Maroons", "body", (1,8,5),""),
     Equipment("Pope Hat", (2,0,2,0), "PopeHat.jpg", "Does the Pope where a silly hat? Now you do.", "head", (0,3,2),""),
     Equipment("Lamp", (0,5,1,0), "Lamp.jpg", "I love lamp.", "hand", (8,0,4),""),
@@ -258,10 +260,10 @@ def Reset():
     Equipment("Couch Cushion", (1,7,1,0), "CCushion.jpg", "I hope I find I pillow fight.", "off-hand", (4,10,1),""),
     Equipment("Crucifix", (None), "Crucifix.jpg", "The Power of Chirst compels you!", "hand", (10,0,10),""),
     Equipment("Joint of Destiny", (None), "Joint.jpg", "A tighly rolled spliff filled with Devil's lettuce... for real.", "off-hand", (420,420,420),""),
-    Equipment("Minnick's Glasses", (None), "MinnickGlasses.jpg", "The spectacles of a wizard from the High Order of the Ancient Council.", "head", (100,100,100),""),
+    Equipment("Minnick's Glasses", (None), "MinnickGlasses.jpg", "The spectacles of a wizard from the High Order of the Ancient Council.", "head", (50,50,50),""),
     Equipment("Mop", (0,0,1,0), "Mop.jpg", "I'm going to clean up this town.", "hand", (6,0,4),""),
     Equipment("Cold Beer", (None), "ColdBeer.jpg", "A freshly brewed pint from Andy Knights himself.", "off-hand", (15,0,20),2),
-    Equipment("Guitar", (None), "Guitar.jpg", "Monster Mash.", "hand", (10,3,5),""),
+    Equipment("Brian's Guitar", (None), "Guitar.jpg", "You now have Brian's power to shred some sick tunes! ROCK ON.", "hand", (35,35,35),""),
     Equipment("Old Headphones", (1,5,1,0), "OldHeadphones.jpg", "Old frayed apple headphones. Good for whipping.", "hand", (5,0,5),""),
     Equipment("Old Car Keys", (0,6,1,0), "CarKeys.jpg", "Fun for babies. Not for Batman.", "hand", (7,0,15),""),
     Equipment("Coffee", (2,4,1,0), "Coffee.jpg", "The fuel of thinkers.", "off-hand", (3,0,9),1),
@@ -297,7 +299,10 @@ def Reset():
     Equipment("Tyler's Visor Glasses", (None), "FastGlasses.jpg","Damn, you are now travelling waaaay to fast. Slow down dude!", "head", (1, 5, 35), ""),
     Equipment("Tyler's Big Hits Shirt", (None), "BigHits.jpg", "The Shirt of the Hero of Kyvach!", "body",(10, 5, 5), ""),
     Equipment("Tyler's Hulk Hands", (None), "HulkHands.jpg", "These pack a serious punch...", "hand", (15, 5, 20),""),
-    Equipment("Tyler's Green Bang Bong", (None), "GBB.jpg","The sacred glass flute providing righteous tokes since '69.", "off-hand", (69, 69, 69), "")
+    Equipment("Tyler's Green Bang Bong", (None), "GBB.jpg","The sacred glass flute providing righteous tokes since '69.", "off-hand", (69, 69, 69), ""),
+    Equipment("LON-CAPA Code", (5, 3, 0, 0), "LONCAPA.jpg","This sacred Python code has saved many an engineering a tight pinch. Or just too lazy to do their own work. I wonder who made it?", "off-hand", (1, 1, 1), ""),
+    Equipment("Tennis Ball", (0, 0, 0, 3), "TennisBall.jpg","The slobery wet ball that belongs to Fred. He's probably looking for it", "hand", (1, 1, 1), ""),
+    Equipment("Dog biscuit", (0, 0, 0, 3), "DogBiscuit.jpg", "Probably better known as a cookie. One of Fred's favourite snacks", "off-hand", (1, 1, 1), 3)
     ]  # DON"T FORGET TO REMOVE THE LAST COMA!
 
     #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
@@ -320,26 +325,26 @@ def Reset():
     Enemy("Dr. Nagasaki","'My grand invention is almost complete...'",(0,5,2,0),(100,100,100),75,"flux capacitor","ambifacient lunar waneshaft","'Yes!'\n'I have been looking for one exactly like that!'\n'Quicky, go to the basement of the Tandem Accelerator!'\n'The High Council is counting on you.'","NOOOO! NOW I WILL NEVER PLEASE THE DARK LORD!"),
     Enemy("Dan Fitzgreen","Hello, although I've turned to the dark side to do Physics Labs\n I'm still a great guy. Did I mention I worked at CERN!?",(None),(100,75,100),400,"ambifacient lunar waneshaft","","'Been a lot stirring around the faculty since last night.'\n'I used to be an adventurous student like you before the High Council and I decided to part ways.'\n'I know what you seek and I am here to help.'\n'You need to fire up that old reactor in the basement of the Tandem Accelerator.'\n'It needs some sort of high power instrument to bring it to life...'\n'I think Dr. Nagasaki has been working on something like that, he is probably somewhere in ITB.'\n'He will likely need this...'","I'm moving to the physics department"),
     Enemy("Kenrick","'The oscilloscope is the window into the electronic world.'",(3,3,1,0),(100,100,200),75,"Kenrick's oscilloscope",None,"","Oh no! My window! The Dark Lord will know I've failed him!"),
-    Enemy("Dr. Soleymani","'Are you interested in a research position?'",(0,1,2,0),(100,100,100),75,"Einstein's Brain",None,"","NOOO! The Dark Lord will never forgive me!"),
+    Enemy("Dr. Soleymani","'Are you interested in a research position?'",(0,1,2,0),(50,50,50),75,"Einstein's Brain",None,"","NOOO! The Dark Lord will never forgive me!"),
     Enemy("Sir William McMaster","'You must rid the university of the evil Dr. Cassidy has planned!'",(None),(175,125,100),125,"iron ring","","","The spirit of Sir William McMaster bursts with a fiercely bright explosion.\nYou look down to see your Iron Ring as well as the deed to McMaster!\nDr. Cassidy quickly picks up the deed and turns to you.\n'Excellent!' he says coupled with maniacal laughter.\n'Too fulfill your true destiny, take the power you hold in your Iron Ring and destroy all of the professors'\n'Only after they are gone can Engineering Physics truly reign supreme!'"),
     Enemy("Chris","'The tools should be coming any day now.'",(4,5,1,0),(50,75,50),50,"capstone tools",None,"","I was going to quit anyway!"),
     #Special
     Enemy("Brendan Fallon","What's up dude? I'm here to bless up your shit.\nDo you have my lunch box?",None,(9999,9999,9999),999,"green bang bong","Brendan Fallon's lunchbox","THANKS! TOKE UP MY DUDES!",""),
-    Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1,0),(999,999,999),999,"",None,"",""),
+    Enemy("Hooded Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1,0),(999,999,999),999,"iron ring",None,"",""),
     Enemy("yourself","Wait, but I'm you? Sorry I'm a little busy to think about this right now.",None,(100,100,100),100,"self worth",None,"","Congratulations, you've conquered yourself! It wasn't that hard!"),
     Enemy("your dad", "Tell your mom the mower's fixed. I'm going to wash the lawn.", None, (250, 250, 250), 200, "crocs of the cartographer", None, "Let's rock & roll!", "At least I don't have to pay the mortgage!"),
     Enemy("Alex Jones", "YOU THINK YOU'RE A TOUGH GUY. YOU'RE AN INTELLECTUAL DUMBASS", None, (300, 300, 300), 200, " ", None, "WE'RE GUNNA DEFEAT THIS ANTI-HUMAN SCUM. WE'RE GUNNA ROCK THEIR WORLD@", "I HATE YOU. COWARDDD!!!!"),
     #Enemy("Special Man","I've been looking for you. Especially after what you did last night.\nI recommend you seek out the profs if you are to find your ring...\nOnly they can right the wrongs you have done.",(5,4,1),(999,999,999),999,"",None,"",""),
     #General
     Enemy("Liam the Gamer","I am NOT going to finish this assignment... if only I had one to copy.",(3,4,0,0),(10,10,10),15,"Swordfish","horrible assignment","Nice! Take this swordfish. I needed 45 cooking for that.",""),
-    Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3,0),(10,10,10),15,None,"cricket","Thanks!","'I can't believe you've done this."),
+    Enemy("Connor the Biologist","I would really like a cricket to continue my research...",(1,7,3,0),(10,10,10),15,"PID control system","cricket","Thanks! I don't know what this does but you can have it!","'I can't believe you've done this."),
     Enemy("Father Frobenius","'You need prayer. Recharge at the altar.'",(2,0,1,0),(10,10,10),25,"crucifix",None,"","I am slain!"),
-    Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1,0),(5,1,10),15,"engineering mug",None,"","I'm a failure at home and at school!"),
-    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1,0),(10,5,1),15,"coffee","Phil's braces","'UHhhh i thinka im gonna- im gon-' Phil vomits. Thanks man, I'll buy you a coffee. I gotta go rock climbing!","mhmh spooky ghost urggh ectoplasm noooooo"),
+    Enemy("Steven the first-year","'Have you got the LON-CAPA Python code?'",(3,6,1,0),(5,1,10),15,"engineering mug","LON-CAPA Code","Thanks man! Now I can get a 12 in at least 6 math courses@","I'm a failure at home and at school!"),
+    Enemy("Phil the drunk","'MHhmgh, Soouh whatu we getta druuuunk'",(5,5,1,0),(10,5,1),15,"coffee","phil's braces","'UHhhh i thinka im gonna- im gon-' Phil vomits. Thanks man, I'll buy you a coffee. I gotta go rock climbing!","mhmh spooky ghost urggh ectoplasm noooooo"),
     Enemy("Jana the vegan","'Did I mention I'm vegan?'",(5,4,0,0),(15,1,5),10,"3w textbook",None,"","I was going to bring it back I swear!"),
     Enemy("Larry the bus driver","'Is that even your bus pass?'",(2,1,1,0),(10,10,5),40,"huge shirt",None,"","That was definitely not your bus pass!"),
     Enemy("Rod the climber","'Righteous! Could you help me get into my car?\nI lost my keys and can't find my car.\nI REALLY need what is in there.'",(5,7,1,0),(14,20,5),40,"delicious meal","bowling ball","Thanks!\nNow I can learn to bowl that perfect strike.\nTake this, I just cooked it up.","Ouch!"),
-    Enemy("Brian the Weeb","'HAHA, you were a RIOT at the Phoenix last night!'",(2,2,1,0),(5,2,10),10,"guitar",None,"","That's not vegan."),
+    Enemy("Brian the Weeb","'HAHA, you were a RIOT at the Phoenix last night! (\S)Also I'm really hungry, can you bring me a potato'",(2,2,1,0),(5,2,10),10,"brian's guitar","potato","","That's not vegan."),
     Enemy("Mitch the TA","'Hey, I saw your picture on Instagram!'\n'They let you get away with doing that to the Willy McMaster statue?'",(0,3,1,0),(10,5,10),25,"phone",None,"","There's my phone."),
     Enemy("Erik the Sk8r","'Check out this tre flip, pretty tight eh?'",(0,0,0,0),(15,15,40),20,"Erik's frosted tips",None,"","Man, that's dumb!"),
     Enemy("Megan the Bartender","'Wait... I recognize you... you have a $420E69 tab!'",(5,4,1,0),(15,20,10),20,"meow mix",None,"","Nuuuuuuuuuuuu"),
@@ -352,7 +357,8 @@ def Reset():
     Enemy("Mario the Mixologist","'Yo check out my meme page, you ever heard coco jay?'",(1,4,1,0),(15,10,20),50,"stylish watch",None,"","si ya saben como consigo, por que me invitan?"),
     Enemy("Paul the Janitor","'Hey brother, I really could use some Febreze.'",(0,5,1,0),(20,20,20),20,"bleach squirt bottle","Febreze","Rock on brother! Thanks so much!","NOOO, Now I can't go see Black Sabbath!"),
     Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0,0),(20,10,1),20,"horrible assignment","einstein's brain","","My 12 year post-grad was for nothiiiiiingggggg!"),
-    Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1,0),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!")]
+    Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1,0),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!"),
+    Animal("Fred the Good Boy", "You talk to Fred. His wise eyes stare at you. It's almost as if he understands what you're saying but he'd rather have have you play with the ball", (0,0,0,3),(9999,9999,9999),9999,None,None,"Fred barks happily. You give him the ball and he kicks it back happily to you.","","Thanks for the pet!")]
 
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
@@ -363,21 +369,22 @@ def Reset():
     Interact("Fridge",(1,6,0,0),"Seems like a regular fridge to me.","You inspect the inside of the fridge to reveal a small keyhole.\nUpon inserting and turning the key you hear a robotic voice bellow.\n'WORMHOLE ACTIVATED'\nThe compartment bursts open and out flies a book!",'relativistic key','Pedrotti cubed'),
     Interact("Optical Bench",(1,6,0,0),"Dr. Haugen's personal optical bench...","You place Dr. Haugen's femtosecond laser on the bench and aim it at the fridge.\nTurning the laser on (remembering your laser safety glasses, of course)\nfires the high-intensity beam at the fridge.\nThe room begins to shake and smoke begins to billow out of the cracks of the fridge.\nThe door swings open and a glowing apparition of Albert Einstein emerges!\n'You have come a long way, but your quest is not yet over.'\n'For there still remains a great evil on this campus'\n'Dr. Haugen was entrusted with protecting the contents of my fridge.'\n'I have known of your destiny since your first year here at McMaster.'\n'You will be the one who determines the fate of the faculty.'\n'It is, therefore, my responsibility to prepare you for what lies ahead.'\n'This key opens a compartment in my fridge which holds one of three Quantum Relics.'\n'These items give the holder the power to shape the fate of the entire university.'\n'I cannot tell you much more. Perhaps I have said too much.'\n'Take this. Good Luck.'","femtosecond laser","relativistic key"),
     Interact("Old Painting",(3,0,1,0),"An old oil painting of the founding fathers of McMaster.\nDated:April 20th, 1887","Through Dr. Minnick's glasses a glowing green inscription is revealed!\n'In the hall where we eternally meet,\nThe second clue lies beneath your feet.'\nWhile reading the secret message Dr. Minnick's glasses get increasingly hotter and you quickly swat them off your face.","Minnick's glasses","Minnick's glasses"),
-    Interact("Old Lamp",(5,1,1,0),"It appears the hole was caused by some sort of laser...","","",""),
-    Interact("Red Car",(0,6,1,0),"A red Dodge Avenger...\nPeering into the window you can't really see much.","N/A",None,None),
+    # TODO Make all these interactables into items and fix anything that breaks with quests.
+    #Interact("Old Lamp",(5,1,1,0),"It appears the hole was caused by some sort of laser...","","",""),
+    #Interact("Red Car",(0,6,1,0),"A red Dodge Avenger...\nPeering into the window you can't really see much.","N/A",None,None),
     Interact("Blue Car",(0,6,1,0),"A blue Ford Mustang...\nPeering into the window you can't really see much.","You smash open the window with the tire iron, breaking it in the process.\nYou unlock and open the door...\nTo reveal a potato.","Tire Iron","potato"),
-    Interact("Old Car",(0,6,1,0),"An old Datsun...\nPeering into the window you can't really see much.","N/A",None,None),
+    #Interact("Old Car",(0,6,1,0),"An old Datsun...\nPeering into the window you can't really see much.","N/A",None,None),
     Interact("New Car",(0,6,1,0),"A new Volkswagen...\nPeering into the window you can't really see much.","You open the car and rummage around.\nUnderneath one of the seats you find a bowling ball!","car keys","bowling ball"),
     Interact("RCA TV",(5,6,1,0),"Old RCA TV with VHS slot...","You put the VHS into the slot and press play...\nThe opening scenes to Tarzan begin but suddenly the screen goes black and a message\nis displayed!\n'DrOWN I Need EveryThing graBs'","Tarzan VHS",""),
-    Interact("Blue Book",(4,0,1,0),"It's a guide to the Bruce trail.","","",""),
+    #Interact("Blue Book",(4,0,1,0),"It's a guide to the Bruce trail.","","",""),
+    # Interact("Red Book",(4,0,1,0),"Flipping through you read:\n'The mitochondria is the powerhouse of the cell.'","","",""),
+    # Interact("Old Journal",(6,1,0,0),"You blow the dust off, open it, and read:\n'The ability to peer into history would be a most formidable power.'\n'I have potentially produced a piece of the puzzle but without a\n'device capable of maintaining the field density long enough I fear\n'it will never become a reality.'\n'Thus I have decided to hide my invention until the time comes where\nsomeone can realize my dream.'\n'If you are reading this, find the place where you can see\ncampus in its entirety.'(\S)'If you ARE the hero, the next steps shall be revealed.'(\S)-M. Faraday","","",""),
     #Interact("Box of old CDs",(2,4,0),"It's a dusty box of old CDs...","You insert one of the CDs into the monolithic computing device...\nThe laptop instantly blue-screens and bursts into flames.","lenovo laptop",None),
     Interact("Display Case",(1,6,1,0),"It's a display case full of all sorts of old-time Engineering Physics wizardry.","The rusty key fits perfectly!\nAs you turn the key glowing square forms on the back\nof the display case and opens revealing an old relic...","rusty key","Faraday's Cage"),
     Interact("SharpXChange",(0,1,1,0),"Would you like to exchange a needle?","Needle Accepted!","dirty needle","clean needle"),
     Interact("Sun Dial",(3,2,1,0),"You can't even tell time on an analog clock.\nHow are you supposed to use this?","Through Dr. Minnick's glasses, you see a green glowing handprint appears\non the face of the sundial!\nYou place your hand on it and a compartment opens.","Minnick's glasses","rusty key"),
     Interact("Rules Sign",(2,3,1,0),"It reads:(\S) (\S)THERE ARE NO RULES","","",""),
-    Interact("Red Book",(4,0,1,0),"Flipping through you read:\n'The mitochondria is the powerhouse of the cell.'","","",""),
-    Interact("Old Journal",(6,1,0,0),"You blow the dust off, open it, and read:\n'The ability to peer into history would be a most formidable power.'\n'I have potentially produced a piece of the puzzle but without a\n'device capable of maintaining the field density long enough I fear\n'it will never become a reality.'\n'Thus I have decided to hide my invention until the time comes where\nsomeone can realize my dream.'\n'If you are reading this, find the place where you can see\ncampus in its entirety.'(\S)'If you ARE the hero, the next steps shall be revealed.'(\S)-M. Faraday","","",""),
-    Interact("McMaster Map",(1,2,1,0),
+        Interact("McMaster Map",(1,2,1,0),
              "It's the map of McMaster.'(\S) ________________________________________________(\S)|Map of McMaster                                 |(\S)|                                       BATES    |(\S)|                                                |(\S)| ETB        JHE         BSB                     |(\S)|                                                |(\S)|                                      STATUE    |(\S)|                                                |(\S)| HOSPITAL                                       |(\S)|          MDCL         CHAPEL              MUSC |(\S)|________________________________________________|"
              ,
              "Through Minnick's glasses the true map is revealled!(\S)You read:'Harness the sun.'(\S) ________________________________________________(\S)|Map of McMaster                                 |(\S)|                                       BATES    |(\S)|                                                |(\S)| ETB        JHE         BSB                     |(\S)|                                                |(\S)|                        \/            STATUE    |(\S)|                        /\                      |(\S)| HOSPITAL                                       |(\S)|          MDCL         CHAPEL              MUSC |(\S)|________________________________________________|(\S) (\S)Dr. Minnick's glasses glow hot as you quickly swat them off of your face."
@@ -391,8 +398,9 @@ def Reset():
     Interact("Ancient Mirror",(4,0,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do.","ancient incantation","gamma glove"),
     Interact("Pack-a-Punch", (None), "Punch your fists into the air and raise a rebel yell! (\S)"
              "There's a lots of bad'uns out there you need to send to hell!" ,
-             "Pack-a-Punch Machine:(\S) To use this machine enter your item and another to sacrafice.","", "")
-
+             "Pack-a-Punch Machine:(\S) To use this machine enter your item and another to sacrafice.","", ""),
+    Interact("Lake Painting", (3, 0, 1, 0), "A painting of a beautiful lake. It brings you peace.", "You feel a pull. All of a sudden you're being pulled into the painting and all around you it's getting bright. (\S)You wake up to the sound of birds chirping and a soft breeze.", "old car keys", None),
+    Interact("Portkey", (0, 0, 0, 3), "This portkey looks like the way back. Whatever magic brought you here must be related to this lake.", "Your world compresses as you're pulled violently into something. (\S)You're back in the Art Museum. Were you ever gone?", None, None)
     ]
 
 Reset()

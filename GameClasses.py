@@ -108,7 +108,22 @@ class Enemy:
         self.alive = True
         self.quest = False
         self.spoke = False
-        
+
+
+class Animal(Enemy):  # this is an inhertance of enemy class
+    # Constructor
+    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo,pinfo):
+        self.pinfo = pinfo
+
+        # invoking the __init__ of the parent class
+        Enemy.__init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo)
+
+        #print self.name  # can totally do commands in the init
+
+    # Methods
+    def pet_me(self):
+        return self.pinfo
+
 class Interact:
     def __init__(self,name,location,info,Sinfo,need,drop):
         self.name = name
@@ -294,5 +309,6 @@ class Map:  #Map Location Storage
 
         # Don't need to return the 'Global' objects from function as affecting scope outside the function
 
-            
+
+
 

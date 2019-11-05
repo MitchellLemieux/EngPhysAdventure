@@ -46,7 +46,7 @@ def StartScreen():
         print "                 |  L|  ___\   |"
         print "                 |  Y| /W O O D|"
         print "                 |___|/________/"
-        print "                      " +Fore.RED + "Production" + lightgreen + "."
+        print "                      " +Fore.RED + "Production." + lightgreen
         time.sleep(3)  # Delay for intro sound
         print CLEARSCREEN
 

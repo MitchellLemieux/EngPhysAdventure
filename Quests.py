@@ -15,6 +15,12 @@ import time
 import Opening  # used for the EPTA all the way down quest
 import os  # used to put files in the cache folder
 import AsciiArt
+import colorama  # Colour module, no bolding on windows :(
+from colorama import Fore, Back, Style
+
+colorama.init()
+CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
+lightgreen = Fore.LIGHTGREEN_EX
 
 global QUESTS
 
@@ -27,6 +33,7 @@ questlist = [
     'secret spaces',
     'rules sign',
     'EPTA all the way down',
+    'national treasure',
     # Events
     'PAP',
     # Talk to hooded man
@@ -123,6 +130,13 @@ def sidequests():
             print "It was a yes or no question. When you look back the files are gone.\nEven flexpde. Good riddance.\n========================================================================"
             QUESTS['EPTA all the way down'] = 0
             GAMEINFO['log'] += [str(playgame)]  # adds your command to the log
+
+    #National Treasure
+    if INTERACT["tri-coloured glasses"].quest and QUESTS['national treasure']:  # Once the sign is read
+        MAPS[1][0][1][0].removeWall("u")
+        QUESTS["secret spaces"] = 0
+
+
 
 
 def ebta_story():
@@ -274,11 +288,11 @@ def events():
     # gmtenthirty = gmfourtwenty + 6 * 60 * 60 + 10 * 60  # 10:30pm
     # insttime = time.gmtime(gmtenthirty)     # 10:30pm time object
     # TODO Make it so if you Do all intractables + (even empty ones) + Quests after winning the game you unlock PAP
-    if INTERACT['red book'].quest == True:
-        gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
-        insttime = time.gmtime(gmfourtwenty)  # 4:20pm time object
-    if INTERACT['blue book'].quest == True:
-        insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
+    # if INTERACT['red book'].quest == True:
+    #     gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
+    #     insttime = time.gmtime(gmfourtwenty)  # 4:20pm time object
+    # if INTERACT['blue book'].quest == True:
+    #     insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
 
     LINEBREAK = "========================================================================"  # standard display with 72 characters
 
@@ -424,3 +438,23 @@ def events():
             Drop(PLAYER.inv['body'].name.lower())
 
     # Killcount counter in player will trigger the police eventually
+
+
+    # Green Lake
+    if INTERACT["lake painting"].quest:
+        PLAYER.location = (0,0,0,3)
+        CurrentPlace = MAPS[0][0][0][3]
+        if CurrentPlace.travelled: printT(CurrentPlace.lore)
+        printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
+        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
+        INTERACT["lake painting"].need = None
+        INTERACT["lake painting"].quest = False
+
+    # Back to Art Museum
+    if INTERACT["portkey"].quest:
+        PLAYER.location = (0,0,0,3)
+        printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
+        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
+        INTERACT["portkey"].quest = False
+
+
