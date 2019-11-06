@@ -85,12 +85,12 @@ VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'e
          'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
          'east', 'west', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
          'walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
-         'recall','shortcuts','dance','sing','pet','scratch']
+         'recall','shortcuts','dance','sing','pet','scratch','lore']
 # DIRECTIONS = []  # TODO Make these wordlist verbs defined here
 DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
-VERBSHORCUTS = ['a', 'b', 'd', 'dr', 'e', 'ea', 'ex', 'f', 'g', 'h', 'i', 'l', 'r', 're', 's', 't', 'u', 'us']
+VERBSHORTCUTS = ['a', 'b', 'd', 'dr', 'e', 'ea', 'ex', 'f', 'g', 'h', 'i', 'l', 'r', 're', 's', 't', 'u', 'us']
 
 
 """
@@ -154,7 +154,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         if len(verb) > 1:
             # if dev mode enabled it accepts special verbs which allows you to use special functions
             if verb == '/420e69': pass  # Does no spell checking so someone doesn't accidentally get 420e69
-            elif verb in VERBSHORCUTS: pass  # Does no spell checking if it's a shortcut
+            elif verb in VERBSHORTCUTS: pass  # Does no spell checking if it's a shortcut
             elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
             else: verb = SpellCheck(verb, VERBS)
 
@@ -212,7 +212,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 raw_input(
                     "We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
                 exit()
-        elif verb in ['re',"remember", "recall"]:
+        elif verb in ['re',"remember", "recall","lore"]:
             x, y, z, dim = PLAYER.location
             place = MAPS[x][y][z][dim]
             print "You entered " + place.name + "\n"
@@ -236,7 +236,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         #  --- Verb Spellchecking ---
         if len(verb) > 1:
             # if dev mode enabled it accepts special verbs which allows you to use special functions
-            if verb in VERBSHORCUTS: pass  # Does no spell checking if it's a shortcut
+            if verb in VERBSHORTCUTS: pass  # Does no spell checking if it's a shortcut
             elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
             else: verb = SpellCheck(verb, VERBS)
         # Implemented a pass on the spellcheck for creativemode, will fix this BS later
@@ -247,7 +247,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
 
         #       --- ShortKey Object Shortcut  ---
         # ShortKey matching to give it the right objectName
-        elif str.isdigit(wordlist[1]): # if the object is a number assume it's a shortkey
+        elif str.isdigit(wordlist[1]):  # if the object is a number assume it's a shortkey
             x, y, z, dim = PLAYER.location
             shortkey = int(wordlist[1])  # converts from string to int because we know it's an int
             # makes a list of objects of all items in area including Inventory First
@@ -256,7 +256,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             if shortkey > len(surroundingobjects):
                 printT("You sure you're okay? There's no " + "{" + str(shortkey) + "} around here.")
                 return  # returns out of the function because invalid input
-            for i in range(1,len(surroundingobjects)+1):  #Shifted loop because starting at 1
+            for i in range(1,len(surroundingobjects)+1):  # Shifted loop because starting at 1
                 if i == shortkey:
                     objectName = surroundingobjects[i-1].name.lower()  # assigns the object name to the same position as seen
                     if objectName == "empty":  # if you request something with an empty object it exists
@@ -394,6 +394,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     if interactable.need == objectName:
                         print "\nYou use the " + objectName + " with the " + interactable.name + ".\n"
                         Inspect(interactable.name.lower())
+                        break  # breaks so only uses it on first interactable that needs it and doesn't cause duplicates or looping
         elif verb in ['g','give']:
             x, y, z, dim = PLAYER.location
             # checks all Enemies in area to see if item is needed

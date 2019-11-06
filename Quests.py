@@ -442,19 +442,20 @@ def events():
 
     # Green Lake
     if INTERACT["lake painting"].quest:
-        PLAYER.location = (0,0,0,3)
+        PLAYER.location = [0,0,0,3]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[0][0][0][3]
         if CurrentPlace.travelled: printT(CurrentPlace.lore)
         printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
         #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["lake painting"].need = None
+        printT("(\S)You no longer need the keys to get into this place.")
         INTERACT["lake painting"].quest = False
 
     # Back to Art Museum
     if INTERACT["portkey"].quest:
-        PLAYER.location = (0,0,0,3)
+        PLAYER.location = [3,0,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
+        CurrentPlace = MAPS[3][0][1][0]
         printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
         #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["portkey"].quest = False
-
 

@@ -29,7 +29,7 @@ import MapDisplay  # Used to separate minim-ap display
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.30.00"
-GAMEINFO['versionname'] = "Alpha v0.29.76 - " + Fore.RED + "Erik Update" + lightgreen
+GAMEINFO['versionname'] = "Alpha v0.29.78 - " + Fore.RED + "Balancing Update" + lightgreen
 GAMEINFO['releasedate'] = "Nov 11, 2019"
 
 
@@ -56,10 +56,8 @@ def Setup():
     PLAYER.name = GAMEINFO['playername']
     NameChange()  # changes the name of all name related things in the game
 
-    x = 2
-    y = 3
-    z = 1
-    dim = 0  # The building or dimension the player is in
+    x,y,z,dim = STARTLOCATION
+    if GAMESETTINGS['DevMode']: x,y,z,dim = BRENSTARTLOCATION
     PLAYER.location[0] = x
     PLAYER.location[1] = y
     PLAYER.location[2] = z
@@ -82,7 +80,8 @@ def Setup():
     if PLAYER.name == "Tyler Kashak" or GAMESETTINGS['DevMode']: #He realizes he's the main character and can do anything he wants
         # AsciiArt.One()  # TODO Enable once Dynamic Ascii Art
         print "\nHe is beginning to believe\n\nYOU are the One\n"
-        PLAYER.__dict__ = Tyler.__dict__  # sets him to the initial Tyler character for strating inventory
+        # TODO Change back to Tyler
+        PLAYER.__dict__ = BREN007PIE.__dict__  # sets him to the initial Tyler character for strating inventory
         PLAYER.maxhealth = 999
         PLAYER.basestats = [420,420,420]
         PLAYER.updateStats()

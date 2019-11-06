@@ -12,7 +12,7 @@ import csv
 XRANGE = 7  # when changing these also change the values in the CreativeMode.load() function
 YRANGE = 9
 ZRANGE = 4
-DRANGE = 4  # Dimensional range of the map, i.e. number of different buildings/dimensions with interiors + overworld
+DRANGE = 5  # Dimensional range of the map, i.e. number of different buildings/dimensions with interiors + overworld
 
 def Reset():
     global MAPS1
@@ -30,7 +30,9 @@ def Reset():
     #Example: Start = Map("Start",(0,0,0),"RONT OF JHE:\nBSB is to your right.","You start here",(),False)
     LOCATIONS1=[
     Map("Behind JHE",(2,3,1,0),"~~:","You see the Iron Ring out front of JHE shining in the morning sun.\nThe campus is bustling with student life.\nThere are people heading in all directions with Kipling pranks\nstill scattered about JHE.(\S) (\S)You're acutely aware that while you're still you, what you can do is restricted.(\S)You feel compelled to stay on this specific section of campus to search for your ring.(\S)Due to your hangover, your actions are limited and need to think about everything you need to do.(\S)You must type in commands to control your body you but only certain actions are accepted.(\S)In your state, you should probably think 'help''.",(),False),
-    Map("JHE Lobby",(2,4,1,0),"~~:","JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night. (\S) Many engineers happy. Many more still grinding.",(),True, 0, [("r",0,1,1,1)] ),
+    Map("JHE Lobby",(2,4,1,0),"~~:","JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night. (\S) Many engineers happy. Many more still grinding.",(),True),
+    #JHE lobby with a link out to BSB interrior
+    #Map("JHE Lobby", (2, 4, 1, 0), "~~:","JHE lobby is alive.\nStudents rushing all around as the smell of burnt coffee and sorrow tickles your nose.\nYou scan the faces around you but see no one familiar.\nThere is a confused air about this place as Kipling was just last night. (\S) Many engineers happy. Many more still grinding.",(), True, 0, [("r", 0, 1, 1, 1)]),
     Map("Nuclear Research Building",(2,5,1,0),"~NUCLEAR RESEARCH BUILDING~:\nTo your left lies the JHE-Annex. The Reactor is in front of you.\nThe Police Station is to your right. JHE lobby is behind you.\nThere are stairs going down.","You have barely ever been in here other than to struggle through\n3 hours of waiting for a water level PID controller to reach steady state.\nYou wonder how anyone could get away with a floor plan this confusing.\nPerhaps that's why no terrorists have blown up the reactor because\nthey are all still lost in here...",(),True),
     Map("Hatch Building",(1,4,1,0),"~~:\nIn front of you lies JHE-Annex. To your right is the JHE lobby.\nTo your rear you can exit.\nTo your left is an alley.","That 'fresh building' smell still lingers.\nYou see members of the various clubs rushing from room to room including a man carrying a rocket.\nThe Kipling clock ticks away... only 364 more...\nWho is this Gerald Hatch anyway?",(),True),
     Map("Behind Hatch",(1,3,1,0),"~~:\nETB to your left. Enter Hatch by going forward.\nThe McMaster Map to your rear. JHE Entrance is to your right.","You stare at the newly completed building.\nThe sun still shines and you are irritated by the constant drone of the Hamiltonian sirens\nwhich you have yet to grow accustomed to...",(),False),
@@ -131,7 +133,7 @@ def Reset():
     Map("MDCL Roof",(1,0,3,0),"~~:\nYou can only go back down.","With all of your might you pull yourself up and onto the roof.\nYou can see the majority of campus from up here!",('f','b','l','r','u'),False),
     Map("3rd Floor Thode",(1,7,3,0),"~~:\nYou can only go back down the stairs.","After hauling up another set of stairs you realize you probably shouldn't\nhave given up on your Pulse membership...\nThe sounds of sobbing can be heard from all around you.\nAfter you dispense all of your tissues to passing I-Sci's you plan your next move.",('f','b','l','r','u'),True),
     Map("2nd Floor Thode",(1,7,2,0),"~~:\nYou can go up or down the stairs.","As you enter Club Thode the smell of feet enters your nostrils.\nWho goes barefoot in a library? C'mon.\nThe memory of countless hours spent slamming together a report made of nonsense, caffeine,\nand hope makes you light headed...\nComing to your senses... You plan your next move.",('f','b','l','r'),True),
-    Map("3rd Floor JHE Stairs", (2, 4, 3,0), "~~:\nYou can only go back down the stairs.",
+    Map("3rd Floor JHE Stairs", (2, 4, 3, 0), "~~:\nYou can only go back down the stairs.",
             "You reach the top of the stairwell but the doors into the 3rd floor are barred with solid sheet metal. "
             "You can't go any further It seems like more construction and but you wonder where they'll put the "
             "displaced 1st years in the meantime.", ('f', 'b', 'l', 'r', 'u'), True),
@@ -139,7 +141,7 @@ def Reset():
             "You swear you see a tumbleweed roll by. There's no one in sight but plenty of bathrooms. Is the Geography "
             "department up here?? After learning about the Oak Ridges Moraine bring yourself back to reality.",
             ('f', 'b', 'l', 'r', 'u'), True),
-    Map("Green Lake",(0,0,0,3),"~~","You wake up in a peaceful place. The water is rushing by down on a nearby like. The leaves are blowing in the wind casting shadows in the green clearing. You feel the warm sun kissing your skin. (\S)Standing just in front of log house you see an old black lab. Sitting patiently waiting for you to throw his ball. He sits beside a sign that reads: Freds' Place.",('f','b','l','r','u','d'),True)
+    Map("Green Lake",(0,0,0,3),"~~","You wake up in a peaceful place. The water is rushing by down on a nearby like. The leaves are blowing in the wind casting shadows in the green clearing. You feel the warm sun kissing your skin. (\S)Standing just in front of log house you see an old black lab. Sitting patiently waiting for you to throw his ball. He sits beside a sign that reads: Freds' Place.",('f','b','l','r','u','d'),True),
     ]
 
     #Items: Equipment.name = "Name" - Equipment.location = tuple of location - Equipment.image = .jpg of item
@@ -301,8 +303,9 @@ def Reset():
     Equipment("Tyler's Hulk Hands", (None), "HulkHands.jpg", "These pack a serious punch...", "hand", (15, 5, 20),""),
     Equipment("Tyler's Green Bang Bong", (None), "GBB.jpg","The sacred glass flute providing righteous tokes since '69.", "off-hand", (69, 69, 69), ""),
     Equipment("LON-CAPA Code", (5, 3, 0, 0), "LONCAPA.jpg","This sacred Python code has saved many an engineering a tight pinch. Or just too lazy to do their own work. I wonder who made it?", "off-hand", (1, 1, 1), ""),
-    Equipment("Tennis Ball", (0, 0, 0, 3), "TennisBall.jpg","The slobery wet ball that belongs to Fred. He's probably looking for it", "hand", (1, 1, 1), ""),
-    Equipment("Dog biscuit", (0, 0, 0, 3), "DogBiscuit.jpg", "Probably better known as a cookie. One of Fred's favourite snacks", "off-hand", (1, 1, 1), 3)
+    Equipment("Tennis Ball", (0, 0, 0, 3), "TennisBall.jpg","The slobery wet ball that belongs to Fred. He's probably looking for it.", "hand", (1, 1, 1), ""),
+    Equipment("Dog biscuit", (0, 0, 0, 3), "DogBiscuit.jpg", "Probably better known as a cookie. One of Fred's favourite snacks.", "off-hand", (1, 1, 1), 3),
+    Equipment("Softwood 2x4 Stud", (0, 0, 0, 3), "Soft2x3Stud.jpg", "A prime peice of Douglas Fir. Useful to be made into whatever you can imagine", "off-hand", (1, 1, 1), "")
     ]  # DON"T FORGET TO REMOVE THE LAST COMA!
 
     #Enemies: Enemy.name = "Name" - Enemy.info = "Description" - Enemy.location = (X,Y,Z) - Enemy.stats = (ATK, DEF, SPD) - Enemy.health = [integer]
@@ -358,7 +361,7 @@ def Reset():
     Enemy("Paul the Janitor","'Hey brother, I really could use some Febreze.'",(0,5,1,0),(20,20,20),20,"bleach squirt bottle","Febreze","Rock on brother! Thanks so much!","NOOO, Now I can't go see Black Sabbath!"),
     Enemy("Undead Grad Student","'Mussst eeaaat funnnndingg... Er, I mean braaains.'",(2,0,0,0),(20,10,1),20,"horrible assignment","einstein's brain","","My 12 year post-grad was for nothiiiiiingggggg!"),
     Enemy("Daniel Parent", "Hi I'm amazing and Daniel", (3,4,1,0),(30,30,40),50,"STARS Wireless Fix",None,"Thanks!","FINALLY!"),
-    Animal("Fred the Good Boy", "You talk to Fred. His wise eyes stare at you. It's almost as if he understands what you're saying but he'd rather have have you play with the ball", (0,0,0,3),(9999,9999,9999),9999,None,None,"Fred barks happily. You give him the ball and he kicks it back happily to you.","","Thanks for the pet!")]
+    Animal("Fred the Good Boy", "You talk to Fred. His wise eyes stare at you. It's almost as if he understands what you're saying but he'd rather have have you play with the ball.", (0,0,0,3),(9999,9999,9999),9999,"tennis ball","tennis ball","Fred barks happily. He chews on it for a second and then kicks it back happily to you.","","He smiles at you happily! His tail wags but you can tell he just wants to play with the ball.")]
 
     #Stationary Objects to interact with
     #Interact(name,location,info,Sinfo,need,drop)
@@ -398,9 +401,10 @@ def Reset():
     Interact("Ancient Mirror",(4,0,0,0),"It's an old mirror from a time long past.","You mutter the incantation... Suddenly, you see the reflection of Richard Feynman himself standing behind you!\n'You have come a long way. The way of the physicist is strong with you.'\n'Here, take this it is one of the 3 Quantum Relics.\n'You will need all 3 to acquire your Iron Ring.'\n'Trust your instincts and when the time comes you will know what to do.","ancient incantation","gamma glove"),
     Interact("Pack-a-Punch", (None), "Punch your fists into the air and raise a rebel yell! (\S)"
              "There's a lots of bad'uns out there you need to send to hell!" ,
-             "Pack-a-Punch Machine:(\S) To use this machine enter your item and another to sacrafice.","", ""),
+             "Pack-a-Punch Machine:(\S) To use this machine enter your item and another to sacrafice.",None, None),
     Interact("Lake Painting", (3, 0, 1, 0), "A painting of a beautiful lake. It brings you peace.", "You feel a pull. All of a sudden you're being pulled into the painting and all around you it's getting bright. (\S)You wake up to the sound of birds chirping and a soft breeze.", "old car keys", None),
-    Interact("Portkey", (0, 0, 0, 3), "This portkey looks like the way back. Whatever magic brought you here must be related to this lake.", "Your world compresses as you're pulled violently into something. (\S)You're back in the Art Museum. Were you ever gone?", None, None)
+    Interact("Portkey", (0, 0, 0, 3), "This portkey looks like the way back. Whatever magic brought you here must be related to this lake.", "Your world compresses as you're pulled violently into something. (\S)You're back in the Art Museum. Were you ever gone?", None, None),
+    Interact("Rick's Crafting Bench", (0, 0, 0, 3), "This bench can create anything made of wood or diamond.","You spend hours crafting the device to the precision you need. It's perfect.","softwood 2x4 stud", "sharpxchange" )
     ]
 
 Reset()

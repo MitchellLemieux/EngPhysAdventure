@@ -23,7 +23,7 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
-INTERIORS = ["OverWorld","BSB","Capstone Room","Green Lake"]  # List of interior names with the index location being the dimension/building number
+INTERIORS = ["OverWorld","BSB","Capstone Room","Green Lake","Haunted Forest"]  # List of interior names with the index location being the dimension/building number
 # ex) 0 is OverwWord, 1 is BSB, 2 is capstone room, etc
 
 
@@ -80,11 +80,15 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
+BRENSTARTLOCATION = (0,0,0,3)
+BRENINV = EMPTYINV
+#BRENINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
 
 
 # TODO Make PLAYER into PLAYERS a dictionary of playable characters objects
 PLAYER = Character('Minnick',list(STARTLOCATION),STARTHEALTH,STARTINV,EMPTYINV)
 Tyler = Character('Tyler Kashak',list(STARTLOCATION),999,TYINV,EMPTYINV)
+BREN007PIE = Character('Brendan Fallon',list(BRENSTARTLOCATION),999,BRENINV,EMPTYINV)
 # MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
 # MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
 
@@ -189,22 +193,21 @@ def Move(direction):
 
         place = MAPS[x][y][z][dim]  # place is new location requested
 
-        #  INTERRIORS DISABLED FOR NOW
-        # # Interrior Links: If the spot has a link might be teliported/moved to that place
-        # for link in currentplace.links:  # if there is links in it it will loop through
-        #     if direction in link:  # Searching all the links to see if any links refer to that direction
-        #         if dim == 0 and link[4] != 0:
-        #             print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
-        #         elif dim != 0 and link[4] == 0: # When going to overworld from non
-        #             print "You go outside."
-        #         elif dim != link[4]:  # Leaving one interior and entering another
-        #             print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
-        #
-        #         x = link[1]
-        #         y = link[2]
-        #         z = link[3]
-        #         dim = link[4]
-        #         place = MAPS[x][y][z][dim]  # Overwrites place with the link location
+        # Interrior Links: If the spot has a link might be teliported/moved to that place
+        for link in currentplace.links:  # if there is links in it it will loop through
+            if direction in link:  # Searching all the links to see if any links refer to that direction
+                if dim == 0 and link[4] != 0:
+                    print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
+                elif dim != 0 and link[4] == 0: # When going to overworld from non
+                    print "You go outside."
+                elif dim != link[4]:  # Leaving one interior and entering another
+                    print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
+
+                x = link[1]
+                y = link[2]
+                z = link[3]
+                dim = link[4]
+                place = MAPS[x][y][z][dim]  # Overwrites place with the link location
 
 
     if place:
@@ -407,24 +410,31 @@ def Inspect(Item): #Item is the inspect item
             else:
                 print""
     # If the entered item is an intractable and is at that location
-    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: # this is for item = interactable
-        if INTERACT[Item].need and PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]: #if you have the item the interactable needs worn on your body
-            
-            PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
-            INTERACT[Item].quest = True # this turns on the quest flag for the interactable once interacted with if you have the item
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:  # this is for item = interactable
+        # TODO Have Interactables be able to use lists (to drop multiple things), tuples(to place unique objects)
+        if INTERACT[Item].need and (PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need] or ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items): #if you're wearing item.need or it's on the ground the interactable needs worn on your body
+            if PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:  # if in the players hand
+                PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
+            elif ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items:
+                MAPS[x][y][z][dim].removeItem(ITEMS[INTERACT[Item].need])
+            INTERACT[Item].quest = True  # this turns on the quest flag for the interactable once interacted with if you have the item
             printT(INTERACT[Item].Sinfo + "(\S)") #special slow version
             PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
-                MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
-                print "You see " + ITEMS[INTERACT[Item].drop].name +".\n"
- 
+                INTERACT[Item].drop_objects(Item,x,y,z,dim,MAPS,ITEMS,INTERACT,ENEMIES)  # drops the proper object
+
             print ""
 
-        elif INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface)
+        elif INTERACT[Item].need == None or INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface or a vendor or a trigger)
             INTERACT[Item].quest = True  # this turns on the quest flag so it can trigger quest events
             printT(INTERACT[Item].info)
             printT(INTERACT[Item].Sinfo)
+
+            if INTERACT[Item].drop:
+                INTERACT[Item].drop_objects(Item, x, y, z, dim, MAPS, ITEMS, INTERACT, ENEMIES)
+            print ""
+
         else:
             printT(INTERACT[Item].info,72,0.1) #fast version
         if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
