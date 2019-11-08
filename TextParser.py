@@ -79,19 +79,26 @@ Download latest update then add this and update the feature list.
 from GameFunctions import *
 import CreativeMode
 
-ALLKEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys())  # keys of all objects used for spellcheck function
 # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in game decision area
-VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'up', 'down', 'left', 'right',
-         'back', 'forward', 'kill', 'get', 'wear', 'look', 'drink', 'inhale', 'ingest', 'devour', 'north', 'south',
-         'east', 'west', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go', 'move',
-         'walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
+VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'kill', 'get', 'wear', 'look',
+         'drink', 'inhale', 'ingest', 'devour', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go',
+         'move','walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
          'recall','shortcuts','dance','sing','pet','scratch','lore']
 # DIRECTIONS = []  # TODO Make these wordlist verbs defined here
 DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
+# List of VERB shortcuts used to stop spellchecking
 VERBSHORTCUTS = ['a', 'b', 'd', 'dr', 'e', 'ea', 'ex', 'f', 'g', 'h', 'i', 'l', 'r', 're', 's', 't', 'u', 'us']
 
+# List of Direction words used to check direction. NEED TO ADD DIRECTIONS TO HERE AND IN MOVE() FUNCTION IN GAMEFUNCTIONS
+DIRECTIONSHORTCUTS = ['u', 'd', 'f', 'b', 'l', 'r']
+DIRECTIONWORDS = ['up', 'down', 'front', 'forward', 'ahead', 'back', 'backward',
+                  'left', 'right',  'north', 'south', 'east', 'west','around']
+VERBS.extend(DIRECTIONWORDS)  # extends verbs so these directions can be recognized in spellchecking
+
+# keys of all objects in game used for spellchecking of objects
+ALLKEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()+DIRECTIONWORDS)
 
 """
 Shortcuts
@@ -151,16 +158,22 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
     if len(wordlist) == 1:  # if it's a single word command
         verb = wordlist[0]  # it has to be a verb if it's a single word command
         #  --- Verb Spellchecking ---
-        if len(verb) > 1:
+        if len(verb) > 2:  # if verb has more than 2 characters will spellcheck
             # if dev mode enabled it accepts special verbs which allows you to use special functions
             if verb == '/420e69': pass  # Does no spell checking so someone doesn't accidentally get 420e69
             elif verb in VERBSHORTCUTS: pass  # Does no spell checking if it's a shortcut
-            elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
-            else: verb = SpellCheck(verb, VERBS)
+            elif GAMESETTINGS['DevMode']:
+                verb = SpellCheck(verb, DEVVERBS)
+                # If you need to see spellchecking output
+                #printT("Your brain is pretty sure you meant " + verb + " instead of " + wordlist[0] + ".")
+            else:
+                verb = SpellCheck(verb, VERBS)
+                # If you need to see spellchecking output
+                #printT("Your brain is pretty sure you meant " + verb + " instead of " + wordlist[0] + ".")
 
         #  --- Parsing ---
-        if verb in ['l','r','f','b','u','d','up', 'down', 'left', 'right', 'back', 'forward','north', 'south', 'east', 'west', 'ahead', 'backward']:
-            CurrentPlace = Move(verb)  # TODO check if CurrentPlace is actually returned and if so, use it
+        if (verb in DIRECTIONSHORTCUTS) or (verb in DIRECTIONWORDS):  # if the verb is a direction verb
+            CurrentPlace = Move(verb,DIRECTIONWORDS,DIRECTIONSHORTCUTS)  # TODO check if CurrentPlace is actually returned and if so, use it
             GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
         elif verb in [ 's','search', 'look']:
             x, y, z, dim = PLAYER.location
@@ -200,17 +213,15 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb in ['exit', 'leave', 'quit', "die"]:
             # A FULL Copy of /savegame function bassically
             if raw_input(
-                    "\n\nAre you sure you want to save and quit the game?\nYour game will be saved.\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in [
+                    "\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in [
                 "y", 'yes', 'yeah']:
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO[
                     'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
                 logGame(GAMEINFO['log'])  # logs the game when you save it
                 CreativeMode.saveGame(GAMEINFO['playername'])  # saves all data
-                print "Your game has been saved! " + GAMEINFO[
-                    'playername']  # Don't indicate the save file has save file in the name
-                raw_input(
-                    "We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
+                # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
+                raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
                 exit()
         elif verb in ['re',"remember", "recall","lore"]:
             x, y, z, dim = PLAYER.location
@@ -234,9 +245,9 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         verb = wordlist[0]
 
         #  --- Verb Spellchecking ---
-        if len(verb) > 1:
+        if len(verb) > 2:  # if verb has more than 2 character
             # if dev mode enabled it accepts special verbs which allows you to use special functions
-            if verb in VERBSHORTCUTS: pass  # Does no spell checking if it's a shortcut
+            if (verb in VERBSHORTCUTS) or (verb in DIRECTIONSHORTCUTS): pass  # Does no spell checking if it's a shortcut
             elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
             else: verb = SpellCheck(verb, VERBS)
         # Implemented a pass on the spellcheck for creativemode, will fix this BS later
@@ -264,7 +275,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                         printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i]) +".")
                         return
         # TODO make exclusion list for custom parser things like these that you don't want spellchecking on 2nd word
-        elif verb in ['go', 'move', 'walk', 'run', 'turn', 'look', 'say','sing']: objectName = wordlist[1]  # no spell check for certain thing
+        elif verb in ['go', 'move', 'walk', 'run', 'turn','say','sing']: objectName = wordlist[1]  # no spell check for certain thing
 
         #       --- Object SubWord Search ---
         # This function allows you to put in one+ word object names and still find a match
@@ -284,7 +295,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             surobjectswords = []  # list contains
             for object in surroundingobjects:
                 name = object.name.lower()
-                if name == wordlist[1]:  # If the word is typed perfectly save it and stop the loop
+                if (name == wordlist[1]) or (wordlist[1] in DIRECTIONWORDS):  # If the word is typed perfectly save it and stop the loop
                     objectName = wordlist[1]
                 else:  # creates list of full names and broken apart ones
                     surobjectsfullnames.append(name)
@@ -337,6 +348,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                             objectName  # See if object is defined
                         except:  # try one last time with old spellcheck to at least not crash
                             objectName = SpellCheck(wordlist[1], ALLKEYS)  # Does do spell check if normal
+                            # Spellchecking for debugging
+                            #printT("Your brain is pretty sure you meant " + objectName + " instead of " + wordlist[1] +".")
 
                     else:  # last option is to say we can't find it
                         print "\nYou can't find that around here. Maybe it's your hungover typing."
@@ -375,7 +388,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             Eat(objectName)
 
         elif verb in ['go', 'move', 'walk', 'run', 'turn']:  # this may or may not work
-            CurrentPlace = Move(objectName)
+            CurrentPlace = Move(objectName,DIRECTIONWORDS,DIRECTIONSHORTCUTS)
             GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
 
         elif verb == "/":  # if using a CreativeMode command

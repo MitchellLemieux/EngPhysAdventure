@@ -182,7 +182,7 @@ def ebta_story():
         MAPS[5][4][1][0].placeEnemy(ENEMIES['dr. knights'])
         QUESTS["lapierre get coffee"] = 0
 
-    if ENEMIES['dr. knights'].quest and QUESTS["knights get book"]:
+    if ENEMIES['dr. knights'].quest and QUESTS["knights get book"] and ITEMS["3w textbook"].location == (3,4,0,0):
         MAPS[1][6][0][0].placeEnemy(ENEMIES['dr. haugen'])
         QUESTS["knights get book"] = 0
 
@@ -258,6 +258,10 @@ def ebta_story():
             return 1
 
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
+        PLAYER.alive = False  # does this so you can get out of the main loop
+        return 2
+
+    if not ENEMIES['hooded man'].alive:  # say if you kill the hooded man, say bit hits him, the game ends
         PLAYER.alive = False  # does this so you can get out of the main loop
         return 2
 
@@ -446,7 +450,7 @@ def events():
         CurrentPlace = MAPS[0][0][0][3]
         if CurrentPlace.travelled: printT(CurrentPlace.lore)
         printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
-        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
+        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["lake painting"].need = None
         printT("(\S)You no longer need the keys to get into this place.")
         INTERACT["lake painting"].quest = False
@@ -456,6 +460,6 @@ def events():
         PLAYER.location = [3,0,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][0][1][0]
         printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
-        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
+        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["portkey"].quest = False
 

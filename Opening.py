@@ -6,12 +6,8 @@ import os
 import fnmatch  # Used to fins the savefiles and display them
 import CreativeMode
 from printT import *
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
+from Colour import *
 
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
 
 from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables to be used in the start screen
 
@@ -29,7 +25,7 @@ LINEBREAK = "===================================================================
 def StartScreen():
     global GAMEINFO
     global GAMESETTINGS
-    print Fore.LIGHTGREEN_EX  # This sets all text color to light green
+    print textcolour # This sets all text color to light green
 
     if GAMESETTINGS['DevMode']:
         pass  # If in dev mode do nothing and skip intro
@@ -39,14 +35,14 @@ def StartScreen():
         print CLEARSCREEN
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) # plays the startup sound with 'multi-threading'
-        print "                " + Fore.RED + "A" + lightgreen + "____ ________"
+        print "                " + Fore.RED + "A" + textcolour + "____ ________"
         print "                /_  H|\_____  \ "
         print "                 |  O|  ___|  |"
         print "                 |  L| /___   <"
         print "                 |  L|  ___\   |"
         print "                 |  Y| /W O O D|"
         print "                 |___|/________/"
-        print "                      " +Fore.RED + "Production." + lightgreen
+        print "                      " + Fore.RED + "Production." + textcolour
         time.sleep(3)  # Delay for intro sound
         print CLEARSCREEN
 

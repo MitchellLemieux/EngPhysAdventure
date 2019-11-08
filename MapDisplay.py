@@ -54,7 +54,7 @@ def mini():
 
     # Map Display Loop:
     if dimplayer != 0:
-        print INTERIORS[dimplayer]  # Prints the interior name if they're not in the overworld
+        print DIMENSIONS[dimplayer]  # Prints the interior name if they're not in the overworld
     # Creates a row printout string and then prints each line from top to bottom. Z is constant for level player is on.
     for y in range(YRANGE - 1, 0 - 1, -1):  # prints out the map from top to bottom to match player orientation
         # TODO make map rotatable for cardinal coordinates

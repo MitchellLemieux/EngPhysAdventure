@@ -16,12 +16,7 @@ import Opening    #don't import * from these b.c. these pull global variables fr
 import CreativeMode #don't import * from these b.c. these pull global variables from game functions and doing a recursive import creates errors
 import Quests  # Used to separate quest/event functions
 import TextParser  # Used to separate text interpretation and commands
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
-
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
+from Colour import *
 
 import MapDisplay  # Used to separate minim-ap display
 
@@ -29,7 +24,7 @@ import MapDisplay  # Used to separate minim-ap display
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.30.00"
-GAMEINFO['versionname'] = "Alpha v0.29.78 - " + Fore.RED + "Balancing Update" + lightgreen
+GAMEINFO['versionname'] = "Alpha v0.29.79 - " + red + "Haunted Forest Playthrough" + textcolour
 GAMEINFO['releasedate'] = "Nov 11, 2019"
 
 
@@ -67,9 +62,9 @@ def Setup():
 
     # This prints
 
-    print "You wake up in " + Back.WHITE + Fore.BLACK + CurrentPlace.name + Back.RESET + lightgreen + "\n"
+    printT("You wake up in " + mapcolour + CurrentPlace.name + textcolour + "(\S)")
     printT(CurrentPlace.lore)
-    printT("(\S)" + Back.WHITE + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + Back.RESET + lightgreen + "(\S)" + CurrentPlace.search(MAPS))
+    printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" +   CurrentPlace.search(MAPS))
 
 
     
@@ -213,10 +208,16 @@ else:  # Dev mode not enabled so error catching
         Setup()
         Main()
     # end function is run at the end of main loop so you can restart the game
+    except (KeyboardInterrupt, SystemExit):  # if keyboard pressed or x out of the game, this is so it doesn't save null data when you press teh keyboard
+        raise
+        #raise os._exit(0)
     except:
         # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
-        CreativeMode.saveGame(GAMEINFO['playername']) #saves all data
+        CreativeMode.saveGame(GAMEINFO['playername'] + " AutoSave") #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
-        print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+        print "Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave"
         print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
         raw_input("Type anything to exit: ")
+
+
+print "done"

@@ -5,12 +5,7 @@ import pickle
 from GameFunctions import * #importing the global dictionaries/values
 from StartUp import XRANGE, YRANGE, ZRANGE, DRANGE #Importing the map bound variables from StartUp to be used in the load function
 import CSVSaves
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
-
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
+from Colour import *
 
 
 def saveGame(savename):
@@ -99,9 +94,9 @@ def loadGame(loadname):
         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
         print "========================================================================"
         if CurrentPlace.travelled == 1:  # To print out the starting location for new files
-            print "You wake up in " + Back.WHITE + Fore.BLACK + CurrentPlace.name + Back.RESET + lightgreen + "\n"
+            print "You wake up in " + mapcolour + CurrentPlace.name + textcolour + "\n"
             printT(CurrentPlace.lore)
-        printT("(\S)" + Back.WHITE + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + Back.RESET + lightgreen + "(\S)" + CurrentPlace.search(MAPS),72,0.75)  # prints the basic lore to give you bearing on where you are
+        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS), 72, 0.75)  # prints the basic lore to give you bearing on where you are
 
 
 

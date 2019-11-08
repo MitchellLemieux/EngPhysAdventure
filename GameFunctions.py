@@ -7,12 +7,8 @@ import AsciiArt
 import time
 import os  # used to put files in the cache folder
 from printT import * #import it all
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
+from Colour import *
 
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
 
 
 # This is where the global variables are instantiated and defined. Global variables used to pass info between functions
@@ -23,7 +19,7 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
-INTERIORS = ["OverWorld","BSB","Capstone Room","Green Lake","Haunted Forest"]  # List of interior names with the index location being the dimension/building number
+DIMENSIONS = ["OverWorld", "BSB", "Capstone Room", "Green Lake", "Haunted Forest","Cabin in the Woods"]  # List of interior names with the index location being the dimension/building number
 # ex) 0 is OverwWord, 1 is BSB, 2 is capstone room, etc
 
 
@@ -39,8 +35,8 @@ GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gam
 GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things (~Places~, <objects>, /interacts/, and [people]) " \
                    "(\S) (\S)These are the commands your brain can handle in this state:" \
                    "(\S)(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
-                   "(\S)(e)equip objects" \
-                   "(\S)(dr)drop objects" \
+                   "(\S)(e)equip objects (picks them up into your inventory, replaces what's in slot)" \
+                   "(\S)(dr)drop objects (removes them from your inventory)" \
                    "(\S)(exa)examine objects" \
                    "(\S)(ea)eat objects" \
                    "(\S)(i)inventory (check inventory)" \
@@ -80,7 +76,8 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
-BRENSTARTLOCATION = (0,0,0,3)
+BRENSTARTLOCATION = (4,0,0,4)
+# (4,0,0,4)  haunted forest
 BRENINV = EMPTYINV
 #BRENINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
 
@@ -133,7 +130,7 @@ def Equip(Item):
     elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and not ENEMIES[Item].alive:
         printT("That's pretty messed up. You probably shouldn't pick up " + ENEMIES[Item].name + "'s body.")
     else:
-        print "\nYou can't find that around here. Maybe it's your hungover typing."
+        printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
 
 
 def Drop(Item):
@@ -157,7 +154,7 @@ def Drop(Item):
 
 
 
-def Move(direction):
+def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
     global MAPS
     global PLAYER
     global ENEMIES
@@ -170,25 +167,31 @@ def Move(direction):
     dim = PLAYER.location[3]
     currentplace = MAPS[x][y][z][dim]  # Saving your current map location to a variable
     place = 0
-    # TODO Bugfix, walls only registers for single letter movements not full commands, another reason to make transforms
+    # Direction parsing and redefining so that it matches walls
+    if direction in DIRECTIONSHORTCUTS: pass  # Don't need to parse direction if a shortcut
+    elif direction == 'up': direction = 'u'
+    elif direction == 'down': direction = 'd'
+    elif direction in ['front', 'forward', 'ahead','west']: direction = 'f'
+    elif direction in ['back', 'backward','east']: direction = 'b'
+    elif direction in ['left', 'south']: direction = 'l'
+    elif direction in ['right','north']: direction = 'r'
+    else:  # if the direction isn't in the accepted directions
+        printT("You stumble over not sure where you were trying to go. You brain doesn't understand " + direction + ".")
+        return
+
     if direction not in currentplace.walls:
-        # TODO Make these direction additions transformations (matrix transforms)
-        # These are the direction parsing
-        if direction in ['f','forward', 'ahead', 'w', 'west']:
-            y += 1
-        elif direction in ['b','back', 'backward', 'e', 'east']:
-            y -= 1
-        elif direction in ['r','right','n','north']:
-            x += 1
-        elif direction in ['l','left', 's', 'south']:
-            x -= 1
-        elif direction in ['u','up']:
-            z += 1
-        elif direction in ['d','down']:
-            z -= 1
-        else:
-            print "You stumble over not sure where you were trying to go. You brain doesn't understand " + direction
+        # TODO Make these direction additions transformations (matrix transforms) that add to a tuple
+        # These are the direction parsing so it moves the desired coordinates
+        if direction == 'u': z += 1
+        elif direction == 'd': z -= 1
+        elif direction == 'f': y += 1
+        elif direction == 'b': y -= 1
+        elif direction == 'l': x -= 1
+        elif direction == 'r': x += 1
+        else:  # This is just a catch, shouldn't happen
+            printT("You stumble over not sure where you were trying to go. Something went wrong in your brain")
             return
+
         # TODO This is where links come in which direct into interriors
 
         place = MAPS[x][y][z][dim]  # place is new location requested
@@ -197,11 +200,11 @@ def Move(direction):
         for link in currentplace.links:  # if there is links in it it will loop through
             if direction in link:  # Searching all the links to see if any links refer to that direction
                 if dim == 0 and link[4] != 0:
-                    print "You go inside " + INTERIORS[link[4]] + "."  # When going to non-Overworld it says going inside
+                    print "You go inside " + DIMENSIONS[link[4]] + "."  # When going to non-Overworld it says going inside
                 elif dim != 0 and link[4] == 0: # When going to overworld from non
                     print "You go outside."
                 elif dim != link[4]:  # Leaving one interior and entering another
-                    print "You leave " + INTERIORS[dim] + " and enter " + INTERIORS[link[4]] + "."
+                    print "You leave " + DIMENSIONS[dim] + " and enter " + DIMENSIONS[link[4]] + "."
 
                 x = link[1]
                 y = link[2]
@@ -223,12 +226,14 @@ def Move(direction):
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
             
         if place.travelled:  # This is the printout section for each time you move
-            print "You enter " + Back.WHITE + Fore.BLACK +  place.name + Back.RESET + lightgreen + "\n"
+            print "You enter " + Back.WHITE + Fore.BLACK + place.name + Back.RESET + textcolour + "\n"
             printT(place.lore)
-            printT("(\S)" + Back.WHITE + Fore.BLACK + "~"+place.name.upper() + "~ (\S)" + Back.RESET + lightgreen + place.search(MAPS),72,0.75)  # (\S) used for printT newline
+            printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
+            printT(place.search(MAPS), 72, 0.75)  # (\S) used for printT newline
             place.travelled = 0
         else:  # If returning to the place
-            printT("(\S)" + Back.WHITE + Fore.BLACK + "~"+place.name.upper() + "~ (\S)" + Back.RESET + lightgreen + place.search(MAPS),72,0.25)  # (\S) used for printT newline
+            printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
+            printT(place.search(MAPS), 72, 0.25)  # (\S) used for printT newline
             return place
             
         
@@ -302,9 +307,12 @@ def Attack(E):
         enemy = ENEMIES[E] #making it the object from the name
         bgchance = 0.01
         if PLAYER.inv['head'] == ITEMS['helm of orin bearclaw']:
-            bgchance += 0.1 
+            bgchance += 0.10
         if PLAYER.inv['body'] == ITEMS['big hits shirt']:
-            bgchance += 0.1
+            bgchance += 0.05
+        if PLAYER.name == "Big Hits Twofer":  # This is for testing big hits events
+            bgchance = 20
+
         if random() <= bgchance: #bigHits feature TODO have oblivion sound effects 
             # AsciiArt.BigHits()  # TODO Enable once Dynamic Ascii Art
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
@@ -446,7 +454,7 @@ def Inspect(Item): #Item is the inspect item
         print "\nIt's rude to stare at people!"
 
     else:
-        print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
+        printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
 
 def Inventory():
     global PLAYER
@@ -502,7 +510,7 @@ def Eat(Item):
             printT("OMG WHAT'S WRONG WITH YOU. I know you're hungry but please find a more vegan option.")
 
     else:
-        print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
+        printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
 
 
 # BackEnd Functions

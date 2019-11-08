@@ -5,7 +5,6 @@
 
 # **Bugs**
 - [ ] Peanut butter Kills anyone
-- [ ] Sound effect for dropping something even though it's not dropped?
 - [ ] Hooded man doesn't have death Diologe
 - [ ] Dr. Novog doesn't death quest
 - [ ] can kill dr. cassidy after you kill mcamster and still give you the same dialog
@@ -17,7 +16,6 @@
 - [ ] Can't play as tyler Kashak after you stop
 - [ ] When you exit from the start screen or otherwise the error catcher catches you
 - [ ] Map loading is maybe weird?
-- [ ] Lot I was broken?
 - [ ] Check to make sure nest game, correct times, and everything add up
 - [ ] Many more
 
@@ -26,6 +24,8 @@
 - [x] Pre0.30 - When you load game music doesn't start for a minute
     - In Setup() return if loadgame had to set GAMEINFO['musicOn'] to 0 so music would know it's the beginning
     - Also set GAMEINFO['timestart'] so the local time variable hopefully adds correctly
+- [x] 0.30 - You can go through walls when not using shortcuts
+    - Redid direction matching in GameFunctions.Move() so it will always recognize walls no matter what you type
 
         
 

@@ -5,12 +5,9 @@ Wrote on April 14,2018: Icemageddon
 """
 import operator
 from random import *
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
+from printT import * #import it all
+from Colour import *
 
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
 
 def six_tuple_add(a, b, c, d, e, f):  # adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
     i = tuple(map(operator.add,a,b))
@@ -59,22 +56,22 @@ class Character:
     def equip(self,Equip):
         drop = 0
         if self.inv[Equip.worn] == Equip:
-            print '\nThis item is already equipped\n'
+            printT(" (\S)This item is already equipped (\S)",72,0)
         # if your inventory is empty
 
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
             print "\n"+Equip.info + "\n"
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + "."
+            printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ".")
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            print "\n"+ Equip.info
-            print "You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n'
+            printT(" (\S)"+ Equip.info)
+            printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n')
         else:
-            print "\nYou can't find that around here. Maybe it's your hungover typing.\n"
+            printT("\nYou can't find that around here. Maybe it's your hungover typing.\n")
         self.updateStats()
         return drop
 
@@ -140,13 +137,13 @@ class Interact:
         # THIS PARSING ONLY Works if all item keys are unique
         if INTERACT[Item].drop in ITEMS.keys():  # if it's an ITEM (in the item keys)
             MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
-            print "You see " + ITEMS[INTERACT[Item].drop].name + ".\n"
+            printT("You see " + ITEMS[INTERACT[Item].drop].name + ".\n")
         elif INTERACT[Item].drop in ENEMIES.keys():  # if it's an Enemy
             MAPS[x][y][z][dim].placeEnemy(ENEMIES[INTERACT[Item].drop])
-            print "You see " + ENEMIES[INTERACT[Item].drop].name + ".\n"
+            printT("You see " + ENEMIES[INTERACT[Item].drop].name + ".\n")
         elif INTERACT[Item].drop in INTERACT.keys():  # if it's an Interactable
             MAPS[x][y][z][dim].placeInteract(INTERACT[INTERACT[Item].drop])
-            print "You see " + INTERACT[INTERACT[Item].drop].name + ".\n"
+            printT("You see " + INTERACT[INTERACT[Item].drop].name + ".\n")
             # TODO Make this an option maybe so it doesn't have to remove itself
             MAPS[x][y][z][dim].removeInteract(INTERACT[Item])  # If it's an interactable place it's an upgrade/transform
 
@@ -220,7 +217,7 @@ class Map:  #Map Location Storage
     # This function is the main thing that says what's in the area.
     def search(self,MAPS):  # Is passed MAPS dictionary so it can search area around it
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
-        description = "\n"
+        description = ""
         length = len(self.items)
         # (\S) used for printT newline
         # Initialize the {shortkey} used with object,interact,enemy for quick commands.
@@ -229,39 +226,39 @@ class Map:  #Map Location Storage
         shortkey = ""
         # This big if statement basically does a printout to account for single object/enemy in the area grammer
         if length:
-            description = "\nYou see"
+            description = "You see"
             if length > 1:  # If there's more than one item/interact in the area
                 for i in range(length):
                     if (i == length-1):
                         if isinstance(self.items[i],Equipment):
-                            description = description+" and a " + str(shortkey) + ""+ Fore.MAGENTA + ""+self.items[i].name + "" + lightgreen +".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            description = description +" and a " + str(shortkey) + "" + objectcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description+" and a " + str(shortkey) + "" + Fore.CYAN + ""+self.items[i].name + "" + lightgreen + ".\n" #inspectable highlight
+                            description = description +" and a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ".\n" #inspectable highlight
                             #shortkey += 1  # increments the shortkey
                     else:
                         if isinstance(self.items[i],Equipment):
-                            description = description + " a " + str(shortkey) + ""+ Fore.MAGENTA + ""+self.items[i].name + "" + lightgreen +","
+                            description = description + " a " + str(shortkey) + "" + objectcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description + " a " + str(shortkey) + "" + Fore.CYAN + ""+self.items[i].name + "" + lightgreen + ","
+                            description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
             else:  # if there's only 1 item/interact in the area
                 if isinstance(self.items[0],Equipment):
-                    description = description + " a " + str(shortkey) + ""+ Fore.MAGENTA + ""+self.items[0].name + "" + lightgreen +".\n" # equipment highlight
+                    description = description + " a " + str(shortkey) + "" + objectcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
                     #shortkey += 1  # increments the shortkey
                 else:
-                    description = description + " a " + str(shortkey) + "" + Fore.CYAN + ""+self.items[0].name + "" + lightgreen + ".\n" # inspectable highlight
+                    description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[0].name + "" + textcolour + ".\n" # inspectable highlight
                     #shortkey += 1  # increments the shortkey
         
         if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + Fore.YELLOW + "" + enemy.name + "" + Style.RESET_ALL + lightgreen + " is playing the Eng Phys Text Based Adventure. WAIT What!?"
+                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + " is playing the Eng Phys Text Based Adventure. WAIT What!?"
                     #shortkey += 1  # increments the shortkey
                 elif enemy.alive:
-                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + Fore.YELLOW + "" + enemy.name + "" + Style.RESET_ALL + lightgreen + " is " \
-+ choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
+                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + " is " \
+                                  + choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
           "eating a frighteningly large burrito","playing runescape","browsing math memes",
           "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
           "eating a Big Mac", "eating too much Lava Pizza", "contemplating how much Mayo is too much",
@@ -280,7 +277,7 @@ class Map:  #Map Location Storage
                     description = description + "(\S)Oh look, its the " \
                                   + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
                                   + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
-                                  + "" + str(shortkey) + "" + Style.DIM + Fore.YELLOW + "" + enemy.name + "" + Style.RESET_ALL + lightgreen + "."
+                                  + "" + str(shortkey) + "" + Style.DIM + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + "."
                     #shortkey += 1  # increments the shortkey
 
         # if self.interact:
@@ -288,7 +285,7 @@ class Map:  #Map Location Storage
         #         description = description + "/" + item.info + "/\n"
                 
         if (description == ""):
-            description = "(\S)There isn't a whole lot to see."
+            description = textcolour + "(\S)There isn't a whole lot to see."
 
         # --- Auto Surrounding Descriptions ---
             # Finding the locations around current location
