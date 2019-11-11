@@ -1,0 +1,269 @@
+/gameinfo
+r
+r
+r
+f
+talk hood
+l
+l
+l
+l
+b
+l
+u
+e silicon
+d
+r
+r
+r
+f
+r
+talk dr.
+f
+l
+a bill
+e solar
+l
+u
+l
+u
+talk dr.
+d
+r
+r
+b
+b
+a ken
+e kenrick's
+f
+talk dr.
+e glasses
+b
+b
+ex sun
+e key
+l
+l
+f
+f
+f
+f
+ex case
+e cage
+f
+d
+t dr.
+e gauss
+u
+b
+b
+b
+b
+b
+b
+b
+e dumb
+f
+f
+r
+f
+f
+u
+talk dr.
+d
+f
+r
+r
+a chris
+e tools
+l
+l
+t buijs
+l
+l
+u
+a dr.
+e flux
+d
+r
+r
+r
+r
+d
+ex reactor
+s
+a stefan
+e donut
+u
+l
+l
+d
+u
+l
+r
+d
+u
+f
+d
+t novog
+e ancient
+u
+r
+r
+b
+b
+b
+b
+b
+b
+d
+ex mirror
+e gamma 
+u
+f
+f
+f
+l
+l
+f
+e coffee
+u
+l
+l
+f
+f
+b
+f
+t dr.
+d
+r
+r
+r
+r
+b
+b
+d
+a jana
+e 3w
+u
+t dr.
+e 3w
+l
+r
+s
+e textbook
+e 3W textbook
+l
+l
+d
+dr 3w
+u
+l
+l
+f
+f
+d
+u
+l
+b
+b
+b
+b
+b
+u
+a dr.
+e brain
+d
+f
+f
+r
+f
+f
+f
+d
+t dr.
+use laser
+use femptosecond laser
+use key
+e pedrotti 
+u
+r
+stats
+r
+b
+r
+r
+b
+b
+b
+/savegame
+t man
+s
+t cassidy
+s
+a mcmaster
+s
+e iron ring
+i
+l
+f
+l
+b
+f
+r
+f
+a dr.
+b
+b
+b
+l
+f
+f
+l
+f
+u
+a dr. preston
+d
+r
+r
+r
+a dr.
+l
+l
+l
+stats
+l
+f
+u
+a dr.
+f
+a dr.
+d
+b
+r
+f
+b
+a dr.
+f
+d
+u
+l
+f
+d
+/savegame
+a Minnick
+u
+l
+b
+b
+u
+d
+r
+r
+r
+r
+f
+l
+l
+d
+a novog

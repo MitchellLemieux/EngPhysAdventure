@@ -1,0 +1,6 @@
+DEV = DEVMODE
+VAN = Vanilla regular mode
+SEC = Vanilla with secrets
+
+LIGHT = Lightside ending where you kill cassidy
+DARK = Darkside ending where you kill all the profs.

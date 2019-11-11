@@ -15,7 +15,7 @@ from Colour import *
 # TODO will be changed to pass by reference) and dictionaries used to store many variables/objects in one
 #   place while making it clear in the code which one is being referenced
 
-MAPS = StartUp.WorldMap() 
+MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
@@ -25,8 +25,9 @@ DIMENSIONS = ["OverWorld", "BSB", "Capstone Room", "Green Lake", "Haunted Forest
 
 
 
-GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':" ",'gamestart':0,'timestart':0,
-            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "","help": ""}
+GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':"",'gamestart':0,'timestart':0,
+            'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "","datapath":"",
+            "help": "", "devmode": 0,'scriptdata': []}
 #this dictionary is used to store misc game info to be passed between function:
 # speedrun time, start time, etc. Values are initialized to their value types
 # version is version of the game, gamestart is the first start time of the game, runtime is the total second count,
@@ -56,7 +57,8 @@ GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 t
 
 QUESTS = {}  #initializing the quests global variable to be later writen into
 
-GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'DevMode': 0, 'loadgame':0}
+# These settings are global and are in the settings.ini file so they don't need to be set every time you startup
+GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'loadgame':0}
 # disable openning, speedrun disables openning;lore read times; might disable secrets or opens them,
 # hardcore for now disables eating but might make enemies harder,
 # DevMode disables the main error catching + Startup Blip
@@ -76,7 +78,7 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
-BRENSTARTLOCATION = (4,0,0,4)
+BRENSTARTLOCATION = (2,3,1,0)
 # (4,0,0,4)  haunted forest
 BRENINV = EMPTYINV
 #BRENINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
@@ -92,7 +94,11 @@ BREN007PIE = Character('Brendan Fallon',list(BRENSTARTLOCATION),999,BRENINV,EMPT
 # Setting up the game path for the game to the cache folder
 # Using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
 # joining an empty string just gives a slash
-GAMEINFO['savepath'] = os.path.join(os.getcwd(), "cache","")
+
+#print os.getcwd()  # gets the CWD of the file
+#print os.getenv('APPDATA')  # The app data working directory. Use this instead of CWD so can write if not admin
+GAMEINFO['savepath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure","","cache","")  # Used for hidden saves + logs
+GAMEINFO['datapath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure","")  # Used for setting file
 
 try:
     os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
@@ -122,7 +128,7 @@ def Equip(Item):
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
 
-        
+
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
         printT("Maybe if you were at your peak you could carry a " + str(INTERACT[Item].name) + " but not with this migraine.")
     elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive:
@@ -221,10 +227,10 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
 
         if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
-        if random() <= 0.003: 
+        if random() <= 0.003:
             MAPS[x][y][z][dim].placeEnemy(bf)
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
-            
+
         if place.travelled:  # This is the printout section for each time you move
             print "You enter " + Back.WHITE + Fore.BLACK + place.name + Back.RESET + textcolour + "\n"
             printT(place.lore)
@@ -235,8 +241,8 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
             printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
             printT(place.search(MAPS), 72, 0.25)  # (\S) used for printT newline
             return place
-            
-        
+
+
     else:
         PLAYER.location[0] = currentplace.location[0]
         PLAYER.location[1] = currentplace.location[1]
@@ -248,11 +254,11 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
 #Combat System
 
 def Combat(P,E):
-     if E:      
+     if E:
         #Speed
         PSpeed = P.stats[2]
         ESpeed = E.stats[2]
-        
+
         #Determine who goes first
         if PSpeed>ESpeed:
             First = P
@@ -264,7 +270,7 @@ def Combat(P,E):
             Combatants = [E,P]
             First = choice(Combatants)
             Combatants.remove(First)
-            Second = Combatants[0]   
+            Second = Combatants[0]
         #Max damage each can deal
         FDamage = abs(First.stats[0])*First.stats[0]/(Second.stats[1]+1)
         SDamage = abs(Second.stats[0])*Second.stats[0]/(First.stats[1]+1)
@@ -275,7 +281,7 @@ def Combat(P,E):
             if First.health:
                 Damage = int(uniform(0.7, 1)*FDamage)
                 Second.health = max(0,Second.health - Damage)
-            
+
             if Second.health:
                 Damage = int(uniform(0.7, 1)*SDamage)
                 First.health = max(0,First.health - Damage)
@@ -313,7 +319,7 @@ def Attack(E):
         if PLAYER.name == "Big Hits Twofer":  # This is for testing big hits events
             bgchance = 20
 
-        if random() <= bgchance: #bigHits feature TODO have oblivion sound effects 
+        if random() <= bgchance: #bigHits feature TODO have oblivion sound effects
             # AsciiArt.BigHits()  # TODO Enable once Dynamic Ascii Art
             print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
             printT(enemy.Dinfo) #slow version
@@ -322,7 +328,7 @@ def Attack(E):
                print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
                CurrentPlace.placeItem(ITEMS[enemy.drop])
         else:
-           Outcome = Combat(PLAYER,enemy) 
+           Outcome = Combat(PLAYER,enemy)
            if Outcome:
                print "You defeated " + enemy.name + ".\n"
                printT(enemy.Dinfo)
@@ -333,7 +339,7 @@ def Attack(E):
                print "Oh no! " + enemy.name + " defeated you!\nYou died, without ever finding your iron ring"
     else:
         print "\nThey don't appear to be here."
-                        
+
 
 def Talk(E):
     global ENEMIES
@@ -344,7 +350,8 @@ def Talk(E):
     y = PLAYER.location[1]
     z = PLAYER.location[2]
     dim = PLAYER.location[3]
-    if E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive):
+
+    if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
             print enemy.name + " took the " + enemy.need + "."
@@ -356,7 +363,7 @@ def Talk(E):
             if enemy.drop:
                 MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
                 print "You see a " + ITEMS[enemy.drop].name +".\n"
-                enemy.drop = None      
+                enemy.drop = None
         elif enemy.quest and enemy.drop:  # What is this for?
 
             printT(enemy.Sinfo)
@@ -368,7 +375,7 @@ def Talk(E):
         else:
             printT(enemy.info)
         enemy.spoke = True
-        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
+        if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
             print "HEALTH: " + str(ENEMIES[E].health)
             print "ATK : " + str(ENEMIES[E].stats[0])
             print "DEF : " + str(ENEMIES[E].stats[1])
@@ -408,7 +415,7 @@ def Inspect(Item): #Item is the inspect item
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         # TODO re-implement inspecting item with words instead of numbers
         # TODO Take away stats from Erik Build
-        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats
+        if GAMEINFO['devmode']:  # If in devmode can see the stats
             print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
             print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
             print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
@@ -445,7 +452,7 @@ def Inspect(Item): #Item is the inspect item
 
         else:
             printT(INTERACT[Item].info,72,0.1) #fast version
-        if GAMESETTINGS['DevMode']:  # If in devmode can see the stats/quest of enemies
+        if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
             print "NEED : " + str(INTERACT[Item].need)
             print "DROP : " + str(INTERACT[Item].drop)
             print "QUESTFlag : " + str(INTERACT[Item].quest)
@@ -488,7 +495,7 @@ def Eat(Item):
             PLAYER.health = max(PLAYER.health, 0)  # prevents clipping bellow 0
             print "\nYou've eaten the " + ITEMS[Item].name + "."
             # TODO Reimplement health/food indicators with words
-            if GAMESETTINGS['DevMode']: print "\nHEALTH: "+ str(PLAYER.health)+"\n"  # if in DevMode can see stats
+            if GAMEINFO['devmode']: print "\nHEALTH: "+ str(PLAYER.health)+"\n"  # if in DevMode can see stats
             if PLAYER.health == 0:
                 PLAYER.alive = False
             ITEMS[Item].location = (None, None, None) #used to clear the item location
@@ -514,7 +521,7 @@ def Eat(Item):
 
 
 # BackEnd Functions
-        
+
 def logGame(log): #this makes a log file which records all player actions for debugging
     # TODO add settings and more description to log
     # metacache is a fake name for the log file. As well, saved as .plp for obfuscation purposes
@@ -524,20 +531,30 @@ def logGame(log): #this makes a log file which records all player actions for de
         f.write(str(log[i]) + '\n')
     f.close()
 
-def NameChange(): # A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
+def NameChange():  # A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
     global PLAYER
     global ENEMIES
     global MAPS
     # ENEMIES['yourself'].name = playername
-    ENEMIES['yourself'].name = PLAYER.name # yourself gets renamed to player name
-    ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
-    MAPS[2][4][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
-    # ENEMIES["your dad"].name = playername + "'s dad"
-    ENEMIES["your dad"].name = PLAYER.name + "'s dad" # renaming him to your dad
-    ENEMIES.update({PLAYER.name.lower():ENEMIES["your dad"]}) # adds that new entity to the dictionary
-    MAPS[5][7][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()]) # then placed on the map
-    return
-        
+    # Can't just update the name, need to update the dictionary name
+    ENEMIES['yourself'].name = PLAYER.name  # yourself gets renamed to player name
+    ENEMIES[PLAYER.name.lower()] = ENEMIES['yourself']  # puts in new value in the dictionary
+    del ENEMIES['yourself']  # deletes old value
+    #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
+
+
+    ENEMIES['your dad'].name = PLAYER.name + "'s dad"  # yourself gets renamed to player name
+    ENEMIES[PLAYER.name.lower() + "'s dad"] = ENEMIES['your dad']  # puts in new value in the dictionary
+    del ENEMIES['your dad']  # deletes old value
+    #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
+    ENEMIES[PLAYER.name.lower()].location = (2, 4, 1, 0)
+    MAPS[2][4][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()])  # then placed on the map
+    ENEMIES[PLAYER.name.lower() + "'s dad"].location = (5, 7, 1, 0)
+    MAPS[5][7][1][0].placeEnemy(ENEMIES[PLAYER.name.lower() + "'s dad"])  # then placed on the map
+
+    # these HAVE TO be returned or else the changes are within the scope of the function only
+    return ENEMIES, MAPS
+
 def SpellCheck(Word,Psblties): #Spellchecks words in the background to check things closest
     Distance = [edit_distance(Word,key) for key in Psblties]
     index = Distance.index(min(Distance))

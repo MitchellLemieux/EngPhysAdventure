@@ -4,12 +4,9 @@
 * Cheat Sheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 # **Bugs**
-- [ ] Peanut butter Kills anyone
-- [ ] Hooded man doesn't have death Diologe
 - [ ] Dr. Novog doesn't death quest
 - [ ] can kill dr. cassidy after you kill mcamster and still give you the same dialog
 - [ ] still a problem with layers, saving and loading, hope it works for 0.27 release
-- [ ] Can talk to hooded man after he disapears
 - [ ] droesn't drop iron ring after you kill cassidy
 - [ ] add savegame info to the sign
 - [ ] Save files in the wrong location? Where is Doug?
@@ -17,7 +14,6 @@
 - [ ] When you exit from the start screen or otherwise the error catcher catches you
 - [ ] Map loading is maybe weird?
 - [ ] Check to make sure nest game, correct times, and everything add up
-- [ ] Many more
 
 # **Fixed Bugs**
 **Includes Date, bug, and bug fix**
@@ -26,6 +22,19 @@
     - Also set GAMEINFO['timestart'] so the local time variable hopefully adds correctly
 - [x] 0.30 - You can go through walls when not using shortcuts
     - Redid direction matching in GameFunctions.Move() so it will always recognize walls no matter what you type
+- [x] 0.30 - Can talk to hooded man or anyone after they disapear
+    - You can talk to enemy's still when removed because the GameFunction.Talk() only checks their location and when
+    an enemy is removed the Enemy.location stays the same.
+    - Changed CameClasses MAP.removeEnemy() method so that it also sets the enemy location to none
+- [x] 0.30 - When you exit from ingame or start screen error catcher catches you and may overwrite your file
+    - We could normally do an acception for a keyboard interrupt but since the game is in a loop it's broken at the
+    wrong spot to be caught by the macro error catcher
+    - Could implement inner loop error catching or within printT but for now having autosaver make the file have
+    autosave on the end so it doesn't overwrite your main game data. Will filter out null outsaves later.
+- [x] 0.30 - Can't talk or fight any of the characters with the name change
+    - Bassically the location was set to none (so talk or other function wouldn't work) BECAUSE the ENEMY.location was
+    set inside the local scope of the GameFunctions.namechange() function
+    - Set it to return MAPS, ENEMIES to fix the scoping issue and update those dictionaries in the global scope
 
         
 

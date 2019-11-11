@@ -20,6 +20,7 @@ def two_tuple_add(a, b):  # adds 2 tuples element-wise
     return tuple(map(operator.add,a,b))
 
 
+
 # WHEN UPDATING ANY CLASS ATRIBUTE WILL NEED TO UPDATE IN CSVSaver to Reflect it!
 #       Unless someone does something fancy to automatically update it but I don't feel it's necessary.
 
@@ -147,6 +148,12 @@ class Interact:
             # TODO Make this an option maybe so it doesn't have to remove itself
             MAPS[x][y][z][dim].removeInteract(INTERACT[Item])  # If it's an interactable place it's an upgrade/transform
 
+#TODO GET RID OF location checking in GAMEFUNCTIONS AND location attribute entirely and just use storage lists in each map location
+# Should get rid of duplicate problems AND will go better with adjacency lists probably.
+# Player list
+# Item list
+# Interactables list
+# Enemies list (rename enemies to NPCs)
 class Map:  #Map Location Storage
     def __init__(self, name, location, info, lore, walls, inside, size=None, links=[]): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       # Name of location
@@ -174,6 +181,7 @@ class Map:  #Map Location Storage
         #   moves they will will go to a different spot on the interior (so you don't have to step around BSB) or JHE
         # Walls can be used to close and open links as they won't let the player move into it and are mutable
         # Using tuples here because they're faster but if want to be changed can use nested lists (mutable)
+
 
         
         #self.interrior = interrior #interrior is a list of inner map objects (so infinite nesting)
@@ -207,6 +215,7 @@ class Map:  #Map Location Storage
     def removeEnemy(self,enemy):
         if enemy in self.ENEMY:
             self.ENEMY.remove(enemy)
+            enemy.location = (None,None,None,None)  # removes the enemy location so they can't be talked to. Has to be a tuple of Nones or else not itterable in compares
 
     def removeInteract(self,Interact):  # had to be rewritted with load or else load function would create duplciate glitch
         for i in self.items:  # weird way to write it but loops through the items in that lcoation and if the name matches it removes it

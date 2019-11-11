@@ -84,8 +84,10 @@ VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'e
          'drink', 'inhale', 'ingest', 'devour', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go',
          'move','walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
          'recall','shortcuts','dance','sing','pet','scratch','lore']
-# DIRECTIONS = []  # TODO Make these wordlist verbs defined here
-DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/']  # lists of Verbs/keywords ONLY the developer can use
+
+# lists of Verbs/keywords ONLY the developer can use
+DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/time', '/gameinfo','/gamesettings', '/player', '/maps',
+            '/enemies','/items', '/interact', '/quests', '/script', '/']
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
 # List of VERB shortcuts used to stop spellchecking
@@ -162,7 +164,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             # if dev mode enabled it accepts special verbs which allows you to use special functions
             if verb == '/420e69': pass  # Does no spell checking so someone doesn't accidentally get 420e69
             elif verb in VERBSHORTCUTS: pass  # Does no spell checking if it's a shortcut
-            elif GAMESETTINGS['DevMode']:
+            elif GAMEINFO['devmode']:
                 verb = SpellCheck(verb, DEVVERBS)
                 # If you need to see spellchecking output
                 #printT("Your brain is pretty sure you meant " + verb + " instead of " + wordlist[0] + ".")
@@ -199,15 +201,10 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             CreativeMode.loadGame("basegame")  # loads in the savefile global variables
             GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         elif verb == '/420e69':  # This toggles game to dev mode for debugging in game
-            GAMESETTINGS['DevMode'] = int(not (GAMESETTINGS['DevMode']))
+            GAMEINFO['devmode'] = int(not (GAMEINFO['devmode']))
             # Prints throw-off style text while still giving the stat
-            print "\nYour hungover brain struggles to understand that command" + str(GAMESETTINGS['DevMode']) + "!\n "
-            # This section writes devmode to settings.ini file so you can get back to the settings
-            # TODO Before release comment out this section so DevMode isn't saved. DevMode in setting file is not for RELEASE
-            f = open("settings.ini", "w+")
-            for setting in GAMESETTINGS:
-                f.write(setting + "\n" + str(GAMESETTINGS[setting]) + "\n")
-            f.close()
+            print "\nYour hungover brain struggles to understand that command" + str(GAMEINFO['devmode']) + "!\n "
+
         # This normal function exits the game but also saves your progress so you can pick back up.
         # Now at least for normal people you can't metagame by saving and loading files
         elif verb in ['exit', 'leave', 'quit', "die"]:
@@ -236,6 +233,35 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             printT(shortcutprint, 72, 0.10)
         elif verb in ['dance']:
             printT("You dance like no one's watching! (\S)But they are... common this university campus.(\S) You'll see it later on Spotted At Mac.")
+
+        # -- DevMode Debug Print Dictionaries --
+        elif verb == '/time':
+            printT("gamestart: " + str(GAMEINFO['gamestart']))
+            printT("timestart: "+ str(GAMEINFO['timestart']))
+            printT("runtime: " + str(GAMEINFO['runtime']))
+            printT("stepcount: " + str(GAMEINFO['stepcount']))
+            printT("commandcount: " + str(GAMEINFO['commandcount']))
+        elif verb == '/gameinfo':
+            for key in GAMEINFO:
+                printT(key)
+                printT(str(GAMEINFO[key]))
+        elif verb == '/gamesettings':
+            for key in GAMESETTINGS:
+                printT(key)
+                printT(str(GAMESETTINGS[key]))
+        elif verb == '/player':
+            print PLAYER
+        elif verb == '/maps':
+            print MAPS
+        elif verb == '/enemies':
+            print ENEMIES
+        elif verb == '/items':
+            print ITEMS
+        elif verb == '/interact':
+            print INTERACT
+        elif verb == '/quests':
+            print QUESTS
+
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 
@@ -248,7 +274,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         if len(verb) > 2:  # if verb has more than 2 character
             # if dev mode enabled it accepts special verbs which allows you to use special functions
             if (verb in VERBSHORTCUTS) or (verb in DIRECTIONSHORTCUTS): pass  # Does no spell checking if it's a shortcut
-            elif GAMESETTINGS['DevMode']: verb = SpellCheck(verb, DEVVERBS)
+            elif GAMEINFO['devmode']: verb = SpellCheck(verb, DEVVERBS)
             else: verb = SpellCheck(verb, VERBS)
         # Implemented a pass on the spellcheck for creativemode, will fix this BS later
         # TODO Fix this BS (I.E. make the spellchecker work for multi nounbased structure OR have commands be combined
@@ -275,7 +301,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                         printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i]) +".")
                         return
         # TODO make exclusion list for custom parser things like these that you don't want spellchecking on 2nd word
-        elif verb in ['go', 'move', 'walk', 'run', 'turn','say','sing']: objectName = wordlist[1]  # no spell check for certain thing
+        elif verb in ['go', 'move', 'walk', 'run', 'turn','say','sing','/script']: objectName = wordlist[1]  # no spell check for certain thing
 
         #       --- Object SubWord Search ---
         # This function allows you to put in one+ word object names and still find a match
@@ -342,7 +368,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                         #word = SpellCheck(word,surobjectswords)  # might not spell check single words with short list as will lead to many errors
                         for object in surobjectsfullnames:
                             if object.find(word) is not -1:  # does a substring search in each word
-                                if GAMESETTINGS['DevMode']: print "Parser found a substring!"  # Debug
+                                if GAMEINFO['devmode']: print "Parser found a substring!"  # Debug
                                 objectName = object
                         try:
                             objectName  # See if object is defined
@@ -357,7 +383,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
 
 
                 # Debug for parser, although some things may need to be polled inside loop
-                if GAMESETTINGS['DevMode']:
+                if GAMEINFO['devmode']:
                     print wordlist[1]
                     for i in surroundingobjects:
                         print i.name
@@ -424,6 +450,17 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     printT(ENEMIES[objectName].pet_me())
                 else:
                     printT("You " + verb + " " + ENEMIES[objectName].name + ".(\S)They actually didn't mind that.")
+        elif verb == '/script':
+            scriptpath = os.path.join(os.getcwd(), "Dev","","PlaythroughScripts","",wordlist[1])
+            try:
+                with open(scriptpath, 'r') as f:
+                    GAMEINFO['scriptdata'] = f.readlines()  # reads in data seperated by newline into a list
+                f.close()
+                for i in range(len(GAMEINFO['scriptdata'])):  # removing the newlines from the script
+                    GAMEINFO['scriptdata'][i] = GAMEINFO['scriptdata'][i].rstrip("\n")
+                print GAMEINFO['scriptdata']
+            except:
+                printT("Theres no script with name " + wordlist[1] + " in the CWD!")
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 

@@ -45,7 +45,7 @@ cx_Freeze.shortcut_table = [
      "TARGETDIR",               # Component_
      "[TARGETDIR]EngPhysTextAdventure.exe",    # Target
      None,                      # Arguments
-     "THE GREAT ENG PHYS TEXT ADVENTURE!",  # Description
+     "THE GREAT ENG PHYS TEXT ADVENTURE! Filled with mystery and adventure for all!",  # Description
      None,                      # Hotkey
      None,                      # Icon
      None,                      # IconIndex
@@ -97,7 +97,7 @@ target = cx_Freeze.Executable(
 #This is general info for the build and compilier
 cx_Freeze.setup( 
         name = "Eng Phys Text Adventure",
-        version = "0.29.79",
+        version = "0.30.00",
         description = "THE GREAT ENG PHYS TEXT ADVENTURE!",
         author = "13 Hollywood Productions",
         options = {"bdist_msi": bdist_msi_options, "build_exe": {"packages":packages,'include_files':includefiles}},

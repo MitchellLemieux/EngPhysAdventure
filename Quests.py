@@ -60,7 +60,8 @@ questlist = [
     'the dark lord',
     'university man',
     'restored order',
-    'create chaos'
+    'create chaos',
+    'neutral balance'
     # PHILpocalypse  # After you give Phil is braces he sobers up and becomes tired Phil.
     # After he asks for a coffee "Man I could really use a coffee but I don't want to spend the money
     # if you give him coffee he gives you a free wish "OH YEAH I AM CAFFINATED. I feel like I can do anyhing!"
@@ -102,10 +103,8 @@ def sidequests():
             '========================================================================\nWould you like to play? \n').lower()
         if playgame == "yes" or playgame == "y":
             print "You click on the game and it begins in the terminal. The drumming \nintensifies. You're not sure if you made the right choice.\n========================================================================\n\n\n"
-            import \
-                CreativeMode  # this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler
-            QUESTS[
-                'EPTA all the way down'] = 0  # Truns off the quest, has to be before the game saves so the quest is ended when you come back
+            import CreativeMode  # this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler)
+            QUESTS['EPTA all the way down'] = 0  # Truns off the quest, has to be before the game saves so the quest is ended when you come back
             CreativeMode.saveGame(str(GAMEINFO['layersdeep']))  # saving game to be reloaded after death or won the game
             log = GAMEINFO['log']  # keeps the log as a temporary variable to keep a running log in the nested game
             Opening.Opening()
@@ -166,7 +165,7 @@ def ebta_story():
         ENEMIES['dan fitzgreen'].quest = True
         QUESTS['buijs kill chris'] = 0
 
-    if ENEMIES['dan fitzgreen'].spoke and INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
+    if INTERACT['broken reactor'].quest and QUESTS["dan fix reactor"]:
         MAPS[2][6][0][0].placeEnemy(ENEMIES['dr. novog'])
         MAPS[4][5][0][0].placeEnemy(ENEMIES['stefan boltzmann'])
         QUESTS["dan fix reactor"] = 0
@@ -246,8 +245,18 @@ def ebta_story():
         ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
         QUESTS['university man'] = 0
 
+    if not ENEMIES['dr. cassidy'].alive and not ENEMIES['sir william mcmaster'].alive and QUESTS['neutral balance']:  # Neutral Ending, kill both
+        PLAYER.alive = False  # does this so you can get out of the main loop
+        QUESTS['neutral balance'] = 0
+        print "I MADE IT!"
+        return 3
+
     if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
-        ENEMIES['dr. cassidy'].info = "Take the power you hold in your Iron Ring and destroy all of the professors!"
+        ENEMIES['dr. cassidy'].Dinfo = "NO WAIT? WHY? Dr. Cassidy falls, slain beside Sir William McMaster. (\S)You see the Deed to McMaster drop from his pocket."
+        ENEMIES['dr. cassidy'].drop = None
+        ENEMIES['dr. cassidy'].info = "Take the power you hold in your Iron Ring and destroy the rest of the " \
+                                      "Quantum Order! (\S)This includes Dr. Minnick, Dr. Novog, Dr. Kitai, Dr. knights, " \
+                                      "Dr. Preston', Dr. kleimann, Dr. Buijs, Dr. Lapierre, and Dr. Nagasaki."
         DEATHS = [ENEMIES[i].alive for i in
                   ['dr. minnick', 'dr. novog', 'dr. kitai', 'dr. knights', 'dr. preston', 'dr. kleimann', 'dr. buijs',
                    'dr. lapierre', 'dr. nagasaki']]
@@ -255,11 +264,14 @@ def ebta_story():
             pass
         else:
             PLAYER.alive = False
-            return 1
+            return 1  # Dark ending, kill McMaster and all Quantum Order
 
-    elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:
+    elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:  # Light Ending, kill Cassidy
+        ENEMIES['sir william mcmaster'].Dinfo = "NO WAIT? WHY? Sir William McMaster falls, slain beside Dr. Cassidy. (\S)You see the Deed to McMaster drop from his pocket."
+        ENEMIES['sir william mcmaster'].drop = None
         PLAYER.alive = False  # does this so you can get out of the main loop
         return 2
+
 
     if not ENEMIES['hooded man'].alive:  # say if you kill the hooded man, say bit hits him, the game ends
         PLAYER.alive = False  # does this so you can get out of the main loop

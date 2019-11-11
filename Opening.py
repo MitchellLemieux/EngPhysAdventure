@@ -9,8 +9,7 @@ from printT import *
 from Colour import *
 
 
-from GameFunctions import GAMESETTINGS, GAMEINFO #imports these global variables to be used in the start screen
-
+from GameFunctions import GAMESETTINGS, GAMEINFO # imports these global variables to be used in the start screen
 
 DELAY = 1.5
 # TODO Implement these based on the size of the screen
@@ -27,7 +26,7 @@ def StartScreen():
     global GAMESETTINGS
     print textcolour # This sets all text color to light green
 
-    if GAMESETTINGS['DevMode']:
+    if GAMEINFO['devmode']:
         pass  # If in dev mode do nothing and skip intro
 # The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
     else:
@@ -35,21 +34,21 @@ def StartScreen():
         print CLEARSCREEN
         audiopath = os.path.join(os.getcwd(), "MediaAssets","","EFXstartup.mp3") #points to the eddited star wars theme
         playsound.playsound(audiopath, False) # plays the startup sound with 'multi-threading'
-        print "                " + Fore.RED + "A" + textcolour + "____ ________"
+        print "                " + red + "A" + textcolour + "____ ________"
         print "                /_  H|\_____  \ "
         print "                 |  O|  ___|  |"
         print "                 |  L| /___   <"
         print "                 |  L|  ___\   |"
         print "                 |  Y| /W O O D|"
         print "                 |___|/________/"
-        print "                      " + Fore.RED + "Production." + textcolour
+        print "                      " + red + "Production." + textcolour
         time.sleep(3)  # Delay for intro sound
         print CLEARSCREEN
 
 
     startmenu = True  # startmenu is the variable that keeps you in the startmenu screen loop
 
-    if GAMESETTINGS['DevMode']:  # If in DevMode it skips the loading screen
+    if GAMEINFO['devmode']:  # If in DevMode it skips the loading screen
         startmenu = False  # turning off loading screen
 
     while startmenu:
@@ -83,7 +82,10 @@ def StartScreen():
                 loadnamelist = []  # list to store loadname
                 # Iterates through display string which has all files in the directory
                 for file in os.listdir(GAMEINFO['savepath']):
-                    if file == "SaveFile basegame.plp":  # ignores the basegame file
+                    filepath = os.path.join(GAMEINFO['savepath'], file)  # gets exact file path so can check size
+                    # TODO Nice to have would be showing game playtime or progress
+                    # ignores the basegame or the file is empty!
+                    if file == "SaveFile basegame.plp" or os.stat(filepath).st_size == 0:
                         next
                     # Searches for the keyword in the files of the savefile directory
                     elif fnmatch.fnmatch(file, 'SaveFile*'):  # looks for files that have SaveFile in the Name
@@ -144,14 +146,15 @@ def StartScreen():
                 elif Schoice =='2':
                     GAMESETTINGS['HardcoreMode'] = int(not(GAMESETTINGS['HardcoreMode']))
                 elif Schoice == '/420e69':  # Character that enables DevMode
-                    GAMESETTINGS['DevMode'] = int(not(GAMESETTINGS['DevMode']))
+                    GAMEINFO['devmode'] = int(not(GAMEINFO['devmode']))
                     # Prints throw-off style text while still giving the stat
-                    print "\nPlease choose " + str(GAMESETTINGS['DevMode']) + "one of the options."
+                    print "\nPlease choose " + str(GAMEINFO['devmode']) + "one of the options."
                 else:
                     print "\nPlease choose one of the options."
-            # Saving Settings Once out of the screen, These setting should be readable and changeable by a person
 
-            f = open("settings.ini", "w+")
+            # Saving Settings Once out of the screen, These setting should be readable and changeable by a person
+            settingpath = os.path.join(GAMEINFO['datapath'], "settings.ini")
+            f = open(settingpath, "w+")
             for setting in GAMESETTINGS:
         # TODO Before release uncomment this line so DevMode isn't saved. DevMode in setting file is not for RELEASE
                 #if setting == "DevMode": continue
@@ -255,7 +258,7 @@ def Closing():
     time.sleep(DELAY)
     print "          THE GREAT ENG PHYS TEXT ADVENTURE\n"
     time.sleep(DELAY)
-    print "Created by:\nMitchell Lemieux, Tyler Kashak, and Brendan Fallon\n"
+    print "Created by:\nBrendan Fallon, Tyler Kashak, and Mitchell Lemieux  \n"
     time.sleep(DELAY)
     print "Special Thanks:\nEric, Erik, Brian, Phil, and Megan\n"
     time.sleep(DELAY)
