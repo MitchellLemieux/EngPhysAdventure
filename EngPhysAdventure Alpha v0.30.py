@@ -136,6 +136,7 @@ def Main():
             command = raw_input('\nWhat do you want to do?\n')
 
         print LINEBREAK  # This linebreak helps split up each turn
+        if GAMESETTINGS['HardcoreMode']: print CLEARSCREEN
 
         # Sends the command text to the text parser to be interpreted and action to be done
         TextParser.Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTINGS)
@@ -186,6 +187,7 @@ def End():
             printT("Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END.")
         elif Quests.ebta_story() == 3: #The good storyline ending.
             printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh you pick up the deed begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in the hands everyone.")
+            QUESTS['neutral balance'] = 0
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         if GAMESETTINGS['SpeedRun']:print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
         logGame(GAMEINFO['log']) #logs the data to be submitted
@@ -196,7 +198,7 @@ def End():
             PLAYER.alive = True
             print LINEBREAK
             QUESTS['restored order'] = 0  # turn this off so you can continue playing the game without the quest redoing
-            QUESTS['create chaos'] = 0 
+            QUESTS['create chaos'] = 0
             Main()  # returns to the main (hopefully in the same state)
         if endchoice == "r":
             CreativeMode.loadGame("basegame") #loads in the savefile global variables

@@ -78,8 +78,9 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
-BRENSTARTLOCATION = (2,3,1,0)
+BRENSTARTLOCATION = (2,3,1,0)  # Dev start location
 # (4,0,0,4)  haunted forest
+# (2,3,1,0)  default location
 BRENINV = EMPTYINV
 #BRENINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
 

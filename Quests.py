@@ -5,8 +5,8 @@
 This Quests.py file is used to write the story, quests, and events of the game by changing objects based on conditions.
 EngPhysStory() is the main Eng Phys storyline  and returns once its finished
 Quests generally only happen once and are sidequests unrelated to the storyline that do something special
-Events are reoccurring based on the condition for the game
-
+Events are reoccurring based on the condition for the game.
+    This also includes PORTALS which is teliportation using interacts
 """
 # TODO Maybe split up these funcions into seperate files
 
@@ -15,12 +15,7 @@ import time
 import Opening  # used for the EPTA all the way down quest
 import os  # used to put files in the cache folder
 import AsciiArt
-import colorama  # Colour module, no bolding on windows :(
-from colorama import Fore, Back, Style
-
-colorama.init()
-CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-lightgreen = Fore.LIGHTGREEN_EX
+from Colour import *
 
 global QUESTS
 
@@ -34,6 +29,7 @@ questlist = [
     'rules sign',
     'EPTA all the way down',
     'national treasure',
+    'open the forest',
     # Events
     'PAP',
     # Talk to hooded man
@@ -134,6 +130,16 @@ def sidequests():
     if INTERACT["tri-coloured glasses"].quest and QUESTS['national treasure']:  # Once the sign is read
         MAPS[1][0][1][0].removeWall("u")
         QUESTS["secret spaces"] = 0
+
+    if INTERACT["red book"].quest and QUESTS['open the forest']:  # Once the sign is read
+        printT("You feel like you've gained some knowledge!")
+        MAPS[3][7][1][0].removeInteract(INTERACT['gap in the trees'])
+        INTERACT['gap in the trees'].location = None
+        MAPS[3][7][1][0].placeInteract(INTERACT['opening in the trees'])
+        INTERACT['opening in the trees'].location = (3,7,1,0)
+
+        QUESTS['open the forest'] = 0
+        #return INTERACT,MAPS  # don't need to return this scope because reasons?
 
 
 
@@ -247,8 +253,6 @@ def ebta_story():
 
     if not ENEMIES['dr. cassidy'].alive and not ENEMIES['sir william mcmaster'].alive and QUESTS['neutral balance']:  # Neutral Ending, kill both
         PLAYER.alive = False  # does this so you can get out of the main loop
-        QUESTS['neutral balance'] = 0
-        print "I MADE IT!"
         return 3
 
     if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
@@ -456,12 +460,15 @@ def events():
     # Killcount counter in player will trigger the police eventually
 
 
-    # Green Lake
+    # --- Portals ---
+    # TODO Build in this portal fucntionality into INTERACTS or maybe just places with doors
+
+    # To Green Lake
     if INTERACT["lake painting"].quest:
         PLAYER.location = [0,0,0,3]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[0][0][0][3]
         if CurrentPlace.travelled: printT(CurrentPlace.lore)
-        printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
+        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
         #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["lake painting"].need = None
         printT("(\S)You no longer need the keys to get into this place.")
@@ -471,7 +478,31 @@ def events():
     if INTERACT["portkey"].quest:
         PLAYER.location = [3,0,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][0][1][0]
-        printT("(\S)" + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
-        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
         INTERACT["portkey"].quest = False
+
+
+    # To Haunted forest from COOTES DRIVE
+
+    if INTERACT['opening in the trees'].quest:
+        PLAYER.location = [4,0,0,4]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
+        CurrentPlace = MAPS[4][0][0][4]
+        if CurrentPlace.travelled: printT(CurrentPlace.lore)
+        printT("(\S)" + mapcolour +"~" +  CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        INTERACT['opening in the trees'].quest = False
+
+    # To COOTES DRIVE from Haunted Forest Start
+    if INTERACT['trail to cootes drive'].quest:
+        PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
+        CurrentPlace = MAPS[3][7][1][0]
+        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        INTERACT['trail to cootes drive'].quest = False
+
+    # To COOTES DRIVE from escape rope
+    if INTERACT['escape rope'].quest:
+        PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
+        CurrentPlace = MAPS[3][7][1][0]
+        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        INTERACT['escape rope'].quest = False
 

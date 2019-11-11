@@ -4,15 +4,10 @@
 * Cheat Sheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 # **Bugs**
-- [ ] Dr. Novog doesn't death quest
-- [ ] can kill dr. cassidy after you kill mcamster and still give you the same dialog
 - [ ] still a problem with layers, saving and loading, hope it works for 0.27 release
-- [ ] droesn't drop iron ring after you kill cassidy
-- [ ] add savegame info to the sign
 - [ ] Save files in the wrong location? Where is Doug?
 - [ ] Can't play as tyler Kashak after you stop
 - [ ] When you exit from the start screen or otherwise the error catcher catches you
-- [ ] Map loading is maybe weird?
 - [ ] Check to make sure nest game, correct times, and everything add up
 
 # **Fixed Bugs**

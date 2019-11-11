@@ -201,4 +201,69 @@ t man
 s
 t cassidy
 s
-a cassidy
+a mcmaster
+s
+e iron ring
+i
+l
+f
+l
+b
+f
+r
+f
+a dr.
+b
+b
+b
+l
+f
+f
+l
+f
+u
+a dr. preston
+d
+r
+r
+r
+a dr.
+l
+l
+l
+stats
+l
+f
+u
+a dr.
+f
+a dr.
+d
+b
+r
+f
+b
+a dr.
+f
+d
+u
+l
+f
+d
+/savegame
+a Minnick
+u
+l
+b
+b
+u
+d
+r
+r
+r
+r
+f
+l
+l
+d
+a novog
