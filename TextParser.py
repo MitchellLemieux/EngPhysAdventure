@@ -87,7 +87,7 @@ VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'e
 
 # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/time', '/gameinfo','/gamesettings', '/player', '/maps',
-            '/enemies','/items', '/interact', '/quests', '/script', '/']
+            '/enemies','/items', '/interact', '/quests', '/script', '/devverbs','/']
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
 # List of VERB shortcuts used to stop spellchecking
@@ -261,7 +261,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             print INTERACT
         elif verb == '/quests':
             print QUESTS
-
+        elif verb == '/devverbs':
+            print DEVVERBS
         else:
             print "\nYour hungover brain struggles to understand that command!\n"
 
