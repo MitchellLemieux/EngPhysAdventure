@@ -620,9 +620,10 @@ def Reset():
                   "A magical axe which appears to cause the forest to kneel at its feet.", "hand", (20, 5, 8), ""),
     Equipment("Charcoal", None, "Charcoal.jpg", "A dusty lump of charcoal.", "off-hand", (1, 1, 1), -10),
     Equipment("Makeshift Explosive", None, "Makeshiftexplosive.jpg",
-                  "A match wont do. (\S)If only I had a hot enough source to light this.", "off-hand", (1, 1, 1), -10),
+                  "A match wont do. (\S)If only you had a hot enough source to light this.", "off-hand", (1, 1, 1), -10),
     Equipment("Ring Pop", None, "Ringpop.jpg", "A small sugary treat", "off-hand", (1, 1, 1), 5),
     Equipment("Matches", None, "Matches.jpg", "Perhaps I should preparea firepit for these.", "off-hand", (1, 1, 1),-10),
+    Equipment("Gunpowder", None, "Gunpowder.jpg", "You should look for a canister of some sort to put this in.", "off-hand", (1, 1, 1),-10),
     Equipment("Small Key", None, "Smallkey.jpg","A small metallic key found within a cookie jar in the Cabin in the woods.", "off-hand", (1, 1, 1),-1)
     ]  # DON"T FORGET TO REMOVE THE LAST COMA!
 
@@ -744,9 +745,13 @@ def Reset():
     Interact("Opening in the Trees",None,"With your knowledge you can now travel through the forest.","You push your way through the brush and after a while you lose track of where you entered from...",None,None),
     Interact("Trail to Cootes Drive",(4,0,0,4),"What was that place?","You push your way through the brush and after a while you make it to Cootes Drive...",None,None),
     Interact("Sulfur Deposit", (0, 4, 0, 4),
-                 "It appears to be a sulfur deposit. (\S)If only I had a way of mining this...",
+                 "It appears to be a sulfur deposit. (\S)If only you had a way of mining this...",
                  "You swing your pick at the rock. (\S)After some time, a fine sulfur power forms on the surface. (\S)You have no way of collecting it so perhaps you may need to bring whatever you want to work on here...",
-                 "old pickaxe", None),
+                 "old pickaxe", "mined sulfur deposit"),
+    Interact("Mined Sulfur Deposit", None,
+                 "It appears to be a mined sulfur deposit. (\S)A powdery residue is on the surface. (\S)You should bring the other required ingredient here...",
+                 "You mix some of the charcoal and sulfur dust together making a rudimentary version of gunpowder.",
+                 "charcoal", "gunpowder"),
     Interact("Tree Carving", (1, 8, 0, 4),"Upon closer inspection it reads: (\S)The man of the woods hates loud noises. (\S)He came running after my friend's and I set off a firework. (\S)I managed to esca- (\S)The note abruptlet ends and you notice a blood stain further down the tree.","",None,None),
     Interact("Dead Deer", (2, 8, 0, 4),"Poor thing... (\S)Looking closer you notice the wounds are not jagged like an animal would inflict. (\S)They are sharp and clean...","", None, None),
     Interact("Empty Soda Can", (3, 9, 0, 4), "It is an empty soda can... what could you possibly do with that?","You fill the can with gunpowder. (\S)This would surely make a boom if you could get it hot enough...","gunpowder", "makeshift explosive"),
@@ -793,7 +798,7 @@ def Reset():
                  "screwdriver", "furnace door"),
 
     Interact("Deep Firepit", (3, 8, 0, 4),
-                 "This firepit looks deep but recently used... If you wanted one of the charcoals you would need something to poke down that far.",
+                 "This firepit looks deep but recently used... If you wanted one of the charcoals you would need something to reach down that far.",
                  "You bend over the edge and reach down using your stick to extend your reach. (\S)You are barely able to pull up a decently sized charcoal from the pit. (\S)You drop the stick in the process... ooops.",
                  "stick", "charcoal"),
     Interact("Gate of the Forest", (0, 6, 0, 4),
