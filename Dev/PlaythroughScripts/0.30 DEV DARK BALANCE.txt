@@ -1,0 +1,126 @@
+/420e69
+/gameinfo
+r
+r
+r
+f
+talk man
+l
+l
+l
+l
+l
+b
+u
+e silic
+d
+r
+r
+r
+f
+r
+t dr.
+e LED
+stats
+d
+l
+i
+b
+r
+b
+e hard
+i
+r
+f
+b
+b
+r
+e shirt
+l
+i
+l
+l
+l
+f
+f
+f
+l
+l
+f
+f
+f
+e ladder
+b
+r
+r
+b
+i
+b
+r
+b
+i
+dr 3
+dr 4
+i
+s
+f
+l
+e coffee
+u
+l
+f
+f
+t d
+d
+r
+r
+b
+b
+r
+b
+l
+e LED
+e OLD
+r
+r
+f
+d
+a jana
+e 3w
+u
+t d
+i
+e 3w
+l
+l
+l
+r
+d
+dr 3
+dr 3W
+e 3
+s
+e LED
+u
+r
+r
+r
+d
+e old
+u
+l
+l
+l
+l
+l
+l
+b
+b
+b
+u
+/420e69
+/savegame
+i
+/stats
+s
+a d

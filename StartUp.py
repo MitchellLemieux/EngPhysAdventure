@@ -740,7 +740,9 @@ def Reset():
     Interact("Rick's Crafting Bench", (0, 0, 0, 3), "This bench can create anything made of wood or diamond.","You spend hours crafting the device to the precision you need. It's perfect.","softwood 2x4 stud", "sharpxchange" ),
 
     # --- Haunted Forest Expansion ---
-    Interact("Gap in the trees",(3,7,0,1),"It is a gap in the trees... a path is barely visible. (\S)It might be best to get a better idea on how to survive out there before trying to take on the trail.","You push your way through the brush and after a while you lose track of where you entered from...",None,None),
+    Interact("Gap in the Trees",(3,7,1,0),"It is a gap in the trees... a path is barely visible. (\S)It might be best to get a better idea on how to survive out there before trying to take on the trail.","",None,None),
+    Interact("Opening in the Trees",None,"With your knowledge you can now travel through the forest.","You push your way through the brush and after a while you lose track of where you entered from...",None,None),
+    Interact("Trail to Cootes Drive",(4,0,0,4),"What was that place?","You push your way through the brush and after a while you make it to Cootes Drive...",None,None),
     Interact("Sulfur Deposit", (0, 4, 0, 4),
                  "It appears to be a sulfur deposit. (\S)If only I had a way of mining this...",
                  "You swing your pick at the rock. (\S)After some time, a fine sulfur power forms on the surface. (\S)You have no way of collecting it so perhaps you may need to bring whatever you want to work on here...",
