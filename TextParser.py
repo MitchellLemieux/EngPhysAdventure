@@ -83,7 +83,7 @@ import CreativeMode
 VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'kill', 'get', 'wear', 'look',
          'drink', 'inhale', 'ingest', 'devour', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go',
          'move','walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
-         'recall','shortcuts','dance','sing','pet','scratch','lore','read','stats','status','condition']
+         'recall','shortcuts','dance','sing','pet','scratch','lore','read','stats','status','condition', 'open']
 
 # lists of Verbs/keywords ONLY the developer can use
 DEVVERBS = ['/savegame', '/loadgame', '/restart', '/time', '/gameinfo','/gamesettings', '/player', '/maps',
@@ -410,7 +410,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb in ['t','talk', 'speak']:
             Talk(objectName)
 
-        elif verb in ['ex','inspect', 'examine','read']:
+        elif verb in ['ex','inspect', 'examine','read', 'open']:
             Inspect(objectName)
 
         elif verb in ['ea','eat', 'drink', 'inhale', 'ingest', 'devour']:

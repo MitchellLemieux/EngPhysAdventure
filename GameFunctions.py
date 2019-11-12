@@ -432,16 +432,34 @@ def Inspect(Item): #Item is the inspect item
         printT(ITEMS[Item].name.upper(),72,0)
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         # TODO re-implement inspecting item with words instead of numbers
-        deltaATK = ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0]
-        deltaDEF = ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1]
-        deltaSPD = ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2]
+        deltaATK = ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0]  # " more powerful"
+        deltaDEF = ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1]  # " better defended"
+        deltaSPD = ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2]  # " faster"
 
+        descriptornumbers = [5,10,25,50,100,1000]
+        descriptors = ["Slightly", " A good bit", " A significant amount"," A very large amount", " A very very large amount", " AN UNGODLY amount"]
+        #5 = a bit
+        #10 = a lot
+        #25 = a significant amount
+        #50 = A TON
+        #100 = a very large amount
+        #1000 = AN UNGODLY amount
 
-        if deltaATK > 5 or deltaDEF > 5 or deltaSPD > 5:
-            desc = "This looks like it would make me "
-        if deltaATK > 5: printT("This item looks more powerful than what I have.")
-        if deltaDEF > 5: printT("This item looks more powerful than what I have.")
-        if deltaSPD > 5: printT("This looks like it would make me faster.")
+        if deltaATK > 4 or deltaDEF > 4 or deltaSPD > 4:  # if any of these are different
+            desc = " (\S)This looks like it would make me: (\S)"
+            for i in range(len(descriptors)):  # loops through descriptors
+                if descriptornumbers[i] > deltaATK and deltaATK > 4:
+                    desc += descriptors[i-1] + " more powerfull. (\S)"
+                    break
+            for i in range(len(descriptors)):  # loops through descriptors
+                if descriptornumbers[i] > deltaDEF and deltaDEF > 4:
+                    desc += descriptors[i-1] + " better defended. (\S)"
+                    break
+            for i in range(len(descriptors)):  # loops through descriptors
+                if descriptornumbers[i] > deltaSPD and deltaSPD > 4:
+                    desc += descriptors[i-1] + " faster. (\S)"
+                    break
+            printT(desc)
 
 
 

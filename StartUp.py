@@ -392,7 +392,7 @@ def Reset():
         ('l', 'r'), False),
     Map("Forest", (0, 7, 0, 4), "FOREST: (\S)",
         "Behind you the trail begins ascending rather quickly... (\S)The brush begins to become increasingly thin as you sense a clearing is nearby.",
-        ('l', 'r'), False),
+        ['l', 'r','b'], False),
     Map("Forest Sanctuary", (0, 6, 0, 4), "FOREST SANCTUARY: (\S)",
         "The clearing is beautiful. (\S)All around you are insects and animals in a display of environmental harmony. (\S)Light shines brightly from above and a beam settles upon a stone pedestal with an inscription which emerges from the forest floor.",
         ('b', 'l', 'r'), False),
@@ -568,7 +568,7 @@ def Reset():
     Equipment("Softwood 2x4 Stud", (0, 0, 0, 3), "Soft2x3Stud.jpg", "A prime peice of Douglas Fir. Useful to be made into whatever you can imagine", "off-hand", (1, 1, 1), ""),
 
     #--- Haunted Forest Items ---
-    Equipment("Golden Apple", (0, 6, 0, 4), "GApple.jpg", " It is a permanent stat boost in fruit form!","off-hand", ( 1, 1, 1), 100),
+    Equipment("Golden Apple", (1, 0, 0, 5), "GApple.jpg", "This luxurious apple glowes in the light. A rare commodity as eating it restores full health.","off-hand", (1, 1, 1), 1000),
     Equipment("Staff of the Indomitable", (0, 6, 0, 4), "TStaff.jpg", "A trusted protector of the forest donned with leaves of brilliant colour.","hand", ( 150, 75, 125), ""),
     Equipment("Staff of the Unwavering", (0, 6, 0, 4), "BStaff.jpg", "A loyal trail guardian once owned by the descendant of a grand wizard.","hand", ( 75, 175, 125), ""),
     
@@ -810,12 +810,12 @@ def Reset():
                  "This firepit looks deep but recently used... If you wanted one of the charcoals you would need something to reach down that far.",
                  "You bend over the edge and reach down using your stick to extend your reach. (\S)You are barely able to pull up a decently sized charcoal from the pit. (\S)You drop the stick in the process... ooops.",
                  "fireplace tongs", "charcoal"),
-    Interact("Gate of the Forest", (0, 6, 0, 4),
+    Interact("Gate of the Forest", (0, 7, 0, 4),
                  "An impenetrable gate formed out of the forest itself. (\S)If only you had a way of cutting through this.",
                  "You raise the axe and prepare to swing it at the gate. (\S)With a thwack a limb extends from the forest above and wraps around your wrist! (\S)Frozen in place, the tree removes the axe from your grasp and pulls it over to the gate. (\S)The branches which make up the gate move until an axe shape is formed. (\S)The axe fits perfectly in the space and begins to glow. The glow intensifies until you are forced to shield your eyes. (\S)Once the light finally dims you look are astonished to see the gate is gone!",
                  "woodsman's axe", None),
     Interact("Stone Pedestal", (0, 6, 0, 4),
-                 "Congratulations, you have reached the end of the forest! (\S)Before you lies two staves of equal value but different use. (\S)Choose wisely as you are only able to take one of them. (\S)Feel free to use the escape rope to return to the point from which you came.",
+                 "You read the note: 'You have proven yourself in the Forest. Take this power and these gifts.' (\S)'Before you lies two staves of equal power but different use.'  (\S)'Feel free to use the escape rope to return to the point from which you came.'",
                  "", None, None),
     Interact("Escape Rope", (0, 6, 0, 4), "", "", None, None),
     Interact("Cookie Jar", (1, 0, 0, 5), "It is a cookie monster cookie jar sealed tight!",

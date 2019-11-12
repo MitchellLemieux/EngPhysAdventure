@@ -29,8 +29,10 @@ questlist = [
     'rules sign',
     'EPTA all the way down',
     'national treasure',
-    'open the forest',
+    'open the trees',
     'open the cabin',
+    'open the forest',
+    'power of the forest',
     # Events
     'PAP',
     # Talk to hooded man
@@ -132,14 +134,13 @@ def sidequests():
         MAPS[1][0][1][0].removeWall("u")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         QUESTS["national treasure"] = 0
 
-    if INTERACT["red book"].quest and QUESTS['open the forest']:  # Once the sign is read
+    if INTERACT["red book"].quest and QUESTS['open the trees']:  # Once the sign is read
         printT("You feel like you've gained some knowledge!")
         MAPS[3][7][1][0].removeInteract(INTERACT['gap in the trees'])
         INTERACT['gap in the trees'].location = None
         MAPS[3][7][1][0].placeInteract(INTERACT['opening in the trees'])
         INTERACT['opening in the trees'].location = (3,7,1,0)
-
-        QUESTS['open the forest'] = 0
+        QUESTS['open the trees'] = 0
         #return INTERACT,MAPS  # don't need to return this scope because reasons?
 
 
@@ -147,9 +148,20 @@ def sidequests():
         MAPS[8][9][0][4].removeWall("r")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         QUESTS['open the cabin'] = 0
 
-    # if INTERACT["lit firepit"].quest and QUESTS['open the cabin']:
-    #     MAPS[8][9][0][4].removeWall("r")  # DON'T FORGET to make wall a list instead of a tuple in the object!
-    #     QUESTS['open the cabin'] = 0
+    if INTERACT['gate of the forest'].quest and QUESTS['open the forest']:
+        MAPS[0][7][0][4].removeWall("b")  # DON'T FORGET to make wall a list instead of a tuple in the object!
+        QUESTS['open the forest'] = 0
+
+    if INTERACT['stone pedestal'].quest and QUESTS['power of the forest']:
+        PLAYER.maxhealth = 200
+        PLAYER.health = 200
+        PLAYER.basestats = [100,100,100]
+        PLAYER.updateStats()
+        printT(" (\S) (\S)You see a flash of light and feel stronger.")
+        AsciiArt.HauntedForest()
+        QUESTS['power of the forest'] = 0
+
+
 
 
 
@@ -496,6 +508,9 @@ def events():
     if INTERACT['opening in the trees'].quest:
         PLAYER.location = [4,0,0,4]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[4][0][0][4]
+        if CurrentPlace.travelled:
+            printT("You enter... (\S)")
+            AsciiArt.HauntedForest()
         if CurrentPlace.travelled: printT(CurrentPlace.lore)
         printT("(\S)" + mapcolour +"~" +  CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
         #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
