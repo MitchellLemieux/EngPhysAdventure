@@ -568,6 +568,10 @@ def Reset():
     Equipment("Softwood 2x4 Stud", (0, 0, 0, 3), "Soft2x3Stud.jpg", "A prime peice of Douglas Fir. Useful to be made into whatever you can imagine", "off-hand", (1, 1, 1), ""),
 
     #--- Haunted Forest Items ---
+    Equipment("Golden Apple", (0, 6, 0, 4), "GApple.jpg", " It is a permanent stat boost in fruit form!","off-hand", ( 1, 1, 1), 100),
+    Equipment("Staff of the Indomitable", (0, 6, 0, 4), "TStaff.jpg", "A trusted protector of the forest donned with leaves of brilliant colour.","hand", ( 150, 75, 125), ""),
+    Equipment("Staff of the Unwavering", (0, 6, 0, 4), "BStaff.jpg", "A loyal trail guardian once owned by the descendant of a grand wizard.","hand", ( 75, 175, 125), ""),
+    
     Equipment("1 Stick", (3, 0, 0, 4), "Stick.jpg", "It is a stick found in the forest.", "hand", (5, 5, 5), -1),
     Equipment("2 Sticks", (9, 1, 0, 4), "Stick.jpg", "2 sticks bundled together.", "hand", (10, 10, 10),-1),
     Equipment("3 Sticks", (0, 3, 0, 4), "Stick.jpg", "3 sticks bundled together.", "hand", (12, 12, 12),-1),
