@@ -1,5 +1,5 @@
 DEV = DEVMODE
-VAN = Vanilla regular mode
+VAN = Vanilla regular mode (no secrets, but sidequests allowed)
 SEC = Vanilla with secrets
 
 LIGHT = Lightside ending where you kill cassidy

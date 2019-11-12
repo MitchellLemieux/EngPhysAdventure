@@ -281,13 +281,15 @@ def Combat(P,E):
         while (P.health and E.health):
             if First.health:
                 Damage = int(uniform(0.7, 1)*FDamage)
-                #print
+                if GAMEINFO['devmode']: printT(First.name + " deals " + str(Damage) + " to " + Second.name)
                 Second.health = max(0,Second.health - Damage)
-
+                if GAMEINFO['devmode']: printT(Second.name + " health: " + str(Second.health))
             if Second.health:
                 Damage = int(uniform(0.7, 1)*SDamage)
+                if GAMEINFO['devmode']: printT(Second.name + " deals " + str(Damage) + " to " + First.name)
                 First.health = max(0,First.health - Damage)
-     # TODO Re-implement combat and number with word ques instead of numbers
+                if GAMEINFO['devmode']: printT(First.name + " health: " + str(Second.health))
+     # TODO Re-implement combat and number with word ques instead of numbers. Also say: _ strikes first
      # if First == P:
      #     print "\nYou attack dealing " + str(SSHealth - Second.health) + " damage.\n" + Second.name + " deals " + str(FSHealth - First.health) + " damage.\n"
      #     print  "You have " + str(First.health) + " health remaining.\n" + Second.name + " has " + str(Second.health) + " health remaining.\n"
