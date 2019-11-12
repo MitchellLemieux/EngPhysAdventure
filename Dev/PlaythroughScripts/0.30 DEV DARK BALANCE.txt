@@ -1,3 +1,4 @@
+0.30 DEV DARK BALANCE.txt
 /420e69
 /gameinfo
 r
@@ -123,4 +124,3 @@ u
 i
 /stats
 s
-a d

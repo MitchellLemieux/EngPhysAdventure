@@ -273,7 +273,7 @@ class Map:  #Map Location Storage
           "eating a Big Mac", "eating too much Lava Pizza", "contemplating how much Mayo is too much",
           "bathing in Mayonnaise", "in a sushi coma", "phasing in and out of this dimension", "drinking spicy Pho broth",
           "reading a book under a tree", "wondering how you can read their thoughts?", "playing 4D chess",
-          "pondering necromancy", "unsuccessfully painting their WarHammer miniature with Mili",
+          "pondering necromancy", "unsuccessfully painting their WarHammer miniature with milli",
           "Synthesizing Gold Nanoparticles", "creating an AI Dog", "petting a cat", "carrying a soccer ball",
           "playing football by themself", "balancing a tennis racket on their nose", "digging down in Minecraft",
           "catching a shiny Pikachu", "checking their Hearthstone Bot", "solving time travel", "watching Gilmore Girls",

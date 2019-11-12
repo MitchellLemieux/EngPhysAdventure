@@ -429,19 +429,37 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb in ['us',"use"]:  # this makes it so you can use items if the interacble is in the area
             x, y, z, dim = PLAYER.location
             # checks all interactables in area to see if item is needed
-            for interactable in MAPS[x][y][z][dim].items:  # for all itmes+interactables in the area
-                if isinstance(interactable, Interact):  # if it's in interactable
-                    if interactable.need == objectName:
-                        print "\nYou use the " + objectName + " with the " + interactable.name + ".\n"
-                        Inspect(interactable.name.lower())
-                        break  # breaks so only uses it on first interactable that needs it and doesn't cause duplicates or looping
+            surroundingobjects = [PLAYER.inv['head'], PLAYER.inv['body'], PLAYER.inv['hand'], PLAYER.inv['off-hand']] \
+                                 + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
+            match = False
+            for i in surroundingobjects:  # checks to make sure in surroundings
+                if i.name == objectName:
+                    match = True
+            if match:
+                for interactable in MAPS[x][y][z][dim].items:  # for all itmes+interactables in the area
+                    if isinstance(interactable, Interact):  # if it's in interactable
+                        if interactable.need == objectName:
+                            print "\nYou use the " + objectName + " with the " + interactable.name + ".\n"
+                            Inspect(interactable.name.lower())
+                            break  # breaks so only uses it on first interactable that needs it and doesn't cause duplicates or looping
+            else:
+                printT(" (\S)You can't find a " + objectName + " around here. Maybe it's your hungover brain.")
         elif verb in ['g','give']:
             x, y, z, dim = PLAYER.location
             # checks all Enemies in area to see if item is needed
-            for enemy in MAPS[x][y][z][dim].ENEMY:  # for all enemy in the area
-                if enemy.need == objectName:
-                    print "\nYou give the " + objectName + " to " + enemy.name + ".\n"
-                    Talk(enemy.name.lower())
+            surroundingobjects = [PLAYER.inv['head'], PLAYER.inv['body'], PLAYER.inv['hand'], PLAYER.inv['off-hand']] \
+                                 + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
+            match = False
+            for i in surroundingobjects:  # checks to make sure in surroundings
+                if i.name == objectName:
+                    match = True
+            if match:
+                for enemy in MAPS[x][y][z][dim].ENEMY:  # for all enemy in the area
+                    if enemy.need == objectName:
+                        print "\nYou give the " + objectName + " to " + enemy.name + ".\n"
+                        Talk(enemy.name.lower())
+            else:
+                printT(" (\S)You can't find a " + objectName + " around here. Maybe it's your hungover brain.")
         elif verb in ["say",'sing']:
             printT("You " + str(verb) + " " + objectName)
         elif verb in ["pet","scratch"]:

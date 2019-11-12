@@ -163,50 +163,51 @@ def updateSave(save): #this file tries to autoatically update the save file
     return
  
 def creative_parser(command):
-    print command
-    # Going to go:
-    # / Commandtype Classtype /Noun/ (/ / so can be multiword without needing context) Attribute/Method(make sure all only 1 word) /Value/ (/ / if string, nothing if int/float/bool)
-    # ex) / Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/
-    # Does it one section at a time, splits left by two spaces gets first two words
-    # Splits around / / characters to get the rest
-
-    #testline = "Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/"
-
-    # Parser WILL BE DIFFERENT FOR EACH COMMAND based on what is needed
-    # Seperating the first 2 spaces to get first two words
-    spaceseperate = command.lower().split(" ", 2)  # SPLIT works from the left normally but rsplit works from the right
-    slashseperate = spaceseperate[2].split("/", 4)  # splits by lines
-    # info = info[:1]  # Could use [:-1] removes last element by taking subset n-1 ellements
-    del slashseperate[-1]  # deletes last empty element
-    del slashseperate[0]  # deletes 1st empty element, not deleting empty spaces because could be empty name
-    slashseperate[1] = slashseperate[1].strip(" ")  # gets rid of empty space in attribute
-    #Maybe delete empty spaces in each attritube
-
-    commandtype = spaceseperate[0].lower()
-    classtype = spaceseperate[1].lower()
-    noun = slashseperate[0].lower()
-
-    # Might leave these prints in there so people understand
-    print commandtype
-    print classtype
-    print noun
-    print attribute
-    print value
-# Go through first 3 values (commandtype, classtype, noun) then each subsequent one based on need
-
-
-    if commandtype == "read":   # passing to the read function
-        creative_read(classtype, spaceseperate[2])
-    # elif commandtype == "set":
-    #     creative_set(classtype, spaceseperate[2])
-    # elif commandtype == "new":
-    #     creative_new(classtype, spaceseperate[2])
-    # elif commandtype == "spawn":
-    #     creative_spawn(classtype, spaceseperate[2])
-    # elif commandtype == "remove":
-    #     creative_remove(classtype, spaceseperate[2])
-    # else:
-    #     print "I don't recognize that Creative command. Options are:\nRead, Set, New, Spawn, Remove"
+    # EVERYTHING DISABLE FOR RELEASE
+#     print command
+#     # Going to go:
+#     # / Commandtype Classtype /Noun/ (/ / so can be multiword without needing context) Attribute/Method(make sure all only 1 word) /Value/ (/ / if string, nothing if int/float/bool)
+#     # ex) / Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/
+#     # Does it one section at a time, splits left by two spaces gets first two words
+#     # Splits around / / characters to get the rest
+#
+#     #testline = "Set Enemy /Dr. Minnick/ sinfo /WHO THE HELL ARE YOU/"
+#
+#     # Parser WILL BE DIFFERENT FOR EACH COMMAND based on what is needed
+#     # Seperating the first 2 spaces to get first two words
+#     spaceseperate = command.lower().split(" ", 2)  # SPLIT works from the left normally but rsplit works from the right
+#     slashseperate = spaceseperate[2].split("/", 4)  # splits by lines
+#     # info = info[:1]  # Could use [:-1] removes last element by taking subset n-1 ellements
+#     del slashseperate[-1]  # deletes last empty element
+#     del slashseperate[0]  # deletes 1st empty element, not deleting empty spaces because could be empty name
+#     slashseperate[1] = slashseperate[1].strip(" ")  # gets rid of empty space in attribute
+#     #Maybe delete empty spaces in each attritube
+#
+#     commandtype = spaceseperate[0].lower()
+#     classtype = spaceseperate[1].lower()
+#     noun = slashseperate[0].lower()
+#
+#     # Might leave these prints in there so people understand
+#     print commandtype
+#     print classtype
+#     print noun
+#     print attribute
+#     print value
+# # Go through first 3 values (commandtype, classtype, noun) then each subsequent one based on need
+#
+#
+#     if commandtype == "read":   # passing to the read function
+#         creative_read(classtype, spaceseperate[2])
+#     # elif commandtype == "set":
+#     #     creative_set(classtype, spaceseperate[2])
+#     # elif commandtype == "new":
+#     #     creative_new(classtype, spaceseperate[2])
+#     # elif commandtype == "spawn":
+#     #     creative_spawn(classtype, spaceseperate[2])
+#     # elif commandtype == "remove":
+#     #     creative_remove(classtype, spaceseperate[2])
+#     # else:
+#     #     print "I don't recognize that Creative command. Options are:\nRead, Set, New, Spawn, Remove"
 
     return
 

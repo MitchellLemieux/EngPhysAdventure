@@ -281,6 +281,7 @@ def Combat(P,E):
         while (P.health and E.health):
             if First.health:
                 Damage = int(uniform(0.7, 1)*FDamage)
+                #print
                 Second.health = max(0,Second.health - Damage)
 
             if Second.health:
@@ -433,6 +434,7 @@ def Inspect(Item): #Item is the inspect item
                 PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
             elif ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items:
                 MAPS[x][y][z][dim].removeItem(ITEMS[INTERACT[Item].need])
+                ITEMS[INTERACT[Item].need].location = (None,None,None,None)
             INTERACT[Item].quest = True  # this turns on the quest flag for the interactable once interacted with if you have the item
             printT(INTERACT[Item].Sinfo + "(\S)") #special slow version
             PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
