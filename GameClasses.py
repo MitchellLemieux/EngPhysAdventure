@@ -63,13 +63,13 @@ class Character:
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            print "\n"+Equip.info + "\n"
+            printT(" (\S)" +Equip.info + " (\S)")
             printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ".")
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            printT(" (\S)"+ Equip.info)
+            printT(" (\S)"+ Equip.info + " (\S)")
             printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n')
         else:
             printT("\nYou can't find that around here. Maybe it's your hungover typing.\n")
@@ -203,9 +203,9 @@ class Map:  #Map Location Storage
             self.items.append(Interact)
             Interact.location = self.location
 
-    def removeWall(self, wall): #this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
+    def removeWall(self, wall):  # this is used to remove walls of rooms given the wall. WALLS have to be a lisst not a tuple to be mutable
         if wall in self.walls: 
-            self.walls.remove(wall) #removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
+            self.walls.remove(wall)  # removes the wall from the list. wall attribute is direction it's blocking such as 'l'. HOWEVER The walls have to be in square [] not circle brackets () so its a list instead of a tuple. Lists are mutable, tuples are not
             
     def removeItem(self,item):  # had to be rewritted with load or else load function would create duplciate glitch
         for i in self.items:  # weird way to write it but loops through the items in that lcoation and if the name matches it removes it
@@ -240,21 +240,21 @@ class Map:  #Map Location Storage
                 for i in range(length):
                     if (i == length-1):
                         if isinstance(self.items[i],Equipment):
-                            description = description +" and a " + str(shortkey) + "" + objectcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            description = description +" and a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
                             #shortkey += 1  # increments the shortkey
                         else:
                             description = description +" and a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ".\n" #inspectable highlight
                             #shortkey += 1  # increments the shortkey
                     else:
                         if isinstance(self.items[i],Equipment):
-                            description = description + " a " + str(shortkey) + "" + objectcolour + "" + self.items[i].name + "" + textcolour + ","
+                            description = description + " a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
                         else:
                             description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
             else:  # if there's only 1 item/interact in the area
                 if isinstance(self.items[0],Equipment):
-                    description = description + " a " + str(shortkey) + "" + objectcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
+                    description = description + " a " + str(shortkey) + "" + itemcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
                     #shortkey += 1  # increments the shortkey
                 else:
                     description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[0].name + "" + textcolour + ".\n" # inspectable highlight

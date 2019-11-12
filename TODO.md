@@ -4,6 +4,9 @@
 * Cheat Sheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 # **Bugs**
+- [ ] If crashes then gave saves may break the game due to giving the object then brekaing on quest
+- [ ] When game is loaded with mismatched items it will break in the middle of the loading loop causing many of the
+    things to not be loaded even if they're fine. It needs a save reconsiler that removes the wrong object.
 - [ ] still a problem with layers, saving and loading, hope it works for 0.27 release
 - [ ] Save files in the wrong location? Where is Doug?
 - [ ] Can't play as tyler Kashak after you stop

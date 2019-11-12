@@ -33,25 +33,29 @@ GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':"",'game
 # version is version of the game, gamestart is the first start time of the game, runtime is the total second count,
 # log is log of all player input, layers deep is how many layers deep in the laptop quest you are, help is help prinout,
 
-GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things (~Places~, <objects>, /interacts/, and [people]) " \
-                   "(\S) (\S)These are the commands your brain can handle in this state:" \
-                   "(\S)(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
-                   "(\S)(e)equip objects (picks them up into your inventory, replaces what's in slot)" \
-                   "(\S)(dr)drop objects (removes them from your inventory)" \
-                   "(\S)(exa)examine objects" \
-                   "(\S)(ea)eat objects" \
-                   "(\S)(i)inventory (check inventory)" \
-                   "(\S)(exa)examine interacts (uses an item when you have the right thing) " \
-                   "(\S)(us)use objects (use an item on a nearby interact)" \
-                   "(\S)(t)talk person  (gives them an item when you have the right thing)" \
-                   "(\S)(g)give object (gives an object to a person around you)" \
-                   "(\S)(a)attack person (Force may be necessary but be careful, you're limited by what you have)" \
-                   "(\S)(s)search (look at what's around you)" \
-                   "(\S)(r)remember (remember what you were doing here earlier)" \
-                   "(\S)exit (exit your body)" \
-                   "(\S)shortcuts (gives shortcuts list)" \
-                   "(\S)(h)help (gives you this list again)" \
-                   "(\S) (\S)While you may accept more commands that is up to you to discover."
+
+
+
+GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things: " + mapcolour + "~Places~" + textcolour + ", " + itemcolour + "items" + textcolour + ", " + interactcolour + "interacts" + textcolour + ", and " + personcolour + "people" + textcolour + ". The colour helps denote each." \
+                    "(\S) (\S)These are the commands your brain can handle in this state:" \
+                    "(\S)-(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
+                    "(\S)-(e)equip " +itemcolour+ "item" +textcolour+ " (picks them up into your inventory, replaces what's in slot)" \
+                    "(\S)-(dr)drop " +itemcolour+ "item" +textcolour+ " (removes them from your inventory)" \
+                    "(\S)-(ex)examine " +itemcolour+ "item" +textcolour+ "" \
+                    "(\S)-(ea)eat " +itemcolour+ "item" +textcolour+ "" \
+                    "(\S)-(i)inventory (check inventory)" \
+                    "(\S)-(c)condition (Sees how you're doing)" \
+                    "(\S)-(ex)examine " +interactcolour+ "interact" +textcolour+ " (uses an item on the interacable when you have the right thing) " \
+                    "(\S)-(us)use " +itemcolour+ "item" +textcolour+ " (use an item on a nearby interactable)" \
+                    "(\S)-(t)talk " +personcolour+ "person" +textcolour+ "  (gives them an item when you have the right thing)" \
+                    "(\S)-(g)give " +itemcolour+ "item" +textcolour+ " (tries to give an object to a person around you)" \
+                    "(\S)-(a)attack " +personcolour+ "person" +textcolour+ " (Force may be necessary but be careful, you're limited by what you have)" \
+                    "(\S)-(s)search (look at what's around you)" \
+                    "(\S)-(r)remember (remember what you were doing here earlier)" \
+                    "(\S)-exit (exit your body, always do this or it won't save!)" \
+                    "(\S)-shortcuts (gives shortcuts list)" \
+                    "(\S)-(h)help (gives you this list again)" \
+                    "(\S) (\S)While you may accept more commands that is up to you to discover."
 
 
 
@@ -233,7 +237,7 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
 
         if place.travelled:  # This is the printout section for each time you move
-            print "You enter " + Back.WHITE + Fore.BLACK + place.name + Back.RESET + textcolour + "\n"
+            print "You enter " + mapcolour + place.name  + textcolour + "\n"
             printT(place.lore)
             printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
             printT(place.search(MAPS), 72, 0.75)  # (\S) used for printT newline
@@ -398,10 +402,20 @@ def Talk(E):
 # TODO Re-implement stats and number with word ques instead of numbers
 def Stats():
     global PLAYER
-    print "\nHEALTH: " + str(PLAYER.health)
-    print "ATK: " + str(PLAYER.stats[0])
-    print "DEF: " + str(PLAYER.stats[1])
-    print "SPD: " + str(PLAYER.stats[2])+"\n"
+    if PLAYER.health > 99: printT("You're in perfect health")
+    elif PLAYER.health > 90: printT("You feel really great!")
+    elif PLAYER.health > 80: printT("You feel a little banged up but not too bad.")
+    elif PLAYER.health > 60: printT("You're pretty badly beat up but still kicking.")
+    elif PLAYER.health > 40: printT("You're very injured. Probably a lot of broken bones. Should get that checked out.")
+    elif PLAYER.health > 20:printT("You're EXTREMELY injured. It's a wonder you can even walk.")
+    elif PLAYER.health > 10: printT("You're bleeding profusely and barely alive. Why are you not in a hospital?")
+    elif PLAYER.health > 0:printT("You're on the verge of death, don't go towards the light.")
+
+    if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
+        print "\nHEALTH: " + str(PLAYER.health)
+        print "ATK: " + str(PLAYER.stats[0])
+        print "DEF: " + str(PLAYER.stats[1])
+        print "SPD: " + str(PLAYER.stats[2])+"\n"
 
 def Inspect(Item): #Item is the inspect item
     global MAPS
@@ -418,7 +432,19 @@ def Inspect(Item): #Item is the inspect item
         printT(ITEMS[Item].name.upper(),72,0)
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
         # TODO re-implement inspecting item with words instead of numbers
-        # TODO Take away stats from Erik Build
+        deltaATK = ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0]
+        deltaDEF = ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1]
+        deltaSPD = ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2]
+
+
+        if deltaATK > 5 or deltaDEF > 5 or deltaSPD > 5:
+            desc = "This looks like it would make me "
+        if deltaATK > 5: printT("This item looks more powerful than what I have.")
+        if deltaDEF > 5: printT("This item looks more powerful than what I have.")
+        if deltaSPD > 5: printT("This looks like it would make me faster.")
+
+
+
         if GAMEINFO['devmode']:  # If in devmode can see the stats
             print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
             print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"

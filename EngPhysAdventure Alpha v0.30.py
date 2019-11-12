@@ -32,14 +32,6 @@ GAMEINFO['releasedate'] = "Nov 12, 2019"
 
 
 
-
-
-magenta = Fore.MAGENTA
-red = Fore.RED
-reset = Fore.RESET
-white = Fore.WHITE
-yellow = Fore.YELLOW
-
 LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
 
 # Begining section of the game (not in the main loop), Seperated for nested game
@@ -101,9 +93,8 @@ def Setup():
         PLAYER.updateStats()
     CurrentPlace.travelled = 0  # so that it says it's been travelled, I moved it down so that it wouldn't effect the basegame save
    
-    GAMEINFO['timestart'] = GAMEINFO['gamestart']   #runtime counter of the start of each main loop session. Needs to be global. Is equal to gamestart at the session start but will change as the user saves, loads, restarts, or does a nested game
+    GAMEINFO['timestart'] = GAMEINFO['gamestart']   # runtime counter of the start of each main loop session. Needs to be global. Is equal to gamestart at the session start but will change as the user saves, loads, restarts, or does a nested game
     if GAMESETTINGS['SpeedRun']: print "Your time starts now!"
-    
                                                                         #this time.ctime(seconds) converts to a nice readable time to be output to the log
     GAMEINFO['log'] = [GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['gamestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
     

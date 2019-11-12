@@ -35,7 +35,8 @@ import cx_Freeze
 includefiles = ["Readme How to Run the game.txt","Patch Notes for Release.txt", "settings.ini", "MediaAssets"]
 includes = []
 excludes = []
-packages = ["pygame"]  #This list includes the names important packages/modules that need to be included
+#packages = ["pygame"]  #This list includes the names important packages/modules that need to be included
+packages = []
 
 #This governs the shortcut
 cx_Freeze.shortcut_table = [

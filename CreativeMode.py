@@ -69,15 +69,15 @@ def loadGame(loadname):
             GAMEINFO[info] = loadinfo[info]                   
         PLAYER.__dict__ = loadplayer.__dict__
         for item in ITEMS:
-            ITEMS[item] = loaditems[item] #assignment better when no subitems? .__dict for when there is
+            ITEMS[item].__dict__ = loaditems[item].__dict__ #assignment better when no subitems? .__dict for when there is
         for enemy in ENEMIES:  #.__dict__ removed on these and it works?
-            ENEMIES[enemy] = loadenemy[enemy]
+            ENEMIES[enemy].__dict__ = loadenemy[enemy].__dict__
         for inter in INTERACT:
-            INTERACT[inter] = loadinter[inter]
+            INTERACT[inter].__dict__ = loadinter[inter].__dict__
         for quest in QUESTS:
-            QUESTS[quest] = loadquest[quest]
+            QUESTS[quest] = loadquest[quest]  # doesn't need .__dict___ for some reason
         for setting in GAMESETTINGS:
-            GAMESETTINGS[setting] = loadsettings[setting]
+            GAMESETTINGS[setting] = loadsettings[setting]  # doesn't need .__dict___ for some reason
         #for some reason putting MAPS load below these other ones fixed a bunch of bugs
         for x in range(XRANGE):
             for y in range(YRANGE):
@@ -85,6 +85,11 @@ def loadGame(loadname):
                     for dim in range (DRANGE):
                         if MAPS[x][y][z][dim]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
                             MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
+                            # Attempting to load in the map items to stop ghosting
+                            # MAPS[x][y][z][dim].items = loadmap[x][y][z][dim].items
+                            # MAPS[x][y][z][dim].ENEMY = loadmap[x][y][z][dim].ENEMY
+                            # MAPS[x][y][z][dim].walls = loadmap[x][y][z][dim].walls
+
 
         GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
         GAMEINFO['log'].append("loadgame") #adds the load game command to the log
@@ -105,20 +110,28 @@ def loadGame(loadname):
         #It's best to reference things by name  
         #Acording to this lists make new functions: http://interactivepython.org/runestone/static/CS152f17/Lists/ObjectsandReferences.html
         #use (a is b) to see if a and b refer to the same memory location
-        return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO
+        return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
+
     except IOError:
         print "There is no file named SaveFile " + loadname + ". Please try again."
         return
-    except (KeyError,AttributeError): #dictionary = key error (ITEMS, ENEMIES, INTERACTS, quest, gameinfo), atribute error = Map error or object attribute
-        print "There is a mismatch between the versions of the game."
-        if GAMEINFO['version'] > loadinfo['version']:
-            print "This is an old version of the game. Attempting to update the file"
-        else:
-            print "Attempting to reconsile the different versions automatically."
-        #updateSave(save), function isn't done
-        return
+    except KeyError as E:
+        print E.args[0]
+        # TODO finish this for simple dictionary changes by using E.args[0] as the key to remove
+        printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvience.")
+        printT("At this time we can't update the file. Some things might be broken")
+        return PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS
 
-    #except KeyError as E
+    except AttributeError:  # dictionary = key error (ITEMS, ENEMIES, INTERACTS, quest, gameinfo), atribute error = Map error or object attribute
+        if GAMEINFO['version'] > loadinfo['version']:
+            print "This is an old version of the game. At this time we don't have file updaters. Sorry!"
+        else:
+            print "Something went wrong with the loading! Things might be broken! We're sorry!"
+
+        #updateSave(save), function isn't done
+        return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
+
+
 
 def updateSave(save): #this file tries to autoatically update the save file
     # TODO finish this for simple dictionary changes

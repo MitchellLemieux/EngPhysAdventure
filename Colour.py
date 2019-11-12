@@ -46,9 +46,16 @@ colourlist = [black,blue,cyan,green,lightblack,lightblue,lightcyan,lightgreen,
 # Object References
 textcolour = lightgreen
 mapcolour = lightwhite
-objectcolour = lightcyan
+itemcolour = lightcyan
 interactcolour = lightyellow
-personcolour = lightcyan
+personcolour = lightmagenta
+
+#Defaults
+# textcolour = lightgreen
+# mapcolour = lightwhite
+# itemcolour = lightcyan
+# interactcolour = lightyellow
+# personcolour = lightmagenta
 
 
 

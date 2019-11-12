@@ -30,6 +30,7 @@ questlist = [
     'EPTA all the way down',
     'national treasure',
     'open the forest',
+    'open the cabin',
     # Events
     'PAP',
     # Talk to hooded man
@@ -128,8 +129,8 @@ def sidequests():
 
     #National Treasure
     if INTERACT["tri-coloured glasses"].quest and QUESTS['national treasure']:  # Once the sign is read
-        MAPS[1][0][1][0].removeWall("u")
-        QUESTS["secret spaces"] = 0
+        MAPS[1][0][1][0].removeWall("u")  # DON'T FORGET to make wall a list instead of a tuple in the object!
+        QUESTS["national treasure"] = 0
 
     if INTERACT["red book"].quest and QUESTS['open the forest']:  # Once the sign is read
         printT("You feel like you've gained some knowledge!")
@@ -141,6 +142,14 @@ def sidequests():
         QUESTS['open the forest'] = 0
         #return INTERACT,MAPS  # don't need to return this scope because reasons?
 
+
+    if INTERACT["lit firepit"].quest and QUESTS['open the cabin']:
+        MAPS[8][9][0][4].removeWall("r")  # DON'T FORGET to make wall a list instead of a tuple in the object!
+        QUESTS['open the cabin'] = 0
+
+    # if INTERACT["lit firepit"].quest and QUESTS['open the cabin']:
+    #     MAPS[8][9][0][4].removeWall("r")  # DON'T FORGET to make wall a list instead of a tuple in the object!
+    #     QUESTS['open the cabin'] = 0
 
 
 

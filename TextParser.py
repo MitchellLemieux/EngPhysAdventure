@@ -83,15 +83,15 @@ import CreativeMode
 VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'kill', 'get', 'wear', 'look',
          'drink', 'inhale', 'ingest', 'devour', 'fight', 'examine', 'exit', 'leave', 'quit', 'speak', 'throw', 'go',
          'move','walk', 'run', 'turn', 'remember', "wait", "sleep", 'sit', 'die', 'pick', 'use', 'give', 'say', 'help',
-         'recall','shortcuts','dance','sing','pet','scratch','lore']
+         'recall','shortcuts','dance','sing','pet','scratch','lore','read','stats','status','condition']
 
 # lists of Verbs/keywords ONLY the developer can use
-DEVVERBS = ['/stats', '/savegame', '/loadgame', '/restart', '/time', '/gameinfo','/gamesettings', '/player', '/maps',
+DEVVERBS = ['/savegame', '/loadgame', '/restart', '/time', '/gameinfo','/gamesettings', '/player', '/maps',
             '/enemies','/items', '/interact', '/quests', '/script', '/devverbs','/']
 DEVVERBS.extend(VERBS)  # Combining all the normal verbs into DEVVERBS to make the extended list when in dev mode
 
 # List of VERB shortcuts used to stop spellchecking
-VERBSHORTCUTS = ['a', 'b', 'd', 'dr', 'e', 'ea', 'ex', 'f', 'g', 'h', 'i', 'l', 'r', 're', 's', 't', 'u', 'us']
+VERBSHORTCUTS = ['a', 'b','c', 'd', 'dr', 'e', 'ea', 'ex', 'f', 'g', 'h', 'i', 'l', 'r', 're', 's', 't', 'u', 'us']
 
 # List of Direction words used to check direction. NEED TO ADD DIRECTIONS TO HERE AND IN MOVE() FUNCTION IN GAMEFUNCTIONS
 DIRECTIONSHORTCUTS = ['u', 'd', 'f', 'b', 'l', 'r']
@@ -106,7 +106,7 @@ ALLKEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()+DIRECTIONWORDS)
 Shortcuts
 a = attack
 b = back
-c = 
+c = condition
 d = down
 dr = drop
 e = equip
@@ -137,13 +137,15 @@ y =
 z = 
 """
 
-shortcutprint = "Shortcuts(\S)a = attack(\S)b = back(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
+shortcutprint = "Shortcuts(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
                         "(\S)ex = examine(\S)f = front(\S)g = give(\S)h = help(\S)i = inventory(\S)l = left(\S)" \
                         "r = right(\S)re = recall(\S)s = search(\S)t = talk(\S)u = up(\S)us = use" \
-                        "(\S) (\S)There are also several parser shortcuts. You can type part of the full name OR use a shortkey." \
+                        "(\S) (\S)There are also several parser shortcuts. You can type part of the full name." \
                         "(\S) e.g. a brian = attack Brian the Weeb" \
-                        "(\S) For <objects>,/interacts/, or [people] use the order it appears in + 4. Shortkeys 1-4 are for inventory." \
-                        "(\S) e.g. exa 5 = examines first thing on the ground" \
+                        "You can also use shortkeys which is a quick numbering system." \
+                        "(\S) Shortkeys 1-4 are for inventory. And the rest are the order of objects around you (starting at 5). " \
+                        "(\S) e.g. e 5 = equips first thing on the ground" \
+                        "(\S) e.g. exa 8 = examines 3rd thing on the ground" \
                         "(\S) dr 1 = drops thing in your head slot"
 
 
@@ -182,7 +184,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" + MAPS[x][y][z][dim].search(MAPS), 72, 0.5)
 
         # TODO if word based description: re-enable stats and remove from DEVVERBs
-        elif (verb == '/stats'):
+        elif verb in ['c','stats','status','condition']:
             Stats()
         elif verb in ['i','inventory']:
             Inventory()
@@ -408,7 +410,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb in ['t','talk', 'speak']:
             Talk(objectName)
 
-        elif verb in ['ex','inspect', 'examine']:
+        elif verb in ['ex','inspect', 'examine','read']:
             Inspect(objectName)
 
         elif verb in ['ea','eat', 'drink', 'inhale', 'ingest', 'devour']:
@@ -433,7 +435,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                                  + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
             match = False
             for i in surroundingobjects:  # checks to make sure in surroundings
-                if i.name == objectName:
+                if i.name.lower() == objectName.lower():
                     match = True
             if match:
                 for interactable in MAPS[x][y][z][dim].items:  # for all itmes+interactables in the area
@@ -451,7 +453,9 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                                  + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
             match = False
             for i in surroundingobjects:  # checks to make sure in surroundings
-                if i.name == objectName:
+                print i.name
+                print objectName
+                if i.name.lower() == objectName.lower():
                     match = True
             if match:
                 for enemy in MAPS[x][y][z][dim].ENEMY:  # for all enemy in the area
