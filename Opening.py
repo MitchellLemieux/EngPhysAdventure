@@ -260,7 +260,8 @@ def Closing():
     time.sleep(DELAY)
     print "Created by:\nBrendan Fallon, Tyler Kashak, and Mitchell Lemieux  \n"
     time.sleep(DELAY)
-    print "Special Thanks:\nEric, Erik, Brian, Phil, and Megan\n"
+    print "Special Thanks:\nErik and Phil our best playtesters! There's no better quality checkers than you guys.\n"
+    print "Also thanks to Eric, Brian, Phil, Liam, and Megan\n"
     time.sleep(DELAY)
     print "                A____ ________"
     print "                /_  H|\_____  \ "

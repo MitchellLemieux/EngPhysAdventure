@@ -181,7 +181,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
         elif verb in [ 's','search', 'look']:
             x, y, z, dim = PLAYER.location
-            printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" + MAPS[x][y][z][dim].search(MAPS), 72, 0.5)
+            MAPS[x][y][z][dim].search(MAPS, DIMENSIONS)
 
         # TODO if word based description: re-enable stats and remove from DEVVERBs
         elif verb in ['c','stats','status','condition']:
@@ -425,10 +425,10 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb == "look":  # used just for look around case
             if objectName == "around":
                 x, y, z, dim = PLAYER.location
-                printT("(\S) ~" + MAPS[x][y][z][dim].name.upper() + "~ (\S)" + MAPS[x][y][z][dim].search(MAPS), 72, 0.5)
+                MAPS[x][y][z][dim].search(MAPS, DIMENSIONS)
         elif verb == "pick":  # Allows for pick up to be a thing, is formatted in exceptions above
             Equip(objectName)  # Equipts it
-        elif verb in ['us',"use"]:  # this makes it so you can use items if the interacble is in the area
+        elif verb in ['us','use']:  # this makes it so you can use items if the interacble is in the area
             x, y, z, dim = PLAYER.location
             # checks all interactables in area to see if item is needed
             surroundingobjects = [PLAYER.inv['head'], PLAYER.inv['body'], PLAYER.inv['hand'], PLAYER.inv['off-hand']] \
@@ -441,7 +441,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 for interactable in MAPS[x][y][z][dim].items:  # for all itmes+interactables in the area
                     if isinstance(interactable, Interact):  # if it's in interactable
                         if interactable.need == objectName:
-                            print "\nYou use the " + objectName + " with the " + interactable.name + ".\n"
+                            printT(" (\S)You use the " +itemcolour+ objectName +textcolour+ " with the " +interactcolour+ interactable.name +textcolour+ ".(\S)")
                             Inspect(interactable.name.lower())
                             break  # breaks so only uses it on first interactable that needs it and doesn't cause duplicates or looping
             else:
@@ -460,7 +460,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             if match:
                 for enemy in MAPS[x][y][z][dim].ENEMY:  # for all enemy in the area
                     if enemy.need == objectName:
-                        print "\nYou give the " + objectName + " to " + enemy.name + ".\n"
+                        printT(" (\S)You give the " +itemcolour+ objectName +textcolour+ " to " +personcolour+ enemy.name +textcolour+ ". (\S)")
                         Talk(enemy.name.lower())
             else:
                 printT(" (\S)You can't find a " + objectName + " around here. Maybe it's your hungover brain.")
@@ -469,10 +469,10 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         elif verb in ["pet","scratch"]:
             if objectName in ENEMIES and (list(ENEMIES[objectName].location) == PLAYER.location):
                 if isinstance(ENEMIES[objectName], Animal):
-                    printT("You " + verb + " " + ENEMIES[objectName].name + ".(\S)")
+                    printT("You " + verb + " " +personcolour+ ENEMIES[objectName].name +textcolour+ ".(\S)")
                     printT(ENEMIES[objectName].pet_me())
                 else:
-                    printT("You " + verb + " " + ENEMIES[objectName].name + ".(\S)They actually didn't mind that.")
+                    printT("You " + verb + " " +personcolour+ ENEMIES[objectName].name +textcolour+ ".(\S)They actually didn't mind that.")
         elif verb == '/script':
             scriptpath = os.path.join(os.getcwd(), "Dev","","PlaythroughScripts","",wordlist[1])
             try:

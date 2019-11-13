@@ -94,6 +94,7 @@ class Character:
         OffHand = "off-hand\t"+self.inv['off-hand'].name+"\t"+str(self.inv['off-hand'].stats)+"\n"
         print Head + Body + Hand + OffHand
 
+#TODO Switch order of drop and need AND sinfo for defining to be consistant with interacts
 class Enemy:
     def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo):
         self.name = str(name)
@@ -124,6 +125,7 @@ class Animal(Enemy):  # this is an inhertance of enemy class
     def pet_me(self):
         return self.pinfo
 
+
 class Interact:
     def __init__(self,name,location,info,Sinfo,need,drop):
         self.name = name
@@ -138,13 +140,13 @@ class Interact:
         # THIS PARSING ONLY Works if all item keys are unique
         if INTERACT[Item].drop in ITEMS.keys():  # if it's an ITEM (in the item keys)
             MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
-            printT("You see " + ITEMS[INTERACT[Item].drop].name + ".\n")
+            printT("You see " +itemcolour+ ITEMS[INTERACT[Item].drop].name +textcolour+ ". (\S)")
         elif INTERACT[Item].drop in ENEMIES.keys():  # if it's an Enemy
             MAPS[x][y][z][dim].placeEnemy(ENEMIES[INTERACT[Item].drop])
-            printT("You see " + ENEMIES[INTERACT[Item].drop].name + ".\n")
+            printT("You see " +personcolour+ ENEMIES[INTERACT[Item].drop].name +textcolour+ ". (\S)")
         elif INTERACT[Item].drop in INTERACT.keys():  # if it's an Interactable
             MAPS[x][y][z][dim].placeInteract(INTERACT[INTERACT[Item].drop])
-            printT("You see " + INTERACT[INTERACT[Item].drop].name + ".\n")
+            printT("You see " +interactcolour+ INTERACT[INTERACT[Item].drop].name +textcolour+ ". (\S)")
             # TODO Make this an option maybe so it doesn't have to remove itself
             MAPS[x][y][z][dim].removeInteract(INTERACT[Item])  # If it's an interactable place it's an upgrade/transform
 
@@ -224,9 +226,22 @@ class Map:  #Map Location Storage
 
 
     # This function is the main thing that says what's in the area.
-    def search(self,MAPS):  # Is passed MAPS dictionary so it can search area around it
+    def search(self,MAPS,DIMENSIONS,Spawn=False):  # Is passed MAPS dictionary so it can search area around it
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
-        description = ""
+
+        if Spawn:  # this is the printout if you wake up in a location (say for example a load)
+            printT("You wake up in " + mapcolour + self.name + textcolour + " (\S)")
+            printT(self.lore)
+        elif self.travelled:
+            printT("You enter " + mapcolour + self.name + textcolour + " (\S)")
+            printT(self.lore)
+
+
+        description = ""  # the main text description accumulator
+
+        # setting the title
+        description += " (\S)" + mapcolour + "~" + self.name.upper() + "~" + textcolour+ " (\S)"
+
         length = len(self.items)
         # (\S) used for printT newline
         # Initialize the {shortkey} used with object,interact,enemy for quick commands.
@@ -235,38 +250,38 @@ class Map:  #Map Location Storage
         shortkey = ""
         # This big if statement basically does a printout to account for single object/enemy in the area grammer
         if length:
-            description = "You see"
+            description += "You see"
             if length > 1:  # If there's more than one item/interact in the area
                 for i in range(length):
                     if (i == length-1):
                         if isinstance(self.items[i],Equipment):
-                            description = description +" and a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            description = description +textcolour+" and a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description +" and a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ".\n" #inspectable highlight
+                            description = description +textcolour+" and a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ".\n" #inspectable highlight
                             #shortkey += 1  # increments the shortkey
                     else:
                         if isinstance(self.items[i],Equipment):
-                            description = description + " a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ","
+                            description = description +textcolour+ " a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ","
+                            description = description +textcolour+ " a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ","
                             #shortkey += 1  # increments the shortkey
             else:  # if there's only 1 item/interact in the area
                 if isinstance(self.items[0],Equipment):
-                    description = description + " a " + str(shortkey) + "" + itemcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
+                    description = description +textcolour+ " a " + str(shortkey) + "" + itemcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
                     #shortkey += 1  # increments the shortkey
                 else:
-                    description = description + " a " + str(shortkey) + "" + interactcolour + "" + self.items[0].name + "" + textcolour + ".\n" # inspectable highlight
+                    description = description +textcolour+ " a " + str(shortkey) + "" + interactcolour + "" + self.items[0].name + "" + textcolour + ".\n" # inspectable highlight
                     #shortkey += 1  # increments the shortkey
         
         if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + " is playing the Eng Phys Text Based Adventure. WAIT What!?"
+                    description = description +textcolour+ " (\S)" + str(shortkey) + "" +personcolour+ "" + enemy.name + "" +textcolour+ " is playing the Eng Phys Text Based Adventure. WAIT What!?"
                     #shortkey += 1  # increments the shortkey
                 elif enemy.alive:
-                    description = description + "(\S)" + str(shortkey) + "" + Style.BRIGHT + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + " is " \
+                    description = description +textcolour+ " (\S)" + str(shortkey) + "" +personcolour+ "" + enemy.name + "" +textcolour+ " is " \
                                   + choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
           "eating a frighteningly large burrito","playing runescape","browsing math memes",
           "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
@@ -283,7 +298,7 @@ class Map:  #Map Location Storage
 
 
                 else:
-                    description = description + "(\S)Oh look, its the " \
+                    description = description +textcolour+ "(\S)Oh look, its the " \
                                   + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
                                   + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
                                   + "" + str(shortkey) + "" + Style.DIM + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + "."
@@ -293,16 +308,16 @@ class Map:  #Map Location Storage
         #     for item in self.interact:
         #         description = description + "/" + item.info + "/\n"
                 
-        if (description == ""):
-            description = textcolour + "(\S)There isn't a whole lot to see."
+        if not self.ENEMY and not self.items:  # if there's nothing in the location
+            description += textcolour + " (\S)There isn't a whole lot to see."
 
         # --- Auto Surrounding Descriptions ---
-            # Finding the locations around current location
+            # -- Finding the locations around current location --
         location = self.location  # gets coordinates tuple
         letterdirections = ['u', 'd', 'f', 'b', 'l', 'r']  # letter based list of directions to check against walls
         lettersthere = ""
         tupledirections = [(0,0,1,0), (0,0,-1,0), (0,1,0,0), (0,-1,0,0), (-1,0,0,0), (1,0,0,0)]  # tuple based list of directions to add to current location
-        surroundings = [None] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
+        surroundings = [""] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
         i = 0  # Counter for direction indexing
         for direction in letterdirections:  # Looping through all the directions
             if direction not in self.walls:  # seeing if the way you can go is in the walls
@@ -313,24 +328,59 @@ class Map:  #Map Location Storage
                     lettersthere += direction + ","
             i += 1
 
-            # Reading out the Surroundings
+                # - Finding Interriors Via Links -
+        if self.links:  # if there's a link and therefore it links to an interrior
+            for link in self.links:  # loping through all links
+                if link[4] != self.location[3]:
+                    # if you're not in the same dimension as the linked dimension displays the dimension name
+                    surroundings[letterdirections.index(link[0])] = DIMENSIONS[link[4]]
+                    lettersthere += link[0] + ","
+                else:
+                    # this magic line replaces the surrounding name with the link name of the area
+                    surroundings[letterdirections.index(link[0])] = MAPS[link[1]][link[2]][link[3]][link[4]].name
+                    lettersthere += link[0] + ","
+
+            # -- Reading out the Surroundings --
         # TODO Add discovery mechanic where it prints locations as you see them
-                # Short Description
+                # - Short Description -
         worddirections = ['[U] ','[D] ','[F] ','[B] ','[L] ','[R] ']
-        description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: " + lettersthere + "(\S)"
+        description += "(\S) (\S)There are " + str(6 - surroundings.count("")) + " obvious exits: (\S)"
+        # old description having letters in there
+        #description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: " + lettersthere + "(\S)"
 
                 # TODO for even shorter/harder list only directions
+            # - Aligning the Words by adding spaces -
+        maxnamelength = max(len(x) for x in surroundings)
+        for i in range(6):  # Equalization of the spacing to the max spacing
+            surroundings[i] = surroundings[i] + " "*( maxnamelength - len(surroundings[i]) )
+
         for i in range(6):  # use index to reference direction
-            if surroundings[i]:  # if the direction is seen
+            if surroundings[i].strip():  # if the direction is seen in there and it's not empty
                 description += worddirections[i] + surroundings[i] + "\t"  # print the word direction + name
-            if worddirections[i] in ['[D] ','[B] '] and surroundings[i]:  # Adds a spaces to make 3 x 2 printout
+            if worddirections[i] == '[U] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no U but D
+                description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+            elif worddirections[i] == '[U] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's U but no D
+                description += " (\S) "  #adding newline
+            if worddirections[i] == '[F] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no F but B
+                description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+            elif worddirections[i] == '[F] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's F but no B
+                description += " (\S) "  #adding newline
+            if (worddirections[i] == '[L] ') and (not surroundings[i].strip()) and surroundings[i+1].strip():  # if there's no L but R
+                description += "."  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
+                description += " "*(maxnamelength+3) + "\t"  # adding correct spacing
+            elif worddirections[i] in ['[D] ','[B] '] and surroundings[i].strip():  # If there's all spaces
                 description += " (\S) "
+
+
                 #TODO Add wordy description
 
 
-            
-        return description
 
+        if self.travelled:  # if haven't been here before
+            printT(description, 72, 0.75)  #prints the final descripton
+            self.travelled = 0
+        else:  # normal fast print
+            printT(description, 72, 0)  # prints final description fast
 
         # Don't need to return the 'Global' objects from function as affecting scope outside the function
 

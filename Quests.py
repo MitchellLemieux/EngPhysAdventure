@@ -84,7 +84,7 @@ def sidequests():
     # Side Quests
     # Secret Spaces
     if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:  # Unlocks the secret space once you get the scroll
-        MAPS[0][2][1][0].removeWall("d")
+        MAPS[0][2][1][0].removeWall("d")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         QUESTS["secret spaces"] = 0
 
     # Rules Sign
@@ -110,8 +110,7 @@ def sidequests():
             newplayername = raw_input("First, what is your name?\n")
             layers = GAMEINFO['layersdeep']  # saves layersdeep to a temporary variable for after the load
             CreativeMode.loadGame("basegame")  # should display the exact start
-            GAMEINFO[
-                'layersdeep'] = layers + 1  # increments the global layers deep because you're now in a lower level, using the memory of the local variable
+            GAMEINFO['layersdeep'] = layers + 1   # increments the global layers deep because you're now in a lower level, using the memory of the local variable
 
             GAMEINFO['playername'] = PLAYER.name = newplayername  # this is done for the log
             GAMEINFO['gamestart'] = time.time()  # Settign the game and timestart for for this layer
@@ -232,13 +231,12 @@ def ebta_story():
 
     # Minnick's Glasses activate the need quest in all further items. So quest is driven by interacts from here
     if ENEMIES['dr. minnick'].quest and QUESTS["minnick get oscilloscope"]:
+        MAPS[6][1][1][0].removeWall("d")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         ENEMIES['dr. minnick'].quest = False
-        ENEMIES[
-            'dr. minnick'].drop = 'gauss eye'  # this has to be lowercase or it throws a key error - All items are defined as lower case when stored
+        ENEMIES['dr. minnick'].drop = 'gauss eye'  # this has to be lowercase or it throws a key error - All items are defined as lower case when stored
         ENEMIES['dr. minnick'].need = "faraday's cage"  # this has to be lowercase or it throws a key error
         ENEMIES['dr. minnick'].info = "I need to complete Kenrick's design... use my glasses to find what we need!"
-        ENEMIES[
-            'dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
+        ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
         MAPS[3][4][1][0].removeEnemy(ENEMIES['dr. minnick'])
         MAPS[1][7][0][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["minnick get oscilloscope"] = 0
@@ -488,9 +486,7 @@ def events():
     if INTERACT["lake painting"].quest:
         PLAYER.location = [0,0,0,3]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[0][0][0][3]
-        if CurrentPlace.travelled: printT(CurrentPlace.lore)
-        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
-        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        CurrentPlace.search(MAPS, DIMENSIONS, True)
         INTERACT["lake painting"].need = None
         printT("(\S)You no longer need the keys to get into this place.")
         INTERACT["lake painting"].quest = False
@@ -499,7 +495,7 @@ def events():
     if INTERACT["portkey"].quest:
         PLAYER.location = [3,0,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][0][1][0]
-        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + "(\S)" + CurrentPlace.search(MAPS))
+        CurrentPlace.search(MAPS, DIMENSIONS, True)
         INTERACT["portkey"].quest = False
 
 
@@ -511,22 +507,20 @@ def events():
         if CurrentPlace.travelled:
             printT("You enter... (\S)")
             AsciiArt.HauntedForest()
-        if CurrentPlace.travelled: printT(CurrentPlace.lore)
-        printT("(\S)" + mapcolour +"~" +  CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
-        #printT("(\S)" + Fore.BLACK + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        CurrentPlace.search(MAPS, DIMENSIONS, True)
         INTERACT['opening in the trees'].quest = False
 
     # To COOTES DRIVE from Haunted Forest Start
     if INTERACT['trail to cootes drive'].quest:
         PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][7][1][0]
-        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        CurrentPlace.search(MAPS, DIMENSIONS, True)
         INTERACT['trail to cootes drive'].quest = False
 
     # To COOTES DRIVE from escape rope
     if INTERACT['escape rope'].quest:
         PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][7][1][0]
-        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS))
+        CurrentPlace.search(MAPS, DIMENSIONS, True)
         INTERACT['escape rope'].quest = False
 

@@ -73,9 +73,8 @@ def Setup():
 
     # This prints
 
-    printT("You wake up in " + mapcolour + CurrentPlace.name + textcolour + "(\S)")
-    printT(CurrentPlace.lore)
-    printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" +   CurrentPlace.search(MAPS))
+    # searches and prints the information with spawn set to true to print "You wake up in"
+    CurrentPlace.search(MAPS, DIMENSIONS,True)
 
 
     

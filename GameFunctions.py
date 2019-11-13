@@ -82,7 +82,7 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
-BRENSTARTLOCATION = (2,3,1,0)  # Dev start location
+BRENSTARTLOCATION = (7,3,0,4)  # Dev start location
 # (4,0,0,4)  haunted forest
 # (2,3,1,0)  default location
 BRENINV = EMPTYINV
@@ -229,23 +229,20 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
         PLAYER.location[1] = y
         PLAYER.location[2] = z
         PLAYER.location[3] = dim
+        bfchance = 0.003
+        if PLAYER.inv['body'] == ITEMS['tony hawk shirt']:
+            bfchance += 0.007
 
         if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
-        if random() <= 0.003:
+        if random() <= bfchance:
             MAPS[x][y][z][dim].placeEnemy(bf)
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
 
-        if place.travelled:  # This is the printout section for each time you move
-            print "You enter " + mapcolour + place.name  + textcolour + "\n"
-            printT(place.lore)
-            printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
-            printT(place.search(MAPS), 72, 0.75)  # (\S) used for printT newline
-            place.travelled = 0
-        else:  # If returning to the place
-            printT("(\S)" + mapcolour + "~" + place.name.upper() + "~(\S)" + textcolour)
-            printT(place.search(MAPS), 72, 0.25)  # (\S) used for printT newline
-            return place
+        place.search(MAPS, DIMENSIONS)  # searches and prints the place
+        return place  # idk why but this returns place and I'm keeping it here so yeah
+
+
 
 
     else:
@@ -376,7 +373,7 @@ def Talk(E):
 
             printT(enemy.Sinfo)
             MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
-            print "You see a " + ITEMS[enemy.drop].name +".\n"
+            printT( "You see a " +itemcolour+ ITEMS[enemy.drop].name +textcolour+". (\S)")
             enemy.drop = None
         elif enemy.quest:
             printT(enemy.Sinfo)
@@ -482,7 +479,7 @@ def Inspect(Item): #Item is the inspect item
                 MAPS[x][y][z][dim].removeItem(ITEMS[INTERACT[Item].need])
                 ITEMS[INTERACT[Item].need].location = (None,None,None,None)
             INTERACT[Item].quest = True  # this turns on the quest flag for the interactable once interacted with if you have the item
-            printT(INTERACT[Item].Sinfo + "(\S)") #special slow version
+            printT(INTERACT[Item].Sinfo + "(\S)")  # special slow version
             PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:

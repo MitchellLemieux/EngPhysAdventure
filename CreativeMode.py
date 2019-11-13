@@ -98,10 +98,10 @@ def loadGame(loadname):
         #Displayes the current place info again to show it's been loaded
         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
         print "========================================================================"
-        if CurrentPlace.travelled == 1:  # To print out the starting location for new files
-            print "You wake up in " + mapcolour + CurrentPlace.name + textcolour + "\n"
-            printT(CurrentPlace.lore)
-        printT("(\S)" + mapcolour + "~" + CurrentPlace.name.upper() + "~" + textcolour + "(\S)" + CurrentPlace.search(MAPS), 72, 0.75)  # prints the basic lore to give you bearing on where you are
+
+        # searches and prints the information with spawn set to true to print "You wake up in"
+        CurrentPlace.search(MAPS, DIMENSIONS,True)
+
 
 
 
@@ -120,6 +120,9 @@ def loadGame(loadname):
         # TODO finish this for simple dictionary changes by using E.args[0] as the key to remove
         printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvience.")
         printT("At this time we can't update the file. Some things might be broken")
+        x, y, z, dim = PLAYER.location
+        MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
+
         return PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS
 
     except AttributeError:  # dictionary = key error (ITEMS, ENEMIES, INTERACTS, quest, gameinfo), atribute error = Map error or object attribute
@@ -129,6 +132,8 @@ def loadGame(loadname):
             print "Something went wrong with the loading! Things might be broken! We're sorry!"
 
         #updateSave(save), function isn't done
+        x, y, z, dim = PLAYER.location
+        MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
         return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
 
 
