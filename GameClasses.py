@@ -2,6 +2,7 @@
 ENG PHYS TEXT BASED ADVENTURE
 Mitchell Lemieux and Tyler Kashak
 Wrote on April 14,2018: Icemageddon
+Maybe this is dumb but before final update I added 2 extra elements to each class for anticipated future use/compatibility.
 """
 import operator
 from random import *
@@ -25,17 +26,22 @@ def two_tuple_add(a, b):  # adds 2 tuples element-wise
 #       Unless someone does something fancy to automatically update it but I don't feel it's necessary.
 
 class Equipment:
-    def __init__(self,name,location,image,info,worn,stats,health):
+    def __init__(self,name,location,image,info,worn,stats,health, extra1 = None, extra2 = None):
         self.name = str(name)
-        self.image = str(image) 
-        self.info = str(info)
-        self.worn = str(worn)
-        self.stats = stats
+        self.colouredname = "" +itemcolour+ name +textcolour+ ""
+        self.image = str(image)  # This is an obsolete field from when the game was going to have pictures
+        self.info = str(info)  # This is the base description that is read
+        self.worn = str(worn)  # Which inventory slot the item takes up
+        self.stats = stats   # These are the stats the item gives you that adds to the base stats
         self.location = location
-        self.health = health
+        self.health = health  # this is a health into for healed amount for eating. If no eating it should be a ""
+        self.quest = False  # This is a inspected flag if it's been picked up or inspected
+        self.extra1 = extra1
+        self.extra2 = extra2
+
     
 class Character:
-    def __init__(self,name,location,health,inv,emptyinv, building = 0):
+    def __init__(self,name,location,health,inv,emptyinv, extra1 = None, extra2 = None):
         self.name = str(name)
         self.location = location
         self.inv = inv
@@ -46,7 +52,9 @@ class Character:
         self.stats = six_tuple_add(self.inv['head'].stats, self.inv['body'].stats, self.inv['hand'].stats, self.inv['off-hand'].stats, tuple(self.basestats), (0, 0, 0)) #adds tuples together to new stats to make actual stats
         self.alive = True
         self.spoke = False  # What is this used for?
-        self.building = 0  # This is the building they're are in, 0 by default. TODO add this into location tuple
+        self.extra1 = extra1
+        self.extra2 = extra2
+
         
         for i in inv:
             inv[i].location = self.location
@@ -57,22 +65,22 @@ class Character:
     def equip(self,Equip):
         drop = 0
         if self.inv[Equip.worn] == Equip:
-            printT(" (\S)This item is already equipped (\S)",72,0)
-        # if your inventory is empty
+            printT(" (\S)You realize this you already have a " + Equip.colouredname + " on you. It's okay, we all have tough days. (\S)",72,0.25)
 
+        # if your inventory is empty
         elif (self.location == list(Equip.location) and self.inv[Equip.worn] == self.emptyinv[Equip.worn]):
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
-            printT(" (\S)" +Equip.info + " (\S)")
-            printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ".")
+            printT(" (\S)" +Equip.info + " (\S)",72,0.25)
+            printT("You've equipped the " + Equip.colouredname + ' to your ' + Equip.worn + ".",72,0.25)
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
             printT(" (\S)"+ Equip.info + " (\S)")
-            printT("You've equipped the " + Equip.name +' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n')
+            printT("You've equipped the " + Equip.colouredname + ' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n')
         else:
-            printT("\nYou can't find that around here. Maybe it's your hungover typing.\n")
+            printT(" (\S)You can't find a " + Equip.colouredname + " around here. Maybe it's your hungover brain.")
         self.updateStats()
         return drop
 
@@ -80,10 +88,10 @@ class Character:
         drop = 0
         if(Equip.name == self.inv[Equip.worn].name):
             self.inv[Equip.worn] = self.emptyinv[Equip.worn]
-            print "\nYou've dropped the " + Equip.name
+            printT(" (\S)You've dropped the " + Equip.colouredname +".")
             drop = Equip
         else:
-            print "Maybe you're still drunk?. You aren't carrying " + Equip.name + "."
+            printT("Maybe you're still drunk?. You aren't carrying " + Equip.colouredname + ".")
         self.updateStats()
         return drop
 
@@ -92,12 +100,13 @@ class Character:
         Body = "body\t\t"+self.inv['body'].name+"\t"+str(self.inv['body'].stats)+"\n"
         Hand = "hand\t\t"+self.inv['hand'].name+"\t"+str(self.inv['hand'].stats)+"\n"
         OffHand = "off-hand\t"+self.inv['off-hand'].name+"\t"+str(self.inv['off-hand'].stats)+"\n"
-        print Head + Body + Hand + OffHand
+        printT( Head + Body + Hand + OffHand)
 
 #TODO Switch order of drop and need AND sinfo for defining to be consistant with interacts
 class Enemy:
-    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo):
+    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo,aesthetic, extra1 = None, extra2 = None):
         self.name = str(name)
+        self.colouredname = "" + personcolour + name + textcolour + ""
         self.info = str(info)
         self.location = location
         self.stats = stats
@@ -106,20 +115,23 @@ class Enemy:
         self.Dinfo = Dinfo  # death info displayed if they need
         self.need = need  # what the need, if you talk to them with this item you'll get the drop and it will set the quest flag to True
         self.drop = drop
+        self.aesthetic = aesthetic  # If the enemy is not for anything aesthetic = True for a couple diff. uses
         self.alive = True
         self.quest = False
         self.spoke = False
+        self.extra1 = extra1
+        self.extra2 = extra2
 
 
-class Animal(Enemy):  # this is an inhertance of enemy class
+class Animal(Enemy):  # this is an inhertance of enemy class. NICE.
     # Constructor
-    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo,pinfo):
+    def __init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo,pinfo,aesthetic, extra1 = None, extra2 = None):
         self.pinfo = pinfo
 
         # invoking the __init__ of the parent class
-        Enemy.__init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo)
+        Enemy.__init__(self,name,info,location,stats,health,drop,need,Sinfo,Dinfo,aesthetic, extra1 = None, extra2 = None)
 
-        #print self.name  # can totally do commands in the init
+        #printT(self.name  # can totally do commands in the init)
 
     # Methods
     def pet_me(self):
@@ -127,26 +139,30 @@ class Animal(Enemy):  # this is an inhertance of enemy class
 
 
 class Interact:
-    def __init__(self,name,location,info,Sinfo,need,drop):
+    def __init__(self,name,location,info,Sinfo,need,drop,aesthetic, extra1 = None, extra2 = None):
         self.name = name
+        self.colouredname = "" + interactcolour + name + textcolour + ""
         self.location = location
         self.info = info
         self.Sinfo = Sinfo
         self.need = need
         self.drop = drop
         self.quest = False
+        self.aesthetic = aesthetic # If the enemy is not for anything aesthetic = True for a couple diff uses
+        self.extra1 = extra1
+        self.extra2 = extra2
 
     def drop_objects(self,Item,x,y,z,dim,MAPS,ITEMS,INTERACT,ENEMIES):  # this is a general method to drop objects
         # THIS PARSING ONLY Works if all item keys are unique
         if INTERACT[Item].drop in ITEMS.keys():  # if it's an ITEM (in the item keys)
             MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
-            printT("You see " +itemcolour+ ITEMS[INTERACT[Item].drop].name +textcolour+ ". (\S)")
+            printT("You see " + ITEMS[INTERACT[Item].drop].colouredname+ ". (\S)")
         elif INTERACT[Item].drop in ENEMIES.keys():  # if it's an Enemy
             MAPS[x][y][z][dim].placeEnemy(ENEMIES[INTERACT[Item].drop])
-            printT("You see " +personcolour+ ENEMIES[INTERACT[Item].drop].name +textcolour+ ". (\S)")
+            printT("You see " + ENEMIES[INTERACT[Item].drop].colouredname + ". (\S)")
         elif INTERACT[Item].drop in INTERACT.keys():  # if it's an Interactable
             MAPS[x][y][z][dim].placeInteract(INTERACT[INTERACT[Item].drop])
-            printT("You see " +interactcolour+ INTERACT[INTERACT[Item].drop].name +textcolour+ ". (\S)")
+            printT("You see " + INTERACT[INTERACT[Item].drop].colouredname + ". (\S)")
             # TODO Make this an option maybe so it doesn't have to remove itself
             MAPS[x][y][z][dim].removeInteract(INTERACT[Item])  # If it's an interactable place it's an upgrade/transform
 
@@ -157,8 +173,9 @@ class Interact:
 # Interactables list
 # Enemies list (rename enemies to NPCs)
 class Map:  #Map Location Storage
-    def __init__(self, name, location, info, lore, walls, inside, size=None, links=[]): #size = (None) means default is none object unless otherwise defined
+    def __init__(self, name, location, info, lore, walls, inside, size=None, links=[], extra1 = None, extra2 = None): #size = (None) means default is none object unless otherwise defined
         self.name = str(name)       # Name of location
+        self.colouredname = "" + mapcolour + name + textcolour + ""
         # Dim is the dimension/ building number associated with the place, by default Overworld is 0, Bsb is 1, etc
         self.location = location    # Map coordinates tuple (X,Y,Z,Dim) TODO Make make ground level 0 and basements -1
         self.info = str(info)  # A more detailed description of the suroundings than the search function
@@ -183,6 +200,8 @@ class Map:  #Map Location Storage
         #   moves they will will go to a different spot on the interior (so you don't have to step around BSB) or JHE
         # Walls can be used to close and open links as they won't let the player move into it and are mutable
         # Using tuples here because they're faster but if want to be changed can use nested lists (mutable)
+        self.extra1 = extra1
+        self.extra2 = extra2
 
 
         
@@ -230,17 +249,17 @@ class Map:  #Map Location Storage
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
 
         if Spawn:  # this is the printout if you wake up in a location (say for example a load)
-            printT("You wake up in " + mapcolour + self.name + textcolour + " (\S)")
+            printT("You wake up in " + self.colouredname + ". (\S)")
             printT(self.lore)
         elif self.travelled:
-            printT("You enter " + mapcolour + self.name + textcolour + " (\S)")
+            printT("You enter " + self.colouredname + ". (\S)")
             printT(self.lore)
 
 
         description = ""  # the main text description accumulator
 
         # setting the title
-        description += " (\S)" + mapcolour + "~" + self.name.upper() + "~" + textcolour+ " (\S)"
+        description += " (\S)" +mapcolour+ "~" + self.name.upper() + "~" +textcolour+ " (\S)"
 
         length = len(self.items)
         # (\S) used for printT newline
@@ -255,45 +274,45 @@ class Map:  #Map Location Storage
                 for i in range(length):
                     if (i == length-1):
                         if isinstance(self.items[i],Equipment):
-                            description = description +textcolour+" and a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
+                            description = description +textcolour+" and a " + str(shortkey) + "" + "" + self.items[i].colouredname + "" + ".\n" #item highlight, checks to see if object is of class equipment and if not it's an interactable
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description +textcolour+" and a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ".\n" #inspectable highlight
+                            description = description +textcolour+" and a " + str(shortkey) + "" + "" + self.items[i].colouredname + "" + ".\n" #inspectable highlight
                             #shortkey += 1  # increments the shortkey
                     else:
                         if isinstance(self.items[i],Equipment):
-                            description = description +textcolour+ " a " + str(shortkey) + "" + itemcolour + "" + self.items[i].name + "" + textcolour + ","
+                            description = description +textcolour+ " a " + str(shortkey) + "" + "" + self.items[i].colouredname + "" + ","
                             #shortkey += 1  # increments the shortkey
                         else:
-                            description = description +textcolour+ " a " + str(shortkey) + "" + interactcolour + "" + self.items[i].name + "" + textcolour + ","
+                            description = description +textcolour+ " a " + str(shortkey) + "" + "" + self.items[i].colouredname + "" + ","
                             #shortkey += 1  # increments the shortkey
             else:  # if there's only 1 item/interact in the area
                 if isinstance(self.items[0],Equipment):
-                    description = description +textcolour+ " a " + str(shortkey) + "" + itemcolour + "" + self.items[0].name + "" + textcolour + ".\n" # equipment highlight
+                    description = description +textcolour+ " a " + str(shortkey) + "" + "" + self.items[0].colouredname + "" + ".\n" # equipment highlight
                     #shortkey += 1  # increments the shortkey
                 else:
-                    description = description +textcolour+ " a " + str(shortkey) + "" + interactcolour + "" + self.items[0].name + "" + textcolour + ".\n" # inspectable highlight
+                    description = description +textcolour+ " a " + str(shortkey) + "" + "" + self.items[0].colouredname + "" + ".\n" # inspectable highlight
                     #shortkey += 1  # increments the shortkey
         
         if self.ENEMY: 
             for enemy in self.ENEMY:
                 if enemy.alive and enemy.location == (2,4,1,0): #if enermy is in JHE lobby they are playing eng phys text adventure lol (including yourself)
-                    description = description +textcolour+ " (\S)" + str(shortkey) + "" +personcolour+ "" + enemy.name + "" +textcolour+ " is playing the Eng Phys Text Based Adventure. WAIT What!?"
+                    description = description +textcolour+ " (\S)" + str(shortkey) + "" + "" + enemy.colouredname + "" + " is playing the Eng Phys Text Based Adventure. WAIT What!?"
                     #shortkey += 1  # increments the shortkey
                 elif enemy.alive:
-                    description = description +textcolour+ " (\S)" + str(shortkey) + "" +personcolour+ "" + enemy.name + "" +textcolour+ " is " \
+                    description = description +textcolour+ " (\S)" + str(shortkey) + "" + "" + enemy.colouredname + "" + " is " \
                                   + choice(["standing in the corner","wandering around","reading a book","creating a grand unified field theory",
-          "eating a frighteningly large burrito","playing runescape","browsing math memes",
+          "eating a frighteningly large burrito","playing RuneScape","browsing math memes",
           "taking a hit from a laser bong","laying down crying","watching the Big Lez show on full volume",
           "eating a Big Mac", "eating too much Lava Pizza", "contemplating how much Mayo is too much",
           "bathing in Mayonnaise", "in a sushi coma", "phasing in and out of this dimension", "drinking spicy Pho broth",
           "reading a book under a tree", "wondering how you can read their thoughts?", "playing 4D chess",
-          "pondering necromancy", "unsuccessfully painting their WarHammer miniature with milli",
+          "pondering necromancy", "unsuccessfully painting their Warhammer 40k miniature with milli",
           "Synthesizing Gold Nanoparticles", "creating an AI Dog", "petting a cat", "carrying a soccer ball",
           "playing football by themself", "balancing a tennis racket on their nose", "digging down in Minecraft",
           "catching a shiny Pikachu", "checking their Hearthstone Bot", "solving time travel", "watching Gilmore Girls",
           "computing the eigenvalue of the inverse Mobius strip", "watching Little House on the Prairie",
-          "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched"]) + "."
+          "getting shot by an auto-turret in Rust", "trying to think of a capstone idea", "being watched","taking 3 mayo jars"]) + "."
                     #shortkey += 1  # increments the shortkey
 
 
@@ -301,7 +320,7 @@ class Map:  #Map Location Storage
                     description = description +textcolour+ "(\S)Oh look, its the " \
                                   + choice(["decaying ", "broken ", "bloodied ", "mutilated ", "scrambled ", "soulless ", "degraded ", "decrepit ", "blank empty stare of the ", "mouldy "]) \
                                   + choice(["corpse of ", "body of ", "cadaver of ", "hunk of meat that used to be ", "remains of ", "chalk outline of ", "snack that used to be "]) \
-                                  + "" + str(shortkey) + "" + Style.DIM + personcolour + "" + enemy.name + "" + Style.RESET_ALL + textcolour + "."
+                                  + "" + str(shortkey) + "" + deadpersoncolour + "" + enemy.name + "" +textcolour+ "."
                     #shortkey += 1  # increments the shortkey
 
         # if self.interact:
@@ -356,7 +375,7 @@ class Map:  #Map Location Storage
 
         for i in range(6):  # use index to reference direction
             if surroundings[i].strip():  # if the direction is seen in there and it's not empty
-                description += worddirections[i] + surroundings[i] + "\t"  # print the word direction + name
+                description += worddirections[i] +mapcolour+ surroundings[i] +textcolour+ "\t"  # print the word direction + name
             if worddirections[i] == '[U] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no U but D
                 description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
             elif worddirections[i] == '[U] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's U but no D
@@ -366,8 +385,9 @@ class Map:  #Map Location Storage
             elif worddirections[i] == '[F] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's F but no B
                 description += " (\S) "  #adding newline
             if (worddirections[i] == '[L] ') and (not surroundings[i].strip()) and surroundings[i+1].strip():  # if there's no L but R
-                description += "."  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
-                description += " "*(maxnamelength+3) + "\t"  # adding correct spacing
+                # Makes a hidden peroid there so spacing is correct because I'm a monkey and can't figure it out what's wrong
+                description += Style.DIM+backcolour+ "." +Style.RESET_ALL+textcolour+ " "  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
+                description += " "*(maxnamelength+2) + "\t"  # adding correct spacing
             elif worddirections[i] in ['[D] ','[B] '] and surroundings[i].strip():  # If there's all spaces
                 description += " (\S) "
 

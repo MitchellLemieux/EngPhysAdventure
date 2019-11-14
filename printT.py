@@ -10,6 +10,15 @@ just be ignored if using this function.
     #and make sure it's disableable through speedrun and a special options
 #seems to skip at LAST ONE OH BECAUSE THERE"S NO DELAY :)
 import time
+import re
+
+
+def escape_ansi(line):  # used to remove ansii escape codes
+    ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', line)
+from Colour import coloursusedlist
+
+# TODO ANSI ESCAPE CODES ARE COUNTED IN HERE which is not good
 
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
@@ -36,10 +45,11 @@ def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new re
     intext =  intext.split(" ")  # splits up input text into a list of words (using spaces)
     phrase = ""  # phrase accumulator to be separated and printed on a separate line after reaching the page width
     sentence = 0  # Paragraph counter. counts number of sentences to split via paragraphs
+
     for word in intext:  # loops through words in sentence list
         if (("." in word) or ("!" in word) or ("?" in word)) and (not("dr." in word.lower())): sentence += 1 #if a punctuation is in word it counts as a sentence (so try to avoid .,!,? for other uses)
         phrase = phrase + word  # adds new text phrase with no space
-
+        lenphrase = len(escape_ansi(phrase))  # this gets the actual length of the phrase without ansii escape codes (colours)
         if ("(\S)" in word): #uses (\S) to custom deliminate spaces, should be before others are is the master short. Use of (\S) is arbitrary, can be any uncommon characters
             phrase = phrase.rstrip(word) #removes the last word from the phrase
             word = word.split("(\S)") #splits it over the delimter, so it can split right at the "(\S)", by making it a list of the last word of the phrase and start of new one
@@ -57,12 +67,12 @@ def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new re
             phrase = "" #resets phase
             sentence = 0 #resets the sentence counter for new paragraph
             continue #returns the loop back to the top of the loop so it doesn't add the space at the start of the next phrase
-        elif len(phrase) == char: #if the phrase has accumulated to JUST the right size it will split
+        elif lenphrase == char: #if the phrase has accumulated to JUST the right size it will split
             print phrase #see above
             time.sleep(delay)
             phrase = "" 
             continue 
-        elif len(phrase) > char : #if phrase is just over the length with next word it removes last word and prints
+        elif lenphrase > char : #if phrase is just over the length with next word it removes last word and prints
             phrase = phrase.rstrip(word) #removes the last word added to phrase from phrase
             print phrase
             time.sleep(delay)

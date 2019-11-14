@@ -97,7 +97,7 @@ def loadGame(loadname):
         
         #Displayes the current place info again to show it's been loaded
         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
-        print "========================================================================"
+        printT("========================================================================")
 
         # searches and prints the information with spawn set to true to print "You wake up in"
         CurrentPlace.search(MAPS, DIMENSIONS,True)
@@ -118,7 +118,7 @@ def loadGame(loadname):
     except KeyError as E:
         print E.args[0]
         # TODO finish this for simple dictionary changes by using E.args[0] as the key to remove
-        printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvience.")
+        printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvenience.")
         printT("At this time we can't update the file. Some things might be broken")
         x, y, z, dim = PLAYER.location
         MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)

@@ -104,6 +104,7 @@ ALLKEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()+DIRECTIONWORDS)
 
 """
 Shortcuts
+ = search
 a = attack
 b = back
 c = condition
@@ -137,7 +138,7 @@ y =
 z = 
 """
 
-shortcutprint = "Shortcuts(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
+shortcutprint = "Shortcuts(\S)blank space = look around(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
                         "(\S)ex = examine(\S)f = front(\S)g = give(\S)h = help(\S)i = inventory(\S)l = left(\S)" \
                         "r = right(\S)re = recall(\S)s = search(\S)t = talk(\S)u = up(\S)us = use" \
                         "(\S) (\S)There are also several parser shortcuts. You can type part of the full name." \
@@ -153,6 +154,8 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
     GAMEINFO['log'].append(command)
     # this splits it at the first spacing making it the first verb and then the rest as the object noun
     # CURRENTLY the rest of the parser calls simply a function based on the verb and passes it the object noun name
+    if command.strip() == "": command = 'search'  # This empty space does a search the function
+
     wordlist = command.lower().split(" ", 1)  # Split at first space for verb
 
     for i in range(len(wordlist)):  # Getting rid of the spaces in strings using .strip()
@@ -364,6 +367,16 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     if word in duplicatewords:
                         # If you try to give ONLY a duplicate word then it should tell the user
                         if len(objectlist)== 1:
+                            # Debug for parser, although some things may need to be polled inside loop
+                            if GAMEINFO['devmode']:
+                                print wordlist[1]
+                                for i in surroundingobjects:
+                                    print i.name
+                                print surobjectsfullnames
+                                print surobjectswords
+                                print duplicatewords
+                                print objectlist
+
                             print "Your brain can't tell which '" + word + "' you mean."
                             return
                         continue

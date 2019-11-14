@@ -24,7 +24,7 @@ import MapDisplay  # Used to separate minim-ap display
 # TODO Make sure these versions and release date are correct
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.30.00"
-GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.00 - " + blue + 'T' + cyan + 'H' + black + 'E ' \
+GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.00 - " + blue + 'T' + cyan + 'H' + red + 'E ' \
                             + green + 'F' + lightgreen + 'I' + lightblue + 'N' + lightcyan + 'A' + lightgreen + 'L ' \
                             + lightmagenta + 'E' + lightred + 'P' + lightwhite + 'T' + lightyellow + 'A ' + magenta \
                             + 'U' + red + 'P' + white + 'D' + yellow + 'A' + blue + 'T' + red + 'E' + textcolour
@@ -84,7 +84,7 @@ def Setup():
     # Enables this ULTRA character is name is Tyler Kashak or in DevMode
     if PLAYER.name == "Tyler Kashak" or GAMEINFO['devmode']: #He realizes he's the main character and can do anything he wants
         # AsciiArt.One()  # TODO Enable once Dynamic Ascii Art
-        print "\nHe is beginning to believe\n\nYOU are the One\n"
+        print "\nHe is beginning to believe.\n\nYOU are the One.\n"
         # TODO Change back to Tyler
         PLAYER.__dict__ = BREN007PIE.__dict__  # sets him to the initial Tyler character for strating inventory
         PLAYER.maxhealth = 999
@@ -140,7 +140,8 @@ def Main():
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0:  # gets you out of the EPTA all the way down quest and back into the sublayer
             End()
-            print "\n========================================================================\n\nYou finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?"
+            print LINEBREAK
+            printT(" (\S)You finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?")
             log = GAMEINFO['log'] #sets up a temporary variable to pass the log back up a layer
             CreativeMode.loadGame(str(GAMEINFO['layersdeep']-1))
             GAMEINFO['log'] = log + ["--Back in layer: " + str(GAMEINFO['layersdeep']) +"---"] #overwrites it to keep a running tab and says what layer we're in 
@@ -162,24 +163,25 @@ def End():
     if Quests.ebta_story()== 0:  # player dies and that's how they're out of the loop
         print LINEBREAK
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
-        if GAMESETTINGS['SpeedRun']: print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
+        if GAMESETTINGS['SpeedRun']: printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) # writes the log file
         if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit:\n").lower() =='r': #lets the player restart the game
             CreativeMode.loadGame("basegame") #loads in the savefile global variables
             GAMEINFO['timestart'] = time.time() #reset instance start time
             Main() #re-enters the main loop
         return # returns the game so you don't get the final dialog
-    elif raw_input("You've won! Type 'C' to continue\n").lower() == 'c':  # If they beat either of the storylines
+    else:
+        raw_input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
         if Quests.ebta_story() == 1: #The bad storyline ending
-            printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allows you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END")
+            printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice, you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allow you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END")
         elif Quests.ebta_story() == 2: #The good storyline ending.
             printT("Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END.")
         elif Quests.ebta_story() == 3: #The good storyline ending.
-            printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh you pick up the deed begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in the hands everyone.")
+            printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh, you pick up the deed and begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in everyone's hands. (\S)THE END.")
             QUESTS['neutral balance'] = 0
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
-        if GAMESETTINGS['SpeedRun']:print "Total Step Count: ", GAMEINFO['stepcount'], "\nTotal Command Count: ", GAMEINFO['commandcount']
+        if GAMESETTINGS['SpeedRun']:printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) #logs the data to be submitted
         CreativeMode.saveGame(GAMEINFO['playername'] + " Winner") #saves all data to later be submited, different from the main save file
         Opening.Closing()  # plays the closing
@@ -212,7 +214,7 @@ try:  # In case settings file isn't there
         GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
 except:
     #print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
-    print "\n\nNo Settings Detected\n\n"
+    printT("\n\nNo Settings Detected!\n\n")
 
 # Reading in DEVMODE.ini file if devmode is set
 try:  # IF DEVMODE.ini isn't there in the CWD of the game no beuno
@@ -250,9 +252,8 @@ else:  # Dev mode not enabled so error catching
         # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
         CreativeMode.saveGame(GAMEINFO['playername'] + " AutoSave") #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
-        print "Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave"
-        print "\nSorry your game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
+        printT("Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave")
+        print "\nYour game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
         raw_input("Type anything to exit: ")
 
 
-print "done"

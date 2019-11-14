@@ -244,7 +244,7 @@ def Opening():
     time.sleep(DELAY)
     print "t o  t h e  f a c u l t y.\n"
     time.sleep(DELAY)
-    print CLEARSCREEN
+    #print CLEARSCREEN  #Don't clearscreen at end so people can read!
     # for i in range(14):
     #     print "\n"
     #     time.sleep(DELAY/2)

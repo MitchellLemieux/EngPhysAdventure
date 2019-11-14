@@ -1,10 +1,6 @@
 """
 This function is just to keep track of colours from colorama and any other stylization
--- Default Colours ---
-White is place
-Blue objects
-Yellow interacts
-Green People
+These also have the variables that set the colours
 """
 
 import colorama  # Colour module, no bolding on windows :(
@@ -15,11 +11,12 @@ from colorama import Fore, Back, Style
 
 colorama.init()
 # Text Colour definitions (foreground)
- 
+
+# Text colours (foreground)
 CLEARSCREEN = '\033[2J'  # This is the clearscreen variable
-black = Fore.BLACK
-blue = Fore.BLUE
-cyan = Fore.CYAN
+black = Fore.BLACK  #
+blue = Fore.BLUE   # a dark blue
+cyan = Fore.CYAN   # this is light blue
 green = Fore.GREEN
 lightblack = Fore.LIGHTBLACK_EX
 lightblue = Fore.LIGHTBLUE_EX
@@ -30,10 +27,11 @@ lightred = Fore.LIGHTRED_EX
 lightwhite = Fore.LIGHTWHITE_EX
 lightyellow = Fore.LIGHTYELLOW_EX
 magenta = Fore.MAGENTA
-red = Fore.RED
-reset = Fore.RESET
+red = Fore.RED      # a dark red
+textreset = Fore.RESET
 white = Fore.WHITE
-yellow = Fore.YELLOW
+yellow = '\u001b[33m'
+yellow = Fore.YELLOW   # This is actually green
 
 colournamelist = ["black","blue","cyan","green","lightblack","lightblue",
               "lightcyan","lightgreen","lightmagenta","lightred","lightred",
@@ -41,14 +39,31 @@ colournamelist = ["black","blue","cyan","green","lightblack","lightblue",
 colourlist = [black,blue,cyan,green,lightblack,lightblue,lightcyan,lightgreen,
               lightmagenta,lightred,lightwhite,lightyellow,magenta,red,white,yellow]
 
+# Styles for text or background
+stylebright = Style.BRIGHT
+styledim = Style.DIM   # this doesn't seem to work
+stylenormal = Style.NORMAL
+stylereset = Style.RESET_ALL
 
-
-# Object References
+# Game Text Colours
 textcolour = lightgreen
+backcolour = black
+wincolour = lightyellow
+losecolour = red
+indicatecolour = lightwhite
+
+
+# Object Text Colours
 mapcolour = lightwhite
 itemcolour = lightcyan
 interactcolour = lightyellow
+#offinteractcolour = cyan
 personcolour = lightmagenta
+deadpersoncolour = red
+#offpersoncolour = magenta
+
+coloursusedlist = [lightwhite,lightcyan,lightyellow,lightmagenta,red]
+
 
 #Defaults
 # textcolour = lightgreen
@@ -59,7 +74,5 @@ personcolour = lightmagenta
 
 
 
-#this is printout
-#print lightred + "WHATS UP"
 
 

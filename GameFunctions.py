@@ -39,7 +39,7 @@ GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':"",'game
 GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things: " + mapcolour + "~Places~" + textcolour + ", " + itemcolour + "items" + textcolour + ", " + interactcolour + "interacts" + textcolour + ", and " + personcolour + "people" + textcolour + ". The colour helps denote each." \
                     "(\S) (\S)These are the commands your brain can handle in this state:" \
                     "(\S)-(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
-                    "(\S)-(e)equip " +itemcolour+ "item" +textcolour+ " (picks them up into your inventory, replaces what's in slot)" \
+                    "(\S)-(e)equip " +itemcolour+ "item" +textcolour+ " (picks them up into your inventory, replaces what you're wearing/holding)" \
                     "(\S)-(dr)drop " +itemcolour+ "item" +textcolour+ " (removes them from your inventory)" \
                     "(\S)-(ex)examine " +itemcolour+ "item" +textcolour+ "" \
                     "(\S)-(ea)eat " +itemcolour+ "item" +textcolour+ "" \
@@ -82,7 +82,7 @@ STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYO
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
 TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
-BRENSTARTLOCATION = (7,3,0,4)  # Dev start location
+BRENSTARTLOCATION = (2,3,1,0)  # Dev start location
 # (4,0,0,4)  haunted forest
 # (2,3,1,0)  default location
 BRENINV = EMPTYINV
@@ -116,7 +116,7 @@ except:
 
 
 # TODO Make these functions into class methods related to each class
-def Equip(Item):
+def Equip(Item):  # Item is a string not an object
     global PLAYER
     global ITEMS
     global MAPS
@@ -126,25 +126,26 @@ def Equip(Item):
     z = PLAYER.location[2]
     dim = PLAYER.location[3]
     Place = MAPS[x][y][z][dim]
-    if Item in ITEMS:  # if name of Item asked for in parser is in ITEMS dictionary
-        # this is different than the equip method in the Character class.
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:  # if name of Item asked for in parser is in ITEMS dictionary
+        # this is different than the equip method in the Character class for some reason
         # Makes sure the item is dropped at the current location
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
         Place.placeItem(drop)
+        ITEMS[Item].quest = True  # quest/inspect flag is true
 
-
-    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:
-        printT("Maybe if you were at your peak you could carry a " + str(INTERACT[Item].name) + " but not with this migraine.")
-    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive:
-        printT("You attempt to pick up " + ENEMIES[Item].name + " but you're not that close... (\S)And now you're both really uncomfortable.")
-    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and not ENEMIES[Item].alive:
-        printT("That's pretty messed up. You probably shouldn't pick up " + ENEMIES[Item].name + "'s body.")
+    # other acceptations for weird requests
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:  # Interacts
+        printT("Maybe if you were at your peak you could carry a " + str(INTERACT[Item].colouredname) + " but not with this migraine.")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive: # People
+        printT("You attempt to pick up " + ENEMIES[Item].colouredname + " but you're not that close... (\S)And now you're both really uncomfortable.")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and not ENEMIES[Item].alive:  # Dead People
+        printT("That's pretty messed up. You probably shouldn't pick up " +deadpersoncolour+ ENEMIES[Item].name + textcolour+ "'s body.")
     else:
-        printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
+        printT(" (\S)You can't find a " +itemcolour+ Item +textcolour+ " around here. Maybe it's your hungover brain.")
 
 
-def Drop(Item):
+def Drop(Item):  # Item is a string not an object
     global MAPS
     global PLAYER
     global ITEMS
@@ -154,14 +155,20 @@ def Drop(Item):
     z = PLAYER.location[2]
     dim = PLAYER.location[3]
     Place = MAPS[x][y][z][dim]
-    if Item in ITEMS:
+    if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
         # Same as equip function. 'None' passed to function if item doesn't exist
-    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive:
-        printT("You drop " + ENEMIES[Item].name + " but they were never yours to begin with. (\S)Now you just have one less friend..")
+
+    # other acceptations for weird requests
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location: # Interacts
+        printT("You probably shouldn't drop the " + str(INTERACT[Item].colouredname) + ". It might break.")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and ENEMIES[Item].alive: # People
+        printT("You drop " + ENEMIES[Item].colouredname + " but they were never yours, to begin with. (\S)Now you just have one less friend...")
+    elif Item in ENEMIES and list(ENEMIES[Item].location) == PLAYER.location and not ENEMIES[Item].alive: # Dead People
+        printT("You pick up " +deadpersoncolour+ ENEMIES[Item].name +textcolour+ "'s body and drop it. Do you get a kick out of this?")
     else:
-       printT("Maybe you're still drunk?. You aren't carrying " + Item + ".")
+       printT("Maybe you're still drunk?. You aren't carrying a " +itemcolour+ Item +textcolour+ ".")
 
 
 
@@ -187,7 +194,7 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
     elif direction in ['left', 'south']: direction = 'l'
     elif direction in ['right','north']: direction = 'r'
     else:  # if the direction isn't in the accepted directions
-        printT("You stumble over not sure where you were trying to go. You brain doesn't understand " + direction + ".")
+        printT("You stumble over not sure where you were trying to go. Your brain doesn't understand " + direction + ".")
         return
 
     if direction not in currentplace.walls:
@@ -211,11 +218,11 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
         for link in currentplace.links:  # if there is links in it it will loop through
             if direction in link:  # Searching all the links to see if any links refer to that direction
                 if dim == 0 and link[4] != 0:
-                    print "You go inside " + DIMENSIONS[link[4]] + "."  # When going to non-Overworld it says going inside
+                    printT("You go inside " +mapcolour+ DIMENSIONS[link[4]] +textcolour+ ".")  # When going to non-Overworld it says going inside
                 elif dim != 0 and link[4] == 0: # When going to overworld from non
-                    print "You go outside."
+                    printT("You go outside.")
                 elif dim != link[4]:  # Leaving one interior and entering another
-                    print "You leave " + DIMENSIONS[dim] + " and enter " + DIMENSIONS[link[4]] + "."
+                    printT("You leave " +mapcolour+ DIMENSIONS[dim] +textcolour+ " and enter " +mapcolour+ DIMENSIONS[link[4]] +textcolour+ ".")
 
                 x = link[1]
                 y = link[2]
@@ -233,9 +240,11 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
         if PLAYER.inv['body'] == ITEMS['tony hawk shirt']:
             bfchance += 0.007
 
+
         if bf.location != (None,None,None,None):
             MAPS[bf.location[0]][bf.location[1]][bf.location[2]][bf.location[3]].removeEnemy(bf)
         if random() <= bfchance:
+            printT(" (\S)You see A " +wincolour+ "BRENDAN FALLON" +textcolour +".")
             MAPS[x][y][z][dim].placeEnemy(bf)
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
 
@@ -250,7 +259,7 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
         PLAYER.location[1] = currentplace.location[1]
         PLAYER.location[2] = currentplace.location[2]
         PLAYER.location[3] = currentplace.location[3]
-        print "\nYou can't go that way!\n"
+        printT(" (\S)Your body " +losecolour+ "can't" +textcolour+ " go that way! (\S)")
         return currentplace
 
 #Combat System
@@ -304,7 +313,7 @@ def Combat(P,E):
         E.alive = False
         return 1
 
-def Attack(E):
+def Attack(E):  # E is a string not an object
     global ENEMIES
     global MAPS
     global PLAYER
@@ -326,27 +335,36 @@ def Attack(E):
 
         if random() <= bgchance: #bigHits feature TODO have oblivion sound effects
             # AsciiArt.BigHits()  # TODO Enable once Dynamic Ascii Art
-            print "\nAn oblivion gate opens and a purple faced hero in ebony armour punches\n" + enemy.name + " to death."
+            printT(" (\S)An oblivion gate opens and a " +lightmagenta+"purple faced hero" +textcolour +" in " +lightblack+"ebony armour" +wincolour+ " punches " +personcolour+ enemy.name +textcolour+ " to death.")
             printT(enemy.Dinfo) #slow version
             enemy.alive = False
             if enemy.drop:
-               print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+               printT(" (\S)" +enemy.colouredname+ " dropped the " + ITEMS[enemy.drop].colouredname + ".")
                CurrentPlace.placeItem(ITEMS[enemy.drop])
         else:
            Outcome = Combat(PLAYER,enemy)
            if Outcome:
-               print "You defeated " + enemy.name + ".\n"
+               printT("You " +wincolour + "defeated " + enemy.colouredname + ". (\S)")
                printT(enemy.Dinfo)
                if enemy.drop:
-                   print enemy.name + " dropped the " + ITEMS[enemy.drop].name + "."
+                   printT( enemy.colouredname + " dropped a " + ITEMS[enemy.drop].colouredname + ".")
                    CurrentPlace.placeItem(ITEMS[enemy.drop])
            else:
-               print "Oh no! " + enemy.name + " defeated you!\nYou died, without ever finding your iron ring"
+               printT("Oh no! " + enemy.colouredname + " " +losecolour + "defeated" + textcolour+ " you! (\S)You died, without ever finding your " +wincolour+"iron ring" + textcolour +".")
+
+    # other acceptations for weird requests
+    elif E in INTERACT and list(INTERACT[E].location) == PLAYER.location: # Interacts
+        printT("You probably shouldn't attack the " + str(INTERACT[E].colouredname) + ". You might get in major trouble.")
+    elif E in ITEMS and list(ITEMS[E].location) == PLAYER.location: # Items
+        printT("You probably shouldn't attack the " + ITEMS[E].colouredname + " it might go badly.")
+    elif E in ENEMIES and list(ENEMIES[E].location) == PLAYER.location and not ENEMIES[E].alive: # Dead People
+        printT("Umm... Okay. You attack " +deadpersoncolour+ ENEMIES[E].name +textcolour+ " and they're still dead...")
+
     else:
-        print "\nThey don't appear to be here."
+        printT("(\S)" + personcolour+ str(E) + textcolour+ " doesn't appear to be here.")
 
 
-def Talk(E):
+def Talk(E):  # E is a string not an object
     global ENEMIES
     global MAPS
     global PLAYER
@@ -359,7 +377,7 @@ def Talk(E):
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
-            print enemy.name + " took the " + enemy.need + "."
+            printT(enemy.colouredname + " took the " + ITEMS[enemy.drop].colouredname+ ".")
             printT(enemy.Sinfo)  # default print speed
             ITEMS[enemy.need].location = (None, None, None)  # Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
@@ -367,18 +385,19 @@ def Talk(E):
             enemy.quest = True
             if enemy.drop:
                 MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
-                print "You see a " + ITEMS[enemy.drop].name +".\n"
+                printT("You see a " + ITEMS[enemy.drop].colouredname +". (\S)")
                 enemy.drop = None
-        elif enemy.quest and enemy.drop:  # What is this for?
-
+        elif enemy.quest and enemy.drop:
             printT(enemy.Sinfo)
             MAPS[x][y][z][dim].placeItem(ITEMS[enemy.drop])
-            printT( "You see a " +itemcolour+ ITEMS[enemy.drop].name +textcolour+". (\S)")
+            printT( "You see a " + ITEMS[enemy.drop].colouredname +". (\S)")
             enemy.drop = None
         elif enemy.quest:
             printT(enemy.Sinfo)
         else:
             printT(enemy.info)
+        if enemy.aesthetic and not(GAMESETTINGS['HardcoreMode']):
+            printT("It's kinda mean, but to you, they don't seem very helpful.")
         enemy.spoke = True
         if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
             print "HEALTH: " + str(ENEMIES[E].health)
@@ -389,17 +408,24 @@ def Talk(E):
             print "DROP : " + str(ENEMIES[E].drop)
             print "QUESTFlag : " + str(ENEMIES[E].quest)
             print "SPOKE : " + str(ENEMIES[E].spoke)
+            print "Aesthetic : " + str(ENEMIES[E].aesthetic)
 
 
-    elif E in ENEMIES and ((list(ENEMIES[E].location) == PLAYER.location)) and (ENEMIES[E].alive==False):
-        print "\nI don't think they can do that anymore.\n"
+    # other acceptations for weird requests
+    elif E in INTERACT and list(INTERACT[E].location) == PLAYER.location: # Interacts
+        printT("You talk at the " + str(INTERACT[E].colouredname) + ". Best conversation you've had in a while.")
+    elif E in ITEMS and list(ITEMS[E].location) == PLAYER.location: # Items
+        printT("You talk at the " + ITEMS[E].colouredname + ". Still better than the Student Wellness Centre person.")
+    elif E in ENEMIES and list(ENEMIES[E].location) == PLAYER.location and not ENEMIES[E].alive: # Dead People
+        printT("Most people don't believe in talking to the dead. But you try talking to " +deadpersoncolour+ ENEMIES[E].name +textcolour+ " anyways.")
+
     else:
-        print "\nThey don't appear to be here.\n"
+        printT("(\S)" + personcolour + str(E) + textcolour + " doesn't appear to be here.")
 
 # TODO Re-implement stats and number with word ques instead of numbers
 def Stats():
     global PLAYER
-    if PLAYER.health > 99: printT("You're in perfect health")
+    if PLAYER.health > 99: printT("You're in perfect health.")
     elif PLAYER.health > 90: printT("You feel really great!")
     elif PLAYER.health > 80: printT("You feel a little banged up but not too bad.")
     elif PLAYER.health > 60: printT("You're pretty badly beat up but still kicking.")
@@ -414,7 +440,7 @@ def Stats():
         print "DEF: " + str(PLAYER.stats[1])
         print "SPD: " + str(PLAYER.stats[2])+"\n"
 
-def Inspect(Item): #Item is the inspect item
+def Inspect(Item): #Item is the inspect item string not an object
     global MAPS
     global ITEMS
     global PLAYER
@@ -426,15 +452,17 @@ def Inspect(Item): #Item is the inspect item
 
     #If item in location
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location: #this is for item = equipment
-        printT(ITEMS[Item].name.upper(),72,0)
+        printT("" + itemcolour+ ITEMS[Item].colouredname.upper() +textcolour + "",72,0)
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
+
+        ITEMS[Item].quest = True  # sets the quest/inspected flag to true
         # TODO re-implement inspecting item with words instead of numbers
         deltaATK = ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0]  # " more powerful"
         deltaDEF = ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1]  # " better defended"
         deltaSPD = ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2]  # " faster"
 
         descriptornumbers = [5,10,25,50,100,1000]
-        descriptors = ["Slightly", " A good bit", " A significant amount"," A very large amount", " A very very large amount", " AN UNGODLY amount"]
+        descriptors = ["Slightly", lightblack+"A good bit", lightblue+"A significant amount",red+"A very large amount", lightwhite+"A very very large amount", lightyellow +"AN UNGODLY amount"]
         #5 = a bit
         #10 = a lot
         #25 = a significant amount
@@ -446,15 +474,15 @@ def Inspect(Item): #Item is the inspect item
             desc = " (\S)This looks like it would make me: (\S)"
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaATK and deltaATK > 4:
-                    desc += descriptors[i-1] + " more powerfull. (\S)"
+                    desc += descriptors[i-1] +textcolour+ " more powerfull. (\S)"
                     break
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaDEF and deltaDEF > 4:
-                    desc += descriptors[i-1] + " better defended. (\S)"
+                    desc += descriptors[i-1] +textcolour+ " better defended. (\S)"
                     break
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaSPD and deltaSPD > 4:
-                    desc += descriptors[i-1] + " faster. (\S)"
+                    desc += descriptors[i-1] +textcolour+ " faster. (\S)"
                     break
             printT(desc)
 
@@ -465,8 +493,9 @@ def Inspect(Item): #Item is the inspect item
             print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
             print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
             print "WORN: " + str(ITEMS[Item].worn).upper()
+            print "QUEST Flag: " + str(ITEMS[Item].quest)
             if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
-                print "Edible: Yes\n " #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
+                printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)") #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
             else:
                 print""
     # If the entered item is an intractable and is at that location
@@ -475,11 +504,12 @@ def Inspect(Item): #Item is the inspect item
         if INTERACT[Item].need and (PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need] or ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items): #if you're wearing item.need or it's on the ground the interactable needs worn on your body
             if PLAYER.inv[ITEMS[INTERACT[Item].need].worn]==ITEMS[INTERACT[Item].need]:  # if in the players hand
                 PLAYER.inv[ITEMS[INTERACT[Item].need].worn] = PLAYER.emptyinv[ITEMS[INTERACT[Item].need].worn]
-            elif ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items:
+            elif ITEMS[INTERACT[Item].need] in MAPS[x][y][z][dim].items:  # if around the area
                 MAPS[x][y][z][dim].removeItem(ITEMS[INTERACT[Item].need])
                 ITEMS[INTERACT[Item].need].location = (None,None,None,None)
             INTERACT[Item].quest = True  # this turns on the quest flag for the interactable once interacted with if you have the item
-            printT(INTERACT[Item].Sinfo + "(\S)")  # special slow version
+            printT("" +interactcolour+ INTERACT[Item].colouredname.upper() +textcolour+ "" ,72,0)  # Due to the upper it removes the colour
+            printT(INTERACT[Item].Sinfo + "(\S)",72,0)  # special slow version
             PLAYER.updateStats()  # TODO stats should automatically update whenver player state is changed
             ITEMS[INTERACT[Item].need].location=(None,None,None) # Brendan added this, used to clear the item location
             if INTERACT[Item].drop:
@@ -489,39 +519,49 @@ def Inspect(Item): #Item is the inspect item
 
         elif INTERACT[Item].need == None or INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface or a vendor or a trigger)
             INTERACT[Item].quest = True  # this turns on the quest flag so it can trigger quest events
-            printT(INTERACT[Item].info)
-            printT(INTERACT[Item].Sinfo)
+            printT("" +interactcolour+ INTERACT[Item].colouredname.upper() +textcolour+ "" ,72,0)  # Due to the upper it removes the colour
+            printT(INTERACT[Item].info,72,0)
+            printT(INTERACT[Item].Sinfo,72,0)
 
             if INTERACT[Item].drop:
                 INTERACT[Item].drop_objects(Item, x, y, z, dim, MAPS, ITEMS, INTERACT, ENEMIES)
             print ""
 
         else:
+            printT("" +interactcolour+ INTERACT[Item].colouredname.upper() +textcolour+ "" ,72,0)  # Due to the upper it removes the colour
             printT(INTERACT[Item].info,72,0.1) #fast version
         if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
             print "NEED : " + str(INTERACT[Item].need)
             print "DROP : " + str(INTERACT[Item].drop)
             print "QUESTFlag : " + str(INTERACT[Item].quest)
+            print "Aesthetic : " + str(INTERACT[Item].aesthetic)
+
+        if INTERACT[Item].aesthetic and not(GAMESETTINGS['HardcoreMode']):  # if it's aesthetic and not in hardcore mode
+            printT("This doesn't look very useful.")
+
+
+    # other acceptations for weird requests
     # If you try to inspect a person
     elif Item in ENEMIES and ((list(ENEMIES[Item].location) == PLAYER.location)) and (ENEMIES[Item].alive):
         print "\nIt's rude to stare at people!"
+
 
     else:
         printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
 
 def Inventory():
     global PLAYER
-    print ""
     # Player inventory is a dictionary of objects so can access and print them out
-    print "{1}HEAD: " + PLAYER.inv['head'].name
-    print "{2}BODY: " + PLAYER.inv['body'].name
-    print "{3}HAND: " + PLAYER.inv['hand'].name
-    print "{4}OFF-HAND: " + PLAYER.inv['off-hand'].name
+    printT(" (\S){1}HEAD: " + PLAYER.inv['head'].colouredname)
+    printT("{2}BODY: " + PLAYER.inv['body'].colouredname)
+    printT("{3}HAND: " + PLAYER.inv['hand'].colouredname)
+    printT("{4}OFF-HAND: " + PLAYER.inv['off-hand'].colouredname + " (\S)")
     # This old method is more general/expandable but doesn't do them in order
     # for i in PLAYER.inv:
     #     print i.upper() + ": " + PLAYER.inv[i].name
-    print ""
-def Eat(Item):
+
+
+def Eat(Item):  # Item is a string not an object
     global PLAYER
     global ITEMS
     global MAPS
@@ -532,14 +572,14 @@ def Eat(Item):
 
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location and not(GAMESETTINGS['HardcoreMode']):
         if Item == "jar of peanut butter" and (PLAYER.name in ["Mitchell Lemieux","Erik Reimers"]):
-            print "Oh NO! You're " + PLAYER.name + " ! Don't you remember?\nYOU'RE ALERGIC TO PEANUT BUTTER!\nYou DIE due to your lack of responsibility."
+            printT("Oh NO! You're " + PLAYER.name + " ! Don't you remember? YOU'RE" +losecolour+" ALERGIC TO PEANUT BUTTER" +textcolour+"! You "+losecolour+"DIE" +textcolour+" due to your lack of responsibility.")
             PLAYER.health = 0
             PLAYER.alive = False
         elif ITEMS[Item].health:
             PLAYER.health = PLAYER.health + ITEMS[Item].health
             PLAYER.health = min(PLAYER.maxhealth, PLAYER.health) #made the minimum of your added health and food so players health doesn't clip over
             PLAYER.health = max(PLAYER.health, 0)  # prevents clipping bellow 0
-            print "\nYou've eaten the " + ITEMS[Item].name + "."
+            printT(" (\S)You've eaten the " + ITEMS[Item].colouredname + ".")
             # TODO Reimplement health/food indicators with words
             if GAMEINFO['devmode']: print "\nHEALTH: "+ str(PLAYER.health)+"\n"  # if in DevMode can see stats
             if PLAYER.health == 0:
@@ -549,21 +589,24 @@ def Eat(Item):
                 PLAYER.inv[ITEMS[Item].worn] = PLAYER.emptyinv[ITEMS[Item].worn]
                 ITEMS[Item].location = (None, None, None)
                 PLAYER.updateStats()
-                print "The " + ITEMS[Item].name + " has been removed from your inventory.\n"
+                printT("The " + ITEMS[Item].colouredname + " has been removed from your inventory. (\S)")
             else:
                 MAPS[x][y][z][dim].removeItem(ITEMS[Item])
         else:
-            print "You can't eat that!"
+            print "You can't eat a " + ITEMS[Item].colouredname + "!"
 
-    # If you attempt to eat someone
-    elif Item in ENEMIES and (list(ENEMIES[Item].location) == PLAYER.location):
+
+    # other acceptations for weird requests
+    elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:  # Interacts
+        printT("Hmm... You don't think a " + str(INTERACT[Item].colouredname) + " would taste good. Let alone be edible.")
+    elif Item in ENEMIES and (list(ENEMIES[Item].location) == PLAYER.location):  # If you attempt to eat someone
         if (ENEMIES[Item].alive):
-            printT("You attempt to eat " + Item + "'s arm...(\S) (\S)They pull away ask you to politely Not.")
+            printT("You attempt to eat " + ENEMIES[Item].colouredname + "'s arm...(\S) (\S)They pull away ask you to politely 'Not'.")
         else:
-            printT("OMG WHAT'S WRONG WITH YOU. I know you're hungry but please find a more vegan option.")
+            printT("OMG, WHAT'S WRONG WITH YOU. (\S)I know you're hungry but please find a more vegan option.")
 
     else:
-        printT(" (\S)You can't find " + Item + " around here. Maybe it's your hungover brain.")
+        printT(" (\S)You can't find a " +itemcolour+ Item +textcolour+ " around here. Maybe it's your hungover brain.")
 
 
 # BackEnd Functions
