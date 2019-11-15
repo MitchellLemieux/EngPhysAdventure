@@ -144,10 +144,10 @@ shortcutprint = "Shortcuts(\S)blank space = look around(\S)a = attack(\S)b = bac
                         "(\S) (\S)There are also several parser shortcuts. You can type part of the full name." \
                         "(\S) e.g. a brian = attack Brian the Weeb" \
                         "You can also use shortkeys which is a quick numbering system." \
-                        "(\S) Shortkeys 1-4 are for inventory. And the rest are the order of objects around you (starting at 5). " \
+                        "(\S) Shortkeys 1-4 are for inventory. Shorkeys 5+ are the objects around you in the order they are shown. " \
                         "(\S) e.g. e 5 = equips first thing on the ground" \
-                        "(\S) e.g. exa 8 = examines 3rd thing on the ground" \
-                        "(\S) dr 1 = drops thing in your head slot"
+                        "(\S) e.g. ex 8 = examines 3rd thing on the ground" \
+                        "(\S) dr 1 = drops the thing in your head slot"
 
 
 def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTINGS):
@@ -304,7 +304,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     objectName = surroundingobjects[i-1].name.lower()  # assigns the object name to the same position as seen
                     if objectName == "empty":  # if you request something with an empty object it exists
                         playerslot = ["head","body","hand","off-hand"]
-                        printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i]) +".")
+                        printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i-1]) +".")
                         return
         # TODO make exclusion list for custom parser things like these that you don't want spellchecking on 2nd word
         elif verb in ['go', 'move', 'walk', 'run', 'turn','say','sing','/script']: objectName = wordlist[1]  # no spell check for certain thing
@@ -377,7 +377,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                                 print duplicatewords
                                 print objectlist
 
-                            print "Your brain can't tell which '" + word + "' you mean."
+                            printT("Your brain can't tell which '" +indicatecolour+ word +textcolour+ "' you mean.")
                             return
                         continue
                     elif objectlist:
@@ -394,7 +394,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                             #printT("Your brain is pretty sure you meant " + objectName + " instead of " + wordlist[1] +".")
 
                     else:  # last option is to say we can't find it
-                        print "\nYou can't find that around here. Maybe it's your hungover typing."
+                        printT(" (\S)You can't find that around here. Maybe it's your hungover typing.")
                         return
 
 
@@ -496,7 +496,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                     GAMEINFO['scriptdata'][i] = GAMEINFO['scriptdata'][i].rstrip("\n")
                 print GAMEINFO['scriptdata']
             except:
-                printT("Theres no script with name " + wordlist[1] + " in the CWD!")
+                printT("Theres no script with name " +indicatecolour+ wordlist[1] +textcolour+ " in the CWD!")
         else:
-            print "\nYour hungover brain struggles to understand that command!\n"
+            printT(" (\S)Your hungover brain struggles to understand that command! (\S)")
 

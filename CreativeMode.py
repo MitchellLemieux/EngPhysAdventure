@@ -50,45 +50,60 @@ def loadGame(loadname):
     global QUESTS
     global GAMEINFO
     global GAMESETTINGS
+
+
     try:
-        f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".plp","r+")  # Saved as .plp for obfuscation purposes
-        save = pickle.load(f)
-        f.close()
-        #seperates the list
-        loadplayer = save[0]
-        loaditems = save[1]
-        loadmap = save[2]
-        loadenemy = save[3]
-        loadinter = save[4]
-        loadquest = save[5]
-        loadinfo = save[6]
-        loadsettings = save[7]
-        
-        
-        for info in GAMEINFO: #when itterating through list the itterating variable is the string of the key
-            GAMEINFO[info] = loadinfo[info]                   
-        PLAYER.__dict__ = loadplayer.__dict__
-        for item in ITEMS:
-            ITEMS[item].__dict__ = loaditems[item].__dict__ #assignment better when no subitems? .__dict for when there is
-        for enemy in ENEMIES:  #.__dict__ removed on these and it works?
-            ENEMIES[enemy].__dict__ = loadenemy[enemy].__dict__
-        for inter in INTERACT:
-            INTERACT[inter].__dict__ = loadinter[inter].__dict__
-        for quest in QUESTS:
-            QUESTS[quest] = loadquest[quest]  # doesn't need .__dict___ for some reason
-        for setting in GAMESETTINGS:
-            GAMESETTINGS[setting] = loadsettings[setting]  # doesn't need .__dict___ for some reason
-        #for some reason putting MAPS load below these other ones fixed a bunch of bugs
-        for x in range(XRANGE):
-            for y in range(YRANGE):
-                for z in range(ZRANGE):
-                    for dim in range (DRANGE):
-                        if MAPS[x][y][z][dim]: #There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
-                            MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
-                            # Attempting to load in the map items to stop ghosting
-                            # MAPS[x][y][z][dim].items = loadmap[x][y][z][dim].items
-                            # MAPS[x][y][z][dim].ENEMY = loadmap[x][y][z][dim].ENEMY
-                            # MAPS[x][y][z][dim].walls = loadmap[x][y][z][dim].walls
+        loadscript = GAMEINFO['savepath'] +"MetaChache "+loadname +".plp"  # Saved as .plp for obfuscation purposes
+
+        try:
+            with open(loadscript, 'r') as f:
+                GAMEINFO['scriptdata'] = f.readlines()  # reads in data seperated by newline into a list
+            f.close()
+            for i in range(len(GAMEINFO['scriptdata'])):  # removing the newlines from the script
+                GAMEINFO['scriptdata'][i] = GAMEINFO['scriptdata'][i].rstrip("\n")
+            #print GAMEINFO['scriptdata']  # Debug print
+        except:
+            printT("Theres no script with name " + indicatecolour + wordlist[1] + textcolour + " in the CWD!")
+
+
+        # f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".plp","r+")  # Saved as .plp for obfuscation purposes
+        # save = pickle.load(f)
+        # f.close()
+        # #seperates the list
+        # loadplayer = save[0]
+        # loaditems = save[1]
+        # loadmap = save[2]
+        # loadenemy = save[3]
+        # loadinter = save[4]
+        # loadquest = save[5]
+        # loadinfo = save[6]
+        # loadsettings = save[7]
+        #
+        #
+        # for info in GAMEINFO: #when itterating through list the itterating variable is the string of the key
+        #     GAMEINFO[info] = loadinfo[info]
+        # PLAYER.__dict__ = loadplayer.__dict__
+        # for item in ITEMS:
+        #     ITEMS[item].__dict__ = loaditems[item].__dict__ #assignment better when no subitems? .__dict for when there is
+        # for enemy in ENEMIES:  #.__dict__ removed on these and it works?
+        #     ENEMIES[enemy].__dict__ = loadenemy[enemy].__dict__
+        # for inter in INTERACT:
+        #     INTERACT[inter].__dict__ = loadinter[inter].__dict__
+        # for quest in QUESTS:
+        #     QUESTS[quest] = loadquest[quest]  # doesn't need .__dict___ for some reason
+        # for setting in GAMESETTINGS:
+        #     GAMESETTINGS[setting] = loadsettings[setting]  # doesn't need .__dict___ for some reason
+        # #for some reason putting MAPS load below these other ones fixed a bunch of bugs
+        # for x in range(XRANGE):
+        #     for y in range(YRANGE):
+        #         for z in range(ZRANGE):
+        #             for dim in range (DRANGE):
+        #                 if MAPS[x][y][z][dim]:  # There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
+        #                     MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
+        #                     # Attempting to load in the map items to stop ghosting
+        #                     # MAPS[x][y][z][dim].items = loadmap[x][y][z][dim].items
+        #                     # MAPS[x][y][z][dim].ENEMY = loadmap[x][y][z][dim].ENEMY
+        #                     # MAPS[x][y][z][dim].walls = loadmap[x][y][z][dim].walls
 
 
         GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
@@ -101,9 +116,6 @@ def loadGame(loadname):
 
         # searches and prints the information with spawn set to true to print "You wake up in"
         CurrentPlace.search(MAPS, DIMENSIONS,True)
-
-
-
 
         #YOU HAVE TO USE THIS DARN .__dict___ thing to copy the object atributes https://stackoverflow.com/questions/36243488/how-can-i-overwrite-an-object-in-python
         #This is ineffecient but works. I think main problem I had is loading where the loaded objects are a new memory location but the game still references old locations

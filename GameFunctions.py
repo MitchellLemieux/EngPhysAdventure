@@ -85,7 +85,9 @@ TYINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits sh
 BRENSTARTLOCATION = (2,3,1,0)  # Dev start location
 # (4,0,0,4)  haunted forest
 # (2,3,1,0)  default location
-BRENINV = EMPTYINV
+# EACH INVENTORY HAS TO BE UNIQUE
+#BRENINV = EMPTYINV  # THIS CAUSED GHOSTING AND DUPLICATION I THINK BECAUSE OF same referenced object
+BRENINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}  # needs to be unique or else ghosting
 #BRENINV = {'head':ITEMS["tyler's visor glasses"],'body':ITEMS["tyler's big hits shirt"],'hand':ITEMS["tyler's hulk hands"],'off-hand':ITEMS["tyler's green bang bong"]} #gets to have the Iron Ring when he graduates
 
 
@@ -112,7 +114,7 @@ try:
     os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
 
 except:
-    print "\n"  # does nothing if the path is already there
+    printT(" (\S)")  # does nothing if the path is already there
 
 
 # TODO Make these functions into class methods related to each class
@@ -129,9 +131,9 @@ def Equip(Item):  # Item is a string not an object
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:  # if name of Item asked for in parser is in ITEMS dictionary
         # this is different than the equip method in the Character class for some reason
         # Makes sure the item is dropped at the current location
+        # TODO Redo this drop and equip structure. Is dumb and can cause duplicates/ghosting
         drop = PLAYER.equip(ITEMS[Item])
         Place.removeItem(ITEMS[Item])
-        Place.placeItem(drop)
         ITEMS[Item].quest = True  # quest/inspect flag is true
 
     # other acceptations for weird requests
@@ -156,6 +158,7 @@ def Drop(Item):  # Item is a string not an object
     dim = PLAYER.location[3]
     Place = MAPS[x][y][z][dim]
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
+        # TODO Redo this drop and equip structure. Is dumb and can cause duplicates/ghosting
         drop = PLAYER.drop(ITEMS[Item])
         Place.placeItem(drop)
         # Same as equip function. 'None' passed to function if item doesn't exist
@@ -377,7 +380,7 @@ def Talk(E):  # E is a string not an object
     if E in ENEMIES and (list(ENEMIES[E].location) == PLAYER.location) and (ENEMIES[E].alive):
         enemy = ENEMIES[E]
         if enemy.need and PLAYER.inv[ITEMS[enemy.need].worn]==ITEMS[enemy.need]and not enemy.quest:
-            printT(enemy.colouredname + " took the " + ITEMS[enemy.drop].colouredname+ ".")
+            printT(enemy.colouredname + " took the " + ITEMS[enemy.need].colouredname+ ".")
             printT(enemy.Sinfo)  # default print speed
             ITEMS[enemy.need].location = (None, None, None)  # Brendan added this, used to clear the item location
             PLAYER.inv[ITEMS[enemy.need].worn] = PLAYER.emptyinv[ITEMS[enemy.need].worn]
@@ -400,15 +403,15 @@ def Talk(E):  # E is a string not an object
             printT("It's kinda mean, but to you, they don't seem very helpful.")
         enemy.spoke = True
         if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
-            print "HEALTH: " + str(ENEMIES[E].health)
-            print "ATK : " + str(ENEMIES[E].stats[0])
-            print "DEF : " + str(ENEMIES[E].stats[1])
-            print "SPD : " + str(ENEMIES[E].stats[2])
-            print "NEED : " + str(ENEMIES[E].need)
-            print "DROP : " + str(ENEMIES[E].drop)
-            print "QUESTFlag : " + str(ENEMIES[E].quest)
-            print "SPOKE : " + str(ENEMIES[E].spoke)
-            print "Aesthetic : " + str(ENEMIES[E].aesthetic)
+            printT("HEALTH: " + str(ENEMIES[E].health))
+            printT("ATK : " + str(ENEMIES[E].stats[0]))
+            printT("DEF : " + str(ENEMIES[E].stats[1]))
+            printT("SPD : " + str(ENEMIES[E].stats[2]))
+            printT("NEED : " + str(ENEMIES[E].need))
+            printT("DROP : " + str(ENEMIES[E].drop))
+            printT("QUESTFlag : " + str(ENEMIES[E].quest))
+            printT("SPOKE : " + str(ENEMIES[E].spoke))
+            printT("Aesthetic : " + str(ENEMIES[E].aesthetic))
 
 
     # other acceptations for weird requests
@@ -435,10 +438,10 @@ def Stats():
     elif PLAYER.health > 0:printT("You're on the verge of death, don't go towards the light.")
 
     if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
-        print "\nHEALTH: " + str(PLAYER.health)
-        print "ATK: " + str(PLAYER.stats[0])
-        print "DEF: " + str(PLAYER.stats[1])
-        print "SPD: " + str(PLAYER.stats[2])+"\n"
+        printT("\nHEALTH: " + str(PLAYER.health))
+        printT("ATK: " + str(PLAYER.stats[0]))
+        printT("DEF: " + str(PLAYER.stats[1]))
+        printT("SPD: " + str(PLAYER.stats[2])+" (\S)")
 
 def Inspect(Item): #Item is the inspect item string not an object
     global MAPS
@@ -474,7 +477,7 @@ def Inspect(Item): #Item is the inspect item string not an object
             desc = " (\S)This looks like it would make me: (\S)"
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaATK and deltaATK > 4:
-                    desc += descriptors[i-1] +textcolour+ " more powerfull. (\S)"
+                    desc += descriptors[i-1] +textcolour+ " more powerful. (\S)"
                     break
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaDEF and deltaDEF > 4:
@@ -489,11 +492,11 @@ def Inspect(Item): #Item is the inspect item string not an object
 
 
         if GAMEINFO['devmode']:  # If in devmode can see the stats
-            print "ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")"
-            print "DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")"
-            print "SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")"
-            print "WORN: " + str(ITEMS[Item].worn).upper()
-            print "QUEST Flag: " + str(ITEMS[Item].quest)
+            printT("ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")")
+            printT("DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")")
+            printT("SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")")
+            printT("WORN: " + str(ITEMS[Item].worn).upper())
+            printT("QUEST Flag: " + str(ITEMS[Item].quest))
             if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
                 printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)") #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
             else:
@@ -515,7 +518,6 @@ def Inspect(Item): #Item is the inspect item string not an object
             if INTERACT[Item].drop:
                 INTERACT[Item].drop_objects(Item,x,y,z,dim,MAPS,ITEMS,INTERACT,ENEMIES)  # drops the proper object
 
-            print ""
 
         elif INTERACT[Item].need == None or INTERACT[Item].need == "":  # Has no needed Items (I.E. it's a quest interface or a vendor or a trigger)
             INTERACT[Item].quest = True  # this turns on the quest flag so it can trigger quest events
@@ -525,16 +527,15 @@ def Inspect(Item): #Item is the inspect item string not an object
 
             if INTERACT[Item].drop:
                 INTERACT[Item].drop_objects(Item, x, y, z, dim, MAPS, ITEMS, INTERACT, ENEMIES)
-            print ""
 
         else:
             printT("" +interactcolour+ INTERACT[Item].colouredname.upper() +textcolour+ "" ,72,0)  # Due to the upper it removes the colour
             printT(INTERACT[Item].info,72,0.1) #fast version
         if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
-            print "NEED : " + str(INTERACT[Item].need)
-            print "DROP : " + str(INTERACT[Item].drop)
-            print "QUESTFlag : " + str(INTERACT[Item].quest)
-            print "Aesthetic : " + str(INTERACT[Item].aesthetic)
+            printT("NEED : " + str(INTERACT[Item].need))
+            printT("DROP : " + str(INTERACT[Item].drop))
+            printT("QUESTFlag : " + str(INTERACT[Item].quest))
+            printT("Aesthetic : " + str(INTERACT[Item].aesthetic))
 
         if INTERACT[Item].aesthetic and not(GAMESETTINGS['HardcoreMode']):  # if it's aesthetic and not in hardcore mode
             printT("This doesn't look very useful.")
@@ -543,7 +544,7 @@ def Inspect(Item): #Item is the inspect item string not an object
     # other acceptations for weird requests
     # If you try to inspect a person
     elif Item in ENEMIES and ((list(ENEMIES[Item].location) == PLAYER.location)) and (ENEMIES[Item].alive):
-        print "\nIt's rude to stare at people!"
+        printT(" (\S)It's rude to stare at people!")
 
 
     else:
@@ -581,7 +582,7 @@ def Eat(Item):  # Item is a string not an object
             PLAYER.health = max(PLAYER.health, 0)  # prevents clipping bellow 0
             printT(" (\S)You've eaten the " + ITEMS[Item].colouredname + ".")
             # TODO Reimplement health/food indicators with words
-            if GAMEINFO['devmode']: print "\nHEALTH: "+ str(PLAYER.health)+"\n"  # if in DevMode can see stats
+            if GAMEINFO['devmode']: printT(" (\S)HEALTH: "+ str(PLAYER.health)+ " (\S)")  # if in DevMode can see stats
             if PLAYER.health == 0:
                 PLAYER.alive = False
             ITEMS[Item].location = (None, None, None) #used to clear the item location
@@ -593,7 +594,7 @@ def Eat(Item):  # Item is a string not an object
             else:
                 MAPS[x][y][z][dim].removeItem(ITEMS[Item])
         else:
-            print "You can't eat a " + ITEMS[Item].colouredname + "!"
+            printT("You can't eat a " + ITEMS[Item].colouredname + "!")
 
 
     # other acceptations for weird requests
@@ -660,7 +661,7 @@ def DisplayTime(value): # converts and displays the time given seconds, for spee
     Minutes = int(valueM/60)
     valueS = (valueM - Minutes*60)
     Seconds = int(valueS)
-    print "Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds"
+    printT("Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds")
 
 
 

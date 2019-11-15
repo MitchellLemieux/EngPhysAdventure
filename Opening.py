@@ -58,8 +58,8 @@ def StartScreen():
         print "        |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
         print "        |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
         print "       /_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-        print "               \/     \//_____/  " + Fore.RED + "TEXT ADVENTURE" + Fore.LIGHTGREEN_EX +"  \/\/         \/ "
-        print "                             Now with colour!"
+        print "               \/     \//_____/  " + red + "TEXT ADVENTURE" + textcolour +"  \/\/         \/ "
+        #print "                             Now with colour!"
         print "                    Version " +str(GAMEINFO['versionname'])
         print "                    Release Date: " + GAMEINFO['releasedate'] + "                    \n\n"
         print "Play New Game[P]  Load Game[L]   Settings[S]   Disclaimers[D]  Exit[E]"
@@ -107,7 +107,7 @@ def StartScreen():
                 elif Lchoice in loadnamelist:  # if user enters loadname
                     loadscreen = False
                     startmenu = False
-                    CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
+                    PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS = CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
                     print CLEARSCREEN
@@ -260,7 +260,7 @@ def Closing():
     time.sleep(DELAY)
     print "Created by:\nBrendan Fallon, Tyler Kashak, and Mitchell Lemieux  \n"
     time.sleep(DELAY)
-    print "Special Thanks:\nErik and Phil our best playtesters! There's no better quality checkers than you guys.\n"
+    print "Special Thanks:\nErik and Phil our best playtesters! There are no better quality checkers than you guys.\n"
     print "Also thanks to Eric, Brian, Phil, Liam, and Megan\n"
     time.sleep(DELAY)
     print "                A____ ________"

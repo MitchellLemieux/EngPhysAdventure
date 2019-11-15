@@ -34,6 +34,7 @@ questlist = [
     'open the forest',
     'power of the forest',
     # Events
+    'completionist',
     'PAP',
     # Talk to hooded man
     "talk to mysterious man",
@@ -90,7 +91,7 @@ def sidequests():
     # Rules Sign
     if INTERACT["rules sign"].quest and QUESTS['rules sign']:  # Once the sign is read
         MAPS[2][3][1][0].removeInteract(INTERACT["rules sign"])
-        printT( "The sign disapears in a flash of smoke. You look around. Are you still dreaming?")
+        printT( "The sign disappears in a flash of smoke. You look around. Are you still dreaming?")
         QUESTS["rules sign"] = 0
 
     # EBTA All the way Down
@@ -98,10 +99,10 @@ def sidequests():
     if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']:
         # TODO as homework see if there's a way to do this with recursion instead of simulating it
         # TODO put drums here
-        playgame = raw_input(
-            '========================================================================\nWould you like to play? \n').lower()
+        playgame = raw_input('========================================================================\nWould you like to play? \n').lower()
         if playgame == "yes" or playgame == "y":
-            print "You click on the game and it begins in the terminal. The drumming \nintensifies. You're not sure if you made the right choice.\n========================================================================\n\n\n"
+            printT("You click on the game and it begins in the terminal. The drumming intensifies. You're not sure if you made the right choice.")
+            printT("======================================================================== (\S) (\S)")
             import CreativeMode  # this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler)
             QUESTS['EPTA all the way down'] = 0  # Truns off the quest, has to be before the game saves so the quest is ended when you come back
             CreativeMode.saveGame(str(GAMEINFO['layersdeep']))  # saving game to be reloaded after death or won the game
@@ -120,11 +121,13 @@ def sidequests():
                                      GAMEINFO['playername'], time.ctime(GAMEINFO['timestart']),
                                      "--LOG START--"]  # log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
         elif playgame == "no" or playgame == "n":
-            print "You decide against it, fearing the worst. You safely edject the pen, \ndrop it on the floor, and smash it to pieces. Better safe than sorry.\nThe drumming stops.\n========================================================================"
+            printT("You decide against it, fearing the worst. You safely edject the pen, drop it on the floor, and smash it to pieces. Better safe than sorry. (\S)The drumming stops.)")
+            printT("========================================================================")
             QUESTS['EPTA all the way down'] = 0
             GAMEINFO['log'] += [str(playgame)]  # adds your command to the log
         else:
-            print "It was a yes or no question. When you look back the files are gone.\nEven flexpde. Good riddance.\n========================================================================"
+            printT("It was a yes or no question. When you look back the files are gone. (\S)Even flexpde. Good riddance.")
+            printT("========================================================================")
             QUESTS['EPTA all the way down'] = 0
             GAMEINFO['log'] += [str(playgame)]  # adds your command to the log
 
@@ -235,8 +238,8 @@ def ebta_story():
         ENEMIES['dr. minnick'].quest = False
         ENEMIES['dr. minnick'].drop = 'gauss eye'  # this has to be lowercase or it throws a key error - All items are defined as lower case when stored
         ENEMIES['dr. minnick'].need = "faraday's cage"  # this has to be lowercase or it throws a key error
-        ENEMIES['dr. minnick'].info = "I need to complete Kenrick's design... use my glasses to find what we need!"
-        ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds Faraday's Cage to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibiliy to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealled to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My quantum relic along with the two others will give you the power to have your ring returned to you.'\n'Once you have all three you will be able to access your ring from the statue of McMaster.'\n'Good luck.'"
+        ENEMIES['dr. minnick'].info = "I need to complete " + deadpersoncolour+"Kenrick's"+textcolour+" design... use my "+itemcolour+"glasses "+textcolour+"to find what we need!"
+        ENEMIES['dr. minnick'].Sinfo = "'Great! Now we can open the window to the electronics world!'\nYou step back and watch as Dr. Minnick adds " +itemcolour+"Faraday's Cage "+textcolour+"to the oscilloscope.\n'I do not know what this oracle will have to say.'\n'It is just my responsibility to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and Kenrick's oscilloscope glows with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealed to be James Clerk Maxwell!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My "+wincolour+"quantum relic "+textcolour+"along with the two others will give you the power to have your ring returned to you.'\n'"+indicatecolour+"Once you have all three you will be able to access your ring from the "+mapcolour+"statue of McMaster."+textcolour+"'\n'Good luck.'"
         MAPS[3][4][1][0].removeEnemy(ENEMIES['dr. minnick'])
         MAPS[1][7][0][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["minnick get oscilloscope"] = 0
@@ -252,12 +255,10 @@ def ebta_story():
     if QUESTS['end game start'] and not (
             QUESTS["maxwell portal"] or QUESTS['einstein fridge'] or QUESTS["feynman mirror"]):
         MAPS[5][2][1][0].placeEnemy(ENEMIES['hooded man'])
-        print "\nYou feel a strange pull towards the McMaster Statue.\n"
-        MAPS[5][2][1][
-            0].lore = "You approach the statue and notice the mysterious Hooded Man beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
+        printT(" (\S)You feel a strange pull towards the McMaster Statue. (\S)")
+        MAPS[5][2][1][0].lore = "You approach the statue and notice the mysterious "+personcolour+"Hooded Man "+textcolour+"beneath the tree.\nHe notices you approach and stops the incantation he was reciting.\nHe motions for you to come closer."
         MAPS[5][2][1][0].travelled = 1
-        ENEMIES[
-            'hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the Quantum Relics which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is Dr. Cassidy himself!"
+        ENEMIES['hooded man'].info = "'I knew you could do it.'\n'I knew you were the one the prophecy spoke of.'\n'For too long the Quantum Order has kept me in isolation...'\n'They thought I was poisoning the minds of students and did not agree\nwith my methods.'\n'But now you have brought the "+indicatecolour+"Quantum Relics "+textcolour+"which will give me the power\nto shape the faculty as I see fit!'\nThe Hooded Man pulls back his hood to reveal the familiar face you only recall from legend!\nIt is "+personcolour+"Dr. Cassidy himself"+textcolour+"!"
         QUESTS['end game start'] = 0
 
     if not QUESTS['end game start'] and ENEMIES['hooded man'].spoke and QUESTS['the dark lord']:
@@ -267,7 +268,7 @@ def ebta_story():
 
     if ENEMIES['dr. cassidy'].spoke and QUESTS['university man']:
         MAPS[5][2][1][0].placeEnemy(ENEMIES['sir william mcmaster'])
-        ENEMIES['dr. cassidy'].info = "Destroy Sir William McMaster and we can rule this university together!"
+        ENEMIES['dr. cassidy'].info = "Destroy "+personcolour+"Sir William McMaster "+textcolour+"and we can rule this university together!"
         QUESTS['university man'] = 0
 
     if not ENEMIES['dr. cassidy'].alive and not ENEMIES['sir william mcmaster'].alive and QUESTS['neutral balance']:  # Neutral Ending, kill both
@@ -275,11 +276,11 @@ def ebta_story():
         return 3
 
     if not ENEMIES['sir william mcmaster'].alive and QUESTS['create chaos']:
-        ENEMIES['dr. cassidy'].Dinfo = "NO WAIT? WHY? Dr. Cassidy falls, slain beside Sir William McMaster. (\S)You see the Deed to McMaster drop from his pocket."
+        ENEMIES['dr. cassidy'].Dinfo = "NO WAIT? WHY? "+personcolour+"Dr. Cassidy "+textcolour+"falls, slain beside "+personcolour+"Sir William McMaster "+textcolour+". (\S)You see the "+wincolour+"Deed to McMaster"+textcolour+"drop from his pocket."
         ENEMIES['dr. cassidy'].drop = None
         ENEMIES['dr. cassidy'].info = "Take the power you hold in your Iron Ring and destroy the rest of the " \
-                                      "Quantum Order! (\S)This includes Dr. Minnick, Dr. Novog, Dr. Kitai, Dr. knights, " \
-                                      "Dr. Preston', Dr. kleimann, Dr. Buijs, Dr. Lapierre, and Dr. Nagasaki."
+                                      "Quantum Order! (\S)This includes "+personcolour+"Dr. Minnick, "+personcolour+"Dr. Novog"+textcolour+", "+personcolour+"Dr. Kitai"+textcolour+", "+personcolour+"Dr. knights"+textcolour+", " \
+                                      ""+personcolour+"Dr. Preston"+textcolour+", "+personcolour+"Dr. Kleimann"+textcolour+", "+personcolour+"Dr. Buijs"+textcolour+", "+personcolour+"Dr. Lapierre"+textcolour+", and "+personcolour+"Dr. Nagasaki"+textcolour+"."
         DEATHS = [ENEMIES[i].alive for i in
                   ['dr. minnick', 'dr. novog', 'dr. kitai', 'dr. knights', 'dr. preston', 'dr. kleimann', 'dr. buijs',
                    'dr. lapierre', 'dr. nagasaki']]
@@ -290,7 +291,7 @@ def ebta_story():
             return 1  # Dark ending, kill McMaster and all Quantum Order
 
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:  # Light Ending, kill Cassidy
-        ENEMIES['sir william mcmaster'].Dinfo = "NO WAIT? WHY? Sir William McMaster falls, slain beside Dr. Cassidy. (\S)You see the Deed to McMaster drop from his pocket."
+        ENEMIES['sir william mcmaster'].Dinfo = "NO WAIT? WHY? "+personcolour+"Sir William McMaster "+textcolour+" falls, slain beside "+personcolour+"Dr. Cassidy "+textcolour+". (\S)You see the "+wincolour+"Deed to McMaster"+textcolour+" drop from his pocket."
         ENEMIES['sir william mcmaster'].drop = None
         PLAYER.alive = False  # does this so you can get out of the main loop
         return 2
@@ -318,7 +319,8 @@ def events():
     #TODO Make sure this isn't set so it's not always 420
     #insttime = time.gmtime(time.time() - 4 * 60 * 60)  # Used to debug and test the time based events by adding timer
     # print time.asctime(insttime)  # Prints out the ascci time to debug (Also nice to see but breaks immersion)
-    insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
+    if QUESTS['completionist']:
+        insttime = time.localtime()  # Instantaneous struct_time object at the time of reading if you haven't beaten everything
     #print insttime  # for debugging time
     # Thunder, cowboys, Bell, PAP sound
 
@@ -335,6 +337,24 @@ def events():
 
     LINEBREAK = "========================================================================"  # standard display with 72 characters
 
+
+    if ebta_story() and QUESTS['completionist']:
+        enemycompletion = [ENEMIES[i].quest for i in
+                      ['rod the bowler', 'brian the Weeb', 'erik the sk8r', 'brendan fallon', 'liam the gamer',
+                       'steven the first-year', 'paul the janitor','phil the drunk', 'zack the snack','connor the biologist']]
+        interactcompletion = [INTERACT[i].quest for i in
+                      ['garbage can', 'rca tv', 'sharpxchange', 'rules sign', 'lenovo laptop"', 'coat of arms',
+                       'mouse','gate of the forest']]
+
+        if (True in enemycompletion) and (True in interactcompletion):
+            pass
+        else:
+            printT("YOU DID IT!!!! YOU 100% THE GAME!")
+            AsciiArt.Acheivement()
+            gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
+            insttime = time.gmtime(gmfourtwenty)  # Sets time to constantly 4:20pm time object
+            QUESTS['completionist'] = 0
+
     # Setting up the Event
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)
     if (insttime.tm_hour == 4 or insttime.tm_hour == 16) and insttime.tm_min == 20 and QUESTS["PAP"]:
@@ -347,7 +367,7 @@ def events():
                                 "Where the way was blocked before is a melted hole just big enough for you to fit through. You expect to enter the " \
                                 "hallway but see all the interior walls have been removed. All that remains are stone walls and boarded up windows. " \
                                 "Textbooks and broken lab equipment litter the ground. You turn the corner to the lecture hall where you would " \
-                                "fall asleep in 8:30 1D04 lecture. Glowing red hot in the centre of the room is the Pack-a-Punch Machine! " \
+                                "fall asleep in the 8:30 1D04 lecture. Glowing red hot in the centre of the room is the Pack-a-Punch Machine! " \
                                 "(\S) (\S) Enscribed on the side in graffiti is 'BLAZE IT'."
         MAPS[2][4][3][0].travelled = 1
         MAPS[2][4][3][0].placeInteract(INTERACT["pack-a-punch"])
@@ -384,14 +404,14 @@ def events():
                 else:
                     sacrificechoice = input('Choose the number of the item you want to sacrifice: ')
                     if sacrificechoice <= 0 or sacrificechoice > k + 1:
-                        print "Please enter a valid option."
+                        print "Please enter a valid option!"
                         sacrificechoice = 0
                     elif upgradechoice == sacrificechoice:
-                        print "Please enter a valid option"
+                        print "Please enter a valid option!"
                         sacrificechoice = 0
 
             except:
-                print "Please input a number selection"
+                print "Please input a number selection!"
 
             # Back Options Options
             if upgradechoice == k + 1:  # if you choose back on upgrade choice screen the loop exits
@@ -416,9 +436,7 @@ def events():
                     elif k == sacrificechoice:
                         sacrifice = PLAYER.inv[i]  # copying object to a temp variable
 
-                if raw_input(
-                        "Upgrading: " + upgrade.name + "\nSacrificing: " + sacrifice.name + "\n\nThis cannot be undone. \nType Y if this is correct:").lower() in [
-                    "y", 'yes', '1']:
+                if raw_input("Upgrading: " + upgrade.name + "\nSacrificing: " + sacrifice.name + "\n\nThis cannot be undone. \nType Y if this is correct:").lower() in ["y", 'yes', '1']:
                     pass  # if they're sure they want to do something go foward
 # The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
                 else:  # goes back to the loop and start again
@@ -429,8 +447,9 @@ def events():
                 PLAYER.drop(upgrade)  # Item is removed from the player
                 PLAYER.drop(sacrifice)  # Item is removed from the player
                 # Upgrading the one item based on the sacrifice
-                print "The Machine Reads: 'Pack-a-Punching Please Wait'"
+                printT("The Machine Reads: 'Pack-a-Punching Please Wait'")
                 upgrade.name = "Better " + upgrade.name  # Adding Better to left side of name each time it's upgraded
+                upgrade.colouredname = "" +wincolour+"Better " +itemcolour+ upgrade.name +textcolour+""  # Adding Better to left side of name each time it's upgraded
                 sumUStats = upgrade.stats[0] + upgrade.stats[1] + upgrade.stats[
                     2]  # taking the sum of the stats of each item
                 sumSStats = sacrifice.stats[0] + sacrifice.stats[1] + sacrifice.stats[2]
@@ -449,7 +468,7 @@ def events():
                                      upgrade.stats[2] + sacrifice.stats[2])  # replacing stats tuple
 
                 MAPS[2][4][3][0].placeItem(upgrade)  # Placing the Upgraded Item on the ground
-                print "The Pack-a-Punch wirls and screaches, glowing bright, before spitting out the " + upgrade.name + " onto the ground!"
+                printT("The "+interactcolour+"Pack-a-Punch "+textcolour+"wirls and screaches, glowing bright, before spitting out the " + upgrade.colouredname + " onto the ground!")
                 # TODO add pack-a-punch sound
 
         # Resetting quest flag so you don't always inspect it once you enter the room
@@ -460,7 +479,8 @@ def events():
     # Resetting the Event
     elif (QUESTS["PAP"] == 0) and (not (PLAYER.location == (2, 4, 3, 0))) and (not (insttime.tm_min == 20)):
         QUESTS["PAP"] = 1
-        print "DONT BLAZE IT"
+
+        #print "DONT BLAZE IT"
         MAPS[2][4][3][0].info = "~3RD FLOOR JHE Stairs~:\nYou can only go back down the stairs."
         MAPS[2][4][3][0].lore = "You see solid block of sheet metal covering the door. Was it always this way?"
         MAPS[2][4][3][0].travelled = 1
@@ -470,8 +490,8 @@ def events():
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)
     if (insttime.tm_hour == 10 or insttime.tm_hour == 22) and insttime.tm_min == 30:
         if not (PLAYER.inv['body'] == EMPTYBODY):  # If  your body isn't empty
-            print "10:30 NO SHIRTY"
-            print "You feel compelled to take your shirt off and drop it on the ground"
+            printT("" + wincolour+"10:30 "+textcolour+"NO SHIRTY")
+            print "You feel compelled to take your "+indicatecolour+"shirt "+losecolour+"off "+textcolour+"and drop it on the ground"
             # Drops the item you have on you, don't forget it has to be name of the item and lowercase.
             # Also can't be PLAYER.drop function because then it doesn't go onto the ground
             Drop(PLAYER.inv['body'].name.lower())
