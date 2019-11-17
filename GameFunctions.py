@@ -651,7 +651,7 @@ def SpellCheck(Word,Psblties): #Spellchecks words in the background to check thi
     return Psblties[index]
 
 def DisplayTime(value): # converts and displays the time given seconds, for speedrunning
-    '''From seconds to Days;Hours:Minutes;Seconds'''
+    '''From seconds to Days;Hours:Minutes;Seconds;Milliseconds'''
     # Figured out there is an effecient way to do this using time module but whatev.
     valueD = (((value/24)/60)/60)
     Days = int (valueD)
@@ -661,9 +661,83 @@ def DisplayTime(value): # converts and displays the time given seconds, for spee
     Minutes = int(valueM/60)
     valueS = (valueM - Minutes*60)
     Seconds = int(valueS)
-    printT("Your run-time was: ", Days,"Days; ",Hours,"Hours: ",Minutes,"Minutes; ",Seconds,"Seconds")
+    valueMS = (valueM - Seconds)
+    Milliseconds = valueMS*1000
+    printT("Your run-time was: (\S)"+ str(Days) + " Days; " + str(Hours)+ " Hours; " + str(Minutes) + " Minutes; " + str(Seconds) + " Seconds; " + str(Milliseconds) + " Milliseconds")
+
+# this Save and Load is written in GameFunctions (instead of GameClasses where it should be) due to import order and undefined of global variables
+
+def save_game(savename):
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER #The main character. player is an object instance of class character.
+    global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
+
+    # this saves current state to csv file, disabled by default for releasing exe
+    # TODO Make these files into the loading with encryption
+    # TODO Turn off CSV saves before compiling
+    #CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+
+    logGame(GAMEINFO['log'])  # logs the data to be submitted
+
+    # Data dictionary for saving
+    DATA = {"PLAYER": PLAYER, "ITEMS": ITEMS, "MAPS": MAPS,"INTERACT":INTERACT,"QUESTS":QUESTS,"ENEMIES":ENEMIES,"GAMEINFO":GAMEINFO,"GAMESETTINGS":GAMESETTINGS}
+
+    savegamepath = GAMEINFO['savepath'] + "SaveFile " + savename + ".plp"
+
+    pickle_game(DATA,savegamepath)  # this actually pickles the data to save it
 
 
+    return
+
+
+def load_game(loadname):
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER #The main character. player is an object instance of class character.
+    global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
+
+    x,y,z,dim = PLAYER.location
+    print MAPS[x][y][z][dim].name
+
+    loadgamepath = GAMEINFO['savepath'] + "SaveFile " + loadname + ".plp"
+
+    DATA = unpickle_game(loadgamepath)  # this unpickles the game to get the data dictionary
+
+    # Overwritting the current dictionaries
+    MAPS = DATA["MAPS"]  # MAPS loads first because least likely to have changed
+    PLAYER = DATA["PLAYER"]
+    ITEMS = DATA["ITEMS"]
+    INTERACT = DATA["INTERACT"]
+    QUESTS = DATA["QUESTS"]
+    ENEMIES = DATA["ENEMIES"]
+    GAMEINFO = DATA["GAMEINFO"]
+    GAMESETTINGS = DATA["GAMESETTINGS"]
+
+    print PLAYER.inv['body'].name
+
+    GAMEINFO['timestart'] = time.time()  # reset instance start time
+
+    x,y,z,dim = PLAYER.location
+    print MAPS[x][y][z][dim].name
+    MAPS[x][y][z][dim].search(MAPS,DIMENSIONS,True)
+
+    # HAVE TO HAVE THESE RETURN INTO THE SCOPE. I HATE GLOBAL VARIABLES ONLY USE PASS BY VALUE EVER
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
 ###this function definitions were added for the compiler so they don't have to be referenced

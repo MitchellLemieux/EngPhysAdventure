@@ -4,7 +4,7 @@ import time
 import playsound  # Used for openning sound and star wars openning
 import os
 import fnmatch  # Used to fins the savefiles and display them
-import CreativeMode
+from GameFunctions import *  # used for save file loading
 from printT import *
 from Colour import *
 
@@ -22,9 +22,19 @@ LINEBREAK = "===================================================================
 #eventually speed run, hardcore mode, dev mode, iron man eventually
 #all of the settings individually not grouped into modes
 def StartScreen():
-    global GAMEINFO
-    global GAMESETTINGS
-    print textcolour # This sets all text color to light green
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
+
+    print textcolour  # This sets all text color
 
     if GAMEINFO['devmode']:
         pass  # If in dev mode do nothing and skip intro
@@ -107,14 +117,14 @@ def StartScreen():
                 elif Lchoice in loadnamelist:  # if user enters loadname
                     loadscreen = False
                     startmenu = False
-                    PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS = CreativeMode.loadGame(Lchoice)  # loads in the savefile global variables
+                    MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(Lchoice)  # loads in the savefile global variables
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
                     print CLEARSCREEN
                 elif Lchoice in loadnumberlist:  # if user enters loadnumber has to lookup the load name
                     loadscreen = False
                     startmenu = False
-                    CreativeMode.loadGame(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
+                    MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
                     GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
 

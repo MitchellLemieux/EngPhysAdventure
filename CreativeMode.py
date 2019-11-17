@@ -7,146 +7,132 @@ from StartUp import XRANGE, YRANGE, ZRANGE, DRANGE #Importing the map bound vari
 import CSVSaves
 from Colour import *
 
-
-def saveGame(savename):
-    global PLAYER
-    global ITEMS
-    global MAPS
-    global ENEMIES
-    global INTERACT
-    global QUESTS
-    global GAMEINFO
-    global GAMESETTINGS
-
-    # this saves current state to csv file, disabled by default for releasing exe
-    # TODO Make these files into the loading with encryption
-    # TODO Turn off CSV saves before compiling
-    #CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
-
-    f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".plp", "w+")  # Saved as .plp for obfuscation purposes
-    x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
-##    types in x
-##    <type 'instance'>
-##    <type 'dict'>
-##    <type 'tuple'>
-##    <type 'dict'>
-##    <type 'dict'>
-##    <type 'dict'>
-##    <type 'dict'>
-##    <type 'dict'>
-    pickle.dump(x, f) #pickles the list of gamedata to the save file
-    f.close()
-
-    return
-
-    
-    
-def loadGame(loadname):
-    global PLAYER
-    global ITEMS
-    global MAPS
-    global ENEMIES
-    global INTERACT
-    global QUESTS
-    global GAMEINFO
-    global GAMESETTINGS
+#Obsolete and moved to GameCLasses+Gamefuntions because pickling needs to be where custom classes are defined
+# def saveGame(savename):
+#     global PLAYER
+#     global ITEMS
+#     global MAPS
+#     global ENEMIES
+#     global INTERACT
+#     global QUESTS
+#     global GAMEINFO
+#     global GAMESETTINGS
+#
+#     # this saves current state to csv file, disabled by default for releasing exe
+#     # TODO Make these files into the loading with encryption
+#     # TODO Turn off CSV saves before compiling
+#     #CSVSaves.entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS)
+#
+#     f = open(GAMEINFO['savepath'] + "SaveFile " + savename + ".plp", "w+")  # Saved as .plp for obfuscation purposes
+#     x = [PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS] # puts all info into a list to be saved
+# ##    types in x
+# ##    <type 'instance'>
+# ##    <type 'dict'>
+# ##    <type 'tuple'>
+# ##    <type 'dict'>
+# ##    <type 'dict'>
+# ##    <type 'dict'>
+# ##    <type 'dict'>
+# ##    <type 'dict'>
+#     pickle.dump(x, f) #pickles the list of gamedata to the save file
+#     f.close()
+#
+#     return
 
 
-    try:
-        loadscript = GAMEINFO['savepath'] +"MetaChache "+loadname +".plp"  # Saved as .plp for obfuscation purposes
-
-        try:
-            with open(loadscript, 'r') as f:
-                GAMEINFO['scriptdata'] = f.readlines()  # reads in data seperated by newline into a list
-            f.close()
-            for i in range(len(GAMEINFO['scriptdata'])):  # removing the newlines from the script
-                GAMEINFO['scriptdata'][i] = GAMEINFO['scriptdata'][i].rstrip("\n")
-            #print GAMEINFO['scriptdata']  # Debug print
-        except:
-            printT("Theres no script with name " + indicatecolour + wordlist[1] + textcolour + " in the CWD!")
-
-
-        # f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".plp","r+")  # Saved as .plp for obfuscation purposes
-        # save = pickle.load(f)
-        # f.close()
-        # #seperates the list
-        # loadplayer = save[0]
-        # loaditems = save[1]
-        # loadmap = save[2]
-        # loadenemy = save[3]
-        # loadinter = save[4]
-        # loadquest = save[5]
-        # loadinfo = save[6]
-        # loadsettings = save[7]
-        #
-        #
-        # for info in GAMEINFO: #when itterating through list the itterating variable is the string of the key
-        #     GAMEINFO[info] = loadinfo[info]
-        # PLAYER.__dict__ = loadplayer.__dict__
-        # for item in ITEMS:
-        #     ITEMS[item].__dict__ = loaditems[item].__dict__ #assignment better when no subitems? .__dict for when there is
-        # for enemy in ENEMIES:  #.__dict__ removed on these and it works?
-        #     ENEMIES[enemy].__dict__ = loadenemy[enemy].__dict__
-        # for inter in INTERACT:
-        #     INTERACT[inter].__dict__ = loadinter[inter].__dict__
-        # for quest in QUESTS:
-        #     QUESTS[quest] = loadquest[quest]  # doesn't need .__dict___ for some reason
-        # for setting in GAMESETTINGS:
-        #     GAMESETTINGS[setting] = loadsettings[setting]  # doesn't need .__dict___ for some reason
-        # #for some reason putting MAPS load below these other ones fixed a bunch of bugs
-        # for x in range(XRANGE):
-        #     for y in range(YRANGE):
-        #         for z in range(ZRANGE):
-        #             for dim in range (DRANGE):
-        #                 if MAPS[x][y][z][dim]:  # There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
-        #                     MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
-        #                     # Attempting to load in the map items to stop ghosting
-        #                     # MAPS[x][y][z][dim].items = loadmap[x][y][z][dim].items
-        #                     # MAPS[x][y][z][dim].ENEMY = loadmap[x][y][z][dim].ENEMY
-        #                     # MAPS[x][y][z][dim].walls = loadmap[x][y][z][dim].walls
-
-
-        GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
-        GAMEINFO['log'].append("loadgame") #adds the load game command to the log
-
-        
-        #Displayes the current place info again to show it's been loaded
-        CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
-        printT("========================================================================")
-
-        # searches and prints the information with spawn set to true to print "You wake up in"
-        CurrentPlace.search(MAPS, DIMENSIONS,True)
-
-        #YOU HAVE TO USE THIS DARN .__dict___ thing to copy the object atributes https://stackoverflow.com/questions/36243488/how-can-i-overwrite-an-object-in-python
-        #This is ineffecient but works. I think main problem I had is loading where the loaded objects are a new memory location but the game still references old locations
-        #It's best to reference things by name  
-        #Acording to this lists make new functions: http://interactivepython.org/runestone/static/CS152f17/Lists/ObjectsandReferences.html
-        #use (a is b) to see if a and b refer to the same memory location
-        return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
-
-    except IOError:
-        print "There is no file named SaveFile " + loadname + ". Please try again."
-        return
-    except KeyError as E:
-        print E.args[0]
-        # TODO finish this for simple dictionary changes by using E.args[0] as the key to remove
-        printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvenience.")
-        printT("At this time we can't update the file. Some things might be broken")
-        x, y, z, dim = PLAYER.location
-        MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
-
-        return PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS
-
-    except AttributeError:  # dictionary = key error (ITEMS, ENEMIES, INTERACTS, quest, gameinfo), atribute error = Map error or object attribute
-        if GAMEINFO['version'] > loadinfo['version']:
-            print "This is an old version of the game. At this time we don't have file updaters. Sorry!"
-        else:
-            print "Something went wrong with the loading! Things might be broken! We're sorry!"
-
-        #updateSave(save), function isn't done
-        x, y, z, dim = PLAYER.location
-        MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
-        return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
+# def loadGame(loadname):
+#     global PLAYER
+#     global ITEMS
+#     global MAPS
+#     global ENEMIES
+#     global INTERACT
+#     global QUESTS
+#     global GAMEINFO
+#     global GAMESETTINGS
+#
+#
+#     try:
+#         # f = open(GAMEINFO['savepath'] +"SaveFile "+loadname +".plp","r+")  # Saved as .plp for obfuscation purposes
+#         # save = pickle.load(f)
+#         # f.close()
+#         # #seperates the list
+#         # loadplayer = save[0]
+#         # loaditems = save[1]
+#         # loadmap = save[2]
+#         # loadenemy = save[3]
+#         # loadinter = save[4]
+#         # loadquest = save[5]
+#         # loadinfo = save[6]
+#         # loadsettings = save[7]
+#         #
+#         #
+#         # for info in GAMEINFO: #when itterating through list the itterating variable is the string of the key
+#         #     GAMEINFO[info] = loadinfo[info]
+#         # PLAYER.__dict__ = loadplayer.__dict__
+#         # for item in ITEMS:
+#         #     ITEMS[item].__dict__ = loaditems[item].__dict__ #assignment better when no subitems? .__dict for when there is
+#         # for enemy in ENEMIES:  #.__dict__ removed on these and it works?
+#         #     ENEMIES[enemy].__dict__ = loadenemy[enemy].__dict__
+#         # for inter in INTERACT:
+#         #     INTERACT[inter].__dict__ = loadinter[inter].__dict__
+#         # for quest in QUESTS:
+#         #     QUESTS[quest] = loadquest[quest]  # doesn't need .__dict___ for some reason
+#         # for setting in GAMESETTINGS:
+#         #     GAMESETTINGS[setting] = loadsettings[setting]  # doesn't need .__dict___ for some reason
+#         # #for some reason putting MAPS load below these other ones fixed a bunch of bugs
+#         # for x in range(XRANGE):
+#         #     for y in range(YRANGE):
+#         #         for z in range(ZRANGE):
+#         #             for dim in range (DRANGE):
+#         #                 if MAPS[x][y][z][dim]:  # There are different objects in 1 vs the other so need to replace object in each list with the new one of reference
+#         #                     MAPS[x][y][z][dim].__dict__ = loadmap[x][y][z][dim].__dict__
+#         #                     # Attempting to load in the map items to stop ghosting
+#         #                     # MAPS[x][y][z][dim].items = loadmap[x][y][z][dim].items
+#         #                     # MAPS[x][y][z][dim].ENEMY = loadmap[x][y][z][dim].ENEMY
+#         #                     # MAPS[x][y][z][dim].walls = loadmap[x][y][z][dim].walls
+#
+#
+#         GAMEINFO['commandcount'] += 1 #+1 command to load the game because it doesn't count the loadgame command
+#         GAMEINFO['log'].append("loadgame") #adds the load game command to the log
+#
+#
+#         #Displayes the current place info again to show it's been loaded
+#         CurrentPlace = MAPS[PLAYER.location[0]][PLAYER.location[1]][PLAYER.location[2]][PLAYER.location[3]]
+#         printT("========================================================================")
+#
+#         # searches and prints the information with spawn set to true to print "You wake up in"
+#         CurrentPlace.search(MAPS, DIMENSIONS,True)
+#
+#         #YOU HAVE TO USE THIS DARN .__dict___ thing to copy the object atributes https://stackoverflow.com/questions/36243488/how-can-i-overwrite-an-object-in-python
+#         #This is ineffecient but works. I think main problem I had is loading where the loaded objects are a new memory location but the game still references old locations
+#         #It's best to reference things by name
+#         #Acording to this lists make new functions: http://interactivepython.org/runestone/static/CS152f17/Lists/ObjectsandReferences.html
+#         #use (a is b) to see if a and b refer to the same memory location
+#         return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
+#
+#     except IOError:
+#         print "There is no file named SaveFile " + loadname + ". Please try again."
+#         return
+#     except KeyError as E:
+#         print E.args[0]
+#         # TODO finish this for simple dictionary changes by using E.args[0] as the key to remove
+#         printT("There is a mismatch between the objects in the game. You don't need to do anything but the game may not have loaded properly! We're sorry for any inconvenience.")
+#         printT("At this time we can't update the file. Some things might be broken")
+#         x, y, z, dim = PLAYER.location
+#         MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
+#
+#         return PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GAMESETTINGS
+#
+#     except AttributeError:  # dictionary = key error (ITEMS, ENEMIES, INTERACTS, quest, gameinfo), atribute error = Map error or object attribute
+#         if GAMEINFO['version'] > loadinfo['version']:
+#             print "This is an old version of the game. At this time we don't have file updaters. Sorry!"
+#         else:
+#             print "Something went wrong with the loading! Things might be broken! We're sorry!"
+#
+#         #updateSave(save), function isn't done
+#         x, y, z, dim = PLAYER.location
+#         MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,True)
+#         return PLAYER,ITEMS,MAPS,ENEMIES,INTERACT,QUESTS,GAMEINFO, GAMESETTINGS
 
 
 

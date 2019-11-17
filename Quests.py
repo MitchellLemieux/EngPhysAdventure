@@ -76,25 +76,32 @@ for quest in questlist:
 
 
 def sidequests():
-    global PLAYER
-    global QUESTS
-    global ITEMS
-    global ENEMIES
-    global INTERACT
-    global MAPS
-    # Side Quests
-    # Secret Spaces
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
+
+
+    # --- Side Quests ---
+    # -- Secret Spaces --
     if INTERACT['coat of arms'].quest and QUESTS["secret spaces"]:  # Unlocks the secret space once you get the scroll
         MAPS[0][2][1][0].removeWall("d")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         QUESTS["secret spaces"] = 0
 
-    # Rules Sign
+    # -- Rules Sign --
     if INTERACT["rules sign"].quest and QUESTS['rules sign']:  # Once the sign is read
         MAPS[2][3][1][0].removeInteract(INTERACT["rules sign"])
         printT( "The sign disappears in a flash of smoke. You look around. Are you still dreaming?")
         QUESTS["rules sign"] = 0
 
-    # EBTA All the way Down
+    # -- EBTA All the way Down --
     # when you put the pen in the laptop it opens the thing
     if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']:
         # TODO as homework see if there's a way to do this with recursion instead of simulating it
@@ -105,12 +112,12 @@ def sidequests():
             printT("======================================================================== (\S) (\S)")
             import CreativeMode  # this is imported here not at the top to avoid recursive import errors (show up as global names not being defined in the compiler)
             QUESTS['EPTA all the way down'] = 0  # Truns off the quest, has to be before the game saves so the quest is ended when you come back
-            CreativeMode.saveGame(str(GAMEINFO['layersdeep']))  # saving game to be reloaded after death or won the game
+            save_game(str(GAMEINFO['layersdeep']))  # saving game to be reloaded after death or won the game
             log = GAMEINFO['log']  # keeps the log as a temporary variable to keep a running log in the nested game
             Opening.Opening()
             newplayername = raw_input("First, what is your name?\n")
             layers = GAMEINFO['layersdeep']  # saves layersdeep to a temporary variable for after the load
-            CreativeMode.loadGame("basegame")  # should display the exact start
+            MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game("basegame")  # should display the exact start
             GAMEINFO['layersdeep'] = layers + 1   # increments the global layers deep because you're now in a lower level, using the memory of the local variable
 
             GAMEINFO['playername'] = PLAYER.name = newplayername  # this is done for the log
@@ -351,6 +358,7 @@ def events():
         else:
             printT("YOU DID IT!!!! YOU 100% THE GAME!")
             AsciiArt.Acheivement()
+            save_game(GAMEINFO['playername'] + " 100 Percent")  # saves all data to later be submited, different from the main save file
             gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
             insttime = time.gmtime(gmfourtwenty)  # Sets time to constantly 4:20pm time object
             QUESTS['completionist'] = 0

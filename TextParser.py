@@ -150,7 +150,19 @@ shortcutprint = "Shortcuts(\S)blank space = look around(\S)a = attack(\S)b = bac
                         "(\S) dr 1 = drops the thing in your head slot"
 
 
-def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTINGS):
+def Parser(command):
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER #The main character. player is an object instance of class character.
+    global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
+
     GAMEINFO['log'].append(command)
     # this splits it at the first spacing making it the first verb and then the rest as the object noun
     # CURRENTLY the rest of the parser calls simply a function based on the verb and passes it the object noun name
@@ -184,6 +196,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
             GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
         elif verb in [ 's','search', 'look']:
             x, y, z, dim = PLAYER.location
+            print MAPS[x][y][z][dim].name
             MAPS[x][y][z][dim].search(MAPS, DIMENSIONS)
 
         # TODO if word based description: re-enable stats and remove from DEVVERBs
@@ -197,13 +210,13 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
             GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
             logGame(GAMEINFO['log'])  # logs the game when you save it
-            CreativeMode.saveGame(GAMEINFO['playername'])  # saves all data
+            save_game(GAMEINFO['playername'])  # saves all data
             print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
         elif verb == '/loadgame':  # this function loads the game off of the save file. Was having problems with loading
-            CreativeMode.loadGame(GAMEINFO['playername'])  # loads in the savefile global variables
+            MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(GAMEINFO['playername'])  # loads in the savefile global variables
             GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         elif verb == '/restart':  # this restarts the game to the base game
-            CreativeMode.loadGame("basegame")  # loads in the savefile global variables
+            MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game("basegame")  # loads in the savefile global variables
             GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         elif verb == '/420e69':  # This toggles game to dev mode for debugging in game
             GAMEINFO['devmode'] = int(not (GAMEINFO['devmode']))
@@ -214,14 +227,11 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
         # Now at least for normal people you can't metagame by saving and loading files
         elif verb in ['exit', 'leave', 'quit', "die"]:
             # A FULL Copy of /savegame function bassically
-            if raw_input(
-                    "\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in [
-                "y", 'yes', 'yeah']:
-                GAMEINFO['runtime'] += (time.time() - GAMEINFO[
-                    'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
+            if raw_input("\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+                GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
                 logGame(GAMEINFO['log'])  # logs the game when you save it
-                CreativeMode.saveGame(GAMEINFO['playername'])  # saves all data
+                save_game(GAMEINFO['playername'])  # saves all data
                 # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
                 raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
                 exit()
@@ -255,7 +265,7 @@ def Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTIN
                 printT(key)
                 printT(str(GAMESETTINGS[key]))
         elif verb == '/player':
-            print PLAYER
+            PLAYER.show_attributes()
         elif verb == '/maps':
             print MAPS
         elif verb == '/enemies':

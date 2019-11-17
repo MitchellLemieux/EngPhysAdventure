@@ -17,6 +17,7 @@ import CreativeMode #don't import * from these b.c. these pull global variables 
 import Quests  # Used to separate quest/event functions
 import TextParser  # Used to separate text interpretation and commands
 from Colour import *
+from TextParser import *
 
 import MapDisplay  # Used to separate minim-ap display
 
@@ -79,7 +80,7 @@ def Setup():
 
     
     GAMEINFO['gamestart'] = time.time()  # Gives the local start date of the game in seconds since epoch of 1970
-    CreativeMode.saveGame("basegame")  # Use this to get a base state newgame, keep it in each time so don't have to worry about updating
+    save_game("basegame")  # Use this to get a base state newgame, keep it in each time so don't have to worry about updating
     # This tyler Kashak has to be after the basegame save or else it will always revert the base game to you spawning as Tyler
     # Enables this ULTRA character is name is Tyler Kashak or in DevMode
     if PLAYER.name == "Tyler Kashak" or GAMEINFO['devmode']: #He realizes he's the main character and can do anything he wants
@@ -99,7 +100,7 @@ def Setup():
     
 
 def Main():
-    # These are all the global dictionaries/objects in the game
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
     global PLAYER #The main character. player is an object instance of class character.
     global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
     global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
@@ -107,8 +108,9 @@ def Main():
     global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
     global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
     global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
-    #global SETTINGS #TODO will import the settings later
-    #global keyword brings in a global variable into a function and allows it to be altered
+    global GAMESETTINGS # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
 
 
 
@@ -129,7 +131,7 @@ def Main():
         if GAMESETTINGS['HardcoreMode']: print CLEARSCREEN
 
         # Sends the command text to the text parser to be interpreted and action to be done
-        TextParser.Parser(command,PLAYER,ITEMS,MAPS,INTERACT,QUESTS,ENEMIES,GAMEINFO,GAMESETTINGS)
+        Parser(command)
 
         GAMEINFO['commandcount'] += 1  # increments the command count after every command but doesn't print
         #print LINEBREAK  # Got rid of this bottom linebreak to hopefully have the current situation more clear
@@ -143,7 +145,7 @@ def Main():
             print LINEBREAK
             printT(" (\S)You finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?")
             log = GAMEINFO['log'] #sets up a temporary variable to pass the log back up a layer
-            CreativeMode.loadGame(str(GAMEINFO['layersdeep']-1))
+            MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(str(GAMEINFO['layersdeep']-1))
             GAMEINFO['log'] = log + ["--Back in layer: " + str(GAMEINFO['layersdeep']) +"---"] #overwrites it to keep a running tab and says what layer we're in 
             #Doesn't reset the GAMEINFO['timestart'] as the runtime will included the time in the nested function
             #TODO delete the save file you're coming out of
@@ -151,8 +153,18 @@ def Main():
     End() #calls the end function in main so that the game can continue its loop structure
 
 def End():
-    global GAMEINFO
-    global PLAYER
+    # Anywhere where a loadgame happens you need all the global variables
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
+
+    save_game(GAMEINFO['playername'])  # saves all data RIGHT away so they can't restart when they die
+
     GAMEINFO['runtime'] = GAMEINFO['runtime'] + (time.time()-GAMEINFO['timestart']) #calculates total time you've been playing by adding your loaded runtime to your instance runtime (end time - start time)
     GAMEINFO['log'] = GAMEINFO['log'] + ["--END OF LOG--", "Stepcount: "+str(GAMEINFO['stepcount']), "Command Count: " + str(GAMEINFO['commandcount']),
       "Run Time: " + str(GAMEINFO['runtime']), "--Character STATS--",str((PLAYER.location[0],PLAYER.location[1],PLAYER.location[2], PLAYER.location[3])),
@@ -160,16 +172,12 @@ def End():
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
     #TODO, condense this story display code
-    if Quests.ebta_story()== 0:  # player dies and that's how they're out of the loop
+    if Quests.ebta_story()== 0:  # player died and that's how they're out of the loop
         print LINEBREAK
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
         if GAMESETTINGS['SpeedRun']: printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) # writes the log file
-        if raw_input("Thanks for playing!! Better luck next time!\nType 'R' to restart the game, anything else to exit:\n").lower() =='r': #lets the player restart the game
-            CreativeMode.loadGame("basegame") #loads in the savefile global variables
-            GAMEINFO['timestart'] = time.time() #reset instance start time
-            Main() #re-enters the main loop
-        return # returns the game so you don't get the final dialog
+        printT("Thanks for playing!! Better luck next time! (\S)")#lets the player restart the game
     else:
         raw_input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
@@ -183,19 +191,46 @@ def End():
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         if GAMESETTINGS['SpeedRun']:printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) #logs the data to be submitted
-        CreativeMode.saveGame(GAMEINFO['playername'] + " Winner") #saves all data to later be submited, different from the main save file
+        save_game(GAMEINFO['playername'] + " Winner") #saves all data to later be submited, different from the main save file
         Opening.Closing()  # plays the closing
-        endchoice = raw_input("Thanks for playing!!\nType 'C' to continue, 'R' to restart, anything else will exit: ").lower() #this input is to hold the screen until the player decides what to do
-        if endchoice == "c":
-            PLAYER.alive = True
-            print LINEBREAK
-            QUESTS['restored order'] = 0  # turn this off so you can continue playing the game without the quest redoing
-            QUESTS['create chaos'] = 0
-            Main()  # returns to the main (hopefully in the same state)
-        if endchoice == "r":
-            CreativeMode.loadGame("basegame") #loads in the savefile global variables
-            GAMEINFO['timestart'] = time.time() #reset local variable starttime to current time
-            Main() #re-enters the main loop
+        printT("Thanks for playing!!! (\S)")
+    endchoice = ""
+    while not endchoice:  # death or ending selection screen
+        printT(" (\S)Continue Playing[C]   Restart Game[R]  Exit[E]")
+        #printT(" (\S)Continue Playing[C]   Restart Game[R]  Main Menu Return[M]  Exit[E]")
+        endchoice = raw_input("Choose what you want to do: ").lower().strip() #this input is to hold the screen until the player decides what to do
+        if (Quests.ebta_story() == 0) and (endchoice in ["c","continue playing","continue","play"]):
+            printT("You can't continue because you're dead!")
+            endchoice = ""
+        #elif endchoice not in ["c", "r", "m", "e", "continue playing", "continue", "play", "restart game", "restart","main menu return", "main menu", "menu return", "main", "menu", "return", "exit"]:
+        elif endchoice not in ["c","r","m","e","continue playing","continue","play","restart game","restart","exit"]:
+            printT("Please choice a valid option!")
+            endchoice = ""
+    if endchoice in ["c","continue playing","continue","play"]:
+        PLAYER.alive = True
+        print LINEBREAK
+        QUESTS['restored order'] = 0  # turn this off so you can continue playing the game without the quest redoing
+        QUESTS['create chaos'] = 0
+        Main()  # returns to the main (hopefully in the same state)
+    elif endchoice in ["r","restart game","restart"]:
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game("basegame") #loads in the savefile global variables
+        GAMEINFO['timestart'] = time.time() #reset local variable starttime to current time
+        Main() #re-enters the main loop
+    # No return to main menu implemented due to bad looping structure
+    # elif endchoice in ["m","main menu return","main menu","menu return","main","menu","return"]:
+    #     Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
+    #     Setup()
+    #     Main()
+    elif endchoice in ["e","exit"]:
+        if raw_input("\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+            GAMEINFO['runtime'] += (time.time() - GAMEINFO[
+                'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
+            GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
+            logGame(GAMEINFO['log'])  # logs the game when you save it
+            save_game(GAMEINFO['playername'])  # saves all data
+            # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
+            raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
+            exit()
     return
 
 
@@ -250,7 +285,7 @@ else:  # Dev mode not enabled so error catching
         #raise os._exit(0)
     except:
         # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
-        CreativeMode.saveGame(GAMEINFO['playername'] + " AutoSave") #saves all data
+        save_game(GAMEINFO['playername'] + " AutoSave") #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
         printT("Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave")
         print "\nYour game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"

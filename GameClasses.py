@@ -8,6 +8,10 @@ import operator
 from random import *
 from printT import * #import it all
 from Colour import *
+try:
+    import cPickle as pickle
+except ImportError:  # python 3.x
+    import pickle
 
 
 def six_tuple_add(a, b, c, d, e, f):  # adds 6 tuples element-wise, used to calculate stats of character. If only need n elements added put (0,0,0) for 6-n arguments
@@ -96,11 +100,28 @@ class Character:
         return drop
 
     def ShowInventory(self):
+
         Head = "head\t\t"+self.inv['head'].name+"\t"+str(self.inv['head'].stats)+"\n"
         Body = "body\t\t"+self.inv['body'].name+"\t"+str(self.inv['body'].stats)+"\n"
         Hand = "hand\t\t"+self.inv['hand'].name+"\t"+str(self.inv['hand'].stats)+"\n"
         OffHand = "off-hand\t"+self.inv['off-hand'].name+"\t"+str(self.inv['off-hand'].stats)+"\n"
-        printT( Head + Body + Hand + OffHand)
+        printT("INVENTORY: (\S)" + Head + Body + Hand + OffHand)
+
+    def show_attributes(self):
+        print "name: " + str(self.name)
+        print "location: " + str(self.location)
+        self.ShowInventory()
+        print "emptyinv: " + str(self.emptyinv)
+        print "health: " + str(self.health)
+        print "maxhealth: " + str(self.maxhealth)
+        print "basestats: " + str(self.basestats)
+        print "stats: " + str(self.stats)
+        print "alive: " + str(self.alive)
+        print "spoke: " + str(self.spoke)
+        print "extra1: " + str(self.extra1)
+        print "extra2: " + str(self.extra2)
+
+
 
 #TODO Switch order of drop and need AND sinfo for defining to be consistant with interacts
 class Enemy:
@@ -405,5 +426,19 @@ class Map:  #Map Location Storage
         # Don't need to return the 'Global' objects from function as affecting scope outside the function
 
 
+# The pickler needs to be in the same level as the defined
+
+def pickle_game(DATA,savegamepath):
+
+    with open(savegamepath, 'wb') as fp:
+        pickle.dump(DATA, fp, protocol=pickle.HIGHEST_PROTOCOL)
+
+    return
 
 
+def unpickle_game(loadgamepath):
+
+    with open(loadgamepath, 'rb') as fp:
+        DATA = pickle.load(fp)
+
+    return DATA
