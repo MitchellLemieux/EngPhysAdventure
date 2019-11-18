@@ -197,7 +197,7 @@ def Parser(command):
         elif verb in [ 's','search', 'look']:
             x, y, z, dim = PLAYER.location
             print MAPS[x][y][z][dim].name
-            MAPS[x][y][z][dim].search(MAPS, DIMENSIONS)
+            MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,GAMESETTINGS)
 
         # TODO if word based description: re-enable stats and remove from DEVVERBs
         elif verb in ['c','stats','status','condition']:
@@ -448,7 +448,7 @@ def Parser(command):
         elif verb == "look":  # used just for look around case
             if objectName == "around":
                 x, y, z, dim = PLAYER.location
-                MAPS[x][y][z][dim].search(MAPS, DIMENSIONS)
+                MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,GAMESETTINGS)
         elif verb == "pick":  # Allows for pick up to be a thing, is formatted in exceptions above
             Equip(objectName)  # Equipts it
         elif verb in ['us','use']:  # this makes it so you can use items if the interacble is in the area

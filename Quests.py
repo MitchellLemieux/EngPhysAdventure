@@ -175,12 +175,17 @@ def sidequests():
 
 
 def ebta_story():
-    global PLAYER
-    global QUESTS
-    global ITEMS
-    global ENEMIES
-    global INTERACT
-    global MAPS
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
 
     # Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
@@ -314,12 +319,17 @@ def ebta_story():
 
 # If Events list gets to long can make it its own file
 def events():
-    global PLAYER
-    global QUESTS
-    global ITEMS
-    global ENEMIES
-    global INTERACT
-    global MAPS
+    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
+    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # If not assignment within the function  may lead to changes only in the local scope
 
     # PAP Event
     # TODO Make time not GMT so it doesn't matter which time zone you're in
@@ -328,6 +338,8 @@ def events():
     # print time.asctime(insttime)  # Prints out the ascci time to debug (Also nice to see but breaks immersion)
     if QUESTS['completionist']:
         insttime = time.localtime()  # Instantaneous struct_time object at the time of reading if you haven't beaten everything
+    else:
+        insttime = time.gmtime(1562765901.005 + 24240 - 141 - (4 * 60 * 60))  # Sets time to constantly 4:20pm time object
     #print insttime  # for debugging time
     # Thunder, cowboys, Bell, PAP sound
 
@@ -345,18 +357,23 @@ def events():
     LINEBREAK = "========================================================================"  # standard display with 72 characters
 
 
-    if ebta_story() and QUESTS['completionist']:
+    if GAMEINFO['winner'] and QUESTS['completionist']:
         enemycompletion = [ENEMIES[i].quest for i in
-                      ['rod the bowler', 'brian the Weeb', 'erik the sk8r', 'brendan fallon', 'liam the gamer',
+                      ['rod the bowler', 'brian the weeb', 'erik the sk8r', 'brendan fallon', 'liam the gamer',
                        'steven the first-year', 'paul the janitor','phil the drunk', 'zack the snack','connor the biologist']]
         interactcompletion = [INTERACT[i].quest for i in
-                      ['garbage can', 'rca tv', 'sharpxchange', 'rules sign', 'lenovo laptop"', 'coat of arms',
+                      ['garbage can', 'rca tv', 'sharpxchange', 'rules sign', 'lenovo laptop', 'coat of arms',
                        'mouse','gate of the forest']]
+
+        # print "status " + str(GAMEINFO['winner'])
+        # enemycompletion = [ENEMIES[i].quest for i in ['erik the sk8r']]
+        # interactcompletion = [INTERACT[i].quest for i in
+        #               ['garbage can']]
 
         if (True in enemycompletion) and (True in interactcompletion):
             pass
         else:
-            printT("YOU DID IT!!!! YOU 100% THE GAME!")
+            raw_input("YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue")
             AsciiArt.Acheivement()
             save_game(GAMEINFO['playername'] + " 100 Percent")  # saves all data to later be submited, different from the main save file
             gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
@@ -514,7 +531,7 @@ def events():
     if INTERACT["lake painting"].quest:
         PLAYER.location = [0,0,0,3]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[0][0][0][3]
-        CurrentPlace.search(MAPS, DIMENSIONS, True)
+        CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT["lake painting"].need = None
         printT("(\S)You no longer need the keys to get into this place.")
         INTERACT["lake painting"].quest = False
@@ -523,7 +540,7 @@ def events():
     if INTERACT["portkey"].quest:
         PLAYER.location = [3,0,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][0][1][0]
-        CurrentPlace.search(MAPS, DIMENSIONS, True)
+        CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT["portkey"].quest = False
 
 
@@ -535,20 +552,20 @@ def events():
         if CurrentPlace.travelled:
             printT("You enter... (\S)")
             AsciiArt.HauntedForest()
-        CurrentPlace.search(MAPS, DIMENSIONS, True)
+        CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT['opening in the trees'].quest = False
 
     # To COOTES DRIVE from Haunted Forest Start
     if INTERACT['trail to cootes drive'].quest:
         PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][7][1][0]
-        CurrentPlace.search(MAPS, DIMENSIONS, True)
+        CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT['trail to cootes drive'].quest = False
 
     # To COOTES DRIVE from escape rope
     if INTERACT['escape rope'].quest:
         PLAYER.location = [3,7,1,0]  # WHEN YOU TELIPORT IT HAS TO BE A LIST BECAUSE PLAYER LOCATION IS A LIST
         CurrentPlace = MAPS[3][7][1][0]
-        CurrentPlace.search(MAPS, DIMENSIONS, True)
+        CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT['escape rope'].quest = False
 

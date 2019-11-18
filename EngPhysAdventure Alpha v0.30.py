@@ -37,13 +37,19 @@ LINEBREAK = "===================================================================
 
 # Begining section of the game (not in the main loop), Seperated for nested game
 def Setup():
-    global PLAYER
-    global GAMEINFO
-    global MAPS
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
 
-    if GAMESETTINGS['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
+
+    if GAMEINFO['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
         GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
-        GAMESETTINGS['loadgame'] = 0  # sets the parameter to 0 just so it doesn't accidentally save
+        GAMEINFO['loadgame'] = 0  # sets the parameter to 0 just so it doesn't accidentally save
         return
 
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun'] or GAMEINFO['devmode']): Opening.Opening() #plays the opening if disable opening is set to False
@@ -60,7 +66,7 @@ def Setup():
                 GAMEINFO['playername'] = ""
     
     PLAYER.name = GAMEINFO['playername']
-    NameChange()  # changes the name of all name related things in the game
+    ENEMIES, MAPS = NameChange(PLAYER.name)  # changes the name of all name related things in the game
 
 
     x,y,z,dim = STARTLOCATION
@@ -75,8 +81,7 @@ def Setup():
     # This prints
 
     # searches and prints the information with spawn set to true to print "You wake up in"
-    CurrentPlace.search(MAPS, DIMENSIONS,True)
-
+    CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS,True)
 
     
     GAMEINFO['gamestart'] = time.time()  # Gives the local start date of the game in seconds since epoch of 1970
@@ -117,7 +122,6 @@ def Main():
     # Main game loop section that runs while the player is alive (player is killed in story once done)
     # TODO don't have main loop based on player alive but on game being played, e.g. gameExit boolean variable instead
     while(PLAYER.alive):
-
         # if not(GAMESETTINGS['HardcoreMode']): MapDisplay.mini()  # Minimap display area in game
 
 
@@ -182,12 +186,15 @@ def End():
         raw_input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
         if Quests.ebta_story() == 1: #The bad storyline ending
-            printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice, you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allow you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END")
+            printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice, you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allow you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END  (\S)")
+            GAMEINFO['winner'] = 1
         elif Quests.ebta_story() == 2: #The good storyline ending.
-            printT("Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END.")
+            printT("Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END. (\S)")
+            GAMEINFO['winner'] = 1
         elif Quests.ebta_story() == 3: #The good storyline ending.
-            printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh, you pick up the deed and begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in everyone's hands. (\S)THE END.")
+            printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh, you pick up the deed and begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in everyone's hands. (\S)THE END  (\S)")
             QUESTS['neutral balance'] = 0
+            GAMEINFO['winner'] = 1
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         if GAMESETTINGS['SpeedRun']:printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) #logs the data to be submitted
@@ -199,12 +206,12 @@ def End():
         printT(" (\S)Continue Playing[C]   Restart Game[R]  Exit[E]")
         #printT(" (\S)Continue Playing[C]   Restart Game[R]  Main Menu Return[M]  Exit[E]")
         endchoice = raw_input("Choose what you want to do: ").lower().strip() #this input is to hold the screen until the player decides what to do
-        if (Quests.ebta_story() == 0) and (endchoice in ["c","continue playing","continue","play"]):
+        if (GAMEINFO['winner'] == 0) and (endchoice in ["c","continue playing","continue","play"]):
             printT("You can't continue because you're dead!")
             endchoice = ""
         #elif endchoice not in ["c", "r", "m", "e", "continue playing", "continue", "play", "restart game", "restart","main menu return", "main menu", "menu return", "main", "menu", "return", "exit"]:
         elif endchoice not in ["c","r","m","e","continue playing","continue","play","restart game","restart","exit"]:
-            printT("Please choice a valid option!")
+            printT(""+losecolour+"Please choice a valid option!"+textcolour+"")
             endchoice = ""
     if endchoice in ["c","continue playing","continue","play"]:
         PLAYER.alive = True
@@ -222,7 +229,7 @@ def End():
     #     Setup()
     #     Main()
     elif endchoice in ["e","exit"]:
-        if raw_input("\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+        if raw_input("\n\nAre you sure you want to quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
             GAMEINFO['runtime'] += (time.time() - GAMEINFO[
                 'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
             GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
@@ -269,7 +276,7 @@ except:  # does nothing if no dev file there
 
 
 # Start Screen is after reading in settings so it can skip start screen if enabled
-Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
+MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
 
 # The Actual Start of the game when you hit Play, depending on if in Dev Mode or not
 if GAMEINFO['devmode']:  # If Dev mode enabled no error catching

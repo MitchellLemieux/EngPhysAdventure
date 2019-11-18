@@ -45,12 +45,20 @@ styledim = Style.DIM   # this doesn't seem to work
 stylenormal = Style.NORMAL
 stylereset = Style.RESET_ALL
 
+# Background colours (background)
+backblack = Back.BLACK
+backblue = Back.BLUE
+
 # Game Text Colours
 textcolour = lightgreen
 backcolour = black
 wincolour = lightyellow
 losecolour = red
 indicatecolour = lightwhite
+
+#Game Background Colours
+backgroundcolour = backblack
+weirdback = backblue
 
 
 # Object Text Colours

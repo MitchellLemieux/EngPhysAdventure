@@ -27,11 +27,13 @@ DIMENSIONS = ["OverWorld", "BSB", "Capstone Room", "Green Lake", "Haunted Forest
 
 GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':"",'gamestart':0,'timestart':0,
             'runtime': 0, 'stepcount':0,'commandcount':0,'log': [],"layersdeep":0,"savepath": "","datapath":"",
-            "help": "", "devmode": 0,'scriptdata': []}
+            "help": "", "devmode": 0,'scriptdata': [],'loadgame':0,'winner':0}
 #this dictionary is used to store misc game info to be passed between function:
 # speedrun time, start time, etc. Values are initialized to their value types
 # version is version of the game, gamestart is the first start time of the game, runtime is the total second count,
 # log is log of all player input, layers deep is how many layers deep in the laptop quest you are, help is help prinout,
+# script is used to store script data to run through assisted
+# loadgame is a flag for loading to skip the setup
 
 
 
@@ -62,11 +64,11 @@ GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 t
 QUESTS = {}  #initializing the quests global variable to be later writen into
 
 # These settings are global and are in the settings.ini file so they don't need to be set every time you startup
-GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0, 'loadgame':0}
+GAMESETTINGS = {'DisableOpening': 0, 'SpeedRun': 0, 'HardcoreMode':0}
 # disable openning, speedrun disables openning;lore read times; might disable secrets or opens them,
 # hardcore for now disables eating but might make enemies harder,
 # DevMode disables the main error catching + Startup Blip
-# loadgame is a flag for loading to skip the setup
+
 
 STARTLOCATION = (2,3,1,0)
 STARTHEALTH = 100
@@ -132,8 +134,9 @@ def Equip(Item):  # Item is a string not an object
         # this is different than the equip method in the Character class for some reason
         # Makes sure the item is dropped at the current location
         # TODO Redo this drop and equip structure. Is dumb and can cause duplicates/ghosting
-        drop = PLAYER.equip(ITEMS[Item])
-        Place.removeItem(ITEMS[Item])
+        drop = PLAYER.equip(ITEMS[Item])  # does the equip method on the player
+        Place.removeItem(ITEMS[Item])   # removes that item from the invoirnment
+        Place.placeItem(drop)  # places the drop if there's something to drop
         ITEMS[Item].quest = True  # quest/inspect flag is true
 
     # other acceptations for weird requests
@@ -159,8 +162,8 @@ def Drop(Item):  # Item is a string not an object
     Place = MAPS[x][y][z][dim]
     if Item in ITEMS and list(ITEMS[Item].location) == PLAYER.location:
         # TODO Redo this drop and equip structure. Is dumb and can cause duplicates/ghosting
-        drop = PLAYER.drop(ITEMS[Item])
-        Place.placeItem(drop)
+        drop = PLAYER.drop(ITEMS[Item])  # the player drop method that will return the item dropped
+        Place.placeItem(drop)  # places the drop on the ground
         # Same as equip function. 'None' passed to function if item doesn't exist
 
     # other acceptations for weird requests
@@ -251,7 +254,7 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
             MAPS[x][y][z][dim].placeEnemy(bf)
             # AsciiArt.Hero()  # TODO Enable once Dynamic Ascii Art
 
-        place.search(MAPS, DIMENSIONS)  # searches and prints the place
+        place.search(MAPS, DIMENSIONS,GAMESETTINGS)  # searches and prints the place
         return place  # idk why but this returns place and I'm keeping it here so yeah
 
 
@@ -621,26 +624,38 @@ def logGame(log): #this makes a log file which records all player actions for de
         f.write(str(log[i]) + '\n')
     f.close()
 
-def NameChange():  # A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
-    global PLAYER
-    global ENEMIES
-    global MAPS
+def NameChange(playername):  # A dumb backend workaround to change the players name. TODO other strategies could have startup instantatied after name is defined
+    global PLAYER  # The main character. player is an object instance of class character.
+    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    global GAMESETTINGS  # The game settings that are saved in the game
     # ENEMIES['yourself'].name = playername
     # Can't just update the name, need to update the dictionary name
-    ENEMIES['yourself'].name = PLAYER.name  # yourself gets renamed to player name
-    ENEMIES[PLAYER.name.lower()] = ENEMIES['yourself']  # puts in new value in the dictionary
-    del ENEMIES['yourself']  # deletes old value
-    #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
+    try:
+        ENEMIES['yourself'].name = playername  # yourself gets renamed to player name
+        ENEMIES['yourself'].colouredname = "" +personcolour+ playername +textcolour+ ""  # yourself gets renamed to player name
+        ENEMIES[playername.lower()] = ENEMIES['yourself']  # puts in new value in the dictionary
+        del ENEMIES['yourself']  # deletes old value
+        #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
 
 
-    ENEMIES['your dad'].name = PLAYER.name + "'s dad"  # yourself gets renamed to player name
-    ENEMIES[PLAYER.name.lower() + "'s dad"] = ENEMIES['your dad']  # puts in new value in the dictionary
-    del ENEMIES['your dad']  # deletes old value
-    #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
-    ENEMIES[PLAYER.name.lower()].location = (2, 4, 1, 0)
-    MAPS[2][4][1][0].placeEnemy(ENEMIES[PLAYER.name.lower()])  # then placed on the map
-    ENEMIES[PLAYER.name.lower() + "'s dad"].location = (5, 7, 1, 0)
-    MAPS[5][7][1][0].placeEnemy(ENEMIES[PLAYER.name.lower() + "'s dad"])  # then placed on the map
+        ENEMIES['your dad'].name = playername + "'s dad"  # yourself gets renamed to player name
+        ENEMIES['your dad'].colouredname = "" +personcolour+ playername + "'s dad" +textcolour+ "" # yourself gets renamed to player name
+        ENEMIES[playername.lower() + "'s dad"] = ENEMIES['your dad']  # puts in new value in the dictionary
+        del ENEMIES['your dad']  # deletes old value
+        #ENEMIES.update({PLAYER.name.lower():ENEMIES['yourself']}) # adds that new entity to the dictionary
+
+        ENEMIES[playername.lower()].location = (2, 4, 1, 0)
+        MAPS[2][4][1][0].placeEnemy(ENEMIES[playername.lower()])  # then placed on the map
+        ENEMIES[playername.lower() + "'s dad"].location = (5, 7, 1, 0)
+        MAPS[5][7][1][0].placeEnemy(ENEMIES[playername.lower() + "'s dad"])  # then placed on the map
+
+    except:  # If yourself is already set in the game
+        pass
 
     # these HAVE TO be returned or else the changes are within the scope of the function only
     return ENEMIES, MAPS
@@ -712,7 +727,6 @@ def load_game(loadname):
     # If not assignment within the function  may lead to changes only in the local scope
 
     x,y,z,dim = PLAYER.location
-    print MAPS[x][y][z][dim].name
 
     loadgamepath = GAMEINFO['savepath'] + "SaveFile " + loadname + ".plp"
 
@@ -728,13 +742,10 @@ def load_game(loadname):
     GAMEINFO = DATA["GAMEINFO"]
     GAMESETTINGS = DATA["GAMESETTINGS"]
 
-    print PLAYER.inv['body'].name
-
     GAMEINFO['timestart'] = time.time()  # reset instance start time
 
     x,y,z,dim = PLAYER.location
-    print MAPS[x][y][z][dim].name
-    MAPS[x][y][z][dim].search(MAPS,DIMENSIONS,True)
+    MAPS[x][y][z][dim].search(MAPS,DIMENSIONS,GAMESETTINGS,True)
 
     # HAVE TO HAVE THESE RETURN INTO THE SCOPE. I HATE GLOBAL VARIABLES ONLY USE PASS BY VALUE EVER
     return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS

@@ -47,6 +47,7 @@ class Equipment:
 class Character:
     def __init__(self,name,location,health,inv,emptyinv, extra1 = None, extra2 = None):
         self.name = str(name)
+        self.colouredname = "" + personcolour + name + textcolour + ""
         self.location = location
         self.inv = inv
         self.emptyinv = emptyinv
@@ -77,12 +78,13 @@ class Character:
             Equip.location = self.location
             printT(" (\S)" +Equip.info + " (\S)",72,0.25)
             printT("You've equipped the " + Equip.colouredname + ' to your ' + Equip.worn + ".",72,0.25)
+        # If you have something on you that you're replacing
         elif(self.location == list(Equip.location)):
             drop = self.inv[Equip.worn]
             self.inv[Equip.worn] = Equip
             Equip.location = self.location
             printT(" (\S)"+ Equip.info + " (\S)")
-            printT("You've equipped the " + Equip.colouredname + ' to your ' + Equip.worn + ', the ' + drop.name + ' has been dropped.\n')
+            printT("You've equipped the " + Equip.colouredname + ' to your ' + Equip.worn + ', the ' + drop.colouredname + ' has been dropped.')
         else:
             printT(" (\S)You can't find a " + Equip.colouredname + " around here. Maybe it's your hungover brain.")
         self.updateStats()
@@ -266,7 +268,7 @@ class Map:  #Map Location Storage
 
 
     # This function is the main thing that says what's in the area.
-    def search(self,MAPS,DIMENSIONS,Spawn=False):  # Is passed MAPS dictionary so it can search area around it
+    def search(self,MAPS,DIMENSIONS,GAMESETTINGS,Spawn=False):  # Is passed MAPS dictionary so it can search area around it
         #also test the displays of things. [People], ~Places~, <Things>, /Interactables/ (put these next to descriptions)
 
         if Spawn:  # this is the printout if you wake up in a location (say for example a load)
@@ -351,69 +353,72 @@ class Map:  #Map Location Storage
         if not self.ENEMY and not self.items:  # if there's nothing in the location
             description += textcolour + " (\S)There isn't a whole lot to see."
 
-        # --- Auto Surrounding Descriptions ---
-            # -- Finding the locations around current location --
-        location = self.location  # gets coordinates tuple
-        letterdirections = ['u', 'd', 'f', 'b', 'l', 'r']  # letter based list of directions to check against walls
-        lettersthere = ""
-        tupledirections = [(0,0,1,0), (0,0,-1,0), (0,1,0,0), (0,-1,0,0), (-1,0,0,0), (1,0,0,0)]  # tuple based list of directions to add to current location
-        surroundings = [""] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
-        i = 0  # Counter for direction indexing
-        for direction in letterdirections:  # Looping through all the directions
-            if direction not in self.walls:  # seeing if the way you can go is in the walls
-                # Gets tuple of requested adjacent spot by adding the direction in the right order
-                dx, dy, dz, dim = tuple(map(operator.add,location,tupledirections[i]))
-                if MAPS[dx][dy][dz][dim]:  # if the map location exists
-                    surroundings[i] = MAPS[dx][dy][dz][dim].name  # store the name into the surroundings variable
-                    lettersthere += direction + ","
-            i += 1
+        if GAMESETTINGS['HardcoreMode']:  # if in hardcore mode it skips the auto descriptions
+            pass
+        else:
+            # --- Auto Surrounding Descriptions ---
+                # -- Finding the locations around current location --
+            location = self.location  # gets coordinates tuple
+            letterdirections = ['u', 'd', 'f', 'b', 'l', 'r']  # letter based list of directions to check against walls
+            lettersthere = ""
+            tupledirections = [(0,0,1,0), (0,0,-1,0), (0,1,0,0), (0,-1,0,0), (-1,0,0,0), (1,0,0,0)]  # tuple based list of directions to add to current location
+            surroundings = [""] * 6  # Name storage, defaulted to none. Order of: Left, right, Front, Back, Up, Down
+            i = 0  # Counter for direction indexing
+            for direction in letterdirections:  # Looping through all the directions
+                if direction not in self.walls:  # seeing if the way you can go is in the walls
+                    # Gets tuple of requested adjacent spot by adding the direction in the right order
+                    dx, dy, dz, dim = tuple(map(operator.add,location,tupledirections[i]))
+                    if MAPS[dx][dy][dz][dim]:  # if the map location exists
+                        surroundings[i] = MAPS[dx][dy][dz][dim].name  # store the name into the surroundings variable
+                        lettersthere += direction + ","
+                i += 1
 
-                # - Finding Interriors Via Links -
-        if self.links:  # if there's a link and therefore it links to an interrior
-            for link in self.links:  # loping through all links
-                if link[4] != self.location[3]:
-                    # if you're not in the same dimension as the linked dimension displays the dimension name
-                    surroundings[letterdirections.index(link[0])] = DIMENSIONS[link[4]]
-                    lettersthere += link[0] + ","
-                else:
-                    # this magic line replaces the surrounding name with the link name of the area
-                    surroundings[letterdirections.index(link[0])] = MAPS[link[1]][link[2]][link[3]][link[4]].name
-                    lettersthere += link[0] + ","
+                    # - Finding Interriors Via Links -
+            if self.links:  # if there's a link and therefore it links to an interrior
+                for link in self.links:  # loping through all links
+                    if link[4] != self.location[3]:
+                        # if you're not in the same dimension as the linked dimension displays the dimension name
+                        surroundings[letterdirections.index(link[0])] = DIMENSIONS[link[4]]
+                        lettersthere += link[0] + ","
+                    else:
+                        # this magic line replaces the surrounding name with the link name of the area
+                        surroundings[letterdirections.index(link[0])] = MAPS[link[1]][link[2]][link[3]][link[4]].name
+                        lettersthere += link[0] + ","
 
-            # -- Reading out the Surroundings --
-        # TODO Add discovery mechanic where it prints locations as you see them
-                # - Short Description -
-        worddirections = ['[U] ','[D] ','[F] ','[B] ','[L] ','[R] ']
-        description += "(\S) (\S)There are " + str(6 - surroundings.count("")) + " obvious exits: (\S)"
-        # old description having letters in there
-        #description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: " + lettersthere + "(\S)"
+                # -- Reading out the Surroundings --
+            # TODO Add discovery mechanic where it prints locations as you see them
+                    # - Short Description -
+            worddirections = ['[U] ','[D] ','[F] ','[B] ','[L] ','[R] ']
+            description += "(\S) (\S)There are " + str(6 - surroundings.count("")) + " obvious exits: (\S)"
+            # old description having letters in there
+            #description += "(\S) (\S)There are " + str(6 - surroundings.count(None)) + " obvious exits: " + lettersthere + "(\S)"
 
-                # TODO for even shorter/harder list only directions
-            # - Aligning the Words by adding spaces -
-        maxnamelength = max(len(x) for x in surroundings)
-        for i in range(6):  # Equalization of the spacing to the max spacing
-            surroundings[i] = surroundings[i] + " "*( maxnamelength - len(surroundings[i]) )
+                    # TODO for even shorter/harder list only directions
+                # - Aligning the Words by adding spaces -
+            maxnamelength = max(len(x) for x in surroundings)
+            for i in range(6):  # Equalization of the spacing to the max spacing
+                surroundings[i] = surroundings[i] + " "*( maxnamelength - len(surroundings[i]) )
 
-        for i in range(6):  # use index to reference direction
-            if surroundings[i].strip():  # if the direction is seen in there and it's not empty
-                description += worddirections[i] +mapcolour+ surroundings[i] +textcolour+ "\t"  # print the word direction + name
-            if worddirections[i] == '[U] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no U but D
-                description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
-            elif worddirections[i] == '[U] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's U but no D
-                description += " (\S) "  #adding newline
-            if worddirections[i] == '[F] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no F but B
-                description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
-            elif worddirections[i] == '[F] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's F but no B
-                description += " (\S) "  #adding newline
-            if (worddirections[i] == '[L] ') and (not surroundings[i].strip()) and surroundings[i+1].strip():  # if there's no L but R
-                # Makes a hidden peroid there so spacing is correct because I'm a monkey and can't figure it out what's wrong
-                description += Style.DIM+backcolour+ "." +Style.RESET_ALL+textcolour+ " "  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
-                description += " "*(maxnamelength+2) + "\t"  # adding correct spacing
-            elif worddirections[i] in ['[D] ','[B] '] and surroundings[i].strip():  # If there's all spaces
-                description += " (\S) "
+            for i in range(6):  # use index to reference direction
+                if surroundings[i].strip():  # if the direction is seen in there and it's not empty
+                    description += worddirections[i] +mapcolour+ surroundings[i] +textcolour+ "\t"  # print the word direction + name
+                if worddirections[i] == '[U] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no U but D
+                    description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+                elif worddirections[i] == '[U] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's U but no D
+                    description += " (\S) "  #adding newline
+                if worddirections[i] == '[F] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no F but B
+                    description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+                elif worddirections[i] == '[F] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's F but no B
+                    description += " (\S) "  #adding newline
+                if (worddirections[i] == '[L] ') and (not surroundings[i].strip()) and surroundings[i+1].strip():  # if there's no L but R
+                    # Makes a hidden peroid there so spacing is correct because I'm a monkey and can't figure it out what's wrong
+                    description += Style.DIM+backcolour+ "." +Style.RESET_ALL+textcolour+ " "  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
+                    description += " "*(maxnamelength+2) + "\t"  # adding correct spacing
+                elif worddirections[i] in ['[D] ','[B] '] and surroundings[i].strip():  # If there's all spaces
+                    description += " (\S) "
 
 
-                #TODO Add wordy description
+                    #TODO Add wordy description
 
 
 

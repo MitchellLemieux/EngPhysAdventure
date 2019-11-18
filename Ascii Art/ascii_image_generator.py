@@ -13,7 +13,7 @@ A python program that convert images to ASCII art.
 
 import argparse
 import numpy as np
-from PIL import Image
+from PIL import Image  # this is actually Pillow module (use pip install pillow) and it works because it extends PIL
 
 
 
@@ -30,7 +30,9 @@ def getAverageL(image):
 
 def covertImageToAscii(fileName, cols, scale, moreLevels):
     """
-    Given Image and dims (rows, cols) returns an m*n list of Images 
+    Given Image and dims (rows, cols) returns an m*n list of Images
+    # Scale is the scaling factor in verticle
+    # Collums is the number of collumns
     """
     # gray scale level values from: 
         # http://paulbourke.net/dataformats/asciiart/

@@ -35,6 +35,9 @@ def StartScreen():
     # If not assignment within the function  may lead to changes only in the local scope
 
     print textcolour  # This sets all text color
+    #print backgroundcolour  # This sets the background colour
+    #print weirdback
+
 
     if GAMEINFO['devmode']:
         pass  # If in dev mode do nothing and skip intro
@@ -62,7 +65,6 @@ def StartScreen():
         startmenu = False  # turning off loading screen
 
     while startmenu:
-        print CLEARSCREEN
         print "       ___________                __________.__"
         print "       \_   _____/    _     _____ \______   \  |__ ___.__. ______"
         print "        |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
@@ -77,13 +79,14 @@ def StartScreen():
         # Play new Game
         if choice in ['p', 'play new game','play']:
             startmenu = False
+            print CLEARSCREEN
 
         # Loading Screen and Game
         # TODO Maybe add this loading screen to CreativeMode so you can load in-game
         elif choice in ['l', 'load game','load', 'loadgame']:
              loadscreen = True
+             print CLEARSCREEN
              while loadscreen:
-                print CLEARSCREEN
                 print "Load Game\n"
                 # print os.listdir(path)  # Gives a list of all files in the directory
                 # This Gets and save files in the cache and stores in lists
@@ -94,8 +97,8 @@ def StartScreen():
                 for file in os.listdir(GAMEINFO['savepath']):
                     filepath = os.path.join(GAMEINFO['savepath'], file)  # gets exact file path so can check size
                     # TODO Nice to have would be showing game playtime or progress
-                    # ignores the basegame or the file is empty!
-                    if file == "SaveFile basegame.plp" or os.stat(filepath).st_size == 0:
+
+                    if file == "SaveFile basegame.plp" or os.stat(filepath).st_size == 0: # ignores the basegame or the file is empty!
                         next
                     # Searches for the keyword in the files of the savefile directory
                     elif fnmatch.fnmatch(file, 'SaveFile*'):  # looks for files that have SaveFile in the Name
@@ -103,7 +106,8 @@ def StartScreen():
                         # Saving load number as string so can compare Lchoice string later
                         loadnumberlist.append(str(loadnumber))
                         # For some reason strip is being dumb and have to strip "SaveFile" and the " " separately
-                        loadnamelist.append(file.lstrip("SaveFile").strip().rstrip(".plp"))
+                        loadnamelist.append(file.lstrip("SaveFile").strip().rstrip("plp").rstrip("."))  # strip is dumb and will keep stripping things if it contains the letters so needs to be done in steps
+                        # see https://stackoverflow.com/questions/46222645/string-rstrip-is-removing-extra-characters
 
                 # Displays the save files was numbered list starting from 1
                 for i in range(loadnumber):
@@ -118,24 +122,26 @@ def StartScreen():
                     loadscreen = False
                     startmenu = False
                     MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(Lchoice)  # loads in the savefile global variables
-                    GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+                    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS  # Sets this loadgame flag so the rest of setup is skipped and goes to main
                     print CLEARSCREEN
                 elif Lchoice in loadnumberlist:  # if user enters loadnumber has to lookup the load name
                     loadscreen = False
                     startmenu = False
                     MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
-                    GAMESETTINGS['loadgame'] = 1  # Sets this flag so the rest of setup is skipped and goes to main
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
-
+                    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS   # Sets this flag so the rest of setup is skipped and goes to main
+                    print CLEARSCREEN
                 else:
-                    print "\nPlease choose one of the options."
+                    print CLEARSCREEN
+                    printT(" (\S)"+losecolour+"Please choose one of the options." + textcolour+"")
 
         # Setting Screen
         elif choice in ['s', 'settings','setting']:
             settingscreen = True
+            print CLEARSCREEN
             while(settingscreen):
-                print CLEARSCREEN
+
                 # TODO Make a DEV mode that disables error catching and enables creative
 
                 print "Settings\n*These may change if you load a previous game\n\n"
@@ -146,21 +152,27 @@ def StartScreen():
 
                 Schoice = raw_input('Choose which settings you want to toggle: ').lower()
                 if Schoice in ['b', 'back', 'leave', 'exit']:
+                    print CLEARSCREEN
                     settingscreen = False
                 elif Schoice =='0':
+                    print CLEARSCREEN
                     # Have to make sure the values toggle to 0 and 1 not true and false for saving
                     GAMESETTINGS['DisableOpening'] = int(not(GAMESETTINGS['DisableOpening']))
                     # print "Hi I'm a dog"
                 elif Schoice =='1':
+                    print CLEARSCREEN
                     GAMESETTINGS['SpeedRun'] = int(not(GAMESETTINGS['SpeedRun']))
                 elif Schoice =='2':
+                    print CLEARSCREEN
                     GAMESETTINGS['HardcoreMode'] = int(not(GAMESETTINGS['HardcoreMode']))
                 elif Schoice == '/420e69':  # Character that enables DevMode
+                    print CLEARSCREEN
                     GAMEINFO['devmode'] = int(not(GAMEINFO['devmode']))
                     # Prints throw-off style text while still giving the stat
                     print "\nPlease choose " + str(GAMEINFO['devmode']) + "one of the options."
                 else:
-                    print "\nPlease choose one of the options."
+                    print CLEARSCREEN
+                    printT(" (\S)"+losecolour+"Please choose one of the options." + textcolour+"")
 
             # Saving Settings Once out of the screen, These setting should be readable and changeable by a person
             settingpath = os.path.join(GAMEINFO['datapath'], "settings.ini")
@@ -186,11 +198,15 @@ def StartScreen():
                    "or dead, or actual events is purely coincidental. By playing this game you give up the right to"
                    "any information or files uploaded to the developers for benevolent development of the game.",72,0)
             raw_input("\nHit enter to continue")
+            print CLEARSCREEN
         # Exiting
         elif choice in ['e', 'exit','leave']: 
             exit()
         else:
-            print "\nPlease choose one of the starting options."
+            print CLEARSCREEN
+            printT(" (\S)"+losecolour+"Please choose one of the starting options."+textcolour+"")
+
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 def Opening():
     #IT WORKS!

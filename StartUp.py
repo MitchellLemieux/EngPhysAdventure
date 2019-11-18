@@ -87,7 +87,7 @@ def Reset():
     Map("Residence Square",(5,5,1,0),"~~:\nBates lies in front of you. The Phoenix at your rear.\nThe Tandem Accelerator is to your left.","Longboarding down this trail going Mach 16 was a blast and a half.\nDodging deer and first years like it's some sort of cube runner.\nNice.",('r'),False),
     Map("Hamilton Hall",(5,3,1,0),"~~:\nThe Phoenix is in front of you. A road is to your left.\nThe Willy McMaster Statue is to your rear.","You think about helping some first years in the Math help centre.\nThen you don't.\nThey should learn to fight through it if they're going to make it through the\nnext 4 years.",('r'),True),
     Map("Turning Circle",(4,2,1,0),"~~:\nWilly Dog stand is to your rear. BSB-field is to your left.\nThe Willy McMaster Statue is to your right. Head down the road if you go forward.","The circle thing with the three trees in it is looking pretty nice\nin the morning sun.\nStudents rush all around.\nThe aroma from the Willy Dog stand is making you pretty hungry...",(),False),
-    Map("Scholar's Road",(4,3,1,0),"~ ~:\nEnter BSB to your left. Hamilton Hall to your right.\nThe turning circle is behind you. General Sciences building in front of you.","A lost first year's parent drives by in a mini-van\nclearly ignoring the 'no access' sign.\nYou thank your astrology sign for making sure they looked up and saw you.",(),False),
+    Map("Scholar's Road",(4,3,1,0),"~ ~:\n","A lost first year's parent drives by in a mini-van clearly ignoring the "+interactcolour+"no access sign"+textcolour+". You thank your astrology sign for making sure they looked up and saw you.",(),False),
     Map("GSB",(4,4,1,0),"~~:","Have you ever been in here?\nI haven't.\nYou see a group of people huddled around a pentagram-wearing goat heads.\nMaybe? I seriously don't know what goes on in here.",(),True),
     Map("Tandem Accelerator",(4,5,1,0),"~~:\nThe General Sciences Building is behind you. The Police station is to your left.\nA trail is to your right. Keyes is in front of you.","Turns out the Tandem Accelerator is NOT a rad place to ride a 2-person bike...\nBummed out you remind yourself you graduated and consider what to do next.",(),True),
     Map("Cootes Drive",(4,7,1,0),"~~:\nLot M is to your right. Keyes is at your rear.\nHead down Cootes trail if you go left.","You narrowly avoid a GO bus\npick yourself up and brush yourself off.\nThen plan your next move.",('f'),False),
@@ -98,9 +98,9 @@ def Reset():
     Map("ITB",(0,5,1,0),"~~:\nJHE-Annex is to your right. Lot I is in front of you.\nAn alley is behind you. You can go up OR down the stairs.","McMaster, back at it again with the horrible floor plan.\nAfter getting lost for 5 hours you finally reach the lobby\nand decide what to do.",('l'),True),
     Map("Alley",(0,4,1,0),"~~:\nITB is in front of you. ETB is behind you.\nYou can enter Hatch to your right.","As you head down the narrow path between ITB and ETB you hear car horns blaring down Main Street.\nYou gather up some trash and put it in a garbage can like a good McMasterian.\nThen plan your next move.",('l'),False),
     Map("T-13",(0,2,1,0),"~~:\nETB is in front of you. The McMaster Map is to your right.\nThe West Wing of the Hospital is behind you.","How many bad invigilators does it take to screw in a light bulb?\nI'm not sure but they took my damn Casio FX-911+C...",['l','d'],True),
-    Map("Hospital West Wing",(0,1,1,0),"~~:\nIn front of your is T-13. To your right is the Health Sci Library.\nThe East Wing of the Hospital is behind you.\nYou can go upstairs.","Doctors and Nurses rush around you.\nYou remember why you didn't want to become a doctor as you\nnearly faint looking at a patient's paper cut in the waiting room.\nAfter a drink from the water fountain you plan what to do.",('l'),True),
+    Map("Hospital West Wing",(0,1,1,0),"~~:","Doctors and Nurses rush around you. You remember why you didn't want to become a doctor as you nearly faint looking at a patient's paper cut in the waiting room. After a drink from the "+interactcolour+"water fountain"+textcolour+" you plan what to do.",('l'),True),
     Map("Hospital East Wing",(0,0,1,0),"~~:\nIn front of you is the West Wing. MDCL is to your right.\nThe Parking Garage is below you.","You smile as you overhear a conversation between a doctor and a family.\nTurns out their child is going to make a full recovery.\nThanks science.",('l','b'),True),
-    Map("MDCL",(1,0,1,0),"~~:\nThe East Wing of the Hospital is to your left. Health Sci library is forward.","After a solid 5 minutes of meditation in the reflection area.\nYou make your next decision feeling refreshed.",['b','r','u'],True),
+    Map("MDCL",(1,0,1,0),"~~:\n","After a solid 5 minutes of meditation in the reflection area. You make your next decision feeling refreshed.",['b','r','u'],True),
     #Basement Level (X,Y,0)
     Map("Secret Room",(6,1,0,0),"~SECRET ROOM~:\nYou can only climb up and out.","You inspect the floorboards and find one is loose.\nUpon lifting it you reveal a secret room!\nYou climb down and find yourself surrounded by stacks of ancient books and\nforgotten items from McMaster's past.",('f','b','l','r','d'),True),
     Map("Quantum Tunnel",(3,4,0,0),"~QUANTUM TUNNEL~:\nGo up to return to the main floor of BSB","What other faculty spends thousands of dollars on furniture for a\nliteral custodial closet in the BSB basement?\nYou guessed it...\nEng Phys. Gotta love em'",('f','b','l','r','d'),True),
@@ -573,7 +573,7 @@ def Reset():
     Equipment("Softwood 2x4 Stud", (0, 0, 0, 3), "Soft2x3Stud.jpg", "A prime peice of Douglas Fir. Useful to be made into whatever you can imagine", "off-hand", (1, 1, 1), ""),
     # --- Aesthetic Objects ---
     Equipment("Kipling Pranks", (2,3,1,0), "KPranks.jpg", "The leftover pranks from the 2017-2018 year. You should probably leave these here.", "off-hand", (2, 2, 2), 3),
-    Equipment("Tequila Shot Glass", (5,4,1,0), "ShotGlass.jpg", "Rub a dub dub in my tub.", "off-hand", (10, 0, 10), -5),
+    Equipment("Tequila Shot Glass", (5,4,1,0), "ShotGlass.jpg", "Maybe you shouldn't touch this stuff after what happened last night.", "off-hand", (10, 0, 10), -5),
     Equipment("Cold Sweat", (3,4,1,0), "ColdSweat.jpg", "A pool of sweat on the ground. Gross.", "off-hand",(0, 0, 0), 1),
 
     #--- Haunted Forest Items ---
@@ -759,17 +759,19 @@ def Reset():
     Interact("Rick's Crafting Bench", (0, 0, 0, 3), "This bench can create anything made of wood or diamond.","You spend hours crafting the device to the precision you need. It's perfect.","softwood 2x4 stud", "sharpxchange",True),
     # --- Aesthetic Interacts ---
     Interact("Iron Ring Statue", (2,3,1,0), "The beautiful statue shines in the light. 'From the Class of 2017'. It reminds you of your lost ring, which you remember you should go find.", "", None, "", True),
-    Interact("Morning Sun", (2,3,1,0), "You stare at the sun for an hour. You're practically blind now." + CLEARSCREEN, "", None, "", True),
+    Interact("Morning Sun", (2,3,1,0), CLEARSCREEN+"You stare at the sun for an hour. You're practically blind now and can't remember what you were doing before." , "", None, "", True),
     Interact("Kipling Game", (2,4,1,0), "It's a laser pointer arcade game. Wow this is fun. And it counts your score! How did they have time to make this?", "", None, "", True),
     Interact("Kipling Clock", (1,4,1,0), "Days to Kipling: 364 until that next fateful day. Hopefully there's no one in your situation next year.", "", None, "", True),
     Interact("Armchair", (1,1,1,0), "It looks comfortable at first but it's really lost. Do they really expect you to do work in these things?", "", None, "", True),
     Interact("Organ", (2,0,1,0), "A hammond B3 Organ. A fine specimen.", "", None, "", True),
-    Interact("Dirty Coffee Table", (3,1,1,0), "A very boujee coffee table display art peace. You don't want to tell the art students how you really feel about this.", "", None, "", True),
+    Interact("Dirty Coffee Table", (3,1,1,0), "A very boujee coffee table display art piece. You don't want to tell the art students how you really feel about this.", "", None, "", True),
     Interact("Willy dog cart", (4,1,1,0), "The man in the cart eyes you warily as you ask for your 5th hotdog of the day. You hand him a fiver and walk away.", "", None, "", True),
     Interact("McMaster Statue", (5,2,1,0), "There are marks of defilement all over the statue. You wonder if this has anything to do with the happenings of last night?", "", None, "", True),
     Interact("Canadian Flag", (3,2,1,0), "This majestic flag waves gracefully in the wind. Canada and proud. ", "", None, "", True),
     Interact("Slackline", (2,2,1,0), "You attempt to walk across this but you don't have the coordination or skill. Practice makes perfect.", "", None, "", True),
     Interact("Reactor Pool", (2,6,1,0), "The blue pool of the McMaster Nuclear Reactor (MNR). Swimming is not advised.", "", None, "", True),
+    Interact("No Access Sign", (4, 3, 1, 0), "You read the sign which definitely says 'no vehicle access' and wonder how it could ever be misinterpreted...", "", None, "", True),
+    Interact("Water Fountain", (0, 1, 1, 0), "You take a big gulp of Hamilton's finest filtered dihydrogen monoxide... yum", "", None, "", True),
 
     # --- Haunted Forest Expansion ---
     Interact("Gap in the Trees",(3,7,1,0),"It is a gap in the trees... a path is barely visible. (\S)It might be best to get a better idea on how to survive out there before trying to take on the trail.","",None,None,False),
