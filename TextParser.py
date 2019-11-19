@@ -78,6 +78,7 @@ Download latest update then add this and update the feature list.
 # How can we keep the text input fun and engaging, for any level of player?
 from GameFunctions import *
 import CreativeMode
+import AsciiArt
 
 # acceptable game commands called 'verbs'. Need to add verb to this list for it to work in game decision area
 VERBS = ['search', 'inventory', 'equip', 'drop', 'attack', 'talk', 'inspect', 'eat', 'kill', 'get', 'wear', 'look',
@@ -227,13 +228,14 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
         # Now at least for normal people you can't metagame by saving and loading files
         elif verb in ['exit', 'leave', 'quit', "die"]:
             # A FULL Copy of /savegame function bassically
-            if raw_input("\n\nAre you sure you want to save and quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+            if raw_input("\n\nAre you sure you want to save and " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
                 logGame(GAMEINFO['log'])  # logs the game when you save it
                 save_game(GAMEINFO['playername'])  # saves all data
                 # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
-                raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
+                AsciiArt.ThanksForPlaying()
+                raw_input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
                 exit()
         elif verb in ['re',"remember", "recall","lore"]:
             x, y, z, dim = PLAYER.location

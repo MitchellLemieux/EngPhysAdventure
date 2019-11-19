@@ -18,6 +18,7 @@ import Quests  # Used to separate quest/event functions
 import TextParser  # Used to separate text interpretation and commands
 from Colour import *
 from TextParser import *
+import AsciiArt
 
 
 import MapDisplay  # Used to separate minim-ap display
@@ -30,7 +31,7 @@ GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.00 - " 
                             + green + 'F' + lightgreen + 'I' + lightblue + 'N' + lightcyan + 'A' + lightgreen + 'L ' \
                             + lightmagenta + 'E' + lightred + 'P' + lightwhite + 'T' + lightyellow + 'A ' + magenta \
                             + 'U' + red + 'P' + white + 'D' + yellow + 'A' + blue + 'T' + red + 'E' + textcolour
-GAMEINFO['releasedate'] = "Nov 12, 2019"
+GAMEINFO['releasedate'] = "Nov 28, 2019"
 
 
 
@@ -239,14 +240,14 @@ def End():
     #     Setup()
     #     Main()
     elif endchoice in ["e","exit"]:
-        if raw_input("\n\nAre you sure you want to quit the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
-            GAMEINFO['runtime'] += (time.time() - GAMEINFO[
-                'timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
+        if raw_input("\n\nAre you sure you want to " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+            GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
             GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
             logGame(GAMEINFO['log'])  # logs the game when you save it
             save_game(GAMEINFO['playername'])  # saves all data
             # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
-            raw_input("We're sad to see you go :( \nI hope whatever you're doing is more fun.\nPress anything to leave")
+            AsciiArt.ThanksForPlaying()
+            raw_input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
             exit()
     return
 

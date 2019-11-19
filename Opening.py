@@ -7,6 +7,7 @@ import fnmatch  # Used to fins the savefiles and display them
 from GameFunctions import *  # used for save file loading
 from printT import *
 from Colour import *
+import AsciiArt
 
 
 from GameFunctions import GAMESETTINGS, GAMEINFO # imports these global variables to be used in the start screen
@@ -54,7 +55,7 @@ def StartScreen():
         print "                 |  L|  ___\   |"
         print "                 |  Y| /W O O D|"
         print "                 |___|/________/"
-        print "                      " + red + "Production." + textcolour
+        print "                      " + red + "Production." + textcolour + ""
         time.sleep(3)  # Delay for intro sound
         print CLEARSCREEN
 
@@ -278,40 +279,40 @@ def Opening():
     #     time.sleep(DELAY/2)
 
 def Closing():
-    print "And so, the fate of McMaster has been decided..."
+    print "\nAnd so, the "+wincolour+"fate" +textcolour+ " of "+mapcolour+"McMaster" +textcolour+ " has been decided..."
     time.sleep(DELAY)
-    print "Our hero has unlocked the secrets of McMaster University"
+    print "Our hero has unlocked the "+wincolour+"secrets" +textcolour+ " of "+mapcolour+"McMaster University" +textcolour+ ""
     time.sleep(DELAY)
-    print "and lived to tell the tale.\n"
+    print "and "+wincolour+"lived" +textcolour+ " to tell the tale.\n"
     time.sleep(DELAY)
-    print "          THE GREAT ENG PHYS TEXT ADVENTURE\n"
+    print "___________                __________.__"
+    print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
+    print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
+    print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
+    print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
+    print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
     time.sleep(DELAY)
-    print "Created by:\nBrendan Fallon, Tyler Kashak, and Mitchell Lemieux  \n"
+    print "Created by:\n"+red+"Brendan Fallon" +textcolour+ ", " +white+ "Tyler Kashak" +textcolour+ ", and " +lightblue+ "Mitchell Lemieux  \n"
     time.sleep(DELAY)
-    print "Special Thanks:\nErik and Phil our best playtesters! There are no better quality checkers than you guys.\n"
-    print "Also thanks to Eric, Brian, Phil, Liam, and Megan\n"
+    print "" +lightmagenta+ "Special Thanks:" +textcolour+ "\n" +personcolour+ "Erik" +textcolour+ " and " +personcolour+ "Phil" +textcolour+ " our best " +indicatecolour+ "playtesters" +textcolour+ "! There are no " +wincolour+ "better quality checkers" +textcolour+ " than you guys.\n"
+    time.sleep(DELAY/2)
+    print "Also thanks to Eric, Brian, Liam, and Megan.\n"
     time.sleep(DELAY)
-    print "                A____ ________"
+    print "                " + red + "A" + textcolour + "____ ________"
     print "                /_  H|\_____  \ "
     print "                 |  O|  ___|  |"
     print "                 |  L| /___   <"
     print "                 |  L|  ___\   |"
     print "                 |  Y| /W O O D|"
     print "                 |___|/________/"
-    print "                      Production."
+    print "                      " + red + "Production." + textcolour + ""
     time.sleep(2)
     printT("This is a work of fiction. Names, characters, businesses, places, events, locales, and incidents are "
            "either the products of the author's imagination or used in a fictitious manner. Any resemblance to actual "
            "persons, living or dead, or actual events is purely coincidental. (\S)",72,0)
-    time.sleep(2)
-    print "___________                __________.__"                 
-    print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
-    print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
-    print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
-    print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-    print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
-    time.sleep(2)
-
+    time.sleep(DELAY)
+    AsciiArt.ThanksForPlaying()
+    time.sleep(DELAY)
 
 
 

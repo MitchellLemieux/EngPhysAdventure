@@ -1,5 +1,5 @@
 import random                                                                                                                                           
-                                                                                                                                                
+from Colour import *
                                                                                                                                                 
 def Hero():                                                                                                                                               
     print "                                                                         :'';;;:;;;;:;;;:::,.`                                        "
@@ -236,3 +236,17 @@ def Crane():
     for line in crane:
         print line
 
+def BigThanksForPlaying():
+    print lightred+          "  ________                __           ______              ____  __            _             __"
+    print red+  " /_  __/ /_  ____ _____  / /_______   / ________  _____   / __ \/ ____ ___  __(_____  ____ _/ /"
+    print lightyellow+        "  / / / __ \/ __ `/ __ \/ //_/ ___/  / /_  / __ \/ ___/  / /_/ / / __ `/ / / / / __ \/ __ `/ /"
+    print green +   " / / / / / / /_/ / / / / ,< (__  )  / __/ / /_/ / /     / ____/ / /_/ / /_/ / / / / / /_/ /_/  "
+    print lightcyan+         "/_/ /_/ /_/\__,_/_/ /_/_/|_/____/  /_/    \____/_/     /_/   /_/\__,_/\__, /_/_/ /_/\__, (_)"
+    print blue+         "                                                                     /____/        /____/     " +textcolour+ ""
+
+def ThanksForPlaying():
+    print red +         " _____ _            _        ___          ___ _           _           _ "
+    print lightyellow+  "|_   _| |___ _ _ _ | |_____ | __|__ _ _  | _ | |__ _ _  _(_)_ _  __ _| |"
+    print green +       "  | | ' \/ _` | ' \| / (_-< | _/ _ | '_| |  _| / _` | || | | ' \/ _` |_|"
+    print lightcyan+    "  | |_||_\__,_|_||_|_\_/__/ |_|\___|_|   |_| |_\__,_|\_, |_|_||_\__, (_)"
+    print blue +        "                                                     |__/       |___/   "+textcolour+""
