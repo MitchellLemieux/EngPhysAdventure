@@ -245,6 +245,7 @@ def Move(direction,DIRECTIONWORDS,DIRECTIONSHORTCUTS):
         bfchance = 0.003
         if PLAYER.inv['body'] == ITEMS['tony hawk shirt']:
             bfchance += 0.007
+            #bfchance += 0.50  # TODO Remove this before final build
 
 
         if bf.location != (None,None,None,None):
@@ -653,6 +654,8 @@ def NameChange(playername):  # A dumb backend workaround to change the players n
         MAPS[2][4][1][0].placeEnemy(ENEMIES[playername.lower()])  # then placed on the map
         ENEMIES[playername.lower() + "'s dad"].location = (5, 7, 1, 0)
         MAPS[5][7][1][0].placeEnemy(ENEMIES[playername.lower() + "'s dad"])  # then placed on the map
+
+        #TODO problem is that allkeys are not updated for spellchecking
 
     except:  # If yourself is already set in the game
         pass

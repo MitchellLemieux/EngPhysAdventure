@@ -150,18 +150,18 @@ shortcutprint = "Shortcuts(\S)blank space = look around(\S)a = attack(\S)b = bac
                         "(\S) dr 1 = drops the thing in your head slot"
 
 
-def Parser(command):
-    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
-    global PLAYER #The main character. player is an object instance of class character.
-    global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS # The game settings that are saved in the game
-    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
-    # If not assignment within the function  may lead to changes only in the local scope
+def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER #The main character. player is an object instance of class character.
+    # global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS # The game settings that are saved in the game
+    # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # # If not assignment within the function  may lead to changes only in the local scope
 
     GAMEINFO['log'].append(command)
     # this splits it at the first spacing making it the first verb and then the rest as the object noun
@@ -308,14 +308,14 @@ def Parser(command):
                                  + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
             if shortkey > len(surroundingobjects):
                 printT("You sure you're okay? There's no " + "{" + str(shortkey) + "} around here.")
-                return  # returns out of the function because invalid input
+                return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS  # returns out of the function because invalid input
             for i in range(1,len(surroundingobjects)+1):  # Shifted loop because starting at 1
                 if i == shortkey:
                     objectName = surroundingobjects[i-1].name.lower()  # assigns the object name to the same position as seen
                     if objectName == "empty":  # if you request something with an empty object it exists
                         playerslot = ["head","body","hand","off-hand"]
                         printT("Your hungover brain realizes you aren't wearing anything on your " + str(playerslot[i-1]) +".")
-                        return
+                        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
         # TODO make exclusion list for custom parser things like these that you don't want spellchecking on 2nd word
         elif verb in ['go', 'move', 'walk', 'run', 'turn','say','sing','/script']: objectName = wordlist[1]  # no spell check for certain thing
 
@@ -388,7 +388,7 @@ def Parser(command):
                                 print objectlist
 
                             printT("Your brain can't tell which '" +indicatecolour+ word +textcolour+ "' you mean.")
-                            return
+                            return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
                         continue
                     elif objectlist:
                         #word = SpellCheck(word,surobjectswords)  # might not spell check single words with short list as will lead to many errors
@@ -405,7 +405,7 @@ def Parser(command):
 
                     else:  # last option is to say we can't find it
                         printT(" (\S)You can't find that around here. Maybe it's your hungover typing.")
-                        return
+                        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
                 # Debug for parser, although some things may need to be polled inside loop
@@ -510,3 +510,5 @@ def Parser(command):
         else:
             printT(" (\S)Your hungover brain struggles to understand that command! (\S)")
 
+
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS

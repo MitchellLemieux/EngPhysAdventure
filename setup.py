@@ -36,7 +36,7 @@ includefiles = ["Readme How to Run the game.txt","Patch Notes for Release.txt", 
 includes = []
 excludes = []
 #packages = ["pygame"]  #This list includes the names important packages/modules that need to be included
-packages = []
+packages = ["cPickle"]
 
 #This governs the shortcut
 cx_Freeze.shortcut_table = [

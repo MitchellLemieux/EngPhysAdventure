@@ -122,6 +122,7 @@ def StartScreen():
                     loadscreen = False
                     startmenu = False
                     MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(Lchoice)  # loads in the savefile global variables
+                    GAMEINFO['loadgame'] = 1
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
                     return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS  # Sets this loadgame flag so the rest of setup is skipped and goes to main
                     print CLEARSCREEN
@@ -130,6 +131,7 @@ def StartScreen():
                     startmenu = False
                     MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(loadnamelist[int(Lchoice)-1])  # converts loadnumber to loadgame index
                     GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
+                    GAMEINFO['loadgame'] = 1
                     return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS   # Sets this flag so the rest of setup is skipped and goes to main
                     print CLEARSCREEN
                 else:
@@ -196,7 +198,7 @@ def StartScreen():
                    "Names, characters, businesses, places, events, locales, and incidents are either the products of "
                    "the author's imagination or used in a fictitious manner. Any resemblance to actual persons, living "
                    "or dead, or actual events is purely coincidental. By playing this game you give up the right to"
-                   "any information or files uploaded to the developers for benevolent development of the game.",72,0)
+                   " any information or files uploaded to the developers for benevolent development of the game.",72,0)
             raw_input("\nHit enter to continue")
             print CLEARSCREEN
         # Exiting

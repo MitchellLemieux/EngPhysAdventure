@@ -19,6 +19,7 @@ import TextParser  # Used to separate text interpretation and commands
 from Colour import *
 from TextParser import *
 
+
 import MapDisplay  # Used to separate minim-ap display
 
 
@@ -59,11 +60,20 @@ def Setup():
     if GAMEINFO['devmode']: GAMEINFO['playername'] = "Doug Fallon"  # Skip name step and names your person Doug
     else:
         # - Name Selection -
-        while not GAMEINFO['playername']:  # name selection can't be empty
-            GAMEINFO['playername'] = raw_input("First, what is your name?\n")
-            if GAMEINFO['playername'] in [""," ", "  ", "   ", ".",",", "no"]:  # not accepted names
-                printT("Please enter a valid name! ")
-                GAMEINFO['playername'] = ""
+        name = ""
+        badchar = ["\\", "/", ":", "*", "?", "'", "<", ">", "|", '"']
+        while not name:  # name selection can't be empty
+            name = raw_input("First, what is your name?\n")
+            if name in [""," ", "  ", "   ", ".",",", "no"]:  # not accepted names
+                printT(""+losecolour+"Please enter a valid name! "+textcolour+"")
+                name = ""
+            elif [True for e in badchar if e in name]:  # if the bad character is in there
+                printT("" + losecolour + "You cannot use \ / : * ? ' < > | " + '" in your name!' + textcolour + "")
+                name = ""
+            else:
+                GAMEINFO['playername'] = name
+
+
     
     PLAYER.name = GAMEINFO['playername']
     ENEMIES, MAPS = NameChange(PLAYER.name)  # changes the name of all name related things in the game
@@ -135,7 +145,7 @@ def Main():
         if GAMESETTINGS['HardcoreMode']: print CLEARSCREEN
 
         # Sends the command text to the text parser to be interpreted and action to be done
-        Parser(command)
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
 
         GAMEINFO['commandcount'] += 1  # increments the command count after every command but doesn't print
         #print LINEBREAK  # Got rid of this bottom linebreak to hopefully have the current situation more clear
@@ -294,6 +304,7 @@ else:  # Dev mode not enabled so error catching
         # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
         save_game(GAMEINFO['playername'] + " AutoSave") #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
+        printT("If you are "+indicatecolour+"exiting"+textcolour+" the game and see this message it's normal! Please "+indicatecolour+"ignore"+textcolour+" the message below.")
         printT("Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave")
         print "\nYour game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
         raw_input("Type anything to exit: ")

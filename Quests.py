@@ -370,7 +370,7 @@ def events():
         # interactcompletion = [INTERACT[i].quest for i in
         #               ['garbage can']]
 
-        if (True in enemycompletion) and (True in interactcompletion):
+        if (False in enemycompletion) or (False in interactcompletion):
             pass
         else:
             raw_input("YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue")
@@ -469,14 +469,16 @@ def events():
                     upgradechoice = 0
                     sacrificechoice = 0
                 # Dropping the items
-                PLAYER.drop(upgrade)  # Item is removed from the player
-                PLAYER.drop(sacrifice)  # Item is removed from the player
+                PLAYER.drop(upgrade)  # Item is removed from the player inventory
+                PLAYER.drop(sacrifice)  # Item is removed from the player inventory
+                del ITEMS[upgrade.name.lower()]  # deleting from the items dictionary so isn't around
+                del ITEMS[sacrifice.name.lower()]  # deleting from the items dictionary so isn't around
+
                 # Upgrading the one item based on the sacrifice
                 printT("The Machine Reads: 'Pack-a-Punching Please Wait'")
-                upgrade.name = "Better " + upgrade.name  # Adding Better to left side of name each time it's upgraded
                 upgrade.colouredname = "" +wincolour+"Better " +itemcolour+ upgrade.name +textcolour+""  # Adding Better to left side of name each time it's upgraded
-                sumUStats = upgrade.stats[0] + upgrade.stats[1] + upgrade.stats[
-                    2]  # taking the sum of the stats of each item
+                upgrade.name = "Better " + upgrade.name  # Adding Better to left side of name each time it's upgraded
+                sumUStats = upgrade.stats[0] + upgrade.stats[1] + upgrade.stats[2]  # taking the sum of the stats of each item
                 sumSStats = sacrifice.stats[0] + sacrifice.stats[1] + sacrifice.stats[2]
                 # Sum of item stats of sacrifice has to be 1/10th that of the PAP item to double or add (whichever is better), or else they just add
                 if sumUStats / 10 <= sumSStats:
@@ -492,7 +494,13 @@ def events():
                     upgrade.stats = (upgrade.stats[0] + sacrifice.stats[0], upgrade.stats[1] + sacrifice.stats[1],
                                      upgrade.stats[2] + sacrifice.stats[2])  # replacing stats tuple
 
+
+                upgrade.location = (2,4,3,0)
+                ITEMS[upgrade.name.lower()] = upgrade  # writing it to the ITEMS dictionary
                 MAPS[2][4][3][0].placeItem(upgrade)  # Placing the Upgraded Item on the ground
+
+                # TODO problem is that allkeys are not updated for spellchecking
+
                 printT("The "+interactcolour+"Pack-a-Punch "+textcolour+"wirls and screaches, glowing bright, before spitting out the " + upgrade.colouredname + " onto the ground!")
                 # TODO add pack-a-punch sound
 

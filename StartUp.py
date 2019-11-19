@@ -503,7 +503,7 @@ def Reset():
     Equipment("Ukelele", (4,4,1,0), "Ukelele.jpg", "Wasting away again in Margaritaville...", "hand", (6,0,5),""),
     Equipment("Fanny Pack", (None), "FannyPack.jpg", "Made for style. Not for carrying.", "body", (10,60,30),""),
     Equipment("STARS Wireless Fix", (None), "StarsFix.jpg", "IT took 6 weeks to make this code? Who knew debugging could be this hard?", "off-hand", (1,1,1),""),
-    Equipment("Brendan Fallon's Lunchbox", (3,4,0,0), "Lunchbox.jpg", "The Lunch Box of an Ancient Hero. Full of samosas", "off-hand", (5,10,5),""),
+    Equipment("Brendan Fallon's Lunchbox", (3,4,0,0), "Lunchbox.jpg", "The Lunch Box of an Ancient Hero. Full of samosas.", "off-hand", (5,10,5),""),
     Equipment("Eng Phys USB Pen", (None), "PhysPen.jpg", "It would be amazing if this thing actually worked. If I had a laptop I could plug it in and find all of 2P04.", "hand", (5,0,5),""),
     Equipment("Ambifacient Lunar Waneshaft", (None), "Dumbness.jpg", "The design consists simply of six hydrocoptic marzlevanes, they fit to the ambifacient lunar waneshaft so that side fumbling is effectively prevented", "off-hand", (1,1,1),""),
     Equipment("Space Pop", (1,7,2,0), "SpacePop.jgp", "Get ready to go to space pop city.", "hand", (4,0,10),1),
