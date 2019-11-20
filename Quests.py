@@ -378,8 +378,6 @@ def events():
         if (False in enemycompletion) or (False in interactcompletion):
             pass
         else:
-            if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
-            if GAMESETTINGS['SpeedRun']: printT("Total Step Count: " + str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
             raw_input("\n" +wincolour+ "YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue:" +textcolour+ "")
             AsciiArt.Acheivement()
             save_game(GAMEINFO['playername'] + " 100 Percent")  # saves all data to later be submited, different from the main save file
@@ -478,8 +476,8 @@ def events():
                 # Dropping the items
                 PLAYER.drop(upgrade)  # Item is removed from the player inventory
                 PLAYER.drop(sacrifice)  # Item is removed from the player inventory
-                del ITEMS[upgrade.name.lower()]  # deleting from the items dictionary so isn't around
-                del ITEMS[sacrifice.name.lower()]  # deleting from the items dictionary so isn't around
+                #del ITEMS[upgrade.name.lower()]  # deleting from the items dictionary so isn't around
+                #del ITEMS[sacrifice.name.lower()]  # deleting from the items dictionary so isn't around
 
                 # Upgrading the one item based on the sacrifice
                 printT("The Machine Reads: " +wincolour+ "'Pack-a-Punching" +indicatecolour+ " Please Wait" +textcolour+ "'")

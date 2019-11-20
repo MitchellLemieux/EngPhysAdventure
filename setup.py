@@ -105,6 +105,8 @@ cx_Freeze.setup(
         executables = [target]
         )
 
+print "420"*69
+
 # Printing out reminders for release
 includefilesprint = ""
 for i in includefiles:
