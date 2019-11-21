@@ -100,23 +100,34 @@ BREN007PIE = Character('Brendan Fallon',list(BRENSTARTLOCATION),999,BRENINV,EMPT
 # MAPS[6][1][1][0].placeItem(ITEMS["big hits shirt"]) #having these spawn the items in the map after should get rid of the wierd bug from having Tyler Kashak having them to start
 # MAPS[0][3][0][0].placeItem(ITEMS["hulk hands"])
 
+
+# --- Setting up Game Folder ---
 # Setting up the game path for the game to the cache folder
 # Using os here to get the current file path and the os.path.join to add the // or \ depending on if it's windows or linuix
 # joining an empty string just gives a slash
 
 #print os.getcwd()  # gets the CWD of the file
 #print os.getenv('APPDATA')  # The app data working directory. Use this instead of CWD so can write if not admin
-GAMEINFO['savepath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure","","cache","")  # Used for hidden saves + logs
-GAMEINFO['datapath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure","")  # Used for setting file
+
 
 try:
+    GAMEINFO['savepath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "", "cache","")  # Used for hidden saves + logs
+    GAMEINFO['datapath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "")  # Used for setting file
     os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
     # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
     # Not hiding individual files so can access and also will throw an error to access if files are hidden
     os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
 
-except:
+except WindowsError:
     printT(" (\S)")  # does nothing if the path is already there
+
+except:  # different system like windows or Linux
+    GAMEINFO['savepath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "", "cache","")  # Used for hidden saves + logs
+    GAMEINFO['datapath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "")  # Used for setting file
+    os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
+    # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
+    # Not hiding individual files so can access and also will throw an error to access if files are hidden
+    os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
 
 
 # TODO Make these functions into class methods related to each class
