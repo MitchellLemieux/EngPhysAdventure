@@ -575,7 +575,7 @@ def Reset():
     Equipment("Kipling Pranks", (2,3,1,0), "KPranks.jpg", "The leftover pranks from the 2017-2018 year. You should probably leave these here.", "off-hand", (2, 2, 2), 3),
     Equipment("Tequila Shot Glass", (5,4,1,0), "ShotGlass.jpg", "Maybe you shouldn't touch this stuff after what happened last night.", "off-hand", (10, 0, 10), -5),
     Equipment("Cold Sweat", (3,4,1,0), "ColdSweat.jpg", "A pool of sweat on the ground. Gross.", "off-hand",(0, 0, 0), 1),
-    Equipment("Polaroid Photograph", (None), "PolaroidPhoto.jpg", "What? Do people still make these? Next thing you know you'll find an 8-inch floppy disk laying around. (\S)The photo shows you smashed out of your mind at the " +mapcolour+ "Phoneix" +textcolour+ ". Looks like a good time.", "off-hand", (0, 0, 0), -2),
+    Equipment("Polaroid Photograph", (None), "PolaroidPhoto.jpg", "What? Do people still make these? Next thing you know you'll find an 8-inch floppy disk laying around. (\S)The photo shows you smashed out of your mind at the " +mapcolour+ "Phoenix" +textcolour+ ". Looks like a good time.", "off-hand", (0, 0, 0), -2),
 
     #--- Haunted Forest Items ---
     Equipment("Golden Apple", (1, 0, 0, 5), "GApple.jpg", "This luxurious apple glowes in the light. A rare commodity as eating it restores full health.","off-hand", (1, 1, 1), 1000),
@@ -702,8 +702,15 @@ def Reset():
     Animal("Fred the Good Boy", "You talk to Fred. His wise eyes stare at you. It's almost as if he understands what you're saying but he'd rather have have you play with the ball.", (0,0,0,3),(9999,9999,9999),9999,"tennis ball","tennis ball","Fred barks happily. He chews on it for a second and then kicks it back happily to you.","","He smiles at you happily! His tail wags but you can tell he just wants to play with the ball.",True),
     Enemy("Nicole the Assistant", "Hi! Welcome to the Engineering Physics Office. What can I help you with? Dr. Lapierre should be just across the tunnel in ABB if you're looking for him.", (1, 5, 2, 0),(15,30,15),40,None,None,"","NO! Did I send you too many emails?",True),
     Animal("Liam the Library Dog","You talk to Liam and it seems to help. Maybe this theropy stuff does work.",(4,0,1,0), (9999, 9999, 9999), 9999, None, None,"", "","Liam cuddles beside you while you scratch/pet him. He's really good at his job.",True),
-
-    # --- Haunted Forest People ---
+    Enemy("Devan the most Unhelpful", "You ask Devan if he knows anything about your " +itemcolour+ "iron ring" +textcolour+ ". (\S)He says: 'How'd you hear about this? What did the " +indicatecolour+ "quantum order" +textcolour+ " tell you? We can't speak here, come meet me in " +mapcolour+ "JHE Basement" +textcolour+ ".'", (1,3,1,0), (25, 25, 25), 50, None, None,"", "I WASNT'T GOING TO GIVE YOU A GOOD MARK ANYWAYS!", False),
+    Enemy("Hannah the Helpful", "Hey are you okay after what happened at the " +mapcolour+ "Phoenix" +textcolour+ "? Do you need help?", (1,4,2,0), (25, 25, 25), 50, None, None,"", "No! How am I going to make a great capstone now!", True),
+    Enemy("Matt the Vuk", "Man you're crazy haha. I wouldn't be walking after what you did at the " +mapcolour+ "Phoenix" +textcolour+ ".",(4,4,1,0), (25, 25, 25), 50, None, None, "", "Now how am I supposed to be the ultimate Eng Phys guy?", True),
+    Enemy("Arthur the D'art","Even though I'm in seven courses right now I'd love to talk!",(5,3,1,0), (25, 25, 25), 50, None, None, "", "At least it's better than Eng Phys!",True),
+    Enemy("Angus the Barber", "He's dressed in a pirate costume and saying: 'Four FOURS!'", (0,7,1,0),(25, 25, 25), 50, None, None, "", "You'll spend an eternity on this ship!", True),
+    Enemy("Neil the Man", "Neil is quietly studying with his headphones on. Best not to disturb him.", (3,4,0,0),(50, 50, 50), 75, None, None, "", "Well this is better than 2P with Phil!", True),
+    Enemy("Keara the Mera", "Hey! Aren't you the guy that ruined the " +mapcolour+ "McMaster statue" +textcolour+ " last night?", (5,0,1,0),(25, 25, 25), 50, None, None, "", "Why would you do that!?", True),
+    Enemy("Dawson the Die Dye Guy", "Sa dude! These psychedelics rock!", (0,4,1,0),(25, 25, 25), 50, None, None, "", "Dudeee, why?", True),
+        # --- Haunted Forest People ---
 
     Enemy("Little Girl", "Hi, I think I'm lost... (\S)Have you seen my mitten?", (0, 0, 0, 4), (10, 10, 10), 10,"ring pop", "old mitten",
               "Oh thank you! That is my mitten. (\S)Here, take my candy. It is the only way I can thank you. BYE!",

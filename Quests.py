@@ -37,6 +37,7 @@ questlist = [
     'completionist',
     'PAP',
     # Talk to hooded man
+    "talk to devan",
     "talk to mysterious man",
     # Nuke
     "preston get dumbbell",
@@ -188,6 +189,16 @@ def ebta_story(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESET
     # global GAMESETTINGS  # The game settings that are saved in the game
     # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
     # # If not assignment within the function  may lead to changes only in the local scope
+
+    # Talk to devan
+    if ENEMIES["devan the most unhelpful"].spoke and QUESTS["talk to devan"]:
+        MAPS[1][3][1][0].removeEnemy(ENEMIES["devan the most unhelpful"])  # removes him from infront of hatch
+        ENEMIES["devan the most unhelpful"].location = (2,4,0,0)
+        MAPS[2][4][0][0].placeEnemy(ENEMIES["devan the most unhelpful"])
+        ENEMIES["devan the most unhelpful"].info = "We can talk in here. I've heard about you seeking your " +itemcolour+ "iron ring" +textcolour+ ". Turns out this thing goes deeper than I could have imagined, way deeper. It seems last night you got really drunk at the " +mapcolour+ "Phoenix" +textcolour+ " and did something to piss off somebody very bad. I'd say if you're trying to get your ring, you should start there."
+        ENEMIES["devan the most unhelpful"].spoke = False
+        QUESTS["talk to devan"] = 0
+
 
     # Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:

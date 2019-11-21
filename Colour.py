@@ -73,6 +73,36 @@ deadpersoncolour = red
 coloursusedlist = [lightwhite,lightcyan,lightyellow,lightmagenta,red]
 
 
+#TurnOffColour(black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen, lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset,white,yellow,stylebright,styledim,stylenormal,stylereset,backblack,backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour,backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour,GAMESETTINGS['ColourOff'])  # turns off the colour if desired on startup
+
+# Ability to turn off colours is complicated to implement in time due to function importing
+# try:  # In case settings file isn't there
+#     settingpath = os.path.join(GAMEINFO['datapath'], "settings.ini")
+#     with open(settingpath, 'r') as f:
+#         data = f.readlines()  # reads in data seperated by newline into a list
+#     f.close()
+#     data = [f.strip() for f in data]  # removes the \n in each list element wise (very useful for list operations)
+#     for i in range(0, len(data), 2):
+#         GAMESETTINGS[data[i]] = int(data[i+1])  # Reading in file data in attribute value order, value should be an int
+# except:
+#     #print "\n\nSomething is Wrong with the Setting.ini file!\n\n"
+#     printT("\n\nNo Settings Detected!\n\n")
+#
+#
+# def TurnOffColour(black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen, lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset,white,yellow,stylebright,styledim,stylenormal,stylereset,backblack,backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour,backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour,ColourOff=False):  # if you ever call TurnOffColour with the flag set to true it will disable all colours
+#     if ColourOff:
+#         black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen = "","","","","","","",""
+#         lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset = "","","","","","",""
+#         white,yellow,stylebright,styledim,stylenormal,stylereset,backblack = "","","","","","",""
+#         backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour = "","","","","",""
+#         backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour = "","","","","",""
+#
+#
+#     return black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen, lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset,white,yellow,stylebright,styledim,stylenormal,stylereset,backblack,backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour,backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour
+#
+#
+# black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen, lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset,white,yellow,stylebright,styledim,stylenormal,stylereset,backblack,backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour,backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour = TurnOffColour(black, blue,cyan, green,lightblack,lightblue,lightcyan,lightgreen, lightmagenta,lightred,lightwhite,lightyellow,magenta,red,textreset,white,yellow,stylebright,styledim,stylenormal,stylereset,backblack,backblue,textcolour,backcolour,wincolour,losecolour,indicatecolour,backgroundcolour,mapcolour,itemcolour,interactcolour,personcolour,deadpersoncolour)
+
 #Defaults
 # textcolour = lightgreen
 # mapcolour = lightwhite

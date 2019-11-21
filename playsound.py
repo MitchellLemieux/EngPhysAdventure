@@ -119,7 +119,10 @@ if system == 'Windows':
     playsound = _playsoundWin
 elif system == 'Darwin':
     playsound = _playsoundOSX
+elif system == "linux" or system == "linux2":  # Linux
+    print "Sorry, sounds don't work for linux yet!"
 else:
-    playsound = _playsoundNix
+    print "Sorry, sounds are not supported for this system yet!"
+    #playsound = _playsoundNix
 
 del system

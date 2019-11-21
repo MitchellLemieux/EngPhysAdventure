@@ -167,7 +167,7 @@ def Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
             #Doesn't reset the GAMEINFO['timestart'] as the runtime will included the time in the nested function
             #TODO delete the save file you're coming out of
             
-    End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS) #calls the end function in main so that the game can continue its loop structure
+    MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS) #calls the end function in main so that the game can continue its loop structure
 
 def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
     # # Anywhere where a loadgame happens you need all the global variables
@@ -251,7 +251,7 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
             AsciiArt.ThanksForPlaying()
             raw_input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
             exit()
-    return
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
 # ---------GAME STARTS HERE  ---------
@@ -285,6 +285,7 @@ try:  # IF DEVMODE.ini isn't there in the CWD of the game no beuno
 except:  # does nothing if no dev file there
     pass
     #raw_input("HI I'M NOT A DEV!")
+
 
 
 

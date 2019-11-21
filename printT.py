@@ -12,6 +12,8 @@ just be ignored if using this function.
 import time
 import re
 
+# Having custom game settings for printT won't work for final release either because like Colours.py, PrintT is a fundamental module
+
 
 def escape_ansi(line):  # used to remove ansii escape codes
     ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')

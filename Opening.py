@@ -152,6 +152,7 @@ def StartScreen():
                 print '[0]Disable Opening:  ' + str(GAMESETTINGS['DisableOpening'])
                 print '[1]Speed Run:        ' + str(GAMESETTINGS['SpeedRun'])
                 print '[2]Hardcore Mode:    ' + str(GAMESETTINGS['HardcoreMode'])
+                # print '[3]Turn Colour Off:    ' + str(GAMESETTINGS['ColourOff']) + " (Must restart client and start new game to take effect)"
                 print '[B]Back\n '
 
                 Schoice = raw_input('Choose which settings you want to toggle: ').lower()
@@ -169,6 +170,9 @@ def StartScreen():
                 elif Schoice =='2':
                     print CLEARSCREEN
                     GAMESETTINGS['HardcoreMode'] = int(not(GAMESETTINGS['HardcoreMode']))
+                # elif Schoice == '3':
+                #     print CLEARSCREEN
+                #     GAMESETTINGS['ColourOff'] = int(not (GAMESETTINGS['ColourOff']))
                 elif Schoice == '/420e69':  # Character that enables DevMode
                     print CLEARSCREEN
                     GAMEINFO['devmode'] = int(not(GAMEINFO['devmode']))

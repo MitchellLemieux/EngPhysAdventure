@@ -8,6 +8,7 @@ import time
 import os  # used to put files in the cache folder
 from printT import * #import it all
 from Colour import *
+from sys import platform
 
 
 
@@ -110,24 +111,36 @@ BREN007PIE = Character('Brendan Fallon',list(BRENSTARTLOCATION),999,BRENINV,EMPT
 #print os.getenv('APPDATA')  # The app data working directory. Use this instead of CWD so can write if not admin
 
 
-try:
-    GAMEINFO['savepath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "", "cache","")  # Used for hidden saves + logs
-    GAMEINFO['datapath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "")  # Used for setting file
-    os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
-    # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
-    # Not hiding individual files so can access and also will throw an error to access if files are hidden
-    os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
 
-except WindowsError:
-    printT(" (\S)")  # does nothing if the path is already there
 
-except:  # different system like windows or Linux
-    GAMEINFO['savepath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "", "cache","")  # Used for hidden saves + logs
-    GAMEINFO['datapath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "")  # Used for setting file
-    os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
-    # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
-    # Not hiding individual files so can access and also will throw an error to access if files are hidden
-    os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
+if platform == "win32":
+    try:
+        GAMEINFO['savepath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "", "cache",
+                                            "")  # Used for hidden saves + logs
+        GAMEINFO['datapath'] = os.path.join(os.getenv('APPDATA'), "EngPhysTextAdventure", "")  # Used for setting file
+        os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
+        # CAN"T have last \ in the file path so have to use [:-1] to use all string but the last character
+        # Not hiding individual files so can access and also will throw an error to access if files are hidden
+        os.system("attrib +h " + GAMEINFO['savepath'][:-1])  # Makes cache file hidden
+
+    except:
+        printT(" (\S)")  # does nothing if the path is already there
+elif platform == "linux" or platform == "linux2":  # Linux
+    try:
+        GAMEINFO['savepath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "", "cache", "")  # Used for hidden saves + logs
+        GAMEINFO['datapath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "")  # Used for setting file
+        os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
+    except:
+        printT(" (\S)")  # does nothing if the path is already there
+elif platform == "darwin":  # OS X/MAC
+    try:
+        GAMEINFO['savepath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "", "cache", "")  # Used for hidden saves + logs
+        GAMEINFO['datapath'] = os.path.join(os.getcwd(), "EngPhysTextAdventure", "")  # Used for setting file
+        os.makedirs(GAMEINFO['savepath'])  # gets the directory then makes the path if it's not there
+    except:
+        printT(" (\S)")  # does nothing if the path is already there
+
+
 
 
 # TODO Make these functions into class methods related to each class
