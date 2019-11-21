@@ -17,7 +17,9 @@ TODO add encryption of these files so a pickler isn't needed
 
 import csv
 import os  # Used for file navigation
-from StartUp import XRANGE, YRANGE, ZRANGE  # Importing the map bound variables from StartUp to be used in the load
+from StartUp import XRANGE, YRANGE, ZRANGE, DRANGE  # Importing the map bound variables from StartUp to be used in the load
+
+
 
 csvPath = os.path.join(os.getcwd(), "Dev", "")  # Gives the base path so the CSVs can be put in the dev folder
 
@@ -34,7 +36,7 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
 
     # Items to CSV file
     # This is the top of the CSV file which describes the attribute and can be filtered
-    iheader = ['Name', 'Description', 'Image Name', 'x', 'y', 'z', 'Attack', 'Defense', 'Speed', 'Health', 'Where Worn']
+    iheader = ['Name', 'Description', 'Image Name', 'x', 'y', 'z', 'dim', 'Attack', 'Defense', 'Speed', 'Health', 'Where Worn']
     with open(csvPath + "ITEMS.csv", "wb") as f:
         writer = csv.writer(f, delimiter=',')  # defining the writer object based on the open file
         # writer.writerow(list) writes a whole line with each element in the list being a separate cell
@@ -43,14 +45,14 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
         for item in ITEMS:  # looping through all the entries in the dictionary
             i = ITEMS[item]  # accessing the object the dictionary and storing it to a temporary variable
             # writing all the attributes of the object to the CSV files
-            writer.writerow([i.name, i.info, i.image, i.location[0], i.location[1], i.location[2], i.stats[0],
-                             i.stats[1], i.stats[2], i.health, i.worn])
+            writer.writerow([i.name, i.info, i.image, i.location[0], i.location[1], i.location[2], i.location[3],
+                             i.stats[0], i.stats[1], i.stats[2], i.health, i.worn])
         writer.writerow(["DELETE ME BEFORE SORTING: To see everything in Excel select columns then and double click "
                          "border to make it autofit. Then do same to rows."])  # last line Excel format message
     f.close()
 
     # Map to CSV
-    mheader = ['Name', 'Description', 'x', 'y', 'z', 'Item Inventory', 'Enemy Inventory',
+    mheader = ['Name', 'Description', 'x', 'y', 'z','dim', 'Item Inventory', 'Enemy Inventory',
                'Place Description (will leave soon)', 'Inside', 'Wall locations', 'Interior Size', 'Travelled Flag',
                'Mapped Flag']
     with open(csvPath + "MAPS.csv", "wb") as f:
@@ -60,12 +62,13 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
         for x in range(XRANGE):
             for y in range(YRANGE):
                 for z in range(ZRANGE):
-                    # There are different objects in 1 vs the other so need to replace object with the new one
-                    if MAPS[x][y][z]:
-                        m = MAPS[x][y][
-                            z]  # accessing the object inter he dictionary and storing it to a temporary variable
-                        writer.writerow([m.name, m.info, m.coords[0], m.coords[1], m.coords[2], m.items, m.ENEMY,
-                                         m.lore, m.inside, m.walls, m.size, m.travelled, m.mapped])
+                    for dim in range(DRANGE):
+                        # There are different objects in 1 vs the other so need to replace object with the new one
+                        if MAPS[x][y][z][dim]:
+                            # accessing the object inter he dictionary and storing it to a temporary variable
+                            m = MAPS[x][y][z][dim]
+                            writer.writerow([m.name, m.info, m.location[0], m.location[1], m.location[2], m.location[3],
+                                             m.items, m.ENEMY,m.lore, m.inside, m.walls, m.size, m.travelled, m.mapped])
         writer.writerow(["DELETE ME BEFORE SORTING: To see everything in Excel select columns then and double click "
                          "border to make it autofit. Then do same to rows."])  # last line Excel format message
     f.close()
@@ -112,16 +115,16 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
                 crossSection[X][YSize - 1] = border
                 border += 1
 
-            # Filling in Names and Walls
+            # Filling in Names and Walls  TODO Interior Mapping
             for X in range(2, YSize - 1, 2):  # Creating row print first with X being the map variable
                 for Y in range(2, YSize - 1, 2):
                     # Error catching for if a map spot doesn't exist. If there is a better way please do it
                     try:
                         # Goes to each map spot and fills in walls around it
                         #   Using (X - 2) / 2 to convert from CSV space to game map space and loop through all spaces
-                        if MAPS[(X - 2) / 2][(Y - 2) / 2][Z]:  # checks if the map exists at the reference location
+                        if MAPS[(X - 2) / 2][(Y - 2) / 2][Z][0]:  # checks if the map exists at the reference location
                             printname = ""  # Cell accumulator string for the mapname
-                            walls = MAPS[(X - 2) / 2][(Y - 2) / 2][Z].walls  # Storing the wall variable temporarily
+                            walls = MAPS[(X - 2) / 2][(Y - 2) / 2][Z][0].walls  # Storing the wall variable temporarily
                             if walls:  # if the map has walls
                                 # does all the cases to adds the side walls to the cell around the map name
                                 if 'f' in walls: crossSection[X][Y + 1] = "-------------------------------"
@@ -132,7 +135,7 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
                                 if 'u' in walls: printname = printname + "^^^ "
                                 if 'd' in walls: printname = printname + "vvv "
                             # Adding the full map name to the element
-                            crossSection[X][Y] = printname + MAPS[(X - 2) / 2][(Y - 2) / 2][Z].name
+                            crossSection[X][Y] = printname + MAPS[(X - 2) / 2][(Y - 2) / 2][Z][0].name
                     except:
                         crossSection[x][y] = "-"  # if no map location put a null
             # Printout/CSV Writer
@@ -158,28 +161,28 @@ def entities_to_CSV(PLAYER, ITEMS, MAPS, ENEMIES, INTERACT, QUESTS, GAMEINFO, GA
     # Quest, GameInfo, & Game Settings will be added as needed. For now not big enough to need Excel.
 
     # Enemies to CSV
-    eheader = ['Name', 'Talk Text', 'x', 'y', 'z', 'Attack', 'Defense', 'Speed', 'health', 'drop', 'need',
+    eheader = ['Name', 'Talk Text', 'x', 'y', 'z','dim', 'Attack', 'Defense', 'Speed', 'health', 'drop', 'need',
                'Special/Quest Text', 'Death Text']
     with open(csvPath + "ENEMIES.csv", "wb") as f:
         writer = csv.writer(f, delimiter=',')  # defining the writer object
         writer.writerow(eheader)  # write the header list
         for enemy in ENEMIES:  # looping through all the entries in the dictionary
             e = ENEMIES[enemy]  # accessing the object inter he dictionary and storing it to a temporary variable
-            writer.writerow([e.name, e.info, e.location[0], e.location[1], e.location[2], e.stats[0], e.stats[1],
-                             e.stats[2], e.health, e.drop, e.need, e.Sinfo, e.Dinfo])
+            writer.writerow([e.name, e.info, e.location[0], e.location[1], e.location[2], e.location[3], e.stats[0],
+                             e.stats[1], e.stats[2], e.health, e.drop, e.need, e.Sinfo, e.Dinfo])
         writer.writerow(["DELETE ME BEFORE SORTING: To see everything in Excel select columns then and double click "
                          "border to make it autofit. Then do same to rows."])  # last line Excel format message
     f.close()
 
     # Intractable to CSV
-    intheader = ['Name', 'Description', 'x', 'y', 'z', 'Special/Quest Info', 'Quest Item', 'Given Item']
+    intheader = ['Name', 'Description', 'x', 'y', 'z', 'dim','Special/Quest Info', 'Quest Item', 'Given Item']
     with open(csvPath + "INTERACT.csv", "wb") as f:
         writer = csv.writer(f, delimiter=',')  # defining the writer object
         writer.writerow(intheader)  # write the header list
         for inter in INTERACT:  # looping through all the entries in the dictionary
             inter = INTERACT[inter]  # accessing the object inter he dictionary and storing it to a temporary variable
             writer.writerow(
-                [inter.name, inter.info, inter.location[0], inter.location[1], inter.location[2],
+                [inter.name, inter.info, inter.location[0], inter.location[1], inter.location[2], inter.location[3],
                  inter.Sinfo, inter.need, inter.drop])
         writer.writerow(["DELETE ME BEFORE SORTING: To see everything in Excel select columns then and double click "
                          "border to make it autofit. Then do same to rows."])  # last line Excel format message

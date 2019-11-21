@@ -10,11 +10,22 @@ just be ignored if using this function.
     #and make sure it's disableable through speedrun and a special options
 #seems to skip at LAST ONE OH BECAUSE THERE"S NO DELAY :)
 import time
+import re
+
+# Having custom game settings for printT won't work for final release either because like Colours.py, PrintT is a fundamental module
+
+
+def escape_ansi(line):  # used to remove ansii escape codes
+    ansi_escape =re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+    return ansi_escape.sub('', line)
+from Colour import coloursusedlist
+
 
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
-# TODO put delay back to 2.5 seconds before game release
-def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
+# TODO put delay back to 2.0 seconds before game release
+# TODO Make an alignment option so can align to left, centre, or right side of screen
+def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
     This function removes newlines from our old text then prints out each line to the chacter limit and with delays inbetween
     Can override parser to make newline split using (\S). Use (\S) (\S) to split and make a blank space with a delay, resets the sentence variable
@@ -23,21 +34,23 @@ def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new 
     """#these are docstrings for function, which come up on idle
 
     # If speed run is enabled this will override the text delay and make it 0 for all outputs
-    from GameFunctions import GAMESETTINGS  # Imports game settings, hopefully will let it compile
-    if GAMESETTINGS['SpeedRun'] == 1:
+    from GameFunctions import GAMESETTINGS,GAMEINFO  # Imports game settings, hopefully to avoid import problems
+    if GAMESETTINGS['SpeedRun'] or GAMEINFO['devmode']:  # If either mode there is no text delay
         delay = 0
     
-    #print "="*char #reference width of screen
-    intext = text.replace('\n', ' ').lstrip().rstrip() #removes newlines from the string and replaces it with spaces, if there's a newline at the start it removes it
+    # print "="*char #reference width of screen
+    # removes newlines from the string and replaces it with spaces, if there's a newline at the start it removes it
+    intext = text.replace('\n', ' ').lstrip().rstrip()
 
     # this is the custom phrase parser that splits at the right width. Probably not optimal but works and okay fast
-    intext =  intext.split(" ") #splits up input text into a list of words (using spaces)
-    phrase = "" #phrase accumulator to be seperated and printed on a seperate line after reaching the page width
-    sentence = 0 #Paragraph counter. counts number of sentenes to split via paragraphs
-    for word in intext: #loops through words in sentence list
-        if (("." in word) or ("!" in word) or ("?" in word)) and (not("dr." in word.lower())): sentence += 1 #if a punctuation is in word it counts as a sentence (so try to avoid .,!,? for other uses)
-        phrase = phrase + word #adds new text phrase with no space
+    intext =  intext.split(" ")  # splits up input text into a list of words (using spaces)
+    phrase = ""  # phrase accumulator to be separated and printed on a separate line after reaching the page width
+    sentence = 0  # Paragraph counter. counts number of sentences to split via paragraphs
 
+    for word in intext:  # loops through words in sentence list
+        if (("." in word) or ("!" in word) or ("?" in word)) and (not("dr." in word.lower())): sentence += 1 #if a punctuation is in word it counts as a sentence (so try to avoid .,!,? for other uses)
+        phrase = phrase + word  # adds new text phrase with no space
+        lenphrase = len(escape_ansi(phrase))  # this gets the actual length of the phrase without ansii escape codes (colours)
         if ("(\S)" in word): #uses (\S) to custom deliminate spaces, should be before others are is the master short. Use of (\S) is arbitrary, can be any uncommon characters
             phrase = phrase.rstrip(word) #removes the last word from the phrase
             word = word.split("(\S)") #splits it over the delimter, so it can split right at the "(\S)", by making it a list of the last word of the phrase and start of new one
@@ -55,20 +68,20 @@ def printT(text, char=72, delay = 2.5): #3 second delay seems to be optimal new 
             phrase = "" #resets phase
             sentence = 0 #resets the sentence counter for new paragraph
             continue #returns the loop back to the top of the loop so it doesn't add the space at the start of the next phrase
-        elif len(phrase) == char: #if the phrase has accumulated to JUST the right size it will split
+        elif lenphrase == char: #if the phrase has accumulated to JUST the right size it will split
             print phrase #see above
             time.sleep(delay)
             phrase = "" 
             continue 
-        elif len(phrase) > char : #if phrase is just over the length with next word it removes last word and prints
+        elif lenphrase > char : #if phrase is just over the length with next word it removes last word and prints
             phrase = phrase.rstrip(word) #removes the last word added to phrase from phrase
             print phrase
             time.sleep(delay)
             phrase = word #resets phrase with current word variable
-        phrase += " " #adds inbetween space after word is sucessfully added
+        phrase += " "  # adds inbetween space after word is sucessfully added
         
-    print phrase.lstrip().rstrip() #prints the final part of the phrase that doesn't evenly fit in so wasn't split
-    time.sleep(delay/2) #final delay but half speed b.c. half text?
+    print phrase.lstrip().rstrip()  # prints the final part of the phrase that doesn't evenly fit in so wasn't split
+    time.sleep(delay/2)  # final delay but half speed b.c. half text?
 
 ###Examples###
 """ #These comment out multiple lines of code using text, won't compile so is bassically a multiline comment

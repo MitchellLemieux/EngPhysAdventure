@@ -1,0 +1,10 @@
+DEV = DEVMODE
+VAN = Vanilla regular mode (no secrets, but sidequests allowed)
+SEC = Vanilla with secrets
+
+LIGHT = Lightside ending where you kill cassidy
+DARK = Darkside ending where you kill all the profs.
+NEUT = kill both profs.
+NONE = No ending, just a script
+
+NOTES = A script for something different

@@ -5,14 +5,14 @@ import py2exe
 setup( console= [
         {
 
-            "script": "EngPhysAdventure Alpha v0.29.py",
+            "script": "EngPhysAdventure Alpha v0.30.py",
             "icon_resources": [(0, "newicon_Hbg_icon.ico")]
         }
      ]
 )
 
-# TODO make the icon apear automatically, moving the media files, and make an installer
-# TODO figure out tags
+
+
 reminder = ["\n\nDon't forget to:\n",
             "Have all your code documented and ready to go!\n",
             "Check all the TODOs in the game\n",

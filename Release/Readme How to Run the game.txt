@@ -16,6 +16,5 @@ Thanks!
     	                    |___|/________/
   	                      Production
 
-
 Version: Alpha v0.29 - Developer Update
 Updated: July 3, 2019

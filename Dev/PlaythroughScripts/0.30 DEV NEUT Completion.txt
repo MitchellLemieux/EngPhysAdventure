@@ -1,0 +1,1243 @@
+/gameinfo
+r
+r
+r
+f
+talk hood
+l
+l
+l
+l
+b
+l
+u
+e silicon
+d
+r
+r
+r
+f
+r
+talk dr.
+f
+l
+a bill
+e solar
+l
+u
+l
+u
+talk dr.
+d
+r
+r
+b
+b
+a ken
+e kenrick's
+f
+talk dr.
+e glasses
+b
+b
+ex sun
+e key
+l
+l
+f
+f
+f
+f
+ex case
+e cage
+f
+d
+t dr.
+e gauss
+u
+b
+b
+b
+b
+b
+b
+b
+e dumb
+f
+f
+r
+f
+f
+u
+talk dr.
+d
+f
+r
+r
+a chris
+e tools
+l
+l
+t buijs
+l
+l
+u
+a dr.
+e flux
+d
+r
+r
+r
+r
+d
+ex reactor
+s
+a stefan
+e donut
+u
+l
+l
+d
+u
+l
+r
+d
+u
+f
+d
+t novog
+e ancient
+u
+r
+r
+b
+b
+b
+b
+b
+b
+d
+ex mirror
+e gamma 
+u
+f
+f
+f
+l
+l
+f
+e coffee
+u
+l
+l
+f
+f
+b
+f
+t dr.
+d
+r
+r
+r
+r
+b
+b
+d
+a jana
+e 3w
+u
+t dr.
+e 3w
+l
+r
+s
+e textbook
+e 3W textbook
+l
+l
+d
+dr 3w
+u
+l
+l
+f
+f
+d
+u
+l
+b
+b
+b
+b
+b
+u
+a dr.
+e brain
+d
+f
+f
+r
+f
+f
+f
+d
+t dr.
+use laser
+use femptosecond laser
+use key
+e pedrotti 
+u
+r
+stats
+r
+b
+r
+r
+b
+b
+b
+/savegame
+t man
+s
+t cassidy
+s
+a mcmaster
+s
+e iron ring
+i
+l
+f
+l
+b
+f
+r
+f
+a dr.
+b
+b
+b
+l
+f
+f
+l
+f
+u
+a dr. preston
+d
+r
+r
+r
+a dr.
+l
+l
+l
+stats
+l
+f
+u
+a dr.
+f
+a dr.
+d
+b
+r
+f
+b
+a dr.
+f
+d
+u
+l
+f
+d
+/savegame
+a Minnick
+u
+l
+b
+b
+u
+d
+r
+r
+r
+r
+f
+l
+l
+d
+a novog
+
+i
+r
+u
+r
+r
+b
+r
+r
+b
+l
+f
+l
+b
+u
+i
+d
+ea banana
+ea sweat
+dr 1
+dr 2
+dr 3
+dr 4
+u
+e cricket
+d
+l
+f
+l
+f
+f
+u
+u
+t con
+d
+d
+l
+l
+b
+use keys
+r
+r
+r
+f
+r
+r
+e tire
+l
+l
+l
+b
+b
+l
+l
+f
+use tire
+e potato
+r
+b
+b
+b
+r
+b
+t brian
+r
+r
+r
+b
+f
+b
+l
+b
+b
+r
+f
+f
+l
+e car
+l
+l
+l
+l
+f
+f
+f
+f
+use keys
+e ball
+f
+f
+r
+r
+r
+r
+r
+t rod
+r
+r
+b
+b
+r
+r
+b
+b
+b
+b
+f
+f
+f
+u
+e drum
+d
+l
+l
+l
+b
+l
+b
+b
+l
+b
+d
+t erik
+u
+f
+l
+r
+r
+r
+f
+r
+f
+r
+r
+l
+l
+f
+e gauss
+l
+l
+l
+f
+f
+f
+e lad
+b
+b
+r
+r
+r
+b
+b
+use lad
+l
+l
+l
+b
+d
+e chain
+u
+r
+r
+r
+f
+f
+e glvoe
+e cubed
+i
+
+e glove
+r
+br
+b
+b
+b
+f
+r
+/savegame
+a mcmaster
+a sir william
+l
+l
+f
+dr 4
+e cubed
+dr 3
+r
+r
+b
+e iron
+i
+
+a dr. cassidy
+b
+f
+l
+l
+f
+drf
+f
+dr 4
+dr 3
+b
+e glove
+
+f
+dr 3
+b
+e 6
+dr 4
+e iron
+f
+dr iron
+l
+l
+l
+b
+b
+r
+/stats
+c
+b
+r
+b
+b
+d
+a grad
+e ass
+u
+f
+f
+r
+f
+f
+d
+t liam
+u
+l
+l
+b
+i
+b
+b
+b
+e feb
+l
+f
+f
+f
+f
+f
+t paul
+r
+r
+r
+r
+r
+r
+b
+b
+d
+e lon
+u
+l
+f
+f
+l
+l
+l
+f
+r
+r
+t steven
+l
+b
+d
+e phil's
+u
+r
+r
+r
+b
+f
+t phil
+l
+l
+l
+f
+d
+u
+b
+d
+e gauss
+u
+b
+b
+b
+b
+b
+u
+e goldfish
+d
+f
+b
+d
+u
+f
+r
+b
+d
+f
+l
+l
+l
+l
+r
+r
+b
+b
+f
+f
+f
+f
+l
+f
+r
+b
+b
+f
+d
+t zack
+i
+u
+r
+dr 2
+f
+b
+b
+l
+b
+f
+use msp
+l
+l
+b
+e tarzan
+f
+f
+r
+r
+r
+r
+f
+r
+f
+ex rca
+l
+l
+l
+l
+l
+b
+b
+e needle
+b
+b
+b
+use needle
+r
+r
+f
+r
+f
+l
+read rules
+f
+l
+u
+f
+f
+e pen
+b
+b
+f
+d
+b
+r
+/savegame
+use pen
+ex lenvo
+ex laptop
+
+i
+ex laptop
+r
+r
+r
+b
+b
+r
+b
+b
+d
+ex shovel
+u
+f
+b
+d
+e shovel
+u
+f
+f
+f
+f
+f
+l
+l
+f
+f
+ex earth
+e decl
+r
+r
+b
+b
+b
+b
+b
+b
+r
+d
+u
+u
+i
+ex tri-coloured
+d
+l
+l
+l
+b
+l
+b
+r
+
+f
+l
+l
+b
+u
+u
+d
+d
+f
+f
+f
+i
+f
+f
+f
+r
+r
+f
+r
+r
+e cheese
+l
+l
+l
+b
+b
+b
+b
+b
+b
+b
+f
+l
+b
+u
+u
+use cheese
+d
+d
+f
+f
+r
+r
+f
+f
+i
+dr 1
+l
+l
+r
+b
+r
+r
+b
+b
+b
+ex red
+f
+f
+f
+f
+f
+f
+f
+l
+ex opening
+f
+f
+r
+b
+r
+r
+r
+f
+r
+f
+l
+f
+f
+l
+l
+b
+r
+e kindling
+l
+f
+r
+r
+b
+b
+r
+b
+l
+b
+l
+f
+l
+f
+l
+l
+f
+r
+f
+f
+r
+r
+r
+r
+b
+b
+ex fire
+dr kindling
+f
+f
+l
+l
+l
+l
+e fireplace
+b
+b
+l
+f
+f
+l
+l
+l
+b
+f
+r
+f
+r
+f
+ex deep
+e char
+r
+e log
+l
+b
+l
+b
+l
+b
+l
+b
+dr char
+f
+r
+f
+r
+b
+f
+r
+r
+b
+b
+r
+b
+b
+r
+r
+r
+r
+b
+
+f
+f
+r
+r
+r
+r
+b
+b
+ex fire
+e kindling
+ex fire
+f
+f
+l
+r
+r
+b
+b
+b
+f
+f
+l
+l
+l
+l
+b
+b
+l
+b
+l
+l
+r
+l
+e old
+b
+b
+b
+b
+b
+l
+l
+t girl
+e ring
+r
+r
+f
+f
+r
+l
+l
+l
+f
+r
+l
+l
+r
+r
+r
+l
+l
+r
+
+f
+t shady
+e match
+b
+l
+l
+b
+r
+r
+f
+r
+r
+f
+r
+f
+f
+r
+r
+r
+r
+b
+b
+ex lit
+f
+f
+l
+l
+l
+l
+b
+b
+l
+b
+l
+l
+b
+b
+b
+r
+f
+e aged
+b
+b
+l
+f
+f
+f
+r
+r
+r
+r
+b
+r
+b
+r
+r
+b
+l
+t man
+e old
+r
+f
+l
+l
+f
+l
+f
+l
+l
+l
+l
+b
+l
+l
+f
+r
+f
+r
+f
+l
+f
+l
+b
+l
+f
+b
+f
+f
+b
+b
+b
+f
+f
+b
+r
+r
+f
+r
+r
+r
+r
+r
+r
+r
+l
+l
+l
+l
+l
+l
+l
+b
+
+r
+l
+r
+b
+l
+b
+l
+f
+l
+f
+l
+l
+l
+b
+l
+b
+
+r
+f
+r
+f
+r
+f
+l
+f
+l
+b
+l
+b
+
+l
+b
+f
+f
+r
+l
+b
+f
+r
+l
+b
+b
+f
+r
+r
+l
+l
+r
+r
+f
+r
+r
+r
+r
+r
+l
+b
+f
+b
+r
+b
+b
+l
+r
+f
+f
+l
+f
+r
+l
+l
+l
+f
+r
+l
+f
+f
+l
+l
+l
+b
+l
+b
+ex sulf
+e sulf
+e gun
+ex sulfer
+ex sulfur
+e gun
+f
+r
+f
+r
+f
+r
+f
+r
+f
+l
+use gun
+e explos
+r
+b
+l
+b
+l
+b
+r
+r
+b
+b
+r
+f
+f
+r
+r
+r
+r
+b
+b
+use exp
+f
+f
+r
+l
+l
+l
+f
+r
+r
+r
+f
+l
+l
+f
+r
+r
+l
+r
+r
+ex cookie
+use key
+e key
+f
+use key
+b
+l
+r
+f
+e woodsman
+b
+l
+l
+l
+b
+r
+r
+b
+l
+l
+l
+b
+l
+b
+b
+l
+f
+f
+l
+l
+l
+f
+f
+f
+l
+b
+b
+ex gate
+
+b
+e rope
+use rope
+ex rope
+b
+b
+i
+e tony
+b
+d
+e lunch

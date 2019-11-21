@@ -1,0 +1,92 @@
+--Patch Notes--
+--Alpha 0.30 Update- The Final EPTA Update - November 21, 2019
+This there was so many updates I'm not going to even list specifics. The amount of code almost doubled.
+CHANGED Is now very text adventure and no more stats
+ADDED The explorable map size was doubled with a DLC expansion!
+CHANGED The parser was SIGNIFICANTLY reworked for quality of life
+CHANGED The surrounding/search was standardized and improved a lot
+ADDED Colour was added.
+ADDED Interior spaces functionality
+CHANGED The game was significantly rebalanced
+ADDED The lore and aesthetic items were significantly expanded.
+ADDED A 100% Win achievement with unlockables
+BUGFIX A RIDICULOUS AMOUNT OF BUGS. DANG YOU GLOBAL VARIABLES!
+CHANGED Compiler to be SIGNIFICANTLY better with CX_Freeze
+ADDED Tons of new characters
+
+So much went into this final update and I really appreciate the help from everyone.
+Unless something is majorly game-breaking there will be no hotfixes.
+It's up to the community now :) I believe in you reading the Brendan+Mitch spaghetti code <3
+
+
+--Alpha 0.29 Update- Developer Update - July 3, 2019
+#First Kipling release and 1 year birthday! New features coming soon
+ADDED Text now prints better! Text will be delayed normally and fill the whole page
+ADDED Made items, people, interactables, and places all have different symbols around them
+	* [People], ~Places~, <Things>, /Interactables/
+ADDED Made an exploratory map for where you've traveled, and where you are
+	* Made it in the orientation of front
+ADDED Better coding practices and documentation!
+ADDED Better item/people development
+ADDED Made for speedrun it turns off the text delay
+ADDED Made the game write the log file as well as save when ever it crashes
+BUGFIX Fixed some typos
+
+--Alpha 0.28.2 Update-
+0.28.2 - Bugfix
+BUGFIX fixed the hulk hands and big hits shirt glitch
+CHANGE nerfed the bang bong 
+CHANGE Made Phil drop coffee so that you can still do quest after you drink the first one
+BUGFIX fixed the save files not actually saving the game quests, and now saves settings
+ADDED added new secret item and probabilities 
+
+0.28.1 - Hotfix
+BUGFIX Hot fix to fix error at end of the game that wouldn't let you win
+
+0.28 - What's that sound?
+CHANGE Rearanged the bsb field and renamed it
+ADDED Developing capstone room interrior
+ADDED MUSIC ADDED!
+	Using simple  module, can't be stopped but works and compiles
+ADDED lots of sound effects but not enough XD, want custom ones too
+CHANGE Improved code modularity and cleaned up github
+ADDED a simple bug catcher that if the game breaks it saves the game before anything happens
+CHANGE Refined the opening and music
+ADDED start screen with credits and disclaimer
+ADDED New person to fight in part of quest
+ADDED a lot more accepted words in the parser
+NOTE Held the feedback session
+
+Alpha 0.27 - Save Files - Jan 2, 2019
+CHANGE Removed walls the 2nd floors so you can walk between them where you can on campus
+ADDED Comments to a lot of code and Brendan learned how it works, still not sure why it does though 
+ADDED save files and load functions for the game!
+	Can type savegame, loadgame, or restart to do those functions
+	The save filename is based on your character name so to load the game fresh you need name your character the same each time
+ADDED Don't eat the peanut butter if you're alergic
+BUGFIX Random events
+BUGFIX Questline
+CHANGED Made health more versatile
+CHANGED Added a new player
+ADDED Don't listen to the drums 
+ADDED Now more texted based than ever!
+ADDED You can restart the game and continue at the end now 
+ADDED EPIPEN, 2nd floor hatch
+
+
+
+
+Alpha 0.26.1 - Hotfix - December 22, 2018
+CHANGE Some secrets now require you to do the quest!
+BUG FIX So you can actually finsh the game without it crashing
+BUG FIX Time Display was corrected
+
+Alpha 0.26 - The SpeedRun Update - 
+ADDED step, command, and time counters that display at the end for speedrunning!
+ADDED A command log for later developer debugging
+
+
+
+Alpha 0.25 - September 13, 2018 - Initial release!
+Base game and storyline
+

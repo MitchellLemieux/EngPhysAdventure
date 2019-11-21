@@ -1,0 +1,9 @@
+Code conventions based on PP8 and good EBTA things
+
+* Made a good convention that if the function is over 40 lines, definetly by 50 then move it to it's own file
+* Also following the PP8 convention style guide for some but need to redo the game at one point
+	* camel case for variables outside function scope ex) dogNose
+	* lowercase for variables inside function scope (PP8) ex) dogincrement
+	* lowercase with _ for functions/methods ex) nose_colour
+	* Pascal case (letter of first words capatalized) for classes and objects ex) DogMan
+* Try to commit one commit all day, or when a major stuff is done
