@@ -1,11 +1,9 @@
 Readme How to Run the game
-1. Download files and extract using self extractor
-2. Go to dist folder and run EngPhysAdventure.exe
-3. Make a shortcut to your desktop by right clicking and selecting "Create shortcut" and then move that shortcut to your desktop
-4. Enjoy!
-5. Give feedback: https://goo.gl/forms/OEMQCupWvEtibd0E3
-6. Report any pesky bugs: https://goo.gl/forms/Jo6P7oMj86OiLvE63
-Thanks!
+1. Run the shortcut on your desktop or where it was installed
+2. Enjoy!
+3. Give feedback: https://goo.gl/forms/OEMQCupWvEtibd0E3
+4. Report any pesky bugs: https://goo.gl/forms/Jo6P7oMj86OiLvE63
+Thanks for playing!
 
     	                   A____ ________
     	                   /_  H|\_____  \ 
@@ -16,6 +14,5 @@ Thanks!
     	                    |___|/________/
   	                      Production
 
-# TODO Update these and remove me
-Version: Alpha v0.29 - Developer Update
-Updated: July 3, 2019
+Version: Alpha v0.30 - The FINAL EPTA UPDATE
+Updated: November 21st, 2019

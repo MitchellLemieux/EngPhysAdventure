@@ -709,7 +709,7 @@ def Reset():
     Enemy("Angus the Barber", "He's dressed in a pirate costume and saying: 'Four FOURS!'", (0,7,1,0),(25, 25, 25), 50, None, None, "", "You'll spend an eternity on this ship!", True),
     Enemy("Neil the Man", "Neil is quietly studying with his headphones on. Best not to disturb him.", (3,4,0,0),(50, 50, 50), 75, None, None, "", "Well this is better than 2P with Phil!", True),
     Enemy("Keara the Mera", "Hey! Aren't you the guy that ruined the " +mapcolour+ "McMaster statue" +textcolour+ " last night?", (5,0,1,0),(25, 25, 25), 50, None, None, "", "Why would you do that!?", True),
-    Enemy("Dawson the Die Dye Guy", "Sa dude! These psychedelics rock!", (0,4,1,0),(25, 25, 25), 50, None, None, "", "Dudeee, why?", True),
+    Enemy("Dawson the Tie Dye Guy", "Sa dude! These psychedelics rock!", (0,4,1,0),(25, 25, 25), 50, None, None, "", "Dudeee, why?", True),
         # --- Haunted Forest People ---
 
     Enemy("Little Girl", "Hi, I think I'm lost... (\S)Have you seen my mitten?", (0, 0, 0, 4), (10, 10, 10), 10,"ring pop", "old mitten",

@@ -2,6 +2,22 @@
 [] is the notes for release to the public. Or just See the release notes
 Keywords are ADDED, BUGFIX, CHANGE, NOTE 
 
+--Alpha 0.30 Update- The Final EPTA Update - November 21, 2019
+Check the docs! (but here's a copy of the release notes for fun)
+This there was so many updates I'm not going to even list specifics. The amount of code almost doubled.
+CHANGED Is now very text adventure and no more stats
+ADDED The explorable map size was doubled with a DLC expansion!
+CHANGED The parser was SIGNIFICANTLY reworked for quality of life
+CHANGED The surrounding/search was standardized and improved a lot
+ADDED Colour was added.
+ADDED Interior spaces functionality
+CHANGED The game was significantly rebalanced
+ADDED The lore and aesthetic items were significantly expanded.
+ADDED A 100% Win achievement with unlockables
+BUGFIX A RIDICULOUS AMOUNT OF BUGS. DANG YOU GLOBAL VARIABLES!
+CHANGED Compiler to be SIGNIFICANTLY better with CX_Freeze
+ADDED Tons of new characters
+
 --Alpha 0.29 Update- Developer Update - July 3, 2019
 #First Kipling release and 1 year birthday! New features coming soon
 ADDED Made a new string pareser mod that is adaptable, checks for overages, and can control delay called printT (see documentation or examples) [Text now prints better!]

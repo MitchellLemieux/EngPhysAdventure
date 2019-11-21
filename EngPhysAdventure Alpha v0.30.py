@@ -31,7 +31,7 @@ GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.00 - " 
                             + green + 'F' + lightgreen + 'I' + lightblue + 'N' + lightcyan + 'A' + lightgreen + 'L ' \
                             + lightmagenta + 'E' + lightred + 'P' + lightwhite + 'T' + lightyellow + 'A ' + magenta \
                             + 'U' + red + 'P' + white + 'D' + yellow + 'A' + blue + 'T' + red + 'E' + textcolour
-GAMEINFO['releasedate'] = "Nov 28, 2019"
+GAMEINFO['releasedate'] = "Nov 21, 2019"
 
 
 
@@ -188,7 +188,7 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
       str((PLAYER.stats[0],PLAYER.stats[1],PLAYER.stats[2])),str(PLAYER.health),"HEAD: " + str(PLAYER.inv["head"].name),
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
-    #TODO, condense this story display code
+
     if GAMEINFO['winner']== 0:  # player died and that's how they're out of the loop
         print LINEBREAK
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running

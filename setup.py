@@ -134,7 +134,7 @@ reminder = ["~~REMINDERS BEFORE FINAL RELEASE~~\n",
             "Rename and Zip build folders, readme, and patchnotes as zip SFX .exe file",
             "Upload that the zip and installer to release folder",
             "Update release on GITHUB with tags? Make a post?"]
-# TODO figure out Git(Hub) tags, how to revert history, and how to mark versions
+
 
 for i in reminder:
     print str(reminder.index(i)) + ". " + i

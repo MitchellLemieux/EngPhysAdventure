@@ -8,7 +8,7 @@ Quests generally only happen once and are sidequests unrelated to the storyline 
 Events are reoccurring based on the condition for the game.
     This also includes PORTALS which is teliportation using interacts
 """
-# TODO Maybe split up these funcions into seperate files
+
 
 from GameFunctions import *  # importing the global dictionaries/values
 import time

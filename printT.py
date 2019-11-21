@@ -20,11 +20,10 @@ def escape_ansi(line):  # used to remove ansii escape codes
     return ansi_escape.sub('', line)
 from Colour import coloursusedlist
 
-# TODO ANSI ESCAPE CODES ARE COUNTED IN HERE which is not good
 
 #in the settings can define user reading speed (even calibrate with a testing module)
     #and can define their window character size (small-med-large) for text reading
-# TODO put delay back to 2.5 seconds before game release
+# TODO put delay back to 2.0 seconds before game release
 # TODO Make an alignment option so can align to left, centre, or right side of screen
 def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new reading speed for me, 2 kinda fast and 4 kinda slow
     """TIPS: Use (\S) for newline & resets paragraph, (\S) (\S) for space with pause, paragraph every punctuation 5 marks 
