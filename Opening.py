@@ -14,7 +14,8 @@ from GameFunctions import GAMESETTINGS, GAMEINFO # imports these global variable
 
 DELAY = 1.5
 # TODO Implement these based on the size of the screen
-LINEBREAK = "========================================================================" #standard display with 72 characters
+#LINEBREAK = "========================================================================" #standard display with 72 characters
+LINEBREAK = "=======================The=Eng=Phys=Text=Adventure=======================" #standard display with 72 characters
 #CLEARSCREEN = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" #35 newlines
 #Graphics , audio, difficulty, modes, advanced
 #screen width, default read speed/On/Off, suggestion for green
@@ -217,14 +218,14 @@ def Opening():
     playsound.playsound(audiopath, False) #plays the sound with 'multithreading'
     time.sleep(0.5)
     print CLEARSCREEN
-    print "                A____ ________"
+    print "                " + magenta + "A" + textcolour + "____ ________"
     print "                /_  H|\_____  \ "
     print "                 |  O|  ___|  |"
     print "                 |  L| /___   <"
     print "                 |  L|  ___\   |"
     print "                 |  Y| /W O O D|"
     print "                 |___|/________/"
-    print "                      Production."
+    print "                      " + magenta + "Production." + textcolour + ""
     time.sleep(3.5) #4 seconds
     print CLEARSCREEN
     print ""
@@ -234,26 +235,26 @@ def Opening():
     print CLEARSCREEN
     print 
     print "___________                __________.__"                 
-    print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
+    print "\_   _____/ " +red+ "THE_GREAT" +textcolour+ "_____ \______   \  |__ ___.__. ______"
     print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
     print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-    print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ "
+    print "        \/     \//_____/  " +red+ "TEXT ADVENTURE" +textcolour+ "  \/\/ (v4.20) \/ "
     time.sleep(7.5)
     print ""
     print "T h e  c a m p u s  i s  i n  a  s t a t e  o f  u n r e s t."
     time.sleep(DELAY)
-    print "A n  a n c i e n t  f o r c e  h a s  b e e n  a w o k e n"
+    print "A n  " +indicatecolour+ "a n c i e n t  f o r c e" +textcolour+ "  h a s  b e e n  a w o k e n"
     time.sleep(DELAY)
     print "a f t e r  t h e  e v e n t s  o f  a  d e b a u c h e r o u s"
     time.sleep(DELAY)
-    print "e v e n i n g  a t  t h e  P h o e n i x.\n"
+    print "e v e n i n g  a t  t h e  " +mapcolour+ "P h o e n i x" +textcolour+ ".\n"
     time.sleep(DELAY*2)
-    print "T h e  h e r o  a w a k e n s  i n  f r o n t  o f  J H E"
+    print "T h e  h e r o  a w a k e n s  i n  " +mapcolour+ "f r o n t  o f  J H E" +textcolour+ ""
     time.sleep(DELAY)
     print "w i t h  a  c o n s i d e r a b l e  h e a d a c h e  b u t"
     time.sleep(DELAY)
-    print "w i t h o u t  t h e i r  I R O N  R I N G.\n"
+    print "w i t h o u t  t h e i r  " +itemcolour+ "I R O N  R I N G" +textcolour+ ".\n"
     time.sleep(DELAY*2)
     print "C l u e s  a b o u t  l a s t  n i g h t  l i t t e r  t h e"
     time.sleep(DELAY)
@@ -269,7 +270,7 @@ def Opening():
     time.sleep(DELAY)
     print "h a v e  a n y  h o p e  o f  r e t r i e v i n g  t h e i r"
     time.sleep(DELAY)
-    print "I R O N  R I N G  a n d  r e t u r n i n g  b a l a n c e"
+    print "" +itemcolour+ "I R O N  R I N G" +textcolour+ "  a n d  r e t u r n i n g  b a l a n c e"
     time.sleep(DELAY)
     print "t o  t h e  f a c u l t y.\n"
     time.sleep(DELAY)
@@ -286,11 +287,11 @@ def Closing():
     print "and "+wincolour+"lived" +textcolour+ " to tell the tale.\n"
     time.sleep(DELAY)
     print "___________                __________.__"
-    print "\_   _____/ THE_GREAT_____ \______   \  |__ ___.__. ______"
+    print "\_   _____/ " +red+ "THE_GREAT" +textcolour+ "_____ \______   \  |__ ___.__. ______"
     print " |    __)_ /    \  / ___  > |     ___/  |  \   |  |/  ___/"
     print " |        \   |  \/ /_/  /  |    |   |      \___  |\___ \ "
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
-    print "        \/     \//_____/  TEXT ADVENTURE  \/\/ (v4.20) \/ \n"
+    print "        \/     \//_____/  " +red+ "TEXT ADVENTURE" +textcolour+ "  \/\/ (v4.20) \/ \n"
     time.sleep(DELAY)
     print "Created by:\n"+red+"Brendan Fallon" +textcolour+ ", " +white+ "Tyler Kashak" +textcolour+ ", and " +lightblue+ "Mitchell Lemieux  \n"
     time.sleep(DELAY)

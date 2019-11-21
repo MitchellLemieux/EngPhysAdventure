@@ -359,8 +359,8 @@ def events():
     # if INTERACT['blue book'].quest == True:
     #     insttime = time.localtime()  # Instantaneous struct_time object at the time of reading
 
-    LINEBREAK = "========================================================================"  # standard display with 72 characters
-
+    #LINEBREAK = "========================================================================"  # standard display with 72 characters
+    LINEBREAK = "=======================The=Eng=Phys=Text=Adventure=======================" #standard display with 72 characters
 
     if GAMEINFO['winner'] and QUESTS['completionist']:
         enemycompletion = [ENEMIES[i].quest for i in

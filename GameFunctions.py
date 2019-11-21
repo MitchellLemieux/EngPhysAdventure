@@ -40,6 +40,7 @@ GAMEINFO = {'version':0,'versionname':"", 'releasedate':"",'playername':"",'game
 
 GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 things: " + mapcolour + "~Places~" + textcolour + ", " + itemcolour + "items" + textcolour + ", " + interactcolour + "interacts" + textcolour + ", and " + personcolour + "people" + textcolour + ". The colour helps denote each." \
                     "(\S) (\S)These are the commands your brain can handle in this state:" \
+                    "(\S)-(s)search (look at what's around you)" \
                     "(\S)-(l,r,f,b,u,d)go left/right/front/back/up/down (you can't turn)" \
                     "(\S)-(e)equip " +itemcolour+ "item" +textcolour+ " (picks them up into your inventory, replaces what you're wearing/holding)" \
                     "(\S)-(dr)drop " +itemcolour+ "item" +textcolour+ " (removes them from your inventory)" \
@@ -52,7 +53,6 @@ GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 t
                     "(\S)-(t)talk " +personcolour+ "person" +textcolour+ "  (gives them an item when you have the right thing)" \
                     "(\S)-(g)give " +itemcolour+ "item" +textcolour+ " (tries to give an object to a person around you)" \
                     "(\S)-(a)attack " +personcolour+ "person" +textcolour+ " (Force may be necessary but be careful, you're limited by what you have)" \
-                    "(\S)-(s)search (look at what's around you)" \
                     "(\S)-(r)remember (remember what you were doing here earlier)" \
                     "(\S)-exit (exit your body, always do this or it won't save!)" \
                     "(\S)-shortcuts (gives shortcuts list)" \
@@ -79,7 +79,7 @@ EMPTYBODY = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped'
 EMPTYHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','hand',(0,0,0),-101)
 EMPTYOFFHAND = Equipment('EMPTY',(None,None,None),'EMPTY.png','Nothing is Equipped','off-hand',(0,0,0),-101)
 EMPTYINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
-STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':EMPTYOFFHAND}
+STARTINV = {'head':EMPTYHEAD,'body':EMPTYBODY,'hand':EMPTYHAND,'off-hand':ITEMS["polaroid photograph"]}
 #STARTINV = {'head':ITEMS['gas mask'],'body':ITEMS['okons chainmail'],'hand':ITEMS['iron ring'],'off-hand':ITEMS['green bang bong']}
 
 # OBJECTS need to be UNIQUE so that the location doesn't get messed up when duplicate objects in the game
@@ -557,10 +557,10 @@ def Inspect(Item): #Item is the inspect item string not an object
 def Inventory():
     global PLAYER
     # Player inventory is a dictionary of objects so can access and print them out
-    printT(" (\S){1}HEAD: " + PLAYER.inv['head'].colouredname)
-    printT("{2}BODY: " + PLAYER.inv['body'].colouredname)
-    printT("{3}HAND: " + PLAYER.inv['hand'].colouredname)
-    printT("{4}OFF-HAND: " + PLAYER.inv['off-hand'].colouredname + " (\S)")
+    printT(" (\S){1}HEAD: " + PLAYER.inv['head'].colouredname,72,0.25)
+    printT("{2}BODY: " + PLAYER.inv['body'].colouredname,72,0.25)
+    printT("{3}HAND: " + PLAYER.inv['hand'].colouredname,72,0.25)
+    printT("{4}OFF-HAND: " + PLAYER.inv['off-hand'].colouredname + " (\S)",72,0.25)
     # This old method is more general/expandable but doesn't do them in order
     # for i in PLAYER.inv:
     #     print i.upper() + ": " + PLAYER.inv[i].name

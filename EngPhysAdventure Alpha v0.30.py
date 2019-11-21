@@ -35,7 +35,8 @@ GAMEINFO['releasedate'] = "Nov 28, 2019"
 
 
 
-LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
+#LINEBREAK = "========================================================================" #standard display width breaker, 72 characters
+LINEBREAK = "=======================The=Eng=Phys=Text=Adventure=======================" #standard display with 72 characters
 
 # Begining section of the game (not in the main loop), Seperated for nested game
 def Setup():

@@ -139,7 +139,7 @@ y =
 z = 
 """
 
-shortcutprint = "Shortcuts(\S)blank space = look around(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
+shortcutprint = "Shortcuts(\S)blank space = look around/search(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
                         "(\S)ex = examine(\S)f = front(\S)g = give(\S)h = help(\S)i = inventory(\S)l = left(\S)" \
                         "r = right(\S)re = recall(\S)s = search(\S)t = talk(\S)u = up(\S)us = use" \
                         "(\S) (\S)There are also several parser shortcuts. You can type part of the full name." \
@@ -296,6 +296,10 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
             else: verb = SpellCheck(verb, VERBS)
         # Implemented a pass on the spellcheck for creativemode, will fix this BS later
         # TODO Fix this BS (I.E. make the spellchecker work for multi nounbased structure OR have commands be combined
+        if not wordlist[1]:  # if the word is empty
+            printT(" (\S)Man you really are drunk. You should " +losecolour+ "type in something" +textcolour+ " to do '" +verb+ "' to.(\S)")
+            return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
+
 
         # --- Object Spellchecking and Shortcuts ---
         if verb == "/": objectName = wordlist[1]  # Doesn't do spell check if creative command
@@ -325,9 +329,12 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
         # This function allows you to put in one+ word object names and still find a match
         else:
             #       --- Exceptions ---
-            if verb in ['pick']:
+            if verb in ['pick']:  # used for pick up exception for equiping
                 if wordlist[1].lstrip().startswith("up"):  # if up is the second word
                     wordlist[1] = wordlist[1].lstrip().split("up")[1].lstrip()  # strips down to just the object name
+            elif verb in ['look']:  # used for look at exception for inspecting
+                if wordlist[1].lstrip().startswith("at"):  # if up is the second word
+                    wordlist[1] = wordlist[1].lstrip().split("at")[1].lstrip()  # strips down to just the object name
             #       --- Setup ---
             x, y, z, dim = PLAYER.location
             # A list of objects of all items in area including Inventory First
@@ -435,7 +442,11 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
         elif verb in ['t','talk', 'speak']:
             Talk(objectName)
 
-        elif verb in ['ex','inspect', 'examine','read', 'open']:
+        elif verb == "look" and objectName == "around":  # used just for look around case. Has to be above inspect conditional so it triggers first
+            x, y, z, dim = PLAYER.location
+            MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,GAMESETTINGS)
+
+        elif verb in ['ex','inspect', 'examine','read', 'open', 'look']:
             Inspect(objectName)
 
         elif verb in ['ea','eat', 'drink', 'inhale', 'ingest', 'devour']:
@@ -447,10 +458,7 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
 
         elif verb == "/":  # if using a CreativeMode command
             CreativeMode.creative_parser(objectName)
-        elif verb == "look":  # used just for look around case
-            if objectName == "around":
-                x, y, z, dim = PLAYER.location
-                MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,GAMESETTINGS)
+
         elif verb == "pick":  # Allows for pick up to be a thing, is formatted in exceptions above
             Equip(objectName)  # Equipts it
         elif verb in ['us','use']:  # this makes it so you can use items if the interacble is in the area

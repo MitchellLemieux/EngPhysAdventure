@@ -403,17 +403,19 @@ class Map:  #Map Location Storage
                 if surroundings[i].strip():  # if the direction is seen in there and it's not empty
                     description += worddirections[i] +mapcolour+ surroundings[i] +textcolour+ "\t"  # print the word direction + name
                 if worddirections[i] == '[U] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no U but D
-                    description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+                    description += "[U] "+ " "*(maxnamelength) + "\t"  # adding correct spacing
                 elif worddirections[i] == '[U] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's U but no D
-                    description += " (\S) "  #adding newline
+                    description += "[D]  (\S) "  #adding newline
                 if worddirections[i] == '[F] ' and not surroundings[i].strip() and surroundings[i+1].strip():  # if there's no F but B
-                    description += " "*(maxnamelength+4) + "\t"  # adding correct spacing
+                    description += "[F] "+" "*(maxnamelength) + "\t"  # adding correct spacing
                 elif worddirections[i] == '[F] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's F but no B
-                    description += " (\S) "  #adding newline
+                    description += "[B]  (\S) "  #adding newline
                 if (worddirections[i] == '[L] ') and (not surroundings[i].strip()) and surroundings[i+1].strip():  # if there's no L but R
                     # Makes a hidden peroid there so spacing is correct because I'm a monkey and can't figure it out what's wrong
-                    description += Style.DIM+backcolour+ "." +Style.RESET_ALL+textcolour+ " "  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
-                    description += " "*(maxnamelength+2) + "\t"  # adding correct spacing
+                    #description += Style.DIM+backcolour+ "." +Style.RESET_ALL+textcolour+ " "  # I DON"T KNOW WHY THIS WORKS BUT ITS 2:21 AM DAY OF RELEASE SO WERE GOIN WITH IT
+                    description += "[L] "+" "*(maxnamelength) + "\t"  # adding correct spacing
+                elif worddirections[i] == '[L] ' and surroundings[i].strip() and not surroundings[i+1].strip():  # if there's L but no R
+                    description += "[R]  (\S) "  #adding newline
                 elif worddirections[i] in ['[D] ','[B] '] and surroundings[i].strip():  # If there's all spaces
                     description += " (\S) "
 
