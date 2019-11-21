@@ -39,15 +39,15 @@ GAMEINFO['releasedate'] = "Nov 28, 2019"
 LINEBREAK = "=======================The=Eng=Phys=Text=Adventure=======================" #standard display with 72 characters
 
 # Begining section of the game (not in the main loop), Seperated for nested game
-def Setup():
-    global PLAYER  # The main character. player is an object instance of class character.
-    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS  # The game settings that are saved in the game
+def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # global PLAYER  # The main character. player is an object instance of class character.
+    # global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS  # The game settings that are saved in the game
 
 
     if GAMEINFO['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
@@ -115,19 +115,20 @@ def Setup():
                                                                         #this time.ctime(seconds) converts to a nice readable time to be output to the log
     GAMEINFO['log'] = [GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['gamestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
     
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
-def Main():
-    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
-    global PLAYER #The main character. player is an object instance of class character.
-    global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS # The game settings that are saved in the game
-    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
-    # If not assignment within the function  may lead to changes only in the local scope
+def Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER #The main character. player is an object instance of class character.
+    # global ITEMS #All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS #All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT #All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS #Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES #All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO #Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS # The game settings that are saved in the game
+    # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # # If not assignment within the function  may lead to changes only in the local scope
 
 
 
@@ -151,13 +152,13 @@ def Main():
 
         GAMEINFO['commandcount'] += 1  # increments the command count after every command but doesn't print
         #print LINEBREAK  # Got rid of this bottom linebreak to hopefully have the current situation more clear
-        Quests.ebta_story()  # runs through the story quests checks and actions
-        Quests.sidequests()  # runs through all the sidequest checks and actions
-        Quests.events()  # runs through all the events checks and actions
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Quests.ebta_story(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)  # runs through the story quests checks and actions
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Quests.sidequests(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)  # runs through all the sidequest checks and actions
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Quests.events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)  # runs through all the events checks and actions
 
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0:  # gets you out of the EPTA all the way down quest and back into the sublayer
-            End()
+            #End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
             print LINEBREAK
             printT(" (\S)You finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?")
             log = GAMEINFO['log'] #sets up a temporary variable to pass the log back up a layer
@@ -166,18 +167,18 @@ def Main():
             #Doesn't reset the GAMEINFO['timestart'] as the runtime will included the time in the nested function
             #TODO delete the save file you're coming out of
             
-    End() #calls the end function in main so that the game can continue its loop structure
+    End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS) #calls the end function in main so that the game can continue its loop structure
 
-def End():
-    # Anywhere where a loadgame happens you need all the global variables
-    global PLAYER  # The main character. player is an object instance of class character.
-    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS  # The game settings that are saved in the game
+def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER  # The main character. player is an object instance of class character.
+    # global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS  # The game settings that are saved in the game
 
     save_game(GAMEINFO['playername'])  # saves all data RIGHT away so they can't restart when they die
 
@@ -188,7 +189,7 @@ def End():
       "BODY: " + str(PLAYER.inv["body"].name), "HAND: " + str(PLAYER.inv["hand"].name), "OFF-HAND: " + str(PLAYER.inv["off-hand"].name)
         ] #adds the final info to the log leger
     #TODO, condense this story display code
-    if Quests.ebta_story()== 0:  # player died and that's how they're out of the loop
+    if GAMEINFO['winner']== 0:  # player died and that's how they're out of the loop
         print LINEBREAK
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
         if GAMESETTINGS['SpeedRun']: printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
@@ -197,16 +198,16 @@ def End():
     else:
         raw_input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
-        if Quests.ebta_story() == 1: #The bad storyline ending
+        if GAMEINFO['winner'] == 1: #The bad storyline ending
             printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice, you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allow you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END  (\S)")
             GAMEINFO['winner'] = 1
-        elif Quests.ebta_story() == 2: #The good storyline ending.
+        elif GAMEINFO['winner'] == 2: #The good storyline ending.
             printT("Having defeated Dr. Cassidy you proved yourself to be a truly honourable engineer.\nWith the forces of evil defeated, McMaster University will continue to operate in peace.\nAll faculties exist in harmony and the integrity of the institution has been preserved.\nYou go on to lead a successful life as an engineer satisfied that you chose what was right.\nTHE END. (\S)")
-            GAMEINFO['winner'] = 1
-        elif Quests.ebta_story() == 3: #The good storyline ending.
+            GAMEINFO['winner'] = 2
+        elif GAMEINFO['winner'] == 3: #The good storyline ending.
             printT("After defeating both Dr. Cassidy and Sir William McMaster you take a moment to think while the deed to McMaster University lies at your feet fluttering slowly in a gentle breeze. You think about what you were told. Does that piece of paper really give you immense power and control over the school? After a quick smirk and a laugh, you pick up the deed and begin to rip it up. The parchment resists for a moment before giving way in a spectacular display of sparks and disappearing into the wind. You go on knowing that the fate of the University now resides in the hands of no one... it resides in everyone's hands. (\S)THE END  (\S)")
             QUESTS['neutral balance'] = 0
-            GAMEINFO['winner'] = 1
+            GAMEINFO['winner'] = 3
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime']) #displays the runtime then all other status
         if GAMESETTINGS['SpeedRun']:printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) #logs the data to be submitted
@@ -230,11 +231,11 @@ def End():
         print LINEBREAK
         QUESTS['restored order'] = 0  # turn this off so you can continue playing the game without the quest redoing
         QUESTS['create chaos'] = 0
-        Main()  # returns to the main (hopefully in the same state)
+        Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)  # returns to the main (hopefully in the same state)
     elif endchoice in ["r","restart game","restart"]:
         MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game("basegame") #loads in the savefile global variables
         GAMEINFO['timestart'] = time.time() #reset local variable starttime to current time
-        Main() #re-enters the main loop
+        Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS) #re-enters the main loop
     # No return to main menu implemented due to bad looping structure
     # elif endchoice in ["m","main menu return","main menu","menu return","main","menu","return"]:
     #     Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
@@ -292,12 +293,12 @@ MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Opening
 
 # The Actual Start of the game when you hit Play, depending on if in Dev Mode or not
 if GAMEINFO['devmode']:  # If Dev mode enabled no error catching
-    Setup()
-    Main()
+    MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
+    Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
 else:  # Dev mode not enabled so error catching
     try:  # runs the main functions (the whole game bassically)
-        Setup()
-        Main()
+        MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
+        Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
     # end function is run at the end of main loop so you can restart the game
     except (KeyboardInterrupt, SystemExit):  # if keyboard pressed or x out of the game, this is so it doesn't save null data when you press teh keyboard
         raise

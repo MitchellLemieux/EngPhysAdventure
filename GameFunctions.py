@@ -54,7 +54,7 @@ GAMEINFO['help'] = "(\S)The complexities of reality have been distilled into 4 t
                     "(\S)-(g)give " +itemcolour+ "item" +textcolour+ " (tries to give an object to a person around you)" \
                     "(\S)-(a)attack " +personcolour+ "person" +textcolour+ " (Force may be necessary but be careful, you're limited by what you have)" \
                     "(\S)-(r)remember (remember what you were doing here earlier)" \
-                    "(\S)-exit (exit your body, always do this or it won't save!)" \
+                    "(\S)-exit (exit your body, " +indicatecolour+ "ALWAYS EXIT" +textcolour+ " or it " +losecolour+ "won't save" +textcolour+ "!)" \
                     "(\S)-shortcuts (gives shortcuts list)" \
                     "(\S)-(h)help (gives you this list again)" \
                     "(\S) (\S)While you may accept more commands that is up to you to discover."

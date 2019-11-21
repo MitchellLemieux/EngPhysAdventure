@@ -75,18 +75,18 @@ for quest in questlist:
     QUESTS.update({quest: 1})
 
 
-def sidequests():
-    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
-    global PLAYER  # The main character. player is an object instance of class character.
-    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS  # The game settings that are saved in the game
-    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
-    # If not assignment within the function  may lead to changes only in the local scope
+def sidequests(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER  # The main character. player is an object instance of class character.
+    # global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS  # The game settings that are saved in the game
+    # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # # If not assignment within the function  may lead to changes only in the local scope
 
 
     # --- Side Quests ---
@@ -98,6 +98,7 @@ def sidequests():
     # -- Rules Sign --
     if INTERACT["rules sign"].quest and QUESTS['rules sign']:  # Once the sign is read
         MAPS[2][3][1][0].removeInteract(INTERACT["rules sign"])
+        INTERACT["rules sign"].location = (None,None,None,None)
         printT( "The sign " +indicatecolour+ "disappears" +textcolour+ " in a flash of " +indicatecolour+ "smoke" +textcolour+ ". You look around. Are you still dreaming?")
         QUESTS["rules sign"] = 0
 
@@ -146,6 +147,7 @@ def sidequests():
     if INTERACT["red book"].quest and QUESTS['open the trees']:  # Once the sign is read
         printT("You feel like you've " +indicatecolour+ "gained" +textcolour+ " some knowledge!")
         MAPS[3][7][1][0].removeInteract(INTERACT['gap in the trees'])
+        INTERACT['gap in the trees'].location = (None, None, None, None)
         INTERACT['gap in the trees'].location = None
         MAPS[3][7][1][0].placeInteract(INTERACT['opening in the trees'])
         INTERACT['opening in the trees'].location = (3,7,1,0)
@@ -170,22 +172,22 @@ def sidequests():
         AsciiArt.HauntedForest()
         QUESTS['power of the forest'] = 0
 
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
 
-
-def ebta_story():
-    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
-    global PLAYER  # The main character. player is an object instance of class character.
-    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS  # The game settings that are saved in the game
-    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
-    # If not assignment within the function  may lead to changes only in the local scope
+def ebta_story(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER  # The main character. player is an object instance of class character.
+    # global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS  # The game settings that are saved in the game
+    # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # # If not assignment within the function  may lead to changes only in the local scope
 
     # Talk to hooded man
     if ENEMIES['hooded man'].spoke and QUESTS["talk to mysterious man"]:
@@ -193,6 +195,7 @@ def ebta_story():
         MAPS[2][4][2][0].placeEnemy(ENEMIES["dr. preston"])
         MAPS[1][6][2][0].placeEnemy(ENEMIES["dr. lapierre"])
         MAPS[5][4][1][0].removeEnemy(ENEMIES["hooded man"])
+        ENEMIES["hooded man"].location = (None, None, None, None)  # the location should be set to none but for some reason it's fine
         ENEMIES['hooded man'].spoke = False
         QUESTS["talk to mysterious man"] = 0
 
@@ -230,6 +233,7 @@ def ebta_story():
         QUESTS['haugen kill soleymani'] = 0
         ENEMIES['dr. haugen'].alive = False
         MAPS[1][6][0][0].removeEnemy(ENEMIES['dr. haugen'])
+        ENEMIES['dr. haugen'].location = (None, None, None, None)
         MAPS[1][6][0][0].placeItem(ITEMS["haugen's clothes"])
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
@@ -253,6 +257,7 @@ def ebta_story():
         ENEMIES['dr. minnick'].info = "I need to complete " + deadpersoncolour+"Kenrick's"+textcolour+" design... use my "+itemcolour+"glasses "+textcolour+"to find what we need!"
         ENEMIES['dr. minnick'].Sinfo = "'" +indicatecolour+ "Great" +textcolour+ "! Now we can open the window to the " +mapcolour+ "electronics world" +textcolour+ "!'\nYou step back and watch as " +personcolour+ "Dr. Minnick" +textcolour+ " adds " +itemcolour+"Faraday's Cage "+textcolour+"to the " +itemcolour+ "oscilloscope" +textcolour+ ".\n'I do not know what this " +personcolour+ "oracle" +textcolour+ " will have to say.'\n'It is just my responsibility to give you access to their knowledge.'\nYour vision begins to go blurry as you hear a low whirr grow louder and " +itemcolour+ "Kenrick's oscilloscope" +red+ " glows" +textcolour+ " with\nconsiderable intensity!\nYou are shocked as you open your eyes. It seems as if you were dropped into the set of 'Tron'.\nA figure approaches as your vision slowly returns.\nThe figure is revealed to be " +personcolour+ "James Clerk Maxwell" +textcolour+ "!\n'We have waited many years for your coming.'\n'You will be the one to determine the fate of this faculty.'\n'My "+wincolour+"quantum relic "+textcolour+"along with the two others will give you the power to have your " +itemcolour+ "ring" +textcolour+ " returned to you.'\n'"+indicatecolour+"Once you have all three you" +textcolour+ " will be able to access your " +itemcolour+ "ring" +textcolour+ " from the "+mapcolour+"statue of McMaster."+textcolour+"'\n'Good luck.'"
         MAPS[3][4][1][0].removeEnemy(ENEMIES['dr. minnick'])
+        ENEMIES['dr. minnick'].location = (None, None, None, None)
         MAPS[1][7][0][0].placeEnemy(ENEMIES['dr. minnick'])
         QUESTS["minnick get oscilloscope"] = 0
 
@@ -274,6 +279,7 @@ def ebta_story():
 
     if not QUESTS['end game start'] and ENEMIES['hooded man'].spoke and QUESTS['the dark lord']:
         MAPS[5][2][1][0].removeEnemy(ENEMIES['hooded man'])
+        ENEMIES['hooded man'].location = (None, None, None, None)
         MAPS[5][2][1][0].placeEnemy(ENEMIES['dr. cassidy'])
         QUESTS['the dark lord'] = 0
 
@@ -284,7 +290,8 @@ def ebta_story():
 
     if not ENEMIES['dr. cassidy'].alive and not ENEMIES['sir william mcmaster'].alive and QUESTS['neutral balance']:  # Neutral Ending, kill both
         PLAYER.alive = False  # does this so you can get out of the main loop
-        return 3
+        GAMEINFO['winner'] = 3
+        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
     # # Brian did this
     # booty = 1
@@ -305,36 +312,40 @@ def ebta_story():
             pass
         else:
             PLAYER.alive = False
-            return 1  # Dark ending, kill McMaster and all Quantum Order
+            GAMEINFO['winner'] = 1
+            return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS  # Dark ending, kill McMaster and all Quantum Order
 
     elif not ENEMIES['dr. cassidy'].alive and QUESTS['restored order']:  # Light Ending, kill Cassidy
         ENEMIES['sir william mcmaster'].Dinfo = "NO WAIT? WHY? "+personcolour+"Sir William McMaster "+textcolour+" falls, slain beside "+personcolour+"Dr. Cassidy "+textcolour+". (\S)You see the "+wincolour+"Deed to McMaster"+textcolour+" drop from his pocket."
         ENEMIES['sir william mcmaster'].drop = None
         PLAYER.alive = False  # does this so you can get out of the main loop
-        return 2
+        GAMEINFO['winner'] = 2
+        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
     if not ENEMIES['hooded man'].alive:  # say if you kill the hooded man, say bit hits him, the game ends
         PLAYER.alive = False  # does this so you can get out of the main loop
-        return 2
+        GAMEINFO['winner'] = 2
+        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
     else:
-        return 0
+        if not GAMEINFO['winner']: GAMEINFO['winner'] = 0
+        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
 
 # If Events list gets to long can make it its own file
-def events():
-    # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
-    global PLAYER  # The main character. player is an object instance of class character.
-    global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
-    global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
-    global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
-    global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
-    global GAMESETTINGS  # The game settings that are saved in the game
-    # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
-    # If not assignment within the function  may lead to changes only in the local scope
+def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
+    # # These are all the global dictionaries/objects in the game. Anywhere where a loadgame happens you need all the global variables
+    # global PLAYER  # The main character. player is an object instance of class character.
+    # global ITEMS  # All the items. This a dictionary of objects of class equipment keyed by their lowcase equipment name (item.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global MAPS  # All the locations. A tuple of objects of class Map inxed by there x,y,z coordinate (MAPS[x][y][z])
+    # global INTERACT  # All the interactables (stationary things that need something). This a dictionary of objects of class Interact keyed by their lowcase name (interact.name). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global QUESTS  # Quest statuses. This is a dictionary of flags (1 or 0) for the status of the quest keyed by quest name.
+    # global ENEMIES  # All the npcs. This a dictionary of objects of class Enemy keyed by their lowcase equipment name (item.name.lower()). Remember the lowercase, may trip you up if referencing upercase version in the file.
+    # global GAMEINFO  # Miscellaneous game info. Dictionary of all sorts of variables
+    # global GAMESETTINGS  # The game settings that are saved in the game
+    # # global keyword makes the variables inside the function reference the correct global scope variable when assigned in the function.
+    # # If not assignment within the function  may lead to changes only in the local scope
 
     # PAP Event
     # TODO Make time not GMT so it doesn't matter which time zone you're in
@@ -362,6 +373,7 @@ def events():
     #LINEBREAK = "========================================================================"  # standard display with 72 characters
     LINEBREAK = "=======================The=Eng=Phys=Text=Adventure=======================" #standard display with 72 characters
 
+    #print GAMEINFO['winner']
     if GAMEINFO['winner'] and QUESTS['completionist']:
         enemycompletion = [ENEMIES[i].quest for i in
                       ['rod the bowler', 'brian the weeb', 'erik the sk8r', 'brendan fallon', 'liam the gamer',
@@ -376,10 +388,13 @@ def events():
         #               ['garbage can']]
 
         if (False in enemycompletion) or (False in interactcompletion):
+            #print enemycompletion
+            #print interactcompletion
             pass
         else:
             raw_input("\n" +wincolour+ "YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue:" +textcolour+ "")
             AsciiArt.Acheivement()
+            GAMEINFO['log'].append("---THEY 100% the game!---")  # appends they won at the end of the log file to make it easier find
             save_game(GAMEINFO['playername'] + " 100 Percent")  # saves all data to later be submited, different from the main save file
             gmfourtwenty = 1562765901.005 + 24240 - 141 - (4 * 60 * 60)  # 4:20pm, Subtracting the 4 hours for gm time
             insttime = time.gmtime(gmfourtwenty)  # Sets time to constantly 4:20pm time object
@@ -523,6 +538,7 @@ def events():
         MAPS[2][4][3][0].lore = "You see solid block of sheet metal covering the door. Was it " +indicatecolour+ "always" +textcolour+ " this way?"
         MAPS[2][4][3][0].travelled = 1
         MAPS[2][4][3][0].removeInteract(INTERACT["pack-a-punch"])
+        INTERACT["pack-a-punch"].location = (None, None, None, None)
 
     # TENThirty Event
     # If time object hour is 4am or 4pm and the minute is 20 (so lasting 1 minute)
@@ -582,3 +598,5 @@ def events():
         CurrentPlace.search(MAPS, DIMENSIONS,GAMESETTINGS, True)
         INTERACT['escape rope'].quest = False
 
+
+    return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS

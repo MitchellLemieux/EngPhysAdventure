@@ -293,9 +293,9 @@ def Closing():
     print "/_______  /___|  /\___  /   |____|   |___|  / ____/____  >"
     print "        \/     \//_____/  " +red+ "TEXT ADVENTURE" +textcolour+ "  \/\/ (v4.20) \/ \n"
     time.sleep(DELAY)
-    print "Created by:\n"+red+"Brendan Fallon" +textcolour+ ", " +white+ "Tyler Kashak" +textcolour+ ", and " +lightblue+ "Mitchell Lemieux  \n"
+    print "Created by:\n"+red+"Brendan Fallon" +textcolour+ ", " +white+ "Tyler Kashak" +textcolour+ ", and " +lightblue+ "Mitchell Lemieux" +textcolour+ ".  \n"
     time.sleep(DELAY)
-    print "" +lightmagenta+ "Special Thanks:" +textcolour+ "\n" +personcolour+ "Erik" +textcolour+ " and " +personcolour+ "Phil" +textcolour+ " our best " +indicatecolour+ "playtesters" +textcolour+ "! There are no " +wincolour+ "better quality checkers" +textcolour+ " than you guys.\n"
+    printT("" +lightmagenta+ "Special Thanks:" +textcolour+ "\n" +personcolour+ "Erik" +textcolour+ " and " +personcolour+ "Phil" +textcolour+ " our best " +indicatecolour+ "playtesters" +textcolour+ "! There are no " +wincolour+ "better quality checkers" +textcolour+ " than you guys. (\S)")
     time.sleep(DELAY/2)
     print "Also thanks to Eric, Brian, Liam, and Megan.\n"
     time.sleep(DELAY)
