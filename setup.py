@@ -98,7 +98,7 @@ target = cx_Freeze.Executable(
 #This is general info for the build and compilier
 cx_Freeze.setup( 
         name = "Eng Phys Text Adventure",
-        version = "0.30.00",
+        version = "0.30.01",
         description = "THE GREAT ENG PHYS TEXT ADVENTURE!",
         author = "13 Hollywood Productions",
         options = {"bdist_msi": bdist_msi_options, "build_exe": {"packages":packages,'include_files':includefiles}},
