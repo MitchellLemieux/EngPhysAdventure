@@ -53,7 +53,7 @@ def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
     if GAMEINFO['loadgame']:  # If player loaded the game it returns out of the setup and goes to main
         GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
         GAMEINFO['loadgame'] = 0  # sets the parameter to 0 just so it doesn't accidentally save
-        return
+        return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun'] or GAMEINFO['devmode']): Opening.Opening() #plays the opening if disable opening is set to False
     
@@ -291,6 +291,9 @@ except:  # does nothing if no dev file there
 
 # Start Screen is after reading in settings so it can skip start screen if enabled
 MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Opening.StartScreen()  # Startscreen loop where you can play new game, loadgame, choose settings, or exit
+
+#TODO Comment out before release, used to debug loading
+#GAMEINFO['devmode'] = 1
 
 # The Actual Start of the game when you hit Play, depending on if in Dev Mode or not
 if GAMEINFO['devmode']:  # If Dev mode enabled no error catching

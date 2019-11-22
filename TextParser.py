@@ -139,7 +139,7 @@ y =
 z = 
 """
 
-shortcutprint = "Shortcuts(\S)blank space = look around/search(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equipt(\S)ea = eat" \
+shortcutprint = "Shortcuts(\S)blank space = look around/search(\S)a = attack(\S)b = back(\S)c = condition(\S)d = down(\S)dr = drop(\S)e = equip(\S)ea = eat" \
                         "(\S)ex = examine(\S)f = front(\S)g = give(\S)h = help(\S)i = inventory(\S)l = left(\S)" \
                         "r = right(\S)re = recall(\S)s = search(\S)t = talk(\S)u = up(\S)us = use" \
                         "(\S) (\S)There are also several parser shortcuts. You can type part of the full name." \
@@ -388,7 +388,6 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
                         if len(objectlist)== 1:
                             # Debug for parser, although some things may need to be polled inside loop
                             if GAMEINFO['devmode']:
-                                print wordlist[1]
                                 for i in surroundingobjects:
                                     print i.name
                                 print surobjectsfullnames
@@ -486,8 +485,6 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
                                  + MAPS[x][y][z][dim].items + MAPS[x][y][z][dim].ENEMY
             match = False
             for i in surroundingobjects:  # checks to make sure in surroundings
-                print i.name
-                print objectName
                 if i.name.lower() == objectName.lower():
                     match = True
             if match:
