@@ -1,0 +1,11 @@
+How to Convert python 2to3
+Where python2ugly.py is the example script
+
+Just Changes
+C:python37/python.exe C:/python37/Tools/scripts/2to3.py python2ugly.py
+
+Overwrite
+C:python37/python.exe C:/python37/Tools/scripts/2to3.py -w python2ugly.py
+
+Overwrite Changes in the CWD
+C:python37/python.exe C:/python37/Tools/scripts/2to3.py -w .

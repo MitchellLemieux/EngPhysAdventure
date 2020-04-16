@@ -55,7 +55,7 @@ def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new re
             phrase = phrase.rstrip(word) #removes the last word from the phrase
             word = word.split("(\S)") #splits it over the delimter, so it can split right at the "(\S)", by making it a list of the last word of the phrase and start of new one
             phrase = phrase + word[0] #adds the final part of the phrase
-            print phrase
+            print(phrase)
             time.sleep(delay)
             if word[1].rstrip() == "": word = "" #if it's just a space it sets it to an empty string so it doesn't add an extra space
             else: word = word[1] + " " #Adds space to remaining word because it will skip over space addition to avoid double space case
@@ -63,24 +63,24 @@ def printT(text, char=72, delay = 2): #3 second delay seems to be optimal new re
             sentence = 0 #resets paragraph  counter
             continue
         elif sentence == 5: #if end of a paragraph (5 puncuation marks) it will split. Should be before character check for rare case where peroid is at the exact end of 5 sentences
-            print phrase + "\n" #prints phrase with a space inbetween for new pharagraph
+            print(phrase + "\n") #prints phrase with a space inbetween for new pharagraph
             time.sleep(delay) #adds delay after to allow user time to read
             phrase = "" #resets phase
             sentence = 0 #resets the sentence counter for new paragraph
             continue #returns the loop back to the top of the loop so it doesn't add the space at the start of the next phrase
         elif lenphrase == char: #if the phrase has accumulated to JUST the right size it will split
-            print phrase #see above
+            print(phrase) #see above
             time.sleep(delay)
             phrase = "" 
             continue 
         elif lenphrase > char : #if phrase is just over the length with next word it removes last word and prints
             phrase = phrase.rstrip(word) #removes the last word added to phrase from phrase
-            print phrase
+            print(phrase)
             time.sleep(delay)
             phrase = word #resets phrase with current word variable
         phrase += " "  # adds inbetween space after word is sucessfully added
         
-    print phrase.lstrip().rstrip()  # prints the final part of the phrase that doesn't evenly fit in so wasn't split
+    print(phrase.lstrip().rstrip())  # prints the final part of the phrase that doesn't evenly fit in so wasn't split
     time.sleep(delay/2)  # final delay but half speed b.c. half text?
 
 ###Examples###

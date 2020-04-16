@@ -45,7 +45,7 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
     image = Image.open(fileName).convert('L')
     # store dimensions
     W, H = image.size[0], image.size[1]
-    print("input image dims: %d x %d" % (W, H))
+    print(("input image dims: %d x %d" % (W, H)))
     # compute width of tile
     w = W/cols
     # compute tile height based on aspect ratio and scale
@@ -53,8 +53,8 @@ def covertImageToAscii(fileName, cols, scale, moreLevels):
     # compute number of rows
     rows = int(H/h)
     
-    print("cols: %d, rows: %d" % (cols, rows))
-    print("tile dims: %d x %d" % (w, h))
+    print(("cols: %d, rows: %d" % (cols, rows)))
+    print(("tile dims: %d x %d" % (w, h)))
 
     # check if image size is too small
     if cols > W or rows > H:
@@ -134,7 +134,7 @@ def main():
         f.write(row + '\n')
     # cleanup
     f.close()
-    print("ASCII art written to %s" % outFile)
+    print(("ASCII art written to %s" % outFile))
 
 # call main
 if __name__ == '__main__':

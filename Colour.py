@@ -30,7 +30,7 @@ magenta = Fore.MAGENTA
 red = Fore.RED      # a dark red
 textreset = Fore.RESET
 white = Fore.WHITE
-yellow = '\u001b[33m'
+yellow = '\\u001b[33m'
 yellow = Fore.YELLOW   # This is actually green
 
 colournamelist = ["black","blue","cyan","green","lightblack","lightblue",

@@ -101,7 +101,7 @@ DIRECTIONWORDS = ['up', 'down', 'front', 'forward', 'ahead', 'back', 'backward',
 VERBS.extend(DIRECTIONWORDS)  # extends verbs so these directions can be recognized in spellchecking
 
 # keys of all objects in game used for spellchecking of objects
-ALLKEYS = sorted(ITEMS.keys() + ENEMIES.keys() + INTERACT.keys()+DIRECTIONWORDS)
+ALLKEYS = sorted(list(ITEMS.keys()) + list(ENEMIES.keys()) + list(INTERACT.keys())+DIRECTIONWORDS)
 
 """
 Shortcuts
@@ -197,7 +197,7 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
             GAMEINFO['stepcount'] += 1  # increments the stepcount after taking a step (whether sucessful or not)
         elif verb in [ 's','search', 'look']:
             x, y, z, dim = PLAYER.location
-            print MAPS[x][y][z][dim].name
+            print(MAPS[x][y][z][dim].name)
             MAPS[x][y][z][dim].search(MAPS, DIMENSIONS,GAMESETTINGS)
 
         # TODO if word based description: re-enable stats and remove from DEVVERBs
@@ -212,7 +212,7 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
             GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
             logGame(GAMEINFO['log'])  # logs the game when you save it
             save_game(GAMEINFO['playername'])  # saves all data
-            print "Your game has been saved!: SaveFile " + GAMEINFO['playername']
+            print("Your game has been saved!: SaveFile " + GAMEINFO['playername'])
         elif verb == '/loadgame':  # this function loads the game off of the save file. Was having problems with loading
             MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(GAMEINFO['playername'])  # loads in the savefile global variables
             GAMEINFO['timestart'] = time.time()  # reset local variable starttime to current time
@@ -222,25 +222,25 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
         elif verb == '/420e69':  # This toggles game to dev mode for debugging in game
             GAMEINFO['devmode'] = int(not (GAMEINFO['devmode']))
             # Prints throw-off style text while still giving the stat
-            print "\nYour hungover brain struggles to understand that command" + str(GAMEINFO['devmode']) + "!\n "
+            print("\nYour hungover brain struggles to understand that command" + str(GAMEINFO['devmode']) + "!\n ")
 
         # This normal function exits the game but also saves your progress so you can pick back up.
         # Now at least for normal people you can't metagame by saving and loading files
         elif verb in ['exit', 'leave', 'quit', "die"]:
             # A FULL Copy of /savegame function bassically
-            if raw_input("\n\nAre you sure you want to save and " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+            if input("\n\nAre you sure you want to save and " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
                 GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
                 GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
                 logGame(GAMEINFO['log'])  # logs the game when you save it
                 save_game(GAMEINFO['playername'])  # saves all data
                 # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
                 AsciiArt.ThanksForPlaying()
-                raw_input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
+                input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
                 exit()
         elif verb in ['re',"remember", "recall","lore"]:
             x, y, z, dim = PLAYER.location
             place = MAPS[x][y][z][dim]
-            print "You entered " + place.name + "\n"
+            print("You entered " + place.name + "\n")
             printT(place.lore)
         elif verb in ["wait", "sleep", "sit"]:
             printT("Time passes.")
@@ -269,19 +269,19 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
         elif verb == '/player':
             PLAYER.show_attributes()
         elif verb == '/maps':
-            print MAPS
+            print(MAPS)
         elif verb == '/enemies':
-            print ENEMIES
+            print(ENEMIES)
         elif verb == '/items':
-            print ITEMS
+            print(ITEMS)
         elif verb == '/interact':
-            print INTERACT
+            print(INTERACT)
         elif verb == '/quests':
-            print QUESTS
+            print(QUESTS)
         elif verb == '/devverbs':
-            print DEVVERBS
+            print(DEVVERBS)
         else:
-            print "\nYour hungover brain struggles to understand that command!\n"
+            print("\nYour hungover brain struggles to understand that command!\n")
 
     # ------------------------------2+ word Commands-------------------------------------
 
@@ -389,11 +389,11 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
                             # Debug for parser, although some things may need to be polled inside loop
                             if GAMEINFO['devmode']:
                                 for i in surroundingobjects:
-                                    print i.name
-                                print surobjectsfullnames
-                                print surobjectswords
-                                print duplicatewords
-                                print objectlist
+                                    print(i.name)
+                                print(surobjectsfullnames)
+                                print(surobjectswords)
+                                print(duplicatewords)
+                                print(objectlist)
 
                             printT("Your brain can't tell which '" +indicatecolour+ word +textcolour+ "' you mean.")
                             return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
@@ -402,7 +402,7 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
                         #word = SpellCheck(word,surobjectswords)  # might not spell check single words with short list as will lead to many errors
                         for object in surobjectsfullnames:
                             if object.find(word) is not -1:  # does a substring search in each word
-                                if GAMEINFO['devmode']: print "Parser found a substring!"  # Debug
+                                if GAMEINFO['devmode']: print("Parser found a substring!")  # Debug
                                 objectName = object
                         try:
                             objectName  # See if object is defined
@@ -418,14 +418,14 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
 
                 # Debug for parser, although some things may need to be polled inside loop
                 if GAMEINFO['devmode']:
-                    print wordlist[1]
+                    print(wordlist[1])
                     for i in surroundingobjects:
-                        print i.name
-                    print surobjectsfullnames
-                    print surobjectswords
-                    print duplicatewords
-                    print objectlist
-                    print objectName
+                        print(i.name)
+                    print(surobjectsfullnames)
+                    print(surobjectswords)
+                    print(duplicatewords)
+                    print(objectlist)
+                    print(objectName)
 
 
         #  --- Parsing ---
@@ -511,7 +511,7 @@ def Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAM
                 f.close()
                 for i in range(len(GAMEINFO['scriptdata'])):  # removing the newlines from the script
                     GAMEINFO['scriptdata'][i] = GAMEINFO['scriptdata'][i].rstrip("\n")
-                print GAMEINFO['scriptdata']
+                print(GAMEINFO['scriptdata'])
             except:
                 printT("Theres no script with name " +indicatecolour+ wordlist[1] +textcolour+ " in the CWD!")
         else:

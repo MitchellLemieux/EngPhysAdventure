@@ -34,7 +34,7 @@ reminder = ["\n\nDon't forget to:\n",
             "Update release on GITHUB with tags?"]
 
 for i in reminder:
-    print str(reminder.index(i)) + ". " + i
+    print(str(reminder.index(i)) + ". " + i)
 
 
 
