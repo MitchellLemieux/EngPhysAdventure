@@ -213,7 +213,7 @@ def csv_to_code():  # this file tries to autoatically update the save file
         with open(csvPath + "ITEMS.csv", 'rb') as csvitems:
             reader = csv.reader(csvitems, delimiter=',')  # reads in the entire document into the reader object
 
-            reader.next()  # removing the header
+            next(reader)  # removing the header
             for row in reader:  # reads in a row of the CSV file as a list which each element is broken up to write
                 code = 'Equipment("' + row[0] + '", ('
                 if row[3] == "":  # if the item doesn't have a starting position sets it to none

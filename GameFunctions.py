@@ -528,7 +528,7 @@ def Inspect(Item): #Item is the inspect item string not an object
             if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
                 printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)") #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
             else:
-                print""
+                print("")
     # If the entered item is an intractable and is at that location
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:  # this is for item = interactable
         # TODO Have Interactables be able to use lists (to drop multiple things), tuples(to place unique objects)

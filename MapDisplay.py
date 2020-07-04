@@ -54,7 +54,7 @@ def mini():
 
     # Map Display Loop:
     if dimplayer != 0:
-        print DIMENSIONS[dimplayer]  # Prints the interior name if they're not in the overworld
+        print(DIMENSIONS[dimplayer])  # Prints the interior name if they're not in the overworld
     # Creates a row printout string and then prints each line from top to bottom. Z is constant for level player is on.
     for y in range(YRANGE - 1, 0 - 1, -1):  # prints out the map from top to bottom to match player orientation
         # TODO make map rotatable for cardinal coordinates
@@ -75,11 +75,11 @@ def mini():
                     maprow += str(MAPS[x][y][zplayer][dimplayer].travelled) + "  "
             else:  # Used to catch if the location doesn't exist will display as null
                 maprow += "-  "
-        print maprow
+        print(maprow)
 
 
 def macro_map():
-    print "I am not done yet!"
+    print("I am not done yet!")
     # This is a map style exported to csv which can be very transferable to this big map
 
     return

@@ -13,7 +13,7 @@ while x:
 f.close()
 
 for i in ordered:
-    print i
+    print(i)
 
-print "Here is your list:\n"
-print ordered
+print("Here is your list:\n")
+print(ordered)

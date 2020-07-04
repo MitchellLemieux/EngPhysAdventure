@@ -105,7 +105,7 @@ cx_Freeze.setup(
         executables = [target]
         )
 
-print "420"*69
+print("420"*69)
 
 # Printing out reminders for release
 includefilesprint = ""
@@ -137,7 +137,7 @@ reminder = ["~~REMINDERS BEFORE FINAL RELEASE~~\n",
 
 
 for i in reminder:
-    print str(reminder.index(i)) + ". " + i
+    print(str(reminder.index(i)) + ". " + i)
 
 
 

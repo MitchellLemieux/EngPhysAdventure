@@ -86,7 +86,7 @@ def _playsoundNix(sound, block=True):
         from urllib.request import pathname2url
     except ImportError:
         # python 2
-        from urllib import pathname2url
+        from urllib.request import pathname2url
 
     import gi
     gi.require_version('Gst', '1.0')
@@ -120,9 +120,9 @@ if system == 'Windows':
 elif system == 'Darwin':
     playsound = _playsoundOSX
 elif system == "linux" or system == "linux2":  # Linux
-    print "Sorry, sounds don't work for linux yet!"
+    print("Sorry, sounds don't work for linux yet!")
 else:
-    print "Sorry, sounds are not supported for this system yet!"
+    print("Sorry, sounds are not supported for this system yet!")
     #playsound = _playsoundNix
 
 del system

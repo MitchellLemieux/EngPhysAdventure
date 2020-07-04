@@ -9,7 +9,7 @@ from random import *
 from printT import * #import it all
 from Colour import *
 try:
-    import cPickle as pickle
+    import pickle as pickle
 except ImportError:  # python 3.x
     import pickle
 
@@ -110,18 +110,18 @@ class Character:
         printT("INVENTORY: (\S)" + Head + Body + Hand + OffHand)
 
     def show_attributes(self):
-        print "name: " + str(self.name)
-        print "location: " + str(self.location)
+        print("name: " + str(self.name))
+        print("location: " + str(self.location))
         self.ShowInventory()
-        print "emptyinv: " + str(self.emptyinv)
-        print "health: " + str(self.health)
-        print "maxhealth: " + str(self.maxhealth)
-        print "basestats: " + str(self.basestats)
-        print "stats: " + str(self.stats)
-        print "alive: " + str(self.alive)
-        print "spoke: " + str(self.spoke)
-        print "extra1: " + str(self.extra1)
-        print "extra2: " + str(self.extra2)
+        print("emptyinv: " + str(self.emptyinv))
+        print("health: " + str(self.health))
+        print("maxhealth: " + str(self.maxhealth))
+        print("basestats: " + str(self.basestats))
+        print("stats: " + str(self.stats))
+        print("alive: " + str(self.alive))
+        print("spoke: " + str(self.spoke))
+        print("extra1: " + str(self.extra1))
+        print("extra2: " + str(self.extra2))
 
 
 
@@ -177,13 +177,13 @@ class Interact:
 
     def drop_objects(self,Item,x,y,z,dim,MAPS,ITEMS,INTERACT,ENEMIES):  # this is a general method to drop objects
         # THIS PARSING ONLY Works if all item keys are unique
-        if INTERACT[Item].drop in ITEMS.keys():  # if it's an ITEM (in the item keys)
+        if INTERACT[Item].drop in list(ITEMS.keys()):  # if it's an ITEM (in the item keys)
             MAPS[x][y][z][dim].placeItem(ITEMS[INTERACT[Item].drop])
             printT("You see " + ITEMS[INTERACT[Item].drop].colouredname+ ". (\S)")
-        elif INTERACT[Item].drop in ENEMIES.keys():  # if it's an Enemy
+        elif INTERACT[Item].drop in list(ENEMIES.keys()):  # if it's an Enemy
             MAPS[x][y][z][dim].placeEnemy(ENEMIES[INTERACT[Item].drop])
             printT("You see " + ENEMIES[INTERACT[Item].drop].colouredname + ". (\S)")
-        elif INTERACT[Item].drop in INTERACT.keys():  # if it's an Interactable
+        elif INTERACT[Item].drop in list(INTERACT.keys()):  # if it's an Interactable
             MAPS[x][y][z][dim].placeInteract(INTERACT[INTERACT[Item].drop])
             printT("You see " + INTERACT[INTERACT[Item].drop].colouredname + ". (\S)")
             # TODO Make this an option maybe so it doesn't have to remove itself

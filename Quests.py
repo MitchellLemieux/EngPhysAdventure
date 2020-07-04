@@ -108,7 +108,7 @@ def sidequests(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESET
     if INTERACT["lenovo laptop"].quest and QUESTS['EPTA all the way down']:
         # TODO as homework see if there's a way to do this with recursion instead of simulating it
         # Would put drums if there was sound effect
-        playgame = raw_input('========================================================================\nWould you like to play? \n').lower()
+        playgame = input('========================================================================\nWould you like to play? \n').lower()
         if playgame == "yes" or playgame == "y":
             printT("You click on the game and it begins in the terminal. The " +red+ "drumming intensifies" +textcolour+ ". You're not sure if you made the right choice.")
             printT("======================================================================== (\S) (\S)")
@@ -117,7 +117,7 @@ def sidequests(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESET
             save_game(str(GAMEINFO['layersdeep']))  # saving game to be reloaded after death or won the game
             log = GAMEINFO['log']  # keeps the log as a temporary variable to keep a running log in the nested game
             Opening.Opening()
-            newplayername = raw_input("First, what is your name?\n")
+            newplayername = input("First, what is your name?\n")
             layers = GAMEINFO['layersdeep']  # saves layersdeep to a temporary variable for after the load
             MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game("basegame")  # should display the exact start
             GAMEINFO['layersdeep'] = layers + 1   # increments the global layers deep because you're now in a lower level, using the memory of the local variable
@@ -403,7 +403,7 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
             #print interactcompletion
             pass
         else:
-            raw_input("\n" +wincolour+ "YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue:" +textcolour+ "")
+            input("\n" +wincolour+ "YOU DID IT!!!! YOU 100% THE GAME! Type anything to continue:" +textcolour+ "")
             AsciiArt.Acheivement()
             GAMEINFO['log'].append("---THEY 100% the game!---")  # appends they won at the end of the log file to make it easier find
             save_game(GAMEINFO['playername'] + " 100 Percent")  # saves all data to later be submited, different from the main save file
@@ -416,7 +416,7 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
     if (insttime.tm_hour == 4 or insttime.tm_hour == 16) and insttime.tm_min == 20 and QUESTS["PAP"]:
         QUESTS["PAP"] = 0
         # Signaling Event, depends whether you're inside or outside
-        print "A Bolt of lightening strikes the top of JHE"
+        print("A Bolt of lightening strikes the top of JHE")
         # TODO make this an interior after so you decide to go in
         MAPS[2][4][3][0].info = "~?~:\nYou can only go back down the stairs."
         MAPS[2][4][3][0].lore = "As you reach the top of the stairs you can feel the " +red+ "heat" +textcolour+ " intensify. " \
@@ -433,13 +433,13 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
         upgradechoice = 0
         sacrificechoice = 0
         while PAPScreen:
-            print LINEBREAK
+            print(LINEBREAK)
             # AsciiArt.PackScreen() # TODO Enable once Dynamic Ascii Art
             # Displaying Options
             if upgradechoice == 0:
-                print "Item 1: Choose an " +itemcolour+ "Item" +textcolour+ " to " +wincolour+ "Upgrade" +textcolour+ ""
+                print("Item 1: Choose an " +itemcolour+ "Item" +textcolour+ " to " +wincolour+ "Upgrade" +textcolour+ "")
             else:
-                print "Item 2: Choose an " +textcolour+ "Item" +textcolour+ " to " +losecolour+ "Sacrifice" +textcolour+ ""
+                print("Item 2: Choose an " +textcolour+ "Item" +textcolour+ " to " +losecolour+ "Sacrifice" +textcolour+ "")
             k = 0
             for i in PLAYER.inv:
                 if PLAYER.inv[i].name == EMPTYINV[i].name:  # skips empty items
@@ -448,26 +448,26 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
 
                 k += 1
                 if (k != int(upgradechoice)):
-                    print "[" + str(k) + "]" + PLAYER.inv[i].name + " " + str(PLAYER.inv[i].stats)
-            print "[" + str(k + 1) + "]Back\n"
+                    print("[" + str(k) + "]" + PLAYER.inv[i].name + " " + str(PLAYER.inv[i].stats))
+            print("[" + str(k + 1) + "]Back\n")
             # Input and Check Input
             try:
                 if upgradechoice == 0:
-                    upgradechoice = input("Choose the number of the " +itemcolour+ "item" +textcolour+ " you want to " +interactcolour+ "Pack-a-Punch" +textcolour+ ": ")
+                    upgradechoice = eval(input("Choose the number of the " +itemcolour+ "item" +textcolour+ " you want to " +interactcolour+ "Pack-a-Punch" +textcolour+ ": "))
                     if upgradechoice <= 0 or upgradechoice > k + 1:
-                        print "" +losecolour+ "Please enter a valid option!" +textcolour+ ""
+                        print("" +losecolour+ "Please enter a valid option!" +textcolour+ "")
                         upgradechoice = 0
                 else:
-                    sacrificechoice = input("Choose the number of the " +itemcolour+ "item" +textcolour+ " you want to " +losecolour+ "sacrifice" +textcolour+ ": ")
+                    sacrificechoice = eval(input("Choose the number of the " +itemcolour+ "item" +textcolour+ " you want to " +losecolour+ "sacrifice" +textcolour+ ": "))
                     if sacrificechoice <= 0 or sacrificechoice > k + 1:
-                        print "Please enter a valid option!"
+                        print("Please enter a valid option!")
                         sacrificechoice = 0
                     elif upgradechoice == sacrificechoice:
-                        print "" +losecolour+ "Please enter a valid option!" +textcolour+ ""
+                        print("" +losecolour+ "Please enter a valid option!" +textcolour+ "")
                         sacrificechoice = 0
 
             except:
-                print "" +losecolour+ "Please input a number selection!" +textcolour+ ""
+                print("" +losecolour+ "Please input a number selection!" +textcolour+ "")
 
             # Back Options Options
             if upgradechoice == k + 1:  # if you choose back on upgrade choice screen the loop exits
@@ -492,7 +492,7 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
                     elif k == sacrificechoice:
                         sacrifice = PLAYER.inv[i]  # copying object to a temp variable
 
-                if raw_input("Upgrading: " + upgrade.colouredname + "\nSacrificing: " + sacrifice.colouredname + "\n\nThis cannot be undone. \nType Y if this is correct:").lower() in ["y", 'yes', '1']:
+                if input("Upgrading: " + upgrade.colouredname + "\nSacrificing: " + sacrifice.colouredname + "\n\nThis cannot be undone. \nType Y if this is correct:").lower() in ["y", 'yes', '1']:
                     pass  # if they're sure they want to do something go foward
 # The pass statement in Python is used when a statement is required syntactically but you do not want code to execute.
                 else:  # goes back to the loop and start again
@@ -556,7 +556,7 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
     if (insttime.tm_hour == 10 or insttime.tm_hour == 22) and insttime.tm_min == 30:
         if not (PLAYER.inv['body'] == EMPTYBODY):  # If  your body isn't empty
             printT("" + wincolour+"10:30 "+textcolour+"NO SHIRTY")
-            print "You feel compelled to take your "+itemcolour+"shirt "+losecolour+"off "+textcolour+"and drop it on the ground"
+            print("You feel compelled to take your "+itemcolour+"shirt "+losecolour+"off "+textcolour+"and drop it on the ground")
             # Drops the item you have on you, don't forget it has to be name of the item and lowercase.
             # Also can't be PLAYER.drop function because then it doesn't go onto the ground
             Drop(PLAYER.inv['body'].name.lower())

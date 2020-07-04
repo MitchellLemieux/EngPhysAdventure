@@ -24,10 +24,10 @@ import AsciiArt
 import MapDisplay  # Used to separate minim-ap display
 
 
-# TODO Make sure these versions and release date are correct
+# TODO Make sure to change BOTH versions and release date are correct
 #If there was a title screen it would go here
 GAMEINFO['version'] = "0.30.01"
-GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.00 - " + blue + 'T' + cyan + 'H' + red + 'E ' \
+GAMEINFO['versionname'] = lightblue + "Alpha " + red +"v" + white +"0.30.01 - " + blue + 'T' + cyan + 'H' + red + 'E ' \
                             + green + 'F' + lightgreen + 'I' + lightblue + 'N' + lightcyan + 'A' + lightgreen + 'L ' \
                             + lightmagenta + 'E' + lightred + 'P' + lightwhite + 'T' + lightyellow + 'A ' + magenta \
                             + 'U' + red + 'P' + white + 'D' + yellow + 'A' + blue + 'T' + red + 'E' + textcolour
@@ -57,7 +57,7 @@ def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
     if not(GAMESETTINGS['DisableOpening'] or GAMESETTINGS['SpeedRun'] or GAMEINFO['devmode']): Opening.Opening() #plays the opening if disable opening is set to False
     
-    print LINEBREAK
+    print(LINEBREAK)
 
     if GAMEINFO['devmode']: GAMEINFO['playername'] = "Doug Fallon"  # Skip name step and names your person Doug
     else:
@@ -65,7 +65,7 @@ def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
         name = ""
         badchar = ["\\", "/", ":", "*", "?", "'", "<", ">", "|", '"']
         while not name:  # name selection can't be empty
-            name = raw_input("First, what is your name?\n")
+            name = input("First, what is your name?\n")
             if name in [""," ", "  ", "   ", ".",",", "no"]:  # not accepted names
                 printT(""+losecolour+"Please enter a valid name! "+textcolour+"")
                 name = ""
@@ -102,7 +102,7 @@ def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
     # Enables this ULTRA character is name is Tyler Kashak or in DevMode
     if PLAYER.name == "Tyler Kashak" or GAMEINFO['devmode']: #He realizes he's the main character and can do anything he wants
         # AsciiArt.One()  # TODO Enable once Dynamic Ascii Art
-        print "\nHe is beginning to believe.\n\nYOU are the One.\n"
+        print("\nHe is beginning to believe.\n\nYOU are the One.\n")
         # TODO Change back to Tyler
         PLAYER.__dict__ = BREN007PIE.__dict__  # sets him to the initial Tyler character for strating inventory
         PLAYER.maxhealth = 999
@@ -111,7 +111,7 @@ def Setup(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
     CurrentPlace.travelled = 0  # so that it says it's been travelled, I moved it down so that it wouldn't effect the basegame save
    
     GAMEINFO['timestart'] = GAMEINFO['gamestart']   # runtime counter of the start of each main loop session. Needs to be global. Is equal to gamestart at the session start but will change as the user saves, loads, restarts, or does a nested game
-    if GAMESETTINGS['SpeedRun']: print "Your time starts now!"
+    if GAMESETTINGS['SpeedRun']: print("Your time starts now!")
                                                                         #this time.ctime(seconds) converts to a nice readable time to be output to the log
     GAMEINFO['log'] = [GAMEINFO['versionname'],  GAMEINFO['playername'], time.ctime(GAMEINFO['gamestart']), "--LOG START--"] #log list is a list that keeps track of player movements for game debugging. Each ellement of the list is written in a new line to the log file when the game ends or is saved.
     
@@ -142,10 +142,10 @@ def Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
             command = GAMEINFO['scriptdata'].pop(0)  # pops the first element to go through script until finished
             printT(command)
         else:
-            command = raw_input('\nWhat do you want to do?\n')
+            command = input('\nWhat do you want to do?\n')
 
-        print LINEBREAK  # This linebreak helps split up each turn
-        if GAMESETTINGS['HardcoreMode']: print CLEARSCREEN
+        print(LINEBREAK)  # This linebreak helps split up each turn
+        if GAMESETTINGS['HardcoreMode']: print(CLEARSCREEN)
 
         # Sends the command text to the text parser to be interpreted and action to be done
         MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = Parser(command,MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
@@ -159,7 +159,7 @@ def Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
         #TODO integrate this into game functions with a function, possibly seperate quests from game functions and import all from there to keep things global
         if PLAYER.alive == False and GAMEINFO['layersdeep'] > 0:  # gets you out of the EPTA all the way down quest and back into the sublayer
             #End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)
-            print LINEBREAK
+            print(LINEBREAK)
             printT(" (\S)You finish the game and put back the laptop ready to get back to reality.\nHow long did you spend on this game?")
             log = GAMEINFO['log'] #sets up a temporary variable to pass the log back up a layer
             MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS = load_game(str(GAMEINFO['layersdeep']-1))
@@ -190,13 +190,13 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
         ] #adds the final info to the log leger
 
     if GAMEINFO['winner']== 0:  # player died and that's how they're out of the loop
-        print LINEBREAK
+        print(LINEBREAK)
         if GAMESETTINGS['SpeedRun']: DisplayTime(GAMEINFO['runtime'])  # displays the runtime for speed running
         if GAMESETTINGS['SpeedRun']: printT("Total Step Count: "+ str(GAMEINFO['stepcount']) + " (\S)Total Command Count: " + str(GAMEINFO['commandcount']))
         logGame(GAMEINFO['log']) # writes the log file
         printT("Thanks for playing!! Better luck next time! (\S)")#lets the player restart the game
     else:
-        raw_input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
+        input("You've " +wincolour+"won"+textcolour+"! Type anything to continue\n").lower()  # If they beat either of the storylines
         GAMEINFO['log'].append("---THEY WON---") #appends they won at the end of the log file to make it easier find
         if GAMEINFO['winner'] == 1: #The bad storyline ending
             printT("After performing the purge of the faculty you join Dr.Cassidy in shaping the New Order.\nAs Dr.Cassidy's apprentice, you reign over McMaster University with an iron fist.\nEngineering Physics is established as the premium field of study and all funding is directed to you.\nYou unlock secrets of untold power which allow you to reinforce your overwhelming grasp on the university.\nYour deeds have given you complete power and you reign supreme for eternity.\nTHE END  (\S)")
@@ -218,7 +218,7 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
     while not endchoice:  # death or ending selection screen
         printT(" (\S)Continue Playing[C]   Restart Game[R]  Exit[E]")
         #printT(" (\S)Continue Playing[C]   Restart Game[R]  Main Menu Return[M]  Exit[E]")
-        endchoice = raw_input("Choose what you want to do: ").lower().strip() #this input is to hold the screen until the player decides what to do
+        endchoice = input("Choose what you want to do: ").lower().strip() #this input is to hold the screen until the player decides what to do
         if (GAMEINFO['winner'] == 0) and (endchoice in ["c","continue playing","continue","play"]):
             printT("You can't continue because you're dead!")
             endchoice = ""
@@ -228,7 +228,7 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
             endchoice = ""
     if endchoice in ["c","continue playing","continue","play"]:
         PLAYER.alive = True
-        print LINEBREAK
+        print(LINEBREAK)
         QUESTS['restored order'] = 0  # turn this off so you can continue playing the game without the quest redoing
         QUESTS['create chaos'] = 0
         Main(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS)  # returns to the main (hopefully in the same state)
@@ -242,14 +242,14 @@ def End(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS):
     #     Setup()
     #     Main()
     elif endchoice in ["e","exit"]:
-        if raw_input("\n\nAre you sure you want to " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
+        if input("\n\nAre you sure you want to " +losecolour+ "quit" +textcolour+ " the game?\nType Y if you wish to save and leave,\nanythine else to continue: \n").lower() in ["y", 'yes', 'yeah']:
             GAMEINFO['runtime'] += (time.time() - GAMEINFO['timestart'])  # adds the runtime (initilized to zero) to the session runtime to make the total runtime
             GAMEINFO['timestart'] = time.time()  # resets timestart so it's not doubly added at the end
             logGame(GAMEINFO['log'])  # logs the game when you save it
             save_game(GAMEINFO['playername'])  # saves all data
             # print "Your game has been saved! " + GAMEINFO['playername']  # Don't indicate the save file has save file in the name
             AsciiArt.ThanksForPlaying()
-            raw_input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
+            input("" +indicatecolour+ "We're sad to see you go :(" +textcolour+ " \nI hope whatever you're doing is more fun.\nPress anything to leave")
             exit()
     return MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTINGS
 
@@ -278,9 +278,9 @@ try:  # IF DEVMODE.ini isn't there in the CWD of the game no beuno
     f.close()
     if data[0] == "LOL NO U":  # contents of the dev file needs to be
         # quickly asks you want to not be in dev mode in obfuscated way
-        if not raw_input("What would you like? Type in n: ") == "n":
+        if not input("What would you like? Type in n: ") == "n":
             GAMEINFO['devmode'] = 1
-            print CLEARSCREEN  # clears the screen
+            print(CLEARSCREEN)  # clears the screen
 
 except:  # does nothing if no dev file there
     pass
@@ -311,9 +311,9 @@ else:  # Dev mode not enabled so error catching
         # AsciiArt.Error()  # TODO Enable once Dynamic Ascii Art
         save_game(GAMEINFO['playername'] + " AutoSave") #saves all data
         logGame(GAMEINFO['log'])  # logs the game when it crashes so it can be recreated
-        printT("If you are "+indicatecolour+"exiting"+textcolour+" the game and see this message it's normal! Please "+indicatecolour+"ignore"+textcolour+" the message below.")
+        printT("If you are just "+indicatecolour+"exiting"+textcolour+" the game and see this error message "+indicatecolour+"please ignore"+textcolour+" it!")
         printT("Your game has been saved!: SaveFile " + GAMEINFO['playername'] + " AutoSave")
-        print "\nYour game encountered some kind of bug, we're sorry.\nWe've saved your game but please contact your nearest developer to report the problem if it continues.\nThanks :D"
-        raw_input("Type anything to exit: ")
+        printT(" (\S)It looks like your game encountered some kind of bug, we're sorry, and we've saved your game. (\S)Check if your game is up to date: (\S)Your current game version = "+GAMEINFO['version']+" (\S)Please check to see if you have the latest version at https://engphystextadventure.wordpress.com/downloads/. (\S)If the bug persists, please contact your nearest developer or use the bug reporting tool on the website. (\S)Thanks :D")
+        input("Type anything to exit: ")
 
 
