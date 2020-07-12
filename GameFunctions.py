@@ -428,7 +428,7 @@ def Talk(E):  # E is a string not an object
         else:
             printT(enemy.info)
         if enemy.aesthetic and not(GAMESETTINGS['HardcoreMode']):
-            printT("It's kinda mean, but to you, they don't seem very helpful.")
+            printT("They don't seem very helpful to you.")
         enemy.spoke = True
         if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
             printT("HEALTH: " + str(ENEMIES[E].health))

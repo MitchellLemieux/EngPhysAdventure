@@ -72,8 +72,8 @@ def Reset():
     Map("University Hall",(6,1,1,0),"~~:\n","The glares from portraits of old McMaster founding fathers intimidate you.\nThe memories of failing midterms in their presence sends you into an almost trance-like state.\nYou notice that the portrait of Keyes totally looks like Stephen Fry.\nAfter talking yourself out of stealing a piece of Mac history you plan your next move.",['r','b','f','d'],True),
     Map("Phoenix Bar & Grill",(5,4,1,0),"~~:\n","Upon entering, a rush of memories from last night enter your mind.\nPeople's faces are a blur but you somewhat recall '16 "+itemcolour+"tequila"+textcolour+" shots' as something you said.\nYou see a mysterious "+personcolour+"Hooded Man"+textcolour+" as he beckons you to come over.",('r'),True),
     Map("BSB",(3,4,1,0),"~BSB~:\n ","You were told JHE would be your home but after picking Eng Phys\nyou didn't realize how wrong you were.\nAt least the cafe is better than JHE's.\nA shudder runs through your body as you draw nearer to the electronics labs.\nWiping a "+itemcolour+"cold sweat"+textcolour+" from your brow you plan ahead.",(),True, (3,3,0)),
-        # ---  Aesthetic Highlighting - --
-    Map("Front of BSB",(3,3,1,0),"~:","You look up and see the McMaster "+interactcolour+"coat of arms"+textcolour+" engraved into the side of BSB.\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn underground (quantum) tunnel would save some hardship on a rainy day...",(),False),
+        # ---  Aesthetic Highlighting ---
+    Map("Front of BSB",(3,3,1,0),"~:","You look up and see the McMaster "+interactcolour+"coat of arms"+textcolour+" engraved into the "+mapcolour+"Front of BSB"+textcolour+".\nThis little pathway has been well worn and you wonder why they don't connect JHE and BSB anyway.\nAn "+mapcolour+"underground (quantum) tunnel"+textcolour+" would save some hardship on a rainy day...",(),False),
     Map("Police Station",(3,5,1,0),"~~:\nThe path between JHE & BSB behind you. The GO station lies ahead of you.\nThe Nuclear Research Building is to your left. The Tandem Accelerator is to your right.","Thoughts of getting kicked out of res parties fill your head.\nThose special constables are punks.\nYou mutter the lyrics of a certain N.W.A hit. After avoiding a campus PD cruiser\nscreaming around the blind corner, you think of what to do next.",(),True),
     Map("Mary Keyes",(4,6,1,0),"~~:\nYou can head to the Bridge if you go forward. The GO station is to your left.\nThe Tandem Accelerator is at your rear. Bates is to your right.","A snack station that's open 'til midnight.\nWhat a life saver indeed.\nYou quickly thank the engineering gods for Mary Keyes and fight yourself\nfrom ordering chicken fingers & fries super combo...",(),True),
     Map("Nuclear Reactor Building",(2,6,1,0),"~~:","As you approach you wonder if that steam is really radioactive?\nIt can't be.\nThe ominous structure draws you closer as you consider what it would be\nlike to swim in that sweet blue "+interactcolour+"pool"+textcolour+"...You lose yourself staring into the faint blue glow of the "+interactcolour+"pool"+textcolour+" as you slowly approach its edge.",(),True),
@@ -576,6 +576,7 @@ def Reset():
     Equipment("Tequila Shot Glass", (5,4,1,0), "ShotGlass.jpg", "Maybe you shouldn't touch this stuff after what happened last night.", "off-hand", (10, 0, 10), -5),
     Equipment("Cold Sweat", (3,4,1,0), "ColdSweat.jpg", "A pool of sweat on the ground. Gross.", "off-hand",(0, 0, 0), 1),
     Equipment("Polaroid Photograph", (None), "PolaroidPhoto.jpg", "What? Do people still make these? Next thing you know you'll find an 8-inch floppy disk laying around. (\S)The photo shows you smashed out of your mind at the " +mapcolour+ "Phoenix" +textcolour+ ". Looks like a good time.", "off-hand", (0, 0, 0), -2),
+    Equipment("Flashcard", (None), "Flashcard.jpg", "The cards are full of notes for studying some crazy biology. Watch out for paper cuts.", "off-hand",(3, 0, 0), 1),
 
     #--- Haunted Forest Items ---
     Equipment("Golden Apple", (1, 0, 0, 5), "GApple.jpg", "This luxurious apple glowes in the light. A rare commodity as eating it restores full health.","off-hand", (1, 1, 1), 1000),
@@ -710,6 +711,7 @@ def Reset():
     Enemy("Neil the Man", "Neil is quietly studying with his headphones on. Best not to disturb him.", (3,4,0,0),(50, 50, 50), 75, None, None, "", "Well this is better than 2P with Phil!", True),
     Enemy("Keara the Mera", "Hey! Aren't you the guy that ruined the " +mapcolour+ "McMaster statue" +textcolour+ " last night?", (5,0,1,0),(25, 25, 25), 50, None, None, "", "Why would you do that!?", True),
     Enemy("Dawson the Tie Dye Guy", "Sa dude! These psychedelics rock!", (0,4,1,0),(25, 25, 25), 50, None, None, "", "Dudeee, why?", True),
+    Enemy("Danya the Daniel", "Don't bug me I'm studying. No quests please. I would love something vegan to eat though.",(1,1,1,0),(25,25,25),50,"flashcard","tofu","Oh thanks! I'll need this later!","Veganism is the moral baseline!",False),
         # --- Haunted Forest People ---
 
     Enemy("Little Girl", "Hi, I think I'm lost... (\S)Have you seen my mitten?", (0, 0, 0, 4), (10, 10, 10), 10,"ring pop", "old mitten",
@@ -771,7 +773,7 @@ def Reset():
     Interact("Morning Sun", (2,3,1,0), CLEARSCREEN+"You stare at the sun for an hour. You're practically blind now and can't remember what you were doing before." , "", None, "", True),
     Interact("Kipling Game", (2,4,1,0), "It's a laser pointer arcade game. Wow this is fun. And it counts your score! How did they have time to make this?", "", None, "", True),
     Interact("Kipling Clock", (1,4,1,0), "Days to Kipling: 364 until that next fateful day. Hopefully there's no one in your situation next year.", "", None, "", True),
-    Interact("Armchair", (1,1,1,0), "It looks comfortable at first but it's really lost. Do they really expect you to do work in these things?", "", None, "", True),
+    Interact("Armchair", (1,1,1,0), "It looks comfortable at first but it's really not. Do they really expect you to do work in these things?", "", None, "", True),
     Interact("Organ", (2,0,1,0), "A hammond B3 Organ. A fine specimen.", "", None, "", True),
     Interact("Dirty Coffee Table", (3,1,1,0), "A very boujee coffee table display art piece. You don't want to tell the art students how you really feel about this.", "", None, "", True),
     Interact("Willy dog cart", (4,1,1,0), "The man in the cart eyes you warily as you ask for your 5th hotdog of the day. You hand him a fiver and walk away.", "", None, "", True),

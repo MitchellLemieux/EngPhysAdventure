@@ -388,7 +388,8 @@ def events(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESETTING
     if GAMEINFO['winner'] and QUESTS['completionist']:
         enemycompletion = [ENEMIES[i].quest for i in
                       ['rod the bowler', 'brian the weeb', 'erik the sk8r', 'brendan fallon', 'liam the gamer',
-                       'steven the first-year', 'paul the janitor','phil the drunk', 'zack the snack','connor the biologist']]
+                       'steven the first-year', 'paul the janitor','phil the drunk', 'zack the snack','connor the biologist',
+                       'danya the daniel']]
         interactcompletion = [INTERACT[i].quest for i in
                       ['garbage can', 'rca tv', 'sharpxchange', 'rules sign', 'lenovo laptop', 'coat of arms',
                        'mouse','gate of the forest']]
