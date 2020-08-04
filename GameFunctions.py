@@ -471,6 +471,7 @@ def Stats():
         printT("DEF: " + str(PLAYER.stats[1]))
         printT("SPD: " + str(PLAYER.stats[2])+" (\S)")
 
+
 def Inspect(Item): #Item is the inspect item string not an object
     global MAPS
     global ITEMS
@@ -487,7 +488,7 @@ def Inspect(Item): #Item is the inspect item string not an object
         printT(ITEMS[Item].info,72,0)  # fast version for reading things
 
         ITEMS[Item].quest = True  # sets the quest/inspected flag to true
-        # TODO re-implement inspecting item with words instead of numbers
+
         deltaATK = ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0]  # " more powerful"
         deltaDEF = ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1]  # " better defended"
         deltaSPD = ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2]  # " faster"
@@ -501,7 +502,26 @@ def Inspect(Item): #Item is the inspect item string not an object
         #100 = a very large amount
         #1000 = AN UNGODLY amount
 
-        if deltaATK > 4 or deltaDEF > 4 or deltaSPD > 4:  # if any of these are different
+        if GAMEINFO['devmode']:  # If in devmode can see the stats
+            printT("ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(deltaATK)+")")
+            printT("DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(deltaDEF)+")")
+            printT("SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(deltaSPD)+")")
+            printT("WORN: " + str(ITEMS[Item].worn).upper())
+            printT("QUEST Flag: " + str(ITEMS[Item].quest))
+            if ITEMS[Item].health: printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)")
+
+        elif PLAYER.inv['head'] == ITEMS["minnick's glasses"] or PLAYER.inv['head'] == ITEMS["pedrotti cubed"]:
+            printT(itemcolour + "(\S)")
+            if PLAYER.inv['head'] == ITEMS["minnick's glasses"]: printT("Minnick's Glasses scan the item with futuristic sounds. It displays what it finds.")
+            else: printT("You use the photonics knowledge and quantum energy from Pedrotti Cubed to scan the item. You learn this about the item.")
+            printT("Item Attack: " + str(ITEMS[Item].stats[0]))
+            printT("Item Defence: " + str(ITEMS[Item].stats[1]))
+            printT("Item Speed: " + str(ITEMS[Item].stats[2]))
+            if ITEMS[Item].health: printT( "This item is Edible (\S) You would recover: " + str(ITEMS[Item].health) + " health.")
+            printT("Difference from what you currently have on: " + "[" + str(deltaATK) + "," + str(deltaDEF) + "," + str(deltaSPD) + "]" )
+            printT(textcolour)
+
+        elif deltaATK > 4 or deltaDEF > 4 or deltaSPD > 4:  # if any of these are different
             desc = " (\S)This looks like it would make me: (\S)"
             for i in range(len(descriptors)):  # loops through descriptors
                 if descriptornumbers[i] > deltaATK and deltaATK > 4:
@@ -519,16 +539,7 @@ def Inspect(Item): #Item is the inspect item string not an object
 
 
 
-        if GAMEINFO['devmode']:  # If in devmode can see the stats
-            printT("ATK : " + str(ITEMS[Item].stats[0]) + " " + "("+str(ITEMS[Item].stats[0]-PLAYER.inv[ITEMS[Item].worn].stats[0])+")")
-            printT("DEF : " + str(ITEMS[Item].stats[1]) + " " + "("+str(ITEMS[Item].stats[1]-PLAYER.inv[ITEMS[Item].worn].stats[1])+")")
-            printT("SPD : " + str(ITEMS[Item].stats[2]) + " " + "("+str(ITEMS[Item].stats[2]-PLAYER.inv[ITEMS[Item].worn].stats[2])+")")
-            printT("WORN: " + str(ITEMS[Item].worn).upper())
-            printT("QUEST Flag: " + str(ITEMS[Item].quest))
-            if ITEMS[Item].health: #if edible it shows that health stat plus what your final health would be if eaten
-                printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)") #+ str(ITEMS[Item].health) + " (" + str(min(100,PLAYER.health + ITEMS[Item].health))+")" +"\n"
-            else:
-                print("")
+
     # If the entered item is an intractable and is at that location
     elif Item in INTERACT and list(INTERACT[Item].location) == PLAYER.location:  # this is for item = interactable
         # TODO Have Interactables be able to use lists (to drop multiple things), tuples(to place unique objects)

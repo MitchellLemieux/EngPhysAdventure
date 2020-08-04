@@ -147,6 +147,11 @@ def Reset():
             "You swear you see a tumbleweed roll by. There's no one in sight but plenty of bathrooms. Is the Geography "
             "department up here?? After learning about the Oak Ridges Moraine bring yourself back to reality.",
             ('f', 'b', 'l', 'r', 'u'), True),
+    Map("3rd Floor BSB", (3, 4, 3,0), "~3RD FLOOR BSB~:\nYou can only go back down the stairs.",
+            "You swear you see a tumbleweed roll by. There's no one in sight but plenty of bathrooms. Is the Geography "
+            "department up here?? After learning about the Oak Ridges Moraine bring yourself back to reality.",
+            ('f', 'b', 'l', 'r', 'u'), True),
+
 
     # --- BSB: Dimension 1 ---
     # JHE lobby with a link out to BSB interrior
@@ -467,7 +472,7 @@ def Reset():
     Equipment("Drumstick", (5,4,2,0), "Drumstick.jpg", "'Property of E-Smooth'", "off-hand", (0,10,15),""),
     Equipment("Self Worth", (None), "DOI.jpg", "Wow, I had this in my all along! Now all I have to do is wait to go back to my bad habits and this will be worthless!", "off-hand", (20,20,20),-10),
     Equipment("Blazer", (5,6,1,0), "Blazer.jpg", "Styyyyyylishhhhhh", "body", (0,4,1),""),
-    Equipment("Empty Bucket", (5,0,0,0), "Bucket.jpg", "The smell of cheap soap still lingers.", "head", (0,10,1),""),
+    Equipment("Empty Bucket", (5,0,0,0), "Bucket.jpg", "The smell of cheap soap and crab still lingers.", "head", (0,10,1),""),
     Equipment("Old Scroll", (None), "OldScroll.jpg", "It reads: 'A permanent title is too much to bear.' 'My secret cache, is under there.'", "off-hand", (0,0,0),""),
     Equipment("PID control system", (None), "PID.jpg", "A PID control system. Kp = 69, my dude.", "head", (45,69,10),""),
     Equipment("Voltage Divider", (None), "VDivider.jpg", "It is a Voltage Divider!", "off-hand", (20,25,20),""),
@@ -513,7 +518,7 @@ def Reset():
     Equipment("Relativistic Key", (None), "Relativistickey.jpg", "You can feel the power radiating from this thing.", "hand", (1,1,1),""),
     Equipment("Willy Dog", (4,1,1,0), "Hotdog.jpg", "Definitely not vegan", "hand", (1,0,2),5),
     Equipment("Solar Ray", (None), "SolarRay.jpg", "The literal power of the Sun!", "hand", (100,20,50),""),
-    Equipment("Helm of Orin Bearclaw", (1,0,3,0), "SkullHelmet.jpg", "A note left beside the helmet says 'A leftover relic from a purple hero'", "head", (35,30,10),""),
+    Equipment("Helm of Orin Bearclaw", (1,0,3,0), "SkullHelmet.jpg", "A leftover relic from a purple hero.", "head", (35,30,10),""),
     Equipment("Maroon Jumpsuit", (5,1,1,0), "MaroonSuit.jpg", "Overalls of the Maroons", "body", (1,8,5),""),
     Equipment("Pope Hat", (2,0,2,0), "PopeHat.jpg", "Does the Pope where a silly hat? Now you do.", "head", (0,3,2),""),
     Equipment("Lamp", (0,5,1,0), "Lamp.jpg", "I love lamp.", "hand", (8,0,4),""),
@@ -525,7 +530,7 @@ def Reset():
     Equipment("Couch Cushion", (1,7,1,0), "CCushion.jpg", "I hope I find I pillow fight.", "off-hand", (4,10,1),""),
     Equipment("Crucifix", (None), "Crucifix.jpg", "The Power of Chirst compels you!", "hand", (10,0,10),""),
     Equipment("Joint of Destiny", (None), "Joint.jpg", "A tighly rolled spliff filled with Devil's lettuce... for real.", "off-hand", (420,420,420),""),
-    Equipment("Minnick's Glasses", (None), "MinnickGlasses.jpg", "The spectacles of a wizard from the High Order of the Ancient Council.", "head", (50,50,50),""),
+    Equipment("Minnick's Glasses", (None), "MinnickGlasses.jpg", "There's very advanced nanotechnology in these. Wearing them lets you analyzing people and objects in your environment. Could be useful.", "head", (50,50,50),""),
     Equipment("Mop", (0,0,1,0), "Mop.jpg", "I'm going to clean up this town.", "hand", (6,0,4),""),
     Equipment("Cold Beer", (None), "ColdBeer.jpg", "A freshly brewed pint from Andy Knights himself.", "off-hand", (15,0,20),2),
     Equipment("Brian's Guitar", (None), "Guitar.jpg", "You now have Brian's power to shred some sick tunes! ROCK ON.", "hand", (35,35,35),""),
@@ -537,7 +542,7 @@ def Reset():
     Equipment("Goldfish", (2,0,2,0), "Goldfish.jpg", "Fun fact, not made of real gold.", "off-hand", (1,1,1),4),
     Equipment("Horrible Assignment", (None), "BadAss.jpg", "A barely legible report on Fourier analysis.", "off-hand", (3,0,0),""),
     Equipment("Silicon Substrate", (0,3,2,0), "Substrate.jpg", "A bulk silicon wafer.", "off-hand", (1,1,1),""),
-    Equipment("Faraday's Cage", (None), "Faraday.jpg", "Faraday cage.", "head", (20,75,15),""),
+    Equipment("Faraday's Cage", (None), "Faraday.jpg", "A faraday cage, good for shielding your brain from all that 5G.", "head", (20,75,15),""),
     Equipment("Frisbee", (2,2,1,0), "Frisbee.jpg", "Look at the flick of the wrist!", "hand", (3,0,5),""),
     Equipment("Rusty Key", (None), "RustyKey.jpg", "You can just about read: 'By the building where the smallest are seen.' 'This key will provide for those who are keen'", "off-hand", (1,1,1),""),
     Equipment("Iron Ring", (None), "IronRing.jpg", "The One Ring to Rule them ALL.", "hand", (1000,1000,1000),-1000),

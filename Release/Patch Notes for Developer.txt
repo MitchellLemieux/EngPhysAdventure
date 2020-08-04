@@ -1,6 +1,14 @@
 --Developer Patch Notes--
 [] is the notes for release to the public. Or just See the release notes
-Keywords are ADDED, BUGFIX, CHANGE, NOTE 
+Keywords are ADDED, BUGFIX, CHANGED, NOTE 
+
+--Alpha 0.31 Update- The Speedrun Update - Aug 27, 2020
+ADDED Minnick's glasses, Pedrotti Cubed, and electron microscope now analyzie items, people, and your stats
+
+CHANGED Haugen's place now 3rd floor ABB
+CHANGED ABB Basement now center for electron microscope
+ADDED 
+CHANGED Examinining people now roughly sizes the up 
 
 --Alpha 0.30 Update- The Final EPTA Update - November 21, 2019
 Check the docs! (but here's a copy of the release notes for fun)
