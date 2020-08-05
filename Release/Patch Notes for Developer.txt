@@ -2,12 +2,17 @@
 [] is the notes for release to the public. Or just See the release notes
 Keywords are ADDED, BUGFIX, CHANGED, NOTE 
 
---Alpha 0.31 Update- The Speedrun Update - Aug 27, 2020
-ADDED Minnick's glasses, Pedrotti Cubed, and electron microscope now analyzie items, people, and your stats
 
-CHANGED Haugen's place now 3rd floor ABB
+
+--Alpha 0.31 Update- The Speedrun Update - Aug 27, 2020
+ADDED Minnick's glasses, Pedrotti Cubed, and being in CCEM now analyzie items, people, and your stats
+CHANGED Haugen's lab to 3rd floor ABB
 CHANGED ABB Basement now center for electron microscope
-ADDED 
+ADDED Transmission Electron Microscope, MRI, and EEG cap
+CHANGED locked door ontop of MDCL 3rd floor isntead of first floor
+ADDED sidequest to get into 1V to get prototype, Carabiner Key to get 
+
+ADDED Player ques about the ability to scan items
 CHANGED Examinining people now roughly sizes the up 
 
 --Alpha 0.30 Update- The Final EPTA Update - November 21, 2019

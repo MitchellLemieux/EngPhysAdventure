@@ -20,7 +20,7 @@ MAPS = StartUp.WorldMap()
 ITEMS = StartUp.ItemDictionary()
 ENEMIES = StartUp.EnemyDictionary()
 INTERACT = StartUp.InteractDictionary()
-DIMENSIONS = ["OverWorld", "BSB", "Capstone Room", "Green Lake", "Haunted Forest","Cabin in the Woods"]  # List of interior names with the index location being the dimension/building number
+DIMENSIONS = ["OverWorld", "BSB", "Capstone Room", "Green Lake", "Haunted Forest","Cabin in the Woods","Hospital"]  # List of interior names with the index location being the dimension/building number
 # ex) 0 is OverwWord, 1 is BSB, 2 is capstone room, etc
 
 
@@ -456,20 +456,36 @@ def Talk(E):  # E is a string not an object
 # TODO Re-implement stats and number with word ques instead of numbers
 def Stats():
     global PLAYER
-    if PLAYER.health > 99: printT("You're in perfect health.")
-    elif PLAYER.health > 90: printT("You feel really great!")
-    elif PLAYER.health > 80: printT("You feel a little banged up but not too bad.")
-    elif PLAYER.health > 60: printT("You're pretty badly beat up but still kicking.")
-    elif PLAYER.health > 40: printT("You're very injured. Probably a lot of broken bones. Should get that checked out.")
-    elif PLAYER.health > 20:printT("You're EXTREMELY injured. It's a wonder you can even walk.")
-    elif PLAYER.health > 10: printT("You're bleeding profusely and barely alive. Why are you not in a hospital?")
-    elif PLAYER.health > 0:printT("You're on the verge of death, don't go towards the light.")
 
     if GAMEINFO['devmode']:  # If in devmode can see the stats/quest of enemies
         printT("\nHEALTH: " + str(PLAYER.health))
         printT("ATK: " + str(PLAYER.stats[0]))
         printT("DEF: " + str(PLAYER.stats[1]))
         printT("SPD: " + str(PLAYER.stats[2])+" (\S)")
+
+    # The detailed description for Stats
+    elif PLAYER.inv['head'] == ITEMS["minnick's glasses"] or PLAYER.inv['off-hand'] == ITEMS["pedrotti cubed"] or PLAYER.location == [1, 6, 0, 0]:
+        printT(personcolour + "(\S)")
+        if PLAYER.inv['head'] == ITEMS["minnick's glasses"]: printT("You scan yourself with Minnick's Glasses. It displays your vitals and abilities. ")
+        elif PLAYER.inv['head'] == ITEMS["pedrotti cubed"]: printT("You spectrum analyize yourself with Pedrotti Cubed. You learn this about the yourself.")
+        else: printT("Under the TEM you scan the structure of the item... or you get a technician to do it. You learn this.")
+        printT("Item Attack: " + str(ITEMS[Item].stats[0]))
+        printT("Item Defence: " + str(ITEMS[Item].stats[1]))
+        printT("Item Speed: " + str(ITEMS[Item].stats[2]))
+        if ITEMS[Item].health: printT(
+            "This item is Edible (\S) You would recover: " + str(ITEMS[Item].health) + " health.")
+        printT("Difference from what you currently have on " + ITEMS[Item].worn + " : [" + str(deltaATK) + "," + str(
+            deltaDEF) + "," + str(deltaSPD) + "]")
+        printT(textcolour)
+    else:
+        if PLAYER.health > 99: printT("You're in perfect health.")
+        elif PLAYER.health > 90: printT("You feel really great!")
+        elif PLAYER.health > 80: printT("You feel a little banged up but not too bad.")
+        elif PLAYER.health > 60: printT("You're pretty badly beat up but still kicking.")
+        elif PLAYER.health > 40: printT("You're very injured. Probably a lot of broken bones. Should get that checked out.")
+        elif PLAYER.health > 20: printT("You're EXTREMELY injured. It's a wonder you can even walk.")
+        elif PLAYER.health > 10: printT("You're bleeding profusely and barely alive. Why are you not in a hospital?")
+        elif PLAYER.health > 0: printT("You're on the verge of death, don't go towards the light.")
 
 
 def Inspect(Item): #Item is the inspect item string not an object
@@ -510,15 +526,17 @@ def Inspect(Item): #Item is the inspect item string not an object
             printT("QUEST Flag: " + str(ITEMS[Item].quest))
             if ITEMS[Item].health: printT( "Eaten Health: " + str(ITEMS[Item].health) + " (\S)")
 
-        elif PLAYER.inv['head'] == ITEMS["minnick's glasses"] or PLAYER.inv['head'] == ITEMS["pedrotti cubed"]:
+        # The detailed description for items
+        elif PLAYER.inv['head'] == ITEMS["minnick's glasses"] or PLAYER.inv['off-hand'] == ITEMS["pedrotti cubed"] or PLAYER.location == [1,6,0,0]:
             printT(itemcolour + "(\S)")
             if PLAYER.inv['head'] == ITEMS["minnick's glasses"]: printT("Minnick's Glasses scan the item with futuristic sounds. It displays what it finds.")
-            else: printT("You use the photonics knowledge and quantum energy from Pedrotti Cubed to scan the item. You learn this about the item.")
+            elif PLAYER.inv['head'] == ITEMS["pedrotti cubed"]: printT("You use your photonics knowledge and quantum energy from Pedrotti Cubed to scan the item. You learn this about the item.")
+            else: printT("Under the TEM you scan the structure of the item... or you get a technician to do it. You learn this.")
             printT("Item Attack: " + str(ITEMS[Item].stats[0]))
             printT("Item Defence: " + str(ITEMS[Item].stats[1]))
             printT("Item Speed: " + str(ITEMS[Item].stats[2]))
             if ITEMS[Item].health: printT( "This item is Edible (\S) You would recover: " + str(ITEMS[Item].health) + " health.")
-            printT("Difference from what you currently have on: " + "[" + str(deltaATK) + "," + str(deltaDEF) + "," + str(deltaSPD) + "]" )
+            printT("Difference from what you currently have on " + ITEMS[Item].worn + " : [" + str(deltaATK) + "," + str(deltaDEF) + "," + str(deltaSPD) + "]" )
             printT(textcolour)
 
         elif deltaATK > 4 or deltaDEF > 4 or deltaSPD > 4:  # if any of these are different

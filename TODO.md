@@ -36,7 +36,7 @@
 
         
 
-# 0.31 TOTAL Rebuild, realease to BETA
+# 0.32 NEVADA GAME ENGINE
 - [ ] Redo so no more global variables
 - [ ] Make all things entities and inherited classes
     - [ ] Different item classes with abilities and sound effects
@@ -54,30 +54,58 @@
     * https://docs.python.org/2/tutorial/classes.html
 
 # 0.31 SpeedRun Update
-- [ ] Can bring things to Electron Microscope (FEI Titan 80-300 HB) to analyize it, can size up people by inspecting them to get a rough idea of how tough they are
+Scan Items
+	Glasses
+	Pedrotti Cubed
+	TEM
+Scan Self
+	Glasses
+	Pedrotti Cubed
+	MRI
+	Brainalizer
+Scan People's Stats
+	Gauss Eye
+	Brainalizer
+Scan People's Wants
+	Gauss Eye
+	Brainalizer
+Scan Interactables
+	Gauss Eye
+	Minnick's Glasses
+Erik's Key in the hospital basement, open's to room dimension of hospital with his prototype
+Facemask, Watch out for COVID
+- Can bring things to Electron Microscope (FEI Titan 80-300 HB) to analyize it, can size up people by inspecting them to get a rough idea of how tough they are
+	Move Huagen's lab to 3rd floor  ABB	
+	Electron Microscope, can analyize things and tell you their stats
+	Transmission Electron Microscopes
+	The Titan 80-300 HB is a double aberration-corrected TEM/STEM that can operate at multiple accelerating voltages to allow imaging of a variety of materials, including beam-sensitive samples. You don't know what that means but apparently if you examine things much more closely in this room. 
 	"Have you been to the Electron Microscope. I heard they can analyize anything on you there and tell you about it. Seems useful."
-	Move Huagen's lab to 3rd floor  ABB
-- [ ] Add Minnick's glasses able to see stats
+	EEG device lets you size up people better
+	
+- Add Minnick's glasses able to see stats
 	Minnick's glasses shows stats, somebody says "I heard a professor at Mac was working on glasses that would analyize things and people. That sounds crazy to try and quantify everything like that. They'd have to be a robot!"
-- [ ] Add autosplitting incorporation
-- [ ] Update the wordpress
-- [ ] Finish the descriptive highlighting
-- [ ] Add minigame to raise your stats
-- [ ] Give a small quest tracking system
-- [ ] Can press x to skip waiting
-- [ ] Examining people
+- Add autosplitting incorporation
+- Update the wordpress
+- Finish the descriptive highlighting
+- Add minigame to raise your stats
+- Give a small quest tracking system
+- Can press x to skip waiting
+- Examining people
 	"You stare at them intently and size them up. You __ be able to take them in a fight"
 
-- [ ] Okon's chainmail upgrade quest: Sacrifice diary of the fallen, then chainmail to upgrade in accelerator to give diamond chainmail that can feel quantum vibrations. Gives much more defence
+- Okon's chainmail upgrade quest: Sacrifice diary of the fallen, then chainmail to upgrade in accelerator to give diamond chainmail that can feel quantum vibrations. Gives much more defence
 
-- [ ] Gauss eye less powerfull but lets you see the wants and drops of people
-- [ ] Peddortti cubed shows you fabric of reality with stats.
-- [ ] Gamma glove does much more attack and shows attack patterns
-- [ ] All Quantum relecs worn give stats to 420
-- [ ] When all Quantum relecs are worn the location of places show up you can teleport/quantum tunnel to places
+- Gauss eye less powerfull but lets you see the wants and drops of people
+- Peddortti cubed shows you fabric of reality with stats.
+- Gamma glove does much more attack and shows attack patterns
+- All Quantum relecs worn give stats to 420
+- When all Quantum relecs are worn the location of places show up you can teleport/quantum tunnel to places
 
-- [ ] Put in hell with a devil that if you press down enough times anywhere you tunnel to hell and have to fight the devil to get out
+- Put in hell with a devil that if you press down enough times anywhere you tunnel to hell and have to fight the devil to get out
 
+
+- V1 Folded on a piece of paper taped to the wall
+- Maybe there's asbestosis still in here, so maybe not best to stay too long
 
 # 0.30.0 NEXT will be kipling
 - [x] Make game load, setting save, and dev mode

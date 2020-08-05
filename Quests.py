@@ -142,7 +142,7 @@ def sidequests(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESET
 
     #National Treasure
     if INTERACT["tri-coloured glasses"].quest and QUESTS['national treasure']:  # Once the sign is read
-        MAPS[1][0][1][0].removeWall("u")  # DON'T FORGET to make wall a list instead of a tuple in the object!
+        MAPS[1][0][2][0].removeWall("u")  # DON'T FORGET to make wall a list instead of a tuple in the object!
         QUESTS["national treasure"] = 0
 
     if INTERACT["red book"].quest and QUESTS['open the trees']:  # Once the sign is read
@@ -237,15 +237,15 @@ def ebta_story(MAPS, PLAYER, ITEMS, INTERACT, QUESTS, ENEMIES, GAMEINFO, GAMESET
         QUESTS["lapierre get coffee"] = 0
 
     if ENEMIES['dr. knights'].quest and QUESTS["knights get book"] and ITEMS["3w textbook"].location == (3,4,0,0):
-        MAPS[1][6][0][0].placeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][3][0].placeEnemy(ENEMIES['dr. haugen'])
         QUESTS["knights get book"] = 0
 
     if ENEMIES['dr. haugen'].quest and QUESTS['haugen kill soleymani']:
         QUESTS['haugen kill soleymani'] = 0
         ENEMIES['dr. haugen'].alive = False
-        MAPS[1][6][0][0].removeEnemy(ENEMIES['dr. haugen'])
+        MAPS[1][6][3][0].removeEnemy(ENEMIES['dr. haugen'])
         ENEMIES['dr. haugen'].location = (None, None, None, None)
-        MAPS[1][6][0][0].placeItem(ITEMS["haugen's clothes"])
+        MAPS[1][6][3][0].placeItem(ITEMS["haugen's clothes"])
 
     if INTERACT['fridge'].quest and QUESTS['einstein fridge']:
         QUESTS['einstein fridge'] = 0
