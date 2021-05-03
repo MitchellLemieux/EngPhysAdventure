@@ -1,6 +1,6 @@
 # EngPhysAdventure
--For Players 
-Google Drive Release: https://drive.google.com/drive/folders/1WcuPeAxjqLOMZuXr7EitxztPH8KN1T4G
+- Game Release: https://engphystextadventure.wordpress.com/downloads/
+
 
 Simple Feedback: https://goo.gl/forms/OEMQCupWvEtibd0E3
 
